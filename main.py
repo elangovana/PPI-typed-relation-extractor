@@ -1,5 +1,7 @@
 import getopt
 import sys
+
+import re
 from bioservices.kegg import KEGG
 
 
@@ -7,7 +9,31 @@ def extract_protein_interaction(kegg_pathway_id):
     kegg = KEGG()
     kgml_parser = kegg.parse_kgml_pathway(kegg_pathway_id)
     protein_relations = list(filter(lambda d: d['link'] in ['PPrel'], kgml_parser['relations']))
-    print protein_relations
+    kegg_entries = kgml_parser['entries']
+    print(kegg_entries)
+
+    for rel in protein_relations:
+
+
+        ko_dnumber=list(filter(lambda d: d['id'] in [rel['entry2']], kegg_entries))[0]['name']
+        ko_snumber=list(filter(lambda d: d['id'] in [rel['entry1']], kegg_entries))[0]['name']
+        #gene_names
+        hsa_snumber="+".join(re.findall( r"(?:\t)(.+)", kegg.link('hsa', ko_snumber)))
+        hsa_dnumber="+".join(re.findall( r"(?:\t)(.+)", kegg.link('hsa', ko_dnumber)))
+
+        uniprot_snumber= kegg.conv("uniprot", hsa_snumber)
+        uniprot_dnumber= kegg.conv("uniprot", hsa_dnumber)
+        for s, sv in uniprot_snumber.items():
+            for d, dv in uniprot_dnumber.items():
+                print(sv+ "\t" + rel['name'] + '\t' + dv)
+
+
+
+
+
+
+
+
 
 
 def main(argv):
