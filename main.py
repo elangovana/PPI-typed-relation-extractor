@@ -10,30 +10,29 @@ def extract_protein_interaction(kegg_pathway_id):
     kgml_parser = kegg.parse_kgml_pathway(kegg_pathway_id)
     protein_relations = list(filter(lambda d: d['link'] in ['PPrel'], kgml_parser['relations']))
     kegg_entries = kgml_parser['entries']
-    print(kegg_entries)
-
     for rel in protein_relations:
+        uniprot_dnumber = get_uniprot_numbers(kegg, kegg_entries, rel['entry2'])
+        uniprot_snumber = get_uniprot_numbers(kegg, kegg_entries, rel['entry1'])
 
-
-        ko_dnumber=list(filter(lambda d: d['id'] in [rel['entry2']], kegg_entries))[0]['name']
-        ko_snumber=list(filter(lambda d: d['id'] in [rel['entry1']], kegg_entries))[0]['name']
-        #gene_names
-        hsa_snumber="+".join(re.findall( r"(?:\t)(.+)", kegg.link('hsa', ko_snumber)))
-        hsa_dnumber="+".join(re.findall( r"(?:\t)(.+)", kegg.link('hsa', ko_dnumber)))
-
-        uniprot_snumber= kegg.conv("uniprot", hsa_snumber)
-        uniprot_dnumber= kegg.conv("uniprot", hsa_dnumber)
         for s, sv in uniprot_snumber.items():
             for d, dv in uniprot_dnumber.items():
-                print(sv+ "\t" + rel['name'] + '\t' + dv)
+                print(sv+ "\t" + rel['name'] + '\t' + dv+ '\t' )
 
 
+def get_uniprot_numbers(kegg, kegg_entries, entry_id):
+    regex_hsa = r"(?:\t)(.+)"
+    uniprot_number={}
+    ko_number = list(filter(lambda d: d['id'] in [entry_id], kegg_entries))[0]['name']
+    ko_number_map = kegg.link('hsa', ko_number)
 
 
+    hsa_number_list = re.findall(regex_hsa, str(ko_number_map))
+    if  len(hsa_number_list) > 0:
+        hsa_number = "+".join(hsa_number_list)
+        uniprot_number = kegg.conv("uniprot", hsa_number)
 
 
-
-
+    return uniprot_number
 
 
 def main(argv):
