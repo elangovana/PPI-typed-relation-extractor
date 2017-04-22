@@ -14,9 +14,9 @@ def extract_protein_interaction(kegg_pathway_id):
         uniprot_dnumber = get_uniprot_numbers(kegg, kegg_entries, rel['entry2'])
         uniprot_snumber = get_uniprot_numbers(kegg, kegg_entries, rel['entry1'])
 
-        for s, sv in uniprot_snumber.items():
-            for d, dv in uniprot_dnumber.items():
-                print(sv+ "\t" + rel['name'] + '\t' + dv+ '\t' )
+        for  sv in uniprot_snumber:
+            for  dv in uniprot_dnumber:
+                print(sv+ "\t" +  convert_uniprot_genename(sv) +"\t"+ rel['name'] + '\t' + dv + '\t' +  convert_uniprot_genename(dv) )
 
 
 def get_uniprot_numbers(kegg, kegg_entries, entry_id):
@@ -24,15 +24,19 @@ def get_uniprot_numbers(kegg, kegg_entries, entry_id):
     uniprot_number={}
     ko_number = list(filter(lambda d: d['id'] in [entry_id], kegg_entries))[0]['name']
     ko_number_map = kegg.link('hsa', ko_number)
-
-
     hsa_number_list = re.findall(regex_hsa, str(ko_number_map))
     if  len(hsa_number_list) > 0:
         hsa_number = "+".join(hsa_number_list)
         uniprot_number = kegg.conv("uniprot", hsa_number)
 
+    return map(lambda x: str(re.findall(r"(?:up:)(.+)", x)[0]), uniprot_number.values())
 
-    return uniprot_number
+
+def convert_uniprot_genename(uniprotList):
+    from bioservices.uniprot import UniProt
+    u = UniProt(verbose=False)
+    gene_name = u.mapping(fr="ACC,ID", to="GENENAME", query=uniprotList)
+    return  ",".join(map(lambda x: ",".join(x), gene_name.values()))
 
 
 def main(argv):
