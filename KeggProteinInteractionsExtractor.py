@@ -39,13 +39,13 @@ class KeggProteinInteractionsExtractor:
             self._logger.debug("Parsing relation for entry {}".format(rel))
 
             # Get the uniprot numbers corresponding to the 2 entries in the relation
-            s_uniprot_dnumbers = self._cached_get_uniprot_numbers(rel['entry2'], kgml_parser)
-            d_uniprot_snumbers = self._cached_get_uniprot_numbers(rel['entry1'], kgml_parser)
+            d_uniprot_numbers = self._cached_get_uniprot_numbers(rel['entry2'], kgml_parser)
+            s_uniprot_numbers = self._cached_get_uniprot_numbers(rel['entry1'], kgml_parser)
 
             # Each source entry may map to multiple uniprot numbers, so loop through and get the relationships
-            for s_uniprot in d_uniprot_snumbers:
+            for s_uniprot in s_uniprot_numbers:
                 # Same applies for the target entry in the relationship
-                for d_uniprot in s_uniprot_dnumbers:
+                for d_uniprot in d_uniprot_numbers:
                     s_gene_name = self._get_gene_names(s_uniprot)
                     d_gene_name = self._get_gene_names(d_uniprot)
 
