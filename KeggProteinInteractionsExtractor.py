@@ -76,7 +76,7 @@ class KeggProteinInteractionsExtractor:
                 matching_entries)))
         entry = matching_entries[0]
 
-        # Multiple KO numbers are separated by space, but the link query recognises that and returns corresponding Uniprots
+        # Multiple KO numbers are separated by space, but the link query recognises that and returns corresponding HSA numbers
         # E.g name="ko:K00922 ko:K02649"
         ko_numbers_sep_space = entry['name']
         # Get the HSA numbers (Homosapien proteins only for the KO)
