@@ -46,11 +46,10 @@ class KeggProteinInteractionsExtractor:
             for s_uniprot in d_uniprot_snumbers:
                 # Same applies for the target entry in the relationship
                 for d_uniprot in s_uniprot_dnumbers:
-
                     s_gene_name = self._get_gene_names(s_uniprot)
                     d_gene_name = self._get_gene_names(d_uniprot)
 
-                    #Add to result
+                    # Add to result
                     result.append({"s_uniprot": s_uniprot,
                                    "s_gene_name": s_gene_name,
                                    "interaction": rel['name'],
@@ -68,16 +67,40 @@ class KeggProteinInteractionsExtractor:
     def _get_uniprot_numbers(self, entry_id, kgml_parser):
         self._logger.debug("Converting kegg Hsa numbers to uniprot for entry id {}".format(entry_id))
         kegg_entries = kgml_parser['entries']
-        regex_hsa = r"(?:\t)(.+)"
-        uniprot_number = {}
-        ko_number = list(filter(lambda d: d['id'] in [entry_id], kegg_entries))[0]['name']
-        ko_number_map = self.kegg.link('hsa', ko_number)
-        hsa_number_list = re.findall(regex_hsa, str(ko_number_map))
+        hsa_uniprot_numbers_map = {}
+
+        # Get the entry corresponding to the entry id
+        # E.g entry id="49" name="ko:K00922 ko:K02649" type="ortholog"  ...
+        matching_entries = list(filter(lambda d: d['id'] == entry_id, kegg_entries))
+        if len(matching_entries) != 1:
+            raise Exception("The number of entries for entry id {} should be 1, but is {}".format(entry_id, len(
+                matching_entries)))
+        entry = matching_entries[0]
+
+        # Multiple KO numbers are separated by space, but the link query recognises that and returns corresponding Uniprots
+        # E.g name="ko:K00922 ko:K02649"
+        ko_numbers_sep_space = entry['name']
+        # Get the HSA numbers (Homosapien proteins only for the KO)
+        ko_number_map_sep_tab_sep_nl = self.kegg.link('hsa', ko_numbers_sep_space)
+
+        # Convert the multiline string to individual maps
+        # E.g
+        # ko:K00922	hsa:5293
+        # ko:K00922	hsa:5291
+        # ko:K02649	hsa:5295
+        self._logger.debug("Obtained HSA numbers for Kegg {}".format(ko_number_map_sep_tab_sep_nl))
+        hsa_number_map_sep_tab_list = filter(None, ko_number_map_sep_tab_sep_nl.split('\n'))
+        hsa_number_list = [list(filter(None, m.split('\t')))[1] for m in hsa_number_map_sep_tab_list]
+
+        # Check if there are any HSA numbers associated with the KO numbers
         if len(hsa_number_list) > 0:
             hsa_number = "+".join(hsa_number_list)
-            uniprot_number = self.kegg.conv("uniprot", hsa_number)
+            # Convert HSA to UniProt
+            hsa_uniprot_numbers_map = self.kegg.conv("uniprot", hsa_number)
 
-        return map(lambda x: str(re.findall(r"(?:up:)(.+)", x)[0]), uniprot_number.values())
+        kegg_uniprot_numbers = hsa_uniprot_numbers_map.values()
+        #Remove the up: prefix from the uniprot numbers, as they look like 'up:B0LPE5', 'up:P31751', 'up:Q9Y243'
+        return map(lambda x: str(re.findall(r"(?:up:)(.+)", x)[0]), kegg_uniprot_numbers)
 
     @lru_cache(maxsize=100)
     def _get_gene_names(self, uniprot_number):
