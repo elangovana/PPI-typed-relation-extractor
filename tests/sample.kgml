@@ -1,0 +1,371 @@
+<?xml version="1.0"?>
+<!DOCTYPE pathway SYSTEM "http://www.kegg.jp/kegg/xml/KGML_v0.7.2_.dtd">
+<!-- Creation date: Oct 6, 2017 10:01:33 +0900 (GMT+9) -->
+<pathway name="path:ko05215" org="ko" number="05215"
+         title="Prostate cancer"
+         image="http://www.kegg.jp/kegg/pathway/ko/ko05215.png"
+         link="http://www.kegg.jp/kegg-bin/show_pathway?ko05215">
+    <!--<entry id="1" name="path:ko04115" type="map"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?ko04115">-->
+        <!--<graphics name="p53 signaling pathway" fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="roundrectangle" x="889" y="566" width="104" height="34"/>-->
+    <!--</entry>-->
+    <!--<entry id="2" name="path:ko04060" type="map"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?ko04060">-->
+        <!--<graphics name="Cytokine-cytokine receptor interaction" fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="roundrectangle" x="231" y="625" width="104" height="34"/>-->
+    <!--</entry>-->
+    <!--<entry id="3" name="path:ko00140" type="map"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?ko00140">-->
+        <!--<graphics name="Steroid hormone biosynthesis" fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="roundrectangle" x="94" y="712" width="126" height="34"/>-->
+    <!--</entry>-->
+    <!--<entry id="4" name="ko:K12344" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K12344">-->
+        <!--<graphics name="K12344" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="209" y="713" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="5" name="ko:K08557" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K08557">-->
+        <!--<graphics name="K08557" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="603" y="824" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="6" name="ko:K08557" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K08557">-->
+        <!--<graphics name="K08557" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="603" y="807" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="7" name="ko:K02580 ko:K04735" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K02580+K04735">-->
+        <!--<graphics name="K02580..." fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="700" y="725" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="8" name="ko:K04734" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K04734">-->
+        <!--<graphics name="K04734" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="700" y="693" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="9" name="ko:K06624" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K06624">-->
+        <!--<graphics name="K06624" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="629" y="572" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="10" name="ko:K01110" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K01110">-->
+        <!--<graphics name="K01110" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="395" y="417" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="11" name="ko:K09348" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K09348">-->
+        <!--<graphics name="K09348" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="479" y="358" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="12" name="ko:K01351" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K01351">-->
+        <!--<graphics name="K01351" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="1039" y="798" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="13" name="ko:K02161" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K02161">-->
+        <!--<graphics name="K02161" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="1039" y="726" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="14" name="ko:K04503" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K04503">-->
+        <!--<graphics name="K04503" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="1039" y="663" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="15" name="ko:K02620 ko:K04490 ko:K04491 ko:K04492" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K02620+K04490+K04491+K04492">-->
+        <!--<graphics name="K02620..." fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="902" y="662" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="16" name="ko:K04498" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K04498">-->
+        <!--<graphics name="K04498" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="854" y="629" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="17" name="cpd:C00951 cpd:C00410 cpd:C07653 cpd:C01227 cpd:C00280 cpd:C00735 cpd:C00762" type="compound"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?C00951+C00410+C07653+C01227+C00280+C00735+C00762">-->
+        <!--<graphics name="C00951..." fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="circle" x="238" y="821" width="8" height="8"/>-->
+    <!--</entry>-->
+    <!--<entry id="18" name="cpd:C03917" type="compound"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?C03917">-->
+        <!--<graphics name="C03917" fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="circle" x="239" y="735" width="8" height="8"/>-->
+    <!--</entry>-->
+    <!--<entry id="19" name="cpd:C00535" type="compound"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?C00535">-->
+        <!--<graphics name="C00535" fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="circle" x="239" y="695" width="8" height="8"/>-->
+    <!--</entry>-->
+    <!--<entry id="20" name="ko:K08557" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K08557">-->
+        <!--<graphics name="K08557" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="466" y="815" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="21" name="cpd:C16038" type="compound"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?C16038">-->
+        <!--<graphics name="C16038" fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="circle" x="239" y="242" width="8" height="8"/>-->
+    <!--</entry>-->
+    <!--<entry id="22" name="ko:K06643" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K06643">-->
+        <!--<graphics name="K06643" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="629" y="603" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="23" name="ko:K06625" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K06625">-->
+        <!--<graphics name="K06625" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="629" y="542" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="24" name="ko:K07201" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K07201">-->
+        <!--<graphics name="K07201" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="629" y="511" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="25" name="ko:K02206" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K02206">-->
+        <!--<graphics name="K02206" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="907" y="314" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="26" name="ko:K02105" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K02105">-->
+        <!--<graphics name="K02105" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="745" y="662" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="27" name="ko:K17454 ko:K09389 ko:K06620" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K17454+K09389+K06620">-->
+        <!--<graphics name="K17454..." fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="990" y="361" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="28" name="ko:K02833 ko:K07827 ko:K07828" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K02833+K07827+K07828">-->
+        <!--<graphics name="K02833..." fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="381" y="714" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="29" name="ko:K04451" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K04451">-->
+        <!--<graphics name="K04451" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="936" y="601" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="30" name="ko:K04361 ko:K04362 ko:K04363 ko:K05083 ko:K05086 ko:K05087 ko:K05089 ko:K05093" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K04361+K04362+K04363+K05083+K05086+K05087+K05089+K05093">-->
+        <!--<graphics name="K04361..." fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="307" y="589" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="31" name="path:ko04210" type="map"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?ko04210">-->
+        <!--<graphics name="Apoptosis" fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="roundrectangle" x="695" y="417" width="104" height="34"/>-->
+    <!--</entry>-->
+    <!--<entry id="32" name="ko:K04467 ko:K07209 ko:K07210" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K04467+K07209+K07210">-->
+        <!--<graphics name="K04467..." fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="629" y="692" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="33" name="ko:K02158" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K02158">-->
+        <!--<graphics name="K02158" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="629" y="480" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="34" name="ko:K04399" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K04399">-->
+        <!--<graphics name="K04399" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="629" y="451" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="35" name="ko:K04374 ko:K05870 ko:K09047 ko:K09048" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K04374+K05870+K09047+K09048">-->
+        <!--<graphics name="K04374..." fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="744" y="626" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="36" name="ko:K06626" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K06626">-->
+        <!--<graphics name="K06626" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="907" y="331" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="37" name="ko:K04357 ko:K04359 ko:K17386 ko:K04526 ko:K05450 ko:K05459 ko:K08774" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K04357+K04359+K17386+K04526+K05450+K05459+K08774">-->
+        <!--<graphics name="K04357..." fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="230" y="589" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="38" name="ko:K06618" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K06618">-->
+        <!--<graphics name="K06618" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="990" y="324" width="46" height="17"/>-->
+    <!--</entry>-->
+    <entry id="39" name="ko:K06276" type="ortholog"
+        link="http://www.kegg.jp/dbget-bin/www_bget?K06276">
+        <graphics name="K06276" fgcolor="#000000" bgcolor="#BFBFFF"
+             type="rectangle" x="470" y="557" width="46" height="17"/>
+    </entry>
+    <!--<entry id="40" name="ko:K03099" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K03099">-->
+        <!--<graphics name="K03099" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="381" y="675" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="41" name="ko:K04364" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K04364">-->
+        <!--<graphics name="K04364" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="381" y="637" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="42" name="cpd:C05981" type="compound"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?C05981">-->
+        <!--<graphics name="C05981" fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="circle" x="434" y="588" width="8" height="8"/>-->
+    <!--</entry>-->
+    <!--<entry id="43" name="ko:K03083" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K03083">-->
+        <!--<graphics name="K03083" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="630" y="643" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="44" name="ko:K04079 ko:K09487" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K04079+K09487">-->
+        <!--<graphics name="K04079..." fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="466" y="832" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="45" name="ko:K07203" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K07203">-->
+        <!--<graphics name="K07203" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="629" y="756" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="46" name="ko:K06624" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K06624">-->
+        <!--<graphics name="K06624" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="843" y="287" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="47" name="path:ko04010" type="map"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?ko04010">-->
+        <!--<graphics name="MAPK signaling pathway" fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="roundrectangle" x="477" y="658" width="104" height="34"/>-->
+    <!--</entry>-->
+    <entry id="48" name="ko:K04456" type="ortholog"
+        link="http://www.kegg.jp/dbget-bin/www_bget?K04456">
+        <graphics name="K04456" fgcolor="#000000" bgcolor="#BFBFFF"
+             type="rectangle" x="530" y="589" width="46" height="17"/>
+    </entry>
+    <entry id="49" name="ko:K00922 ko:K02649" type="ortholog"
+        link="http://www.kegg.jp/dbget-bin/www_bget?K00922+K02649">
+        <graphics name="K00922..." fgcolor="#000000" bgcolor="#BFBFFF"
+             type="rectangle" x="381" y="589" width="46" height="17"/>
+    </entry>
+    <!--<entry id="51" name="path:ko05215" type="map"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?ko05215">-->
+        <!--<graphics name="TITLE:Prostate cancer" fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="roundrectangle" x="116" y="58" width="152" height="25"/>-->
+    <!--</entry>-->
+    <!--<entry id="52" name="path:ko04110" type="map"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?ko04110">-->
+        <!--<graphics name="Cell cycle" fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="roundrectangle" x="1081" y="309" width="104" height="34"/>-->
+    <!--</entry>-->
+    <!--<entry id="53" name="ko:K04371" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K04371">-->
+        <!--<graphics name="K04371" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="534" y="755" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="54" name="ko:K04368 ko:K04369" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K04368+K04369">-->
+        <!--<graphics name="K04368..." fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="533" y="714" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="55" name="ko:K04365 ko:K04366 ko:K08845" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K04365+K04366+K08845">-->
+        <!--<graphics name="K04365..." fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="459" y="714" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="56" name="path:ko04151" type="map"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?ko04151">-->
+        <!--<graphics name="PI3K-Akt signaling pathway" fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="roundrectangle" x="569" y="417" width="104" height="34"/>-->
+    <!--</entry>-->
+    <!--<entry id="57" name="ko:K09633" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K09633">-->
+        <!--<graphics name="K09633" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="921" y="415" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="58" name="ko:K09435" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K09435">-->
+        <!--<graphics name="K09435" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="976" y="415" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="59" name="ko:K09633" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K09633">-->
+        <!--<graphics name="K09633" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="921" y="524" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="60" name="ko:K15593" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K15593">-->
+        <!--<graphics name="K15593" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="976" y="524" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="61" name="ko:K01348" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K01348">-->
+        <!--<graphics name="K01348" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="1118" y="403" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="62" name="ko:K01394 ko:K01403" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K01394+K01403">-->
+        <!--<graphics name="K01394..." fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="1118" y="425" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="64" name="ko:K04387" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K04387">-->
+        <!--<graphics name="K04387" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="1118" y="447" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="65" name="ko:K15619" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K15619">-->
+        <!--<graphics name="K15619" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="1118" y="478" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="66" name="ko:K01348" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K01348">-->
+        <!--<graphics name="K01348" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="1118" y="516" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="67" name="ko:K01403" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K01403">-->
+        <!--<graphics name="K01403" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="1118" y="538" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="68" name="ko:K01343" type="ortholog"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?K01343">-->
+        <!--<graphics name="K01343" fgcolor="#000000" bgcolor="#BFBFFF"-->
+             <!--type="rectangle" x="1169" y="403" width="46" height="17"/>-->
+    <!--</entry>-->
+    <!--<entry id="69" name="path:ko05202" type="map"-->
+        <!--link="http://www.kegg.jp/dbget-bin/www_bget?ko05202">-->
+        <!--<graphics name="Transcriptional misregulation in cancer" fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="roundrectangle" x="942" y="467" width="141" height="34"/>-->
+    <!--</entry>-->
+    <!--<entry id="70" name="undefined" type="group">-->
+        <!--<graphics fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="rectangle" x="907" y="322" width="46" height="34"/>-->
+        <!--<component id="25"/>-->
+        <!--<component id="36"/>-->
+    <!--</entry>-->
+    <!--<entry id="71" name="undefined" type="group">-->
+        <!--<graphics fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="rectangle" x="603" y="815" width="46" height="34"/>-->
+        <!--<component id="5"/>-->
+        <!--<component id="6"/>-->
+    <!--</entry>-->
+    <!--<entry id="72" name="undefined" type="group">-->
+        <!--<graphics fgcolor="#000000" bgcolor="#FFFFFF"-->
+             <!--type="rectangle" x="466" y="823" width="46" height="34"/>-->
+        <!--<component id="20"/>-->
+        <!--<component id="44"/>-->
+    <!--</entry>-->
+    <relation entry1="49" entry2="39" type="PPrel">
+        <subtype name="compound" value="42"/>
+        <subtype name="activation" value="--&gt;"/>
+    </relation>
+    <relation entry1="49" entry2="48" type="PPrel">
+        <subtype name="compound" value="42"/>
+        <subtype name="activation" value="--&gt;"/>
+    </relation>
+
+
+</pathway>

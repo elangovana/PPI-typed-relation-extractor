@@ -8,5 +8,5 @@ setup(
     license='',
     author='aparnaelangovan',
     author_email='',
-    description='', requires=['bioservices','pandas']
+    description='', requires=['bioservices','pandas', 'ddt']
 )
