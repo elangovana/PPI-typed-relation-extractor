@@ -1,7 +1,7 @@
 import logging
 import re
 from functools import lru_cache
-
+import json
 import pandas as pd
 
 from bioservices import KEGG, UniProt
@@ -88,7 +88,6 @@ class KeggProteinInteractionsExtractor:
         # ko:K00922	hsa:5293
         # ko:K00922	hsa:5291
         # ko:K02649	hsa:5295
-        self._logger.debug("Obtained HSA numbers for Kegg {}".format(ko_number_map_sep_tab_sep_nl))
         hsa_number_map_sep_tab_list = filter(None, ko_number_map_sep_tab_sep_nl.split('\n'))
         hsa_number_list = [list(filter(None, m.split('\t')))[1] for m in hsa_number_map_sep_tab_list]
 
@@ -104,7 +103,9 @@ class KeggProteinInteractionsExtractor:
 
     @lru_cache(maxsize=100)
     def _get_gene_names(self, uniprot_number):
-        self._logger.debug("Retrieving uniprot gene names for {}".format(uniprot_number))
+        #Get the gene names associated with the uniprot number
+        self._logger.debug("Retrieving gene names for uniprotid {}".format(uniprot_number))
         gene_names_dict = self.u.mapping(fr="ACC,ID", to="GENENAME", query=uniprot_number)
-        self._logger.debug("Retrieved uniprot gene names for {}".format(gene_names_dict))
+
+        self._logger.debug("Gene names map : {}".format(json.dumps(gene_names_dict)))
         return ",".join(map(lambda x: ",".join(x), gene_names_dict.values()))
