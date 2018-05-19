@@ -50,11 +50,10 @@ class KeggProteinInteractionsExtractor:
                     d_gene_name = self._get_gene_names(d_uniprot)
 
                     # Add to result
-                    result.append({"s_uniprot": s_uniprot,
-                                   "s_gene_name": s_gene_name,
-                                   "interaction": rel['name'],
-                                   "d_uniprot": d_uniprot,
-                                   "d_genename": d_gene_name})
+                    rel_dict = {"s_uniprot": s_uniprot, "s_gene_name": s_gene_name, "interaction": rel['name'],
+                                "d_uniprot": d_uniprot, "d_genename": d_gene_name}
+                    self._logger.debug("** Relation extracted {}".format(json.dumps(rel_dict)))
+                    result.append(rel_dict)
         return result
 
     def _cached_get_uniprot_numbers(self, entry_id, kgml_parser):
@@ -83,13 +82,14 @@ class KeggProteinInteractionsExtractor:
         # Get the HSA numbers (Homosapien proteins only for the KO)
         ko_number_map_sep_tab_sep_nl = self.kegg.link('hsa', ko_numbers_sep_space)
 
-        # Convert the multiline string to individual maps
+        # Extract jus the has numbers from the multiline string individual maps
         # E.g
         # ko:K00922	hsa:5293
         # ko:K00922	hsa:5291
         # ko:K02649	hsa:5295
-        hsa_number_map_sep_tab_list = filter(None, ko_number_map_sep_tab_sep_nl.split('\n'))
-        hsa_number_list = [list(filter(None, m.split('\t')))[1] for m in hsa_number_map_sep_tab_list]
+        self._logger.debug("HSA numbers for the KO numbers \n{}".format(ko_number_map_sep_tab_sep_nl))
+        regex_hsa = r"(?:\t)(.+)"
+        hsa_number_list = re.findall(regex_hsa, str(ko_number_map_sep_tab_sep_nl))
 
         # Check if there are any HSA numbers associated with the KO numbers
         if len(hsa_number_list) > 0:
@@ -97,13 +97,17 @@ class KeggProteinInteractionsExtractor:
             # Convert HSA to UniProt
             hsa_uniprot_numbers_map = self.kegg.conv("uniprot", hsa_number)
 
-        kegg_uniprot_numbers = hsa_uniprot_numbers_map.values()
-        #Remove the up: prefix from the uniprot numbers, as they look like 'up:B0LPE5', 'up:P31751', 'up:Q9Y243'
-        return map(lambda x: str(re.findall(r"(?:up:)(.+)", x)[0]), kegg_uniprot_numbers)
+        self._logger.debug("HSA to Uniprot number map {}".format(json.dumps(hsa_uniprot_numbers_map)))
+        kegg_uniprot_numbers = list(hsa_uniprot_numbers_map.values())
+        # Remove the up: prefix from the uniprot numbers, as they look like 'up:B0LPE5', 'up:P31751', 'up:Q9Y243'
+        result = list(map(lambda x: str(re.findall(r"(?:up:)(.+)", x)[0]), kegg_uniprot_numbers))
+        self._logger.debug("Uniprot numbers {}".format(result))
+
+        return result
 
     @lru_cache(maxsize=100)
     def _get_gene_names(self, uniprot_number):
-        #Get the gene names associated with the uniprot number
+        # Get the gene names associated with the uniprot number
         self._logger.debug("Retrieving gene names for uniprotid {}".format(uniprot_number))
         gene_names_dict = self.u.mapping(fr="ACC,ID", to="GENENAME", query=uniprot_number)
 
