@@ -29,7 +29,6 @@ class KeggProteinInteractionsExtractor:
         self._logger.debug("Extracting PPIs for kegg pathway id {} ".format(kegg_pathway_id))
 
         for rel in protein_relations:
-            self._logger.debug("Extracting PPIs for kegg pathway id {} ".format(kegg_pathway_id))
 
             uniprot_dnumber = self._get_uniprot_numbers(self.kegg, kegg_entries, rel['entry2'])
             uniprot_snumber = self._get_uniprot_numbers(self.kegg, kegg_entries, rel['entry1'])
@@ -45,7 +44,7 @@ class KeggProteinInteractionsExtractor:
         return result_df
 
     def _get_uniprot_numbers(self, kegg, kegg_entries, entry_id):
-        self._logger.info("Converting kegg Hsa numbers to uniprot ")
+        self._logger.debug("Converting kegg Hsa numbers to uniprot ")
         regex_hsa = r"(?:\t)(.+)"
         uniprot_number = {}
         ko_number = list(filter(lambda d: d['id'] in [entry_id], kegg_entries))[0]['name']
