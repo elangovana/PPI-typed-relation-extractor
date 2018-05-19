@@ -82,7 +82,7 @@ class KeggProteinInteractionsExtractor:
         # Get the HSA numbers (Homosapien proteins only for the KO)
         ko_number_map_sep_tab_sep_nl = self.kegg.link('hsa', ko_numbers_sep_space)
 
-        # Extract jus the has numbers from the multiline string individual maps
+        # Extract just the HSA numbers from the multiline string individual maps
         # E.g
         # ko:K00922	hsa:5293
         # ko:K00922	hsa:5291
