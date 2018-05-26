@@ -51,21 +51,21 @@ class MipsProteinInteractionsExtractor:
 
             #loop through the ref list
             for ele_ref in ele_ref_list:
-                doc_id = ele_ref.attrib["id"]
-                doc_type = ele_ref.attrib["db"]
+                doc_id = ele_ref.attrib.get("id", "")
+                doc_type = ele_ref.attrib.get("db","")
                 for s_ele_participant in ele_participant_list:
                     s_protien_name = s_ele_participant.find("names/fullName").text
-                    s_protien_id = s_ele_participant.find("xref/primaryRef").attrib["id"]
-                    s_protien_db = s_ele_participant.find("xref/primaryRef").attrib["db"]
+                    s_protien_id = s_ele_participant.find("xref/primaryRef").attrib.get( "id", "")
+                    s_protien_db = s_ele_participant.find("xref/primaryRef").attrib.get("db", "")
 
                     for d_ele_participant in ele_participant_list:
 
                         d_protien_name = d_ele_participant.find("names/fullName").text
-                        d_protien_id = d_ele_participant.find("xref/primaryRef").attrib["id"]
-                        d_protien_db = d_ele_participant.find("xref/primaryRef").attrib["db"]
+                        d_protien_id = d_ele_participant.find("xref/primaryRef").attrib.get("id", "")
+                        d_protien_db = d_ele_participant.find("xref/primaryRef").attrib.get("db", "")
 
                         # Assume no self relations
-                        if s_protien_id == d_protien_id:
+                        if s_protien_id == d_protien_id and s_protien_id != "":
                             continue
 
                         interaction = {}
