@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entrySet  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  version="1" level="1">
+    <entry>
+        <source>
+            <names>
+                <shortLabel>MIPS</shortLabel>
+                <fullName>Munich Information Center for Protein Sequences</fullName>
+            </names>
+            <bibref>
+                <xref>
+                    <primaryRef db="Pubmed" id="9399795" />
+                </xref>
+            </bibref>
+        </source>
+        <interactionList>
+            <interaction>
+                <experimentList>
+                    <experimentDescription>
+                        <bibref>
+                            <xref>
+                                <primaryRef db="PubMed" id="9867828" />
+                            </xref>
+                        </bibref>
+                        <interactionDetection>
+                            <names>
+                                <shortLabel>two hybrid</shortLabel>
+                            </names>
+                            <xref>
+                                <primaryRef db="MI" id="0018" />
+                            </xref>
+                        </interactionDetection>
+                    </experimentDescription>
+                </experimentList>
+                <participantList>
+                    <proteinParticipant>
+                        <proteinInteractor>
+                            <names>
+                                <shortLabel>1</shortLabel>
+                                <fullName>S100A8;CAGA;MRP8; calgranulin A (migration inhibitory factor-related protein 8)</fullName>
+                            </names>
+                            <xref>
+                                <primaryRef db="SP" id="P27005" />
+                            </xref>
+                            <organism ncbiTaxId="10090" />
+                        </proteinInteractor>
+                        <confidence unit="boolean" value="1" />
+                        <isTaggedProtein>false</isTaggedProtein>
+                        <isOverexpressedProtein>false</isOverexpressedProtein>
+                    </proteinParticipant>
+                    <proteinParticipant>
+                        <proteinInteractor>
+                            <names>
+                                <shortLabel>2</shortLabel>
+                                <fullName>S100A9;CAGB;MRP14; calgranulin B (migration inhibitory factor-related protein 14)</fullName>
+                            </names>
+                            <xref>
+                                <primaryRef db="SP" id="P31725" />
+                            </xref>
+                            <organism ncbiTaxId="10090" />
+                        </proteinInteractor>
+                        <confidence unit="boolean" value="1" />
+                        <isTaggedProtein>false</isTaggedProtein>
+                        <isOverexpressedProtein>false</isOverexpressedProtein>
+                    </proteinParticipant>
+                </participantList>
+            </interaction>
+            <interaction>
+                <experimentList>
+                    <experimentDescription>
+                        <bibref>
+                            <xref>
+                                <primaryRef db="PubMed" id="9867828" />
+                            </xref>
+                        </bibref>
+                        <interactionDetection>
+                            <names>
+                                <shortLabel>two hybrid</shortLabel>
+                            </names>
+                            <xref>
+                                <primaryRef db="MI" id="0018" />
+                            </xref>
+                        </interactionDetection>
+                    </experimentDescription>
+                </experimentList>
+                <participantList>
+                    <proteinParticipant>
+                        <proteinInteractor>
+                            <names>
+                                <shortLabel>2</shortLabel>
+                                <fullName>S100A9;CAGB;MRP14; calgranulin B (migration inhibitory factor-related protein 14)</fullName>
+                            </names>
+                            <xref>
+                                <primaryRef db="SP" id="P31725" />
+                            </xref>
+                            <organism ncbiTaxId="10090" />
+                        </proteinInteractor>
+                        <confidence unit="boolean" value="1" />
+                        <isTaggedProtein>false</isTaggedProtein>
+                        <isOverexpressedProtein>false</isOverexpressedProtein>
+                    </proteinParticipant>
+                    <proteinParticipant>
+                        <proteinInteractor>
+                            <names>
+                                <shortLabel>1</shortLabel>
+                                <fullName>S100A8;CAGA;MRP8; calgranulin A (migration inhibitory factor-related protein 8)</fullName>
+                            </names>
+                            <xref>
+                                <primaryRef db="SP" id="P27005" />
+                            </xref>
+                            <organism ncbiTaxId="10090" />
+                        </proteinInteractor>
+                        <confidence unit="boolean" value="1" />
+                        <isTaggedProtein>false</isTaggedProtein>
+                        <isOverexpressedProtein>false</isOverexpressedProtein>
+                    </proteinParticipant>
+                </participantList>
+            </interaction>
+
+        </interactionList>
+    </entry>
+</entrySet>
+
