@@ -1,0 +1,744 @@
+<PubmedArticleSet>
+<PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+        <PMID Version="1">27558065</PMID>
+        <DateCompleted>
+            <Year>2016</Year>
+            <Month>09</Month>
+            <Day>27</Day>
+        </DateCompleted>
+        <DateRevised>
+            <Year>2017</Year>
+            <Month>02</Month>
+            <Day>20</Day>
+        </DateRevised>
+        <Article PubModel="Print">
+            <Journal>
+                <ISSN IssnType="Electronic">1476-4687</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <Volume>536</Volume>
+                    <Issue>7617</Issue>
+                    <PubDate>
+                        <Year>2016</Year>
+                        <Month>08</Month>
+                        <Day>25</Day>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Nature</Title>
+                <ISOAbbreviation>Nature</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>An integrated design and fabrication strategy for entirely soft, autonomous robots.</ArticleTitle>
+            <Pagination>
+                <MedlinePgn>451-5</MedlinePgn>
+            </Pagination>
+            <ELocationID EIdType="doi" ValidYN="Y">10.1038/nature19100</ELocationID>
+            <Abstract>
+                <AbstractText>Soft robots possess many attributes that are difficult, if not impossible, to achieve with conventional robots composed of rigid materials. Yet, despite recent advances, soft robots must still be tethered to hard robotic control systems and power sources. New strategies for creating completely soft robots, including soft analogues of these crucial components, are needed to realize their full potential. Here we report the untethered operation of a robot composed solely of soft materials. The robot is controlled with microfluidic logic that autonomously regulates fluid flow and, hence, catalytic decomposition of an on-board monopropellant fuel supply. Gas generated from the fuel decomposition inflates fluidic networks downstream of the reaction sites, resulting in actuation. The body and microfluidic logic of the robot are fabricated using moulding and soft lithography, respectively, and the pneumatic actuator networks, on-board fuel reservoirs and catalytic reaction chambers needed for movement are patterned within the body via a multi-material, embedded 3D printing technique. The fluidic and elastomeric architectures required for function span several orders of magnitude from the microscale to the macroscale. Our integrated design and rapid fabrication approach enables the programmable assembly of multiple materials within this architecture, laying the foundation for completely soft, autonomous robots.</AbstractText>
+            </Abstract>
+            <AuthorList CompleteYN="Y">
+                <Author ValidYN="Y">
+                    <LastName>Wehner</LastName>
+                    <ForeName>Michael</ForeName>
+                    <Initials>M</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>John A. Paulson School of Engineering and Applied Sciences, Harvard University, Cambridge, Massachusetts 02138, USA.</Affiliation>
+                    </AffiliationInfo>
+                    <AffiliationInfo>
+                        <Affiliation>Wyss Institute for Biologically Inspired Engineering, Harvard University, Cambridge, Massachusetts 02138, USA.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Truby</LastName>
+                    <ForeName>Ryan L</ForeName>
+                    <Initials>RL</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>John A. Paulson School of Engineering and Applied Sciences, Harvard University, Cambridge, Massachusetts 02138, USA.</Affiliation>
+                    </AffiliationInfo>
+                    <AffiliationInfo>
+                        <Affiliation>Wyss Institute for Biologically Inspired Engineering, Harvard University, Cambridge, Massachusetts 02138, USA.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Fitzgerald</LastName>
+                    <ForeName>Daniel J</ForeName>
+                    <Initials>DJ</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>John A. Paulson School of Engineering and Applied Sciences, Harvard University, Cambridge, Massachusetts 02138, USA.</Affiliation>
+                    </AffiliationInfo>
+                    <AffiliationInfo>
+                        <Affiliation>Wyss Institute for Biologically Inspired Engineering, Harvard University, Cambridge, Massachusetts 02138, USA.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Mosadegh</LastName>
+                    <ForeName>Bobak</ForeName>
+                    <Initials>B</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Dalio Institute of Cardiovascular Imaging, Weill Cornell Medicine and New York Presbyterian Hospital, New York, New York 10021, USA.</Affiliation>
+                    </AffiliationInfo>
+                    <AffiliationInfo>
+                        <Affiliation>Department of Radiology, Weill Cornell Medicine, New York, New York 10021, USA.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Whitesides</LastName>
+                    <ForeName>George M</ForeName>
+                    <Initials>GM</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Wyss Institute for Biologically Inspired Engineering, Harvard University, Cambridge, Massachusetts 02138, USA.</Affiliation>
+                    </AffiliationInfo>
+                    <AffiliationInfo>
+                        <Affiliation>Department of Chemistry and Chemical Biology, Harvard University, Cambridge, Massachusetts 02138, USA.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Lewis</LastName>
+                    <ForeName>Jennifer A</ForeName>
+                    <Initials>JA</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>John A. Paulson School of Engineering and Applied Sciences, Harvard University, Cambridge, Massachusetts 02138, USA.</Affiliation>
+                    </AffiliationInfo>
+                    <AffiliationInfo>
+                        <Affiliation>Wyss Institute for Biologically Inspired Engineering, Harvard University, Cambridge, Massachusetts 02138, USA.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Wood</LastName>
+                    <ForeName>Robert J</ForeName>
+                    <Initials>RJ</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>John A. Paulson School of Engineering and Applied Sciences, Harvard University, Cambridge, Massachusetts 02138, USA.</Affiliation>
+                    </AffiliationInfo>
+                    <AffiliationInfo>
+                        <Affiliation>Wyss Institute for Biologically Inspired Engineering, Harvard University, Cambridge, Massachusetts 02138, USA.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+            </AuthorList>
+            <Language>eng</Language>
+            <PublicationTypeList>
+                <PublicationType UI="D016428">Journal Article</PublicationType>
+                <PublicationType UI="D013485">Research Support, Non-U.S. Gov't</PublicationType>
+                <PublicationType UI="D013486">Research Support, U.S. Gov't, Non-P.H.S.</PublicationType>
+            </PublicationTypeList>
+        </Article>
+        <MedlineJournalInfo>
+            <Country>England</Country>
+            <MedlineTA>Nature</MedlineTA>
+            <NlmUniqueID>0410462</NlmUniqueID>
+            <ISSNLinking>0028-0836</ISSNLinking>
+        </MedlineJournalInfo>
+        <ChemicalList>
+            <Chemical>
+                <RegistryNumber>49DFR088MY</RegistryNumber>
+                <NameOfSubstance UI="D010984">Platinum</NameOfSubstance>
+            </Chemical>
+            <Chemical>
+                <RegistryNumber>BBX060AN9V</RegistryNumber>
+                <NameOfSubstance UI="D006861">Hydrogen Peroxide</NameOfSubstance>
+            </Chemical>
+            <Chemical>
+                <RegistryNumber>S88TT14065</RegistryNumber>
+                <NameOfSubstance UI="D010100">Oxygen</NameOfSubstance>
+            </Chemical>
+        </ChemicalList>
+        <CitationSubset>IM</CitationSubset>
+        <CommentsCorrectionsList>
+            <CommentsCorrections RefType="CommentIn">
+                <RefSource>Nature. 2016 Aug 25;536(7617):400-1</RefSource>
+                <PMID Version="1">27558058</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Nat Phys. 2010 Jun 1;6(6):433-437</RefSource>
+                <PMID Version="1">20526435</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Nat Commun. 2013;4:2257</RefSource>
+                <PMID Version="1">23907294</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Soft Robot. 2014 Mar 1;1(1):75-87</RefSource>
+                <PMID Version="1">27625912</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Lab Chip. 2011 Jan 21;11(2):191-3</RefSource>
+                <PMID Version="1">21152593</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Angew Chem Int Ed Engl. 2013 Mar 4;52(10):2892-6</RefSource>
+                <PMID Version="1">23382085</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Adv Mater. 2014 Sep;26(36):6307-12</RefSource>
+                <PMID Version="1">24934143</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Adv Mater. 2013 Dec 10;25(46):6709-13</RefSource>
+                <PMID Version="1">24123311</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Lab Chip. 2011 Feb 21;11(4):738-42</RefSource>
+                <PMID Version="1">21132212</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Proc Natl Acad Sci U S A. 2011 Dec 20;108(51):20400-3</RefSource>
+                <PMID Version="1">22123978</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Lab Chip. 2009 Nov 7;9(21):3131-43</RefSource>
+                <PMID Version="1">19823730</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Science. 2015 Jul 10;349(6244):161-5</RefSource>
+                <PMID Version="1">26160940</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Science. 2003 May 9;300(5621):955-8</RefSource>
+                <PMID Version="1">12738857</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Adv Mater. 2011 Jun 24;23(24):H178-83</RefSource>
+                <PMID Version="1">21438034</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Nature. 2015 May 28;521(7553):467-75</RefSource>
+                <PMID Version="1">26017446</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Bioinspir Biomim. 2011 Jun;6(2):026007</RefSource>
+                <PMID Version="1">21521905</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Science. 2007 Feb 9;315 (5813):832-5</RefSource>
+                <PMID Version="1">17289994</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Proc Natl Acad Sci U S A. 2005 Aug 2;102(31):10813-8</RefSource>
+                <PMID Version="1">16043719</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Bioinspir Biomim. 2015 Sep 09;10(5):055003</RefSource>
+                <PMID Version="1">26353071</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Lab Chip. 2007 Nov;7(11):1449-53</RefSource>
+                <PMID Version="1">17960270</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Adv Mater. 2014 May 21;26(19):3124-30</RefSource>
+                <PMID Version="1">24550124</PMID>
+            </CommentsCorrections>
+        </CommentsCorrectionsList>
+        <MeshHeadingList>
+            <MeshHeading>
+                <DescriptorName UI="D002384" MajorTopicYN="N">Catalysis</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D004548" MajorTopicYN="N">Elasticity</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D004867" MajorTopicYN="Y">Equipment Design</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D006244" MajorTopicYN="Y">Hardness</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D006861" MajorTopicYN="N">Hydrogen Peroxide</DescriptorName>
+                <QualifierName UI="Q000737" MajorTopicYN="N">chemistry</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D008128" MajorTopicYN="N">Logic</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D044085" MajorTopicYN="N">Microfluidics</DescriptorName>
+                <QualifierName UI="Q000379" MajorTopicYN="Y">methods</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D009038" MajorTopicYN="N">Motion</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D010100" MajorTopicYN="N">Oxygen</DescriptorName>
+                <QualifierName UI="Q000737" MajorTopicYN="N">chemistry</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D010984" MajorTopicYN="N">Platinum</DescriptorName>
+                <QualifierName UI="Q000737" MajorTopicYN="N">chemistry</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D011327" MajorTopicYN="N">Printing</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D066330" MajorTopicYN="Y">Printing, Three-Dimensional</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D012371" MajorTopicYN="N">Robotics</DescriptorName>
+                <QualifierName UI="Q000295" MajorTopicYN="Y">instrumentation</QualifierName>
+                <QualifierName UI="Q000379" MajorTopicYN="Y">methods</QualifierName>
+            </MeshHeading>
+        </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+        <History>
+            <PubMedPubDate PubStatus="received">
+                <Year>2016</Year>
+                <Month>03</Month>
+                <Day>29</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="accepted">
+                <Year>2016</Year>
+                <Month>07</Month>
+                <Day>07</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="entrez">
+                <Year>2016</Year>
+                <Month>8</Month>
+                <Day>26</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="pubmed">
+                <Year>2016</Year>
+                <Month>8</Month>
+                <Day>26</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="medline">
+                <Year>2016</Year>
+                <Month>9</Month>
+                <Day>28</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+        </History>
+        <PublicationStatus>ppublish</PublicationStatus>
+        <ArticleIdList>
+            <ArticleId IdType="pubmed">27558065</ArticleId>
+            <ArticleId IdType="pii">nature19100</ArticleId>
+            <ArticleId IdType="doi">10.1038/nature19100</ArticleId>
+        </ArticleIdList>
+    </PubmedData>
+</PubmedArticle>
+
+
+<PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+        <PMID Version="1">27466125</PMID>
+        <DateCompleted>
+            <Year>2016</Year>
+            <Month>08</Month>
+            <Day>24</Day>
+        </DateCompleted>
+        <DateRevised>
+            <Year>2016</Year>
+            <Month>12</Month>
+            <Day>16</Day>
+        </DateRevised>
+        <Article PubModel="Print">
+            <Journal>
+                <ISSN IssnType="Electronic">1476-4687</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <Volume>535</Volume>
+                    <Issue>7613</Issue>
+                    <PubDate>
+                        <Year>2016</Year>
+                        <Month>07</Month>
+                        <Day>28</Day>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Nature</Title>
+                <ISOAbbreviation>Nature</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>Combinatorial design of textured mechanical metamaterials.</ArticleTitle>
+            <Pagination>
+                <MedlinePgn>529-32</MedlinePgn>
+            </Pagination>
+            <ELocationID EIdType="doi" ValidYN="Y">10.1038/nature18960</ELocationID>
+            <Abstract>
+                <AbstractText>The structural complexity of metamaterials is limitless, but, in practice, most designs comprise periodic architectures that lead to materials with spatially homogeneous features. More advanced applications in soft robotics, prosthetics and wearable technology involve spatially textured mechanical functionality, which requires aperiodic architectures. However, a naive implementation of such structural complexity invariably leads to geometrical frustration (whereby local constraints cannot be satisfied everywhere), which prevents coherent operation and impedes functionality. Here we introduce a combinatorial strategy for the design of aperiodic, yet frustration-free, mechanical metamaterials that exhibit spatially textured functionalities. We implement this strategy using cubic building blocks-voxels-that deform anisotropically, a local stacking rule that allows cooperative shape changes by guaranteeing that deformed building blocks fit together as in a three-dimensional jigsaw puzzle, and three-dimensional printing. These aperiodic metamaterials exhibit long-range holographic order, whereby the two-dimensional pixelated surface texture dictates the three-dimensional interior voxel arrangement. They also act as programmable shape-shifters, morphing into spatially complex, but predictable and designable, shapes when uniaxially compressed. Finally, their mechanical response to compression by a textured surface reveals their ability to perform sensing and pattern analysis. Combinatorial design thus opens up a new avenue towards mechanical metamaterials with unusual order and machine-like functionalities.</AbstractText>
+            </Abstract>
+            <AuthorList CompleteYN="Y">
+                <Author ValidYN="Y">
+                    <LastName>Coulais</LastName>
+                    <ForeName>Corentin</ForeName>
+                    <Initials>C</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Huygens-Kamerlingh Onnes Laboratory, Universiteit Leiden, PO box 9504, 2300 RA Leiden, The Netherlands.</Affiliation>
+                    </AffiliationInfo>
+                    <AffiliationInfo>
+                        <Affiliation>FOM Institute AMOLF, Science Park 104, 1098 XG Amsterdam, The Netherlands.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Teomy</LastName>
+                    <ForeName>Eial</ForeName>
+                    <Initials>E</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>School of Mechanical Engineering and The Sackler Center for Computational Molecular and Materials Science, Tel Aviv University, Tel Aviv 69978, Israel.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>de Reus</LastName>
+                    <ForeName>Koen</ForeName>
+                    <Initials>K</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Huygens-Kamerlingh Onnes Laboratory, Universiteit Leiden, PO box 9504, 2300 RA Leiden, The Netherlands.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Shokef</LastName>
+                    <ForeName>Yair</ForeName>
+                    <Initials>Y</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>School of Mechanical Engineering and The Sackler Center for Computational Molecular and Materials Science, Tel Aviv University, Tel Aviv 69978, Israel.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>van Hecke</LastName>
+                    <ForeName>Martin</ForeName>
+                    <Initials>M</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Huygens-Kamerlingh Onnes Laboratory, Universiteit Leiden, PO box 9504, 2300 RA Leiden, The Netherlands.</Affiliation>
+                    </AffiliationInfo>
+                    <AffiliationInfo>
+                        <Affiliation>FOM Institute AMOLF, Science Park 104, 1098 XG Amsterdam, The Netherlands.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+            </AuthorList>
+            <Language>eng</Language>
+            <PublicationTypeList>
+                <PublicationType UI="D016428">Journal Article</PublicationType>
+                <PublicationType UI="D013485">Research Support, Non-U.S. Gov't</PublicationType>
+            </PublicationTypeList>
+        </Article>
+        <MedlineJournalInfo>
+            <Country>England</Country>
+            <MedlineTA>Nature</MedlineTA>
+            <NlmUniqueID>0410462</NlmUniqueID>
+            <ISSNLinking>0028-0836</ISSNLinking>
+        </MedlineJournalInfo>
+        <CitationSubset>IM</CitationSubset>
+        <MeshHeadingList>
+            <MeshHeading>
+                <DescriptorName UI="D006696" MajorTopicYN="N">Holography</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D019563" MajorTopicYN="Y">Mechanics</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D066330" MajorTopicYN="N">Printing, Three-Dimensional</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D019736" MajorTopicYN="N">Prostheses and Implants</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D012371" MajorTopicYN="N">Robotics</DescriptorName>
+                <QualifierName UI="Q000295" MajorTopicYN="N">instrumentation</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D013499" MajorTopicYN="Y">Surface Properties</DescriptorName>
+            </MeshHeading>
+        </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+        <History>
+            <PubMedPubDate PubStatus="received">
+                <Year>2016</Year>
+                <Month>03</Month>
+                <Day>26</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="accepted">
+                <Year>2016</Year>
+                <Month>06</Month>
+                <Day>17</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="entrez">
+                <Year>2016</Year>
+                <Month>7</Month>
+                <Day>29</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="pubmed">
+                <Year>2016</Year>
+                <Month>7</Month>
+                <Day>29</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="medline">
+                <Year>2016</Year>
+                <Month>8</Month>
+                <Day>25</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+        </History>
+        <PublicationStatus>ppublish</PublicationStatus>
+        <ArticleIdList>
+            <ArticleId IdType="pubmed">27466125</ArticleId>
+            <ArticleId IdType="pii">nature18960</ArticleId>
+            <ArticleId IdType="doi">10.1038/nature18960</ArticleId>
+        </ArticleIdList>
+    </PubmedData>
+</PubmedArticle>
+
+
+<PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+        <PMID Version="1">27127816</PMID>
+        <DateCompleted>
+            <Year>2016</Year>
+            <Month>05</Month>
+            <Day>10</Day>
+        </DateCompleted>
+        <DateRevised>
+            <Year>2016</Year>
+            <Month>04</Month>
+            <Day>28</Day>
+        </DateRevised>
+        <Article PubModel="Print">
+            <Journal>
+                <ISSN IssnType="Electronic">1476-4687</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <Volume>532</Volume>
+                    <Issue>7599</Issue>
+                    <PubDate>
+                        <Year>2016</Year>
+                        <Month>Apr</Month>
+                        <Day>21</Day>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Nature</Title>
+                <ISOAbbreviation>Nature</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>Open hardware: Self-built labware stimulates creativity.</ArticleTitle>
+            <Pagination>
+                <MedlinePgn>313</MedlinePgn>
+            </Pagination>
+            <AuthorList CompleteYN="Y">
+                <Author ValidYN="Y">
+                    <LastName>Urban</LastName>
+                    <ForeName>Pawel</ForeName>
+                    <Initials>P</Initials>
+                </Author>
+            </AuthorList>
+            <Language>eng</Language>
+            <PublicationTypeList>
+                <PublicationType UI="D016422">Letter</PublicationType>
+            </PublicationTypeList>
+        </Article>
+        <MedlineJournalInfo>
+            <Country>England</Country>
+            <MedlineTA>Nature</MedlineTA>
+            <NlmUniqueID>0410462</NlmUniqueID>
+            <ISSNLinking>0028-0836</ISSNLinking>
+        </MedlineJournalInfo>
+        <CitationSubset>IM</CitationSubset>
+        <MeshHeadingList>
+            <MeshHeading>
+                <DescriptorName UI="D022126" MajorTopicYN="Y">Access to Information</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D002621" MajorTopicYN="N">Chemistry</DescriptorName>
+                <QualifierName UI="Q000191" MajorTopicYN="N">economics</QualifierName>
+                <QualifierName UI="Q000295" MajorTopicYN="Y">instrumentation</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D003405" MajorTopicYN="Y">Creativity</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D004581" MajorTopicYN="N">Electronics</DescriptorName>
+                <QualifierName UI="Q000191" MajorTopicYN="N">economics</QualifierName>
+                <QualifierName UI="Q000295" MajorTopicYN="N">instrumentation</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D004867" MajorTopicYN="Y">Equipment Design</DescriptorName>
+                <QualifierName UI="Q000191" MajorTopicYN="N">economics</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D020407" MajorTopicYN="N">Internet</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D007753" MajorTopicYN="Y">Laboratories</DescriptorName>
+                <QualifierName UI="Q000191" MajorTopicYN="N">economics</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D066330" MajorTopicYN="N">Printing, Three-Dimensional</DescriptorName>
+                <QualifierName UI="Q000191" MajorTopicYN="N">economics</QualifierName>
+                <QualifierName UI="Q000295" MajorTopicYN="N">instrumentation</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D012108" MajorTopicYN="Y">Research Personnel</DescriptorName>
+            </MeshHeading>
+        </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+        <History>
+            <PubMedPubDate PubStatus="entrez">
+                <Year>2016</Year>
+                <Month>4</Month>
+                <Day>30</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="pubmed">
+                <Year>2016</Year>
+                <Month>4</Month>
+                <Day>30</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="medline">
+                <Year>2016</Year>
+                <Month>5</Month>
+                <Day>11</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+        </History>
+        <PublicationStatus>ppublish</PublicationStatus>
+        <ArticleIdList>
+            <ArticleId IdType="pubmed">27127816</ArticleId>
+        </ArticleIdList>
+    </PubmedData>
+</PubmedArticle>
+
+
+<PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+        <PMID Version="1">26842040</PMID>
+        <DateCompleted>
+            <Year>2016</Year>
+            <Month>02</Month>
+            <Day>25</Day>
+        </DateCompleted>
+        <DateRevised>
+            <Year>2017</Year>
+            <Month>09</Month>
+            <Day>22</Day>
+        </DateRevised>
+        <Article PubModel="Print">
+            <Journal>
+                <ISSN IssnType="Electronic">1476-4687</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <Volume>530</Volume>
+                    <Issue>7588</Issue>
+                    <PubDate>
+                        <Year>2016</Year>
+                        <Month>Feb</Month>
+                        <Day>04</Day>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Nature</Title>
+                <ISOAbbreviation>Nature</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>Meet the soft, cuddly robots of the future.</ArticleTitle>
+            <Pagination>
+                <MedlinePgn>24-6</MedlinePgn>
+            </Pagination>
+            <ELocationID EIdType="doi" ValidYN="Y">10.1038/530024a</ELocationID>
+            <AuthorList CompleteYN="Y">
+                <Author ValidYN="Y">
+                    <LastName>Shen</LastName>
+                    <ForeName>Helen</ForeName>
+                    <Initials>H</Initials>
+                </Author>
+            </AuthorList>
+            <Language>eng</Language>
+            <PublicationTypeList>
+                <PublicationType UI="D016433">News</PublicationType>
+            </PublicationTypeList>
+        </Article>
+        <MedlineJournalInfo>
+            <Country>England</Country>
+            <MedlineTA>Nature</MedlineTA>
+            <NlmUniqueID>0410462</NlmUniqueID>
+            <ISSNLinking>0028-0836</ISSNLinking>
+        </MedlineJournalInfo>
+        <CitationSubset>IM</CitationSubset>
+        <CommentsCorrectionsList>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Bioinspir Biomim. 2011 Jun;6(2):026007</RefSource>
+                <PMID Version="1">21521905</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Bioinspir Biomim. 2011 Sep;6(3):036004</RefSource>
+                <PMID Version="1">21852714</PMID>
+            </CommentsCorrections>
+            <CommentsCorrections RefType="Cites">
+                <RefSource>Proc Natl Acad Sci U S A. 2011 Dec 20;108(51):20400-3</RefSource>
+                <PMID Version="1">22123978</PMID>
+            </CommentsCorrections>
+        </CommentsCorrectionsList>
+        <MeshHeadingList>
+            <MeshHeading>
+                <DescriptorName UI="D000818" MajorTopicYN="N">Animals</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D040761" MajorTopicYN="N">Biomimetic Materials</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D032701" MajorTopicYN="N">Biomimetics</DescriptorName>
+                <QualifierName UI="Q000295" MajorTopicYN="Y">instrumentation</QualifierName>
+                <QualifierName UI="Q000379" MajorTopicYN="Y">methods</QualifierName>
+                <QualifierName UI="Q000639" MajorTopicYN="N">trends</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D006244" MajorTopicYN="Y">Hardness</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D009068" MajorTopicYN="N">Movement</DescriptorName>
+                <QualifierName UI="Q000502" MajorTopicYN="N">physiology</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D049831" MajorTopicYN="N">Octopodiformes</DescriptorName>
+                <QualifierName UI="Q000033" MajorTopicYN="N">anatomy &amp; histology</QualifierName>
+                <QualifierName UI="Q000502" MajorTopicYN="N">physiology</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D018583" MajorTopicYN="N">Pliability</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D066330" MajorTopicYN="N">Printing, Three-Dimensional</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName UI="D012371" MajorTopicYN="N">Robotics</DescriptorName>
+                <QualifierName UI="Q000295" MajorTopicYN="Y">instrumentation</QualifierName>
+                <QualifierName UI="Q000379" MajorTopicYN="N">methods</QualifierName>
+                <QualifierName UI="Q000639" MajorTopicYN="Y">trends</QualifierName>
+            </MeshHeading>
+        </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+        <History>
+            <PubMedPubDate PubStatus="entrez">
+                <Year>2016</Year>
+                <Month>2</Month>
+                <Day>5</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="pubmed">
+                <Year>2016</Year>
+                <Month>2</Month>
+                <Day>6</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="medline">
+                <Year>2016</Year>
+                <Month>2</Month>
+                <Day>26</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+        </History>
+        <PublicationStatus>ppublish</PublicationStatus>
+        <ArticleIdList>
+            <ArticleId IdType="pubmed">26842040</ArticleId>
+            <ArticleId IdType="pii">530024a</ArticleId>
+            <ArticleId IdType="doi">10.1038/530024a</ArticleId>
+        </ArticleIdList>
+    </PubmedData>
+</PubmedArticle>
+</PubmedArticleSet>
