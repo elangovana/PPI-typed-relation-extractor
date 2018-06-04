@@ -9,8 +9,9 @@ import requests
 import xml.etree.cElementTree as ElementTree
 from urllib.parse import urlencode
 
+
 class PubmedAbstractExtractor:
-    def __init__(self, pubmed_baseurl = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"):
+    def __init__(self, pubmed_baseurl="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"):
         self._logger = logging.getLogger(__name__)
         self.pubmed_baseurl = pubmed_baseurl
 
@@ -18,11 +19,11 @@ class PubmedAbstractExtractor:
         self._logger.info("Extracting pubmed abstract")
 
         query_string = urlencode({'db': 'pubmed'
-                                  ,'id': ','.join(pubmed_id_list)
-                                  ,'retmode':'abstract'
-                                  ,'rettype':'xml'})
+                                     , 'id': ','.join(pubmed_id_list)
+                                     , 'retmode': 'abstract'
+                                     , 'rettype': 'xml'})
 
-        uri = "{}?{}".format( self.pubmed_baseurl, query_string)
+        uri = "{}?{}".format(self.pubmed_baseurl, query_string)
         self._logger.debug("Extracting pubmed abstract from url {}".format(uri))
 
         # Downloading pubmed abstracts Xml file
@@ -55,7 +56,6 @@ class PubmedAbstractExtractor:
                 continue
             article_title = title_ele.text
 
-
             abstract_ele = article_ele.find("Abstract/AbstractText")
             if abstract_ele is None:
                 continue
@@ -66,8 +66,8 @@ class PubmedAbstractExtractor:
 
             result_arr.append({
                 "id": pubmed_id
-                ,"title":article_title
-                ,'abstract':article_abstract
+                , "title": article_title
+                , 'abstract': article_abstract
 
             })
 
@@ -81,5 +81,3 @@ class PubmedAbstractExtractor:
             if event == "end" and elem.tag == name:
                 yield elem
                 elem.clear()
-
-
