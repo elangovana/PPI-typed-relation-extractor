@@ -68,7 +68,11 @@ class MipsProteinInteractionsExtractor:
                         if s_protien_id == d_protien_id and s_protien_id != "":
                             continue
 
+                        # set up key as the combination of the 2 interacting protein uniprot names in order
+                        key = "#".join(sorted([s_protien_id, d_protien_id]))
+
                         interaction = {}
+                        interaction["key"] = key
                         interaction["doc_id"] = doc_id
                         interaction["doc_type"] = doc_type
                         interaction["s_protien_id"] = s_protien_id

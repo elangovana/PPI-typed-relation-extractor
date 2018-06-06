@@ -48,9 +48,11 @@ class KeggProteinInteractionsExtractor:
                 for d_uniprot in d_uniprot_numbers:
                     s_gene_name = self._get_gene_names(s_uniprot)
                     d_gene_name = self._get_gene_names(d_uniprot)
+                    #set up key as the combination of the 2 interacting protein uniprot names in order
+                    key ="#".join(sorted([s_uniprot, d_uniprot]))
 
                     # Add to result
-                    rel_dict = {"s_uniprot": s_uniprot, "s_gene_name": s_gene_name, "interaction": rel['name'],
+                    rel_dict = {"key": key,"s_uniprot": s_uniprot, "s_gene_name": s_gene_name, "interaction": rel['name'],
                                 "d_uniprot": d_uniprot, "d_genename": d_gene_name}
                     self._logger.debug("** Relation extracted {}".format(json.dumps(rel_dict)))
                     result.append(rel_dict)
