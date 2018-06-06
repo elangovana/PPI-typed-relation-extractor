@@ -17,9 +17,10 @@ class TestMipsProteinInteractionsExtractor(unittest.TestCase):
     @unpack
     def test_extract_protein_interactions_kgml(self, mips_file, expected_no_rel):
         #Arrange
+        full_mips_file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), mips_file)
         sut = MipsProteinInteractionsExtractor()
 
-        with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), mips_file), 'r') as myfile:
+        with open(full_mips_file_path, 'r') as myfile:
             #Act
             actual = sut.extract_protein_interaction_file(myfile)
 
