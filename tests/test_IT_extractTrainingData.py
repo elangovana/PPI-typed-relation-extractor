@@ -26,8 +26,9 @@ class TestExtractTrainingData(TestCase):
         df_kegg = kegg.extract_protein_interactions_kgml(kgml_string)
 
         # Mips
-        mips = MipsProteinInteractionsExtractor()
-        with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), mips_file), 'r') as myfile:
+        mips_full_file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), mips_file)
+        mips = MipsProteinInteractionsExtractor(mips_full_file_path)
+        with open(mips_full_file_path, 'r') as myfile:
             df_mips = mips.extract_protein_interaction_file(myfile)
 
         sut = ExtractTrainingData(df_kegg, df_mips)
