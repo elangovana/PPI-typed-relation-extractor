@@ -3,7 +3,7 @@ import logging
 
 import os
 import tempfile
-
+import tarfile
 import pandas as pd
 import requests
 import xml.etree.cElementTree as ElementTree
@@ -18,21 +18,20 @@ Bioinformatics 2005; 21(6):832-834; [Epub 2004 Nov 5]   doi:10.1093/bioinformati
 
 
 class MipsProteinInteractionsExtractor:
-    def __init__(self):
+    def __init__(self, file):
+        self.file = file
         self._logger = logging.getLogger(__name__)
 
-    def extract_protein_interaction(self, uri="http://mips.helmholtz-muenchen.de/proj/ppi/data/mppi.gz"):
+
+    def extract_protein_interaction(self):
         self._logger.info("Extracting protein extractions")
 
-        # Downloading PPI Xml file
-        r = requests.get(uri, allow_redirects=True)
-        with tempfile.TemporaryFile(suffix=".csv", mode="w+r") as tmpfile:
-            self._logger.info("Downloading {} to temp file".format(uri))
-            tmpfile.write(r.content)
-            tmpfile.seek(0)
-
+        with open(self.file, 'r') as tmpfile:
+            self._logger.info("loadind data from file {}".format(self.file))
             # Start Extracting PPIs
-            self.extract_protein_interaction_file(tmpfile)
+            result_df = self.extract_protein_interaction_file(tmpfile)
+
+        return result_df
 
     def extract_protein_interaction_file(self, handle):
         """
@@ -44,18 +43,18 @@ class MipsProteinInteractionsExtractor:
         for interaction in self._iter_elements_by_name(handle, "interaction"):
 
             # Find Pub Med Rreferences
-            #TODO
+            # TODO
             ele_ref_list = interaction.findall("experimentList/experimentDescription/bibref/xref/primaryRef")
-            #Get Protein Participants
+            # Get Protein Participants
             ele_participant_list = interaction.findall("participantList/proteinParticipant/proteinInteractor")
 
-            #loop through the ref list
+            # loop through the ref list
             for ele_ref in ele_ref_list:
                 doc_id = ele_ref.attrib.get("id", "")
-                doc_type = ele_ref.attrib.get("db","")
+                doc_type = ele_ref.attrib.get("db", "")
                 for s_ele_participant in ele_participant_list:
                     s_protien_name = s_ele_participant.find("names/fullName").text
-                    s_protien_id = s_ele_participant.find("xref/primaryRef").attrib.get( "id", "")
+                    s_protien_id = s_ele_participant.find("xref/primaryRef").attrib.get("id", "")
                     s_protien_db = s_ele_participant.find("xref/primaryRef").attrib.get("db", "")
 
                     for d_ele_participant in ele_participant_list:
@@ -84,7 +83,9 @@ class MipsProteinInteractionsExtractor:
                         interaction["d_protien_db"] = d_protien_db
 
                         result_arr.append(interaction)
-                        self._logger.debug("{} {} {} {} {} {}".format(doc_id, doc_type, s_protien_id, s_protien_db, d_protien_id, d_protien_db))
+                        self._logger.debug(
+                            "{} {} {} {} {} {}".format(doc_id, doc_type, s_protien_id, s_protien_db, d_protien_id,
+                                                       d_protien_db))
 
         df_result = pd.DataFrame(result_arr)
         return df_result
@@ -96,5 +97,3 @@ class MipsProteinInteractionsExtractor:
             if event == "end" and elem.tag == name:
                 yield elem
                 elem.clear()
-
-
