@@ -20,10 +20,9 @@ class KeggProteinInteractionsExtractor:
         self._logger.info("Extracting PPIs for kegg pathway id {} ".format(kegg_pathway_id))
 
         kgml = self.kegg.get(kegg_pathway_id, "kgml")
-        result = self.extract_protein_interactions_kgml(kgml)
+        result_df = self.extract_protein_interactions_kgml(kgml)
 
         # result in a dataframe
-        result_df = pd.DataFrame(result)
         self._logger.info("Completed PPIs extraction for kegg pathway id {} ".format(kegg_pathway_id))
 
         return result_df
@@ -56,7 +55,8 @@ class KeggProteinInteractionsExtractor:
                                 "d_uniprot": d_uniprot, "d_genename": d_gene_name}
                     self._logger.debug("** Relation extracted {}".format(json.dumps(rel_dict)))
                     result.append(rel_dict)
-        return result
+        result_df = pd.DataFrame(result)
+        return result_df
 
     def _cached_get_uniprot_numbers(self, entry_id, kgml_parser):
         if entry_id not in self._cache_kegg_entry_uniprots:
