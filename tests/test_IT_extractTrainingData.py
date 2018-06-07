@@ -15,7 +15,7 @@ class TestExtractTrainingData(TestCase):
     def setUp(self):
         fileConfig(os.path.join(os.path.dirname(__file__), 'logger.ini'))
 
-    @data(("sample.kgml", "sample_mips.xml", 0))
+    @data(("sample_ko.kgml", "sample_mips.xml", 0))
     @unpack
     def test_run(self, kgml_file, mips_file, expected_no_records):
         # Arrange
