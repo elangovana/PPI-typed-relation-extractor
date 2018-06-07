@@ -13,7 +13,8 @@ class TestKeggProteinInteractionsExtractor(unittest.TestCase):
     def setUp(self):
         fileConfig(os.path.join(os.path.dirname(__file__), 'logger.ini'))
 
-    @data(("sample_ko.kgml", 48))
+    @data(("sample_ko.kgml", 48)
+          ,("sample_hsa.kgml", 3))
     @unpack
     def test_extract_protein_interactions_kgml(self, kgml_file, expected_no_rel):
         #Arrange

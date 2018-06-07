@@ -81,17 +81,7 @@ class KeggProteinInteractionsExtractor:
         # Multiple KO numbers are separated by space, but the link query recognises that and returns corresponding HSA numbers
         # E.g name="ko:K00922 ko:K02649"
         ko_numbers_sep_space = entry['name']
-        # Get the HSA numbers (Homosapien proteins only for the KO)
-        ko_number_map_sep_tab_sep_nl = self.kegg.link('hsa', ko_numbers_sep_space)
-
-        # Extract just the HSA numbers from the multiline string individual maps
-        # E.g
-        # ko:K00922	hsa:5293
-        # ko:K00922	hsa:5291
-        # ko:K02649	hsa:5295
-        self._logger.debug("HSA numbers for the KO numbers \n{}".format(ko_number_map_sep_tab_sep_nl))
-        regex_hsa = r"(?:\t)(.+)"
-        hsa_number_list = re.findall(regex_hsa, str(ko_number_map_sep_tab_sep_nl))
+        hsa_number_list = self.get_hsa_numbers(ko_numbers_sep_space)
 
         # Check if there are any HSA numbers associated with the KO numbers
         if len(hsa_number_list) > 0:
@@ -106,6 +96,34 @@ class KeggProteinInteractionsExtractor:
         self._logger.debug("Uniprot numbers {}".format(result))
 
         return result
+
+    def get_hsa_numbers(self, ko_numbers_sep_space):
+        # Assume the  Numbers are all Ko number or all HSA.
+        self._logger.debug("Obtained KO numbers \n{}".format(ko_numbers_sep_space))
+
+        # Undefined..
+        if ko_numbers_sep_space.strip().lower() == "undefined":
+            return []
+
+        # If HSA then return as is..
+        if ko_numbers_sep_space.strip().lower().startswith('hsa:'):
+            return ko_numbers_sep_space.split(' ')
+
+        # Check if ko.. else raise exception
+        if not ko_numbers_sep_space.strip().lower().startswith('ko:'):
+            raise ValueError("Expecting Ko or hsa numbers only, but found {}".format(ko_numbers_sep_space))
+
+        # Get the HSA numbers (Homosapien proteins only for the KO)
+        ko_number_map_sep_tab_sep_nl = self.kegg.link('hsa', ko_numbers_sep_space)
+        # Extract just the HSA numbers from the multiline string individual maps
+        # E.g
+        # ko:K00922	hsa:5293
+        # ko:K00922	hsa:5291
+        # ko:K02649	hsa:5295
+        self._logger.debug("HSA numbers for the KO numbers \n{}".format(ko_number_map_sep_tab_sep_nl))
+        regex_hsa = r"(?:\t)(.+)"
+        hsa_number_list = re.findall(regex_hsa, str(ko_number_map_sep_tab_sep_nl))
+        return hsa_number_list
 
     @lru_cache(maxsize=100)
     def _get_gene_names(self, uniprot_number):

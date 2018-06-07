@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE pathway SYSTEM "https://www.kegg.jp/kegg/xml/KGML_v0.7.2_.dtd">
+<!-- Creation date: Apr 5, 2016 13:55:39 +0900 (GMT+9) -->
+<pathway name="path:hsa04110" org="hsa" number="04110"
+         title="Cell cycle"
+         image="https://www.kegg.jp/kegg/pathway/hsa/hsa04110.png"
+         link="https://www.kegg.jp/kegg-bin/show_pathway?hsa04110">
+
+    <entry id="5"
+           name="hsa:10393 hsa:246184 hsa:25847 hsa:29882 hsa:29945 hsa:51433 hsa:51434 hsa:51529 hsa:64682 hsa:8697 hsa:8881 hsa:996"
+           type="gene"
+           link="https://www.kegg.jp/dbget-bin/www_bget?hsa:10393+hsa:246184+hsa:25847+hsa:29882+hsa:29945+hsa:51433+hsa:51434+hsa:51529+hsa:64682+hsa:8697+hsa:8881+hsa:996">
+        <graphics name="ANAPC10, APC10, DOC1..." fgcolor="#000000" bgcolor="#BFFFBF"
+                  type="rectangle" x="919" y="297" width="46" height="17"/>
+    </entry>
+
+    <entry id="32" name="hsa:2810" type="gene"
+           link="https://www.kegg.jp/dbget-bin/www_bget?hsa:2810">
+        <graphics name="SFN, YWHAS" fgcolor="#000000" bgcolor="#BFFFBF"
+                  type="rectangle" x="638" y="313" width="46" height="17"/>
+    </entry>
+
+    <entry id="42" name="hsa:9700" type="gene"
+           link="https://www.kegg.jp/dbget-bin/www_bget?hsa:9700">
+        <graphics name="ESPL1, ESP1, SEPA" fgcolor="#000000" bgcolor="#BFFFBF"
+                  type="rectangle" x="919" y="198" width="46" height="17"/>
+    </entry>
+    <entry id="64" name="hsa:85417 hsa:891 hsa:9133" type="gene"
+           link="https://www.kegg.jp/dbget-bin/www_bget?hsa:85417+hsa:891+hsa:9133">
+        <graphics name="CCNB3..." fgcolor="#000000" bgcolor="#BFFFBF"
+                  type="rectangle" x="780" y="451" width="46" height="17"/>
+    </entry>
+    <entry id="113" name="undefined" type="group">
+        <graphics fgcolor="#000000" bgcolor="#FFFFFF"
+                  type="rectangle" x="830" y="298" width="46" height="51"/>
+        <component id="22"/>
+        <component id="27"/>
+        <component id="29"/>
+    </entry>
+    <entry id="114" name="undefined" type="group">
+        <graphics fgcolor="#000000" bgcolor="#FFFFFF"
+                  type="rectangle" x="918" y="134" width="92" height="51"/>
+        <component id="43"/>
+        <component id="83"/>
+        <component id="84"/>
+        <component id="85"/>
+    </entry>
+
+
+    <relation entry1="113" entry2="5" type="PPrel">
+        <subtype name="inhibition" value="--|"/>
+    </relation>
+    <relation entry1="42" entry2="114" type="PPrel">
+        <subtype name="inhibition" value="--|"/>
+    </relation>
+    <relation entry1="32" entry2="64" type="PPrel">
+        <subtype name="inhibition" value="--|"/>
+    </relation>
+</pathway>
