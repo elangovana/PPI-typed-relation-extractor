@@ -15,7 +15,7 @@ class TestBulkKeggProteinInteractionsExtractor(TestCase):
 
     @data((["path:hsa04110", "path:ko05215"], 500))
     @unpack
-    def test_run(self, pathway_list, expected_no_min_records):
+    def test_extract(self, pathway_list, expected_no_min_records):
         # Arrange
         # kegg
         kegg = KeggProteinInteractionsExtractor()
@@ -26,3 +26,17 @@ class TestBulkKeggProteinInteractionsExtractor(TestCase):
 
         # Assert
         self.assertGreater(expected_no_min_records, len(actual))
+
+
+    def test_get_all(self):
+        # Arrange
+        # kegg
+        kegg = KeggProteinInteractionsExtractor()
+        sut = BulkKeggProteinInteractionsExtractor(kegg)
+
+        # act
+        actual = sut.extract_all()
+
+# assert
+        self.assertTrue(not actual is None)
+
