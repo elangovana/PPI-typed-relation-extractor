@@ -1,9 +1,11 @@
 import pandas as pd
 
+from KeggProteinInteractionsExtractor import  KeggProteinInteractionsExtractor
+
 
 class BulkKeggProteinInteractionsExtractor:
     def __init__(self, kegg_extractor=None):
-        self.kegg_extractor = kegg_extractor
+        self.kegg_extractor = kegg_extractor or KeggProteinInteractionsExtractor()
 
     def extract(self, pathway_list=None):
         if pathway_list is None:
