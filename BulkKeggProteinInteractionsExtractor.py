@@ -19,7 +19,11 @@ class BulkKeggProteinInteractionsExtractor:
         for pathway in pathway_list:
             ppi_df = self.kegg_extractor.extract_protein_interaction(pathway)
             ppi_df_list.append(ppi_df)
-        return pd.concat(ppi_df_list)
+
+        concated_df = pd.concat(ppi_df_list)
+        #remove duplicates
+        concated_df.drop_duplicates(subset=['key'], keep="first")
+        return concated_df
 
     def extract_all(self):
         from bioservices import KEGG
