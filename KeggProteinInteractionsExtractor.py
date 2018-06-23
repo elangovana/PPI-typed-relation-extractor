@@ -28,6 +28,8 @@ class KeggProteinInteractionsExtractor:
         return result_df
 
     def extract_protein_interactions_kgml(self, kgml_string):
+        self._logger.info("Parsing kgml")
+        self._logger.debug(kgml_string)
         kgml_parser = self.kegg.parse_kgml_pathway(pathwayId='', res=kgml_string)
         result = []
 

@@ -5,6 +5,7 @@ import os
 import tempfile
 from logging.config import fileConfig
 
+from BulkKeggProteinInteractionsExtractor import BulkKeggProteinInteractionsExtractor
 from ExtractTrainingData import ExtractTrainingData
 from KeggProteinInteractionsExtractor import KeggProteinInteractionsExtractor
 from MIPSProteinInteractionsExtractor import MipsProteinInteractionsExtractor
@@ -18,7 +19,7 @@ def save_df_to_file(file_name, df):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("kegg_pathway_id", help="Enter the kegg pathway id here, e.g path:ko05215")
+    parser.add_argument("kegg_pathway_id", help="Enter the kegg pathway id here, e.g path:ko05215. To download all pathways type all")
     parser.add_argument("mips_ppi_xml_file", help="Enter the MIPS PPI XML file")
     parser.add_argument("output_dir", help="Enter the output directory")
     args = parser.parse_args()
@@ -49,8 +50,10 @@ if __name__ == "__main__":
 
     # Run extractor
     logger.info("Running kegg extractor")
-    ppi_extractor = KeggProteinInteractionsExtractor()
-    result_df_kegg = ppi_extractor.extract_protein_interaction(kegg_pathway_id)
+    ppi_extractor = BulkKeggProteinInteractionsExtractor()
+    print(kegg_pathway_id)
+    pathway_list= [kegg_pathway_id] if kegg_pathway_id != "all" else None
+    result_df_kegg = ppi_extractor.extract(pathway_list)
     # save result to file
     outputfile_kegg = os.path.join(output_dir, "kegg.csv")
     save_df_to_file(outputfile_kegg, result_df_kegg)
