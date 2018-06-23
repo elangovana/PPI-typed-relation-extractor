@@ -19,13 +19,13 @@ def save_df_to_file(file_name, df):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("kegg_pathway_id", help="Enter the kegg pathway id here, e.g path:ko05215. To download all pathways type all")
+    parser.add_argument("kegg_pathway_id", help="Enter the kegg pathway id here, e.g path:ko05215. To specify multiple pathways, sep by comma, e.g path:ko05215,path:hsa04110 . To download all pathways type all")
     parser.add_argument("mips_ppi_xml_file", help="Enter the MIPS PPI XML file")
     parser.add_argument("output_dir", help="Enter the output directory")
     args = parser.parse_args()
 
     # default kegg pathway id for sample test run
-    kegg_pathway_id = args.kegg_pathway_id
+    kegg_pathway_ids = args.kegg_pathway_id
     mips_xml_file = args.mips_ppi_xml_file
     output_dir = args.output_dir
 
@@ -51,8 +51,7 @@ if __name__ == "__main__":
     # Run extractor
     logger.info("Running kegg extractor")
     ppi_extractor = BulkKeggProteinInteractionsExtractor()
-    print(kegg_pathway_id)
-    pathway_list= [kegg_pathway_id] if kegg_pathway_id != "all" else None
+    pathway_list= list(filter(None, kegg_pathway_ids.split(","))) if kegg_pathway_ids != "all" else None
     result_df_kegg = ppi_extractor.extract(pathway_list)
     # save result to file
     outputfile_kegg = os.path.join(output_dir, "kegg.csv")
