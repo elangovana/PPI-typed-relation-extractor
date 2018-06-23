@@ -2,7 +2,7 @@ import logging
 
 import pandas as pd
 
-from KeggProteinInteractionsExtractor import  KeggProteinInteractionsExtractor
+from KeggProteinInteractionsExtractor import KeggProteinInteractionsExtractor
 
 
 class BulkKeggProteinInteractionsExtractor:
@@ -13,28 +13,28 @@ class BulkKeggProteinInteractionsExtractor:
     def extract(self, pathway_list=None):
         if pathway_list is None:
             pathway_list = self.extract_all().keys()
-        self._logger.info("Extracting for debug\n {}".format("\n".join(pathway_list)))
+        self._logger.info("Extracting for debug\n{}".format("\n".join(pathway_list)))
 
-        ppi_df_list = []
+        result = pd.DataFrame()
         for pathway in pathway_list:
+            self._logger.debug("Extracting pathway for {}".format(pathway))
             ppi_df = self.kegg_extractor.extract_protein_interaction(pathway)
-            ppi_df_list.append(ppi_df)
+            concated_df = pd.concat([result, ppi_df])
+            # remove duplicates
+            result = concated_df.drop_duplicates(subset=['key'], keep="first")
 
-        concated_df = pd.concat(ppi_df_list)
-        #remove duplicates
-        concated_df.drop_duplicates(subset=['key'], keep="first")
-        return concated_df
+        return result
 
     def extract_all(self):
         from bioservices import KEGG
         kegg = KEGG()
         pathway_list = filter(None, kegg.list("pathway/hsa").split("\n"))
 
-        pathway_dict ={}
+        pathway_dict = {}
         for p in pathway_list:
             id = p.split("\t")[0]
             name = p.split("\t")[1]
 
-            pathway_dict[id]=name
+            pathway_dict[id] = name
 
         return pathway_dict
