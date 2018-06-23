@@ -58,6 +58,7 @@ class KeggProteinInteractionsExtractor:
                     self._logger.debug("** Relation extracted {}".format(json.dumps(rel_dict)))
                     result.append(rel_dict)
         result_df = pd.DataFrame(result)
+        self._logger.info("Extracted {} ppi relations".format(len(result_df)))
         return result_df
 
     def _cached_get_uniprot_numbers(self, entry_id, kgml_parser):
