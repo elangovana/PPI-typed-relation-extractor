@@ -13,7 +13,7 @@ class TestBulkKeggProteinInteractionsExtractor(TestCase):
     def setUp(self):
         fileConfig(os.path.join(os.path.dirname(__file__), 'logger.ini'))
 
-    @data((["path:hsa04110", "path:ko05215"], 500))
+    @data((["path:hsa01230", "path:hsa04110", "path:ko05215", ], 500))
     @unpack
     def test_extract(self, pathway_list, expected_no_min_records):
         # Arrange

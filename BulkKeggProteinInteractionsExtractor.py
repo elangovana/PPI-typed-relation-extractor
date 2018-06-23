@@ -18,7 +18,10 @@ class BulkKeggProteinInteractionsExtractor:
         result = pd.DataFrame()
         for pathway in pathway_list:
             self._logger.debug("Extracting pathway for {}".format(pathway))
+
             ppi_df = self.kegg_extractor.extract_protein_interaction(pathway)
+            if (len(ppi_df)) == 0: continue
+
             concated_df = pd.concat([result, ppi_df])
             # remove duplicates
             result = concated_df.drop_duplicates(subset=['key'], keep="first")
