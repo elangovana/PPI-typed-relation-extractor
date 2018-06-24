@@ -92,7 +92,13 @@ class KeggProteinInteractionsExtractor:
             # Convert HSA to UniProt
             hsa_uniprot_numbers_map = self.kegg.conv("uniprot", hsa_number)
 
-        self._logger.debug("HSA to Uniprot number map {}".format(json.dumps(hsa_uniprot_numbers_map)))
+        json_hsa_uniprot_map = json.dumps(hsa_uniprot_numbers_map)
+        self._logger.debug("HSA to Uniprot number map {}".format(json_hsa_uniprot_map))
+        # Handle case where the uniprot numbers cannot be obtained for a HSA
+        if json_hsa_uniprot_map.strip() == "" or json_hsa_uniprot_map.strip() == '"\\n"' :
+            self._logger.debug("Could not map to has to Uniprot number map {}".format(json_hsa_uniprot_map))
+            return []
+
         kegg_uniprot_numbers = list(hsa_uniprot_numbers_map.values())
         # Remove the up: prefix from the uniprot numbers, as they look like 'up:B0LPE5', 'up:P31751', 'up:Q9Y243'
         result = list(map(lambda x: str(re.findall(r"(?:up:)(.+)", x)[0]), kegg_uniprot_numbers))
