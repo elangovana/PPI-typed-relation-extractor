@@ -15,7 +15,7 @@ class TestKeggProteinInteractionsExtractor(unittest.TestCase):
 
     @data(("sample_ko.kgml", 48)
           ,("sample_hsa.kgml", 3)
-          ("sample_nouniprot_forhsa.xml", 0))
+          ,("sample_nouniprot_forhsa.xml", 0))
     @unpack
     def test_extract_protein_interactions_kgml(self, kgml_file, expected_no_rel):
         #Arrange
