@@ -25,6 +25,7 @@ class BulkKeggProteinInteractionsExtractor:
             concated_df = pd.concat([result, ppi_df])
             # remove duplicates
             result = concated_df.drop_duplicates(subset=['key'], keep="first")
+            self._logger.info("Total ppi extracted so for {}".format(len(result)))
 
         return result
 
