@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE pathway SYSTEM "http://www.kegg.jp/kegg/xml/KGML_v0.7.2_.dtd">
+<!-- Creation date: May 16, 2016 13:24:52 +0900 (GMT+9) -->
+<pathway name="path:hsa05205" org="hsa" number="05205"
+         title="Proteoglycans in cancer"
+         image="http://www.kegg.jp/kegg/pathway/hsa/hsa05205.png"
+         link="http://www.kegg.jp/kegg-bin/show_pathway?hsa05205">
+
+    <entry id="77" name="hsa:406991" type="gene"
+        link="http://www.kegg.jp/dbget-bin/www_bget?hsa:406991">
+        <graphics name="MIR21, MIRN21, hsa-mir-21, miR-21, miRNA21" fgcolor="#000000" bgcolor="#BFFFBF"
+             type="rectangle" x="783" y="677" width="46" height="17"/>
+    </entry>
+
+    <entry id="453" name="undefined" type="group">
+        <graphics fgcolor="#000000" bgcolor="#FFFFFF"
+             type="rectangle" x="590" y="666" width="46" height="37"/>
+        <component id="74"/>
+        <component id="75"/>
+    </entry>
+
+
+    <relation entry1="453" entry2="77" type="PPrel">
+        <subtype name="activation" value="--&gt;"/>
+    </relation>
+
+
+</pathway>
