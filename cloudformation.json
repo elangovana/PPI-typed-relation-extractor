@@ -1,0 +1,42 @@
+{
+  "Resources": {
+    "BatchJob": {
+      "Type": "AWS::Batch::ComputeEnvironment",
+      "Properties": {
+        "Type": "MANAGED",
+        "ServiceRole": {
+          "Ref": "RoleBatch"
+        },
+        "ComputeEnvironmentName": "SimpleCompute",
+        "ComputeResources": {
+          "MaxvCpus": 128,
+          "SecurityGroupIds": [
+            "sg-abcd1234"
+          ],
+          "Type": "EC2",
+          "Subnets": [
+            "subnet-aaaaaaaa",
+            "subnet-bbbbbbbb",
+            "subnet-cccccccc"
+          ],
+          "MinvCpus": 0,
+          "ImageId": "ami-a1b2c3d4",
+          "InstanceRole": "ecsInstanceRole",
+          "InstanceTypes": [
+            "c4.large",
+            "c4.xlarge",
+            "c4.2xlarge",
+            "c4.4xlarge",
+            "c4.8xlarge"
+          ],
+
+          "Tags": {
+            "Name": "Batch Instance - C4OnDemand"
+          },
+          "DesiredvCpus": 48
+        },
+        "State": "ENABLED"
+      }
+    }
+  }
+}
