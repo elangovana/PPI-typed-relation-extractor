@@ -2,7 +2,7 @@ import logging
 
 import pandas as pd
 
-from KeggProteinInteractionsExtractor import KeggProteinInteractionsExtractor
+from dataextractors.KeggProteinInteractionsExtractor import KeggProteinInteractionsExtractor
 
 
 class BulkKeggProteinInteractionsExtractor:

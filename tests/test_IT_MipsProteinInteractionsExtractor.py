@@ -4,7 +4,7 @@ import os
 from ddt import ddt, data, unpack
 from logging.config import fileConfig
 
-from MIPSProteinInteractionsExtractor import MipsProteinInteractionsExtractor
+from dataextractors.MIPSProteinInteractionsExtractor import MipsProteinInteractionsExtractor
 
 
 @ddt

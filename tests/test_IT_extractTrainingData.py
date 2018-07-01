@@ -1,13 +1,12 @@
 from unittest import TestCase
-import unittest
 import os
 
 from ddt import ddt, data, unpack
 from logging.config import fileConfig
 
-from ExtractTrainingData import ExtractTrainingData
-from KeggProteinInteractionsExtractor import KeggProteinInteractionsExtractor
-from MIPSProteinInteractionsExtractor import MipsProteinInteractionsExtractor
+from dataextractors.ExtractTrainingData import ExtractTrainingData
+from dataextractors.KeggProteinInteractionsExtractor import KeggProteinInteractionsExtractor
+from dataextractors.MIPSProteinInteractionsExtractor import MipsProteinInteractionsExtractor
 
 
 @ddt

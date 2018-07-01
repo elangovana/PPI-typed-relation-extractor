@@ -1,14 +1,11 @@
 import argparse
-import sys
 import logging
 import os
-import tempfile
 from logging.config import fileConfig
 
-from BulkKeggProteinInteractionsExtractor import BulkKeggProteinInteractionsExtractor
-from ExtractTrainingData import ExtractTrainingData
-from KeggProteinInteractionsExtractor import KeggProteinInteractionsExtractor
-from MIPSProteinInteractionsExtractor import MipsProteinInteractionsExtractor
+from dataextractors.BulkKeggProteinInteractionsExtractor import BulkKeggProteinInteractionsExtractor
+from dataextractors.ExtractTrainingData import ExtractTrainingData
+from dataextractors.MIPSProteinInteractionsExtractor import MipsProteinInteractionsExtractor
 
 
 def save_df_to_file(file_name, df):

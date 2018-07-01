@@ -104,3 +104,4 @@ venv.bak/
 .mypy_cache/
 
 tmp
+GoogleNews-vectors-negative300.bin

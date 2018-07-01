@@ -4,7 +4,7 @@ import os
 from ddt import ddt, data, unpack
 from logging.config import fileConfig
 
-from KeggProteinInteractionsExtractor import KeggProteinInteractionsExtractor
+from dataextractors.KeggProteinInteractionsExtractor import KeggProteinInteractionsExtractor
 
 
 @ddt

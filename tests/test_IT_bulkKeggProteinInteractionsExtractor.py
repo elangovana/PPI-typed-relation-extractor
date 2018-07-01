@@ -4,8 +4,8 @@ from unittest import TestCase
 import os
 from ddt import ddt, data, unpack
 
-from BulkKeggProteinInteractionsExtractor import BulkKeggProteinInteractionsExtractor
-from KeggProteinInteractionsExtractor import KeggProteinInteractionsExtractor
+from dataextractors.BulkKeggProteinInteractionsExtractor import BulkKeggProteinInteractionsExtractor
+from dataextractors.KeggProteinInteractionsExtractor import KeggProteinInteractionsExtractor
 
 
 @ddt
