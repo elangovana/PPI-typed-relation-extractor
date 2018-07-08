@@ -47,7 +47,7 @@ class ImexProteinInteractionsExtractor:
                         interfactor_ref_id = ele_participant.find( "df:interactorRef", self.namespaces).text
 
 
-                        uniprotid = self.get_interactor_details(entry, interfactor_ref_id)
+                        uniprotid, alias_list = self.get_interactor_details(entry, interfactor_ref_id)
 
                         print("{},{}, {}, {}, {}, {}".format(interaction_type, interfactor_ref_id, uniprotid, is_negative, pubmed_id, title))
                         i = i+1
@@ -79,11 +79,12 @@ class ImexProteinInteractionsExtractor:
         ele_interactor = entry.find(interactor_xpath, self.namespaces)
         ele_unitprot = ele_interactor.find("df:xref/df:secondaryRef[@db='{}']".format("uniprotkb"), self.namespaces)
         alias=[]
-        #for ele_interactor.find("df:names/")
+        for e in ele_interactor.findall("df:names//*",self.namespaces):
+            alias.append( [e.text])
         if ele_unitprot is None:
             ele_unitprot = ele_interactor.find("df:xref/df:primaryRef[@db='{}']".format("uniprotkb"), self.namespaces)
         if ele_unitprot is not None:
-            return  ele_unitprot.attrib['id']
+            return  ele_unitprot.attrib['id'], alias
         return None
 
     def get_pubmed_id(self, entry, experiment_ref_id):
