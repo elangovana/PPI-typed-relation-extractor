@@ -43,14 +43,16 @@ class ImexProteinInteractionsExtractor:
 
                     is_negative = ele_interaction.find("df:negative", self.namespaces).text
 
-                    for ele_participant in ele_interaction.findall("df:participantList/df:participant", self.namespaces):
-                        interfactor_ref_id = ele_participant.find( "df:interactorRef", self.namespaces).text
-
+                    for ele_participant in ele_interaction.findall("df:participantList/df:participant",
+                                                                   self.namespaces):
+                        interfactor_ref_id = ele_participant.find("df:interactorRef", self.namespaces).text
 
                         uniprotid, alias_list = self.get_interactor_details(entry, interfactor_ref_id)
 
-                        print("{},{}, {}, {}, {}, {}".format(interaction_type, interfactor_ref_id, uniprotid, is_negative, pubmed_id, title))
-                        i = i+1
+                        print(
+                            "{},{}, {}, {}, {}, {}".format(interaction_type, interfactor_ref_id, uniprotid, is_negative,
+                                                           pubmed_id, title))
+                        i = i + 1
                     print("Total participants in this interaction : {}".format(i))
 
         # result in a dataframe
@@ -78,21 +80,23 @@ class ImexProteinInteractionsExtractor:
         interactor_xpath = "df:interactorList/df:interactor[@id='{}']".format(interfactor_ref_id)
         ele_interactor = entry.find(interactor_xpath, self.namespaces)
         ele_unitprot = ele_interactor.find("df:xref/df:secondaryRef[@db='{}']".format("uniprotkb"), self.namespaces)
-        alias=[]
-        for e in ele_interactor.findall("df:names//*",self.namespaces):
-            alias.append( [e.text])
+        alias = []
+        for e in ele_interactor.findall("df:names//*", self.namespaces):
+            alias.append([e.text])
         if ele_unitprot is None:
             ele_unitprot = ele_interactor.find("df:xref/df:primaryRef[@db='{}']".format("uniprotkb"), self.namespaces)
         if ele_unitprot is not None:
-            return  ele_unitprot.attrib['id'], alias
+            return ele_unitprot.attrib['id'], alias
         return None
 
     def get_pubmed_id(self, entry, experiment_ref_id):
-        ele_experiment = entry.find("df:experimentList/df:experimentDescription[@id='{}']".format(experiment_ref_id), self.namespaces)
-        ele_primary_ref = ele_experiment.find("df:bibref/df:xref/df:primaryRef[@db='{}']".format("pubmed"), self.namespaces)
+        ele_experiment = entry.find("df:experimentList/df:experimentDescription[@id='{}']".format(experiment_ref_id),
+                                    self.namespaces)
+        ele_primary_ref = ele_experiment.find("df:bibref/df:xref/df:primaryRef[@db='{}']".format("pubmed"),
+                                              self.namespaces)
 
         if ele_primary_ref is not None:
             title = ele_experiment.find("df:attributeList/df:attribute[@name='title']", self.namespaces).text
 
-            return  (ele_primary_ref.attrib["id"],title)
+            return (ele_primary_ref.attrib["id"], title)
         return None
