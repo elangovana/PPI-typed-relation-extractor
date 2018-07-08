@@ -12,7 +12,9 @@ class TestImexProteinInteractionsExtractor(TestCase):
     def setUp(self):
         fileConfig(os.path.join(os.path.dirname(__file__), 'logger.ini'))
 
-    @data(("human_13_negative.xml", 500))
+    @data(("human_13_negative.xml", 500)
+       ,("data/human_01.xml", 40))
+
     @unpack
     def test_extract_protein_interaction(self, xmlfile, expected_total):
         #Arrange
