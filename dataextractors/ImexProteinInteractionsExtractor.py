@@ -25,7 +25,7 @@ class ImexProteinInteractionsExtractor:
 
     def extract_protein_interaction(self):
         self._logger.info("Extracting PPIs for kegg pathway id {} ".format(self.xmlfile))
-
+        result = []
         with open(self.xmlfile, "r") as handle:
 
             for entry in self._iter_elements_by_name(handle, "df:entry", self.namespaces):
@@ -37,28 +37,39 @@ class ImexProteinInteractionsExtractor:
                     if interaction_type not in self.interactionlist:
                         continue
                     i = 0
-
+                    interaction_id = ele_interaction.attrib["id"]
                     experiment_ref_id = ele_interaction.find("df:experimentList/df:experimentRef", self.namespaces).text
                     pubmed_id, title = self.get_pubmed_id(entry, experiment_ref_id)
 
                     is_negative = ele_interaction.find("df:negative", self.namespaces).text
 
+                    participants =[]
                     for ele_participant in ele_interaction.findall("df:participantList/df:participant",
                                                                    self.namespaces):
                         interfactor_ref_id = ele_participant.find("df:interactorRef", self.namespaces).text
 
                         uniprotid, alias_list = self.get_interactor_details(entry, interfactor_ref_id)
+                        participants.append({"uniprotid" : uniprotid, "alias": alias_list})
 
                         print(
                             "{},{}, {}, {}, {}, {}".format(interaction_type, interfactor_ref_id, uniprotid, is_negative,
                                                            pubmed_id, title))
                         i = i + 1
+                    result.append({
+                        "isNegative" : is_negative
+                        ,"participants":participants
+                        ,"pubmedId": pubmed_id
+                        ,"pubmedTitle":title
+                        ,"interactionType":interaction_type
+                        ,"interactionId": interaction_id
+
+                    })
                     print("Total participants in this interaction : {}".format(i))
 
         # result in a dataframe
         self._logger.info("Completed PPIs extraction for kegg pathway".format())
-        result_df = pd.DataFrame()
-        return result_df
+
+        return result
 
     def _iter_elements_by_name(self, handle, name, namespace):
         events = ElementTree.iterparse(handle, events=("start", "end"))

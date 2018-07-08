@@ -17,9 +17,12 @@ class TestImexProteinInteractionsExtractor(TestCase):
 
     @unpack
     def test_extract_protein_interaction(self, xmlfile, expected_total):
-        #Arrange
+        # Arrange
         full_xml_file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), xmlfile)
         sut = ImexProteinInteractionsExtractor(full_xml_file_path)
 
-        #Assert
-        sut.extract_protein_interaction()
+        # Act
+        actual =  sut.extract_protein_interaction()
+
+        # Assert
+        print(actual)
