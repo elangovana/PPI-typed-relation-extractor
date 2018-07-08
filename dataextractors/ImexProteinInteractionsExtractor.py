@@ -11,8 +11,10 @@ from bioservices import UniProt
 
 class ImexProteinInteractionsExtractor:
 
-    def __init__(self, xmlfile, interactionlist=["phosphorylation"]):
+    def __init__(self, xmlfile, interactionlist=None):
 
+        if interactionlist is None:
+            interactionlist = ["phosphorylation"]
         self.interactionlist = interactionlist
         self.xmlfile = xmlfile
         self.namespaces = {'df': 'http://psi.hupo.org/mi/mif'}  #
@@ -36,16 +38,18 @@ class ImexProteinInteractionsExtractor:
                         continue
                     i = 0
 
-
-
+                    experiment_ref_id = ele_interaction.find("df:experimentList/df:experimentRef", self.namespaces).text
+                    pubmed_id, title = self.get_pubmed_id(entry, experiment_ref_id)
 
                     is_negative = ele_interaction.find("df:negative", self.namespaces).text
+
                     for ele_participant in ele_interaction.findall("df:participantList/df:participant", self.namespaces):
                         interfactor_ref_id = ele_participant.find( "df:interactorRef", self.namespaces).text
 
+
                         uniprotid = self.get_interactor_details(entry, interfactor_ref_id)
 
-                        print("{},{}, {}, {}".format(interaction_type, interfactor_ref_id, uniprotid, is_negative))
+                        print("{},{}, {}, {}, {}, {}".format(interaction_type, interfactor_ref_id, uniprotid, is_negative, pubmed_id, title))
                         i = i+1
                     print("Total participants in this interaction : {}".format(i))
 
@@ -74,6 +78,20 @@ class ImexProteinInteractionsExtractor:
         interactor_xpath = "df:interactorList/df:interactor[@id='{}']".format(interfactor_ref_id)
         ele_interactor = entry.find(interactor_xpath, self.namespaces)
         ele_unitprot = ele_interactor.find("df:xref/df:secondaryRef[@db='{}']".format("uniprotkb"), self.namespaces)
+        alias=[]
+        #for ele_interactor.find("df:names/")
+        if ele_unitprot is None:
+            ele_unitprot = ele_interactor.find("df:xref/df:primaryRef[@db='{}']".format("uniprotkb"), self.namespaces)
         if ele_unitprot is not None:
             return  ele_unitprot.attrib['id']
+        return None
+
+    def get_pubmed_id(self, entry, experiment_ref_id):
+        ele_experiment = entry.find("df:experimentList/df:experimentDescription[@id='{}']".format(experiment_ref_id), self.namespaces)
+        ele_primary_ref = ele_experiment.find("df:bibref/df:xref/df:primaryRef[@db='{}']".format("pubmed"), self.namespaces)
+
+        if ele_primary_ref is not None:
+            title = ele_experiment.find("df:attributeList/df:attribute[@name='title']", self.namespaces).text
+
+            return  (ele_primary_ref.attrib["id"],title)
         return None
