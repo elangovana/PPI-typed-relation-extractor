@@ -25,5 +25,5 @@ class TestDataPreprocessor(TestCase):
 
         #Assert if output has any content
         outhandler.seek(0)
-        self.assertEquals(len(outhandler.read(10)),10)
+        self.assertEqual(len(outhandler.read(10)),10)
 
