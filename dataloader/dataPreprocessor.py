@@ -3,7 +3,7 @@ import logging
 
 import lxml.etree as ET
 import os
-from io import BytesIO
+from io import BytesIO, StringIO
 
 import xmltodict
 
@@ -34,7 +34,7 @@ class DataPreprocessor:
         dom = ET.parse(xmlHandle)
         fulXsltFilePath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "flatten.xslt")
 
-        #Transform
+        # Transform
         with (open(fulXsltFilePath, "rb")) as xsltHandle:
             xslt = ET.parse(xsltHandle)
             transform = ET.XSLT(xslt)
@@ -55,11 +55,21 @@ class DataPreprocessor:
 
         abstract = self.pubmed_extractor.extract_abstract_by_pubmedid([pubmed_id])[0]
 
-        #add abstract to elemnt
+        # add abstract to element
         abstract_ele = ET.SubElement(data_ele, "abstract")
         abstract_ele.text = abstract
 
         return ET.tostring(data_ele).decode()
+
+    def run_pipeline(self, xmlHandle):
+        """
+Runs the preprocessing pipeline
+        :param xmlHandle: The xml stream containing data in PSI format
+
+        """
+        for data in self.transform(xmlHandle):
+            yield self.convert_to_json(StringIO(self.adddata(data)))
+
 
     def _iter_elements_by_name(self, handle, name, namespace):
         events = ET.iterparse(handle, events=("start", "end"))
