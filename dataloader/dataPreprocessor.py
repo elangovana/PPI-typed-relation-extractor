@@ -14,6 +14,7 @@ class DataPreprocessor:
             outputHandle = BytesIO()
         newdom.write(outputHandle)
         outputHandle.seek(0)
+        #yield return each data
         for entry in self._iter_elements_by_name(outputHandle, "data", {}):
             yield  ET.tostring( entry)
 
