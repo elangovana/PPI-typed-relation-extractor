@@ -3,6 +3,8 @@ import os
 from io import BytesIO
 class DataPreprocessor:
 
+
+
     def transform(self, xmlHandle):
         dom = ET.parse(xmlHandle)
         fulXsltFilePath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "flatten.xslt")
@@ -16,7 +18,11 @@ class DataPreprocessor:
         outputHandle.seek(0)
         #yield return each data
         for entry in self._iter_elements_by_name(outputHandle, "data", {}):
-            yield  ET.tostring( entry)
+            yield entry
+
+    def adddata(self, entry):
+        pubmed = ET.SubElement(entry, "pubmed")
+
 
 
 

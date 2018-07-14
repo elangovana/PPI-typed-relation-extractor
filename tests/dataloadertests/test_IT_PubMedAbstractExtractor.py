@@ -4,7 +4,7 @@ import os
 from ddt import ddt, data, unpack
 from logging.config import fileConfig
 
-from dataextractors.PubmedAbstractExtractor import PubmedAbstractExtractor
+from dataloader.PubmedAbstractExtractor import PubmedAbstractExtractor
 
 
 @ddt
