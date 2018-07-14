@@ -13,7 +13,7 @@ class TestMipsProteinInteractionsExtractor(unittest.TestCase):
     def setUp(self):
         fileConfig(os.path.join(os.path.dirname(__file__), 'logger.ini'))
 
-    @data(("sample_pubmed_data.xml", 2))
+    @data(("data/sample_pubmed_data.xml", 2))
     @unpack
     def test_extract_protein_interactions_kgml(self, mips_file, expected_no_rel):
         #Arrange
