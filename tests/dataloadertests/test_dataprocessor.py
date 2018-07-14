@@ -14,14 +14,13 @@ class TestDataPreprocessor(TestCase):
     def test_Convert_to_json(self, xmlfile):
         # Arrange
         fulXmlFilePath = os.path.join(os.path.dirname(os.path.realpath(__file__)), xmlfile)
-        fulXsltFilePath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "data/flatten.xslt")
+
         outhandler = BytesIO()
         sut = DataPreprocessor()
 
         with open(fulXmlFilePath, "rb") as xmlHandler:
-            with open(fulXsltFilePath, "rb") as xsltHandler:
-                # Act
-                sut.transform(xmlHandler, xsltHandler, outhandler)
+            # Act
+            sut.transform(xmlHandler, outhandler)
 
         # Assert if output has any content
         outhandler.seek(0)
