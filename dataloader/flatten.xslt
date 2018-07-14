@@ -9,13 +9,18 @@
             <xsl:variable name="entry" select="."/>
             <xsl:for-each select="$entry/df:interactionList/df:interaction">
                 <data>
-                    <xsl:copy-of select="."/>
 
                     <xsl:variable name="expid" select="df:experimentList/df:experimentRef/text()"/>
 
-                    <!-- experiments-->
-                    <xsl:copy-of select="$entry/df:experimentList/df:experimentDescription[@id = $expid]"/>
 
+                    <pubmedid><xsl:value-of select="$entry/df:experimentList/df:experimentDescription[@id = $expid]/df:bibref/df:xref/df:primaryRef[@db='pubmed']/@id"></xsl:value-of></pubmedid>
+                    <xsl:copy-of select="."/>
+
+
+
+
+                        <!-- experiments-->
+                    <xsl:copy-of select="$entry/df:experimentList/df:experimentDescription[@id = $expid]"/>
                     <!-- Particiapants-->
                     <xsl:for-each select="df:participantList/df:participant">
                         <xsl:variable name="partid" select="df:interactorRef/text()"></xsl:variable>
