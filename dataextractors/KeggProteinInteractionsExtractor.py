@@ -9,12 +9,31 @@ from bioservices import KEGG, UniProt
 
 class KeggProteinInteractionsExtractor:
 
-    def __init__(self):
-
+    def __init__(self, kegg=None, uniprot =None):
         self._logger = logging.getLogger(__name__)
-        self.kegg = KEGG()
-        self.u = UniProt(verbose=False)
+        self.kegg = kegg
+        self.uniprot = uniprot
         self._cache_kegg_entry_uniprots = {}
+
+    @property
+    def uniprot(self):
+        self.__uniprot = self.__uniprot or UniProt(verbose=False)
+        return self.__uniprot
+
+    @uniprot.setter
+    def uniprot(self, uniprot):
+        self.__uniprot = uniprot
+
+
+    @property
+    def kegg(self):
+        self.__kegg = self.__kegg or KEGG()
+        return self.__kegg
+
+    @kegg.setter
+    def kegg(self, kegg):
+        self.__kegg = kegg
+
 
     def extract_protein_interaction(self, kegg_pathway_id):
         self._logger.info("Extracting PPIs for kegg pathway id {} ".format(kegg_pathway_id))
@@ -49,11 +68,12 @@ class KeggProteinInteractionsExtractor:
                 for d_uniprot in d_uniprot_numbers:
                     s_gene_name = self._get_gene_names(s_uniprot)
                     d_gene_name = self._get_gene_names(d_uniprot)
-                    #set up key as the combination of the 2 interacting protein uniprot names in order
-                    key ="#".join(sorted([s_uniprot, d_uniprot]))
+                    # set up key as the combination of the 2 interacting protein uniprot names in order
+                    key = "#".join(sorted([s_uniprot, d_uniprot]))
 
                     # Add to result
-                    rel_dict = {"key": key,"s_uniprot": s_uniprot, "s_gene_name": s_gene_name, "interaction": rel['name'],
+                    rel_dict = {"key": key, "s_uniprot": s_uniprot, "s_gene_name": s_gene_name,
+                                "interaction": rel['name'],
                                 "d_uniprot": d_uniprot, "d_genename": d_gene_name}
                     self._logger.debug("** Relation extracted {}".format(json.dumps(rel_dict)))
                     result.append(rel_dict)
@@ -95,7 +115,7 @@ class KeggProteinInteractionsExtractor:
         json_hsa_uniprot_map = json.dumps(hsa_uniprot_numbers_map)
         self._logger.debug("HSA to Uniprot number map {}".format(json_hsa_uniprot_map))
         # Handle case where the uniprot numbers cannot be obtained for a HSA
-        if json_hsa_uniprot_map.strip() == "" or json_hsa_uniprot_map.strip() == '"\\n"' :
+        if json_hsa_uniprot_map.strip() == "" or json_hsa_uniprot_map.strip() == '"\\n"':
             self._logger.debug("Could not map to has to Uniprot number map {}".format(json_hsa_uniprot_map))
             return []
 
@@ -138,7 +158,7 @@ class KeggProteinInteractionsExtractor:
     def _get_gene_names(self, uniprot_number):
         # Get the gene names associated with the uniprot number
         self._logger.debug("Retrieving gene names for uniprotid {}".format(uniprot_number))
-        gene_names_dict = self.u.mapping(fr="ACC,ID", to="GENENAME", query=uniprot_number)
+        gene_names_dict = self.uniprot.mapping(fr="ACC,ID", to="GENENAME", query=uniprot_number)
 
         self._logger.debug("Gene names map : {}".format(json.dumps(gene_names_dict)))
         return ",".join(map(lambda x: ",".join(x), gene_names_dict.values()))
