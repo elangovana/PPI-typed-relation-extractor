@@ -8,7 +8,7 @@ from dataextractors.KeggProteinInteractionsExtractor import KeggProteinInteracti
 
 
 @ddt
-class TestKeggProteinInteractionsExtractor(unittest.TestCase):
+class TestITKeggProteinInteractionsExtractor(unittest.TestCase):
 
     def setUp(self):
         fileConfig(os.path.join(os.path.dirname(__file__), 'logger.ini'))
