@@ -32,7 +32,7 @@ class TestKeggProteinInteractionsExtractor(unittest.TestCase):
                                                 "ko:K00922	hsa:5291\n" +
                                                 "ko:K02649	hsa:5295")
 
-        # No matter what the input is, return the  ko numbers that map to hsa numbers
+        # No matter what the input is, return the  hsa numbers that map to uniprot numbers
         mock_kegg.conv =  MagicMock(return_value = {"hsa:5293" : "up:B0LPE5"})
 
         # Mock Uni Prot
