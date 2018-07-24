@@ -6,4 +6,5 @@ RUN yum install  python-lxml
 ADD .  /opt/program/kegg_protein_extractor
 RUN pip install -r /opt/program/kegg_protein_extractor/requirements.txt -t /opt/program/kegg_protein_extractor/
 RUN pip install  awscli --upgrade
-CMD [ "python", "/opt/program/kegg_protein_extractor/main.py" ]
+RUN export PYTHONPATH=/opt/program/kegg_protein_extractor
+CMD [ "bash", "/opt/program/kegg_protein_extractor/scripts/run_pipeline.py" ]
