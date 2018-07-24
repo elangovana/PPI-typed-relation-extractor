@@ -1,23 +1,20 @@
 import json
 import logging
-from io import BytesIO, StringIO
+import os
+from io import StringIO
 from logging.config import fileConfig
+from pathlib import Path
 from unittest import TestCase
 from unittest.mock import MagicMock
-
-import os
-from xml.etree import ElementTree
 
 from ddt import ddt, data, unpack
 
 from dataloader.PubmedAbstractExtractor import PubmedAbstractExtractor
-from dataloader.dataPreprocessor import DataPreprocessor
-from pathlib import Path
-from unittest.mock import MagicMock
+from dataloader.imexDataPreprocessor import ImexDataPreprocessor
 
 
 @ddt
-class TestDataPreprocessor(TestCase):
+class TestImexDataPreprocessor(TestCase):
     def setUp(self):
         self._logger = logging.getLogger(__name__)
         fileConfig(os.path.join(os.path.dirname(__file__), 'logger.ini'))
@@ -27,7 +24,7 @@ class TestDataPreprocessor(TestCase):
     def test_transform(self, xmlfile, expected_no_interactions):
         # Arrange
         fulXmlFilePath = os.path.join(os.path.dirname(os.path.realpath(__file__)), xmlfile)
-        sut = DataPreprocessor()
+        sut = ImexDataPreprocessor()
 
         with open(fulXmlFilePath, "rb") as xmlHandler:
             # Act
@@ -45,10 +42,10 @@ class TestDataPreprocessor(TestCase):
         contents = Path(fulXmlFilePath).read_text()
         content_handle = StringIO(contents)
 
-        sut = DataPreprocessor()
+        sut = ImexDataPreprocessor()
         mock_extractor = PubmedAbstractExtractor()
         abstract_dummy = "This is a dummy extract"
-        mock_extractor.extract_abstract_by_pubmedid = MagicMock(return_value=[abstract_dummy])
+        mock_extractor.extract_abstract_by_pubmedid = MagicMock(return_value=[{"abstract":abstract_dummy}])
         sut.pubmed_extractor=mock_extractor
 
 
@@ -63,7 +60,7 @@ class TestDataPreprocessor(TestCase):
     @unpack
     def test_Convert_to_json(self, xml, expected):
         # Arrange
-        sut = DataPreprocessor()
+        sut = ImexDataPreprocessor()
 
         # Act
         actual = sut.convert_to_json(xml)

@@ -10,7 +10,7 @@ import xmltodict
 from dataloader.PubmedAbstractExtractor import PubmedAbstractExtractor
 
 
-class DataPreprocessor:
+class ImexDataPreprocessor:
 
     def __init__(self, pubmed_extractor=None):
         self.pubmed_extractor = pubmed_extractor
@@ -53,7 +53,7 @@ class DataPreprocessor:
         data_ele = tree.getroot()
         pubmed_id = data_ele.find("pubmedid").text
 
-        abstract = self.pubmed_extractor.extract_abstract_by_pubmedid([pubmed_id])[0]
+        abstract = self.pubmed_extractor.extract_abstract_by_pubmedid([pubmed_id])[0]["abstract"]
 
         # add abstract to element
         abstract_ele = ET.SubElement(data_ele, "abstract")
@@ -68,7 +68,7 @@ Runs the preprocessing pipeline
 
         """
         for data in self.transform(xmlHandle):
-            yield self.convert_to_json(StringIO(self.adddata(data)))
+            yield self.convert_to_json(self.adddata(StringIO(data)))
 
 
     def _iter_elements_by_name(self, handle, name, namespace):
@@ -89,3 +89,7 @@ Runs the preprocessing pipeline
 
     def convert_to_json(self, xmlHandle):
         return json.dumps(xmltodict.parse(xmlHandle))
+
+
+
+
