@@ -14,6 +14,7 @@ quote USER $USER
 quote PASS $PASSWD
 prompt noprompt
 lcd $LDIR
+passive
 cd /pub/databases/IntAct/current/psi25/species/
 mget human*.xml
 
