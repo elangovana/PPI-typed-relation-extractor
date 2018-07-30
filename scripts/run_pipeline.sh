@@ -10,6 +10,7 @@ scripts_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 #process data
 source_dir=$scripts_dir/..
+export PYTHONPATH=$source_dir
 python $source_dir/dataloader/bulkImexDataPreprocessor.py data outdir
 
 
