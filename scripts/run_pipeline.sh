@@ -6,7 +6,7 @@ mkdir outdir
 
 #Download ftp files
 scripts_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-sh $scripts_dir/dowloadintactinteractions.sh
+sh $scripts_dir/dowloadintactinteractions.sh data
 
 #process data
 source_dir=$scripts_dir/..

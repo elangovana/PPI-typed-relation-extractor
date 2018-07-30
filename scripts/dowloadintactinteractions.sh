@@ -3,11 +3,10 @@ HOST='ftp.ebi.ac.uk'
 USER='anonymous'
 PASSWD='anonymous'
 FILE=/pub/databases/intact/current/psi25/species/human*.xml
-s3destination=$1
+s3destination=$2
+LDIR=$1
 
 
-mkdir data
-LDIR=data
 ftp -n $HOST <<END_SCRIPT
 quote USER $USER
 quote PASS $PASSWD
