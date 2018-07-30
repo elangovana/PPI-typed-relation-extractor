@@ -14,6 +14,6 @@ COPY ./  /opt/program/kegg_protein_extractor
 RUN ls -la /opt/program/kegg_protein_extractor
 RUN pip install -r /opt/program/kegg_protein_extractor/requirements.txt -t /opt/program/kegg_protein_extractor/
 RUN pip install  awscli --upgrade
-RUN export PYTHONPATH=/opt/program/kegg_protein_extractor
+
 
 CMD [ "bash", "/opt/program/kegg_protein_extractor/scripts/run_pipeline.sh" ]
