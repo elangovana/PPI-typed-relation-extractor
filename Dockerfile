@@ -16,4 +16,4 @@ RUN pip install -r /opt/program/kegg_protein_extractor/requirements.txt -t /opt/
 RUN pip install  awscli --upgrade
 
 WORKDIR /opt/program/kegg_protein_extractor
-CMD [ "bash", "/opt/program/kegg_protein_extractor/scripts/run_pipeline.sh" ]
+ENTRYPOINT ["/opt/program/kegg_protein_extractor/scripts/run_pipeline.sh"]
