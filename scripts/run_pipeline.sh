@@ -20,7 +20,7 @@ python $source_dir/dataloader/bulkImexDataPreprocessor.py $datadir $processeddat
 
 
 
-if ["$s3destination" == ""]; then
+if [ "$s3destination" == "" ]; then
     echo "No s3destination argument passed, hence not copying to s3. If you want to copy data to s3 .."
     echo "$0  <outdir>  <filepattern> <s3://mydesbucket/data>"
 else
