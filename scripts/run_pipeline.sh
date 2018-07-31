@@ -1,14 +1,17 @@
 #!/bin/bash
-s3destination=$1
+filepattern=$1
+s3destination=$2
 set -e
 mkdir data
 mkdir outdir
 
 #Download ftp files
+echo "Downloading files.."
 scripts_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-. $scripts_dir/dowloadintactinteractions.sh data
+. $scripts_dir/dowloadintactinteractions.sh data $filepattern
 
 #process data
+echo "Processing data.."
 source_dir=$scripts_dir/..
 export PYTHONPATH=$source_dir
 python $source_dir/dataloader/bulkImexDataPreprocessor.py data outdir
