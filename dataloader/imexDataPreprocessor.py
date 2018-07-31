@@ -53,7 +53,10 @@ class ImexDataPreprocessor:
         data_ele = tree.getroot()
         pubmed_id = data_ele.find("pubmedid").text
 
-        abstract = self.pubmed_extractor.extract_abstract_by_pubmedid([pubmed_id])[0]["abstract"]
+        pubmed_list = self.pubmed_extractor.extract_abstract_by_pubmedid([pubmed_id])
+        abstract = ""
+        if len(pubmed_list) > 0:
+            abstract = pubmed_list[0]["abstract"]
 
         # add abstract to element
         abstract_ele = ET.SubElement(data_ele, "abstract")
@@ -69,7 +72,6 @@ Runs the preprocessing pipeline
         """
         for data in self.transform(xmlHandle):
             yield self.convert_to_json(self.adddata(StringIO(data)))
-
 
     def _iter_elements_by_name(self, handle, name, namespace):
         events = ET.iterparse(handle, events=("start", "end"))
@@ -89,7 +91,3 @@ Runs the preprocessing pipeline
 
     def convert_to_json(self, xmlHandle):
         return json.dumps(xmltodict.parse(xmlHandle))
-
-
-
-
