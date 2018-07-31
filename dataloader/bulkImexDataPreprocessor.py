@@ -1,11 +1,12 @@
 import argparse
+import logging
 import os
 
 from dataloader.imexDataPreprocessor   import ImexDataPreprocessor
 
 
 def bulk_run(data_dir, out_dir):
-
+    logger = logging.getLogger(__name__)
     #Get xml files in dir
     for imex_file_name in os.listdir(data_dir):
         if not imex_file_name.endswith(".xml"):
@@ -13,7 +14,7 @@ def bulk_run(data_dir, out_dir):
 
         # Assuming all xml files are valid imex files.
         full_path = os.path.join(data_dir, imex_file_name)
-        print(full_path)
+        logger.info("Processing file {}".format(full_path))
         data_processor = ImexDataPreprocessor()
 
         with open(full_path, "rb") as xmlhandle:
