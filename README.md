@@ -14,4 +14,10 @@ Given a Kegg Pathway Id, e.g path:ko05215, extracts protein interactions defined
 https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
 
 # Run Docker
+```bash
 docker run -i -t lanax/keggproteininteractionsextractor -v /localdir/input:/opt/data/input /localdir/output:/opt/data/output <konumber> /opt/data/input/<input_data_mips_api>  /opt/data/output 
+```
+
+```bash
+docker run -v /home/ubuntu/data:/data lanax/kegg-pathway-extractor:latest /data human_01*.xml
+```
