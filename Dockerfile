@@ -16,4 +16,5 @@ RUN pip install -r /opt/program/kegg_protein_extractor/requirements.txt -t /opt/
 RUN pip install  awscli --upgrade
 
 WORKDIR /opt/program/kegg_protein_extractor
-CMD  ["bash", "/opt/program/kegg_protein_extractor/scripts/run_pipeline.sh"]
+ENTRYPOINT  ["bash", "/opt/program/kegg_protein_extractor/scripts/run_pipeline.sh"]
+CMD ["/data human_01*.xml"]
