@@ -25,6 +25,15 @@ def bulk_run(data_dir, processor):
                 processor.process(imex_file_name, i, doc)
 
 
+class Processors:
+    def __init__(self, processor_list):
+        self.processor_list = processor_list
+
+    def process(self, imex_file_name, doc_index, doc):
+        for processor in self.processor_list:
+            processor.process(imex_file_name, doc_index, doc)
+
+
 if "__main__" == __name__:
     parser = argparse.ArgumentParser()
     parser.add_argument("input_dir",
@@ -33,4 +42,9 @@ if "__main__" == __name__:
 
     args = parser.parse_args()
     processor = ImexJsonProcessorFileWriter(args.out_dir)
-    bulk_run(args.input_dir, processor)
+
+    ##Consolidate all processors
+    processors = Processors([processor])
+
+    # Run
+    bulk_run(args.input_dir, processors)
