@@ -2,12 +2,13 @@ import argparse
 import logging
 import os
 
-from dataloader.imexDataPreprocessor   import ImexDataPreprocessor
+from dataloader.ImexJsonProcessorFileWriter import ImexJsonProcessorFileWriter
+from dataloader.imexDataPreprocessor import ImexDataPreprocessor
 
 
-def bulk_run(data_dir, out_dir):
+def bulk_run(data_dir, processor):
     logger = logging.getLogger(__name__)
-    #Get xml files in dir
+    # Get xml files in dir
     for imex_file_name in os.listdir(data_dir):
         if not imex_file_name.endswith(".xml"):
             continue
@@ -18,14 +19,10 @@ def bulk_run(data_dir, out_dir):
         data_processor = ImexDataPreprocessor()
 
         with open(full_path, "rb") as xmlhandle:
-            i = 1
+            i = 0
             for doc in data_processor.run_pipeline(xmlhandle):
-                outfile_name = "{}_{:03d}.json".format(imex_file_name, i )
-                out_file = os.path.join(out_dir, outfile_name )
-                with open(out_file,"w") as out_file_handle:
-                    out_file_handle.write(doc)
-
-
+                i = i + 1
+                processor.process(imex_file_name, i, doc)
 
 
 if "__main__" == __name__:
@@ -35,4 +32,5 @@ if "__main__" == __name__:
     parser.add_argument("out_dir", help="The output dir")
 
     args = parser.parse_args()
-    bulk_run(args.input_dir, args.out_dir)
+    processor = ImexJsonProcessorFileWriter(args.out_dir)
+    bulk_run(args.input_dir, processor)
