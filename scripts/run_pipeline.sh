@@ -25,5 +25,5 @@ if [ "$s3destination" == "" ]; then
     echo "$0  <outdir>  <filepattern> <s3://mydesbucket/data>"
 else
     echo "Copying from $processeddatadir/* to $s3destination"
-    aws s3 cp $processeddatadir/* $s3destination
+    aws s3 cp $processeddatadir/* $s3destination --recursive
 fi
