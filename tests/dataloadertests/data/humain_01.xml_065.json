@@ -1,0 +1,2897 @@
+{
+  "data": {
+    "@xmlns:df": "http://psi.hupo.org/mi/mif",
+    "pubmedid": "25849143",
+    "ns0:interaction": {
+      "@xmlns:ns0": "http://psi.hupo.org/mi/mif",
+      "@xmlns": "http://psi.hupo.org/mi/mif",
+      "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+      "@id": "2728507",
+      "@imexId": "IM-24595-7",
+      "ns0:names": {
+        "ns0:shortLabel": "flna-itga2b-2"
+      },
+      "ns0:xref": {
+        "ns0:primaryRef": {
+          "@db": "dip",
+          "@dbAc": "MI:0465",
+          "@id": "DIP-199278E",
+          "@refType": "identity",
+          "@refTypeAc": "MI:0356"
+        },
+        "ns0:secondaryRef": [
+          {
+            "@db": "psi-mi",
+            "@dbAc": "MI:0488",
+            "@id": "MI:0465",
+            "@refType": "imex source"
+          },
+          {
+            "@db": "intact",
+            "@dbAc": "MI:0469",
+            "@id": "EBI-16152546",
+            "@refType": "identity",
+            "@refTypeAc": "MI:0356"
+          },
+          {
+            "@db": "imex",
+            "@dbAc": "MI:0670",
+            "@id": "IM-24595-7",
+            "@refType": "imex-primary",
+            "@refTypeAc": "MI:0662"
+          }
+        ]
+      },
+      "ns0:experimentList": {
+        "ns0:experimentRef": "2728463"
+      },
+      "ns0:participantList": {
+        "ns0:participant": [
+          {
+            "@id": "2728508",
+            "ns0:names": {
+              "ns0:shortLabel": "N/A"
+            },
+            "ns0:xref": {
+              "ns0:primaryRef": {
+                "@db": "intact",
+                "@dbAc": "MI:0469",
+                "@id": "EBI-16152556",
+                "@refType": "identity",
+                "@refTypeAc": "MI:0356"
+              }
+            },
+            "ns0:interactorRef": "2728466",
+            "ns0:biologicalRole": {
+              "ns0:names": {
+                "ns0:shortLabel": "unspecified role",
+                "ns0:fullName": "unspecified role"
+              },
+              "ns0:xref": {
+                "ns0:primaryRef": {
+                  "@db": "psi-mi",
+                  "@dbAc": "MI:0488",
+                  "@id": "MI:0499",
+                  "@refType": "identity",
+                  "@refTypeAc": "MI:0356"
+                },
+                "ns0:secondaryRef": [
+                  {
+                    "@db": "intact",
+                    "@dbAc": "MI:0469",
+                    "@id": "EBI-77781",
+                    "@refType": "identity",
+                    "@refTypeAc": "MI:0356"
+                  },
+                  {
+                    "@db": "pubmed",
+                    "@dbAc": "MI:0446",
+                    "@id": "14755292",
+                    "@refType": "primary-reference",
+                    "@refTypeAc": "MI:0358"
+                  }
+                ]
+              }
+            },
+            "ns0:experimentalRoleList": {
+              "ns0:experimentalRole": {
+                "ns0:names": {
+                  "ns0:shortLabel": "unspecified role",
+                  "ns0:fullName": "unspecified role"
+                },
+                "ns0:xref": {
+                  "ns0:primaryRef": {
+                    "@db": "psi-mi",
+                    "@dbAc": "MI:0488",
+                    "@id": "MI:0499",
+                    "@refType": "identity",
+                    "@refTypeAc": "MI:0356"
+                  },
+                  "ns0:secondaryRef": [
+                    {
+                      "@db": "pubmed",
+                      "@dbAc": "MI:0446",
+                      "@id": "14755292",
+                      "@refType": "primary-reference",
+                      "@refTypeAc": "MI:0358"
+                    },
+                    {
+                      "@db": "intact",
+                      "@dbAc": "MI:0469",
+                      "@id": "EBI-1383079",
+                      "@refType": "identity",
+                      "@refTypeAc": "MI:0356"
+                    }
+                  ]
+                }
+              }
+            },
+            "ns0:featureList": {
+              "ns0:feature": {
+                "@id": "2728509",
+                "ns0:names": {
+                  "ns0:shortLabel": "Region 1019-1039",
+                  "ns0:fullName": "Region 1019-1039"
+                },
+                "ns0:xref": {
+                  "ns0:primaryRef": {
+                    "@db": "intact",
+                    "@dbAc": "MI:0469",
+                    "@id": "EBI-16152557",
+                    "@refType": "identity",
+                    "@refTypeAc": "MI:0356"
+                  }
+                },
+                "ns0:featureType": {
+                  "ns0:names": {
+                    "ns0:shortLabel": "sufficient to bind",
+                    "ns0:fullName": "sufficient binding region",
+                    "ns0:alias": {
+                      "@type": "synonym",
+                      "@typeAc": "MI:1041",
+                      "#text": "sufficient to bind"
+                    }
+                  },
+                  "ns0:xref": {
+                    "ns0:primaryRef": {
+                      "@db": "psi-mi",
+                      "@dbAc": "MI:0488",
+                      "@id": "MI:0442",
+                      "@refType": "identity",
+                      "@refTypeAc": "MI:0356"
+                    },
+                    "ns0:secondaryRef": [
+                      {
+                        "@db": "pubmed",
+                        "@dbAc": "MI:0446",
+                        "@id": "14755292",
+                        "@refType": "primary-reference",
+                        "@refTypeAc": "MI:0358"
+                      },
+                      {
+                        "@db": "intact",
+                        "@dbAc": "MI:0469",
+                        "@id": "EBI-608899",
+                        "@refType": "identity",
+                        "@refTypeAc": "MI:0356"
+                      }
+                    ]
+                  }
+                },
+                "ns0:featureRangeList": {
+                  "ns0:featureRange": {
+                    "ns0:startStatus": {
+                      "ns0:names": {
+                        "ns0:shortLabel": "certain",
+                        "ns0:fullName": "certain sequence position",
+                        "ns0:alias": {
+                          "@type": "synonym",
+                          "@typeAc": "MI:1041",
+                          "#text": "certain"
+                        }
+                      },
+                      "ns0:xref": {
+                        "ns0:primaryRef": {
+                          "@db": "psi-mi",
+                          "@dbAc": "MI:0488",
+                          "@id": "MI:0335",
+                          "@refType": "identity",
+                          "@refTypeAc": "MI:0356"
+                        },
+                        "ns0:secondaryRef": [
+                          {
+                            "@db": "intact",
+                            "@dbAc": "MI:0469",
+                            "@id": "EBI-540564",
+                            "@refType": "identity",
+                            "@refTypeAc": "MI:0356"
+                          },
+                          {
+                            "@db": "pubmed",
+                            "@dbAc": "MI:0446",
+                            "@id": "14755292",
+                            "@refType": "primary-reference",
+                            "@refTypeAc": "MI:0358"
+                          }
+                        ]
+                      }
+                    },
+                    "ns0:begin": {
+                      "@position": "1019"
+                    },
+                    "ns0:endStatus": {
+                      "ns0:names": {
+                        "ns0:shortLabel": "certain",
+                        "ns0:fullName": "certain sequence position",
+                        "ns0:alias": {
+                          "@type": "synonym",
+                          "@typeAc": "MI:1041",
+                          "#text": "certain"
+                        }
+                      },
+                      "ns0:xref": {
+                        "ns0:primaryRef": {
+                          "@db": "psi-mi",
+                          "@dbAc": "MI:0488",
+                          "@id": "MI:0335",
+                          "@refType": "identity",
+                          "@refTypeAc": "MI:0356"
+                        },
+                        "ns0:secondaryRef": [
+                          {
+                            "@db": "intact",
+                            "@dbAc": "MI:0469",
+                            "@id": "EBI-540564",
+                            "@refType": "identity",
+                            "@refTypeAc": "MI:0356"
+                          },
+                          {
+                            "@db": "pubmed",
+                            "@dbAc": "MI:0446",
+                            "@id": "14755292",
+                            "@refType": "primary-reference",
+                            "@refTypeAc": "MI:0358"
+                          }
+                        ]
+                      }
+                    },
+                    "ns0:end": {
+                      "@position": "1039"
+                    },
+                    "ns0:isLink": "false"
+                  }
+                }
+              }
+            },
+            "ns0:hostOrganismList": {
+              "ns0:hostOrganism": {
+                "@ncbiTaxId": "562",
+                "ns0:names": {
+                  "ns0:shortLabel": "ecolx",
+                  "ns0:fullName": "Escherichia coli"
+                }
+              }
+            }
+          },
+          {
+            "@id": "2728510",
+            "ns0:names": {
+              "ns0:shortLabel": "N/A"
+            },
+            "ns0:xref": {
+              "ns0:primaryRef": {
+                "@db": "intact",
+                "@dbAc": "MI:0469",
+                "@id": "EBI-16152553",
+                "@refType": "identity",
+                "@refTypeAc": "MI:0356"
+              }
+            },
+            "ns0:interactorRef": "2728464",
+            "ns0:biologicalRole": {
+              "ns0:names": {
+                "ns0:shortLabel": "unspecified role",
+                "ns0:fullName": "unspecified role"
+              },
+              "ns0:xref": {
+                "ns0:primaryRef": {
+                  "@db": "psi-mi",
+                  "@dbAc": "MI:0488",
+                  "@id": "MI:0499",
+                  "@refType": "identity",
+                  "@refTypeAc": "MI:0356"
+                },
+                "ns0:secondaryRef": [
+                  {
+                    "@db": "intact",
+                    "@dbAc": "MI:0469",
+                    "@id": "EBI-77781",
+                    "@refType": "identity",
+                    "@refTypeAc": "MI:0356"
+                  },
+                  {
+                    "@db": "pubmed",
+                    "@dbAc": "MI:0446",
+                    "@id": "14755292",
+                    "@refType": "primary-reference",
+                    "@refTypeAc": "MI:0358"
+                  }
+                ]
+              }
+            },
+            "ns0:experimentalRoleList": {
+              "ns0:experimentalRole": {
+                "ns0:names": {
+                  "ns0:shortLabel": "unspecified role",
+                  "ns0:fullName": "unspecified role"
+                },
+                "ns0:xref": {
+                  "ns0:primaryRef": {
+                    "@db": "psi-mi",
+                    "@dbAc": "MI:0488",
+                    "@id": "MI:0499",
+                    "@refType": "identity",
+                    "@refTypeAc": "MI:0356"
+                  },
+                  "ns0:secondaryRef": [
+                    {
+                      "@db": "pubmed",
+                      "@dbAc": "MI:0446",
+                      "@id": "14755292",
+                      "@refType": "primary-reference",
+                      "@refTypeAc": "MI:0358"
+                    },
+                    {
+                      "@db": "intact",
+                      "@dbAc": "MI:0469",
+                      "@id": "EBI-1383079",
+                      "@refType": "identity",
+                      "@refTypeAc": "MI:0356"
+                    }
+                  ]
+                }
+              }
+            },
+            "ns0:featureList": {
+              "ns0:feature": {
+                "@id": "2728511",
+                "ns0:names": {
+                  "ns0:shortLabel": "Region 2236-2330",
+                  "ns0:fullName": "Region 2236-2330"
+                },
+                "ns0:xref": {
+                  "ns0:primaryRef": {
+                    "@db": "intact",
+                    "@dbAc": "MI:0469",
+                    "@id": "EBI-16152554",
+                    "@refType": "identity",
+                    "@refTypeAc": "MI:0356"
+                  }
+                },
+                "ns0:featureType": {
+                  "ns0:names": {
+                    "ns0:shortLabel": "sufficient to bind",
+                    "ns0:fullName": "sufficient binding region",
+                    "ns0:alias": {
+                      "@type": "synonym",
+                      "@typeAc": "MI:1041",
+                      "#text": "sufficient to bind"
+                    }
+                  },
+                  "ns0:xref": {
+                    "ns0:primaryRef": {
+                      "@db": "psi-mi",
+                      "@dbAc": "MI:0488",
+                      "@id": "MI:0442",
+                      "@refType": "identity",
+                      "@refTypeAc": "MI:0356"
+                    },
+                    "ns0:secondaryRef": [
+                      {
+                        "@db": "pubmed",
+                        "@dbAc": "MI:0446",
+                        "@id": "14755292",
+                        "@refType": "primary-reference",
+                        "@refTypeAc": "MI:0358"
+                      },
+                      {
+                        "@db": "intact",
+                        "@dbAc": "MI:0469",
+                        "@id": "EBI-608899",
+                        "@refType": "identity",
+                        "@refTypeAc": "MI:0356"
+                      }
+                    ]
+                  }
+                },
+                "ns0:featureRangeList": {
+                  "ns0:featureRange": {
+                    "ns0:startStatus": {
+                      "ns0:names": {
+                        "ns0:shortLabel": "certain",
+                        "ns0:fullName": "certain sequence position",
+                        "ns0:alias": {
+                          "@type": "synonym",
+                          "@typeAc": "MI:1041",
+                          "#text": "certain"
+                        }
+                      },
+                      "ns0:xref": {
+                        "ns0:primaryRef": {
+                          "@db": "psi-mi",
+                          "@dbAc": "MI:0488",
+                          "@id": "MI:0335",
+                          "@refType": "identity",
+                          "@refTypeAc": "MI:0356"
+                        },
+                        "ns0:secondaryRef": [
+                          {
+                            "@db": "intact",
+                            "@dbAc": "MI:0469",
+                            "@id": "EBI-540564",
+                            "@refType": "identity",
+                            "@refTypeAc": "MI:0356"
+                          },
+                          {
+                            "@db": "pubmed",
+                            "@dbAc": "MI:0446",
+                            "@id": "14755292",
+                            "@refType": "primary-reference",
+                            "@refTypeAc": "MI:0358"
+                          }
+                        ]
+                      }
+                    },
+                    "ns0:begin": {
+                      "@position": "2236"
+                    },
+                    "ns0:endStatus": {
+                      "ns0:names": {
+                        "ns0:shortLabel": "certain",
+                        "ns0:fullName": "certain sequence position",
+                        "ns0:alias": {
+                          "@type": "synonym",
+                          "@typeAc": "MI:1041",
+                          "#text": "certain"
+                        }
+                      },
+                      "ns0:xref": {
+                        "ns0:primaryRef": {
+                          "@db": "psi-mi",
+                          "@dbAc": "MI:0488",
+                          "@id": "MI:0335",
+                          "@refType": "identity",
+                          "@refTypeAc": "MI:0356"
+                        },
+                        "ns0:secondaryRef": [
+                          {
+                            "@db": "intact",
+                            "@dbAc": "MI:0469",
+                            "@id": "EBI-540564",
+                            "@refType": "identity",
+                            "@refTypeAc": "MI:0356"
+                          },
+                          {
+                            "@db": "pubmed",
+                            "@dbAc": "MI:0446",
+                            "@id": "14755292",
+                            "@refType": "primary-reference",
+                            "@refTypeAc": "MI:0358"
+                          }
+                        ]
+                      }
+                    },
+                    "ns0:end": {
+                      "@position": "2330"
+                    },
+                    "ns0:isLink": "false"
+                  }
+                }
+              }
+            },
+            "ns0:hostOrganismList": {
+              "ns0:hostOrganism": {
+                "@ncbiTaxId": "562",
+                "ns0:names": {
+                  "ns0:shortLabel": "ecolx",
+                  "ns0:fullName": "Escherichia coli"
+                }
+              }
+            }
+          },
+          {
+            "@id": "2728512",
+            "ns0:names": {
+              "ns0:shortLabel": "N/A"
+            },
+            "ns0:xref": {
+              "ns0:primaryRef": {
+                "@db": "intact",
+                "@dbAc": "MI:0469",
+                "@id": "EBI-16152550",
+                "@refType": "identity",
+                "@refTypeAc": "MI:0356"
+              }
+            },
+            "ns0:interactorRef": "2728465",
+            "ns0:biologicalRole": {
+              "ns0:names": {
+                "ns0:shortLabel": "unspecified role",
+                "ns0:fullName": "unspecified role"
+              },
+              "ns0:xref": {
+                "ns0:primaryRef": {
+                  "@db": "psi-mi",
+                  "@dbAc": "MI:0488",
+                  "@id": "MI:0499",
+                  "@refType": "identity",
+                  "@refTypeAc": "MI:0356"
+                },
+                "ns0:secondaryRef": [
+                  {
+                    "@db": "intact",
+                    "@dbAc": "MI:0469",
+                    "@id": "EBI-77781",
+                    "@refType": "identity",
+                    "@refTypeAc": "MI:0356"
+                  },
+                  {
+                    "@db": "pubmed",
+                    "@dbAc": "MI:0446",
+                    "@id": "14755292",
+                    "@refType": "primary-reference",
+                    "@refTypeAc": "MI:0358"
+                  }
+                ]
+              }
+            },
+            "ns0:experimentalRoleList": {
+              "ns0:experimentalRole": {
+                "ns0:names": {
+                  "ns0:shortLabel": "unspecified role",
+                  "ns0:fullName": "unspecified role"
+                },
+                "ns0:xref": {
+                  "ns0:primaryRef": {
+                    "@db": "psi-mi",
+                    "@dbAc": "MI:0488",
+                    "@id": "MI:0499",
+                    "@refType": "identity",
+                    "@refTypeAc": "MI:0356"
+                  },
+                  "ns0:secondaryRef": [
+                    {
+                      "@db": "pubmed",
+                      "@dbAc": "MI:0446",
+                      "@id": "14755292",
+                      "@refType": "primary-reference",
+                      "@refTypeAc": "MI:0358"
+                    },
+                    {
+                      "@db": "intact",
+                      "@dbAc": "MI:0469",
+                      "@id": "EBI-1383079",
+                      "@refType": "identity",
+                      "@refTypeAc": "MI:0356"
+                    }
+                  ]
+                }
+              }
+            },
+            "ns0:featureList": {
+              "ns0:feature": {
+                "@id": "2728513",
+                "ns0:names": {
+                  "ns0:shortLabel": "Region 742-788",
+                  "ns0:fullName": "Region 742-788"
+                },
+                "ns0:xref": {
+                  "ns0:primaryRef": {
+                    "@db": "intact",
+                    "@dbAc": "MI:0469",
+                    "@id": "EBI-16152551",
+                    "@refType": "identity",
+                    "@refTypeAc": "MI:0356"
+                  }
+                },
+                "ns0:featureType": {
+                  "ns0:names": {
+                    "ns0:shortLabel": "sufficient to bind",
+                    "ns0:fullName": "sufficient binding region",
+                    "ns0:alias": {
+                      "@type": "synonym",
+                      "@typeAc": "MI:1041",
+                      "#text": "sufficient to bind"
+                    }
+                  },
+                  "ns0:xref": {
+                    "ns0:primaryRef": {
+                      "@db": "psi-mi",
+                      "@dbAc": "MI:0488",
+                      "@id": "MI:0442",
+                      "@refType": "identity",
+                      "@refTypeAc": "MI:0356"
+                    },
+                    "ns0:secondaryRef": [
+                      {
+                        "@db": "pubmed",
+                        "@dbAc": "MI:0446",
+                        "@id": "14755292",
+                        "@refType": "primary-reference",
+                        "@refTypeAc": "MI:0358"
+                      },
+                      {
+                        "@db": "intact",
+                        "@dbAc": "MI:0469",
+                        "@id": "EBI-608899",
+                        "@refType": "identity",
+                        "@refTypeAc": "MI:0356"
+                      }
+                    ]
+                  }
+                },
+                "ns0:featureRangeList": {
+                  "ns0:featureRange": {
+                    "ns0:startStatus": {
+                      "ns0:names": {
+                        "ns0:shortLabel": "certain",
+                        "ns0:fullName": "certain sequence position",
+                        "ns0:alias": {
+                          "@type": "synonym",
+                          "@typeAc": "MI:1041",
+                          "#text": "certain"
+                        }
+                      },
+                      "ns0:xref": {
+                        "ns0:primaryRef": {
+                          "@db": "psi-mi",
+                          "@dbAc": "MI:0488",
+                          "@id": "MI:0335",
+                          "@refType": "identity",
+                          "@refTypeAc": "MI:0356"
+                        },
+                        "ns0:secondaryRef": [
+                          {
+                            "@db": "intact",
+                            "@dbAc": "MI:0469",
+                            "@id": "EBI-540564",
+                            "@refType": "identity",
+                            "@refTypeAc": "MI:0356"
+                          },
+                          {
+                            "@db": "pubmed",
+                            "@dbAc": "MI:0446",
+                            "@id": "14755292",
+                            "@refType": "primary-reference",
+                            "@refTypeAc": "MI:0358"
+                          }
+                        ]
+                      }
+                    },
+                    "ns0:begin": {
+                      "@position": "742"
+                    },
+                    "ns0:endStatus": {
+                      "ns0:names": {
+                        "ns0:shortLabel": "certain",
+                        "ns0:fullName": "certain sequence position",
+                        "ns0:alias": {
+                          "@type": "synonym",
+                          "@typeAc": "MI:1041",
+                          "#text": "certain"
+                        }
+                      },
+                      "ns0:xref": {
+                        "ns0:primaryRef": {
+                          "@db": "psi-mi",
+                          "@dbAc": "MI:0488",
+                          "@id": "MI:0335",
+                          "@refType": "identity",
+                          "@refTypeAc": "MI:0356"
+                        },
+                        "ns0:secondaryRef": [
+                          {
+                            "@db": "intact",
+                            "@dbAc": "MI:0469",
+                            "@id": "EBI-540564",
+                            "@refType": "identity",
+                            "@refTypeAc": "MI:0356"
+                          },
+                          {
+                            "@db": "pubmed",
+                            "@dbAc": "MI:0446",
+                            "@id": "14755292",
+                            "@refType": "primary-reference",
+                            "@refTypeAc": "MI:0358"
+                          }
+                        ]
+                      }
+                    },
+                    "ns0:end": {
+                      "@position": "788"
+                    },
+                    "ns0:isLink": "false"
+                  }
+                }
+              }
+            },
+            "ns0:hostOrganismList": {
+              "ns0:hostOrganism": {
+                "@ncbiTaxId": "562",
+                "ns0:names": {
+                  "ns0:shortLabel": "ecolx",
+                  "ns0:fullName": "Escherichia coli"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "ns0:interactionType": {
+        "ns0:names": {
+          "ns0:shortLabel": "physical association",
+          "ns0:fullName": "physical association"
+        },
+        "ns0:xref": {
+          "ns0:primaryRef": {
+            "@db": "psi-mi",
+            "@dbAc": "MI:0488",
+            "@id": "MI:0915",
+            "@refType": "identity",
+            "@refTypeAc": "MI:0356"
+          },
+          "ns0:secondaryRef": [
+            {
+              "@db": "pubmed",
+              "@dbAc": "MI:0446",
+              "@id": "14755292",
+              "@refType": "primary-reference",
+              "@refTypeAc": "MI:0358"
+            },
+            {
+              "@db": "intact",
+              "@dbAc": "MI:0469",
+              "@id": "EBI-1813147",
+              "@refType": "identity",
+              "@refTypeAc": "MI:0356"
+            }
+          ]
+        }
+      },
+      "ns0:modelled": "false",
+      "ns0:intraMolecular": "false",
+      "ns0:negative": "false"
+    },
+    "ns0:experimentDescription": {
+      "@xmlns:ns0": "http://psi.hupo.org/mi/mif",
+      "@xmlns": "http://psi.hupo.org/mi/mif",
+      "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+      "@id": "2728463",
+      "ns0:names": {
+        "ns0:shortLabel": "liu-2015-27"
+      },
+      "ns0:bibref": {
+        "ns0:xref": {
+          "ns0:primaryRef": {
+            "@db": "pubmed",
+            "@dbAc": "MI:0446",
+            "@id": "25849143",
+            "@refType": "primary-reference",
+            "@refTypeAc": "MI:0358"
+          }
+        }
+      },
+      "ns0:xref": {
+        "ns0:primaryRef": {
+          "@db": "dip",
+          "@dbAc": "MI:0465",
+          "@id": "DIP-265998X",
+          "@refType": "identity",
+          "@refTypeAc": "MI:0356"
+        },
+        "ns0:secondaryRef": [
+          {
+            "@db": "doi",
+            "@dbAc": "MI:0574",
+            "@id": "10.1038/nsmb.2999",
+            "@refType": "primary-reference",
+            "@refTypeAc": "MI:0358"
+          },
+          {
+            "@db": "wwpdb",
+            "@dbAc": "MI:0805",
+            "@id": "2MTP",
+            "@refType": "identity",
+            "@refTypeAc": "MI:0356"
+          },
+          {
+            "@db": "intact",
+            "@dbAc": "MI:0469",
+            "@id": "EBI-16152534",
+            "@refType": "identity",
+            "@refTypeAc": "MI:0356"
+          },
+          {
+            "@db": "imex",
+            "@dbAc": "MI:0670",
+            "@id": "IM-24595",
+            "@refType": "imex-primary",
+            "@refTypeAc": "MI:0662"
+          }
+        ]
+      },
+      "ns0:hostOrganismList": {
+        "ns0:hostOrganism": {
+          "@ncbiTaxId": "-1",
+          "ns0:names": {
+            "ns0:shortLabel": "in vitro",
+            "ns0:fullName": "In vitro"
+          }
+        }
+      },
+      "ns0:interactionDetectionMethod": {
+        "ns0:names": {
+          "ns0:shortLabel": "nmr",
+          "ns0:fullName": "nuclear magnetic resonance",
+          "ns0:alias": [
+            {
+              "@type": "synonym",
+              "@typeAc": "MI:1041",
+              "#text": "NMR"
+            },
+            {
+              "@type": "go synonym",
+              "@typeAc": "MI:0303",
+              "#text": "NMR"
+            }
+          ]
+        },
+        "ns0:xref": {
+          "ns0:primaryRef": {
+            "@db": "psi-mi",
+            "@dbAc": "MI:0488",
+            "@id": "MI:0077",
+            "@refType": "identity",
+            "@refTypeAc": "MI:0356"
+          },
+          "ns0:secondaryRef": [
+            {
+              "@db": "pubmed",
+              "@dbAc": "MI:0446",
+              "@id": "12062432",
+              "@refType": "see-also",
+              "@refTypeAc": "MI:0361"
+            },
+            {
+              "@db": "pubmed",
+              "@dbAc": "MI:0446",
+              "@id": "12120505",
+              "@refType": "primary-reference",
+              "@refTypeAc": "MI:0358"
+            },
+            {
+              "@db": "intact",
+              "@dbAc": "MI:0469",
+              "@id": "EBI-1186",
+              "@refType": "identity",
+              "@refTypeAc": "MI:0356"
+            }
+          ]
+        }
+      },
+      "ns0:participantIdentificationMethod": {
+        "ns0:names": {
+          "ns0:shortLabel": "predetermined",
+          "ns0:fullName": "predetermined participant",
+          "ns0:alias": {
+            "@type": "synonym",
+            "@typeAc": "MI:1041",
+            "#text": "predetermined"
+          }
+        },
+        "ns0:xref": {
+          "ns0:primaryRef": {
+            "@db": "psi-mi",
+            "@dbAc": "MI:0488",
+            "@id": "MI:0396",
+            "@refType": "identity",
+            "@refTypeAc": "MI:0356"
+          },
+          "ns0:secondaryRef": [
+            {
+              "@db": "intact",
+              "@dbAc": "MI:0469",
+              "@id": "EBI-1465",
+              "@refType": "identity",
+              "@refTypeAc": "MI:0356"
+            },
+            {
+              "@db": "pubmed",
+              "@dbAc": "MI:0446",
+              "@id": "14755292",
+              "@refType": "primary-reference",
+              "@refTypeAc": "MI:0358"
+            }
+          ]
+        }
+      },
+      "ns0:attributeList": {
+        "ns0:attribute": [
+          {
+            "@name": "author-list",
+            "@nameAc": "MI:0636",
+            "#text": "Liu J., Das M., Yang J., Ithychanda SS., Yakubenko VP., Plow EF., Qin J."
+          },
+          {
+            "@name": "comment",
+            "@nameAc": "MI:0612",
+            "#text": "DIP original experiment: DIP-265998X"
+          },
+          {
+            "@name": "journal",
+            "@nameAc": "MI:0885",
+            "#text": "Nature structural & molecular biology"
+          },
+          {
+            "@name": "publication year",
+            "@nameAc": "MI:0886",
+            "#text": "2015"
+          },
+          {
+            "@name": "curation depth",
+            "@nameAc": "MI:0955",
+            "#text": "IMEx"
+          },
+          {
+            "@name": "title",
+            "@nameAc": "MI:1091",
+            "#text": "Structural mechanism of integrin inactivation by filamin."
+          },
+          {
+            "@name": "author-list",
+            "@nameAc": "MI:0636",
+            "#text": "Liu J.,  Das M.,  Yang J.,  Ithychanda SS.,  Yakubenko VP.,  Plow EF.,  Qin J."
+          },
+          {
+            "@name": "full coverage",
+            "@nameAc": "MI:0957",
+            "#text": "Only protein-protein interactions"
+          },
+          {
+            "@name": "imex curation",
+            "@nameAc": "MI:0959"
+          },
+          {
+            "@name": "curation depth",
+            "@nameAc": "MI:0955",
+            "#text": "imex curation"
+          }
+        ]
+      }
+    },
+    "ns0:interactor": [
+      {
+        "@xmlns:ns0": "http://psi.hupo.org/mi/mif",
+        "@xmlns": "http://psi.hupo.org/mi/mif",
+        "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+        "@id": "2728466",
+        "ns0:names": {
+          "ns0:shortLabel": "p08514-1",
+          "ns0:fullName": "Integrin alpha-IIb",
+          "ns0:alias": [
+            {
+              "@type": "gene name",
+              "@typeAc": "MI:0301",
+              "#text": "ITGA2B"
+            },
+            {
+              "@type": "gene name synonym",
+              "@typeAc": "MI:0302",
+              "#text": "GP2B"
+            },
+            {
+              "@type": "gene name synonym",
+              "@typeAc": "MI:0302",
+              "#text": "ITGAB"
+            },
+            {
+              "@type": "gene name synonym",
+              "@typeAc": "MI:0302",
+              "#text": "GPalpha IIb"
+            },
+            {
+              "@type": "gene name synonym",
+              "@typeAc": "MI:0302",
+              "#text": "Platelet membrane glycoprotein IIb"
+            }
+          ]
+        },
+        "ns0:xref": {
+          "ns0:primaryRef": {
+            "@db": "uniprotkb",
+            "@dbAc": "MI:0486",
+            "@id": "P08514-1",
+            "@refType": "identity",
+            "@refTypeAc": "MI:0356",
+            "@version": "146"
+          },
+          "ns0:secondaryRef": [
+            {
+              "@db": "intact",
+              "@dbAc": "MI:0469",
+              "@id": "EBI-702693",
+              "@refType": "isoform-parent",
+              "@refTypeAc": "MI:0243"
+            },
+            {
+              "@db": "intact",
+              "@dbAc": "MI:0469",
+              "@id": "EBI-15805658",
+              "@refType": "identity",
+              "@refTypeAc": "MI:0356"
+            }
+          ]
+        },
+        "ns0:interactorType": {
+          "ns0:names": {
+            "ns0:shortLabel": "protein",
+            "ns0:fullName": "protein"
+          },
+          "ns0:xref": {
+            "ns0:primaryRef": {
+              "@db": "psi-mi",
+              "@dbAc": "MI:0488",
+              "@id": "MI:0326",
+              "@refType": "identity",
+              "@refTypeAc": "MI:0356"
+            },
+            "ns0:secondaryRef": [
+              {
+                "@db": "so",
+                "@dbAc": "MI:0601",
+                "@id": "SO:0000358",
+                "@refType": "see-also",
+                "@refTypeAc": "MI:0361"
+              },
+              {
+                "@db": "pubmed",
+                "@dbAc": "MI:0446",
+                "@id": "14755292",
+                "@refType": "primary-reference",
+                "@refTypeAc": "MI:0358"
+              },
+              {
+                "@db": "intact",
+                "@dbAc": "MI:0469",
+                "@id": "EBI-619654",
+                "@refType": "identity",
+                "@refTypeAc": "MI:0356"
+              }
+            ]
+          }
+        },
+        "ns0:organism": {
+          "@ncbiTaxId": "9606",
+          "ns0:names": {
+            "ns0:shortLabel": "human",
+            "ns0:fullName": "Homo sapiens",
+            "ns0:alias": {
+              "@type": "synonym",
+              "@typeAc": "MI:1041",
+              "#text": "Human"
+            }
+          }
+        },
+        "ns0:sequence": "MARALCPLQALWLLEWVLLLLGPCAAPPAWALNLDPVQLTFYAGPNGSQFGFSLDFHKDSHGRVAIVVGAPRTLGPSQEETGGVFLCPWRAEGGQCPSLLFDLRDETRNVGSQTLQTFKARQGLGASVVSWSDVIVACAPWQHWNVLEKTEEAEKTPVGSCFLAQPESGRRAEYSPCRGNTLSRIYVENDFSWDKRYCEAGFSSVVTQAGELVLGAPGGYYFLGLLAQAPVADIFSSYRPGILLWHVSSQSLSFDSSNPEYFDGYWGYSVAVGEFDGDLNTTEYVVGAPTWSWTLGAVEILDSYYQRLHRLRGEQMASYFGHSVAVTDVNGDGRHDLLVGAPLYMESRADRKLAEVGRVYLFLQPRGPHALGAPSLLLTGTQLYGRFGSAIAPLGDLDRDGYNDIAVAAPYGGPSGRGQVLVFLGQSEGLRSRPSQVLDSPFPTGSAFGFSLRGAVDIDDNGYPDLIVGAYGANQVAVYRAQPVVKASVQLLVQDSLNPAVKSCVLPQTKTPVSCFNIQMCVGATGHNIPQKLSLNAELQLDRQKPRQGRRVLLLGSQQAGTTLNLDLGGKHSPICHTTMAFLRDEADFRDKLSPIVLSLNVSLPPTEAGMAPAVVLHGDTHVQEQTRIVLDCGEDDVCVPQLQLTASVTGSPLLVGADNVLELQMDAANEGEGAYEAELAVHLPQGAHYMRALSNVEGFERLICNQKKENETRVVLCELGNPMKKNAQIGIAMLVSVGNLEEAGESVSFQLQIRSKNSQNPNSKIVLLDVPVRAEAQVELRGNSFPASLVVAAEEGEREQNSLDSWGPKVEHTYELHNNGPGTVNGLHLSIHLPGQSQPSDLLYILDIQPQGGLQCFPQPPVNPLKVDWGLPIPSPSPIHPAHHKRDRRQIFLPEPEQPSRLQDPVLVSCDSAPCTVVQCDLQEMARGQRAMVTVLAFLWLPSLYQRPLDQFVLQSHAWFNVSSLPYAVPPLSLPRGEAQVWTQLLRALEERAIPIWWVLVGVLGGLLLLTILVLAMWKVGFFKRNRPPLEEDDEEGE",
+        "ns0:attributeList": {
+          "ns0:attribute": [
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P08514-1 original sequence version: 146"
+            },
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P08514-1 original sequence version: 195"
+            },
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P08514-1 original sequence version: 158"
+            }
+          ]
+        }
+      },
+      {
+        "@xmlns:ns0": "http://psi.hupo.org/mi/mif",
+        "@xmlns": "http://psi.hupo.org/mi/mif",
+        "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+        "@id": "2728464",
+        "ns0:names": {
+          "ns0:shortLabel": "flna_human",
+          "ns0:fullName": "Filamin-A",
+          "ns0:alias": [
+            {
+              "@type": "gene name",
+              "@typeAc": "MI:0301",
+              "#text": "FLNA"
+            },
+            {
+              "@type": "gene name synonym",
+              "@typeAc": "MI:0302",
+              "#text": "FLN"
+            },
+            {
+              "@type": "gene name synonym",
+              "@typeAc": "MI:0302",
+              "#text": "FLN1"
+            },
+            {
+              "@type": "gene name synonym",
+              "@typeAc": "MI:0302",
+              "#text": "Alpha-filamin"
+            },
+            {
+              "@type": "gene name synonym",
+              "@typeAc": "MI:0302",
+              "#text": "Filamin-1"
+            },
+            {
+              "@type": "gene name synonym",
+              "@typeAc": "MI:0302",
+              "#text": "Endothelial actin-binding protein"
+            },
+            {
+              "@type": "gene name synonym",
+              "@typeAc": "MI:0302",
+              "#text": "Actin-binding protein 280"
+            },
+            {
+              "@type": "gene name synonym",
+              "@typeAc": "MI:0302",
+              "#text": "Non-muscle filamin"
+            }
+          ]
+        },
+        "ns0:xref": {
+          "ns0:primaryRef": {
+            "@db": "uniprotkb",
+            "@dbAc": "MI:0486",
+            "@id": "P21333",
+            "@refType": "identity",
+            "@refTypeAc": "MI:0356",
+            "@version": "SP_104"
+          },
+          "ns0:secondaryRef": [
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0031532"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3HOR"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-114608"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0016479"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0004871"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0070062"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0048365"
+            },
+            {
+              "@db": "intact",
+              "@dbAc": "MI:0469",
+              "@id": "EBI-1103234",
+              "@refType": "intact-secondary"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0031267"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0043113"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2BP3"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0031852"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0051020"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR028559"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:2000179"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0005911"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR013783"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0015459"
+            },
+            {
+              "@db": "ensembl",
+              "@dbAc": "MI:0476",
+              "@id": "ENSP00000416926"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2W0P"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR001715"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0043123"
+            },
+            {
+              "@db": "intact",
+              "@dbAc": "MI:0469",
+              "@id": "EBI-350432",
+              "@refType": "identity",
+              "@refTypeAc": "MI:0356"
+            },
+            {
+              "@db": "mint",
+              "@dbAc": "MI:0471",
+              "@id": "P21333"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0045296"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0016020"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0001664"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0051764"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0005634"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0071526"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-430116"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0030168"
+            },
+            {
+              "@db": "ensembl",
+              "@dbAc": "MI:0476",
+              "@id": "ENST00000422373"
+            },
+            {
+              "@db": "refseq",
+              "@dbAc": "MI:0481",
+              "@id": "NP_001447.2"
+            },
+            {
+              "@db": "refseq",
+              "@dbAc": "MI:0481",
+              "@id": "NP_001104026.1"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "4M9P"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2K7P"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0019900"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0090307"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0030334"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0045184"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2BRQ"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0005737"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0005884"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR001298"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0050821"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0005925"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0030018"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:1901381"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0043433"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3HOP"
+            },
+            {
+              "@db": "ensembl",
+              "@dbAc": "MI:0476",
+              "@id": "ENSG00000196924"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0021943"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0031523"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0005829"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3CNK"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:1905031"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0030863"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0097440"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0015629"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0003723"
+            },
+            {
+              "@db": "uniprotkb",
+              "@dbAc": "MI:0486",
+              "@id": "Q5HY53",
+              "@refType": "secondary-ac",
+              "@refTypeAc": "MI:0360",
+              "@version": "SP_137"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0017160"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2J3S"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0043066"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0043198"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0042803"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2MTP"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "4P3W"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:2001046"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0021987"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0034329"
+            },
+            {
+              "@db": "uniprotkb",
+              "@dbAc": "MI:0486",
+              "@id": "Q5HY55",
+              "@refType": "secondary-ac",
+              "@refTypeAc": "MI:0360",
+              "@version": "SP_137"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0044325"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR036872"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0048471"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0005730"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:2001224"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0043025"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2AAV"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0060271"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2K3T"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0034394"
+            },
+            {
+              "@db": "ensembl",
+              "@dbAc": "MI:0476",
+              "@id": "ENSP00000353467"
+            },
+            {
+              "@db": "ensembl",
+              "@dbAc": "MI:0476",
+              "@id": "ENST00000360319"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2JF1"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0044319"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0002576"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0051015"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0042177"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0008134"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR014756"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0072659"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0005886"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:1905000"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:1900026"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3ISW"
+            },
+            {
+              "@db": "uniprotkb",
+              "@dbAc": "MI:0486",
+              "@id": "E9KL45",
+              "@refType": "secondary-ac",
+              "@refTypeAc": "MI:0360",
+              "@version": "SP_165"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0034988"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0070527"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2WFN"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3HOC"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0042789"
+            },
+            {
+              "@db": "dip",
+              "@dbAc": "MI:0465",
+              "@id": "DIP-1136N"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2K7Q"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0017048"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3RGH"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR017868"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0051220"
+            },
+            {
+              "@db": "ensembl",
+              "@dbAc": "MI:0476",
+              "@id": "ENST00000369850"
+            },
+            {
+              "@db": "uniprotkb",
+              "@dbAc": "MI:0486",
+              "@id": "Q8NF52",
+              "@refType": "secondary-ac",
+              "@refTypeAc": "MI:0360",
+              "@version": "SP_117"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR001589"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-5627123"
+            },
+            {
+              "@db": "dip",
+              "@dbAc": "MI:0465",
+              "@id": "DIP-1136N",
+              "@refType": "identity",
+              "@refTypeAc": "MI:0356"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-446353"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0005576"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0007195"
+            },
+            {
+              "@db": "ensembl",
+              "@dbAc": "MI:0476",
+              "@id": "ENSP00000358866"
+            }
+          ]
+        },
+        "ns0:interactorType": {
+          "ns0:names": {
+            "ns0:shortLabel": "protein",
+            "ns0:fullName": "protein"
+          },
+          "ns0:xref": {
+            "ns0:primaryRef": {
+              "@db": "psi-mi",
+              "@dbAc": "MI:0488",
+              "@id": "MI:0326",
+              "@refType": "identity",
+              "@refTypeAc": "MI:0356"
+            },
+            "ns0:secondaryRef": [
+              {
+                "@db": "so",
+                "@dbAc": "MI:0601",
+                "@id": "SO:0000358",
+                "@refType": "see-also",
+                "@refTypeAc": "MI:0361"
+              },
+              {
+                "@db": "pubmed",
+                "@dbAc": "MI:0446",
+                "@id": "14755292",
+                "@refType": "primary-reference",
+                "@refTypeAc": "MI:0358"
+              },
+              {
+                "@db": "intact",
+                "@dbAc": "MI:0469",
+                "@id": "EBI-619654",
+                "@refType": "identity",
+                "@refTypeAc": "MI:0356"
+              }
+            ]
+          }
+        },
+        "ns0:organism": {
+          "@ncbiTaxId": "9606",
+          "ns0:names": {
+            "ns0:shortLabel": "human",
+            "ns0:fullName": "Homo sapiens",
+            "ns0:alias": {
+              "@type": "synonym",
+              "@typeAc": "MI:1041",
+              "#text": "Human"
+            }
+          }
+        },
+        "ns0:sequence": "MSSSHSRAGQSAAGAAPGGGVDTRDAEMPATEKDLAEDAPWKKIQQNTFTRWCNEHLKCVSKRIANLQTDLSDGLRLIALLEVLSQKKMHRKHNQRPTFRQMQLENVSVALEFLDRESIKLVSIDSKAIVDGNLKLILGLIWTLILHYSISMPMWDEEEDEEAKKQTPKQRLLGWIQNKLPQLPITNFSRDWQSGRALGALVDSCAPGLCPDWDSWDASKPVTNAREAMQQADDWLGIPQVITPEEIVDPNVDEHSVMTYLSQFPKAKLKPGAPLRPKLNPKKARAYGPGIEPTGNMVKKRAEFTVETRSAGQGEVLVYVEDPAGHQEEAKVTANNDKNRTFSVWYVPEVTGTHKVTVLFAGQHIAKSPFEVYVDKSQGDASKVTAQGPGLEPSGNIANKTTYFEIFTAGAGTGEVEVVIQDPMGQKGTVEPQLEARGDSTYRCSYQPTMEGVHTVHVTFAGVPIPRSPYTVTVGQACNPSACRAVGRGLQPKGVRVKETADFKVYTKGAGSGELKVTVKGPKGEERVKQKDLGDGVYGFEYYPMVPGTYIVTITWGGQNIGRSPFEVKVGTECGNQKVRAWGPGLEGGVVGKSADFVVEAIGDDVGTLGFSVEGPSQAKIECDDKGDGSCDVRYWPQEAGEYAVHVLCNSEDIRLSPFMADIRDAPQDFHPDRVKARGPGLEKTGVAVNKPAEFTVDAKHGGKAPLRVQVQDNEGCPVEALVKDNGNGTYSCSYVPRKPVKHTAMVSWGGVSIPNSPFRVNVGAGSHPNKVKVYGPGVAKTGLKAHEPTYFTVDCAEAGQGDVSIGIKCAPGVVGPAEADIDFDIIRNDNDTFTVKYTPRGAGSYTIMVLFADQATPTSPIRVKVEPSHDASKVKAEGPGLSRTGVELGKPTHFTVNAKAAGKGKLDVQFSGLTKGDAVRDVDIIDHHDNTYTVKYTPVQQGPVGVNVTYGGDPIPKSPFSVAVSPSLDLSKIKVSGLGEKVDVGKDQEFTVKSKGAGGQGKVASKIVGPSGAAVPCKVEPGLGADNSVVRFLPREEGPYEVEVTYDGVPVPGSPFPLEAVAPTKPSKVKAFGPGLQGGSAGSPARFTIDTKGAGTGGLGLTVEGPCEAQLECLDNGDGTCSVSYVPTEPGDYNINILFADTHIPGSPFKAHVVPCFDASKVKCSGPGLERATAGEVGQFQVDCSSAGSAELTIEICSEAGLPAEVYIQDHGDGTHTITYIPLCPGAYTVTIKYGGQPVPNFPSKLQVEPAVDTSGVQCYGPGIEGQGVFREATTEFSVDARALTQTGGPHVKARVANPSGNLTETYVQDRGDGMYKVEYTPYEEGLHSVDVTYDGSPVPSSPFQVPVTEGCDPSRVRVHGPGIQSGTTNKPNKFTVETRGAGTGGLGLAVEGPSEAKMSCMDNKDGSCSVEYIPYEAGTYSLNVTYGGHQVPGSPFKVPVHDVTDASKVKCSGPGLSPGMVRANLPQSFQVDTSKAGVAPLQVKVQGPKGLVEPVDVVDNADGTQTVNYVPSREGPYSISVLYGDEEVPRSPFKVKVLPTHDASKVKASGPGLNTTGVPASLPVEFTIDAKDAGEGLLAVQITDPEGKPKKTHIQDNHDGTYTVAYVPDVTGRYTILIKYGGDEIPFSPYRVRAVPTGDASKCTVTVSIGGHGLGAGIGPTIQIGEETVITVDTKAAGKGKVTCTVCTPDGSEVDVDVVENEDGTFDIFYTAPQPGKYVICVRFGGEHVPNSPFQVTALAGDQPSVQPPLRSQQLAPQYTYAQGGQQTWAPERPLVGVNGLDVTSLRPFDLVIPFTIKKGEITGEVRMPSGKVAQPTITDNKDGTVTVRYAPSEAGLHEMDIRYDNMHIPGSPLQFYVDYVNCGHVTAYGPGLTHGVVNKPATFTVNTKDAGEGGLSLAIEGPSKAEISCTDNQDGTCSVSYLPVLPGDYSILVKYNEQHVPGSPFTARVTGDDSMRMSHLKVGSAADIPINISETDLSLLTATVVPPSGREEPCLLKRLRNGHVGISFVPKETGEHLVHVKKNGQHVASSPIPVVISQSEIGDASRVRVSGQGLHEGHTFEPAEFIIDTRDAGYGGLSLSIEGPSKVDINTEDLEDGTCRVTYCPTEPGNYIINIKFADQHVPGSPFSVKVTGEGRVKESITRRRRAPSVANVGSHCDLSLKIPEISIQDMTAQVTSPSGKTHEAEIVEGENHTYCIRFVPAEMGTHTVSVKYKGQHVPGSPFQFTVGPLGEGGAHKVRAGGPGLERAEAGVPAEFSIWTREAGAGGLAIAVEGPSKAEISFEDRKDGSCGVAYVVQEPGDYEVSVKFNEEHIPDSPFVVPVASPSGDARRLTVSSLQESGLKVNQPASFAVSLNGAKGAIDAKVHSPSGALEECYVTEIDQDKYAVRFIPRENGVYLIDVKFNGTHIPGSPFKIRVGEPGHGGDPGLVSAYGAGLEGGVTGNPAEFVVNTSNAGAGALSVTIDGPSKVKMDCQECPEGYRVTYTPMAPGSYLISIKYGGPYHIGGSPFKAKVTGPRLVSNHSLHETSSVFVDSLTKATCAPQHGAPGPGPADASKVVAKGLGLSKAYVGQKSSFTVDCSKAGNNMLLVGVHGPRTPCEEILVKHVGSRLYSVSYLLKDKGEYTLVVKWGDEHIPGSPYRVVVP",
+        "ns0:attributeList": {
+          "ns0:attribute": [
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P21333 original sequence version: 185"
+            },
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P21333-1 original sequence version: 187"
+            },
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P21333 original sequence version: 115"
+            },
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P21333 original sequence version: 144"
+            },
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P21333-1 original sequence version: 156"
+            },
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P21333 original sequence version: 201"
+            },
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P21333 original sequence version: 197"
+            },
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P21333 original sequence version: 170"
+            }
+          ]
+        }
+      },
+      {
+        "@xmlns:ns0": "http://psi.hupo.org/mi/mif",
+        "@xmlns": "http://psi.hupo.org/mi/mif",
+        "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+        "@id": "2728465",
+        "ns0:names": {
+          "ns0:shortLabel": "itb3_human",
+          "ns0:fullName": "Integrin beta-3",
+          "ns0:alias": [
+            {
+              "@type": "gene name synonym",
+              "@typeAc": "MI:0302",
+              "#text": "Platelet membrane glycoprotein IIIa"
+            },
+            {
+              "@type": "gene name",
+              "@typeAc": "MI:0301",
+              "#text": "ITGB3"
+            },
+            {
+              "@type": "gene name synonym",
+              "@typeAc": "MI:0302",
+              "#text": "GP3A"
+            }
+          ]
+        },
+        "ns0:xref": {
+          "ns0:primaryRef": {
+            "@db": "uniprotkb",
+            "@dbAc": "MI:0486",
+            "@id": "P05106",
+            "@refType": "identity",
+            "@refTypeAc": "MI:0356",
+            "@version": "SP_124"
+          },
+          "ns0:secondaryRef": [
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "4Z7Q"
+            },
+            {
+              "@db": "uniprotkb",
+              "@dbAc": "MI:0486",
+              "@id": "Q13413",
+              "@refType": "secondary-ac",
+              "@refTypeAc": "MI:0360",
+              "@version": "SP_124"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-3000170"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "4G1M"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3ZE0"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3IJE"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0001618"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "1MK7"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0007596"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-114608"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3ZDX"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-6802946"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0071062"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2VDR"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3ZDZ"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0070062"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0007229"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "1M1X"
+            },
+            {
+              "@db": "ensembl",
+              "@dbAc": "MI:0476",
+              "@id": "ENSP00000452786"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR032695"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0045715"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "1U8C"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0001934"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0003756"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR002369"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3ZE2"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0042470"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "4MMY"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "1MIZ"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0007160"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0048010"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2VDP"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0042802"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0005634"
+            },
+            {
+              "@db": "uniprotkb",
+              "@dbAc": "MI:0486",
+              "@id": "Q12806",
+              "@refType": "secondary-ac",
+              "@refTypeAc": "MI:0360",
+              "@version": "SP_124"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0043235"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "1JV2"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0030198"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0030168"
+            },
+            {
+              "@db": "uniprotkb",
+              "@dbAc": "MI:0486",
+              "@id": "A0PJW2",
+              "@refType": "secondary-ac",
+              "@refTypeAc": "MI:0360",
+              "@version": "SP_124"
+            },
+            {
+              "@db": "uniprotkb",
+              "@dbAc": "MI:0486",
+              "@id": "Q16499",
+              "@refType": "secondary-ac",
+              "@refTypeAc": "MI:0360",
+              "@version": "SP_124"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "1S4X"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0032147"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0031092"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0035295"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR014836"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2KV9"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0050900"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "4O02"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR013111"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "6AVU"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2VDK"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0031528"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0050839"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0046718"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0032369"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0033627"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2N9Y"
+            },
+            {
+              "@db": "uniprotkb",
+              "@dbAc": "MI:0486",
+              "@id": "Q14648",
+              "@refType": "secondary-ac",
+              "@refTypeAc": "MI:0360",
+              "@version": "SP_124"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "1KUP"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0001968"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0042060"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0005887"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3NIG"
+            },
+            {
+              "@db": "mint",
+              "@dbAc": "MI:0471",
+              "@id": "P05106"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0005925"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR016201"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-6802949"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR015812"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2K9J"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "4Z7O"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR036465"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0001938"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0010888"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "1MK9"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2VDM"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0032587"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0014909"
+            },
+            {
+              "@db": "uniprotkb",
+              "@dbAc": "MI:0486",
+              "@id": "D3DXJ8",
+              "@refType": "secondary-ac",
+              "@refTypeAc": "MI:0360",
+              "@version": "SP_164"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0035867"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0005178"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2LJE"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "5HDB"
+            },
+            {
+              "@db": "ensembl",
+              "@dbAc": "MI:0476",
+              "@id": "ENST00000559488"
+            },
+            {
+              "@db": "dip",
+              "@dbAc": "MI:0465",
+              "@id": "DIP-304N"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0030949"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2LJF"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-1566948"
+            },
+            {
+              "@db": "refseq",
+              "@dbAc": "MI:0481",
+              "@id": "NP_000203.2"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0035868"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2MTP"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-6802955"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2VDQ"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "6AVQ"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0009986"
+            },
+            {
+              "@db": "uniprotkb",
+              "@dbAc": "MI:0486",
+              "@id": "O15495",
+              "@refType": "secondary-ac",
+              "@refTypeAc": "MI:0360",
+              "@version": "SP_124"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0010745"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0031258"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2KNC"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0007155"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2INI"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3T3M"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "4MMZ"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-5674135"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "1M8O"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3ZE1"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-372708"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-210990"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0010595"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3ZDY"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2Q6W"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0005161"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2VDO"
+            },
+            {
+              "@db": "intact",
+              "@dbAc": "MI:0469",
+              "@id": "EBI-702847",
+              "@refType": "identity",
+              "@refTypeAc": "MI:0356"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0043277"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3NID"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-354192"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "4MMX"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-4420097"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0045124"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0038027"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2L91"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0050840"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0031527"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "1RN0"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2VDL"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0002576"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0031589"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-354194"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-445144"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2L1C"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3NIF"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0005886"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0050919"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR012896"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0050731"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0043184"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0034113"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0070527"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0019899"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2RMZ"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR027068"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2VC2"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3T3P"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0008305"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2VDN"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3FCS"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-216083"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0034683"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0015026"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0060055"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "1TYE"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-2129379"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-6802952"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "4Z7N"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0035866"
+            },
+            {
+              "@db": "ensembl",
+              "@dbAc": "MI:0476",
+              "@id": "ENSG00000259207"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2LJD"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "4G1E"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-6802948"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0034446"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0050748"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0048333"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "1KUZ"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "3FCU"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR033760"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "6AVR"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "4CAK"
+            },
+            {
+              "@db": "go",
+              "@dbAc": "MI:0448",
+              "@id": "GO:0002020"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "2RN0"
+            },
+            {
+              "@db": "reactome",
+              "@dbAc": "MI:0467",
+              "@id": "R-HSA-3000178"
+            },
+            {
+              "@db": "rcsb pdb",
+              "@dbAc": "MI:0460",
+              "@id": "1L5G"
+            },
+            {
+              "@db": "interpro",
+              "@dbAc": "MI:0449",
+              "@id": "IPR036349"
+            }
+          ]
+        },
+        "ns0:interactorType": {
+          "ns0:names": {
+            "ns0:shortLabel": "protein",
+            "ns0:fullName": "protein"
+          },
+          "ns0:xref": {
+            "ns0:primaryRef": {
+              "@db": "psi-mi",
+              "@dbAc": "MI:0488",
+              "@id": "MI:0326",
+              "@refType": "identity",
+              "@refTypeAc": "MI:0356"
+            },
+            "ns0:secondaryRef": [
+              {
+                "@db": "so",
+                "@dbAc": "MI:0601",
+                "@id": "SO:0000358",
+                "@refType": "see-also",
+                "@refTypeAc": "MI:0361"
+              },
+              {
+                "@db": "pubmed",
+                "@dbAc": "MI:0446",
+                "@id": "14755292",
+                "@refType": "primary-reference",
+                "@refTypeAc": "MI:0358"
+              },
+              {
+                "@db": "intact",
+                "@dbAc": "MI:0469",
+                "@id": "EBI-619654",
+                "@refType": "identity",
+                "@refTypeAc": "MI:0356"
+              }
+            ]
+          }
+        },
+        "ns0:organism": {
+          "@ncbiTaxId": "9606",
+          "ns0:names": {
+            "ns0:shortLabel": "human",
+            "ns0:fullName": "Homo sapiens",
+            "ns0:alias": {
+              "@type": "synonym",
+              "@typeAc": "MI:1041",
+              "#text": "Human"
+            }
+          }
+        },
+        "ns0:sequence": "MRARPRPRPLWATVLALGALAGVGVGGPNICTTRGVSSCQQCLAVSPMCAWCSDEALPLGSPRCDLKENLLKDNCAPESIEFPVSEARVLEDRPLSDKGSGDSSQVTQVSPQRIALRLRPDDSKNFSIQVRQVEDYPVDIYYLMDLSYSMKDDLWSIQNLGTKLATQMRKLTSNLRIGFGAFVDKPVSPYMYISPPEALENPCYDMKTTCLPMFGYKHVLTLTDQVTRFNEEVKKQSVSRNRDAPEGGFDAIMQATVCDEKIGWRNDASHLLVFTTDAKTHIALDGRLAGIVQPNDGQCHVGSDNHYSASTTMDYPSLGLMTEKLSQKNINLIFAVTENVVNLYQNYSELIPGTTVGVLSMDSSNVLQLIVDAYGKIRSKVELEVRDLPEELSLSFNATCLNNEVIPGLKSCMGLKIGDTVSFSIEAKVRGCPQEKEKSFTIKPVGFKDSLIVQVTFDCDCACQAQAEPNSHRCNNGNGTFECGVCRCGPGWLGSQCECSEEDYRPSQQDECSPREGQPVCSQRGECLCGQCVCHSSDFGKITGKYCECDDFSCVRYKGEMCSGHGQCSCGDCLCDSDWTGYYCNCTTRTDTCMSSNGLLCSGRGKCECGSCVCIQPGSYGDTCEKCPTCPDACTFKKECVECKKFDRGALHDENTCNRYCRDEIESVKELKDTGKDAVNCTYKNEDDCVVRFQYYEDSSGKSILYVVEEPECPKGPDILVVLLSVMGAILLIGLAALLIWKLLITIHDRKEFAKFEEERARAKWDTANNPLYKEATSTFTNITYRGT",
+        "ns0:attributeList": {
+          "ns0:attribute": [
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P05106 original sequence version: 202"
+            },
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P05106-1 original sequence version: 158"
+            },
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P05106-1 original sequence version: 164"
+            },
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P05106 original sequence version: 200"
+            },
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P05106-1 original sequence version: 213"
+            },
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P05106-1 original sequence version: 175"
+            },
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P05106-1 original sequence version: 192"
+            },
+            {
+              "@name": "comment",
+              "@nameAc": "MI:0612",
+              "#text": "DIP protein P05106-1 original sequence version: 171"
+            }
+          ]
+        }
+      }
+    ],
+    "abstract": "Activation of heterodimeric (\u03b1\u03b2) integrin is crucial for regulating cell adhesion. Binding of talin to the cytoplasmic face of integrin activates the receptor, but how integrin is maintained in a resting state to counterbalance its activation has remained obscure. Here, we report the structure of the cytoplasmic domain of human integrin \u03b1IIb\u03b23 bound to its inhibitor, the immunoglobin repeat 21 of filamin A (FLNa-Ig21). The structure reveals an unexpected ternary complex in which FLNa-Ig21 not only binds to the C terminus of the integrin \u03b23 cytoplasmic tail (CT), as previously predicted, but also engages N-terminal helices of \u03b1IIb and \u03b23 CTs to stabilize an inter-CT clasp that helps restrain the integrin in a resting state. Combined with functional data, the structure reveals a new mechanism of filamin-mediated retention of inactive integrin, suggesting a new framework for understanding regulation of integrin activation and adhesion."
+  }
+}

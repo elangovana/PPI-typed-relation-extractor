@@ -2,7 +2,11 @@ import argparse
 import logging
 import os
 
+from aws_requests_auth.aws_auth import AWSRequestsAuth
+
+from dataloader.ImexJsonProcessorElasticSearchLoader import ImexJsonProcessorElasticSearchLoader
 from dataloader.ImexJsonProcessorFileWriter import ImexJsonProcessorFileWriter
+from dataloader.elasticSearchWrapper import connectES
 from dataloader.imexDataPreprocessor import ImexDataPreprocessor
 
 
@@ -34,17 +38,39 @@ class Processors:
             processor.process(imex_file_name, doc_index, doc)
 
 
+def run(input_dir, elastic_search_domain, aws_region, aws_access_key_id, aws_secret_access_key, out_dir):
+    auth = AWSRequestsAuth(aws_access_key=aws_access_key_id,
+                           aws_secret_access_key=aws_secret_access_key,
+                           aws_token="",
+                           aws_host=elastic_search_domain,
+                           aws_region=aws_region,
+                           aws_service='es')
+    esclient = connectES(elastic_search_domain, auth)
+
+    ##Consolidate all processors
+    filewriter_processor = ImexJsonProcessorFileWriter(out_dir)
+    es_processor = ImexJsonProcessorElasticSearchLoader(esclient)
+    processors = Processors([filewriter_processor, es_processor])
+
+    # Run
+    bulk_run(input_dir, processors)
+
+
 if "__main__" == __name__:
     parser = argparse.ArgumentParser()
     parser.add_argument("input_dir",
                         help="The input directory containing the imex files")
     parser.add_argument("out_dir", help="The output dir")
+    parser.add_argument("--elasticsearchdomain",
+                        help="Elastic Search Domain, e.g search-amy-pwlposkclcmld3azaydylcbugy.us-east-2.es.amazonaws.com",
+                        default=os.environ.get("elasticsearch_domain_name", None))
+    parser.add_argument("--awsregion", help="AWS Region , e.g us-east-1", default=os.environ.get("AWS_REGION", None))
+    parser.add_argument("--awsaccesskeyid", help="AWS Region , e.g us-east-1",
+                        default=os.environ.get("AWS_ACCESS_KEY_ID", None))
+    parser.add_argument("--awssecretaccesskey", help="AWS Region , e.g us-east-1",
+                        default=os.environ.get("AWS_SECRET_ACCESS_KEY", None))
 
     args = parser.parse_args()
-    processor = ImexJsonProcessorFileWriter(args.out_dir)
 
-    ##Consolidate all processors
-    processors = Processors([processor])
-
-    # Run
-    bulk_run(args.input_dir, processors)
+    run(args.input_dir, args.elasticsearchdomain, args.awsregion, args.awsaccesskeyid, args.awssecretaccesskey,
+        args.out_dir)

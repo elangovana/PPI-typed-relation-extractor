@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 from elasticsearch import Elasticsearch
 
@@ -6,14 +7,15 @@ from dataloader.elasticSearchWrapper import connectES, createIndex
 
 class ImexJsonProcessorElasticSearchLoader:
 
-    def __init__(self, esclient=None, index="imexdocs_index"):
+    def __init__(self, esclient, index="imexdocs_index"):
         self.esclient = esclient
         self.index = index
         self._index_exists = False
+        self._logger = logging.getLogger(__name__)
 
     @property
     def esclient(self):
-        self.__esclient = self.__esclient or connectES()
+        self.__esclient = self.__esclient
         return self.__esclient
 
     @esclient.setter
@@ -29,5 +31,5 @@ class ImexJsonProcessorElasticSearchLoader:
     def process(self, imex_file_name, doc_index, doc):
         self.initialse()
         id = "{}_{:03d}.json".format(imex_file_name, doc_index).lower()
-        res = self.esclient.index(index=self.index, doc_type='imex', id=id, body=doc)
-        print(res['result'])
+        self.esclient.index(index=self.index, doc_type='imex', id=id, body=doc)
+

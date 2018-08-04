@@ -5,3 +5,4 @@ gensim==2.3
 elasticsearch>=6.0.0,<7.0.0
 lxml==4.2.3
 xmltodict==0.11.0
+aws-requests-auth==0.4.1
