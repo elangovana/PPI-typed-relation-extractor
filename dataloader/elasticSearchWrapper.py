@@ -27,7 +27,8 @@ def createIndex(esClient, indexName, indexDoc = None):
         indexDoc = indexDoc or  {
                 "settings": {
                     "number_of_shards": 1,
-                    "number_of_replicas": 0
+                    "number_of_replicas": 0,
+                    "index.mapping.total_fields.limit": 2000,
                 }
             }
         index_exists = esClient.indices.exists(indexName)
