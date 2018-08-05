@@ -90,4 +90,6 @@ Runs the preprocessing pipeline
                 elem.clear()
 
     def convert_to_json(self, xmlHandle):
-        return json.dumps(xmltodict.parse(xmlHandle))
+        # Ignore namespaces when converting to json..
+        namespaces = {'http://psi.hupo.org/mi/mif': None}
+        return json.dumps(xmltodict.parse(xmlHandle, process_namespaces=True, namespaces=namespaces))

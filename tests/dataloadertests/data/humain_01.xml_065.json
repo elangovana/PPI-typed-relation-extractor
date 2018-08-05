@@ -1,25 +1,21 @@
 {
   "data": {
-    "@xmlns:df": "http://psi.hupo.org/mi/mif",
     "pubmedid": "25849143",
-    "ns0:interaction": {
-      "@xmlns:ns0": "http://psi.hupo.org/mi/mif",
-      "@xmlns": "http://psi.hupo.org/mi/mif",
-      "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "interaction": {
       "@id": "2728507",
       "@imexId": "IM-24595-7",
-      "ns0:names": {
-        "ns0:shortLabel": "flna-itga2b-2"
+      "names": {
+        "shortLabel": "flna-itga2b-2"
       },
-      "ns0:xref": {
-        "ns0:primaryRef": {
+      "xref": {
+        "primaryRef": {
           "@db": "dip",
           "@dbAc": "MI:0465",
           "@id": "DIP-199278E",
           "@refType": "identity",
           "@refTypeAc": "MI:0356"
         },
-        "ns0:secondaryRef": [
+        "secondaryRef": [
           {
             "@db": "psi-mi",
             "@dbAc": "MI:0488",
@@ -42,18 +38,18 @@
           }
         ]
       },
-      "ns0:experimentList": {
-        "ns0:experimentRef": "2728463"
+      "experimentList": {
+        "experimentRef": "2728463"
       },
-      "ns0:participantList": {
-        "ns0:participant": [
+      "participantList": {
+        "participant": [
           {
             "@id": "2728508",
-            "ns0:names": {
-              "ns0:shortLabel": "N/A"
+            "names": {
+              "shortLabel": "N/A"
             },
-            "ns0:xref": {
-              "ns0:primaryRef": {
+            "xref": {
+              "primaryRef": {
                 "@db": "intact",
                 "@dbAc": "MI:0469",
                 "@id": "EBI-16152556",
@@ -61,21 +57,21 @@
                 "@refTypeAc": "MI:0356"
               }
             },
-            "ns0:interactorRef": "2728466",
-            "ns0:biologicalRole": {
-              "ns0:names": {
-                "ns0:shortLabel": "unspecified role",
-                "ns0:fullName": "unspecified role"
+            "interactorRef": "2728466",
+            "biologicalRole": {
+              "names": {
+                "shortLabel": "unspecified role",
+                "fullName": "unspecified role"
               },
-              "ns0:xref": {
-                "ns0:primaryRef": {
+              "xref": {
+                "primaryRef": {
                   "@db": "psi-mi",
                   "@dbAc": "MI:0488",
                   "@id": "MI:0499",
                   "@refType": "identity",
                   "@refTypeAc": "MI:0356"
                 },
-                "ns0:secondaryRef": [
+                "secondaryRef": [
                   {
                     "@db": "intact",
                     "@dbAc": "MI:0469",
@@ -93,21 +89,21 @@
                 ]
               }
             },
-            "ns0:experimentalRoleList": {
-              "ns0:experimentalRole": {
-                "ns0:names": {
-                  "ns0:shortLabel": "unspecified role",
-                  "ns0:fullName": "unspecified role"
+            "experimentalRoleList": {
+              "experimentalRole": {
+                "names": {
+                  "shortLabel": "unspecified role",
+                  "fullName": "unspecified role"
                 },
-                "ns0:xref": {
-                  "ns0:primaryRef": {
+                "xref": {
+                  "primaryRef": {
                     "@db": "psi-mi",
                     "@dbAc": "MI:0488",
                     "@id": "MI:0499",
                     "@refType": "identity",
                     "@refTypeAc": "MI:0356"
                   },
-                  "ns0:secondaryRef": [
+                  "secondaryRef": [
                     {
                       "@db": "pubmed",
                       "@dbAc": "MI:0446",
@@ -126,15 +122,15 @@
                 }
               }
             },
-            "ns0:featureList": {
-              "ns0:feature": {
+            "featureList": {
+              "feature": {
                 "@id": "2728509",
-                "ns0:names": {
-                  "ns0:shortLabel": "Region 1019-1039",
-                  "ns0:fullName": "Region 1019-1039"
+                "names": {
+                  "shortLabel": "Region 1019-1039",
+                  "fullName": "Region 1019-1039"
                 },
-                "ns0:xref": {
-                  "ns0:primaryRef": {
+                "xref": {
+                  "primaryRef": {
                     "@db": "intact",
                     "@dbAc": "MI:0469",
                     "@id": "EBI-16152557",
@@ -142,25 +138,25 @@
                     "@refTypeAc": "MI:0356"
                   }
                 },
-                "ns0:featureType": {
-                  "ns0:names": {
-                    "ns0:shortLabel": "sufficient to bind",
-                    "ns0:fullName": "sufficient binding region",
-                    "ns0:alias": {
+                "featureType": {
+                  "names": {
+                    "shortLabel": "sufficient to bind",
+                    "fullName": "sufficient binding region",
+                    "alias": {
                       "@type": "synonym",
                       "@typeAc": "MI:1041",
                       "#text": "sufficient to bind"
                     }
                   },
-                  "ns0:xref": {
-                    "ns0:primaryRef": {
+                  "xref": {
+                    "primaryRef": {
                       "@db": "psi-mi",
                       "@dbAc": "MI:0488",
                       "@id": "MI:0442",
                       "@refType": "identity",
                       "@refTypeAc": "MI:0356"
                     },
-                    "ns0:secondaryRef": [
+                    "secondaryRef": [
                       {
                         "@db": "pubmed",
                         "@dbAc": "MI:0446",
@@ -178,27 +174,27 @@
                     ]
                   }
                 },
-                "ns0:featureRangeList": {
-                  "ns0:featureRange": {
-                    "ns0:startStatus": {
-                      "ns0:names": {
-                        "ns0:shortLabel": "certain",
-                        "ns0:fullName": "certain sequence position",
-                        "ns0:alias": {
+                "featureRangeList": {
+                  "featureRange": {
+                    "startStatus": {
+                      "names": {
+                        "shortLabel": "certain",
+                        "fullName": "certain sequence position",
+                        "alias": {
                           "@type": "synonym",
                           "@typeAc": "MI:1041",
                           "#text": "certain"
                         }
                       },
-                      "ns0:xref": {
-                        "ns0:primaryRef": {
+                      "xref": {
+                        "primaryRef": {
                           "@db": "psi-mi",
                           "@dbAc": "MI:0488",
                           "@id": "MI:0335",
                           "@refType": "identity",
                           "@refTypeAc": "MI:0356"
                         },
-                        "ns0:secondaryRef": [
+                        "secondaryRef": [
                           {
                             "@db": "intact",
                             "@dbAc": "MI:0469",
@@ -216,28 +212,28 @@
                         ]
                       }
                     },
-                    "ns0:begin": {
+                    "begin": {
                       "@position": "1019"
                     },
-                    "ns0:endStatus": {
-                      "ns0:names": {
-                        "ns0:shortLabel": "certain",
-                        "ns0:fullName": "certain sequence position",
-                        "ns0:alias": {
+                    "endStatus": {
+                      "names": {
+                        "shortLabel": "certain",
+                        "fullName": "certain sequence position",
+                        "alias": {
                           "@type": "synonym",
                           "@typeAc": "MI:1041",
                           "#text": "certain"
                         }
                       },
-                      "ns0:xref": {
-                        "ns0:primaryRef": {
+                      "xref": {
+                        "primaryRef": {
                           "@db": "psi-mi",
                           "@dbAc": "MI:0488",
                           "@id": "MI:0335",
                           "@refType": "identity",
                           "@refTypeAc": "MI:0356"
                         },
-                        "ns0:secondaryRef": [
+                        "secondaryRef": [
                           {
                             "@db": "intact",
                             "@dbAc": "MI:0469",
@@ -255,31 +251,31 @@
                         ]
                       }
                     },
-                    "ns0:end": {
+                    "end": {
                       "@position": "1039"
                     },
-                    "ns0:isLink": "false"
+                    "isLink": "false"
                   }
                 }
               }
             },
-            "ns0:hostOrganismList": {
-              "ns0:hostOrganism": {
+            "hostOrganismList": {
+              "hostOrganism": {
                 "@ncbiTaxId": "562",
-                "ns0:names": {
-                  "ns0:shortLabel": "ecolx",
-                  "ns0:fullName": "Escherichia coli"
+                "names": {
+                  "shortLabel": "ecolx",
+                  "fullName": "Escherichia coli"
                 }
               }
             }
           },
           {
             "@id": "2728510",
-            "ns0:names": {
-              "ns0:shortLabel": "N/A"
+            "names": {
+              "shortLabel": "N/A"
             },
-            "ns0:xref": {
-              "ns0:primaryRef": {
+            "xref": {
+              "primaryRef": {
                 "@db": "intact",
                 "@dbAc": "MI:0469",
                 "@id": "EBI-16152553",
@@ -287,21 +283,21 @@
                 "@refTypeAc": "MI:0356"
               }
             },
-            "ns0:interactorRef": "2728464",
-            "ns0:biologicalRole": {
-              "ns0:names": {
-                "ns0:shortLabel": "unspecified role",
-                "ns0:fullName": "unspecified role"
+            "interactorRef": "2728464",
+            "biologicalRole": {
+              "names": {
+                "shortLabel": "unspecified role",
+                "fullName": "unspecified role"
               },
-              "ns0:xref": {
-                "ns0:primaryRef": {
+              "xref": {
+                "primaryRef": {
                   "@db": "psi-mi",
                   "@dbAc": "MI:0488",
                   "@id": "MI:0499",
                   "@refType": "identity",
                   "@refTypeAc": "MI:0356"
                 },
-                "ns0:secondaryRef": [
+                "secondaryRef": [
                   {
                     "@db": "intact",
                     "@dbAc": "MI:0469",
@@ -319,21 +315,21 @@
                 ]
               }
             },
-            "ns0:experimentalRoleList": {
-              "ns0:experimentalRole": {
-                "ns0:names": {
-                  "ns0:shortLabel": "unspecified role",
-                  "ns0:fullName": "unspecified role"
+            "experimentalRoleList": {
+              "experimentalRole": {
+                "names": {
+                  "shortLabel": "unspecified role",
+                  "fullName": "unspecified role"
                 },
-                "ns0:xref": {
-                  "ns0:primaryRef": {
+                "xref": {
+                  "primaryRef": {
                     "@db": "psi-mi",
                     "@dbAc": "MI:0488",
                     "@id": "MI:0499",
                     "@refType": "identity",
                     "@refTypeAc": "MI:0356"
                   },
-                  "ns0:secondaryRef": [
+                  "secondaryRef": [
                     {
                       "@db": "pubmed",
                       "@dbAc": "MI:0446",
@@ -352,15 +348,15 @@
                 }
               }
             },
-            "ns0:featureList": {
-              "ns0:feature": {
+            "featureList": {
+              "feature": {
                 "@id": "2728511",
-                "ns0:names": {
-                  "ns0:shortLabel": "Region 2236-2330",
-                  "ns0:fullName": "Region 2236-2330"
+                "names": {
+                  "shortLabel": "Region 2236-2330",
+                  "fullName": "Region 2236-2330"
                 },
-                "ns0:xref": {
-                  "ns0:primaryRef": {
+                "xref": {
+                  "primaryRef": {
                     "@db": "intact",
                     "@dbAc": "MI:0469",
                     "@id": "EBI-16152554",
@@ -368,25 +364,25 @@
                     "@refTypeAc": "MI:0356"
                   }
                 },
-                "ns0:featureType": {
-                  "ns0:names": {
-                    "ns0:shortLabel": "sufficient to bind",
-                    "ns0:fullName": "sufficient binding region",
-                    "ns0:alias": {
+                "featureType": {
+                  "names": {
+                    "shortLabel": "sufficient to bind",
+                    "fullName": "sufficient binding region",
+                    "alias": {
                       "@type": "synonym",
                       "@typeAc": "MI:1041",
                       "#text": "sufficient to bind"
                     }
                   },
-                  "ns0:xref": {
-                    "ns0:primaryRef": {
+                  "xref": {
+                    "primaryRef": {
                       "@db": "psi-mi",
                       "@dbAc": "MI:0488",
                       "@id": "MI:0442",
                       "@refType": "identity",
                       "@refTypeAc": "MI:0356"
                     },
-                    "ns0:secondaryRef": [
+                    "secondaryRef": [
                       {
                         "@db": "pubmed",
                         "@dbAc": "MI:0446",
@@ -404,27 +400,27 @@
                     ]
                   }
                 },
-                "ns0:featureRangeList": {
-                  "ns0:featureRange": {
-                    "ns0:startStatus": {
-                      "ns0:names": {
-                        "ns0:shortLabel": "certain",
-                        "ns0:fullName": "certain sequence position",
-                        "ns0:alias": {
+                "featureRangeList": {
+                  "featureRange": {
+                    "startStatus": {
+                      "names": {
+                        "shortLabel": "certain",
+                        "fullName": "certain sequence position",
+                        "alias": {
                           "@type": "synonym",
                           "@typeAc": "MI:1041",
                           "#text": "certain"
                         }
                       },
-                      "ns0:xref": {
-                        "ns0:primaryRef": {
+                      "xref": {
+                        "primaryRef": {
                           "@db": "psi-mi",
                           "@dbAc": "MI:0488",
                           "@id": "MI:0335",
                           "@refType": "identity",
                           "@refTypeAc": "MI:0356"
                         },
-                        "ns0:secondaryRef": [
+                        "secondaryRef": [
                           {
                             "@db": "intact",
                             "@dbAc": "MI:0469",
@@ -442,28 +438,28 @@
                         ]
                       }
                     },
-                    "ns0:begin": {
+                    "begin": {
                       "@position": "2236"
                     },
-                    "ns0:endStatus": {
-                      "ns0:names": {
-                        "ns0:shortLabel": "certain",
-                        "ns0:fullName": "certain sequence position",
-                        "ns0:alias": {
+                    "endStatus": {
+                      "names": {
+                        "shortLabel": "certain",
+                        "fullName": "certain sequence position",
+                        "alias": {
                           "@type": "synonym",
                           "@typeAc": "MI:1041",
                           "#text": "certain"
                         }
                       },
-                      "ns0:xref": {
-                        "ns0:primaryRef": {
+                      "xref": {
+                        "primaryRef": {
                           "@db": "psi-mi",
                           "@dbAc": "MI:0488",
                           "@id": "MI:0335",
                           "@refType": "identity",
                           "@refTypeAc": "MI:0356"
                         },
-                        "ns0:secondaryRef": [
+                        "secondaryRef": [
                           {
                             "@db": "intact",
                             "@dbAc": "MI:0469",
@@ -481,31 +477,31 @@
                         ]
                       }
                     },
-                    "ns0:end": {
+                    "end": {
                       "@position": "2330"
                     },
-                    "ns0:isLink": "false"
+                    "isLink": "false"
                   }
                 }
               }
             },
-            "ns0:hostOrganismList": {
-              "ns0:hostOrganism": {
+            "hostOrganismList": {
+              "hostOrganism": {
                 "@ncbiTaxId": "562",
-                "ns0:names": {
-                  "ns0:shortLabel": "ecolx",
-                  "ns0:fullName": "Escherichia coli"
+                "names": {
+                  "shortLabel": "ecolx",
+                  "fullName": "Escherichia coli"
                 }
               }
             }
           },
           {
             "@id": "2728512",
-            "ns0:names": {
-              "ns0:shortLabel": "N/A"
+            "names": {
+              "shortLabel": "N/A"
             },
-            "ns0:xref": {
-              "ns0:primaryRef": {
+            "xref": {
+              "primaryRef": {
                 "@db": "intact",
                 "@dbAc": "MI:0469",
                 "@id": "EBI-16152550",
@@ -513,21 +509,21 @@
                 "@refTypeAc": "MI:0356"
               }
             },
-            "ns0:interactorRef": "2728465",
-            "ns0:biologicalRole": {
-              "ns0:names": {
-                "ns0:shortLabel": "unspecified role",
-                "ns0:fullName": "unspecified role"
+            "interactorRef": "2728465",
+            "biologicalRole": {
+              "names": {
+                "shortLabel": "unspecified role",
+                "fullName": "unspecified role"
               },
-              "ns0:xref": {
-                "ns0:primaryRef": {
+              "xref": {
+                "primaryRef": {
                   "@db": "psi-mi",
                   "@dbAc": "MI:0488",
                   "@id": "MI:0499",
                   "@refType": "identity",
                   "@refTypeAc": "MI:0356"
                 },
-                "ns0:secondaryRef": [
+                "secondaryRef": [
                   {
                     "@db": "intact",
                     "@dbAc": "MI:0469",
@@ -545,21 +541,21 @@
                 ]
               }
             },
-            "ns0:experimentalRoleList": {
-              "ns0:experimentalRole": {
-                "ns0:names": {
-                  "ns0:shortLabel": "unspecified role",
-                  "ns0:fullName": "unspecified role"
+            "experimentalRoleList": {
+              "experimentalRole": {
+                "names": {
+                  "shortLabel": "unspecified role",
+                  "fullName": "unspecified role"
                 },
-                "ns0:xref": {
-                  "ns0:primaryRef": {
+                "xref": {
+                  "primaryRef": {
                     "@db": "psi-mi",
                     "@dbAc": "MI:0488",
                     "@id": "MI:0499",
                     "@refType": "identity",
                     "@refTypeAc": "MI:0356"
                   },
-                  "ns0:secondaryRef": [
+                  "secondaryRef": [
                     {
                       "@db": "pubmed",
                       "@dbAc": "MI:0446",
@@ -578,15 +574,15 @@
                 }
               }
             },
-            "ns0:featureList": {
-              "ns0:feature": {
+            "featureList": {
+              "feature": {
                 "@id": "2728513",
-                "ns0:names": {
-                  "ns0:shortLabel": "Region 742-788",
-                  "ns0:fullName": "Region 742-788"
+                "names": {
+                  "shortLabel": "Region 742-788",
+                  "fullName": "Region 742-788"
                 },
-                "ns0:xref": {
-                  "ns0:primaryRef": {
+                "xref": {
+                  "primaryRef": {
                     "@db": "intact",
                     "@dbAc": "MI:0469",
                     "@id": "EBI-16152551",
@@ -594,25 +590,25 @@
                     "@refTypeAc": "MI:0356"
                   }
                 },
-                "ns0:featureType": {
-                  "ns0:names": {
-                    "ns0:shortLabel": "sufficient to bind",
-                    "ns0:fullName": "sufficient binding region",
-                    "ns0:alias": {
+                "featureType": {
+                  "names": {
+                    "shortLabel": "sufficient to bind",
+                    "fullName": "sufficient binding region",
+                    "alias": {
                       "@type": "synonym",
                       "@typeAc": "MI:1041",
                       "#text": "sufficient to bind"
                     }
                   },
-                  "ns0:xref": {
-                    "ns0:primaryRef": {
+                  "xref": {
+                    "primaryRef": {
                       "@db": "psi-mi",
                       "@dbAc": "MI:0488",
                       "@id": "MI:0442",
                       "@refType": "identity",
                       "@refTypeAc": "MI:0356"
                     },
-                    "ns0:secondaryRef": [
+                    "secondaryRef": [
                       {
                         "@db": "pubmed",
                         "@dbAc": "MI:0446",
@@ -630,27 +626,27 @@
                     ]
                   }
                 },
-                "ns0:featureRangeList": {
-                  "ns0:featureRange": {
-                    "ns0:startStatus": {
-                      "ns0:names": {
-                        "ns0:shortLabel": "certain",
-                        "ns0:fullName": "certain sequence position",
-                        "ns0:alias": {
+                "featureRangeList": {
+                  "featureRange": {
+                    "startStatus": {
+                      "names": {
+                        "shortLabel": "certain",
+                        "fullName": "certain sequence position",
+                        "alias": {
                           "@type": "synonym",
                           "@typeAc": "MI:1041",
                           "#text": "certain"
                         }
                       },
-                      "ns0:xref": {
-                        "ns0:primaryRef": {
+                      "xref": {
+                        "primaryRef": {
                           "@db": "psi-mi",
                           "@dbAc": "MI:0488",
                           "@id": "MI:0335",
                           "@refType": "identity",
                           "@refTypeAc": "MI:0356"
                         },
-                        "ns0:secondaryRef": [
+                        "secondaryRef": [
                           {
                             "@db": "intact",
                             "@dbAc": "MI:0469",
@@ -668,28 +664,28 @@
                         ]
                       }
                     },
-                    "ns0:begin": {
+                    "begin": {
                       "@position": "742"
                     },
-                    "ns0:endStatus": {
-                      "ns0:names": {
-                        "ns0:shortLabel": "certain",
-                        "ns0:fullName": "certain sequence position",
-                        "ns0:alias": {
+                    "endStatus": {
+                      "names": {
+                        "shortLabel": "certain",
+                        "fullName": "certain sequence position",
+                        "alias": {
                           "@type": "synonym",
                           "@typeAc": "MI:1041",
                           "#text": "certain"
                         }
                       },
-                      "ns0:xref": {
-                        "ns0:primaryRef": {
+                      "xref": {
+                        "primaryRef": {
                           "@db": "psi-mi",
                           "@dbAc": "MI:0488",
                           "@id": "MI:0335",
                           "@refType": "identity",
                           "@refTypeAc": "MI:0356"
                         },
-                        "ns0:secondaryRef": [
+                        "secondaryRef": [
                           {
                             "@db": "intact",
                             "@dbAc": "MI:0469",
@@ -707,40 +703,40 @@
                         ]
                       }
                     },
-                    "ns0:end": {
+                    "end": {
                       "@position": "788"
                     },
-                    "ns0:isLink": "false"
+                    "isLink": "false"
                   }
                 }
               }
             },
-            "ns0:hostOrganismList": {
-              "ns0:hostOrganism": {
+            "hostOrganismList": {
+              "hostOrganism": {
                 "@ncbiTaxId": "562",
-                "ns0:names": {
-                  "ns0:shortLabel": "ecolx",
-                  "ns0:fullName": "Escherichia coli"
+                "names": {
+                  "shortLabel": "ecolx",
+                  "fullName": "Escherichia coli"
                 }
               }
             }
           }
         ]
       },
-      "ns0:interactionType": {
-        "ns0:names": {
-          "ns0:shortLabel": "physical association",
-          "ns0:fullName": "physical association"
+      "interactionType": {
+        "names": {
+          "shortLabel": "physical association",
+          "fullName": "physical association"
         },
-        "ns0:xref": {
-          "ns0:primaryRef": {
+        "xref": {
+          "primaryRef": {
             "@db": "psi-mi",
             "@dbAc": "MI:0488",
             "@id": "MI:0915",
             "@refType": "identity",
             "@refTypeAc": "MI:0356"
           },
-          "ns0:secondaryRef": [
+          "secondaryRef": [
             {
               "@db": "pubmed",
               "@dbAc": "MI:0446",
@@ -758,21 +754,18 @@
           ]
         }
       },
-      "ns0:modelled": "false",
-      "ns0:intraMolecular": "false",
-      "ns0:negative": "false"
+      "modelled": "false",
+      "intraMolecular": "false",
+      "negative": "false"
     },
-    "ns0:experimentDescription": {
-      "@xmlns:ns0": "http://psi.hupo.org/mi/mif",
-      "@xmlns": "http://psi.hupo.org/mi/mif",
-      "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "experimentDescription": {
       "@id": "2728463",
-      "ns0:names": {
-        "ns0:shortLabel": "liu-2015-27"
+      "names": {
+        "shortLabel": "liu-2015-27"
       },
-      "ns0:bibref": {
-        "ns0:xref": {
-          "ns0:primaryRef": {
+      "bibref": {
+        "xref": {
+          "primaryRef": {
             "@db": "pubmed",
             "@dbAc": "MI:0446",
             "@id": "25849143",
@@ -781,15 +774,15 @@
           }
         }
       },
-      "ns0:xref": {
-        "ns0:primaryRef": {
+      "xref": {
+        "primaryRef": {
           "@db": "dip",
           "@dbAc": "MI:0465",
           "@id": "DIP-265998X",
           "@refType": "identity",
           "@refTypeAc": "MI:0356"
         },
-        "ns0:secondaryRef": [
+        "secondaryRef": [
           {
             "@db": "doi",
             "@dbAc": "MI:0574",
@@ -820,20 +813,20 @@
           }
         ]
       },
-      "ns0:hostOrganismList": {
-        "ns0:hostOrganism": {
+      "hostOrganismList": {
+        "hostOrganism": {
           "@ncbiTaxId": "-1",
-          "ns0:names": {
-            "ns0:shortLabel": "in vitro",
-            "ns0:fullName": "In vitro"
+          "names": {
+            "shortLabel": "in vitro",
+            "fullName": "In vitro"
           }
         }
       },
-      "ns0:interactionDetectionMethod": {
-        "ns0:names": {
-          "ns0:shortLabel": "nmr",
-          "ns0:fullName": "nuclear magnetic resonance",
-          "ns0:alias": [
+      "interactionDetectionMethod": {
+        "names": {
+          "shortLabel": "nmr",
+          "fullName": "nuclear magnetic resonance",
+          "alias": [
             {
               "@type": "synonym",
               "@typeAc": "MI:1041",
@@ -846,15 +839,15 @@
             }
           ]
         },
-        "ns0:xref": {
-          "ns0:primaryRef": {
+        "xref": {
+          "primaryRef": {
             "@db": "psi-mi",
             "@dbAc": "MI:0488",
             "@id": "MI:0077",
             "@refType": "identity",
             "@refTypeAc": "MI:0356"
           },
-          "ns0:secondaryRef": [
+          "secondaryRef": [
             {
               "@db": "pubmed",
               "@dbAc": "MI:0446",
@@ -879,25 +872,25 @@
           ]
         }
       },
-      "ns0:participantIdentificationMethod": {
-        "ns0:names": {
-          "ns0:shortLabel": "predetermined",
-          "ns0:fullName": "predetermined participant",
-          "ns0:alias": {
+      "participantIdentificationMethod": {
+        "names": {
+          "shortLabel": "predetermined",
+          "fullName": "predetermined participant",
+          "alias": {
             "@type": "synonym",
             "@typeAc": "MI:1041",
             "#text": "predetermined"
           }
         },
-        "ns0:xref": {
-          "ns0:primaryRef": {
+        "xref": {
+          "primaryRef": {
             "@db": "psi-mi",
             "@dbAc": "MI:0488",
             "@id": "MI:0396",
             "@refType": "identity",
             "@refTypeAc": "MI:0356"
           },
-          "ns0:secondaryRef": [
+          "secondaryRef": [
             {
               "@db": "intact",
               "@dbAc": "MI:0469",
@@ -915,8 +908,8 @@
           ]
         }
       },
-      "ns0:attributeList": {
-        "ns0:attribute": [
+      "attributeList": {
+        "attribute": [
           {
             "@name": "author-list",
             "@nameAc": "MI:0636",
@@ -969,16 +962,13 @@
         ]
       }
     },
-    "ns0:interactor": [
+    "interactor": [
       {
-        "@xmlns:ns0": "http://psi.hupo.org/mi/mif",
-        "@xmlns": "http://psi.hupo.org/mi/mif",
-        "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
         "@id": "2728466",
-        "ns0:names": {
-          "ns0:shortLabel": "p08514-1",
-          "ns0:fullName": "Integrin alpha-IIb",
-          "ns0:alias": [
+        "names": {
+          "shortLabel": "p08514-1",
+          "fullName": "Integrin alpha-IIb",
+          "alias": [
             {
               "@type": "gene name",
               "@typeAc": "MI:0301",
@@ -1006,8 +996,8 @@
             }
           ]
         },
-        "ns0:xref": {
-          "ns0:primaryRef": {
+        "xref": {
+          "primaryRef": {
             "@db": "uniprotkb",
             "@dbAc": "MI:0486",
             "@id": "P08514-1",
@@ -1015,7 +1005,7 @@
             "@refTypeAc": "MI:0356",
             "@version": "146"
           },
-          "ns0:secondaryRef": [
+          "secondaryRef": [
             {
               "@db": "intact",
               "@dbAc": "MI:0469",
@@ -1032,20 +1022,20 @@
             }
           ]
         },
-        "ns0:interactorType": {
-          "ns0:names": {
-            "ns0:shortLabel": "protein",
-            "ns0:fullName": "protein"
+        "interactorType": {
+          "names": {
+            "shortLabel": "protein",
+            "fullName": "protein"
           },
-          "ns0:xref": {
-            "ns0:primaryRef": {
+          "xref": {
+            "primaryRef": {
               "@db": "psi-mi",
               "@dbAc": "MI:0488",
               "@id": "MI:0326",
               "@refType": "identity",
               "@refTypeAc": "MI:0356"
             },
-            "ns0:secondaryRef": [
+            "secondaryRef": [
               {
                 "@db": "so",
                 "@dbAc": "MI:0601",
@@ -1070,21 +1060,21 @@
             ]
           }
         },
-        "ns0:organism": {
+        "organism": {
           "@ncbiTaxId": "9606",
-          "ns0:names": {
-            "ns0:shortLabel": "human",
-            "ns0:fullName": "Homo sapiens",
-            "ns0:alias": {
+          "names": {
+            "shortLabel": "human",
+            "fullName": "Homo sapiens",
+            "alias": {
               "@type": "synonym",
               "@typeAc": "MI:1041",
               "#text": "Human"
             }
           }
         },
-        "ns0:sequence": "MARALCPLQALWLLEWVLLLLGPCAAPPAWALNLDPVQLTFYAGPNGSQFGFSLDFHKDSHGRVAIVVGAPRTLGPSQEETGGVFLCPWRAEGGQCPSLLFDLRDETRNVGSQTLQTFKARQGLGASVVSWSDVIVACAPWQHWNVLEKTEEAEKTPVGSCFLAQPESGRRAEYSPCRGNTLSRIYVENDFSWDKRYCEAGFSSVVTQAGELVLGAPGGYYFLGLLAQAPVADIFSSYRPGILLWHVSSQSLSFDSSNPEYFDGYWGYSVAVGEFDGDLNTTEYVVGAPTWSWTLGAVEILDSYYQRLHRLRGEQMASYFGHSVAVTDVNGDGRHDLLVGAPLYMESRADRKLAEVGRVYLFLQPRGPHALGAPSLLLTGTQLYGRFGSAIAPLGDLDRDGYNDIAVAAPYGGPSGRGQVLVFLGQSEGLRSRPSQVLDSPFPTGSAFGFSLRGAVDIDDNGYPDLIVGAYGANQVAVYRAQPVVKASVQLLVQDSLNPAVKSCVLPQTKTPVSCFNIQMCVGATGHNIPQKLSLNAELQLDRQKPRQGRRVLLLGSQQAGTTLNLDLGGKHSPICHTTMAFLRDEADFRDKLSPIVLSLNVSLPPTEAGMAPAVVLHGDTHVQEQTRIVLDCGEDDVCVPQLQLTASVTGSPLLVGADNVLELQMDAANEGEGAYEAELAVHLPQGAHYMRALSNVEGFERLICNQKKENETRVVLCELGNPMKKNAQIGIAMLVSVGNLEEAGESVSFQLQIRSKNSQNPNSKIVLLDVPVRAEAQVELRGNSFPASLVVAAEEGEREQNSLDSWGPKVEHTYELHNNGPGTVNGLHLSIHLPGQSQPSDLLYILDIQPQGGLQCFPQPPVNPLKVDWGLPIPSPSPIHPAHHKRDRRQIFLPEPEQPSRLQDPVLVSCDSAPCTVVQCDLQEMARGQRAMVTVLAFLWLPSLYQRPLDQFVLQSHAWFNVSSLPYAVPPLSLPRGEAQVWTQLLRALEERAIPIWWVLVGVLGGLLLLTILVLAMWKVGFFKRNRPPLEEDDEEGE",
-        "ns0:attributeList": {
-          "ns0:attribute": [
+        "sequence": "MARALCPLQALWLLEWVLLLLGPCAAPPAWALNLDPVQLTFYAGPNGSQFGFSLDFHKDSHGRVAIVVGAPRTLGPSQEETGGVFLCPWRAEGGQCPSLLFDLRDETRNVGSQTLQTFKARQGLGASVVSWSDVIVACAPWQHWNVLEKTEEAEKTPVGSCFLAQPESGRRAEYSPCRGNTLSRIYVENDFSWDKRYCEAGFSSVVTQAGELVLGAPGGYYFLGLLAQAPVADIFSSYRPGILLWHVSSQSLSFDSSNPEYFDGYWGYSVAVGEFDGDLNTTEYVVGAPTWSWTLGAVEILDSYYQRLHRLRGEQMASYFGHSVAVTDVNGDGRHDLLVGAPLYMESRADRKLAEVGRVYLFLQPRGPHALGAPSLLLTGTQLYGRFGSAIAPLGDLDRDGYNDIAVAAPYGGPSGRGQVLVFLGQSEGLRSRPSQVLDSPFPTGSAFGFSLRGAVDIDDNGYPDLIVGAYGANQVAVYRAQPVVKASVQLLVQDSLNPAVKSCVLPQTKTPVSCFNIQMCVGATGHNIPQKLSLNAELQLDRQKPRQGRRVLLLGSQQAGTTLNLDLGGKHSPICHTTMAFLRDEADFRDKLSPIVLSLNVSLPPTEAGMAPAVVLHGDTHVQEQTRIVLDCGEDDVCVPQLQLTASVTGSPLLVGADNVLELQMDAANEGEGAYEAELAVHLPQGAHYMRALSNVEGFERLICNQKKENETRVVLCELGNPMKKNAQIGIAMLVSVGNLEEAGESVSFQLQIRSKNSQNPNSKIVLLDVPVRAEAQVELRGNSFPASLVVAAEEGEREQNSLDSWGPKVEHTYELHNNGPGTVNGLHLSIHLPGQSQPSDLLYILDIQPQGGLQCFPQPPVNPLKVDWGLPIPSPSPIHPAHHKRDRRQIFLPEPEQPSRLQDPVLVSCDSAPCTVVQCDLQEMARGQRAMVTVLAFLWLPSLYQRPLDQFVLQSHAWFNVSSLPYAVPPLSLPRGEAQVWTQLLRALEERAIPIWWVLVGVLGGLLLLTILVLAMWKVGFFKRNRPPLEEDDEEGE",
+        "attributeList": {
+          "attribute": [
             {
               "@name": "comment",
               "@nameAc": "MI:0612",
@@ -1104,14 +1094,11 @@
         }
       },
       {
-        "@xmlns:ns0": "http://psi.hupo.org/mi/mif",
-        "@xmlns": "http://psi.hupo.org/mi/mif",
-        "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
         "@id": "2728464",
-        "ns0:names": {
-          "ns0:shortLabel": "flna_human",
-          "ns0:fullName": "Filamin-A",
-          "ns0:alias": [
+        "names": {
+          "shortLabel": "flna_human",
+          "fullName": "Filamin-A",
+          "alias": [
             {
               "@type": "gene name",
               "@typeAc": "MI:0301",
@@ -1154,8 +1141,8 @@
             }
           ]
         },
-        "ns0:xref": {
-          "ns0:primaryRef": {
+        "xref": {
+          "primaryRef": {
             "@db": "uniprotkb",
             "@dbAc": "MI:0486",
             "@id": "P21333",
@@ -1163,7 +1150,7 @@
             "@refTypeAc": "MI:0356",
             "@version": "SP_104"
           },
-          "ns0:secondaryRef": [
+          "secondaryRef": [
             {
               "@db": "go",
               "@dbAc": "MI:0448",
@@ -1773,20 +1760,20 @@
             }
           ]
         },
-        "ns0:interactorType": {
-          "ns0:names": {
-            "ns0:shortLabel": "protein",
-            "ns0:fullName": "protein"
+        "interactorType": {
+          "names": {
+            "shortLabel": "protein",
+            "fullName": "protein"
           },
-          "ns0:xref": {
-            "ns0:primaryRef": {
+          "xref": {
+            "primaryRef": {
               "@db": "psi-mi",
               "@dbAc": "MI:0488",
               "@id": "MI:0326",
               "@refType": "identity",
               "@refTypeAc": "MI:0356"
             },
-            "ns0:secondaryRef": [
+            "secondaryRef": [
               {
                 "@db": "so",
                 "@dbAc": "MI:0601",
@@ -1811,21 +1798,21 @@
             ]
           }
         },
-        "ns0:organism": {
+        "organism": {
           "@ncbiTaxId": "9606",
-          "ns0:names": {
-            "ns0:shortLabel": "human",
-            "ns0:fullName": "Homo sapiens",
-            "ns0:alias": {
+          "names": {
+            "shortLabel": "human",
+            "fullName": "Homo sapiens",
+            "alias": {
               "@type": "synonym",
               "@typeAc": "MI:1041",
               "#text": "Human"
             }
           }
         },
-        "ns0:sequence": "MSSSHSRAGQSAAGAAPGGGVDTRDAEMPATEKDLAEDAPWKKIQQNTFTRWCNEHLKCVSKRIANLQTDLSDGLRLIALLEVLSQKKMHRKHNQRPTFRQMQLENVSVALEFLDRESIKLVSIDSKAIVDGNLKLILGLIWTLILHYSISMPMWDEEEDEEAKKQTPKQRLLGWIQNKLPQLPITNFSRDWQSGRALGALVDSCAPGLCPDWDSWDASKPVTNAREAMQQADDWLGIPQVITPEEIVDPNVDEHSVMTYLSQFPKAKLKPGAPLRPKLNPKKARAYGPGIEPTGNMVKKRAEFTVETRSAGQGEVLVYVEDPAGHQEEAKVTANNDKNRTFSVWYVPEVTGTHKVTVLFAGQHIAKSPFEVYVDKSQGDASKVTAQGPGLEPSGNIANKTTYFEIFTAGAGTGEVEVVIQDPMGQKGTVEPQLEARGDSTYRCSYQPTMEGVHTVHVTFAGVPIPRSPYTVTVGQACNPSACRAVGRGLQPKGVRVKETADFKVYTKGAGSGELKVTVKGPKGEERVKQKDLGDGVYGFEYYPMVPGTYIVTITWGGQNIGRSPFEVKVGTECGNQKVRAWGPGLEGGVVGKSADFVVEAIGDDVGTLGFSVEGPSQAKIECDDKGDGSCDVRYWPQEAGEYAVHVLCNSEDIRLSPFMADIRDAPQDFHPDRVKARGPGLEKTGVAVNKPAEFTVDAKHGGKAPLRVQVQDNEGCPVEALVKDNGNGTYSCSYVPRKPVKHTAMVSWGGVSIPNSPFRVNVGAGSHPNKVKVYGPGVAKTGLKAHEPTYFTVDCAEAGQGDVSIGIKCAPGVVGPAEADIDFDIIRNDNDTFTVKYTPRGAGSYTIMVLFADQATPTSPIRVKVEPSHDASKVKAEGPGLSRTGVELGKPTHFTVNAKAAGKGKLDVQFSGLTKGDAVRDVDIIDHHDNTYTVKYTPVQQGPVGVNVTYGGDPIPKSPFSVAVSPSLDLSKIKVSGLGEKVDVGKDQEFTVKSKGAGGQGKVASKIVGPSGAAVPCKVEPGLGADNSVVRFLPREEGPYEVEVTYDGVPVPGSPFPLEAVAPTKPSKVKAFGPGLQGGSAGSPARFTIDTKGAGTGGLGLTVEGPCEAQLECLDNGDGTCSVSYVPTEPGDYNINILFADTHIPGSPFKAHVVPCFDASKVKCSGPGLERATAGEVGQFQVDCSSAGSAELTIEICSEAGLPAEVYIQDHGDGTHTITYIPLCPGAYTVTIKYGGQPVPNFPSKLQVEPAVDTSGVQCYGPGIEGQGVFREATTEFSVDARALTQTGGPHVKARVANPSGNLTETYVQDRGDGMYKVEYTPYEEGLHSVDVTYDGSPVPSSPFQVPVTEGCDPSRVRVHGPGIQSGTTNKPNKFTVETRGAGTGGLGLAVEGPSEAKMSCMDNKDGSCSVEYIPYEAGTYSLNVTYGGHQVPGSPFKVPVHDVTDASKVKCSGPGLSPGMVRANLPQSFQVDTSKAGVAPLQVKVQGPKGLVEPVDVVDNADGTQTVNYVPSREGPYSISVLYGDEEVPRSPFKVKVLPTHDASKVKASGPGLNTTGVPASLPVEFTIDAKDAGEGLLAVQITDPEGKPKKTHIQDNHDGTYTVAYVPDVTGRYTILIKYGGDEIPFSPYRVRAVPTGDASKCTVTVSIGGHGLGAGIGPTIQIGEETVITVDTKAAGKGKVTCTVCTPDGSEVDVDVVENEDGTFDIFYTAPQPGKYVICVRFGGEHVPNSPFQVTALAGDQPSVQPPLRSQQLAPQYTYAQGGQQTWAPERPLVGVNGLDVTSLRPFDLVIPFTIKKGEITGEVRMPSGKVAQPTITDNKDGTVTVRYAPSEAGLHEMDIRYDNMHIPGSPLQFYVDYVNCGHVTAYGPGLTHGVVNKPATFTVNTKDAGEGGLSLAIEGPSKAEISCTDNQDGTCSVSYLPVLPGDYSILVKYNEQHVPGSPFTARVTGDDSMRMSHLKVGSAADIPINISETDLSLLTATVVPPSGREEPCLLKRLRNGHVGISFVPKETGEHLVHVKKNGQHVASSPIPVVISQSEIGDASRVRVSGQGLHEGHTFEPAEFIIDTRDAGYGGLSLSIEGPSKVDINTEDLEDGTCRVTYCPTEPGNYIINIKFADQHVPGSPFSVKVTGEGRVKESITRRRRAPSVANVGSHCDLSLKIPEISIQDMTAQVTSPSGKTHEAEIVEGENHTYCIRFVPAEMGTHTVSVKYKGQHVPGSPFQFTVGPLGEGGAHKVRAGGPGLERAEAGVPAEFSIWTREAGAGGLAIAVEGPSKAEISFEDRKDGSCGVAYVVQEPGDYEVSVKFNEEHIPDSPFVVPVASPSGDARRLTVSSLQESGLKVNQPASFAVSLNGAKGAIDAKVHSPSGALEECYVTEIDQDKYAVRFIPRENGVYLIDVKFNGTHIPGSPFKIRVGEPGHGGDPGLVSAYGAGLEGGVTGNPAEFVVNTSNAGAGALSVTIDGPSKVKMDCQECPEGYRVTYTPMAPGSYLISIKYGGPYHIGGSPFKAKVTGPRLVSNHSLHETSSVFVDSLTKATCAPQHGAPGPGPADASKVVAKGLGLSKAYVGQKSSFTVDCSKAGNNMLLVGVHGPRTPCEEILVKHVGSRLYSVSYLLKDKGEYTLVVKWGDEHIPGSPYRVVVP",
-        "ns0:attributeList": {
-          "ns0:attribute": [
+        "sequence": "MSSSHSRAGQSAAGAAPGGGVDTRDAEMPATEKDLAEDAPWKKIQQNTFTRWCNEHLKCVSKRIANLQTDLSDGLRLIALLEVLSQKKMHRKHNQRPTFRQMQLENVSVALEFLDRESIKLVSIDSKAIVDGNLKLILGLIWTLILHYSISMPMWDEEEDEEAKKQTPKQRLLGWIQNKLPQLPITNFSRDWQSGRALGALVDSCAPGLCPDWDSWDASKPVTNAREAMQQADDWLGIPQVITPEEIVDPNVDEHSVMTYLSQFPKAKLKPGAPLRPKLNPKKARAYGPGIEPTGNMVKKRAEFTVETRSAGQGEVLVYVEDPAGHQEEAKVTANNDKNRTFSVWYVPEVTGTHKVTVLFAGQHIAKSPFEVYVDKSQGDASKVTAQGPGLEPSGNIANKTTYFEIFTAGAGTGEVEVVIQDPMGQKGTVEPQLEARGDSTYRCSYQPTMEGVHTVHVTFAGVPIPRSPYTVTVGQACNPSACRAVGRGLQPKGVRVKETADFKVYTKGAGSGELKVTVKGPKGEERVKQKDLGDGVYGFEYYPMVPGTYIVTITWGGQNIGRSPFEVKVGTECGNQKVRAWGPGLEGGVVGKSADFVVEAIGDDVGTLGFSVEGPSQAKIECDDKGDGSCDVRYWPQEAGEYAVHVLCNSEDIRLSPFMADIRDAPQDFHPDRVKARGPGLEKTGVAVNKPAEFTVDAKHGGKAPLRVQVQDNEGCPVEALVKDNGNGTYSCSYVPRKPVKHTAMVSWGGVSIPNSPFRVNVGAGSHPNKVKVYGPGVAKTGLKAHEPTYFTVDCAEAGQGDVSIGIKCAPGVVGPAEADIDFDIIRNDNDTFTVKYTPRGAGSYTIMVLFADQATPTSPIRVKVEPSHDASKVKAEGPGLSRTGVELGKPTHFTVNAKAAGKGKLDVQFSGLTKGDAVRDVDIIDHHDNTYTVKYTPVQQGPVGVNVTYGGDPIPKSPFSVAVSPSLDLSKIKVSGLGEKVDVGKDQEFTVKSKGAGGQGKVASKIVGPSGAAVPCKVEPGLGADNSVVRFLPREEGPYEVEVTYDGVPVPGSPFPLEAVAPTKPSKVKAFGPGLQGGSAGSPARFTIDTKGAGTGGLGLTVEGPCEAQLECLDNGDGTCSVSYVPTEPGDYNINILFADTHIPGSPFKAHVVPCFDASKVKCSGPGLERATAGEVGQFQVDCSSAGSAELTIEICSEAGLPAEVYIQDHGDGTHTITYIPLCPGAYTVTIKYGGQPVPNFPSKLQVEPAVDTSGVQCYGPGIEGQGVFREATTEFSVDARALTQTGGPHVKARVANPSGNLTETYVQDRGDGMYKVEYTPYEEGLHSVDVTYDGSPVPSSPFQVPVTEGCDPSRVRVHGPGIQSGTTNKPNKFTVETRGAGTGGLGLAVEGPSEAKMSCMDNKDGSCSVEYIPYEAGTYSLNVTYGGHQVPGSPFKVPVHDVTDASKVKCSGPGLSPGMVRANLPQSFQVDTSKAGVAPLQVKVQGPKGLVEPVDVVDNADGTQTVNYVPSREGPYSISVLYGDEEVPRSPFKVKVLPTHDASKVKASGPGLNTTGVPASLPVEFTIDAKDAGEGLLAVQITDPEGKPKKTHIQDNHDGTYTVAYVPDVTGRYTILIKYGGDEIPFSPYRVRAVPTGDASKCTVTVSIGGHGLGAGIGPTIQIGEETVITVDTKAAGKGKVTCTVCTPDGSEVDVDVVENEDGTFDIFYTAPQPGKYVICVRFGGEHVPNSPFQVTALAGDQPSVQPPLRSQQLAPQYTYAQGGQQTWAPERPLVGVNGLDVTSLRPFDLVIPFTIKKGEITGEVRMPSGKVAQPTITDNKDGTVTVRYAPSEAGLHEMDIRYDNMHIPGSPLQFYVDYVNCGHVTAYGPGLTHGVVNKPATFTVNTKDAGEGGLSLAIEGPSKAEISCTDNQDGTCSVSYLPVLPGDYSILVKYNEQHVPGSPFTARVTGDDSMRMSHLKVGSAADIPINISETDLSLLTATVVPPSGREEPCLLKRLRNGHVGISFVPKETGEHLVHVKKNGQHVASSPIPVVISQSEIGDASRVRVSGQGLHEGHTFEPAEFIIDTRDAGYGGLSLSIEGPSKVDINTEDLEDGTCRVTYCPTEPGNYIINIKFADQHVPGSPFSVKVTGEGRVKESITRRRRAPSVANVGSHCDLSLKIPEISIQDMTAQVTSPSGKTHEAEIVEGENHTYCIRFVPAEMGTHTVSVKYKGQHVPGSPFQFTVGPLGEGGAHKVRAGGPGLERAEAGVPAEFSIWTREAGAGGLAIAVEGPSKAEISFEDRKDGSCGVAYVVQEPGDYEVSVKFNEEHIPDSPFVVPVASPSGDARRLTVSSLQESGLKVNQPASFAVSLNGAKGAIDAKVHSPSGALEECYVTEIDQDKYAVRFIPRENGVYLIDVKFNGTHIPGSPFKIRVGEPGHGGDPGLVSAYGAGLEGGVTGNPAEFVVNTSNAGAGALSVTIDGPSKVKMDCQECPEGYRVTYTPMAPGSYLISIKYGGPYHIGGSPFKAKVTGPRLVSNHSLHETSSVFVDSLTKATCAPQHGAPGPGPADASKVVAKGLGLSKAYVGQKSSFTVDCSKAGNNMLLVGVHGPRTPCEEILVKHVGSRLYSVSYLLKDKGEYTLVVKWGDEHIPGSPYRVVVP",
+        "attributeList": {
+          "attribute": [
             {
               "@name": "comment",
               "@nameAc": "MI:0612",
@@ -1870,14 +1857,11 @@
         }
       },
       {
-        "@xmlns:ns0": "http://psi.hupo.org/mi/mif",
-        "@xmlns": "http://psi.hupo.org/mi/mif",
-        "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
         "@id": "2728465",
-        "ns0:names": {
-          "ns0:shortLabel": "itb3_human",
-          "ns0:fullName": "Integrin beta-3",
-          "ns0:alias": [
+        "names": {
+          "shortLabel": "itb3_human",
+          "fullName": "Integrin beta-3",
+          "alias": [
             {
               "@type": "gene name synonym",
               "@typeAc": "MI:0302",
@@ -1895,8 +1879,8 @@
             }
           ]
         },
-        "ns0:xref": {
-          "ns0:primaryRef": {
+        "xref": {
+          "primaryRef": {
             "@db": "uniprotkb",
             "@dbAc": "MI:0486",
             "@id": "P05106",
@@ -1904,7 +1888,7 @@
             "@refTypeAc": "MI:0356",
             "@version": "SP_124"
           },
-          "ns0:secondaryRef": [
+          "secondaryRef": [
             {
               "@db": "rcsb pdb",
               "@dbAc": "MI:0460",
@@ -2795,20 +2779,20 @@
             }
           ]
         },
-        "ns0:interactorType": {
-          "ns0:names": {
-            "ns0:shortLabel": "protein",
-            "ns0:fullName": "protein"
+        "interactorType": {
+          "names": {
+            "shortLabel": "protein",
+            "fullName": "protein"
           },
-          "ns0:xref": {
-            "ns0:primaryRef": {
+          "xref": {
+            "primaryRef": {
               "@db": "psi-mi",
               "@dbAc": "MI:0488",
               "@id": "MI:0326",
               "@refType": "identity",
               "@refTypeAc": "MI:0356"
             },
-            "ns0:secondaryRef": [
+            "secondaryRef": [
               {
                 "@db": "so",
                 "@dbAc": "MI:0601",
@@ -2833,21 +2817,21 @@
             ]
           }
         },
-        "ns0:organism": {
+        "organism": {
           "@ncbiTaxId": "9606",
-          "ns0:names": {
-            "ns0:shortLabel": "human",
-            "ns0:fullName": "Homo sapiens",
-            "ns0:alias": {
+          "names": {
+            "shortLabel": "human",
+            "fullName": "Homo sapiens",
+            "alias": {
               "@type": "synonym",
               "@typeAc": "MI:1041",
               "#text": "Human"
             }
           }
         },
-        "ns0:sequence": "MRARPRPRPLWATVLALGALAGVGVGGPNICTTRGVSSCQQCLAVSPMCAWCSDEALPLGSPRCDLKENLLKDNCAPESIEFPVSEARVLEDRPLSDKGSGDSSQVTQVSPQRIALRLRPDDSKNFSIQVRQVEDYPVDIYYLMDLSYSMKDDLWSIQNLGTKLATQMRKLTSNLRIGFGAFVDKPVSPYMYISPPEALENPCYDMKTTCLPMFGYKHVLTLTDQVTRFNEEVKKQSVSRNRDAPEGGFDAIMQATVCDEKIGWRNDASHLLVFTTDAKTHIALDGRLAGIVQPNDGQCHVGSDNHYSASTTMDYPSLGLMTEKLSQKNINLIFAVTENVVNLYQNYSELIPGTTVGVLSMDSSNVLQLIVDAYGKIRSKVELEVRDLPEELSLSFNATCLNNEVIPGLKSCMGLKIGDTVSFSIEAKVRGCPQEKEKSFTIKPVGFKDSLIVQVTFDCDCACQAQAEPNSHRCNNGNGTFECGVCRCGPGWLGSQCECSEEDYRPSQQDECSPREGQPVCSQRGECLCGQCVCHSSDFGKITGKYCECDDFSCVRYKGEMCSGHGQCSCGDCLCDSDWTGYYCNCTTRTDTCMSSNGLLCSGRGKCECGSCVCIQPGSYGDTCEKCPTCPDACTFKKECVECKKFDRGALHDENTCNRYCRDEIESVKELKDTGKDAVNCTYKNEDDCVVRFQYYEDSSGKSILYVVEEPECPKGPDILVVLLSVMGAILLIGLAALLIWKLLITIHDRKEFAKFEEERARAKWDTANNPLYKEATSTFTNITYRGT",
-        "ns0:attributeList": {
-          "ns0:attribute": [
+        "sequence": "MRARPRPRPLWATVLALGALAGVGVGGPNICTTRGVSSCQQCLAVSPMCAWCSDEALPLGSPRCDLKENLLKDNCAPESIEFPVSEARVLEDRPLSDKGSGDSSQVTQVSPQRIALRLRPDDSKNFSIQVRQVEDYPVDIYYLMDLSYSMKDDLWSIQNLGTKLATQMRKLTSNLRIGFGAFVDKPVSPYMYISPPEALENPCYDMKTTCLPMFGYKHVLTLTDQVTRFNEEVKKQSVSRNRDAPEGGFDAIMQATVCDEKIGWRNDASHLLVFTTDAKTHIALDGRLAGIVQPNDGQCHVGSDNHYSASTTMDYPSLGLMTEKLSQKNINLIFAVTENVVNLYQNYSELIPGTTVGVLSMDSSNVLQLIVDAYGKIRSKVELEVRDLPEELSLSFNATCLNNEVIPGLKSCMGLKIGDTVSFSIEAKVRGCPQEKEKSFTIKPVGFKDSLIVQVTFDCDCACQAQAEPNSHRCNNGNGTFECGVCRCGPGWLGSQCECSEEDYRPSQQDECSPREGQPVCSQRGECLCGQCVCHSSDFGKITGKYCECDDFSCVRYKGEMCSGHGQCSCGDCLCDSDWTGYYCNCTTRTDTCMSSNGLLCSGRGKCECGSCVCIQPGSYGDTCEKCPTCPDACTFKKECVECKKFDRGALHDENTCNRYCRDEIESVKELKDTGKDAVNCTYKNEDDCVVRFQYYEDSSGKSILYVVEEPECPKGPDILVVLLSVMGAILLIGLAALLIWKLLITIHDRKEFAKFEEERARAKWDTANNPLYKEATSTFTNITYRGT",
+        "attributeList": {
+          "attribute": [
             {
               "@name": "comment",
               "@nameAc": "MI:0612",
