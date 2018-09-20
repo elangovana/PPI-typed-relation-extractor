@@ -43,9 +43,9 @@ class TestImexDataPreprocessor(TestCase):
         content_handle = StringIO(contents)
 
         sut = ImexDataPreprocessor()
-        mock_extractor = PubmedAbstractExtractor()
+        mock_extractor = MagicMock()
         abstract_dummy = "This is a dummy extract"
-        mock_extractor.extract_abstract_by_pubmedid = MagicMock(return_value=[{"abstract":abstract_dummy}])
+        mock_extractor.extract_abstract_by_pubmedid.return_value =[{"abstract":abstract_dummy}]
         sut.pubmed_extractor=mock_extractor
 
 
