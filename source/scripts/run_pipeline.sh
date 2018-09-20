@@ -22,7 +22,7 @@ python $source_dir/dataloader/bulkImexDataPreprocessor.py $datadir $processeddat
 echo "Attempting to copy to s3 if specified $s3destination"
 if [ "$s3destination" == "" ]; then
     echo "No s3destination argument passed, hence not copying to s3. If you want to copy data to s3 .."
-    echo "$0  <outdir>  <filepattern> <s3://mydesbucket/data>"
+    echo "$0  <outdir>  <filepattern> < >"
 else
     echo "Copying from $processeddatadir/* to $s3destination"
     aws s3 cp $processeddatadir/ $s3destination --recursive --include *.json
