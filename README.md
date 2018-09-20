@@ -13,7 +13,9 @@ Given a Kegg Pathway Id, e.g path:ko05215, extracts protein interactions defined
 2. Download pretrained word embeddings
 https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
 
-# Run Docker
+## Run Docker
+
+### Download and analyse the dataset with elastic search
 1. Sample download intact files with pattern human0* and elastic search index
 ```bash
 region=$1
@@ -28,4 +30,11 @@ file_pattern=human0*
 script=scripts/run_pipeline_download_esindex.sh
 
 sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain --env AWS_ACCESS_KEY_ID=$accesskey   --env AWS_REGION=$region --env AWS_SECRET_ACCESS_KEY=$accesssecret lanax/kegg-pathway-extractor:latest $script /data $file_pattern $s3path 
+```
+
+### Prepare the dataset
+
+2. Extract specific types of interaction
+```bash
+
 ```
