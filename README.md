@@ -14,10 +14,18 @@ Given a Kegg Pathway Id, e.g path:ko05215, extracts protein interactions defined
 https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
 
 # Run Docker
+1. Sample download intact files with pattern human0* and elastic search index
 ```bash
-docker run -i -t lanax/keggproteininteractionsextractor -v /localdir/input:/opt/data/input /localdir/output:/opt/data/output <konumber> /opt/data/input/<input_data_mips_api>  /opt/data/output 
-```
+region=$1
+esdomain=$2
+accesskey=$3
+accesssecret=$4
+s3path=$5
 
-```bash
-docker run -v /home/ubuntu/data:/data lanax/kegg-pathway-extractor:latest /data human_01*.xml
+basedata=/home/ubuntu/data
+file_pattern=human0*
+
+script=scripts/run_pipeline_download_esindex.sh
+
+sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain --env AWS_ACCESS_KEY_ID=$accesskey   --env AWS_REGION=$region --env AWS_SECRET_ACCESS_KEY=$accesssecret lanax/kegg-pathway-extractor:latest $script /data $file_pattern $s3path 
 ```
