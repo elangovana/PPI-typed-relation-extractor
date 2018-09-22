@@ -5,10 +5,10 @@ from ddt import ddt, data, unpack
 from logging.config import fileConfig
 
 from dataextractors.KeggProteinInteractionsExtractor import KeggProteinInteractionsExtractor
-from dataloader.ImexJsonProcessorElasticSearchLoader import ImexJsonProcessorElasticSearchLoader
+from datatransformer.ImexJsonProcessorElasticSearchLoader import ImexJsonProcessorElasticSearchLoader
 from aws_requests_auth.aws_auth import AWSRequestsAuth
 
-from dataloader.elasticSearchWrapper import connectES
+from datatransformer.elasticSearchWrapper import connectES
 
 '''
 Prerequistes.. This is an integration test. Requires the Elastic search environment to be set up. 

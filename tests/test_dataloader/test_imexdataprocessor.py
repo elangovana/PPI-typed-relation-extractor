@@ -9,8 +9,7 @@ from unittest.mock import MagicMock
 
 from ddt import ddt, data, unpack
 
-from dataloader.PubmedAbstractExtractor import PubmedAbstractExtractor
-from dataloader.imexDataPreprocessor import ImexDataPreprocessor
+from datatransformer.imexDataPreprocessorFlattenXml import ImexDataPreprocessorFlattenXml
 
 
 @ddt
@@ -24,7 +23,7 @@ class TestImexDataPreprocessor(TestCase):
     def test_transform(self, xmlfile, expected_no_interactions):
         # Arrange
         fulXmlFilePath = os.path.join(os.path.dirname(os.path.realpath(__file__)), xmlfile)
-        sut = ImexDataPreprocessor()
+        sut = ImexDataPreprocessorFlattenXml()
 
         with open(fulXmlFilePath, "rb") as xmlHandler:
             # Act
@@ -42,7 +41,7 @@ class TestImexDataPreprocessor(TestCase):
         contents = Path(fulXmlFilePath).read_text()
         content_handle = StringIO(contents)
 
-        sut = ImexDataPreprocessor()
+        sut = ImexDataPreprocessorFlattenXml()
         mock_extractor = MagicMock()
         abstract_dummy = "This is a dummy extract"
         mock_extractor.extract_abstract_by_pubmedid.return_value =[{"abstract":abstract_dummy}]
@@ -60,7 +59,7 @@ class TestImexDataPreprocessor(TestCase):
     @unpack
     def test_Convert_to_json(self, xml, expected):
         # Arrange
-        sut = ImexDataPreprocessor()
+        sut = ImexDataPreprocessorFlattenXml()
 
         # Act
         actual = sut.convert_to_json(xml)
