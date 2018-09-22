@@ -11,22 +11,22 @@ from bioservices import UniProt
 
 class ImexProteinInteractionsExtractor:
 
-    def __init__(self, xmlfile, interactionlist=None):
+    def __init__(self, interactionlist=None):
 
         if interactionlist is None:
             interactionlist = ["phosphorylation"]
         self.interactionlist = interactionlist
-        self.xmlfile = xmlfile
+
         self.namespaces = {'df': 'http://psi.hupo.org/mi/mif'}  #
         self._logger = logging.getLogger(__name__)
 
         self.u = UniProt(verbose=False)
         self._cache_kegg_entry_uniprots = {}
 
-    def extract_protein_interaction(self):
-        self._logger.info("Extracting PPIs for kegg pathway id {} ".format(self.xmlfile))
+    def extract_protein_interaction(self, xmlfile):
+        self._logger.info("Extracting PPIs for kegg pathway id {} ".format(xmlfile))
         result = []
-        with open(self.xmlfile, "r") as handle:
+        with open(xmlfile, "r") as handle:
 
             for entry in self._iter_elements_by_name(handle, "df:entry", self.namespaces):
 
