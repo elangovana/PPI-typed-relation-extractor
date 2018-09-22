@@ -16,7 +16,7 @@ bash $scripts_dir/dowloadintactinteractions.sh $datadir $filepattern
 echo "Processing data..in directory $datadir"
 source_dir=$scripts_dir/..
 export PYTHONPATH=$source_dir
-python $source_dir/dataloader/bulkImexDataPreprocessor.py $datadir $processeddatadir
+python $source_dir/datavisualiser/main_es_loader.py $datadir $processeddatadir
 
 
 echo "Attempting to copy to s3 if specified $s3destination"

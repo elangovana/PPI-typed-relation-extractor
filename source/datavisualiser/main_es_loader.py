@@ -4,9 +4,11 @@ import os
 
 from aws_requests_auth.aws_auth import AWSRequestsAuth
 
-from dataloader.ImexJsonProcessorElasticSearchLoader import ImexJsonProcessorElasticSearchLoader
+from datavisualiser.ImexJsonProcessorElasticSearchLoader import ImexJsonProcessorElasticSearchLoader
 from dataloader.ImexJsonProcessorFileWriter import ImexJsonProcessorFileWriter
-from dataloader.elasticSearchWrapper import connectES
+from datavisualiser.elasticSearchWrapper import connectES
+
+from dataloader.Processors import Processors
 from dataloader.imexDataPreprocessor import ImexDataPreprocessor
 
 
@@ -27,15 +29,6 @@ def bulk_run(data_dir, processor):
             for doc in data_processor.run_pipeline(xmlhandle):
                 i = i + 1
                 processor.process(imex_file_name, i, doc)
-
-
-class Processors:
-    def __init__(self, processor_list):
-        self.processor_list = processor_list
-
-    def process(self, imex_file_name, doc_index, doc):
-        for processor in self.processor_list:
-            processor.process(imex_file_name, doc_index, doc)
 
 
 def run(input_dir, elastic_search_domain, aws_region, aws_access_key_id, aws_secret_access_key, out_dir):

@@ -1,10 +1,8 @@
 # coding=utf-8
 import logging
 
-import os
 import tempfile
 
-import pandas as pd
 import requests
 import xml.etree.cElementTree as ElementTree
 from urllib.parse import urlencode

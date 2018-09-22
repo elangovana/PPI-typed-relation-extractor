@@ -1,8 +1,5 @@
 import logging
-from datetime import datetime
-from elasticsearch import Elasticsearch
-
-from dataloader.elasticSearchWrapper import connectES, createIndex
+from datavisualiser.elasticSearchWrapper import createIndex
 
 
 class ImexJsonProcessorElasticSearchLoader:
@@ -23,8 +20,7 @@ class ImexJsonProcessorElasticSearchLoader:
         self.__esclient = client
 
     def initialse(self):
-        if not self._index_exists :
-
+        if not self._index_exists:
             createIndex(self.esclient, self.index)
             self._index_exists = True
 
@@ -32,4 +28,3 @@ class ImexJsonProcessorElasticSearchLoader:
         self.initialse()
         id = "{}_{:03d}.json".format(imex_file_name, doc_index).lower()
         self.esclient.index(index=self.index, doc_type='imex', id=id, body=doc)
-
