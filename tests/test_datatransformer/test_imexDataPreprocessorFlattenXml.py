@@ -13,7 +13,7 @@ from datatransformer.imexDataPreprocessorFlattenXml import ImexDataPreprocessorF
 
 
 @ddt
-class TestImexDataPreprocessor(TestCase):
+class TestImexDataPreprocessorFlattenXml(TestCase):
     def setUp(self):
         self._logger = logging.getLogger(__name__)
         fileConfig(os.path.join(os.path.dirname(__file__), 'logger.ini'))

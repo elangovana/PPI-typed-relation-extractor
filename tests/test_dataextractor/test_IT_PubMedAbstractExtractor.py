@@ -8,7 +8,7 @@ from dataextractors.PubmedAbstractExtractor import PubmedAbstractExtractor
 
 
 @ddt
-class TestMipsProteinInteractionsExtractor(unittest.TestCase):
+class TestPubmedAbstractExtractor(unittest.TestCase):
 
     def setUp(self):
         fileConfig(os.path.join(os.path.dirname(__file__), 'logger.ini'))
