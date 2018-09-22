@@ -5,11 +5,11 @@ import os
 from aws_requests_auth.aws_auth import AWSRequestsAuth
 
 from datavisualiser.ImexJsonProcessorElasticSearchLoader import ImexJsonProcessorElasticSearchLoader
-from dataloader.ImexJsonProcessorFileWriter import ImexJsonProcessorFileWriter
+from datatransformer.ImexJsonProcessorFileWriter import ImexJsonProcessorFileWriter
 from datavisualiser.elasticSearchWrapper import connectES
 
-from dataloader.Processors import Processors
-from dataloader.imexDataPreprocessor import ImexDataPreprocessor
+from datatransformer.Processors import Processors
+from datatransformer.imexDataPreprocessor import ImexDataPreprocessorFlattenXml
 
 
 def bulk_run(data_dir, processor):
@@ -22,7 +22,7 @@ def bulk_run(data_dir, processor):
         # Assuming all xml files are valid imex files.
         full_path = os.path.join(data_dir, imex_file_name)
         logger.info("Processing file {}".format(full_path))
-        data_processor = ImexDataPreprocessor()
+        data_processor = ImexDataPreprocessorFlattenXml()
 
         with open(full_path, "rb") as xmlhandle:
             i = 0

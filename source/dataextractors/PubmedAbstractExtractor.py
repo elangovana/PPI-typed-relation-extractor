@@ -1,11 +1,9 @@
-# coding=utf-8
 import logging
-
 import tempfile
+from urllib.parse import urlencode
+from xml.etree import cElementTree as ElementTree
 
 import requests
-import xml.etree.cElementTree as ElementTree
-from urllib.parse import urlencode
 
 
 class PubmedAbstractExtractor:

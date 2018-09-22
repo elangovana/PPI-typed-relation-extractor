@@ -7,10 +7,10 @@ from io import BytesIO, StringIO
 
 import xmltodict
 
-from dataloader.PubmedAbstractExtractor import PubmedAbstractExtractor
+from dataextractors.PubmedAbstractExtractor import PubmedAbstractExtractor
 
 
-class ImexDataPreprocessor:
+class ImexDataPreprocessorFlattenXml:
 
     def __init__(self, pubmed_extractor=None):
         self.pubmed_extractor = pubmed_extractor

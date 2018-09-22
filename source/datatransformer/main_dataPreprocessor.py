@@ -3,9 +3,9 @@ import logging
 import os
 
 
-from dataloader.ImexJsonProcessorFileWriter import ImexJsonProcessorFileWriter
-from dataloader.Processors import Processors
-from dataloader.imexDataPreprocessor import ImexDataPreprocessor
+from datatransformer.ImexJsonProcessorFileWriter import ImexJsonProcessorFileWriter
+from datatransformer.Processors import Processors
+from datatransformer.imexDataPreprocessorFlattenXml import ImexDataPreprocessorFlattenXml
 
 
 def bulk_run(data_dir, processor):
@@ -18,7 +18,7 @@ def bulk_run(data_dir, processor):
         # Assuming all xml files are valid imex files.
         full_path = os.path.join(data_dir, imex_file_name)
         logger.info("Processing file {}".format(full_path))
-        data_processor = ImexDataPreprocessor()
+        data_processor = ImexDataPreprocessorFlattenXml()
 
         with open(full_path, "rb") as xmlhandle:
             i = 0
