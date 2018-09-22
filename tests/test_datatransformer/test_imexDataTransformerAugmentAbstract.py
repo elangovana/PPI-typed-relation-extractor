@@ -8,9 +8,9 @@ class TestImexDataTransformerAugmentAbstract(TestCase):
 
     def test_should_transform(self):
         # Arrange
-        sut = ImexDataTransformerAugmentAbstract()
         key_pubmedid = "pubmedid"
         key_pubmedabstract = "pubmedabstract"
+        sut = ImexDataTransformerAugmentAbstract(id_key=key_pubmedid, abstract_key=key_pubmedabstract)
         input = [{key_pubmedid: "1234"}]
         expected = [{key_pubmedid: "1234", key_pubmedabstract: "Dummy Abstract"}]
 
@@ -24,7 +24,7 @@ class TestImexDataTransformerAugmentAbstract(TestCase):
         }]
 
         # Act
-        actual = list(sut.transform(input, id_key=key_pubmedid, abstract_key=key_pubmedabstract))
+        actual = list(sut.transform(input))
 
         # Assert
         self.assertSequenceEqual(actual, expected)
