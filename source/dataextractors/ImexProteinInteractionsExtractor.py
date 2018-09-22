@@ -25,7 +25,7 @@ class ImexProteinInteractionsExtractor:
 
     def extract_protein_interaction(self, xmlfile):
         self._logger.info("Extracting PPIs for kegg pathway id {} ".format(xmlfile))
-        result = []
+
         with open(xmlfile, "r") as handle:
 
             for entry in self._iter_elements_by_name(handle, "df:entry", self.namespaces):
@@ -55,7 +55,9 @@ class ImexProteinInteractionsExtractor:
                             "{},{}, {}, {}, {}, {}".format(interaction_type, interfactor_ref_id, uniprotid, is_negative,
                                                            pubmed_id, title))
                         i = i + 1
-                    result.append({
+                        print("Total participants in this interaction : {}".format(i))
+
+                    yield {
                         "isNegative" : is_negative
                         ,"participants":participants
                         ,"pubmedId": pubmed_id
@@ -63,13 +65,8 @@ class ImexProteinInteractionsExtractor:
                         ,"interactionType":interaction_type
                         ,"interactionId": interaction_id
 
-                    })
-                    print("Total participants in this interaction : {}".format(i))
+                    }
 
-        # result in a dataframe
-        self._logger.info("Completed PPIs extraction for kegg pathway".format())
-
-        return result
 
     def _iter_elements_by_name(self, handle, name, namespace):
         events = ElementTree.iterparse(handle, events=("start", "end"))

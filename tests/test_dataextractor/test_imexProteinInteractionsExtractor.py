@@ -12,17 +12,17 @@ class TestImexProteinInteractionsExtractor(TestCase):
     def setUp(self):
         fileConfig(os.path.join(os.path.dirname(__file__), 'logger.ini'))
 
-    @data(("human_13_negative.xml", 500)
-       ,("data/human_01.xml", 40))
+    @data(("data/human_13_negative.xml", 0)
+       ,("data/human_01.xml", 4))
 
     @unpack
     def test_extract_protein_interaction(self, xmlfile, expected_total):
         # Arrange
         full_xml_file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), xmlfile)
-        sut = ImexProteinInteractionsExtractor()
+        sut = ImexProteinInteractionsExtractor(['phosphorylation'])
 
         # Act
-        actual =  sut.extract_protein_interaction(full_xml_file_path)
+        actual =  list(sut.extract_protein_interaction(full_xml_file_path))
 
         # Assert
-        print(actual)
+        self.assertEqual(len(actual), expected_total)
