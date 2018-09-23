@@ -31,4 +31,6 @@ if [ "$s3destination" == "" ]; then
 
 else
     aws s3 cp $1/* $s3destination
+    find $1/* > $1/manifest.txt
+    aws s3 cp $1/manifest.txt $s3destination
 fi
