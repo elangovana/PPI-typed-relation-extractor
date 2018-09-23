@@ -21,7 +21,7 @@ class BulkImexProteinInteractionsExtractor:
         return logging.getLogger(__name__)
 
 
-    def extract_protein_interaction(self, filelist_iter):
+    def get_protein_interactions(self, filelist_iter):
         """
 Extracts protein interactions from a list of files
         :param filelist_iter:

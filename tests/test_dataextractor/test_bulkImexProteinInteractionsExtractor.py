@@ -17,7 +17,7 @@ class TestBulkImexProteinInteractionsExtractor(TestCase):
         sut = BulkImexProteinInteractionsExtractor(['phosphorylation'])
         expected_total = 4
         sut.imexProteinInteractionsExtractor = MagicMock()
-        sut.imexProteinInteractionsExtractor.extract_protein_interaction.side_effect = lambda x: [{
+        sut.imexProteinInteractionsExtractor.get_protein_interactions.side_effect = lambda x: [{
             "isNegative": False
             , "participants": [{"uniprotid": "123", "alias": ["protien"]}]
             , "pubmedId": "56757"
@@ -36,7 +36,7 @@ class TestBulkImexProteinInteractionsExtractor(TestCase):
         }]
 
         # Act
-        actual = list(sut.extract_protein_interaction(list_files))
+        actual = list(sut.get_protein_interactions(list_files))
 
         # assert
         self.assertEqual(len(actual), expected_total)
