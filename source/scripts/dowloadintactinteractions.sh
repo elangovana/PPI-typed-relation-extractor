@@ -37,6 +37,7 @@ if [ "$s3destination" == "" ]; then
 
 else
     aws s3 cp ${LDIR}/ $s3destination --recursive --include *.xml
-    find ${LDIR}/*.xml > ${LDIR}/manifest.txt
+    wdir=`pwd`
+    cd ${LDIR} && find . -name "*.xml" > ${LDIR}/manifest.txt && cd $wdir
     aws s3 cp ${LDIR}/manifest.txt ${s3destination}
 fi

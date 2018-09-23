@@ -43,30 +43,29 @@ class ImexProteinInteractionsExtractor:
 
                     is_negative = ele_interaction.find("df:negative", self.namespaces).text
 
-                    participants =[]
+                    participants = []
                     for ele_participant in ele_interaction.findall("df:participantList/df:participant",
                                                                    self.namespaces):
                         interfactor_ref_id = ele_participant.find("df:interactorRef", self.namespaces).text
 
                         uniprotid, alias_list = self.get_interactor_details(entry, interfactor_ref_id)
-                        participants.append({"uniprotid" : uniprotid, "alias": alias_list})
+                        participants.append({"uniprotid": uniprotid, "alias": alias_list})
 
                         print(
-                            "{},{}, {}, {}, {}, {}".format(interaction_type, interfactor_ref_id, uniprotid, is_negative,
+                            "{}, {},{}, {}, {}, {}, {}".format(interaction_id, interaction_type, interfactor_ref_id, uniprotid, is_negative,
                                                            pubmed_id, title))
                         i = i + 1
                         print("Total participants in this interaction : {}".format(i))
 
                     yield {
-                        "isNegative" : is_negative
-                        ,"participants":participants
-                        ,"pubmedId": pubmed_id
-                        ,"pubmedTitle":title
-                        ,"interactionType":interaction_type
-                        ,"interactionId": interaction_id
+                        "isNegative": is_negative
+                        , "participants": participants
+                        , "pubmedId": pubmed_id
+                        , "pubmedTitle": title
+                        , "interactionType": interaction_type
+                        , "interactionId": interaction_id
 
                     }
-
 
     def _iter_elements_by_name(self, handle, name, namespace):
         events = ElementTree.iterparse(handle, events=("start", "end"))
@@ -79,7 +78,9 @@ class ImexProteinInteractionsExtractor:
             namespace_short_name = name[:name.index(":")]
             expanded_name = "{{{}}}{}".format(namespace[namespace_short_name], local_name)
 
+
         for event, elem in events:
+
             if event == "end" and elem.tag == expanded_name:
                 yield elem
                 elem.clear()
@@ -104,7 +105,10 @@ class ImexProteinInteractionsExtractor:
                                               self.namespaces)
 
         if ele_primary_ref is not None:
-            title = ele_experiment.find("df:attributeList/df:attribute[@name='title']", self.namespaces).text
+            title = None
+            ele_title = ele_experiment.find("df:attributeList/df:attribute[@name='title']", self.namespaces)
+            if ele_title is not None:
+                title = ele_title.text
 
             return (ele_primary_ref.attrib["id"], title)
         return None
