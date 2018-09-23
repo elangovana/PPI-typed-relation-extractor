@@ -30,5 +30,5 @@ if [ "$s3destination" == "" ]; then
     echo "$0 <localdir>  <filepatterntodownload> <s3://mydestinationbucket/data>"
 
 else
-    aws s3 copy data/* $s3destination
+    aws s3 cp data/* $s3destination
 fi

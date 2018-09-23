@@ -12,8 +12,6 @@ pip install -r source/requirements.txt
 
 ## How to run
 ```bash
-export AWS_ACCOUNT=''
-export AWS_REGION=''
-export tag='201809170901'
- python aws_batch/register_job.py $AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com/awscomprehend-sentiment-demo:$tag 
+export tag='latest'
+python aws_batch/register_job_download_raw_files.py lanax/kegg-pathway-extractor:$tag 
 ```
