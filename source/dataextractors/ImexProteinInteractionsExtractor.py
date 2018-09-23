@@ -23,7 +23,7 @@ class ImexProteinInteractionsExtractor:
         self.u = UniProt(verbose=False)
         self._cache_kegg_entry_uniprots = {}
 
-    def extract_protein_interaction(self, xmlfile):
+    def get_protein_interactions(self, xmlfile):
         self._logger.info("Extracting PPIs for kegg pathway id {} ".format(xmlfile))
 
         with open(xmlfile, "r") as handle:

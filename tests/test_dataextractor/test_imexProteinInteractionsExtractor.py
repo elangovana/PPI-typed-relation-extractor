@@ -22,7 +22,7 @@ class TestImexProteinInteractionsExtractor(TestCase):
         sut = ImexProteinInteractionsExtractor(['phosphorylation'])
 
         # Act
-        actual =  list(sut.extract_protein_interaction(full_xml_file_path))
+        actual =  list(sut.get_protein_interactions(full_xml_file_path))
 
         # Assert
         self.assertEqual(len(actual), expected_total)

@@ -11,7 +11,6 @@ class TestBulkImexProteinInteractionsExtractor(TestCase):
 
     @data(["data/human_13_negative.xml"
               , "data/human_01.xml"])
-
     def test_extract_protein_interaction(self, list_files):
         # Arrange
         sut = BulkImexProteinInteractionsExtractor(['phosphorylation'])
@@ -39,4 +38,4 @@ class TestBulkImexProteinInteractionsExtractor(TestCase):
         actual = list(sut.get_protein_interactions(list_files))
 
         # assert
-        self.assertEqual(len(actual), expected_total)
+        self.assertEqual(expected_total, len(actual))

@@ -33,7 +33,7 @@ class RegisterJob:
                 "volumes": [
                     {
                         "host": {
-                            "sourcePath": "DocumentSentimentAnalysisdata"
+                            "sourcePath": "KeggPathWayExtractorData"
                         },
                         "name": "data"
                     }

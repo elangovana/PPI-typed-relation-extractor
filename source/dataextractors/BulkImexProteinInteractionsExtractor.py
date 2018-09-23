@@ -31,4 +31,4 @@ Extracts protein interactions from a list of files
 
         for imex_file_name in filelist_iter:
             self.logger.info("Processing file {}".format(imex_file_name))
-            yield from self.imexProteinInteractionsExtractor.extract_protein_interaction(imex_file_name)
+            yield from self.imexProteinInteractionsExtractor.get_protein_interactions(imex_file_name)
