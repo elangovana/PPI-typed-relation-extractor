@@ -16,6 +16,7 @@ https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
 ## Run Docker
 
 ### Download and analyse the dataset with elastic search
+#### Visualise
 1. Sample download intact files with pattern human0* and elastic search index
 ```bash
 region=$1
@@ -34,7 +35,8 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
 
 ### Prepare the dataset
 
-2. Extract specific types of interaction
+2. Create a dataset locally from source
 ```bash
-
+export PYTHONPATH=./source
+python source/pipeline/main_pipeline_abstractprep.py <inputdir containing imex xml files> <outputdir>
 ```

@@ -2,7 +2,7 @@ from dataextractors.PubmedAbstractExtractor import PubmedAbstractExtractor
 
 
 class ImexDataTransformerAugmentAbstract:
-    def __init__(self, id_key: str = "pubmedid",
+    def __init__(self, id_key: str = "pubmedId",
                  abstract_key: str = "pubmedabstract"):
         """
         :param id_key: The key in the input identifying the pubmedid used to extract the abstract
