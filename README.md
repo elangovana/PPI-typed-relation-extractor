@@ -33,10 +33,29 @@ script=scripts/run_pipeline_download_esindex.sh
 sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain --env AWS_ACCESS_KEY_ID=$accesskey   --env AWS_REGION=$region --env AWS_SECRET_ACCESS_KEY=$accesssecret lanax/kegg-pathway-extractor:latest $script /data $file_pattern $s3path 
 ```
 
-### Prepare the dataset
+#### Prepare dataset
+
+
+1. Download dataset from Imex ftp site ftp.ebi.ac.uk
+    ```bash
+    basedata=/home/ubuntu/data
+ 
+    sudo docker run -v ${basedata}:/data  scripts/dowloadintactinteractions.sh /data  "<filepattern e.g. human*.xml>" "<optional s3 destination>"
+    ```
+
+
+## Run locally from source
+
+
+1. Download dataset from Imex ftp site ftp.ebi.ac.uk
+    ```bash
+    cd ./source
+    bash scripts/dowloadintactinteractions.sh "<localdir>" "<filepattern e.g. human*.xml>" "<optional s3 destination>"
+    ```
 
 2. Create a dataset locally from source
-```bash
-export PYTHONPATH=./source
-python source/pipeline/main_pipeline_abstractprep.py <inputdir containing imex xml files> <outputdir>
-```
+    
+    ```bash
+    export PYTHONPATH=./source
+    python source/pipeline/main_pipeline_abstractprep.py <inputdir containing imex xml files> <outputdir>
+    ```
