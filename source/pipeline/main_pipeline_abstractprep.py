@@ -92,11 +92,12 @@ if __name__ == '__main__':
     parser.add_argument("input_dir",
                         help="The input directory containing the imex files")
     parser.add_argument("out_file", help="Output file")
-    parser.add_argument("--log-level", help="Log level", choices={"INFO", "WARN", "DEBUG", "ERROR"})
+    parser.add_argument("--log-level", help="Log level", default="INFO", choices={"INFO", "WARN", "DEBUG", "ERROR"})
 
     args = parser.parse_args()
 
-    logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler(sys.stdout)],
+    #Set up logging
+    logging.basicConfig(level=logging.getLevelName(args.log_level), handlers=[logging.StreamHandler(sys.stdout)],
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
     run(args.input_dir,

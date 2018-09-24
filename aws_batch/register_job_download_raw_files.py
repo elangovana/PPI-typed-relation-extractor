@@ -21,7 +21,9 @@ class RegisterJob:
             "parameters": {
                 "file_pattern": "human_*.xml",
                 "s3_destination": "s3://<bucker>/prefix/",
-                "local_dir": "/data"
+                "local_dir": "/data",
+                "log_level":"--log-level INFO"
+
             },
             "containerProperties": {
                 "image": container_name,
@@ -31,7 +33,8 @@ class RegisterJob:
                     "scripts/dowloadintactinteractions.sh",
                     "Ref::local_dir",
                     "Ref::file_pattern",
-                    "Ref::s3_destination"
+                    "Ref::s3_destination",
+                    "Ref::log_level"
                 ],
                 "jobRoleArn": "arn:aws:iam::{}:role/Batch".format(self.account),
                 "volumes": [
