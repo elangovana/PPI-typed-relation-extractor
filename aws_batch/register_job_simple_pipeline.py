@@ -66,9 +66,10 @@ class RegisterJob:
             "jobDefinitionName":job_def_name,
             "type": "container",
             "parameters": {
-                "file_pattern": "human_*.xml",
-                "s3_destination": "s3://<bucker>/prefix/",
-                "local_dir": "/data"
+                "input_path": "s3://<bucker>/prefix/",
+                "output_path": "s3://<bucker>/prefix_ouput/",
+
+                "log_level": "--log-level INFO"
 
             },
             "containerProperties": {
@@ -76,17 +77,17 @@ class RegisterJob:
                 "vcpus": 1,
                 "memory": 2000,
                 "command": [
-                    "bash",
-                    "scripts/dowloadintactinteractions.sh",
-                    "Ref::local_dir",
-                    "Ref::file_pattern",
-                    "Ref::s3_destination"
+                    "python",
+                    "pipeline/main_pipeline_abstractprep.py",
+                    "Ref::input_path",
+                    "Ref::output_path",
+                    "Ref::log_level"
                 ],
                 "jobRoleArn": "arn:aws:iam::{}:role/{}".format(self.account, role_name),
                 "volumes": [
                     {
                         "host": {
-                            "sourcePath": "KeggPathWayExtractor_downloadfile"
+                            "sourcePath": job_def_name
                         },
                         "name": "data"
                     }

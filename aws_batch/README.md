@@ -12,6 +12,9 @@ pip install -r source/requirements.txt
 
 ## How to run
 ```bash
+export PYTHONPATH=./aws_batch
+
 export tag='latest'
+
 python aws_batch/register_job_download_raw_files.py lanax/kegg-pathway-extractor:$tag 
 ```
