@@ -51,11 +51,7 @@ class ImexProteinInteractionsExtractor:
                         uniprotid, alias_list = self.get_interactor_details(entry, interfactor_ref_id)
                         participants.append({"uniprotid": uniprotid, "alias": alias_list})
 
-                        print(
-                            "{}, {},{}, {}, {}, {}, {}".format(interaction_id, interaction_type, interfactor_ref_id, uniprotid, is_negative,
-                                                           pubmed_id, title))
                         i = i + 1
-                        print("Total participants in this interaction : {}".format(i))
 
                     yield {
                         "isNegative": is_negative
@@ -78,7 +74,6 @@ class ImexProteinInteractionsExtractor:
             namespace_short_name = name[:name.index(":")]
             expanded_name = "{{{}}}{}".format(namespace[namespace_short_name], local_name)
 
-
         for event, elem in events:
 
             if event == "end" and elem.tag == expanded_name:
@@ -96,7 +91,7 @@ class ImexProteinInteractionsExtractor:
             ele_unitprot = ele_interactor.find("df:xref/df:primaryRef[@db='{}']".format("uniprotkb"), self.namespaces)
         if ele_unitprot is not None:
             return ele_unitprot.attrib['id'], alias
-        return None
+        return None, None
 
     def get_pubmed_id(self, entry, experiment_ref_id):
         ele_experiment = entry.find("df:experimentList/df:experimentDescription[@id='{}']".format(experiment_ref_id),
