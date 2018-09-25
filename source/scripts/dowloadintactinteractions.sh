@@ -39,5 +39,5 @@ else
     aws s3 cp ${LDIR}/ $s3destination --recursive --include *.xml
     wdir=`pwd`
     cd ${LDIR} && find . -name "*.xml" > ${LDIR}/manifest.txt && cd $wdir
-    aws s3 cp ${LDIR}/manifest.txt ${s3destination}/manifest.txt
+    aws s3 cp ${LDIR}/manifest.txt ${s3destination}manifest.txt
 fi
