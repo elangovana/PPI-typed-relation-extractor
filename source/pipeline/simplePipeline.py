@@ -1,5 +1,4 @@
 from dataextractors.BulkImexProteinInteractionsExtractor import BulkImexProteinInteractionsExtractor
-from datatransformer.ImexDataTransformerAugmentAbstract import ImexDataTransformerAugmentAbstract
 
 
 class SimplePipeline:
