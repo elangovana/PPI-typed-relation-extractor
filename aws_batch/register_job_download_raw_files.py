@@ -18,7 +18,7 @@ class RegisterJob:
         :param data_bucket: the name of the s3 bucket that will hold the data
         :param container_name: The name of the container to use e.g 324346001917.dkr.ecr.us-east-2.amazonaws.com/awscomprehend-sentiment-demo:latest
         """
-        job_def_name = "KeggPathWayExtractor_simplepipeline"
+        job_def_name = "KeggPathWayExtractor_downloadrawfile"
         role_name = "AWSBatchECSRole_{}".format(job_def_name)
 
         ##This is mandatory for aws batch
@@ -86,7 +86,7 @@ class RegisterJob:
                 "volumes": [
                     {
                         "host": {
-                            "sourcePath": "KeggPathWayExtractor_downloadfile"
+                            "sourcePath": job_def_name
                         },
                         "name": "data"
                     }
