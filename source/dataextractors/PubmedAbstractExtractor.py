@@ -25,7 +25,7 @@ class PubmedAbstractExtractor:
         # Downloading pubmed abstracts Xml file
         r = requests.get(uri, allow_redirects=True)
         with tempfile.TemporaryFile(suffix=".csv", mode="wb+") as tmpfile:
-            self._logger.info("Downloading {} to temp file".format(uri))
+            self._logger.debug("Downloading {} to temp file".format(uri))
             tmpfile.write(r.content)
             tmpfile.seek(0)
 
