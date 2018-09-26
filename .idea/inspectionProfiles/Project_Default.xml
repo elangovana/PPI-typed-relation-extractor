@@ -10,5 +10,12 @@
         </value>
       </option>
     </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="aws_batch.register_job_download_raw_files.EntityAlreadyExistsException" />
+        </list>
+      </option>
+    </inspection_tool>
   </profile>
 </component>

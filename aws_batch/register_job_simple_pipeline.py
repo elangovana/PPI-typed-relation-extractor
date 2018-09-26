@@ -69,7 +69,7 @@ class RegisterJob:
                 "input_path": "s3://<bucker>/prefix/",
                 "output_path": "s3://<bucker>/prefix_ouput/",
 
-                "log_level": "--log-level INFO"
+                "log_level": "INFO"
 
             },
             "containerProperties": {
@@ -81,6 +81,7 @@ class RegisterJob:
                     "pipeline/main_pipeline_abstractprep.py",
                     "Ref::input_path",
                     "Ref::output_path",
+                    "--log-level",
                     "Ref::log_level"
                 ],
                 "jobRoleArn": "arn:aws:iam::{}:role/{}".format(self.account, role_name),
