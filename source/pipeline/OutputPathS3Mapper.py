@@ -52,7 +52,7 @@ class OutputPathS3Mapper:
     def upload_single_file(self, bucket_name, key, tempath):
         client = boto3.resource('s3')
         local_path = tempath
-        self.logger.info("Uploading to bucket {}, {} to file {}".format(bucket_name, key, local_path))
+        self.logger.info("Uploading to bucket {}, {} from file {}".format(bucket_name, key, local_path))
         with open(tempath, "rb") as data:
-            client.Bucket(bucket_name).put_object(key, data)
+            client.Object(bucket_name, key).put(Body=data)
 
