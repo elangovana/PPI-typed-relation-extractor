@@ -66,15 +66,20 @@ def get_localpath(path):
     return tempath
 
 
-
 def run(input_dir, out_file):
+    logger = logging.getLogger(__name__)
+    logger.info("Starting run with arguments...\n{}".format(args.__dict__))
     input_dir = path_rationalise(input_dir)
     local_out = get_localpath(out_file)
 
     pipeline = SimplePipeline()
     pipeline.pipeline_steps = [("Populate_Abstract", ImexDataTransformerAugmentAbstract())]
 
-    data_extractor = BulkImexProteinInteractionsExtractor(["phosphorylation"])
+    interaction_types = ['phosphorylation', 'dephosphorylation', 'ubiquitination',
+                         'methylation', 'acetylation', 'deubiquitination', 'demethylation']
+
+    logger.info("Extracting interaction types {}".format( ",".join(interaction_types)))
+    data_extractor = BulkImexProteinInteractionsExtractor(interaction_types)
     data_iter = data_extractor.get_protein_interactions(pathlib.Path(input_dir).glob('**/*.xml'))
 
     result = pipeline.run(data_iter)
@@ -83,8 +88,6 @@ def run(input_dir, out_file):
     pd.DataFrame(list(result)).to_json(local_out)
 
     upload_to_dest(local_out, out_file)
-
-
 
 
 if __name__ == '__main__':
@@ -96,7 +99,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    #Set up logging
+    # Set up logging
     logging.basicConfig(level=logging.getLevelName(args.log_level), handlers=[logging.StreamHandler(sys.stdout)],
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
@@ -105,4 +108,3 @@ if __name__ == '__main__':
     run(args.input_dir,
         args.out_file)
     logger.info("Completed run...")
-
