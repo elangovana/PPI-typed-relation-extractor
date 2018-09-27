@@ -16,5 +16,8 @@ export PYTHONPATH=./aws_batch
 
 export tag='latest'
 
-python aws_batch/register_job_download_raw_files.py lanax/kegg-pathway-extractor:$tag 
+python aws_batch/register_job_download_raw_files.py lanax/kegg-pathway-extractor:$tag <bucket>
+
+
+python aws_batch/register_job_simple_pipeline.py lanax/kegg-pathway-extractor:$tag <bucket>
 ```

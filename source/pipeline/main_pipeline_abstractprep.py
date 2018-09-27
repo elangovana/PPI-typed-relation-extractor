@@ -100,5 +100,9 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.getLevelName(args.log_level), handlers=[logging.StreamHandler(sys.stdout)],
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
+    logger = logging.getLogger(__name__)
+    logger.info("Starting run with arguments...\n{}".format(args.__dict__))
     run(args.input_dir,
         args.out_file)
+    logger.info("Completed run...")
+
