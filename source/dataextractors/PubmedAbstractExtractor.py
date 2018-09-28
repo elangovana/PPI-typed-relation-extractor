@@ -12,7 +12,7 @@ class PubmedAbstractExtractor:
         self.pubmed_baseurl = pubmed_baseurl
 
     def extract_abstract_by_pubmedid(self, pubmed_id_list):
-        self._logger.info("Extracting pubmed abstract")
+        self._logger.info("Extracting pubmed abstract {}".format(",".join(pubmed_id_list)))
 
         query_string = urlencode({'db': 'pubmed'
                                      , 'id': ','.join(pubmed_id_list)
@@ -38,7 +38,7 @@ class PubmedAbstractExtractor:
         Extracts pubmed abstracts as xml
         :param pubmed xml file handle:
         """
-        self._logger.info("Running extract for pubmedarticle...")
+        self._logger.debug("Running extract for pubmedarticle...")
         result_arr = []
         for pubmed_article in self._iter_elements_by_name(handle, "PubmedArticle"):
 
