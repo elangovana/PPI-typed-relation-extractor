@@ -8,10 +8,10 @@ import sys
 
 from dataextractors.BulkImexProteinInteractionsExtractor import BulkImexProteinInteractionsExtractor
 from datatransformer.ImexDataTransformerAugmentAbstract import ImexDataTransformerAugmentAbstract
-from pipeline.OutputPathS3Mapper import OutputPathS3Mapper
+from pathmappers.OutputPathS3Mapper import OutputPathS3Mapper
 from pipeline.dataPrepPipeline import DataPrepPipeline
-from pipeline.pathLocalFileMapper import PathLocalFileMapper
-from pipeline.inputPathS3Mapper import InputPathS3Mapper
+from pathmappers.pathLocalFileMapper import PathLocalFileMapper
+from pathmappers.inputPathS3Mapper import InputPathS3Mapper
 
 
 def path_rationalise(path):
