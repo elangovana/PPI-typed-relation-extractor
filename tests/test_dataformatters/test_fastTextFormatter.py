@@ -20,4 +20,4 @@ Verifies the formatting
         sut(data_iter, lambda x: x["label"], lambda x: x["text"], output)
 
         # Assert
-        self.assertEquals(output.getvalue(), expected)
+        self.assertEqual(output.getvalue(), expected)
