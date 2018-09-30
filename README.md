@@ -57,5 +57,5 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
     
     ```bash
     export PYTHONPATH=./source
-    python source/pipeline/main_pipeline_abstractprep.py <inputdir containing imex xml files> <outputdir>
+    python source/pipeline/main_pipeline_dataprep.py <inputdir containing imex xml files> <outputdir>
     ```

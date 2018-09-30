@@ -1,7 +1,7 @@
 from dataextractors.BulkImexProteinInteractionsExtractor import BulkImexProteinInteractionsExtractor
 
 
-class SimplePipeline:
+class DataPrepPipeline:
 
     def __init__(self, interactionlist=None):
         self.interactionlist = interactionlist or ['phosphorylation']

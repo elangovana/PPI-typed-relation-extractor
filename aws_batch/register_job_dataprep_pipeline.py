@@ -12,13 +12,13 @@ class RegisterJob:
         self.account = account or boto3.client('sts').get_caller_identity().get('Account')
         self.region = aws_region or boto3.session.Session().region_name
 
-    def run(self, container_name: str, data_bucket:str):
+    def run(self, container_name: str, data_bucket: str):
         """
         Registers a job with aws batch.
         :param data_bucket: the name of the s3 bucket that will hold the data
         :param container_name: The name of the container to use e.g 324346001917.dkr.ecr.us-east-2.amazonaws.com/awscomprehend-sentiment-demo:latest
         """
-        job_def_name = "KeggPathWayExtractor_simplepipeline"
+        job_def_name = "KeggPathWayExtractor_datapreppipeline"
         role_name = "AWSBatchECSRole_{}".format(job_def_name)
 
         ##This is mandatory for aws batch
@@ -36,7 +36,7 @@ class RegisterJob:
             ]
         }
 
-        #This is custom for the batch
+        # This is custom for the batch
         access_policy = {
             "Version": "2012-10-17",
             "Statement": [
@@ -58,18 +58,18 @@ class RegisterJob:
             ]
         }
 
-        managed_policy_arns =["arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"]
+        managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"]
 
         create_role(role_name, assume_role_policy, access_policy, managed_policy_arns)
 
         job_definition = {
-            "jobDefinitionName":job_def_name,
+            "jobDefinitionName": job_def_name,
             "type": "container",
             "parameters": {
                 "input_path": "s3://<bucker>/prefix/",
                 "output_path": "s3://<bucker>/prefix_ouput/",
-
-                "log_level": "INFO"
+                "log_level": "INFO",
+                "interaction_types": "phosphorylation,dephosphorylation,ubiquitination,methylation,acetylation,deubiquitination,demethylation"
 
             },
             "containerProperties": {
@@ -78,11 +78,13 @@ class RegisterJob:
                 "memory": 2000,
                 "command": [
                     "python",
-                    "pipeline/main_pipeline_abstractprep.py",
+                    "pipeline/main_pipeline_dataprep.py",
                     "Ref::input_path",
                     "Ref::output_path",
                     "--log-level",
-                    "Ref::log_level"
+                    "Ref::log_level",
+                    "--interaction-types",
+                    "Ref::interaction_types"
                 ],
                 "jobRoleArn": "arn:aws:iam::{}:role/{}".format(self.account, role_name),
                 "volumes": [

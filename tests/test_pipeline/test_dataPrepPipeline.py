@@ -1,10 +1,10 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from pipeline.simplePipeline import SimplePipeline
+from pipeline.dataPrepPipeline import DataPrepPipeline
 
 
-class TestSimplePipeline(TestCase):
+class TestDataPrepPipeline(TestCase):
 
     def test_run(self):
         # Arrange
@@ -16,7 +16,7 @@ class TestSimplePipeline(TestCase):
         mock_step2 = MagicMock()
         mock_step2.transform.return_value = [{"Itema": "1", "step": 2}]
 
-        sut = SimplePipeline()
+        sut = DataPrepPipeline()
         sut.pipeline_steps = [("mock_step1", mock_step1), ("mock_stpe2", mock_step2)]
         data = [{"Itema": "1"}]
 

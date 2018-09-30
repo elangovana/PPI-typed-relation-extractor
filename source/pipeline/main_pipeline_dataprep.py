@@ -9,9 +9,9 @@ import sys
 from dataextractors.BulkImexProteinInteractionsExtractor import BulkImexProteinInteractionsExtractor
 from datatransformer.ImexDataTransformerAugmentAbstract import ImexDataTransformerAugmentAbstract
 from pipeline.OutputPathS3Mapper import OutputPathS3Mapper
+from pipeline.dataPrepPipeline import DataPrepPipeline
 from pipeline.pathLocalFileMapper import PathLocalFileMapper
 from pipeline.inputPathS3Mapper import InputPathS3Mapper
-from pipeline.simplePipeline import SimplePipeline
 
 
 def path_rationalise(path):
@@ -72,7 +72,7 @@ def run(input_dir, out_file, interaction_types):
     input_dir = path_rationalise(input_dir)
     local_out = get_localpath(out_file)
 
-    pipeline = SimplePipeline()
+    pipeline = DataPrepPipeline()
     pipeline.pipeline_steps = [("Populate_Abstract", ImexDataTransformerAugmentAbstract())]
 
     logger.info("Extracting interaction types {}".format(",".join(interaction_types)))
