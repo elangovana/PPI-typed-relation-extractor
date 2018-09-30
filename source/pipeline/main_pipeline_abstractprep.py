@@ -66,19 +66,16 @@ def get_localpath(path):
     return tempath
 
 
-def run(input_dir, out_file):
+def run(input_dir, out_file, interaction_types):
     logger = logging.getLogger(__name__)
-    logger.info("Starting run with arguments...\n{}".format(args.__dict__))
+
     input_dir = path_rationalise(input_dir)
     local_out = get_localpath(out_file)
 
     pipeline = SimplePipeline()
     pipeline.pipeline_steps = [("Populate_Abstract", ImexDataTransformerAugmentAbstract())]
 
-    interaction_types = ['phosphorylation', 'dephosphorylation', 'ubiquitination',
-                         'methylation', 'acetylation', 'deubiquitination', 'demethylation']
-
-    logger.info("Extracting interaction types {}".format( ",".join(interaction_types)))
+    logger.info("Extracting interaction types {}".format(",".join(interaction_types)))
     data_extractor = BulkImexProteinInteractionsExtractor(interaction_types)
     data_iter = data_extractor.get_protein_interactions(pathlib.Path(input_dir).glob('**/*.xml'))
 
@@ -92,10 +89,15 @@ def run(input_dir, out_file):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    interaction_types_csv = ",".join(['phosphorylation', 'dephosphorylation', 'ubiquitination',
+                                      'methylation', 'acetylation', 'deubiquitination', 'demethylation'])
     parser.add_argument("input_dir",
                         help="The input directory containing the imex files")
     parser.add_argument("out_file", help="Output file")
     parser.add_argument("--log-level", help="Log level", default="INFO", choices={"INFO", "WARN", "DEBUG", "ERROR"})
+    parser.add_argument("--interaction-types",
+                        help="A comma separated list of interactions. The interaction type must match the imex types. For more details see https://www.ebi.ac.uk/intact/validator/help.xhtml and https://www.ebi.ac.uk/ols/ontologies/mi/terms?obo_id=MI%3A0190",
+                        default=interaction_types_csv)
 
     args = parser.parse_args()
 
@@ -105,6 +107,8 @@ if __name__ == '__main__':
 
     logger = logging.getLogger(__name__)
     logger.info("Starting run with arguments...\n{}".format(args.__dict__))
-    run(args.input_dir,
-        args.out_file)
+
+    ## Run
+    interaction_types = [i.strip() for i in args.interaction_types.split(",") if i is not None and i.strip() != ""]
+    run(args.input_dir, args.out_file, interaction_types)
     logger.info("Completed run...")
