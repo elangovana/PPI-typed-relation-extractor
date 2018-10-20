@@ -21,7 +21,7 @@ class TestParser(TestCase):
 
         # Assert
         # Check the result length is accurate
-        self.assertEquals(len(actual), len(data))
+        self.assertEqual(len(actual), len(data))
         # Check that each record contains the correct number of text columns
         for i in range(len(actual)):
             self.assertEqual(len(actual[i]), len(data[i]))
@@ -30,4 +30,4 @@ class TestParser(TestCase):
             for j in range(len(actual[i])):
                 if j == label_index: continue
                 # The result contains the vocab index and the end of sentence token
-                self.assertEquals(len(actual[i][j]), len(data[i][j]) + 1)
+                self.assertEqual(len(actual[i][j]), len(data[i][j]) + 1)
