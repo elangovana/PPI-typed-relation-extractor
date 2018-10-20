@@ -1,10 +1,14 @@
 from unittest import TestCase
 
+from ddt import ddt, data
+
 from algorithms.Parser import Parser, UNKNOWN_WORD, EOS
 
 
+@ddt
 class TestParser(TestCase):
-    def test_transform_to_array(self):
+    @data((3), (-1))
+    def test_transform_to_array(self, label_index):
         # Arrange
         vocab = {"This": 0, "good": 1, UNKNOWN_WORD: 3, EOS: 4}
         data = [(["This", "is", "good"], ["entity1"], ["entity2"], "0"),
@@ -12,7 +16,7 @@ class TestParser(TestCase):
         sut = Parser()
 
         # Act
-        label_index = 3
+
         actual = sut.transform_to_array(data, label_index=label_index, vocab=vocab)
 
         # Assert
