@@ -2,7 +2,9 @@ from dataextractors.BulkImexProteinInteractionsExtractor import BulkImexProteinI
 
 
 class DataPrepPipeline:
-
+    """
+    Calls a bunch of tranforms on the steps to transforms one dataset to the other.
+    """
     def __init__(self, interactionlist=None):
         self.interactionlist = interactionlist or ['phosphorylation']
         self.data_reader = None
