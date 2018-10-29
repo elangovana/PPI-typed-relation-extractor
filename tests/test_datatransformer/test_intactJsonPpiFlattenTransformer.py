@@ -2,7 +2,7 @@ from unittest import TestCase
 
 import pandas as pd
 
-from datavisualiser.jsonPPIFlattenTransformer import IntactJsonPpiFlattenTransformer
+from datatransformer.jsonPPIFlattenTransformer import IntactJsonPpiFlattenTransformer
 
 
 class TestIntactJsonPpiFlattenTransformer(TestCase):
