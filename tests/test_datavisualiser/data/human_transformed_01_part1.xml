@@ -1,0 +1,906 @@
+<data xmlns:ns0="http://psi.hupo.org/mi/mif">
+    <pubmedid>17047155</pubmedid>
+    <ns0:interaction id="1243236" imexId="IM-17275-2">
+        <ns0:names>
+            <ns0:shortLabel>casp8-cflar-1</ns0:shortLabel>
+        </ns0:names>
+        <ns0:xref>
+            <ns0:primaryRef db="intact" dbAc="MI:0469" id="EBI-4567600" refType="identity" refTypeAc="MI:0356"/>
+            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-4567587" refType="see-also" refTypeAc="MI:0361"/>
+            <ns0:secondaryRef db="imex" dbAc="MI:0670" id="IM-17275-2" refType="imex-primary" refTypeAc="MI:0662"/>
+        </ns0:xref>
+        <ns0:experimentList>
+            <ns0:experimentRef>1243231</ns0:experimentRef>
+        </ns0:experimentList>
+        <ns0:participantList>
+            <ns0:participant id="1243237">
+                <ns0:names>
+                    <ns0:shortLabel>n/a</ns0:shortLabel>
+                </ns0:names>
+                <ns0:xref>
+                    <ns0:primaryRef db="intact" dbAc="MI:0469" id="EBI-4567605" refType="identity" refTypeAc="MI:0356"/>
+                </ns0:xref>
+                <ns0:interactorRef>1243232</ns0:interactorRef>
+                <ns0:biologicalRole>
+                    <ns0:names>
+                        <ns0:shortLabel>unspecified role</ns0:shortLabel>
+                        <ns0:fullName>unspecified role</ns0:fullName>
+                    </ns0:names>
+                    <ns0:xref>
+                        <ns0:primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499" refType="identity" refTypeAc="MI:0356"/>
+                        <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-77781" refType="identity"
+                                          refTypeAc="MI:0356"/>
+                        <ns0:secondaryRef db="pubmed" dbAc="MI:0446" id="14755292" refType="primary-reference"
+                                          refTypeAc="MI:0358"/>
+                    </ns0:xref>
+                </ns0:biologicalRole>
+                <ns0:experimentalRoleList>
+                    <ns0:experimentalRole>
+                        <ns0:names>
+                            <ns0:shortLabel>prey</ns0:shortLabel>
+                            <ns0:fullName>prey</ns0:fullName>
+                        </ns0:names>
+                        <ns0:xref>
+                            <ns0:primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0498" refType="identity"
+                                            refTypeAc="MI:0356"/>
+                            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-58" refType="identity"
+                                              refTypeAc="MI:0356"/>
+                            <ns0:secondaryRef db="pubmed" dbAc="MI:0446" id="14755292" refType="primary-reference"
+                                              refTypeAc="MI:0358"/>
+                        </ns0:xref>
+                    </ns0:experimentalRole>
+                </ns0:experimentalRoleList>
+            </ns0:participant>
+            <ns0:participant id="1243238">
+                <ns0:names>
+                    <ns0:shortLabel>n/a</ns0:shortLabel>
+                </ns0:names>
+                <ns0:xref>
+                    <ns0:primaryRef db="intact" dbAc="MI:0469" id="EBI-4567604" refType="identity" refTypeAc="MI:0356"/>
+                </ns0:xref>
+                <ns0:interactorRef>1243233</ns0:interactorRef>
+                <ns0:biologicalRole>
+                    <ns0:names>
+                        <ns0:shortLabel>unspecified role</ns0:shortLabel>
+                        <ns0:fullName>unspecified role</ns0:fullName>
+                    </ns0:names>
+                    <ns0:xref>
+                        <ns0:primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499" refType="identity" refTypeAc="MI:0356"/>
+                        <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-77781" refType="identity"
+                                          refTypeAc="MI:0356"/>
+                        <ns0:secondaryRef db="pubmed" dbAc="MI:0446" id="14755292" refType="primary-reference"
+                                          refTypeAc="MI:0358"/>
+                    </ns0:xref>
+                </ns0:biologicalRole>
+                <ns0:experimentalRoleList>
+                    <ns0:experimentalRole>
+                        <ns0:names>
+                            <ns0:shortLabel>prey</ns0:shortLabel>
+                            <ns0:fullName>prey</ns0:fullName>
+                        </ns0:names>
+                        <ns0:xref>
+                            <ns0:primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0498" refType="identity"
+                                            refTypeAc="MI:0356"/>
+                            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-58" refType="identity"
+                                              refTypeAc="MI:0356"/>
+                            <ns0:secondaryRef db="pubmed" dbAc="MI:0446" id="14755292" refType="primary-reference"
+                                              refTypeAc="MI:0358"/>
+                        </ns0:xref>
+                    </ns0:experimentalRole>
+                </ns0:experimentalRoleList>
+            </ns0:participant>
+            <ns0:participant id="1243239">
+                <ns0:names>
+                    <ns0:shortLabel>n/a</ns0:shortLabel>
+                </ns0:names>
+                <ns0:xref>
+                    <ns0:primaryRef db="intact" dbAc="MI:0469" id="EBI-4567603" refType="identity" refTypeAc="MI:0356"/>
+                </ns0:xref>
+                <ns0:interactorRef>1243234</ns0:interactorRef>
+                <ns0:biologicalRole>
+                    <ns0:names>
+                        <ns0:shortLabel>unspecified role</ns0:shortLabel>
+                        <ns0:fullName>unspecified role</ns0:fullName>
+                    </ns0:names>
+                    <ns0:xref>
+                        <ns0:primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499" refType="identity" refTypeAc="MI:0356"/>
+                        <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-77781" refType="identity"
+                                          refTypeAc="MI:0356"/>
+                        <ns0:secondaryRef db="pubmed" dbAc="MI:0446" id="14755292" refType="primary-reference"
+                                          refTypeAc="MI:0358"/>
+                    </ns0:xref>
+                </ns0:biologicalRole>
+                <ns0:experimentalRoleList>
+                    <ns0:experimentalRole>
+                        <ns0:names>
+                            <ns0:shortLabel>bait</ns0:shortLabel>
+                            <ns0:fullName>bait</ns0:fullName>
+                        </ns0:names>
+                        <ns0:xref>
+                            <ns0:primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0496" refType="identity"
+                                            refTypeAc="MI:0356"/>
+                            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-49" refType="identity"
+                                              refTypeAc="MI:0356"/>
+                            <ns0:secondaryRef db="pubmed" dbAc="MI:0446" id="14755292" refType="primary-reference"
+                                              refTypeAc="MI:0358"/>
+                        </ns0:xref>
+                    </ns0:experimentalRole>
+                </ns0:experimentalRoleList>
+            </ns0:participant>
+            <ns0:participant id="1243240">
+                <ns0:names>
+                    <ns0:shortLabel>n/a</ns0:shortLabel>
+                </ns0:names>
+                <ns0:xref>
+                    <ns0:primaryRef db="intact" dbAc="MI:0469" id="EBI-4567602" refType="identity" refTypeAc="MI:0356"/>
+                </ns0:xref>
+                <ns0:interactorRef>1243235</ns0:interactorRef>
+                <ns0:biologicalRole>
+                    <ns0:names>
+                        <ns0:shortLabel>unspecified role</ns0:shortLabel>
+                        <ns0:fullName>unspecified role</ns0:fullName>
+                    </ns0:names>
+                    <ns0:xref>
+                        <ns0:primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499" refType="identity" refTypeAc="MI:0356"/>
+                        <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-77781" refType="identity"
+                                          refTypeAc="MI:0356"/>
+                        <ns0:secondaryRef db="pubmed" dbAc="MI:0446" id="14755292" refType="primary-reference"
+                                          refTypeAc="MI:0358"/>
+                    </ns0:xref>
+                </ns0:biologicalRole>
+                <ns0:experimentalRoleList>
+                    <ns0:experimentalRole>
+                        <ns0:names>
+                            <ns0:shortLabel>prey</ns0:shortLabel>
+                            <ns0:fullName>prey</ns0:fullName>
+                        </ns0:names>
+                        <ns0:xref>
+                            <ns0:primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0498" refType="identity"
+                                            refTypeAc="MI:0356"/>
+                            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-58" refType="identity"
+                                              refTypeAc="MI:0356"/>
+                            <ns0:secondaryRef db="pubmed" dbAc="MI:0446" id="14755292" refType="primary-reference"
+                                              refTypeAc="MI:0358"/>
+                        </ns0:xref>
+                    </ns0:experimentalRole>
+                </ns0:experimentalRoleList>
+            </ns0:participant>
+        </ns0:participantList>
+        <ns0:interactionType>
+            <ns0:names>
+                <ns0:shortLabel>association</ns0:shortLabel>
+                <ns0:fullName>association</ns0:fullName>
+            </ns0:names>
+            <ns0:xref>
+                <ns0:primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0914" refType="identity" refTypeAc="MI:0356"/>
+                <ns0:secondaryRef db="pubmed" dbAc="MI:0446" id="14755292" refType="primary-reference"
+                                  refTypeAc="MI:0358"/>
+                <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-1813191" refType="identity" refTypeAc="MI:0356"/>
+            </ns0:xref>
+        </ns0:interactionType>
+        <ns0:modelled>false</ns0:modelled>
+        <ns0:intraMolecular>false</ns0:intraMolecular>
+        <ns0:negative>true</ns0:negative>
+        <ns0:attributeList>
+            <ns0:attribute name="figure legend" nameAc="MI:0599">2a</ns0:attribute>
+            <ns0:attribute name="negative">The interaction does not occur under these experimental conditions.
+            </ns0:attribute>
+        </ns0:attributeList>
+    </ns0:interaction>
+    <ns0:experimentDescription id="1243231">
+        <ns0:names>
+            <ns0:shortLabel>rebe-2007-2</ns0:shortLabel>
+            <ns0:fullName>Caspase-8 prevents sustained activation of NF-kappaB in monocytes undergoing macrophagic
+                differentiation.
+            </ns0:fullName>
+        </ns0:names>
+        <ns0:bibref>
+            <ns0:xref>
+                <ns0:primaryRef db="pubmed" dbAc="MI:0446" id="17047155" refType="primary-reference"
+                                refTypeAc="MI:0358"/>
+            </ns0:xref>
+        </ns0:bibref>
+        <ns0:xref>
+            <ns0:primaryRef db="intact" dbAc="MI:0469" id="EBI-4567593" refType="identity" refTypeAc="MI:0356"/>
+            <ns0:secondaryRef db="imex" dbAc="MI:0670" id="IM-17275" refType="imex-primary" refTypeAc="MI:0662"/>
+            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-4567550" refType="see-also" refTypeAc="MI:0361"/>
+        </ns0:xref>
+        <ns0:hostOrganismList>
+            <ns0:hostOrganism ncbiTaxId="9606">
+                <ns0:names>
+                    <ns0:shortLabel>human-monocyte</ns0:shortLabel>
+                    <ns0:fullName>Human mononuclear cells</ns0:fullName>
+                </ns0:names>
+                <ns0:tissue>
+                    <ns0:names>
+                        <ns0:shortLabel>monocyte</ns0:shortLabel>
+                        <ns0:fullName>Monocyte, mononuclear cell</ns0:fullName>
+                    </ns0:names>
+                    <ns0:xref>
+                        <ns0:primaryRef db="mint" dbAc="MI:0471" id="MINT-8286755" refType="identity"
+                                        refTypeAc="MI:0356"/>
+                        <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-1810080" refType="identity"
+                                          refTypeAc="MI:0356"/>
+                        <ns0:secondaryRef db="brenda" dbAc="MI:0864" id="BTO:0000876" refType="identity"
+                                          refTypeAc="MI:0356"/>
+                    </ns0:xref>
+                </ns0:tissue>
+            </ns0:hostOrganism>
+        </ns0:hostOrganismList>
+        <ns0:interactionDetectionMethod>
+            <ns0:names>
+                <ns0:shortLabel>anti bait coip</ns0:shortLabel>
+                <ns0:fullName>anti bait coimmunoprecipitation</ns0:fullName>
+                <ns0:alias type="synonym" typeAc="MI:1041">anti bait coip</ns0:alias>
+            </ns0:names>
+            <ns0:xref>
+                <ns0:primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0006" refType="identity" refTypeAc="MI:0356"/>
+                <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-976" refType="identity" refTypeAc="MI:0356"/>
+                <ns0:secondaryRef db="pubmed" dbAc="MI:0446" id="7708014" refType="primary-reference"
+                                  refTypeAc="MI:0358"/>
+            </ns0:xref>
+        </ns0:interactionDetectionMethod>
+        <ns0:participantIdentificationMethod>
+            <ns0:names>
+                <ns0:shortLabel>western blot</ns0:shortLabel>
+                <ns0:fullName>western blot</ns0:fullName>
+                <ns0:alias type="synonym" typeAc="MI:1041">Immuno blot</ns0:alias>
+                <ns0:alias type="go synonym" typeAc="MI:0303">Immuno blot</ns0:alias>
+            </ns0:names>
+            <ns0:xref>
+                <ns0:primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0113" refType="identity" refTypeAc="MI:0356"/>
+                <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-973" refType="identity" refTypeAc="MI:0356"/>
+                <ns0:secondaryRef db="pubmed" dbAc="MI:0446" id="14755292" refType="primary-reference"
+                                  refTypeAc="MI:0358"/>
+            </ns0:xref>
+        </ns0:participantIdentificationMethod>
+        <ns0:attributeList>
+            <ns0:attribute name="author-list" nameAc="MI:0636">Rebe C., Cathelin S., Launay S., Filomenko R., Prevotat
+                L., L'Ollivier C., Gyan E., Micheau O., Grant S., Dubart-Kupperschmitt A., Fontenay M., Solary E.
+            </ns0:attribute>
+            <ns0:attribute name="dataset" nameAc="MI:0875">Apoptosis - Interactions involving proteins with a function
+                related to apoptosis
+            </ns0:attribute>
+            <ns0:attribute name="negative">This experiment relates to a negative interaction.</ns0:attribute>
+            <ns0:attribute name="exp-modification" nameAc="MI:0627">The cells used in this experiment were
+                differenciated to macrophages by TPA treatment.
+            </ns0:attribute>
+            <ns0:attribute name="contact-email" nameAc="MI:0634">esolary@u-bourgogne.fr</ns0:attribute>
+            <ns0:attribute name="journal" nameAc="MI:0885">Blood (0006-4971)</ns0:attribute>
+            <ns0:attribute name="publication year" nameAc="MI:0886">2007</ns0:attribute>
+            <ns0:attribute name="full coverage" nameAc="MI:0957">Only protein-protein interactions</ns0:attribute>
+            <ns0:attribute name="imex curation" nameAc="MI:0959"/>
+            <ns0:attribute name="curation depth" nameAc="MI:0955">imex curation</ns0:attribute>
+        </ns0:attributeList>
+    </ns0:experimentDescription>
+    <ns0:interactor id="1243232">
+        <ns0:names>
+            <ns0:shortLabel>fadd_human</ns0:shortLabel>
+            <ns0:fullName>FAS-associated death domain protein</ns0:fullName>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">FAS-associating death domain-containing protein
+            </ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">Mediator of receptor induced toxicity</ns0:alias>
+            <ns0:alias type="gene name" typeAc="MI:0301">FADD</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">MORT1</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">Protein FADD</ns0:alias>
+            <ns0:alias type="orf name" typeAc="MI:0306">GIG3</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">Growth-inhibiting gene 3 protein</ns0:alias>
+        </ns0:names>
+        <ns0:xref>
+            <ns0:primaryRef db="uniprotkb" dbAc="MI:0486" id="Q13158" refType="identity" refTypeAc="MI:0356"
+                            version="SP_82"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0006919"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0002821"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0048536"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q6IBR4" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_92"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097191"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5218900"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="1E3Y"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-9013957"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="1E41"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0042104"/>
+            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-494804" refType="identity" refTypeAc="MI:0356"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0045651"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097190"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0032729"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0035877"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-3371378"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-75158"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0060546"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-75157"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0044297"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0045944"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="3EZQ"/>
+            <ns0:secondaryRef db="dip" dbAc="MI:0465" id="DIP-286N"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:2000454"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0048148"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0036462"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0048538"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0035666"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0051607"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-69416"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0043123"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="3OQ9"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0032760"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENST00000301838"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0032757"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0008625"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0042802"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0005634"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0043278"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097192"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0060340"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5357786"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENSG00000168040"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0071260"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5213460"/>
+            <ns0:secondaryRef db="mint" dbAc="MI:0471" id="Q13158"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0034138"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0016032"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:1902043"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0045087"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0005886"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR001875"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0005737"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:1902042"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR016729"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0032813"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0006915"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0001916"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:2001238"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097527"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-2562578"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0070236"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097049"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0033077"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0043029"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="1A1Z"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="1A1W"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0007166"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR000488"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0005123"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:1902041"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR011029"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0071550"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097342"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0031264"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="2GF5"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0045121"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0043065"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0043005"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0005829"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0031265"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-933543"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="NP_003815.1"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-140534"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097202"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0045862"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0002020"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0089720"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENSP00000301838"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0048535"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q14866" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_82"/>
+        </ns0:xref>
+        <ns0:interactorType>
+            <ns0:names>
+                <ns0:shortLabel>protein</ns0:shortLabel>
+                <ns0:fullName>protein</ns0:fullName>
+            </ns0:names>
+            <ns0:xref>
+                <ns0:primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326" refType="identity" refTypeAc="MI:0356"/>
+                <ns0:secondaryRef db="so" dbAc="MI:0601" id="SO:0000358" refType="see-also" refTypeAc="MI:0361"/>
+                <ns0:secondaryRef db="pubmed" dbAc="MI:0446" id="14755292" refType="primary-reference"
+                                  refTypeAc="MI:0358"/>
+                <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-619654" refType="identity" refTypeAc="MI:0356"/>
+            </ns0:xref>
+        </ns0:interactorType>
+        <ns0:organism ncbiTaxId="9606">
+            <ns0:names>
+                <ns0:shortLabel>human</ns0:shortLabel>
+                <ns0:fullName>Homo sapiens</ns0:fullName>
+                <ns0:alias type="synonym" typeAc="MI:1041">Human</ns0:alias>
+            </ns0:names>
+        </ns0:organism>
+        <ns0:sequence>
+            MDPFLVLLHSVSSSLSSSELTELKFLCLGRVGKRKLERVQSGLDLFSMLLEQNDLEPGHTELLRELLASLRRHDLLRRVDDFEAGAAAGAAPGEEDLCAAFNVICDNVGKDWRRLARQLKVSDTKIDSIEDRYPRNLTERVRESLRIWKNTEKENATVAHLVGALRSCQMNLVADLVQEVQQARDLQNRSGAMSPMSWNSDASTSEAS
+        </ns0:sequence>
+        <ns0:attributeList>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q13158 original sequence version: 155
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q13158 original sequence version: 130
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q13158 original sequence version: 110
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q13158 original sequence version: 118
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q13158 original sequence version: 141
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q13158 original sequence version: 166
+            </ns0:attribute>
+        </ns0:attributeList>
+    </ns0:interactor>
+    <ns0:interactor id="1243233">
+        <ns0:names>
+            <ns0:shortLabel>ripk1_human</ns0:shortLabel>
+            <ns0:fullName>Receptor-interacting serine/threonine-protein kinase 1</ns0:fullName>
+            <ns0:alias type="gene name" typeAc="MI:0301">RIPK1</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">RIP</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">Serine/threonine-protein kinase RIP</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">Cell death protein RIP</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">RIP1</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">Receptor-interacting protein 1</ns0:alias>
+        </ns0:names>
+        <ns0:xref>
+            <ns0:primaryRef db="uniprotkb" dbAc="MI:0486" id="Q13546" refType="identity" refTypeAc="MI:0356"
+                            version="SP_86"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097191"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-9013957"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="XP_005249514.2"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR011009"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0010940"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0004871"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-3295583"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5689880"/>
+            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-358507" refType="identity" refTypeAc="MI:0356"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-3371378"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0046330"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0045944"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0001934"/>
+            <ns0:secondaryRef db="mint" dbAc="MI:0471" id="Q13546"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0035666"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0043123"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0032757"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENSG00000137275"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0031625"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0042802"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0043235"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0007249"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="6C4D"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5213460"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0005524"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q59H33" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_97"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0016032"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0034138"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="A0AV89" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_86"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0010008"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR000719"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="5HX6"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:2001238"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="6C3E"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0044877"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="4ITJ"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="4NEU"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENSP00000259808"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:1905206"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR000488"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:1902041"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0002756"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR011029"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097342"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR037934"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0005829"/>
+            <ns0:secondaryRef db="dip" dbAc="MI:0465" id="DIP-433N" refType="identity" refTypeAc="MI:0356"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-933543"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-140534"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="B2RAG1" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_97"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0070513"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:2001240"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="4ITH"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0060545"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0006919"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENSP00000369773"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5218900"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0034612"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENST00000380409"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0045651"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-1810476"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5357956"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097190"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0071363"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0070231"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-937041"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0043068"/>
+            <ns0:secondaryRef db="dip" dbAc="MI:0465" id="DIP-433N"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:1990000"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="5TX5"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5357905"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0070266"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-69416"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="NP_003795.2"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0005739"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0004674"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0043124"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0032760"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0046777"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0016579"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0051291"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0051260"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5357786"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENST00000259808"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5689896"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0033209"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="B4E3F9" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_97"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0044257"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0007257"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:1901026"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR008271"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0004672"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5675482"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:1902042"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0006915"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:2001237"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097527"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-2562578"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0070926"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0036289"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:2000379"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0071356"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR001245"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0005123"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0071550"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="4ITI"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0031264"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR025735"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0045121"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0043065"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-168927"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0051092"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0010803"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097343"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q13180" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_86"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-75893"/>
+        </ns0:xref>
+        <ns0:interactorType>
+            <ns0:names>
+                <ns0:shortLabel>protein</ns0:shortLabel>
+                <ns0:fullName>protein</ns0:fullName>
+            </ns0:names>
+            <ns0:xref>
+                <ns0:primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326" refType="identity" refTypeAc="MI:0356"/>
+                <ns0:secondaryRef db="so" dbAc="MI:0601" id="SO:0000358" refType="see-also" refTypeAc="MI:0361"/>
+                <ns0:secondaryRef db="pubmed" dbAc="MI:0446" id="14755292" refType="primary-reference"
+                                  refTypeAc="MI:0358"/>
+                <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-619654" refType="identity" refTypeAc="MI:0356"/>
+            </ns0:xref>
+        </ns0:interactorType>
+        <ns0:organism ncbiTaxId="9606">
+            <ns0:names>
+                <ns0:shortLabel>human</ns0:shortLabel>
+                <ns0:fullName>Homo sapiens</ns0:fullName>
+                <ns0:alias type="synonym" typeAc="MI:1041">Human</ns0:alias>
+            </ns0:names>
+        </ns0:organism>
+        <ns0:sequence>
+            MQPDMSLNVIKMKSSDFLESAELDSGGFGKVSLCFHRTQGLMIMKTVYKGPNCIEHNEALLEEAKMMNRLRHSRVVKLLGVIIEEGKYSLVMEYMEKGNLMHVLKAEMSTPLSVKGRIILEIIEGMCYLHGKGVIHKDLKPENILVDNDFHIKIADLGLASFKMWSKLNNEEHNELREVDGTAKKNGGTLYYMAPEHLNDVNAKPTEKSDVYSFAVVLWAIFANKEPYENAICEQQLIMCIKSGNRPDVDDITEYCPREIISLMKLCWEANPEARPTFPGIEEKFRPFYLSQLEESVEEDVKSLKKEYSNENAVVKRMQSLQLDCVAVPSSRSNSATEQPGSLHSSQGLGMGPVEESWFAPSLEHPQEENEPSLQSKLQDEANYHLYGSRMDRQTKQQPRQNVAYNREEERRRRVSHDPFAQQRPYENFQNTEGKGTAYSSAASHGNAVHQPSGLTSQPQVLYQNNGLYSSHGFGTRPLDPGTAGPRVWYRPIPSHMPSLHNIPVPETNYLGNTPTMPFSSLPPTDESIKYTIYNSTGIQIGAYNYMEIGGTSSSLLDSTNTNFKEEPAAKYQAIFDNTTSLTDKHLDPIRENLGKHWKNCARKLGFTQSQIDEIDHDYERDGLKEKVYQMLQKWVMREGIKGATVGKLAQALHQCSRIDLLSSLIYVSQN
+        </ns0:sequence>
+        <ns0:attributeList>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q13546 original sequence version: 158
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q13546-1 original sequence version: 140
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q13546 original sequence version: 146
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q13546-1 original sequence version: 146
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q13546 original sequence version: 134
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q13546 original sequence version: 109
+            </ns0:attribute>
+        </ns0:attributeList>
+    </ns0:interactor>
+    <ns0:interactor id="1243234">
+        <ns0:names>
+            <ns0:shortLabel>casp8_human</ns0:shortLabel>
+            <ns0:fullName>Caspase-8</ns0:fullName>
+            <ns0:alias type="gene name" typeAc="MI:0301">CASP8</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">MCH5</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">ICE-like apoptotic protease 5</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">MORT1-associated ced-3 homolog</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">FADD-homologous ICE/ced-3-like protease</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">FADD-like ICE</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">Apoptotic cysteine protease</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">Apoptotic protease Mch-5</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">CAP4</ns0:alias>
+        </ns0:names>
+        <ns0:xref>
+            <ns0:primaryRef db="uniprotkb" dbAc="MI:0486" id="Q14790" refType="identity" refTypeAc="MI:0356"
+                            version="SP_107"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-264870"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097191"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="1QTN"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="2FUN"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="XP_006712852.1"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-9013957"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="XP_005246944.1"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="XP_005246947.1"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="NP_203520.1"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0032496"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0035877"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-3371378"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-75158"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0042113"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:1901216"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q53TT5" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="4JJ7"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0004197"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENST00000323492"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0035666"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0070423"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0043123"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0008233"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="3KJQ"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="2Y1L"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENSP00000264275"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0060544"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q8TDI2" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0031625"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0042802"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q14795" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0009409"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="NP_203522.1"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="XP_005246949.1"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="4ZBW"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5213460"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q8TDI3" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0034138"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR015917"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="3H11"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0006508"/>
+            <ns0:secondaryRef db="dip" dbAc="MI:0465" id="DIP-30915N"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q14792" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="4PS1"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q9UQ81" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-78060" refType="identity" refTypeAc="MI:0356"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-168638"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q8TDI5" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR033170"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0032025"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-75153"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0007166"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0005654"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:1902041"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR011029"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097342"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0030225"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:1900740"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="XP_005246948.1"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="5H31"/>
+            <ns0:secondaryRef db="dip" dbAc="MI:0465" id="DIP-30915N" refType="identity" refTypeAc="MI:0356"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENSP00000351273"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0051603"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0005829"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0005741"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0031265"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-933543"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENST00000264275"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-140534"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="1QDU"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR016129"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0006919"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5218900"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0034612"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENSP00000376087"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0005856"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0060715"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q14796" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="mint" dbAc="MI:0471" id="Q14790"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="5H33"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0045651"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0032355"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097190"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q96T22" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0045471"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR029030"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-75157"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0044297"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="XP_006712856.1"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR033139"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5357905"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0008234"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENSP00000412523"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0030101"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR001309"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="1F9E"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="XP_005246943.1"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="O14676" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0036462"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097296"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q8TDI1" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENST00000392258"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENSP00000264274"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-111465"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5660668"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097199"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-69416"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q14794" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0005739"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0043124"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENST00000432109"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENSP00000325722"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q15806" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-75108"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5357786"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="NP_001219.2"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENST00000358485"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENST00000392263"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="5JQE"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0071260"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097153"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="NP_203519.1"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0039650"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097110"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q8TDI4" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR001875"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-5675482"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:1902042"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097200"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="XP_005246946.1"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0006915"/>
+            <ns0:secondaryRef db="reactome" dbAc="MI:0467" id="R-HSA-2562578"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="3KJN"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="NP_001073594.1"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097194"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q15780" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q14793" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="2K7Z"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="NP_001073593.1"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0071407"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="1I4E"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0071550"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENST00000264274"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0042110"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="XP_006712853.1"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0031264"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q9C0K4" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0045121"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0043005"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="4PRZ"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0010803"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0097202"/>
+            <ns0:secondaryRef db="go" dbAc="MI:0448" id="GO:0045862"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="5L08"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENSG00000064012"/>
+            <ns0:secondaryRef db="rcsb pdb" dbAc="MI:0460" id="2C2Z"/>
+            <ns0:secondaryRef db="refseq" dbAc="MI:0481" id="XP_005246945.1"/>
+            <ns0:secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q14791" refType="secondary-ac" refTypeAc="MI:0360"
+                              version="SP_107"/>
+            <ns0:secondaryRef db="interpro" dbAc="MI:0449" id="IPR002138"/>
+            <ns0:secondaryRef db="ensembl" dbAc="MI:0476" id="ENSP00000376091"/>
+        </ns0:xref>
+        <ns0:interactorType>
+            <ns0:names>
+                <ns0:shortLabel>protein</ns0:shortLabel>
+                <ns0:fullName>protein</ns0:fullName>
+            </ns0:names>
+            <ns0:xref>
+                <ns0:primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326" refType="identity" refTypeAc="MI:0356"/>
+                <ns0:secondaryRef db="so" dbAc="MI:0601" id="SO:0000358" refType="see-also" refTypeAc="MI:0361"/>
+                <ns0:secondaryRef db="pubmed" dbAc="MI:0446" id="14755292" refType="primary-reference"
+                                  refTypeAc="MI:0358"/>
+                <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-619654" refType="identity" refTypeAc="MI:0356"/>
+            </ns0:xref>
+        </ns0:interactorType>
+        <ns0:organism ncbiTaxId="9606">
+            <ns0:names>
+                <ns0:shortLabel>human</ns0:shortLabel>
+                <ns0:fullName>Homo sapiens</ns0:fullName>
+                <ns0:alias type="synonym" typeAc="MI:1041">Human</ns0:alias>
+            </ns0:names>
+        </ns0:organism>
+        <ns0:sequence>
+            MDFSRNLYDIGEQLDSEDLASLKFLSLDYIPQRKQEPIKDALMLFQRLQEKRMLEESNLSFLKELLFRINRLDLLITYLNTRKEEMERELQTPGRAQISAYRVMLYQISEEVSRSELRSFKFLLQEEISKCKLDDDMNLLDIFIEMEKRVILGEGKLDILKRVCAQINKSLLKIINDYEEFSKERSSSLEGSPDEFSNGEELCGVMTISDSPREQDSESQTLDKVYQMKSKPRGYCLIINNHNFAKAREKVPKLHSIRDRNGTHLDAGALTTTFEELHFEIKPHDDCTVEQIYEILKIYQLMDHSNMDCFICCILSHGDKGIIYGTDGQEAPIYELTSQFTGLKCPSLAGKPKVFFIQACQGDNYQKGIPVETDSEEQPYLEMDLSSPQTRYIPDEADFLLGMATVNNCVSYRNPAEGTWYIQSLCQSLRERCPRGDDILTILTEVNYEVSNKDDKKNMGKQMPQPTFTLRKKLVFPSD
+        </ns0:sequence>
+        <ns0:attributeList>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q14790 original sequence version: 184
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q14790 original sequence version: 135
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q14790 original sequence version: 136
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q14790 original sequence version: 147
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q14790 original sequence version: 146
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q14790 original sequence version: 170
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q14790 original sequence version: 198
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q14790-1 original sequence version: 197
+            </ns0:attribute>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein Q14790 original sequence version: 158
+            </ns0:attribute>
+        </ns0:attributeList>
+    </ns0:interactor>
+    <ns0:interactor id="1243235">
+        <ns0:names>
+            <ns0:shortLabel>o15519-1</ns0:shortLabel>
+            <ns0:fullName>CASP8 and FADD-like apoptosis regulator</ns0:fullName>
+            <ns0:alias type="isoform synonym" typeAc="MI:0304">FLIP-L</ns0:alias>
+            <ns0:alias type="isoform synonym" typeAc="MI:0304">CLARP1</ns0:alias>
+            <ns0:alias type="isoform synonym" typeAc="MI:0304">MRIT alpha-1</ns0:alias>
+            <ns0:alias type="isoform synonym" typeAc="MI:0304">CASH alpha</ns0:alias>
+            <ns0:alias type="isoform synonym" typeAc="MI:0304">I-FLICE 1</ns0:alias>
+            <ns0:alias type="isoform synonym" typeAc="MI:0304">FLAME-1 gamma</ns0:alias>
+            <ns0:alias type="isoform synonym" typeAc="MI:0304">Usurpin alpha</ns0:alias>
+            <ns0:alias type="gene name" typeAc="MI:0301">CFLAR</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">CASH</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">CASP8AP1</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">CLARP</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">MRIT</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">Caspase homolog</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">Caspase-eight-related protein</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">Caspase-like apoptosis regulatory protein</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">Cellular FLICE-like inhibitory protein</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">FADD-like antiapoptotic molecule 1</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">Inhibitor of FLICE</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">MACH-related inducer of toxicity</ns0:alias>
+            <ns0:alias type="gene name synonym" typeAc="MI:0302">Usurpin</ns0:alias>
+        </ns0:names>
+        <ns0:xref>
+            <ns0:primaryRef db="uniprotkb" dbAc="MI:0486" id="O15519-1" refType="identity" refTypeAc="MI:0356"/>
+            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-7093972" refType="intact-secondary"/>
+            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-7093827" refType="intact-secondary"/>
+            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-7093876" refType="intact-secondary"/>
+            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-7093724" refType="intact-secondary"/>
+            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-7093779" refType="intact-secondary"/>
+            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-7158298" refType="intact-secondary"/>
+            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-7093921" refType="intact-secondary"/>
+            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-514941" refType="isoform-parent" refTypeAc="MI:0243"/>
+            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-8019287" refType="intact-secondary"/>
+            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="MINT-2589696" refType="intact-secondary"/>
+            <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-4567563" refType="identity" refTypeAc="MI:0356"/>
+        </ns0:xref>
+        <ns0:interactorType>
+            <ns0:names>
+                <ns0:shortLabel>protein</ns0:shortLabel>
+                <ns0:fullName>protein</ns0:fullName>
+            </ns0:names>
+            <ns0:xref>
+                <ns0:primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326" refType="identity" refTypeAc="MI:0356"/>
+                <ns0:secondaryRef db="so" dbAc="MI:0601" id="SO:0000358" refType="see-also" refTypeAc="MI:0361"/>
+                <ns0:secondaryRef db="pubmed" dbAc="MI:0446" id="14755292" refType="primary-reference"
+                                  refTypeAc="MI:0358"/>
+                <ns0:secondaryRef db="intact" dbAc="MI:0469" id="EBI-619654" refType="identity" refTypeAc="MI:0356"/>
+            </ns0:xref>
+        </ns0:interactorType>
+        <ns0:organism ncbiTaxId="9606">
+            <ns0:names>
+                <ns0:shortLabel>human</ns0:shortLabel>
+                <ns0:fullName>Homo sapiens</ns0:fullName>
+                <ns0:alias type="synonym" typeAc="MI:1041">Human</ns0:alias>
+            </ns0:names>
+        </ns0:organism>
+        <ns0:sequence>
+            MSAEVIHQVEEALDTDEKEMLLFLCRDVAIDVVPPNVRDLLDILRERGKLSVGDLAELLYRVRRFDLLKRILKMDRKAVETHLLRNPHLVSDYRVLMAEIGEDLDKSDVSSLIFLMKDYMGRGKISKEKSFLDLVVELEKLNLVAPDQLDLLEKCLKNIHRIDLKTKIQKYKQSVQGAGTSYRNVLQAAIQKSLKDPSNNFRLHNGRSKEQRLKEQLGAQQEPVKKSIQESEAFLPQSIPEERYKMKSKPLGICLIIDCIGNETELLRDTFTSLGYEVQKFLHLSMHGISQILGQFACMPEHRDYDSFVCVLVSRGGSQSVYGVDQTHSGLPLHHIRRMFMGDSCPYLAGKPKMFFIQNYVVSEGQLEDSSLLEVDGPAMKNVEFKAQKRGLCTVHREADFFWSLCTADMSLLEQSHSSPSLYLQCLSQKLRQERKRPLLDLHIELNGYMYDWNSRVSAKEKYYVWLQHTLRKKLILSYT
+        </ns0:sequence>
+        <ns0:attributeList>
+            <ns0:attribute name="comment" nameAc="MI:0612">DIP protein O15519-1 original sequence version: 143
+            </ns0:attribute>
+        </ns0:attributeList>
+    </ns0:interactor>
+</data>
+

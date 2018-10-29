@@ -9,7 +9,7 @@ from unittest.mock import MagicMock
 
 from ddt import ddt, data, unpack
 
-from datatransformer.imexDataPreprocessorFlattenXml import ImexDataPreprocessorFlattenXml
+from datavisualiser.imexDataPreprocessorFlattenXml import ImexDataPreprocessorFlattenXml
 
 
 @ddt

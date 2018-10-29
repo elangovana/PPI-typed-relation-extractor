@@ -4,12 +4,12 @@ import os
 
 from aws_requests_auth.aws_auth import AWSRequestsAuth
 
-from datatransformer.imexDataPreprocessorFlattenXml import ImexDataPreprocessorFlattenXml
+from datavisualiser.imexDataPreprocessorFlattenXml import ImexDataPreprocessorFlattenXml
 from datavisualiser.ImexJsonProcessorElasticSearchLoader import ImexJsonProcessorElasticSearchLoader
-from datatransformer.ImexJsonProcessorFileWriter import ImexJsonProcessorFileWriter
+from datavisualiser.ImexJsonProcessorFileWriter import ImexJsonProcessorFileWriter
 from datavisualiser.elasticSearchWrapper import connectES
 
-from datatransformer.Processors import Processors
+from datavisualiser.Processors import Processors
 
 
 def bulk_run(data_dir, processor):

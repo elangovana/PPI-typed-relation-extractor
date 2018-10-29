@@ -3,9 +3,9 @@ import logging
 import os
 
 
-from datatransformer.ImexJsonProcessorFileWriter import ImexJsonProcessorFileWriter
-from datatransformer.Processors import Processors
-from datatransformer.imexDataPreprocessorFlattenXml import ImexDataPreprocessorFlattenXml
+from datavisualiser.ImexJsonProcessorFileWriter import ImexJsonProcessorFileWriter
+from datavisualiser.Processors import Processors
+from datavisualiser.imexDataPreprocessorFlattenXml import ImexDataPreprocessorFlattenXml
 
 
 def bulk_run(data_dir, processor):
