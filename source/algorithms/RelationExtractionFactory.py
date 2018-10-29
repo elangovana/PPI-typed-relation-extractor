@@ -9,7 +9,8 @@ from algorithms.Train import Train
 class RelationExtractionFactory:
 
     def __init__(self, embedding_handle, embedding_dim: int, class_size: int, learning_rate: float = 0.01,
-                 momentum: float = 0.9):
+                 momentum: float = 0.9, ngram: int = 3):
+        self.ngram = ngram
         self.embedding_dim = embedding_dim
         self.embedding_handle = embedding_handle
         self.class_size = class_size
@@ -76,22 +77,36 @@ class RelationExtractionFactory:
     def embedder_loader(self, value):
         self.__embedder_loader__ = value
 
-    def __call__(self, data, vocab=None):
+    def __call__(self, data, labels):
+        """
+
+        :type data: Dataframe
+        """
         min_words_dict = self.parser.get_min_dictionary()
 
-        ## Initialise these with random weights
+        # Initialise minwords with random weights
         min_words_weights_dict = {}
         for word in min_words_dict.keys():
             min_words_weights_dict[word] = nn.Embedding(1, self.embedding_dim).weight.detach().numpy().tolist()[0]
 
         vocab, embedding_array = self.embedder_loader(self.embedding_handle, min_words_weights_dict)
 
-        # TODO Clean this
-        model = self.model_network(self.class_size, self.embedding_dim, embedding_array)
-        processed_data = self.parser.transform_to_array(data, vocab=vocab, with_label=True)
+        # Extract words
+        data = data.applymap(lambda x: self.parser.split_text(self.parser.normalize_text(x)))
 
+        # TODO Clean this
+        model = self.model_network(self.class_size, self.embedding_dim, embedding_array, ngram_context_size=self.ngram)
+        processed_data = self.parser.transform_to_array(data.values.tolist(), vocab=vocab)
+
+        #converts labels to int ..
+        labels = self.parser.encode_labels(labels)
+
+        data_formatted = [(l, f) for l, f in zip(labels, processed_data)]
+
+        # Set up optimiser
         optimiser = self.optimiser(params=model.parameters(),
                                    lr=self.learning_rate,
                                    momentum=self.momentum)
 
-        self.trainer(processed_data, model, self.loss_function, optimiser)
+        # Invoke trainer
+        self.trainer(data_formatted, model, self.loss_function, optimiser)

@@ -19,11 +19,9 @@ Runs train...
 
         for epoch in range(epoch):
             total_loss = 0
-            for batch_x, batch_y in train_loader:
+            for  batch_y, batch_x in train_loader:
                 #for feature, target in zip(batch_x, batch_y):
-                    # Step 1. Prepare the inputs to be passed to the model (i.e, turn the words
-                    # into integer indices and wrap them in tensors)
-                    context_idxs = torch.tensor(batch_x, dtype=torch.long)
+
 
                     # Step 2. Recall that torch *accumulates* gradients. Before passing in a
                     # new instance, you need to zero out the gradients from the old
@@ -32,7 +30,7 @@ Runs train...
 
                     # Step 3. Run the forward pass, getting log probabilities over next
                     # words
-                    predicted = model_network(context_idxs)
+                    predicted = model_network(batch_x)
 
                     # Step 4. Compute your loss function. (Again, Torch wants the target
                     # word wrapped in a tensor)

@@ -1,6 +1,8 @@
 import collections
 
 import numpy
+from sklearn import preprocessing
+
 
 UNKNOWN_WORD = '<unk>'
 
@@ -64,3 +66,7 @@ Transforms the dataset containing text into an dataset containing an array of vo
             result.append(tokenised)
 
         return result
+
+    def encode_labels(self, y):
+        le = preprocessing.LabelEncoder()
+        return le.fit_transform(y)

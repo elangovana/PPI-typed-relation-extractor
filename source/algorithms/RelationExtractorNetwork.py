@@ -6,7 +6,7 @@ import torch.nn.functional as F
 class RelationExtractorNetwork(nn.Module):
 
     def __init__(self, class_size, embedding_dim, pretrained_weights_or_embed_vocab_size,
-                 ngram_context_size=1,
+                 ngram_context_size=3,
                  seed=777):
         """
 Extracts relationship using a single layer
@@ -28,7 +28,9 @@ Extracts relationship using a single layer
 
     def forward(self, inputs):
         ## Average the embedding words in sentence to represent the sentence embededding
-        embeds = torch.sum(self.embeddings(inputs), dim=1) / len(inputs)
+        concat_inputs = torch.cat(inputs, dim=1)
+        concat_inputs= torch.tensor(concat_inputs, dtype=torch.long)
+        embeds = torch.sum(self.embeddings(concat_inputs), dim=1) / len(inputs)
         out = F.relu(self.linear1(embeds))
         out = self.output_layer(out)
         log_probs = F.log_softmax(out, dim=1)
