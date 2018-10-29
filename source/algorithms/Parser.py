@@ -47,36 +47,20 @@ class Parser:
             ids.append(eos_id)
         return numpy.array(ids, numpy.int32)
 
-    def transform_to_array(self, dataset, vocab: dict, label_index: int):
+    def transform_to_array(self, dataset, vocab: dict):
         """
 Transforms the dataset containing text into an dataset containing an array of vocab indices.
-        :param label_index: Specify the index of the label column. If no label pass -1. The label must a type convertable to int
-        :param dataset: Each row in the dataset is a iterable ( [tokensied text1], [tokensied text2], label) or tuple( [tokensied text1], [tokensied text2]) if label_index is -1. The label has to be an type convertable to int
+        :param dataset: Each row is a list of tokens
         :param vocab: Vocabulary to use
         :return: Return a list of lists, where each row consist of vocab indices except for the toke index
         """
 
-        if label_index >= 0:
-            # Has labels
-            # TODO: repeat code block, refactor
-            result = []
-            for r in dataset:
-                tokenised = []
-                i = 0
-                for text_col in r:
-                    # If label, do not tokenise
-                    if i == label_index:
-                        tokenised.append(int(text_col))
-                        continue
-                    tokenised.append(self.make_array(text_col, vocab))
-                    i += 1
-                result.append(tokenised)
-        else:
-            result = []
-            for r in dataset:
-                tokenised = []
-                for text_col in r:
-                    tokenised.append(self.make_array(text_col, vocab))
-                result.append(tokenised)
+
+        result = []
+        for r in dataset:
+            tokenised = []
+            for token in r:
+                tokenised.append(self.make_array(token, vocab))
+            result.append(tokenised)
 
         return result
