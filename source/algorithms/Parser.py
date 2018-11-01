@@ -3,7 +3,6 @@ import collections
 import numpy
 from sklearn import preprocessing
 
-
 UNKNOWN_WORD = '<unk>'
 
 EOS = '<eos>'
@@ -57,7 +56,6 @@ Transforms the dataset containing text into an dataset containing an array of vo
         :return: Return a list of lists, where each row consist of vocab indices except for the toke index
         """
 
-
         result = []
         for r in dataset:
             tokenised = []
@@ -67,6 +65,12 @@ Transforms the dataset containing text into an dataset containing an array of vo
 
         return result
 
-    def encode_labels(self, y):
+    def get_label_map(self, y):
         le = preprocessing.LabelEncoder()
-        return le.fit_transform(y)
+        le.fit(y)
+        return le.classes_
+
+    def encode_labels(self, y, classes):
+        le = preprocessing.LabelEncoder()
+        le.classes_ = classes
+        return le.transform(y)

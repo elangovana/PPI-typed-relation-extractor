@@ -1,9 +1,11 @@
 from torch import optim, nn
+from torchtext import data
 
 from algorithms.Parser import Parser
 from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
 from algorithms.RelationExtractorNetwork import RelationExtractorNetwork
 from algorithms.Train import Train
+from torchtext.data import TabularDataset
 
 
 class RelationExtractionFactory:
@@ -77,7 +79,7 @@ class RelationExtractionFactory:
     def embedder_loader(self, value):
         self.__embedder_loader__ = value
 
-    def __call__(self, data, labels):
+    def __call__(self, train, train_labels, validation, validation_labels):
         """
 
         :type data: Dataframe
@@ -91,17 +93,29 @@ class RelationExtractionFactory:
 
         vocab, embedding_array = self.embedder_loader(self.embedding_handle, min_words_weights_dict)
 
+        #TODO: expecting first column to be an abstract so the network averages the sentence
+        col_names = train.columns.values
+
         # Extract words
-        data = data.applymap(lambda x: self.parser.split_text(self.parser.normalize_text(x)))
+        train_data = train.applymap(lambda x: self.parser.split_text(self.parser.normalize_text(x)))
+        validation_data = validation.applymap(lambda x: self.parser.split_text(self.parser.normalize_text(x)))
 
         # TODO Clean this
         model = self.model_network(self.class_size, self.embedding_dim, embedding_array, ngram_context_size=self.ngram)
-        processed_data = self.parser.transform_to_array(data.values.tolist(), vocab=vocab)
+        processed_data = self.parser.transform_to_array(train_data.values.tolist(), vocab=vocab)
+        val_processed_data = self.parser.transform_to_array(validation_data.values.tolist(), vocab=vocab)
 
-        #converts labels to int ..
-        labels = self.parser.encode_labels(labels)
+        # converts train_labels_encode to int ..
+        classes = self.parser.get_label_map(train_labels)
+        train_labels_encode = self.parser.encode_labels(train_labels, classes)
+        validation_labels_encode = self.parser.encode_labels(validation_labels, classes)
 
-        data_formatted = [(l, f) for l, f in zip(labels, processed_data)]
+        data_formatted, val_data_formatted = self.getexamples(col_names,processed_data,
+                                                              train_labels_encode), self.getexamples(
+            col_names,val_processed_data,
+            validation_labels_encode)
+
+        sort_key = lambda x: sum([len(i) for i in x])
 
         # Set up optimiser
         optimiser = self.optimiser(params=model.parameters(),
@@ -109,4 +123,13 @@ class RelationExtractionFactory:
                                    momentum=self.momentum)
 
         # Invoke trainer
-        self.trainer(data_formatted, model, self.loss_function, optimiser)
+        self.trainer(data_formatted, val_data_formatted, sort_key, model, self.loss_function, optimiser)
+
+    def getexamples(self, col_names, data_list, encoded_labels):
+        LABEL = data.LabelField(use_vocab=False, sequential=False, is_target=True)
+        TEXT = data.Field(use_vocab=False, pad_token=0)
+        fields = [(c, TEXT) for c in col_names]
+        fields.append(("label", LABEL))
+
+        return data.Dataset([data.Example.fromlist([*f, l], fields) for l, f in
+                zip(encoded_labels, data_list)], fields)
