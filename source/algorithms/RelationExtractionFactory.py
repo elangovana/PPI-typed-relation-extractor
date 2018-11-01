@@ -1,3 +1,5 @@
+import logging
+
 from torch import optim, nn
 from torchtext import data
 
@@ -76,6 +78,10 @@ class RelationExtractionFactory:
         self.__embedder_loader__ = self.__embedder_loader__ or PretrainedEmbedderLoader()
         return self.__embedder_loader__
 
+    @property
+    def logger(self):
+        return logging.getLogger(__name__)
+
     @embedder_loader.setter
     def embedder_loader(self, value):
         self.__embedder_loader__ = value
@@ -92,7 +98,9 @@ class RelationExtractionFactory:
         for word in min_words_dict.keys():
             min_words_weights_dict[word] = nn.Embedding(1, self.embedding_dim).weight.detach().numpy().tolist()[0]
 
+        self.logger.info("Loading embeding..")
         vocab, embedding_array = self.embedder_loader(self.embedding_handle, min_words_weights_dict)
+        self.logger.info("loaded vocab size {}, embed array len {}, size of first element {}.".format(len(vocab), len(embedding_array), len(embedding_array[0])))
 
         #TODO: expecting first column to be an abstract so the network averages the sentence
         self.col_names = train.columns.values

@@ -1,12 +1,18 @@
 import tempfile
 from io import StringIO
+from logging.config import fileConfig
 from unittest import TestCase
+
+import os
 
 from algorithms.RelationExtractionFactory import RelationExtractionFactory
 import pandas as pd
 
 
 class TestSitRelationExtractionFactory(TestCase):
+    def setUp(self):
+        fileConfig(os.path.join(os.path.dirname(__file__), 'logger.ini'))
+
     def test_call(self):
         # Arrange
         out_dir= tempfile.mkdtemp()
