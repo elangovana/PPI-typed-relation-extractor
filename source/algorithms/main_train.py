@@ -16,7 +16,11 @@ def run(data_file, embedding_file, tmp_dir, interaction_type="phosphorylation"):
     data = data.query('interactionType == "{}"'.format(interaction_type))
 
     labels = data[["isNegative"]]
-    data = data[["interactionType", "pubmedabstract", "destAlias", "sourceAlias"]]
+    data = data[["pubmedabstract", "destAlias", "sourceAlias"]]
+
+    data['destAlias'] = data['destAlias'].map(lambda x: ", ".join(x[0]))
+    data['sourceAlias'] = data['sourceAlias'].map(lambda x: ", ".join(x[0]))
+
 
     X_train, X_test, y_train, y_test = train_test_split(data, labels, train_size=.8,
                                                         random_state=777)
