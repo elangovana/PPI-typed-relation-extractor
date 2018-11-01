@@ -10,8 +10,9 @@ from torchtext.data import TabularDataset
 
 class RelationExtractionFactory:
 
-    def __init__(self, embedding_handle, embedding_dim: int, class_size: int, learning_rate: float = 0.01,
+    def __init__(self, embedding_handle, embedding_dim: int, class_size: int, output_dir, learning_rate: float = 0.01,
                  momentum: float = 0.9, ngram: int = 3):
+        self.output_dir = output_dir
         self.ngram = ngram
         self.embedding_dim = embedding_dim
         self.embedding_handle = embedding_handle
@@ -94,7 +95,7 @@ class RelationExtractionFactory:
         vocab, embedding_array = self.embedder_loader(self.embedding_handle, min_words_weights_dict)
 
         #TODO: expecting first column to be an abstract so the network averages the sentence
-        col_names = train.columns.values
+        self.col_names = train.columns.values
 
         # Extract words
         train_data = train.applymap(lambda x: self.parser.split_text(self.parser.normalize_text(x)))
@@ -110,12 +111,12 @@ class RelationExtractionFactory:
         train_labels_encode = self.parser.encode_labels(train_labels, classes)
         validation_labels_encode = self.parser.encode_labels(validation_labels, classes)
 
-        data_formatted, val_data_formatted = self.getexamples(col_names,processed_data,
+        data_formatted, val_data_formatted = self.getexamples(self.col_names,processed_data,
                                                               train_labels_encode), self.getexamples(
-            col_names,val_processed_data,
+            self.col_names,val_processed_data,
             validation_labels_encode)
 
-        sort_key = lambda x: sum([len(i) for i in x])
+        sort_key = lambda x: self.sum(x)
 
         # Set up optimiser
         optimiser = self.optimiser(params=model.parameters(),
@@ -123,7 +124,11 @@ class RelationExtractionFactory:
                                    momentum=self.momentum)
 
         # Invoke trainer
-        self.trainer(data_formatted, val_data_formatted, sort_key, model, self.loss_function, optimiser)
+        self.trainer(data_formatted, val_data_formatted, sort_key, model, self.loss_function, optimiser, self.output_dir)
+
+    def sum(self, x):
+
+        return sum([len(getattr(x,c)) for c in self.col_names])
 
     def getexamples(self, col_names, data_list, encoded_labels):
         LABEL = data.LabelField(use_vocab=False, sequential=False, is_target=True)
