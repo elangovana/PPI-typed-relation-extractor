@@ -13,7 +13,8 @@ from torchtext.data import TabularDataset
 class RelationExtractionFactory:
 
     def __init__(self, embedding_handle, embedding_dim: int, class_size: int, output_dir, learning_rate: float = 0.01,
-                 momentum: float = 0.9, ngram: int = 3):
+                 momentum: float = 0.9, ngram: int = 3, epochs: int =10):
+        self.epochs = epochs
         self.output_dir = output_dir
         self.ngram = ngram
         self.embedding_dim = embedding_dim
@@ -132,7 +133,7 @@ class RelationExtractionFactory:
                                    momentum=self.momentum)
 
         # Invoke trainer
-        self.trainer(data_formatted, val_data_formatted, sort_key, model, self.loss_function, optimiser, self.output_dir)
+        self.trainer(data_formatted, val_data_formatted, sort_key, model, self.loss_function, optimiser, self.output_dir,epoch=self.epochs)
 
     def sum(self, x):
 

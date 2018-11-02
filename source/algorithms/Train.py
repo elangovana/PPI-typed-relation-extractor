@@ -15,7 +15,7 @@ class Train:
     def __call__(self, data_iter, validation_iter, text_sort_key_lambda, model_network, loss_function, optimizer,
                  output_dir,
                  epoch=10, mini_batch_size=10,
-                 eval_every_n_epoch=1, device=-1):
+                 eval_every_n_epoch=1, device_type="cpu"):
         """
 Runs train...
         :param validation_iter: Validation set
@@ -38,7 +38,7 @@ Runs train...
         train_iter, val_iter = BucketIterator.splits(
             (data_iter, validation_iter),  # we pass in the datasets we want the iterator to draw data from
             batch_size=mini_batch_size,
-            device=device,  # if you want to use the GPU, specify the GPU number here
+            device=torch.device(device_type),  # if you want to use the GPU, specify the GPU number here
             sort_key=text_sort_key_lambda,
             # the BucketIterator needs to be told what function it should use to group the data.
             sort_within_batch=True,
