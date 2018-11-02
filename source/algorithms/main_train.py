@@ -49,7 +49,7 @@ if "__main__" == __name__:
     parser.add_argument("embeddim", help="the embed dim", type=int)
 
     parser.add_argument("outdir", help="The output dir")
-    parser.add_argument("--epochs", help="The number of epochs", type=int)
+    parser.add_argument("--epochs", help="The number of epochs", type=int, default=10)
     parser.add_argument("--interaction-type", help="The interction type", default="phosphorylation")
 
     args = parser.parse_args()
