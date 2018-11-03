@@ -4,32 +4,34 @@ import sys
 
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split
 
 from algorithms.RelationExtractionFactory import RelationExtractionFactory
 
 
-def run(data_file, embedding_file, embed_dim, tmp_dir, epochs, interaction_type=None):
+def prepare_data(interaction_type, file):
+    data_df = pd.read_json(file)
+    if interaction_type is not None:
+        data_df = data_df.query('interactionType == "{}"'.format(interaction_type))
+    labels = data_df[["isNegative"]]
+    data_df = data_df[["pubmedabstract", "interactionType", "destAlias", "sourceAlias"]]
+    data_df['destAlias'] = data_df['destAlias'].map(lambda x: ", ".join(x[0]))
+    data_df['sourceAlias'] = data_df['sourceAlias'].map(lambda x: ", ".join(x[0]))
+    labels = np.reshape(labels.values.tolist(), (-1,))
+    return data_df, labels
+
+
+def run(train_file, val_file, embedding_file, embed_dim, tmp_dir, epochs, interaction_type=None):
     logger = logging.getLogger(__name__)
-    data = pd.read_json(data_file)
+
     class_size = 2
 
     logger.info("Running with interaction type {}".format(interaction_type))
-    if interaction_type is not None:
-        data = data.query('interactionType == "{}"'.format(interaction_type))
 
-    labels = data[["isNegative"]]
-    data = data[["pubmedabstract", "interactionType", "destAlias", "sourceAlias"]]
+    train_df, train_labels = prepare_data(interaction_type, train_file)
+    val_df, val_labels = prepare_data(interaction_type, val_file)
 
-    data['destAlias'] = data['destAlias'].map(lambda x: ", ".join(x[0]))
-    data['sourceAlias'] = data['sourceAlias'].map(lambda x: ", ".join(x[0]))
+    logger.info("Training shape {}, test shape {}".format(train_df.shape, val_df.shape))
 
-    X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=.2,
-                                                        random_state=777)
-
-    logger.info("Training shape {}, test shape {}".format(X_train.shape, X_test.shape))
-
-    # TODO: For the moment just filter one type of classification and do binary as true vs false
     with open(embedding_file, "r") as embedding:
         # Ignore the first line as it contains the number of words and vector dim
         head = embedding.readline()
@@ -37,17 +39,18 @@ def run(data_file, embedding_file, embed_dim, tmp_dir, epochs, interaction_type=
         train_factory = RelationExtractionFactory(embedding_handle=embedding, embedding_dim=embed_dim,
                                                   class_size=class_size,
                                                   output_dir=tmp_dir, ngram=1, epochs=epochs)
-        train_factory(X_train, np.reshape(y_train.values.tolist(), (-1,)), X_test,
-                      np.reshape(y_test.values.tolist(), (-1,)))
+        train_factory(train_df, train_labels, val_df, val_labels)
 
 
 if "__main__" == __name__:
     logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler(sys.stdout)],
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     parser = argparse.ArgumentParser()
-    parser.add_argument("inputjson",
-                        help="The input json data")
-    parser.add_argument("embedding", help="The embeeing file")
+    parser.add_argument("trainjson",
+                        help="The input train json data")
+    parser.add_argument("valjson",
+                        help="The input val json data")
+    parser.add_argument("embedding", help="The embedding file")
     parser.add_argument("embeddim", help="the embed dim", type=int)
 
     parser.add_argument("outdir", help="The output dir")
@@ -56,5 +59,5 @@ if "__main__" == __name__:
 
     args = parser.parse_args()
 
-    run(args.inputjson, args.embedding, args.embeddim,
+    run(args.trainjson, args.valjson, args.embedding, args.embeddim,
         args.outdir, args.epochs, args.interaction_type)
