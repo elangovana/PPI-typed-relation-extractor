@@ -7,7 +7,6 @@ from algorithms.Parser import Parser
 from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
 from algorithms.RelationExtractorNetwork import RelationExtractorNetwork
 from algorithms.Train import Train
-from torchtext.data import TabularDataset
 
 
 class RelationExtractionFactory:
@@ -111,7 +110,8 @@ class RelationExtractionFactory:
         validation_data = validation.applymap(lambda x: self.parser.split_text(self.parser.normalize_text(x)))
 
         # TODO Clean this
-        model = self.model_network(self.class_size, self.embedding_dim, embedding_array, ngram_context_size=self.ngram)
+        model = self.model_network(self.class_size, self.embedding_dim, embedding_array,
+                                   feature_len=len(self.col_names))
         processed_data = self.parser.transform_to_array(train_data.values.tolist(), vocab=vocab)
         val_processed_data = self.parser.transform_to_array(validation_data.values.tolist(), vocab=vocab)
 
