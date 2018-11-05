@@ -1,5 +1,8 @@
+import itertools
 import logging
+from collections import Counter
 
+import pandas as pd
 from torch import optim, nn
 from torchtext import data
 
@@ -111,11 +114,16 @@ class RelationExtractionAverageFactory:
         validation_data = validation.applymap(lambda x: self.parser.split_text(self.parser.normalize_text(x)))
 
 
+
         # TODO Clean this
         model = self.model_network(self.class_size, self.embedding_dim, embedding_array,
                                    feature_len=len(self.col_names))
         processed_data = self.parser.transform_to_array(train_data.values.tolist(), vocab=vocab)
         val_processed_data = self.parser.transform_to_array(validation_data.values.tolist(), vocab=vocab)
+
+        token_counts = pd.DataFrame(processed_data).apply(lambda c: self.get_column_values_count(c), axis=0).values
+        self.logger.info("vocab : {}".format(vocab))
+        self.logger.info("Token counts : {}".format(token_counts))
 
         # converts train_labels_encode to int ..
         classes = self.parser.get_label_map(train_labels)
@@ -137,6 +145,10 @@ class RelationExtractionAverageFactory:
         # Invoke trainer
         self.trainer(data_formatted, val_data_formatted, sort_key, model, self.loss_function, optimiser,
                      self.output_dir, epoch=self.epochs)
+
+    def get_column_values_count(self, c):
+        values = list(itertools.chain.from_iterable(c.values))
+        return Counter(values)
 
     def sum(self, x):
         return sum([len(getattr(x, c)) for c in self.col_names])

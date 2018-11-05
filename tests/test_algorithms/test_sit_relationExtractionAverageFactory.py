@@ -25,7 +25,7 @@ class TestSitRelationExtractionAverageFactory(TestCase):
                     ["this is a cat not a hat", "mat protein", "cat protein"]]
 
         val_data = [["This is hat", "entity1", "entity2"],
-                    ["this is a cat not a mat", "mat protein", "cat protein"]]
+                    ["this a mat", "mat protein", "cat protein"]]
 
         labels = ["1", "0"]
         cols = ['abstract', 'entity1', 'entity2']
