@@ -112,8 +112,8 @@ class RelationExtractionAverageFactory:
         self.col_names = train.columns.values
 
         # Extract words
-        train_data = train.applymap(lambda x: self.parser.split_text(self.parser.normalize_text(x)))
-        validation_data = validation.applymap(lambda x: self.parser.split_text(self.parser.normalize_text(x)))
+        train_data = train.applymap(lambda x: self.parser.split_text(x))
+        validation_data = validation.applymap(lambda x: self.parser.split_text(x))
 
         # TODO Clean this
         model = self.model_network(self.class_size, self.embedding_dim, embedding_array,
