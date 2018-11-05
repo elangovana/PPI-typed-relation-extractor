@@ -16,8 +16,9 @@ from algorithms.Train import Train
 
 class RelationExtractionAverageFactory:
 
-    def __init__(self, embedding_handle, embedding_dim: int, class_size: int, output_dir, learning_rate: float = 0.01,
-                 momentum: float = 0.9, ngram: int = 3, epochs: int = 10):
+    def __init__(self, embedding_handle, embedding_dim: int, class_size: int, output_dir, learning_rate: float = 0.001,
+                 momentum: float = 0.9, ngram: int = 3, epochs: int = 10, min_vocab_frequency=3):
+        self.min_vocab_frequency = min_vocab_frequency
         self.epochs = epochs
         self.output_dir = output_dir
         self.ngram = ngram
@@ -96,24 +97,30 @@ class RelationExtractionAverageFactory:
 
         :type data: Dataframe
         """
+        # Tokenised data
+        train_data = train.applymap(lambda x: self.parser.split_text(x))
+        validation_data = validation.applymap(lambda x: self.parser.split_text(x))
+
+        train_vocab = self.construct_vocab(train_data)
+
         min_words_dict = self.parser.get_min_dictionary()
+        for w in min_words_dict.keys():
+            if w not in train_vocab:
+                train_vocab[w] = len(train_vocab)
+
 
         # Initialise minwords with random weights
-        min_words_weights_dict = {}
-        for word in min_words_dict.keys():
-            min_words_weights_dict[word] = nn.Embedding(1, self.embedding_dim).weight.detach().numpy().tolist()[0]
+        rand_words_weights_dict = {}
+        for word in train_vocab.keys():
+            rand_words_weights_dict[word] = nn.Embedding(1, self.embedding_dim).weight.detach().numpy().tolist()[0]
 
         self.logger.info("Loading embeding..")
-        vocab, embedding_array = self.embedder_loader(self.embedding_handle, min_words_weights_dict)
+        vocab, embedding_array = self.embedder_loader(self.embedding_handle, rand_words_weights_dict)
         self.logger.info("loaded vocab size {}, embed array len {}, size of first element {}.".format(len(vocab), len(
             embedding_array), len(embedding_array[0])))
 
         # TODO: expecting first column to be an abstract so the network averages the sentence
         self.col_names = train.columns.values
-
-        # Extract words
-        train_data = train.applymap(lambda x: self.parser.split_text(x))
-        validation_data = validation.applymap(lambda x: self.parser.split_text(x))
 
         # TODO Clean this
         model = self.model_network(self.class_size, self.embedding_dim, embedding_array,
@@ -146,6 +153,16 @@ class RelationExtractionAverageFactory:
         # Invoke trainer
         self.trainer(data_formatted, val_data_formatted, sort_key, model, self.loss_function, optimiser,
                      self.output_dir, epoch=self.epochs)
+
+    def construct_vocab(self, train_data):
+        vocab_token_counter = Counter()
+        for i in pd.DataFrame(train_data).apply(lambda c: self.get_column_values_count(c), axis=0).values:
+            vocab_token_counter += i
+
+        result = {}
+        for ik, iv in filter(lambda t: t[1] >= self.min_vocab_frequency, vocab_token_counter.items()):
+            result[ik] = len(result)
+        return result
 
     def get_column_values_count(self, c):
         values = list(itertools.chain.from_iterable(c.values))
