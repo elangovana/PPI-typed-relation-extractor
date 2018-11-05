@@ -1,4 +1,5 @@
 import argparse
+import itertools
 import logging
 import sys
 
@@ -20,13 +21,13 @@ def prepare_data(interaction_type, file):
         data_df = data_df.query('interactionType == "{}"'.format(interaction_type))
     labels = data_df[["isNegative"]]
     data_df = data_df[["pubmedabstract", "interactionType", "destAlias", "sourceAlias"]]
-    data_df['destAlias'] = data_df['destAlias'].map(lambda x: ", ".join(x[0]))
-    data_df['sourceAlias'] = data_df['sourceAlias'].map(lambda x: ", ".join(x[0]))
+    data_df['destAlias'] = data_df['destAlias'].map(lambda x: ", ".join(list(itertools.chain.from_iterable(x))))
+    data_df['sourceAlias'] = data_df['sourceAlias'].map(lambda x: ", ".join(list(itertools.chain.from_iterable(x))))
     labels = np.reshape(labels.values.tolist(), (-1,))
     return data_df, labels
 
 
-def run(network, train_file, val_file, embedding_file, embed_dim, tmp_dir, epochs, interaction_type=None):
+def run(network, train_file, val_file, embedding_file, embed_dim, out_dir, epochs, interaction_type=None):
     logger = logging.getLogger(__name__)
 
     class_size = 2
@@ -45,7 +46,7 @@ def run(network, train_file, val_file, embedding_file, embed_dim, tmp_dir, epoch
         network_factory = networks_dict[network]
         train_factory = network_factory(embedding_handle=embedding, embedding_dim=embed_dim,
                                         class_size=class_size,
-                                        output_dir=tmp_dir, ngram=1, epochs=epochs)
+                                        output_dir=out_dir, ngram=1, epochs=epochs)
         train_factory(train_df, train_labels, val_df, val_labels)
 
 
