@@ -1,5 +1,7 @@
 import itertools
+import json
 import logging
+import os
 from collections import Counter
 
 import pandas as pd
@@ -113,8 +115,6 @@ class RelationExtractionAverageFactory:
         train_data = train.applymap(lambda x: self.parser.split_text(self.parser.normalize_text(x)))
         validation_data = validation.applymap(lambda x: self.parser.split_text(self.parser.normalize_text(x)))
 
-
-
         # TODO Clean this
         model = self.model_network(self.class_size, self.embedding_dim, embedding_array,
                                    feature_len=len(self.col_names))
@@ -122,7 +122,6 @@ class RelationExtractionAverageFactory:
         val_processed_data = self.parser.transform_to_array(validation_data.values.tolist(), vocab=vocab)
 
         token_counts = pd.DataFrame(processed_data).apply(lambda c: self.get_column_values_count(c), axis=0).values
-        self.logger.info("vocab : {}".format(vocab))
         self.logger.info("Token counts : {}".format(token_counts))
 
         # converts train_labels_encode to int ..
@@ -142,6 +141,8 @@ class RelationExtractionAverageFactory:
                                    lr=self.learning_rate,
                                    momentum=self.momentum)
 
+        self.persist(outdir=self.output_dir, vocab=vocab)
+
         # Invoke trainer
         self.trainer(data_formatted, val_data_formatted, sort_key, model, self.loss_function, optimiser,
                      self.output_dir, epoch=self.epochs)
@@ -152,6 +153,10 @@ class RelationExtractionAverageFactory:
 
     def sum(self, x):
         return sum([len(getattr(x, c)) for c in self.col_names])
+
+    def persist(self, outdir, vocab):
+        with open(os.path.join(outdir, "vocab.json"), "w") as f:
+            f.write(json.dumps(vocab))
 
     def getexamples(self, col_names, data_list, encoded_labels):
         LABEL = data.LabelField(use_vocab=False, sequential=False, is_target=True)
