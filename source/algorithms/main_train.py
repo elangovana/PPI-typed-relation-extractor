@@ -1,6 +1,7 @@
 import argparse
 import itertools
 import logging
+import os
 import sys
 
 import numpy as np
@@ -29,6 +30,9 @@ def prepare_data(interaction_type, file):
 
 def run(network, train_file, val_file, embedding_file, embed_dim, out_dir, epochs, interaction_type=None):
     logger = logging.getLogger(__name__)
+
+    if not os.path.exists(out_dir) or not os.path.isdir(out_dir):
+        raise FileNotFoundError("The path {} should exist and must be a directory".format(out_dir))
 
     class_size = 2
 
