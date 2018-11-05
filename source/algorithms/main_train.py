@@ -5,7 +5,13 @@ import sys
 import numpy as np
 import pandas as pd
 
-from algorithms.RelationExtractionFactory import RelationExtractionFactory
+from algorithms.RelationExtractionAverageFactory import RelationExtractionAverageFactory
+from algorithms.RelationExtractionLinearFactory import RelationExtractionLinearFactory
+
+networks_dict = {
+    "Linear": RelationExtractionLinearFactory,
+    "Avg": RelationExtractionAverageFactory
+}
 
 
 def prepare_data(interaction_type, file):
@@ -20,12 +26,12 @@ def prepare_data(interaction_type, file):
     return data_df, labels
 
 
-def run(train_file, val_file, embedding_file, embed_dim, tmp_dir, epochs, interaction_type=None):
+def run(network, train_file, val_file, embedding_file, embed_dim, tmp_dir, epochs, interaction_type=None):
     logger = logging.getLogger(__name__)
 
     class_size = 2
 
-    logger.info("Running with interaction type {}".format(interaction_type))
+    logger.info("Running with interaction type {}, network {}".format(interaction_type, network))
 
     train_df, train_labels = prepare_data(interaction_type, train_file)
     val_df, val_labels = prepare_data(interaction_type, val_file)
@@ -36,9 +42,10 @@ def run(train_file, val_file, embedding_file, embed_dim, tmp_dir, epochs, intera
         # Ignore the first line as it contains the number of words and vector dim
         head = embedding.readline()
         logger.info("The embedding header is {}".format(head))
-        train_factory = RelationExtractionFactory(embedding_handle=embedding, embedding_dim=embed_dim,
-                                                  class_size=class_size,
-                                                  output_dir=tmp_dir, ngram=1, epochs=epochs)
+        network_factory = networks_dict[network]
+        train_factory = network_factory(embedding_handle=embedding, embedding_dim=embed_dim,
+                                        class_size=class_size,
+                                        output_dir=tmp_dir, ngram=1, epochs=epochs)
         train_factory(train_df, train_labels, val_df, val_labels)
 
 
@@ -46,6 +53,8 @@ if "__main__" == __name__:
     logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler(sys.stdout)],
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     parser = argparse.ArgumentParser()
+    parser.add_argument("network",
+                        help="The type of network to use", choices=set(list(networks_dict.keys())))
     parser.add_argument("trainjson",
                         help="The input train json data")
     parser.add_argument("valjson",
@@ -59,5 +68,5 @@ if "__main__" == __name__:
 
     args = parser.parse_args()
 
-    run(args.trainjson, args.valjson, args.embedding, args.embeddim,
+    run(args.network, args.trainjson, args.valjson, args.embedding, args.embeddim,
         args.outdir, args.epochs, args.interaction_type)

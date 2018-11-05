@@ -5,14 +5,14 @@ from torchtext import data
 
 from algorithms.Parser import Parser
 from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
-from algorithms.RelationExtractorNetwork import RelationExtractorNetwork
+from algorithms.RelationExtractorLinearNetwork import RelationExtractorLinearNetwork
 from algorithms.Train import Train
 
 
-class RelationExtractionFactory:
+class RelationExtractionLinearFactory:
 
     def __init__(self, embedding_handle, embedding_dim: int, class_size: int, output_dir, learning_rate: float = 0.01,
-                 momentum: float = 0.9, ngram: int = 3, epochs: int =10):
+                 momentum: float = 0.9, ngram: int = 3, epochs: int = 10):
         self.epochs = epochs
         self.output_dir = output_dir
         self.ngram = ngram
@@ -30,7 +30,7 @@ class RelationExtractionFactory:
 
     @property
     def model_network(self):
-        self.__model_network__ = self.__model_network__ or RelationExtractorNetwork
+        self.__model_network__ = self.__model_network__ or RelationExtractorLinearNetwork
         return self.__model_network__
 
     @model_network.setter
@@ -100,18 +100,22 @@ class RelationExtractionFactory:
 
         self.logger.info("Loading embeding..")
         vocab, embedding_array = self.embedder_loader(self.embedding_handle, min_words_weights_dict)
-        self.logger.info("loaded vocab size {}, embed array len {}, size of first element {}.".format(len(vocab), len(embedding_array), len(embedding_array[0])))
+        self.logger.info("loaded vocab size {}, embed array len {}, size of first element {}.".format(len(vocab), len(
+            embedding_array), len(embedding_array[0])))
 
-        #TODO: expecting first column to be an abstract so the network averages the sentence
+        # TODO: expecting first column to be an abstract so the network averages the sentence
         self.col_names = train.columns.values
 
         # Extract words
         train_data = train.applymap(lambda x: self.parser.split_text(self.parser.normalize_text(x)))
         validation_data = validation.applymap(lambda x: self.parser.split_text(self.parser.normalize_text(x)))
 
+        # Lengths of each column
+        column_lengths = train_data.apply(lambda c: max(c.apply(len))).values
+
         # TODO Clean this
         model = self.model_network(self.class_size, self.embedding_dim, embedding_array,
-                                   feature_len=len(self.col_names))
+                                   feature_lengths=column_lengths)
         processed_data = self.parser.transform_to_array(train_data.values.tolist(), vocab=vocab)
         val_processed_data = self.parser.transform_to_array(validation_data.values.tolist(), vocab=vocab)
 
@@ -120,9 +124,9 @@ class RelationExtractionFactory:
         train_labels_encode = self.parser.encode_labels(train_labels, classes)
         validation_labels_encode = self.parser.encode_labels(validation_labels, classes)
 
-        data_formatted, val_data_formatted = self.getexamples(self.col_names,processed_data,
+        data_formatted, val_data_formatted = self.getexamples(self.col_names, column_lengths, processed_data,
                                                               train_labels_encode), self.getexamples(
-            self.col_names,val_processed_data,
+            self.col_names, column_lengths, val_processed_data,
             validation_labels_encode)
 
         sort_key = lambda x: self.sum(x)
@@ -133,17 +137,17 @@ class RelationExtractionFactory:
                                    momentum=self.momentum)
 
         # Invoke trainer
-        self.trainer(data_formatted, val_data_formatted, sort_key, model, self.loss_function, optimiser, self.output_dir,epoch=self.epochs)
+        self.trainer(data_formatted, val_data_formatted, sort_key, model, self.loss_function, optimiser,
+                     self.output_dir, epoch=self.epochs)
 
     def sum(self, x):
+        return sum([len(getattr(x, c)) for c in self.col_names])
 
-        return sum([len(getattr(x,c)) for c in self.col_names])
-
-    def getexamples(self, col_names, data_list, encoded_labels):
+    def getexamples(self, col_names, col_sizes, data_list, encoded_labels):
         LABEL = data.LabelField(use_vocab=False, sequential=False, is_target=True)
-        TEXT = data.Field(use_vocab=False, pad_token=0)
-        fields = [(c, TEXT) for c in col_names]
+
+        fields = [(c, data.Field(use_vocab=False, pad_token=0, fix_length=l)) for c, l in zip(col_names, col_sizes)]
         fields.append(("label", LABEL))
 
         return data.Dataset([data.Example.fromlist([*f, l], fields) for l, f in
-                zip(encoded_labels, data_list)], fields)
+                             zip(encoded_labels, data_list)], fields)
