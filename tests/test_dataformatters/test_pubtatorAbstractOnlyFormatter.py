@@ -1,4 +1,3 @@
-import json
 from io import StringIO
 from unittest import TestCase
 
@@ -16,8 +15,7 @@ class TestPubtatorAbstractOnlyFormatter(TestCase):
                      {"pubmedid": "12133", "abstract": "This is a dog"}]
         output = StringIO()
 
-        expected = "".join([json.dumps({"text": "This is a cat", "sourcedb": "PubMed", "sourceid": "1233"}),
-                            json.dumps({"text": "This is a dog", "sourcedb": "PubMed", "sourceid": "12133"})])
+        expected = "1233|a|This is a cat\n\n12133|a|This is a dog\n\n"
 
         # Act
         sut(data_iter, lambda x: x["pubmedid"], lambda x: x["abstract"], output)

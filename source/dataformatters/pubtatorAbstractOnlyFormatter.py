@@ -1,4 +1,3 @@
-import json
 from typing import Callable, Any
 
 
@@ -16,8 +15,7 @@ Formats the data in pubtator abstract only format.
 
         for item in data_iter:
             pubmedid = label_func(item)
-            sourcedb = "PubMed"
-            abstract = text_func(item).replace("\n", " ")
-            r = {"text": abstract, "sourcedb": sourcedb, "sourceid": pubmedid}
-            line = json.dumps(r)
+            abstract = text_func(item).replace("\n", " ").replace("|", " ")
+
+            line = "{}|{}|{}\n\n".format(pubmedid, "a", abstract)
             output_handle.write(line)

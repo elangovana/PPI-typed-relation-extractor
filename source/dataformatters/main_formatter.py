@@ -26,7 +26,7 @@ if "__main__" == __name__:
     parser = argparse.ArgumentParser()
     parser.add_argument("inputjson",
                         help="The input json data file")
-    parser.add_argument("outdir", help="The output dir")
+    parser.add_argument("outfile", help="The output file name")
     args = parser.parse_args()
 
-    run(args.inputjson, args.outdir)
+    run(args.inputjson, args.outfile)
