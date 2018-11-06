@@ -12,6 +12,7 @@ Formats the data in pubtator abstract only format.
         :param label_func: A function which accepts an item from the collection of records and returns the pubmedid value
         :param data_iter: A iterable collection of records
         """
+        # Writing uniue pubmeds only because Gnormplu requires unique ids
         uniqueids = set()
         for item in data_iter:
             pubmedid = label_func(item)
