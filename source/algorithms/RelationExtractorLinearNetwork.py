@@ -32,8 +32,7 @@ Extracts relationship using a single layer
         self.output_layer = nn.Linear(layer2_size, class_size)
 
     def forward(self, batch_inputs):
-        ## Average the embedding words in sentence to represent the sentence embededding
-        # index 0 is multiword
+        # Embed each feature
         merged_input = []
         for f, s in zip(batch_inputs, self.feature_lengths):
             concat_sentence = f.transpose(0, 1)
@@ -41,18 +40,9 @@ Extracts relationship using a single layer
 
             embeddings = self.embeddings(concat_sentence)
 
-            # # If greater than min length, chunk into n parts
-            # n_chunks = 20
-            # min_size = 10
-            # if len(embeddings[0]) > min_size:
-            #     chunked = torch.chunk(embeddings, n_chunks, dim=1)
-            # average_embed = torch.sum(embeddings, dim=1) / len(concat_sentence)
-
-            # Get the sentence length of the first item in the batch
-            # padded = pack_padded_sequence(embeddings, [sum(self.feature_lengths)], batch_first=True)
-
             merged_input.append(embeddings)
 
+        # Final output
         final_input = torch.cat(merged_input, dim=1)
         final_input = final_input.view(len(final_input), -1)
         out = F.relu(self.linear1(final_input))
