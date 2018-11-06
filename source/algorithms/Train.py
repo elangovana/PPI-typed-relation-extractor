@@ -1,10 +1,10 @@
-import glob
-import os
 import datetime
+import logging
+import os
 
 import torch
 import torch.utils.data
-from torchtext.data import Iterator, BucketIterator
+from torchtext.data import BucketIterator
 
 
 class Train:
@@ -12,10 +12,16 @@ class Train:
     def __init__(self):
         pass
 
+    @property
+    def logger(self):
+        return logging.getLogger(__name__)
+
+
     def __call__(self, data_iter, validation_iter, text_sort_key_lambda, model_network, loss_function, optimizer,
                  output_dir,
                  epoch=10, mini_batch_size=32,
                  eval_every_n_epoch=1, device_type="cpu"):
+
         """
 Runs train...
         :param validation_iter: Validation set
@@ -86,10 +92,10 @@ Runs train...
 
                 val_acc, val_loss = self.calculate_val_loss(loss_function, model_network, val_iter, validation_iter)
 
-                print(val_log_template.format((datetime.datetime.now() - start).seconds,
-                                              epoch, iterations, 1 + len(batch_x), len(train_iter),
-                                              100. * (1 + len(batch_x)) / len(train_iter), total_loss,
-                                              val_loss.item(), train_acc, val_acc))
+                self.logger.info(val_log_template.format((datetime.datetime.now() - start).seconds,
+                                                         epoch, iterations, 1 + len(batch_x), len(train_iter),
+                                                         100. * (1 + len(batch_x)) / len(train_iter), total_loss,
+                                                         val_loss.item(), train_acc, val_acc))
 
                 # update best valiation set accuracy
                 if val_acc > best_val_acc:
@@ -101,14 +107,28 @@ Runs train...
         val_iter.init_epoch()
         # calculate accuracy on validation set
         n_val_correct, val_loss = 0, 0
+        actuals = []
+        predicted = []
         with torch.no_grad():
             for val_batch_idx, val_y in val_iter:
-                answer = model_network(val_batch_idx)
+                pred_batch_y = model_network(val_batch_idx)
 
-                n_val_correct += (torch.max(answer, 1)[1].view(val_y.size()) == val_y).sum().item()
-                val_loss = loss_function(answer, val_y)
+                pred_flat = torch.max(pred_batch_y, 1)[1].view(val_y.size())
+                n_val_correct += (pred_flat == val_y).sum().item()
+                val_loss = loss_function(pred_batch_y, val_y)
+                actuals.extend(val_y)
+                predicted.extend(pred_flat)
+
+        self.print_confusion_matrix(actuals, predicted)
         val_acc = 100. * n_val_correct / len(validation_iter)
         return val_acc, val_loss
+
+    def print_confusion_matrix(self, y_actual, y_pred):
+        from sklearn.metrics import confusion_matrix
+        cnf_matrix = confusion_matrix(y_actual, y_pred)
+
+        self.logger.info("Confusion matrix:\n{}".format(cnf_matrix))
+
 
     def save_snapshot(self, model, output_dir):
         # found a model with better validation set accuracy
