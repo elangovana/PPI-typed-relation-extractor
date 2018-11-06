@@ -3,6 +3,7 @@ python:
   - "3.5.0"
 install:
   - pip install pip==10.0.1
+  - pip -V
   - pip install --progress-bar off -r source/requirements.txt
 script:
   - export PYTHONPATH=./source
