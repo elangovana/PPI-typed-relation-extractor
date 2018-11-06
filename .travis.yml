@@ -2,7 +2,7 @@ language: python
 python:
   - "3.5.0"
 install:
-  - pip install -r source/requirements.txt
+  - pip install -q -r source/requirements.txt
 script:
   - export PYTHONPATH=./source
   - pytest --tb=short
