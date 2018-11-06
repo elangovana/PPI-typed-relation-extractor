@@ -118,7 +118,6 @@ class RelationExtractionLinearFactory:
         self.logger.info("loaded vocab size {}, embed array len {}, size of first element {}.".format(len(vocab), len(
             embedding_array), len(embedding_array[0])))
 
-        # TODO: expecting first column to be an abstract so the network averages the sentence
         self.col_names = train.columns.values
 
         # Lengths of each column
