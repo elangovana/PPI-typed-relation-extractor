@@ -33,5 +33,4 @@ class GnormplusPubtatorReader:
                     {"start": start_pos, "end": end_pos, "name": name, "type": type, "normalised_id": normalised_id})
 
             record["annotations"] = annotations
-            print(record)
             yield record
