@@ -41,7 +41,7 @@ class GnormplusNegativeSamplesAugmentor:
     def transform(self, input_df):
         """
 
-        :param input_df: A pandas dataframe like object with columns atleast these columns [isNegative, pubmedId, particpant1Id, particpant2Id] .
+        :param input_df: A pandas dataframe like object with columns atleast these columns [interactionId, isNegative, pubmedId, particpant1Id, particpant2Id] .
         """
 
         data_fake = pd.DataFrame(columns=input_df.columns)
