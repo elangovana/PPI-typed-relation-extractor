@@ -59,3 +59,8 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
     export PYTHONPATH=./source
     python source/pipeline/main_pipeline_dataprep.py <inputdir containing imex xml files> <outputdir>
     ```
+    
+3. Run train job
+    ```bash
+Linear train.json val.json ./tests/test_algorithms/sample_PubMed-and-PMC-w2v.bin.txt 200 outdir
+```
