@@ -1,6 +1,7 @@
-import pandas as pd
-import json
 import copy
+import json
+
+import pandas as pd
 
 
 class IntactJsonPpiFlattenTransformer:
@@ -68,8 +69,8 @@ class IntactJsonPpiFlattenTransformer:
            """
         record = copy.deepcopy(record_to_copy_from)
         record.pop('participants', None)
-        record["sourceUniprot"] = source_participant["uniprotid"]
-        record["destUnitprot"] = target_participant["uniprotid"]
-        record["sourceAlias"] = source_participant["alias"]
-        record["destAlias"] = target_participant["alias"]
+        record["particpant1Id"] = source_participant["uniprotid"]
+        record["particpant2Id"] = target_participant["uniprotid"]
+        record["particpant1Alias"] = source_participant["alias"]
+        record["particpant2Alias"] = target_participant["alias"]
         return record
