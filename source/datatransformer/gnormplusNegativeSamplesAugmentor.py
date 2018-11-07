@@ -10,7 +10,7 @@ Adds negative samples of entities (Uniprot numbers) found in annotations in a en
 """
 
 
-class GnormplusPubtatorPubmedAugmentor:
+class GnormplusNegativeSamplesAugmentor:
 
     def __init__(self, pubmed_annotations: iter, geneIdConverter=None, include_self_relations=False):
         """

@@ -3,10 +3,10 @@ from unittest.mock import MagicMock
 
 import pandas as pd
 
-from datatransformer.gnormplusPubtatorPubmedAugmentor import GnormplusPubtatorPubmedAugmentor
+from datatransformer.gnormplusNegativeSamplesAugmentor import GnormplusNegativeSamplesAugmentor
 
 
-class TestGnormplusPubtatorPubmedAugmentor(TestCase):
+class TestGnormplusNegativeSamplesAugmentor(TestCase):
     def test_transform(self):
         # Arrange
         annotations = [{'id': '19167335', 'type': 'a',
@@ -34,7 +34,7 @@ class TestGnormplusPubtatorPubmedAugmentor(TestCase):
         geneIdConverter = MagicMock()
         geneIdConverter.convert.side_effect = lambda x: "uni_{}".format(x)
 
-        sut = GnormplusPubtatorPubmedAugmentor(annotations, geneIdConverter)
+        sut = GnormplusNegativeSamplesAugmentor(annotations, geneIdConverter)
         data = pd.DataFrame([
             {"interactionId": "1",
              "interactionType": "phosphorylation",
