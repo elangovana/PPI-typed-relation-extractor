@@ -69,8 +69,8 @@ class IntactJsonPpiFlattenTransformer:
            """
         record = copy.deepcopy(record_to_copy_from)
         record.pop('participants', None)
-        record["particpant1Id"] = source_participant["uniprotid"]
-        record["particpant2Id"] = target_participant["uniprotid"]
-        record["particpant1Alias"] = source_participant["alias"]
-        record["particpant2Alias"] = target_participant["alias"]
+        record["participant1Id"] = source_participant["uniprotid"]
+        record["participant2Id"] = target_participant["uniprotid"]
+        record["participant1Alias"] = source_participant["alias"]
+        record["participant2Alias"] = target_participant["alias"]
         return record

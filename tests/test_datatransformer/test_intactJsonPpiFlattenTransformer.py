@@ -48,4 +48,4 @@ class TestIntactJsonPpiFlattenTransformer(TestCase):
 
         actual = sut.transform(data)
 
-        self.assertEquals(len(actual), 5)
+        self.assertEqual(len(actual), 5)
