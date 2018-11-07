@@ -62,5 +62,6 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
     
 3. Run train job
     ```bash
-Linear train.json val.json ./tests/test_algorithms/sample_PubMed-and-PMC-w2v.bin.txt 200 outdir
-```
+    export PYTHONPATH=./source
+    python source/algorithms/main_train.py Linear train.json val.json ./tests/test_algorithms/sample_PubMed-and-PMC-w2v.bin.txt 200 outdir
+    ```
