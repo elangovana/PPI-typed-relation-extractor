@@ -81,29 +81,10 @@ class GnormplusPubtatorPubmedAugmentor:
 
                 data_fake = data_fake.append(record)
 
+        # Data with negative samples
         data_fake = data_fake.append(input_df)
         return data_fake
 
-    def _construct_flatrecord(self, record_to_copy_from, source_participant, target_participant):
-        """
-               Flattens participants
-               [{
-                   'uniprotid': 'Q8WUB1',
-                   'alias': [
-                     ['kc1g2_human'],
-                     ['Casein kinase I isoform gamma-2'],
-                     ['CK1G2'],
-                     ['CSNK1G2']
-                   ]
-                 }]
-           """
-        record = copy.deepcopy(record_to_copy_from)
-        record.pop('participants', None)
-        record["particpant1Id"] = source_participant["uniprotid"]
-        record["particpant2Id"] = target_participant["uniprotid"]
-        record["particpant1Alias"] = source_participant["alias"]
-        record["particpant2Alias"] = target_participant["alias"]
-        return record
 
     def _construct_pubmed_entities_map(self):
         map_gene_ids = {}
