@@ -36,11 +36,11 @@ class NcbiGeneUniprotMapper:
         data = urlencode(params)
         response = urllib.request.urlopen("{}?{}".format(self.url, data))
         page = response.read().decode("utf-8")
-        results = []
+        results = {}
         for r in page.split("\n")[1:]:
             if r.strip("\s") == "": break
 
             m = r.split("\t")
 
-            results.append({m[0]: m[2]})
+            results[m[0]] = m[2]
         return results

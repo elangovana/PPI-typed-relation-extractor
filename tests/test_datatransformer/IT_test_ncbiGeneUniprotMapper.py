@@ -9,7 +9,7 @@ from datatransformer.ncbiGeneUniprotMapper import NcbiGeneUniprotMapper
 class TestNcbiGeneUniprotMapper(TestCase):
 
     @data(('10076', 1)
-        , (['10076', '25930'], 3)
+        , (['10076', '25930'], 2)
         , ('DUMMY', 0))
     @unpack
     def test_convert(self, geneid, expected_len):
@@ -18,6 +18,7 @@ class TestNcbiGeneUniprotMapper(TestCase):
 
         # Act
         actual = sut.convert(geneid)
+        print(actual)
 
         # Assert
         self.assertEqual(len(actual), expected_len)
