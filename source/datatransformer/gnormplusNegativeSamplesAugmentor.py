@@ -94,7 +94,12 @@ class GnormplusNegativeSamplesAugmentor:
             converted_gene_ids = set()
             gene_id_alias_map = {}
             for g in filter(lambda v: v['type'] == 'Gene', annotation['annotations']):
-                geneid = self.geneIdConverter.convert(g['normalised_id'])
+                normalised_id = g['normalised_id']
+                coverted_map_list = self.geneIdConverter.convert(normalised_id)
+                if normalised_id in coverted_map_list:
+                    geneid = coverted_map_list[normalised_id]
+                else:
+                    continue
                 converted_gene_ids.add(geneid)
 
                 # also create a map of geneid: alias so it is easier to refer back to the name used in the text

@@ -32,7 +32,7 @@ class TestGnormplusNegativeSamplesAugmentor(TestCase):
                        ]
         # Mock uniprot converter
         geneIdConverter = MagicMock()
-        geneIdConverter.convert.side_effect = lambda x: [{x: "uni_{}".format(x)}]
+        geneIdConverter.convert.side_effect = lambda x: {x: "uni_{}".format(x)}
 
         sut = GnormplusNegativeSamplesAugmentor(annotations, geneIdConverter)
         data = pd.DataFrame([
