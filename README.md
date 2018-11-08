@@ -59,8 +59,20 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
     export PYTHONPATH=./source
     python source/pipeline/main_pipeline_dataprep.py <inputdir containing imex xml files> <outputdir>
     ```
+3. Create pubtator formatted abstracts so that GnormPlus can recognises entities
+
+    ```bash
+    export PYTHONPATH=./source
+    python source/dataformatters/pubtatorAbstractOnlyFormatter.py <datafilecreatedfrompreviousstep> <outputfile>
+    ```
+4.  Extract entities using GNormPlus
+    ```bash
+    docker pull lanax/gnormplus
+    docker run -it -v  lanax/gnormplus
+    ```
     
-3. Run train job
+
+4. Run train job
     ```bash
     export PYTHONPATH=./source
     python source/algorithms/main_train.py Linear train.json val.json ./tests/test_algorithms/sample_PubMed-and-PMC-w2v.bin.txt 200 outdir

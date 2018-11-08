@@ -18,6 +18,7 @@ class TestNcbiGeneUniprotMapper(TestCase):
 
         # Act
         actual = sut.convert(geneid)
+        print(actual)
 
         # Assert
         self.assertEqual(len(actual), expected_len)

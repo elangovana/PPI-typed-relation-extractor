@@ -1,4 +1,5 @@
 import copy
+import logging
 import uuid
 
 import pandas as pd
@@ -38,6 +39,10 @@ class GnormplusNegativeSamplesAugmentor:
     def geneIdConverter(self, value):
         self.__geneIdConverter__ = value
 
+    @property
+    def logger(self):
+        return logging.getLogger(__name__)
+
     def transform(self, input_df):
         """
 
@@ -50,6 +55,7 @@ class GnormplusNegativeSamplesAugmentor:
 
         for pubmedid in input_df['pubmedId'].unique():
             existing_participants = set()
+
             all_possible_participants = pubmedid_entities_map[pubmedid]["participant_pairs"]
             alias_map = pubmedid_entities_map[pubmedid]["aliases_map"]
 
@@ -82,7 +88,7 @@ class GnormplusNegativeSamplesAugmentor:
                 data_fake = data_fake.append(record)
 
         # Data with negative samples
-        data_fake = data_fake.append(input_df)
+        data_fake = data_fake.append(input_df, ignore_index=True)
         return data_fake
 
 
