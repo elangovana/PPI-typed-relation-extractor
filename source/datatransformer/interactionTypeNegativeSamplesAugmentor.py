@@ -33,15 +33,17 @@ class InteractionTypeNegativeSamplesAugmentor:
         for pubmedid in input_df['pubmedId'].unique():
             # input records matching the given pubmed
             input_records_pubmed = input_df[input_df.pubmedId == pubmedid]
+            pubmed_pos_relations = input_records_pubmed.query('isNegative == False')
 
             # interaction types associated with current pubmed
             existing_interaction_types = input_records_pubmed['interactionType'].unique()
 
             fake_interactions = set(interaction_types) - set(existing_interaction_types)
 
-            sample_size = tot_interactions if len(input_records_pubmed) >= tot_interactions else len(
-                input_records_pubmed)
-            template_records = input_records_pubmed.sample(n=sample_size, random_state=self.seed)
+            sample_size = tot_interactions if len(pubmed_pos_relations) >= tot_interactions else len(
+                pubmed_pos_relations)
+            # get tep
+            template_records = pubmed_pos_relations.sample(n=sample_size, random_state=self.seed)
 
             i = 0
             for p in fake_interactions:
