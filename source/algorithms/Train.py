@@ -16,7 +16,6 @@ class Train:
     def logger(self):
         return logging.getLogger(__name__)
 
-
     def __call__(self, data_iter, validation_iter, text_sort_key_lambda, model_network, loss_function, optimizer,
                  output_dir,
                  epoch=10, mini_batch_size=32,
@@ -90,7 +89,8 @@ Runs train...
 
                 train_acc = 100. * n_correct / n_total
 
-                val_acc, val_loss = self.calculate_val_loss(loss_function, model_network, val_iter, validation_iter)
+                val_acc, val_loss = self.calculate_val_loss(loss_function, model_network, val_iter, validation_iter,
+                                                            output_dir)
 
                 self.logger.info(val_log_template.format((datetime.datetime.now() - start).seconds,
                                                          epoch, iterations, 1 + len(batch_x), len(train_iter),
@@ -101,7 +101,7 @@ Runs train...
                 if val_acc > best_val_acc:
                     self.save_snapshot(model_network, output_dir)
 
-    def calculate_val_loss(self, loss_function, model_network, val_iter, validation_iter):
+    def calculate_val_loss(self, loss_function, model_network, val_iter, validation_iter, output_dir):
         # switch model to evaluation mode
         model_network.eval()
         val_iter.init_epoch()
@@ -119,16 +119,25 @@ Runs train...
                 actuals.extend(val_y)
                 predicted.extend(pred_flat)
 
-        self.print_confusion_matrix(actuals, predicted)
+        self.print_confusion_matrix(actuals, predicted, output_dir)
         val_acc = 100. * n_val_correct / len(validation_iter)
         return val_acc, val_loss
 
-    def print_confusion_matrix(self, y_actual, y_pred):
-        from sklearn.metrics import confusion_matrix
+    def print_confusion_matrix(self, y_actual, y_pred, output_dir):
+        from sklearn.metrics import confusion_matrix, recall_score, precision_score, f1_score
         cnf_matrix = confusion_matrix(y_actual, y_pred)
 
-        self.logger.info("Confusion matrix:\n{}".format(cnf_matrix))
+        recall, precision, f1 = recall_score(y_actual, y_pred, pos_label=0), precision_score(y_actual, y_pred,
+                                                                                             pos_label=0), f1_score(
+            y_actual, y_pred, pos_label=0)
 
+        filename = os.path.join(output_dir,
+                                "predictedvsactual_{}".format(
+                                    datetime.datetime.strftime(datetime.datetime.now(), format="%Y%m%d_%H%M%S")))
+        self.save_data(y_pred, y_actual, filename)
+        self.logger.info("Confusion matrix, full output in {}: \n{}".format(filename, cnf_matrix))
+
+        self.logger.info("Precison {}, recall {}: f1 {}".format(precision, recall, f1))
 
     def save_snapshot(self, model, output_dir):
         # found a model with better validation set accuracy
@@ -138,3 +147,9 @@ Runs train...
 
         # save model, delete previous 'best_snapshot' files
         torch.save(model, snapshot_path)
+
+    def save_data(self, pred, actual, outfile):
+        # Write to output
+        with open(outfile, "w") as out:
+            for a, p in zip(actual, pred):
+                out.write("{},{}\n".format(a, p))

@@ -133,6 +133,7 @@ class RelationExtractionAverageFactory:
 
         # converts train_labels_encode to int ..
         classes = self.parser.get_label_map(train_labels)
+        self.logger.info("Encoded Class order : {}".format(classes))
         train_labels_encode = self.parser.encode_labels(train_labels, classes)
         validation_labels_encode = self.parser.encode_labels(validation_labels, classes)
 
