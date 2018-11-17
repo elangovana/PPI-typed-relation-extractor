@@ -2,10 +2,10 @@ from unittest import TestCase
 
 import torch
 
-from algorithms.RelationExtractorLinearNetwork import RelationExtractorLinearNetwork
+from algorithms.RelationExtractionAverageNetwork import RelationExtractorNetworkAverage
 
 
-class TestRelationExtractorLinearNetwork(TestCase):
+class TestRelationExtractorAverageNetwork(TestCase):
     def test_forward(self):
         vocab_size = 10000
         batch_size = 10
@@ -18,9 +18,9 @@ class TestRelationExtractorLinearNetwork(TestCase):
         max_itype_len = 1
         interaction_type = torch.LongTensor(max_itype_len, batch_size).random_(0, vocab_size)
 
-        sut = RelationExtractorLinearNetwork(class_size=class_size, embedding_dim=vector_dim,
-                                             pretrained_weights_or_embed_vocab_size=vocab_size,
-                                             feature_lengths=[max_abstract_len, max_itype_len])
+        sut = RelationExtractorNetworkAverage(class_size=class_size, embedding_dim=vector_dim,
+                                              pretrained_weights_or_embed_vocab_size=vocab_size,
+                                              feature_len=len([max_abstract_len, max_itype_len]))
 
         # Act
         actual = sut([abstract, interaction_type])
