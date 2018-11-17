@@ -19,7 +19,7 @@ class Train:
     def __call__(self, data_iter, validation_iter, text_sort_key_lambda, model_network, loss_function, optimizer,
                  output_dir,
                  epoch=10, mini_batch_size=32,
-                 eval_every_n_epoch=1, device_type="cpu"):
+                 eval_every_n_epoch=1, device_type="cpu", pos_label=1):
 
         """
 Runs train...
@@ -90,7 +90,7 @@ Runs train...
                 train_acc = 100. * n_correct / n_total
 
                 val_acc, val_loss = self.calculate_val_loss(loss_function, model_network, val_iter, validation_iter,
-                                                            output_dir)
+                                                            output_dir, pos_label)
 
                 self.logger.info(val_log_template.format((datetime.datetime.now() - start).seconds,
                                                          epoch, iterations, 1 + len(batch_x), len(train_iter),
@@ -101,7 +101,7 @@ Runs train...
                 if val_acc > best_val_acc:
                     self.save_snapshot(model_network, output_dir)
 
-    def calculate_val_loss(self, loss_function, model_network, val_iter, validation_iter, output_dir):
+    def calculate_val_loss(self, loss_function, model_network, val_iter, validation_iter, output_dir, pos_label):
         # switch model to evaluation mode
         model_network.eval()
         val_iter.init_epoch()
@@ -119,17 +119,17 @@ Runs train...
                 actuals.extend(val_y)
                 predicted.extend(pred_flat)
 
-        self.print_confusion_matrix(actuals, predicted, output_dir)
+        self.print_confusion_matrix(actuals, predicted, output_dir, pos_label)
         val_acc = 100. * n_val_correct / len(validation_iter)
         return val_acc, val_loss
 
-    def print_confusion_matrix(self, y_actual, y_pred, output_dir):
+    def print_confusion_matrix(self, y_actual, y_pred, output_dir, pos_label):
         from sklearn.metrics import confusion_matrix, recall_score, precision_score, f1_score
         cnf_matrix = confusion_matrix(y_actual, y_pred)
 
-        recall, precision, f1 = recall_score(y_actual, y_pred, pos_label=0), precision_score(y_actual, y_pred,
-                                                                                             pos_label=0), f1_score(
-            y_actual, y_pred, pos_label=0)
+        recall, precision, f1 = recall_score(y_actual, y_pred, pos_label=pos_label), precision_score(y_actual, y_pred,
+                                                                                                     pos_label=pos_label), f1_score(
+            y_actual, y_pred, pos_label=pos_label)
 
         filename = os.path.join(output_dir,
                                 "predictedvsactual_{}".format(

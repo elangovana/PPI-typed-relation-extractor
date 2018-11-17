@@ -17,7 +17,8 @@ from algorithms.Train import Train
 class RelationExtractionLinearFactory:
 
     def __init__(self, embedding_handle, embedding_dim: int, class_size: int, output_dir, learning_rate: float = 0.01,
-                 momentum: float = 0.9, ngram: int = 3, epochs: int = 10, min_vocab_frequency=3):
+                 momentum: float = 0.9, ngram: int = 3, epochs: int = 10, min_vocab_frequency=3, pos_label=1):
+        self.pos_label = pos_label
         self.min_vocab_frequency = min_vocab_frequency
         self.epochs = epochs
         self.output_dir = output_dir
@@ -137,6 +138,7 @@ class RelationExtractionLinearFactory:
         self.logger.info("Encoded Class order : {}".format(classes))
         train_labels_encode = self.parser.encode_labels(train_labels, classes)
         validation_labels_encode = self.parser.encode_labels(validation_labels, classes)
+        pos_label = self.parser.encode_labels([self.pos_label], classes)[0]
 
         data_formatted, val_data_formatted = self.getexamples(self.col_names, column_lengths, processed_data,
                                                               train_labels_encode), self.getexamples(
@@ -154,7 +156,7 @@ class RelationExtractionLinearFactory:
 
         # Invoke trainer
         self.trainer(data_formatted, val_data_formatted, sort_key, model, self.loss_function, optimiser,
-                     self.output_dir, epoch=self.epochs)
+                     self.output_dir, epoch=self.epochs, pos_label=pos_label)
         return model
 
     def sum(self, x):

@@ -19,7 +19,7 @@ class TestSitRelationExtractionAverageFactory(TestCase):
         embedding = StringIO(
             "\n".join(["hat 0.2 .34 0.8", "mat 0.5 .34 0.8", "entity1 0.5 .55 0.8", "entity2 0.3 .55 0.9"]))
         sut = RelationExtractionAverageFactory(class_size=2, embedding_handle=embedding, embedding_dim=3, ngram=1,
-                                               output_dir=out_dir)
+                                               output_dir=out_dir, pos_label="1")
 
         train_df = [["This is good", "entity1", "entity2"],
                     ["this is a cat not a hat", "mat protein", "cat protein"]]
