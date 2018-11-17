@@ -49,7 +49,9 @@ def run(network, train_file, val_file, embedding_file, embed_dim, out_dir, epoch
         train_factory = network_factory(embedding_handle=embedding, embedding_dim=embed_dim,
                                         class_size=class_size,
                                         output_dir=out_dir, ngram=1, epochs=epochs)
-        train_factory(train_df, train_labels, val_df, val_labels)
+        model = train_factory(train_df, train_labels, val_df, val_labels)
+
+        return model
 
 
 if "__main__" == __name__:

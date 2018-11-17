@@ -155,6 +155,8 @@ class RelationExtractionAverageFactory:
         self.trainer(data_formatted, val_data_formatted, sort_key, model, self.loss_function, optimiser,
                      self.output_dir, epoch=self.epochs)
 
+        return model
+
     def construct_vocab(self, train_data):
         vocab_token_counter = Counter()
         for i in pd.DataFrame(train_data).apply(lambda c: self.get_column_values_count(c), axis=0).values:

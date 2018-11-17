@@ -155,6 +155,7 @@ class RelationExtractionLinearFactory:
         # Invoke trainer
         self.trainer(data_formatted, val_data_formatted, sort_key, model, self.loss_function, optimiser,
                      self.output_dir, epoch=self.epochs)
+        return model
 
     def sum(self, x):
         return sum([len(getattr(x, c)) for c in self.col_names])
