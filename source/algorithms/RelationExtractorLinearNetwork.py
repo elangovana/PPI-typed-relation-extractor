@@ -19,8 +19,10 @@ Extracts relationship using a single layer
         torch.manual_seed(seed)
         super(RelationExtractorLinearNetwork, self).__init__()
         # Use random weights if vocab size if passed in else load pretrained weights
+
         self.embeddings = nn.Embedding(pretrained_weights_or_embed_vocab_size,
-                                       pretrained_weights_or_embed_vocab_size) if pretrained_weights_or_embed_vocab_size is int else nn.Embedding.from_pretrained(
+                                       embedding_dim) if type(
+            pretrained_weights_or_embed_vocab_size) is int else nn.Embedding.from_pretrained(
             torch.FloatTensor(pretrained_weights_or_embed_vocab_size))
         layer1_size = 250
         layer2_size = 550
