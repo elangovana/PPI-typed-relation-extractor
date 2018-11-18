@@ -15,8 +15,7 @@ networks_dict = {
 }
 
 
-def prepare_data(self_relations_filter, file):
-    data_df = pd.read_json(file)
+def prepare_data(self_relations_filter, data_df):
     if self_relations_filter:
         data_df = data_df.query('participant1 == participant2')
     labels = data_df[["isValid"]]
@@ -24,6 +23,21 @@ def prepare_data(self_relations_filter, file):
 
     labels = np.reshape(labels.values.tolist(), (-1,))
     return data_df, labels
+
+
+def up_sample_minority(train_df, self_relations_filter):
+    # True is the minority class
+    if self_relations_filter:
+        train_df = train_df.query('participant1 == participant2')
+
+    train_dat_0s = train_df.query('isValid == False')
+    train_dat_1s = train_df.query('isValid == True')
+
+    rep_1 = [train_dat_1s for x in range(train_dat_0s.shape[0] // train_dat_1s.shape[0])]
+    keep_1s = pd.concat(rep_1, axis=0)
+
+    train_dat = pd.concat([keep_1s, train_dat_0s], axis=0)
+    return train_dat
 
 
 def run(network, train_file, val_file, embedding_file, embed_dim, out_dir, epochs, self_relations_filter=True):
@@ -36,8 +50,20 @@ def run(network, train_file, val_file, embedding_file, embed_dim, out_dir, epoch
 
     logger.info("Running with self relations filter {}, network {}".format(self_relations_filter, network))
 
-    train_df, train_labels = prepare_data(self_relations_filter, train_file)
-    val_df, val_labels = prepare_data(self_relations_filter, val_file)
+    train_df = pd.read_json(train_file)
+    logger.info("Train size: {}, class distribution before upsampling\n {}".format(train_df.shape,
+                                                                                   train_df['isValid'].value_counts()))
+
+    train_df = up_sample_minority(train_df, self_relations_filter)
+    logger.info("Train size: {}, class distribution after upsampling \n{}".format(train_df.shape,
+                                                                                  train_df['isValid'].value_counts()))
+
+    train_df, train_labels = prepare_data(self_relations_filter, train_df)
+    logger.info("Train size: {}, class distribution after upsampling & data prep \n{}".format(train_df.shape,
+                                                                                              np.bincount(
+                                                                                                  train_labels)))
+
+    val_df, val_labels = prepare_data(self_relations_filter, pd.read_json(val_file))
 
     logger.info("Training shape {}, test shape {}".format(train_df.shape, val_df.shape))
 
