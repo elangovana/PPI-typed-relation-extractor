@@ -123,6 +123,7 @@ class RelationExtractionLinearFactory:
 
         # Lengths of each column
         column_lengths = train_data.apply(lambda c: max(c.apply(len))).values
+        self.logger.info("Column length counts : {}".format(column_lengths))
 
         # TODO Clean this
         model = self.model_network(self.class_size, self.embedding_dim, embedding_array,
