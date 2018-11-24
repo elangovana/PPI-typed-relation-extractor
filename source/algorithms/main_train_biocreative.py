@@ -17,7 +17,7 @@ networks_dict = {
 
 def prepare_data(self_relations_filter, data_df):
     if self_relations_filter:
-        data_df = data_df.query('participant1 == participant2')
+        data_df = data_df.query('participant1 != participant2')
     labels = data_df[["isValid"]]
     data_df = data_df[["abstract", "participant1", "participant2"]]
 
@@ -28,7 +28,7 @@ def prepare_data(self_relations_filter, data_df):
 def up_sample_minority(train_df, self_relations_filter):
     # True is the minority class
     if self_relations_filter:
-        train_df = train_df.query('participant1 == participant2')
+        train_df = train_df.query('participant1 != participant2')
 
     train_dat_0s = train_df.query('isValid == False')
     train_dat_1s = train_df.query('isValid == True')
