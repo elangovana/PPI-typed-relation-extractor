@@ -54,6 +54,8 @@ Runs train...
             train_iter.init_epoch()
             total_loss = 0
             n_correct, n_total = 0, 0
+            actuals_train = []
+            predicted_train = []
             for batch_x, batch_y in train_iter:
                 iterations += 1
                 # for feature, target in zip(batch_x, batch_y):
@@ -81,8 +83,15 @@ Runs train...
 
                 losses.append(total_loss)
 
+                actuals_train.extend(batch_y)
+                predicted_train.extend(torch.max(predicted, 1)[1].view(batch_y.size()))
+
                 n_correct += (torch.max(predicted, 1)[1].view(batch_y.size()) == batch_y).sum().item()
                 n_total += len(batch_y)
+
+            # Print training set confusion matrix
+            self.logger.info("Train set results:")
+            self.print_confusion_matrix(actuals_train, predicted_train, output_dir, pos_label)
 
             # evaluate performance on validation set periodically
             if epoch % eval_every_n_epoch == 0:
@@ -118,7 +127,7 @@ Runs train...
                 val_loss = loss_function(pred_batch_y, val_y)
                 actuals.extend(val_y)
                 predicted.extend(pred_flat)
-
+        self.logger.info("Validation set results:")
         self.print_confusion_matrix(actuals, predicted, output_dir, pos_label)
         val_acc = 100. * n_val_correct / len(validation_iter)
         return val_acc, val_loss
