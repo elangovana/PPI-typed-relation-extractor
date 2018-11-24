@@ -1,5 +1,6 @@
 import argparse
 import logging
+import sys
 
 from gensim.models.keyedvectors import KeyedVectors
 
