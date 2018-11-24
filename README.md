@@ -71,9 +71,24 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
     docker run -it -v  lanax/gnormplus
     ```
     
+4. Download wordtovec pretrained models (either pubmed+pmc trained or  pubmed+pmc+wikipedia)and convert to text format 
 
+    ```bash
+    # Download word to vec trained only on pubmed and pmc
+    wget  wget -O /data/PubMed-and-PMC-w2v.bin http://evexdb.org/pmresources/vec-space-models/PubMed-and-PMC-w2v.bin
+ 
+    python ./source/dataformatters/main_wordToVecBinToText.py /data/PubMed-and-PMC-w2v.bin /data/PubMed-and-PMC-w2v.bin.txt
+    ```
+    
+    ```bash
+    # Download word to vec trained only on pubmed and pmc and wikipedia
+    wget  wget -O /data/PubMed-and-PMC-w2v.bin http://evexdb.org/pmresources/vec-space-models/wikipedia-pubmed-and-PMC-w2v.bin
+ 
+    python ./source/dataformatters/main_wordToVecBinToText.py /data/wikipedia-pubmed-and-PMC-w2v.bin /data/wikipedia-pubmed-and-PMC-w2v.bin.txt
+    ```
 4. Run train job
     ```bash
     export PYTHONPATH=./source
     python source/algorithms/main_train.py Linear train.json val.json ./tests/test_algorithms/sample_PubMed-and-PMC-w2v.bin.txt 200 outdir
     ```
+
