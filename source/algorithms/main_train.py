@@ -57,8 +57,7 @@ def run(network, train_file, val_file, embedding_file, embed_dim, out_dir, epoch
 
 
 if "__main__" == __name__:
-    logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler(sys.stdout)],
-                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
     parser = argparse.ArgumentParser()
     parser.add_argument("network",
                         help="The type of network to use", choices=set(list(networks_dict.keys())))
@@ -73,7 +72,13 @@ if "__main__" == __name__:
     parser.add_argument("--epochs", help="The number of epochs", type=int, default=10)
     parser.add_argument("--interaction-type", help="The interction type", default=None)
 
+    parser.add_argument("--log-level", help="Log level", default="INFO", choices={"INFO", "WARN", "DEBUG", "ERROR"})
+
     args = parser.parse_args()
+
+    # Set up logging
+    logging.basicConfig(level=logging.getLevelName(args.log_level), handlers=[logging.StreamHandler(sys.stdout)],
+                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
     run(args.network, args.trainjson, args.valjson, args.embedding, args.embeddim,
         args.outdir, args.epochs, args.interaction_type)
