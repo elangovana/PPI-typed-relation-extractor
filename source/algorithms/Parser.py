@@ -1,6 +1,7 @@
 import collections
 
 import numpy
+from nltk.tokenize import wordpunct_tokenize
 from sklearn import preprocessing
 
 UNKNOWN_WORD = '<unk>'
@@ -13,7 +14,7 @@ class Parser:
         if char_based:
             return list(text)
         else:
-            return text.split()
+            return wordpunct_tokenize(text)
 
     def normalize_text(self, text):
         return text.strip().lower()
