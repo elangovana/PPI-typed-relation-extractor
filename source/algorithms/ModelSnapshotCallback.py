@@ -55,4 +55,6 @@ class ModelSnapshotCallback:
             # save model, delete previous 'best_snapshot' files
             torch.save(model, snapshot_path)
 
-        return current_score
+            best_accuracy = current_score
+
+        return best_accuracy
