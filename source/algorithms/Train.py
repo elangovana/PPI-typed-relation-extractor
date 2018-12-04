@@ -126,6 +126,7 @@ class Train:
                 n_total += len(batch_y)
 
             # Print training set confusion matrix
+            self.logger.info("Train set result details:")
             self.results_writer(data_iter, actuals_train, predicted_train, pos_label, output_dir)
             train_results = self.results_scorer(y_actual=actuals_train, y_pred=predicted_train, pos_label=pos_label)
             self.logger.info("Train set results: {}", train_results)
