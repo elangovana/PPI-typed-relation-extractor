@@ -129,7 +129,7 @@ class Train:
             self.logger.info("Train set result details:")
             self.results_writer(data_iter, actuals_train, predicted_train, pos_label, output_dir)
             train_results = self.results_scorer(y_actual=actuals_train, y_pred=predicted_train, pos_label=pos_label)
-            self.logger.info("Train set results: {}", train_results)
+            self.logger.info("Train set results: {}".format(train_results))
 
             best_score = self.snapshotter(model_network, val_iter, best_score, output_dir=output_dir,
                                           pos_label=pos_label,
