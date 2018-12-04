@@ -1,28 +1,63 @@
 import datetime
 import logging
-import os
 
 import torch
 import torch.utils.data
 from torchtext.data import BucketIterator
 
+from algorithms.ModelSnapshotCallback import ModelSnapshotCallback
+from algorithms.result_scorer import score_type_f1, ResultScorer, score_type_accuracy
+from algorithms.result_writer import ResultWriter
+
 
 class Train:
 
     def __init__(self):
-        pass
+        self.snapshotter = None
+        self.results_scorer = None
+        self.results_writer = None
 
     @property
     def logger(self):
         return logging.getLogger(__name__)
 
+    @property
+    def snapshotter(self):
+        self.__snapshotter__ = self.__snapshotter__ or ModelSnapshotCallback()
+        return self.__snapshotter__
+
+    @snapshotter.setter
+    def snapshotter(self, value):
+        self.__snapshotter__ = value
+
+    @snapshotter.setter
+    def snapshotter(self, value):
+        self.__snapshotter__ = value
+
+    @property
+    def results_scorer(self):
+        self.__results_scorer__ = self.__results_scorer__ or ResultScorer()
+        return self.__results_scorer__
+
+    @results_scorer.setter
+    def results_scorer(self, value):
+        self.__results_scorer__ = value
+
+    @property
+    def results_writer(self):
+        self.__results_writer__ = self.__results_writer__ or ResultWriter()
+        return self.__results_writer__
+
+    @results_writer.setter
+    def results_writer(self, value):
+        self.__results_writer__ = value
+
     def __call__(self, data_iter, validation_iter, text_sort_key_lambda, model_network, loss_function, optimizer,
                  output_dir,
                  epoch=10, mini_batch_size=32,
                  eval_every_n_epoch=1, device_type="cpu", pos_label=1):
-
         """
-Runs train...
+    Runs train...
         :param validation_iter: Validation set
         :param epoch:
         :param mini_batch_size:
@@ -50,6 +85,7 @@ Runs train...
             repeat=False  # we pass repeat=False because we want to wrap this Iterator layer.
         )
 
+        best_score = 0
         for epoch in range(epoch):
             train_iter.init_epoch()
             total_loss = 0
@@ -90,27 +126,30 @@ Runs train...
                 n_total += len(batch_y)
 
             # Print training set confusion matrix
-            self.logger.info("Train set results:")
-            self.print_confusion_matrix(actuals_train, predicted_train, output_dir, pos_label)
+            self.results_writer(data_iter, actuals_train, predicted_train, pos_label, output_dir)
+            train_results = self.results_scorer(y_actual=actuals_train, y_pred=predicted_train, pos_label=pos_label)
+            self.logger.info("Train set results: {}", train_results)
+
+            best_score = self.snapshotter(model_network, val_iter, best_score, output_dir=output_dir,
+                                          pos_label=pos_label,
+                                          metric=score_type_f1)
+
+            val_actuals, val_predicted, val_loss = self.predict(loss_function, model_network, val_iter)
+            self.logger.info("Validation set result details:")
+
+            self.results_writer(data_iter, val_actuals, val_predicted, pos_label, output_dir)
+            val_results = self.results_scorer(y_actual=val_actuals, y_pred=val_predicted, pos_label=pos_label)
 
             # evaluate performance on validation set periodically
-            if epoch % eval_every_n_epoch == 0:
+            self.logger.info(val_log_template.format((datetime.datetime.now() - start).seconds,
+                                                     epoch, iterations, 1 + len(batch_x), len(train_iter),
+                                                     100. * (1 + len(batch_x)) / len(train_iter), total_loss,
+                                                     val_loss.item(), train_results[score_type_accuracy],
+                                                     val_results[score_type_accuracy]))
+            # Print training set confusion matrix
+            self.logger.info("Validation set results: {} ".format(val_results))
 
-                train_acc = 100. * n_correct / n_total
-
-                val_acc, val_loss = self.calculate_val_loss(loss_function, model_network, val_iter, validation_iter,
-                                                            output_dir, pos_label)
-
-                self.logger.info(val_log_template.format((datetime.datetime.now() - start).seconds,
-                                                         epoch, iterations, 1 + len(batch_x), len(train_iter),
-                                                         100. * (1 + len(batch_x)) / len(train_iter), total_loss,
-                                                         val_loss.item(), train_acc, val_acc))
-
-                # update best valiation set accuracy
-                if val_acc > best_val_acc:
-                    self.save_snapshot(model_network, output_dir)
-
-    def calculate_val_loss(self, loss_function, model_network, val_iter, validation_iter, output_dir, pos_label):
+    def predict(self, loss_function, model_network, val_iter):
         # switch model to evaluation mode
         model_network.eval()
         val_iter.init_epoch()
@@ -127,38 +166,5 @@ Runs train...
                 val_loss = loss_function(pred_batch_y, val_y)
                 actuals.extend(val_y)
                 predicted.extend(pred_flat)
-        self.logger.info("Validation set results:")
-        self.print_confusion_matrix(actuals, predicted, output_dir, pos_label)
-        val_acc = 100. * n_val_correct / len(validation_iter)
-        return val_acc, val_loss
 
-    def print_confusion_matrix(self, y_actual, y_pred, output_dir, pos_label):
-        from sklearn.metrics import confusion_matrix, recall_score, precision_score, f1_score
-        cnf_matrix = confusion_matrix(y_actual, y_pred)
-
-        recall, precision, f1 = recall_score(y_actual, y_pred, pos_label=pos_label), precision_score(y_actual, y_pred,
-                                                                                                     pos_label=pos_label), f1_score(
-            y_actual, y_pred, pos_label=pos_label)
-
-        filename = os.path.join(output_dir,
-                                "predictedvsactual_{}".format(
-                                    datetime.datetime.strftime(datetime.datetime.now(), format="%Y%m%d_%H%M%S")))
-        self.save_data(y_pred, y_actual, filename)
-        self.logger.info("Confusion matrix, full output in {}: \n{}".format(filename, cnf_matrix))
-
-        self.logger.info("Precison {}, recall {}: f1 {}".format(precision, recall, f1))
-
-    def save_snapshot(self, model, output_dir):
-        # found a model with better validation set accuracy
-
-        snapshot_prefix = os.path.join(output_dir, 'best_snapshot')
-        snapshot_path = snapshot_prefix + 'model.pt'
-
-        # save model, delete previous 'best_snapshot' files
-        torch.save(model, snapshot_path)
-
-    def save_data(self, pred, actual, outfile):
-        # Write to output
-        with open(outfile, "w") as out:
-            for a, p in zip(actual, pred):
-                out.write("{},{}\n".format(a, p))
+        return actuals, predicted, val_loss
