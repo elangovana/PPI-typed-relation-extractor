@@ -1,23 +1,31 @@
-import itertools
+import glob
 import json
 import logging
 import os
-from collections import Counter
 
-import pandas as pd
+import numpy
+import torch
+from sklearn.pipeline import Pipeline
 from torch import optim, nn
-from torchtext import data
 
-from algorithms.Parser import Parser
 from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
 from algorithms.RelationExtractorLinearNetwork import RelationExtractorLinearNetwork
 from algorithms.Train import Train
+from algorithms.transform_extract_label_numbers import TransformExtractLabelNumbers
+from algorithms.transform_extract_vocab import TransformExtractVocab
+from algorithms.transform_final_create_examples import TransformFinalCreateExamples
+from algorithms.transform_labels_to_numbers import TransformLabelsToNumbers
+from algorithms.transform_tokenise import TransformTokenise
+from algorithms.transform_tokens_to_indices import TransformTokensToIndices
 
 
 class RelationExtractionLinearFactory:
 
     def __init__(self, embedding_handle, embedding_dim: int, class_size: int, output_dir, learning_rate: float = 0.01,
-                 momentum: float = 0.9, ngram: int = 3, epochs: int = 10, min_vocab_frequency=3, pos_label=1):
+                 momentum: float = 0.9, ngram: int = 3, epochs: int = 10, min_vocab_frequency=3, pos_label=1,
+                 vocab=None, classes=None):
+        self.classes = classes
+        self.vocab = vocab
         self.pos_label = pos_label
         self.min_vocab_frequency = min_vocab_frequency
         self.epochs = epochs
@@ -34,6 +42,9 @@ class RelationExtractionLinearFactory:
         self.trainer = None
         self.loss_function = None
         self.optimiser = None
+        self.transform_extract_label_number = None
+        self.transform_tokenise = None
+        self.train_data_pipeline = None
 
     @property
     def model_network(self):
@@ -72,42 +83,94 @@ class RelationExtractionLinearFactory:
         self.__trainer__ = value
 
     @property
-    def parser(self):
-        self.__parser__ = self.__parser__ or Parser()
-        return self.__parser__
-
-    @parser.setter
-    def parser(self, value):
-        self.__parser__ = value
-
-    @property
     def embedder_loader(self):
         self.__embedder_loader__ = self.__embedder_loader__ or PretrainedEmbedderLoader()
         return self.__embedder_loader__
+
+    @embedder_loader.setter
+    def embedder_loader(self, value):
+        self.__embedder_loader__ = value
 
     @property
     def logger(self):
         return logging.getLogger(__name__)
 
-    @embedder_loader.setter
-    def embedder_loader(self, value):
-        self.__embedder_loader__ = value
+    def get_data_pipeline(self, vocab, pipeline=None):
+        # this is the default pipeline
+
+        pipeline = pipeline or Pipeline([
+            ('TransformExtractWords', self.transform_tokenise)
+            , ('TransformWordsIndices', TransformTokensToIndices(vocab=vocab))
+
+        ])
+
+        return pipeline
+
+    @property
+    def train_data_pipeline(self):
+        if self.__train_data_pipeline__ is None:
+            # this is the default pipeline
+            self.__train_data_pipeline__ = Pipeline([
+                ('TransformExtractWords', self.transform_tokenise)
+                , ('TransformWordsIndices', TransformExtractVocab(min_vocab_frequency=self.min_vocab_frequency))
+            ])
+
+        return self.__train_data_pipeline__
+
+    @train_data_pipeline.setter
+    def train_data_pipeline(self, value):
+        self.__train_data_pipeline__ = value
+
+    @property
+    def transform_extract_label_number(self):
+        self.__transform_extract_label_number__ = self.__transform_extract_label_number__ or TransformExtractLabelNumbers()
+        return self.__transform_extract_label_number__
+
+    @transform_extract_label_number.setter
+    def transform_extract_label_number(self, value):
+        self.__transform_extract_label_number__ = value
+
+    @property
+    def transform_tokenise(self):
+        self.__transform_tokenise__ = self.__transform_tokenise__ or TransformTokenise()
+        return self.__transform_tokenise__
+
+    @transform_tokenise.setter
+    def transform_tokenise(self, value):
+        self.__transform_tokenise__ = value
+
+    def get_transform_examples(self, feature_len, transformer=None):
+        transformer = transformer or TransformFinalCreateExamples(feature_lens=feature_len)
+        return transformer
+
+    def get_transformer_labels_to_integers(self, classes, transformer=None):
+        transformer = transformer or TransformLabelsToNumbers(classes=classes)
+
+        return transformer
 
     def __call__(self, train, train_labels, validation, validation_labels):
         """
 
         :type data: Dataframe
         """
-        # Tokenised data
-        train_data = train.applymap(lambda x: self.parser.split_text(x))
-        validation_data = validation.applymap(lambda x: self.parser.split_text(x))
+        # Extract train specific features
+        train_vocab = self.train_data_pipeline.transform(train)
+        classes = self.transform_extract_label_number.transform(train_labels)
+        # Lengths of each column
+        feature_lens = self.transform_tokenise.transform(train).apply(lambda c: max(c.apply(len))).values
+        self.logger.info("Column length counts : {}".format(feature_lens))
 
-        train_vocab = self.construct_vocab(train_data)
+        transformer_labels = self.get_transformer_labels_to_integers(classes)
+        transfomed_train_labels = transformer_labels.transform(train_labels)
+        transfomed_val_labels = transformer_labels.transform(validation_labels)
 
-        min_words_dict = self.parser.get_min_dictionary()
-        for w in min_words_dict.keys():
-            if w not in train_vocab:
-                train_vocab[w] = len(train_vocab)
+        transformer_pipeline = self.get_data_pipeline(vocab=train_vocab)
+        transformer_examples = self.get_transform_examples(feature_lens)
+
+        train_examples = transformer_examples.transform(transformer_pipeline.transform(train),
+                                                        y=transfomed_train_labels)
+        val_examples = transformer_examples.transform(transformer_pipeline.transform(validation),
+                                                      y=transfomed_val_labels)
 
         # Initialise minwords with random weights
         rand_words_weights_dict = {}
@@ -119,32 +182,10 @@ class RelationExtractionLinearFactory:
         self.logger.info("loaded vocab size {}, embed array len {}, size of first element {}.".format(len(vocab), len(
             embedding_array), len(embedding_array[0])))
 
-        self.col_names = train.columns.values
-
-        # Lengths of each column
-        column_lengths = train_data.apply(lambda c: max(c.apply(len))).values
-        self.logger.info("Column length counts : {}".format(column_lengths))
-
-        # TODO Clean this
         model = self.model_network(self.class_size, self.embedding_dim, embedding_array,
-                                   feature_lengths=column_lengths)
-        processed_data = self.parser.transform_to_array(train_data.values.tolist(), vocab=vocab)
-        val_processed_data = self.parser.transform_to_array(validation_data.values.tolist(), vocab=vocab)
+                                   feature_lengths=feature_lens)
 
-        token_counts = pd.DataFrame(processed_data).apply(lambda c: self.get_column_values_count(c), axis=0).values
-        self.logger.info("Token counts : {}".format(token_counts))
-
-        # converts train_labels_encode to int ..
-        classes = self.parser.get_label_map(train_labels)
-        self.logger.info("Encoded Class order : {}".format(classes))
-        train_labels_encode = self.parser.encode_labels(train_labels, classes)
-        validation_labels_encode = self.parser.encode_labels(validation_labels, classes)
-        pos_label = self.parser.encode_labels([self.pos_label], classes)[0]
-
-        data_formatted, val_data_formatted = self.getexamples(self.col_names, column_lengths, processed_data,
-                                                              train_labels_encode), self.getexamples(
-            self.col_names, column_lengths, val_processed_data,
-            validation_labels_encode)
+        pos_label = transformer_labels.encode_labels([self.pos_label], classes)[0]
 
         sort_key = lambda x: self.sum(x)
 
@@ -153,40 +194,64 @@ class RelationExtractionLinearFactory:
                                    lr=self.learning_rate,
                                    momentum=self.momentum)
 
-        self.persist(outdir=self.output_dir, vocab=vocab)
+        self.persist(outdir=self.output_dir, vocab=vocab, classes=classes, feature_lens=feature_lens)
 
         # Invoke trainer
-        self.trainer(data_formatted, val_data_formatted, sort_key, model, self.loss_function, optimiser,
-                     self.output_dir, epoch=self.epochs, pos_label=pos_label)
-        return model
+        results = self.trainer(train_examples, val_examples, sort_key, model, self.loss_function, optimiser,
+                               self.output_dir, epoch=self.epochs, pos_label=pos_label)
+        return results
 
     def sum(self, x):
-        return sum([len(getattr(x, c)) for c in self.col_names])
+        return sum([len(getattr(x, c)) for c in x.__dict__ if c != 'label'])
 
-    def persist(self, outdir, vocab):
+    def persist(self, outdir, vocab, classes, feature_lens):
         with open(os.path.join(outdir, "vocab.json"), "w") as f:
             f.write(json.dumps(vocab))
 
+        with open(os.path.join(outdir, "classes.json"), "w") as f:
+            f.write(json.dumps(classes.tolist()))
 
-    def get_column_values_count(self, c):
-        values = list(itertools.chain.from_iterable(c.values))
-        return Counter(values)
+        with open(os.path.join(outdir, "feature_lens.json"), "w") as f:
+            f.write(json.dumps(feature_lens.tolist()))
 
-    def getexamples(self, col_names, col_sizes, data_list, encoded_labels):
-        LABEL = data.LabelField(use_vocab=False, sequential=False, is_target=True)
+    @staticmethod
+    def load(artifacts_dir):
+        model_file = RelationExtractionLinearFactory._find_artifact("{}/*model.pt".format(artifacts_dir))
+        classes_file = RelationExtractionLinearFactory._find_artifact("{}/*classes.json".format(artifacts_dir))
+        vocab_file = RelationExtractionLinearFactory._find_artifact("{}/*vocab.json".format(artifacts_dir))
+        feature_lens_file = RelationExtractionLinearFactory._find_artifact(
+            "{}/*feature_lens.json".format(artifacts_dir))
 
-        fields = [(c, data.Field(use_vocab=False, pad_token=0, fix_length=l)) for c, l in zip(col_names, col_sizes)]
-        fields.append(("label", LABEL))
+        with open(vocab_file, "r") as f:
+            vocab = json.loads(f.read())
 
-        return data.Dataset([data.Example.fromlist([*f, l], fields) for l, f in
-                             zip(encoded_labels, data_list)], fields)
+        with open(classes_file, "r") as f:
+            classes = numpy.asarray(json.loads(f.read()))
 
-    def construct_vocab(self, train_data):
-        vocab_token_counter = Counter()
-        for i in pd.DataFrame(train_data).apply(lambda c: self.get_column_values_count(c), axis=0).values:
-            vocab_token_counter += i
+        with open(feature_lens_file, "r") as f:
+            feature_lens = numpy.asarray(json.loads(f.read()))
 
-        result = {}
-        for ik, iv in filter(lambda t: t[1] >= self.min_vocab_frequency, vocab_token_counter.items()):
-            result[ik] = len(result)
-        return result
+        factory = RelationExtractionLinearFactory(class_size=0, vocab=vocab, embedding_handle=None, output_dir=None,
+                                                  embedding_dim=0)
+
+        model = torch.load(model_file)
+
+        return lambda x: factory.predict(x, vocab, feature_lens, model)
+
+    @staticmethod
+    def _find_artifact(pattern):
+
+        matching = glob.glob(pattern)
+        assert len(matching) == 1, "Expected one in {}, but found {}".format(matching,
+                                                                             len(matching))
+        matched_file = matching[0]
+        return matched_file
+
+    def predict(self, df, vocab, feature_lens, model):
+
+        transformer_pipeline = self.get_data_pipeline(vocab=vocab)
+        transformer_examples = self.get_transform_examples(feature_lens)
+
+        val_examples = transformer_examples.transform(transformer_pipeline.transform(df))
+
+        return self.trainer.predict(model, val_examples)

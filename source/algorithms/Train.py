@@ -3,6 +3,7 @@ import logging
 
 import torch
 import torch.utils.data
+import torchtext
 from torchtext.data import BucketIterator
 
 from algorithms.ModelSnapshotCallback import ModelSnapshotCallback
@@ -135,7 +136,7 @@ class Train:
                                           pos_label=pos_label,
                                           metric=score_type_f1)
 
-            val_actuals, val_predicted, val_loss = self.predict(loss_function, model_network, val_iter)
+            val_actuals, val_predicted, val_loss = self.validate(loss_function, model_network, val_iter)
             self.logger.info("Validation set result details:")
 
             self.results_writer(data_iter, val_actuals, val_predicted, pos_label, output_dir)
@@ -150,7 +151,9 @@ class Train:
             # Print training set confusion matrix
             self.logger.info("Validation set results: {} ".format(val_results))
 
-    def predict(self, loss_function, model_network, val_iter):
+            return val_results, val_actuals, val_predicted
+
+    def validate(self, loss_function, model_network, val_iter):
         # switch model to evaluation mode
         model_network.eval()
         val_iter.init_epoch()
@@ -165,7 +168,23 @@ class Train:
                 pred_flat = torch.max(pred_batch_y, 1)[1].view(val_y.size())
                 n_val_correct += (pred_flat == val_y).sum().item()
                 val_loss = loss_function(pred_batch_y, val_y)
-                actuals.extend(val_y)
-                predicted.extend(pred_flat)
+                actuals.extend(val_y.numpy().tolist())
+                predicted.extend(pred_flat.numpy().tolist())
 
         return actuals, predicted, val_loss
+
+    def predict(self, model_network, dataset):
+        # switch model to evaluation mode
+        model_network.eval()
+        dataset_iterator = torchtext.data.Iterator(dataset, batch_size=10, train=False, sort_key=lambda x: 1)
+        predicted = []
+        with torch.no_grad():
+            for val_batch_idx, _ in dataset_iterator:
+                pred_batch_y = model_network(val_batch_idx)
+
+                pred_binary = torch.max(pred_batch_y, 1)[1]
+                pred_flat = pred_binary.view(pred_binary.size())
+
+                predicted.extend(pred_flat.numpy().tolist())
+
+        return predicted
