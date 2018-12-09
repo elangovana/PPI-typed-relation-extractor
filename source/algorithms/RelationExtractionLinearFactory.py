@@ -225,9 +225,6 @@ class RelationExtractionLinearFactory:
         with open(vocab_file, "r") as f:
             vocab = json.loads(f.read())
 
-        with open(classes_file, "r") as f:
-            classes = numpy.asarray(json.loads(f.read()))
-
         with open(feature_lens_file, "r") as f:
             feature_lens = numpy.asarray(json.loads(f.read()))
 
