@@ -22,7 +22,7 @@ class TransformTokenise:
         df = df.applymap(lambda x: self.split_text(x))
         token_counts = df.apply(lambda c: self._get_column_values_count(c), axis=0).values
 
-        self.logger.info("Token counts : {}".format(token_counts))
+        self.logger.debug("Token counts : {}".format(token_counts))
         return df
 
     def split_text(self, text, char_based=False):
