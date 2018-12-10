@@ -30,7 +30,7 @@ def run(network, data_file, artifactsdir, out_dir, self_relations_filter=True):
 
     logger.info("Running with self relations filter {}, network {}".format(self_relations_filter, network))
 
-    df = pd.read_json(data_file)
+    df = pd.read_json(data_file, dtype={'docid': 'str'})
     logger.info("Data size after load: {}".format(df.shape))
 
     df_prep = prepare_data(self_relations_filter, df)
