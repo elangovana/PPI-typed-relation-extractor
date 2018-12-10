@@ -4,6 +4,7 @@ Writes results
 import datetime
 import logging
 import os
+import uuid
 
 
 class ResultWriter:
@@ -17,8 +18,9 @@ class ResultWriter:
         cnf_matrix = confusion_matrix(y_actual, y_pred)
 
         filename = os.path.join(output_dir,
-                                "predictedvsactual_{}".format(
-                                    datetime.datetime.strftime(datetime.datetime.now(), format="%Y%m%d_%H%M%S")))
+                                "predictedvsactual_{}_{}.csv".format(str(uuid.uuid4()),
+                                                                     datetime.datetime.strftime(datetime.datetime.now(),
+                                                                                                format="%Y%m%d_%H%M%S")))
         self.save_data(y_pred, y_actual, filename)
         self.logger.info("Confusion matrix, full output in {}: \n{}".format(filename, cnf_matrix))
 
@@ -26,5 +28,6 @@ class ResultWriter:
         # Write to output
 
         with open(outfile, "w") as out:
+            out.write("{},{}\n".format("actual", "pred"))
             for a, p in zip(actual, pred):
                 out.write("{},{}\n".format(a, p))

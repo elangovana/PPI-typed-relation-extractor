@@ -70,7 +70,7 @@ class Train:
         :param optimizer: Optimiser
         """
         losses = []
-        best_val_acc = -1
+        best_results = None
         start = datetime.datetime.now()
         iterations = 0
         val_log_template = ' '.join(
@@ -130,17 +130,21 @@ class Train:
             self.logger.info("Train set result details:")
             self.results_writer(data_iter, actuals_train, predicted_train, pos_label, output_dir)
             train_results = self.results_scorer(y_actual=actuals_train, y_pred=predicted_train, pos_label=pos_label)
-            self.logger.info("Train set results: {}".format(train_results))
+            self.logger.info("{}".format(train_results))
 
-            best_score = self.snapshotter(model_network, val_iter, best_score, output_dir=output_dir,
-                                          pos_label=pos_label,
-                                          metric=score_type_f1)
-
-            val_actuals, val_predicted, val_loss = self.validate(loss_function, model_network, val_iter)
             self.logger.info("Validation set result details:")
-
+            val_actuals, val_predicted, val_loss = self.validate(loss_function, model_network, val_iter)
             self.results_writer(data_iter, val_actuals, val_predicted, pos_label, output_dir)
             val_results = self.results_scorer(y_actual=val_actuals, y_pred=val_predicted, pos_label=pos_label)
+            # Print training set confusion matrix
+            self.logger.info("{} ".format(val_results))
+
+            if val_results[score_type_f1] > best_score:
+                best_results = (model_network, val_results, val_actuals, val_predicted)
+
+                best_score = self.snapshotter(model_network, val_iter, best_score, output_dir=output_dir,
+                                              pos_label=pos_label,
+                                              metric=score_type_f1)
 
             # evaluate performance on validation set periodically
             self.logger.info(val_log_template.format((datetime.datetime.now() - start).seconds,
@@ -148,10 +152,8 @@ class Train:
                                                      100. * (1 + len(batch_x)) / len(train_iter), total_loss,
                                                      val_loss.item(), train_results[score_type_accuracy],
                                                      val_results[score_type_accuracy]))
-            # Print training set confusion matrix
-            self.logger.info("Validation set results: {} ".format(val_results))
 
-            return val_results, val_actuals, val_predicted
+        return best_results
 
     def validate(self, loss_function, model_network, val_iter):
         # switch model to evaluation mode
