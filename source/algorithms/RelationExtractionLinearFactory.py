@@ -239,8 +239,8 @@ class RelationExtractionLinearFactory:
     def _find_artifact(pattern):
 
         matching = glob.glob(pattern)
-        assert len(matching) == 1, "Expected one in {}, but found {}".format(matching,
-                                                                             len(matching))
+        assert len(matching) == 1, "Expected exactly one in {}, but found {}".format(pattern,
+                                                                                     len(matching))
         matched_file = matching[0]
         return matched_file
 
