@@ -156,15 +156,16 @@ class RelationExtractionLinearFactory:
         # Extract train specific features
         train_vocab = self.train_data_pipeline.transform(train)
         classes = self.transform_extract_label_number.transform(train_labels)
-        # Lengths of each column
-        feature_lens = self.transform_tokenise.transform(train).apply(lambda c: max(c.apply(len))).values
-        self.logger.info("Column length counts : {}".format(feature_lens))
+
 
         transformer_labels = self.get_transformer_labels_to_integers(classes)
         transfomed_train_labels = transformer_labels.transform(train_labels)
         transfomed_val_labels = transformer_labels.transform(validation_labels)
 
         transformer_pipeline = self.get_data_pipeline(vocab=train_vocab)
+        # Lengths of each column
+        feature_lens = transformer_pipeline.transform(train).apply(lambda c: max(c.apply(len))).values
+        self.logger.info("Column length counts : {}".format(feature_lens))
         transformer_examples = self.get_transform_examples(feature_lens)
 
         train_examples = transformer_examples.transform(transformer_pipeline.transform(train),
