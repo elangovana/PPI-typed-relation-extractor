@@ -155,6 +155,7 @@ class RelationExtractionLinearFactory:
         """
         # Extract train specific features
         train_vocab = self.train_data_pipeline.transform(train)
+        self.logger.info("The vocab len is {}".format(len(train_vocab)))
         classes = self.transform_extract_label_number.transform(train_labels)
 
 
