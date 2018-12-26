@@ -217,11 +217,13 @@ class RelationExtractorLinearNetworkDropoutWordFactory:
 
     @staticmethod
     def load(artifacts_dir):
-        model_file = RelationExtractorLinearNetworkDropoutWord._find_artifact("{}/*model.pt".format(artifacts_dir))
-        classes_file = RelationExtractorLinearNetworkDropoutWord._find_artifact(
+        model_file = RelationExtractorLinearNetworkDropoutWordFactory._find_artifact(
+            "{}/*model.pt".format(artifacts_dir))
+        classes_file = RelationExtractorLinearNetworkDropoutWordFactory._find_artifact(
             "{}/*classes.json".format(artifacts_dir))
-        vocab_file = RelationExtractorLinearNetworkDropoutWord._find_artifact("{}/*vocab.json".format(artifacts_dir))
-        feature_lens_file = RelationExtractorLinearNetworkDropoutWord._find_artifact(
+        vocab_file = RelationExtractorLinearNetworkDropoutWordFactory._find_artifact(
+            "{}/*vocab.json".format(artifacts_dir))
+        feature_lens_file = RelationExtractorLinearNetworkDropoutWordFactory._find_artifact(
             "{}/*feature_lens.json".format(artifacts_dir))
 
         with open(vocab_file, "r") as f:
@@ -230,9 +232,9 @@ class RelationExtractorLinearNetworkDropoutWordFactory:
         with open(feature_lens_file, "r") as f:
             feature_lens = numpy.asarray(json.loads(f.read()))
 
-        factory = RelationExtractorLinearNetworkDropoutWord(class_size=0, vocab=vocab, embedding_handle=None,
-                                                            output_dir=None,
-                                                            embedding_dim=0)
+        factory = RelationExtractorLinearNetworkDropoutWordFactory(class_size=0, vocab=vocab, embedding_handle=None,
+                                                                   output_dir=None,
+                                                                   embedding_dim=0)
 
         model = torch.load(model_file)
 
