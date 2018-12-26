@@ -10,7 +10,7 @@ class RelationExtractorLinearNetworkDropoutWord(nn.Module):
 
     def __init__(self, class_size, embedding_dim, pretrained_weights_or_embed_vocab_size, feature_lengths,
                  ngram_context_size=1,
-                 seed=777, dropout_rate=.2):
+                 seed=777, dropout_rate=.3):
         """
 Extracts relationship using a single layer
         :param class_size: The number of relationship types
