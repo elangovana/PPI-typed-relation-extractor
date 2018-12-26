@@ -31,14 +31,18 @@ Extracts relationship using a single layer
         layer1_size = 100
         layer2_size = 70
         layer3_size = 40
+        layer4_size = 30
+        layer5_size = 10
 
         self.feature_lengths = feature_lengths
         # add 2 one for each entity
         self.linear1 = nn.Linear(sum([f * embedding_dim for f in feature_lengths]), layer1_size)
         self.linear2 = nn.Linear(layer1_size, layer2_size)
         self.linear3 = nn.Linear(layer2_size, layer3_size)
+        self.linear4 = nn.Linear(layer3_size, layer4_size)
+        self.linear5 = nn.Linear(layer4_size, layer5_size)
 
-        self.output_layer = nn.Linear(layer3_size, class_size)
+        self.output_layer = nn.Linear(layer5_size, class_size)
 
     def add_unk(input_token_id, p):
         # random.random() gives you a value between 0 and 1
@@ -75,7 +79,10 @@ Extracts relationship using a single layer
         final_input = final_input.view(len(final_input), -1)
         out = torch.tanh(self.linear1(final_input))
         out = torch.tanh(self.linear2(out))
-        out = F.relu(self.linear3(out))
+        out = torch.tanh(self.linear3(out))
+        out = torch.tanh(self.linear4(out))
+
+        out = F.relu(self.linear5(out))
 
         out = self.output_layer(out)
         log_probs = F.log_softmax(out, dim=1)
