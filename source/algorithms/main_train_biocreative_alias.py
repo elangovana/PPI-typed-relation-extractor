@@ -8,11 +8,13 @@ import numpy as np
 import pandas as pd
 
 from algorithms.RelationExtractionAverageFactory import RelationExtractionAverageFactory
+from algorithms.RelationExtractionLinearDropoutWordFactory import RelationExtractorLinearNetworkDropoutWordFactory
 from algorithms.RelationExtractionLinearFactory import RelationExtractionLinearFactory
 
 networks_dict = {
     "Linear": RelationExtractionLinearFactory,
-    "Avg": RelationExtractionAverageFactory
+    "Avg": RelationExtractionAverageFactory,
+    "LinearWithDropout": RelationExtractorLinearNetworkDropoutWordFactory
 }
 
 
