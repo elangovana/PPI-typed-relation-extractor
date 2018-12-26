@@ -7,7 +7,6 @@ from unittest import TestCase
 import pandas as pd
 
 from algorithms.RelationExtractionLinearDropoutWordFactory import RelationExtractorLinearNetworkDropoutWordFactory
-from algorithms.RelationExtractionLinearFactory import RelationExtractionLinearFactory
 from algorithms.result_scorer import ResultScorer
 
 
@@ -61,7 +60,7 @@ class TestSitRelationExtractionLinearFactoryWordDropout(TestCase):
 
         model, expected_scores, expected_actual, expected_predicted = sut(train_df, labels, val_df, labels)
 
-        predictor = RelationExtractionLinearFactory.load(out_dir)
+        predictor = RelationExtractorLinearNetworkDropoutWordFactory.load(out_dir)
 
         scorer = ResultScorer()
 
