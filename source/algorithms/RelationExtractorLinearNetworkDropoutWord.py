@@ -28,14 +28,17 @@ Extracts relationship using a single layer
                                        embedding_dim) if type(
             pretrained_weights_or_embed_vocab_size) is int else nn.Embedding.from_pretrained(
             torch.FloatTensor(pretrained_weights_or_embed_vocab_size))
-        layer1_size = 250
-        layer2_size = 550
+        layer1_size = 100
+        layer2_size = 70
+        layer3_size = 40
+
         self.feature_lengths = feature_lengths
         # add 2 one for each entity
         self.linear1 = nn.Linear(sum([f * embedding_dim for f in feature_lengths]), layer1_size)
         self.linear2 = nn.Linear(layer1_size, layer2_size)
+        self.linear3 = nn.Linear(layer2_size, layer3_size)
 
-        self.output_layer = nn.Linear(layer2_size, class_size)
+        self.output_layer = nn.Linear(layer3_size, class_size)
 
     def add_unk(input_token_id, p):
         # random.random() gives you a value between 0 and 1
@@ -70,8 +73,9 @@ Extracts relationship using a single layer
         # Final output
         final_input = torch.cat(merged_input, dim=1)
         final_input = final_input.view(len(final_input), -1)
-        out = F.relu(self.linear1(final_input))
-        out = F.relu(self.linear2(out))
+        out = torch.tanh(self.linear1(final_input))
+        out = torch.tanh(self.linear2(out))
+        out = F.relu(self.linear3(out))
 
         out = self.output_layer(out)
         log_probs = F.log_softmax(out, dim=1)
