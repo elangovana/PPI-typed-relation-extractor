@@ -8,6 +8,7 @@ import torch
 from sklearn.pipeline import Pipeline
 from torch import optim, nn
 
+from algorithms.Parser import PAD
 from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
 from algorithms.RelationExtractorLinearNetworkDropoutWord import RelationExtractorLinearNetworkDropoutWord
 from algorithms.Train import Train
@@ -176,7 +177,11 @@ class RelationExtractorLinearNetworkDropoutWordFactory:
         # Initialise minwords with random weights
         rand_words_weights_dict = {}
         for word in train_vocab.keys():
-            rand_words_weights_dict[word] = nn.Embedding(1, self.embedding_dim).weight.detach().numpy().tolist()[0]
+            # Pad character is a vector of all zeros
+            if word == PAD:
+                rand_words_weights_dict[word] = [0] * self.embedding_dim
+            else:
+                rand_words_weights_dict[word] = nn.Embedding(1, self.embedding_dim).weight.detach().numpy().tolist()[0]
 
         self.logger.info("Loading embeding..")
         vocab, embedding_array = self.embedder_loader(self.embedding_handle, rand_words_weights_dict)

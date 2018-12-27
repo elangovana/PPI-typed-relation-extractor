@@ -8,6 +8,8 @@ UNKNOWN_WORD = '<unk>'
 
 EOS = '<eos>'
 
+PAD = '<pad>'
+
 
 class Parser:
     def split_text(self, text, char_based=False):
@@ -31,7 +33,7 @@ class Parser:
 
     @staticmethod
     def get_min_dictionary():
-        return {EOS: 0, UNKNOWN_WORD: 1}
+        return {PAD: 0, EOS: 1, UNKNOWN_WORD: 2}
 
     def get_counts_by_token(self, dataset, tokens_index=0):
         counts = collections.defaultdict(int)
