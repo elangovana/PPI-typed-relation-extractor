@@ -184,8 +184,10 @@ class RelationExtractorLinearNetworkDropoutWordFactory:
                 rand_words_weights_dict[word] = nn.Embedding(1, self.embedding_dim).weight.detach().numpy().tolist()[0]
 
         self.logger.info("Loading embeding..")
-        vocab, embedding_array = self.embedder_loader(self.embedding_handle, rand_words_weights_dict)
-        self.logger.info("loaded vocab size {}, embed array len {}, size of first element {}.".format(len(vocab), len(
+        embedding_array = self.get_embeddings(rand_words_weights_dict, train_vocab)
+
+        self.logger.info(
+            "loaded vocab size {}, embed array len {}, size of first element {}.".format(len(train_vocab), len(
             embedding_array), len(embedding_array[0])))
 
         model = self.model_network(self.class_size, self.embedding_dim, embedding_array,
@@ -200,12 +202,28 @@ class RelationExtractorLinearNetworkDropoutWordFactory:
                                    lr=self.learning_rate,
                                    momentum=self.momentum)
 
-        self.persist(outdir=self.output_dir, vocab=vocab, classes=classes, feature_lens=feature_lens)
+        self.persist(outdir=self.output_dir, vocab=train_vocab, classes=classes, feature_lens=feature_lens)
 
         # Invoke trainer
         results = self.trainer(train_examples, val_examples, sort_key, model, self.loss_function, optimiser,
                                self.output_dir, epoch=self.epochs, pos_label=pos_label)
         return results
+
+    def get_embeddings(self, rand_words_weights_dict, train_vocab):
+        # TODO clean this up, for now re-order the dict returned based on training vocab
+        vocab, embedding_array = self.embedder_loader(self.embedding_handle, rand_words_weights_dict)
+        self.logger.debug("Vocab returned from embeddings \n{}".format(vocab))
+        self.logger.debug("Embeddings loaded \n{}".format(embedding_array))
+
+        new_array = [[0]] * len(train_vocab)
+        for k in train_vocab.keys():
+            new_array[train_vocab[k]] = embedding_array[vocab[k]]
+        embedding_array = new_array
+
+        self.logger.debug("Training Vocab \n{}".format(train_vocab))
+        self.logger.debug("Embeddings after transformation loaded \n{}".format(embedding_array))
+
+        return embedding_array
 
     def sum(self, x):
         return sum([len(getattr(x, c)) for c in x.__dict__ if c != 'label'])
