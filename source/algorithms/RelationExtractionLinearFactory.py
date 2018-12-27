@@ -8,6 +8,7 @@ import torch
 from sklearn.pipeline import Pipeline
 from torch import optim, nn
 
+from algorithms.Parser import PAD
 from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
 from algorithms.RelationExtractorLinearNetwork import RelationExtractorLinearNetwork
 from algorithms.Train import Train
@@ -153,8 +154,25 @@ class RelationExtractionLinearFactory:
         :type data: Dataframe
         """
         # Extract train specific features
-        train_vocab = self.train_data_pipeline.transform(train)
-        self.logger.info("The vocab len is {}".format(len(train_vocab)))
+        train_specific_vocab = self.train_data_pipeline.transform(train)
+        # Initialise train vocab with random weights,
+        rand_words_weights_dict = {}
+        for word in train_specific_vocab.keys():
+            # Pad character is a vector of all zeros
+            if word == PAD:
+                rand_words_weights_dict[word] = [0] * self.embedding_dim
+            else:
+                rand_words_weights_dict[word] = nn.Embedding(1, self.embedding_dim).weight.detach().numpy().tolist()[0]
+
+        self.logger.info("Loading embeding..")
+        # The full vocab is a combination of train and embeddings..
+        full_vocab, embedding_array = self.embedder_loader(self.embedding_handle, rand_words_weights_dict)
+        self.logger.info("The vocab len is {}".format(len(full_vocab)))
+
+        self.logger.info(
+            "loaded vocab size {}, embed array len {}, size of first element {}.".format(len(full_vocab), len(
+                embedding_array), len(embedding_array[0])))
+
         classes = self.transform_extract_label_number.transform(train_labels)
 
         transformer_labels = self.get_transformer_labels_to_integers(classes)
@@ -164,7 +182,7 @@ class RelationExtractionLinearFactory:
         self.logger.debug("Transformed train labels : {}".format(transfomed_train_labels))
         self.logger.debug("Transformed val labels : {}".format(transfomed_val_labels))
 
-        transformer_pipeline = self.get_data_pipeline(vocab=train_vocab)
+        transformer_pipeline = self.get_data_pipeline(vocab=full_vocab)
         # Lengths of each column
         feature_lens = transformer_pipeline.transform(train).apply(lambda c: max(c.apply(len))).values
         self.logger.info("Column length counts : {}".format(feature_lens))
@@ -174,18 +192,6 @@ class RelationExtractionLinearFactory:
                                                         y=transfomed_train_labels)
         val_examples = transformer_examples.transform(transformer_pipeline.transform(validation),
                                                       y=transfomed_val_labels)
-
-        # Initialise minwords with random weights
-        rand_words_weights_dict = {}
-        for word in train_vocab.keys():
-            rand_words_weights_dict[word] = nn.Embedding(1, self.embedding_dim).weight.detach().numpy().tolist()[0]
-
-        self.logger.info("Loading embeding..")
-        embedding_array = self.get_embeddings(rand_words_weights_dict, train_vocab)
-
-        self.logger.info(
-            "loaded vocab size {}, embed array len {}, size of first element {}.".format(len(train_vocab), len(
-                embedding_array), len(embedding_array[0])))
 
         model = self.model_network(self.class_size, self.embedding_dim, embedding_array,
                                    feature_lengths=feature_lens)
@@ -199,7 +205,7 @@ class RelationExtractionLinearFactory:
                                    lr=self.learning_rate,
                                    momentum=self.momentum)
 
-        self.persist(outdir=self.output_dir, vocab=train_vocab, classes=classes, feature_lens=feature_lens)
+        self.persist(outdir=self.output_dir, vocab=full_vocab, classes=classes, feature_lens=feature_lens)
 
         # Invoke trainer
         (model_network, val_results, val_actuals, val_predicted) = self.trainer(train_examples, val_examples, sort_key,
@@ -249,22 +255,6 @@ class RelationExtractionLinearFactory:
         model = torch.load(model_file)
 
         return lambda x: factory.predict(x, vocab, feature_lens, model, classes)
-
-    def get_embeddings(self, rand_words_weights_dict, train_vocab):
-        # TODO clean this up, for now re-order the dict returned based on training vocab
-        vocab, embedding_array = self.embedder_loader(self.embedding_handle, rand_words_weights_dict)
-        self.logger.debug("Vocab returned from embeddings \n{}".format(vocab))
-        self.logger.debug("Embeddings loaded \n{}".format(embedding_array))
-
-        new_array = [[0]] * len(train_vocab)
-        for k in train_vocab.keys():
-            new_array[train_vocab[k]] = embedding_array[vocab[k]]
-        embedding_array = new_array
-
-        self.logger.debug("Training Vocab \n{}".format(train_vocab))
-        self.logger.debug("Embeddings after transformation loaded \n{}".format(embedding_array))
-
-        return embedding_array
 
     @staticmethod
     def _find_artifact(pattern):
