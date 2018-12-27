@@ -18,9 +18,14 @@ class TransformExtractLabelNumbers:
 
     def transform(self, y):
         labels = self._get_label_map(y)
+
         return labels
 
     def _get_label_map(self, y):
         le = preprocessing.LabelEncoder()
         le.fit(y)
-        return le.classes_
+
+        classes = le.classes_
+        self.logger.info("labels map numbers: {}".format(classes))
+
+        return classes
