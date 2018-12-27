@@ -178,7 +178,7 @@ class Train:
     def predict(self, model_network, dataset):
         # switch model to evaluation mode
         model_network.eval()
-        dataset_iterator = torchtext.data.Iterator(dataset, batch_size=10, train=False, sort_key=lambda x: 1)
+        dataset_iterator = torchtext.data.Iterator(dataset, batch_size=10, train=False, sort=False, shuffle=False)
         predicted = []
         with torch.no_grad():
             for val_batch_idx, _ in dataset_iterator:
