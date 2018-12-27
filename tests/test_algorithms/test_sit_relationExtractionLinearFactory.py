@@ -16,10 +16,11 @@ class TestSitRelationExtractionLinearFactory(TestCase):
 
     def test_call(self):
         # Arrange
-        out_dir= tempfile.mkdtemp()
-        embedding = StringIO("\n".join(["hat 0.2 .34 0.8", "mat 0.5 .34 0.8", "entity1 0.5 .55 0.8", "entity2 0.3 .55 0.9"]))
+        out_dir = tempfile.mkdtemp()
+        embedding = StringIO(
+            "\n".join(["hat 0.2 .34 0.8", "mat 0.5 .34 0.8", "entity1 0.5 .55 0.8", "entity2 0.3 .55 0.9"]))
         sut = RelationExtractionLinearFactory(class_size=2, embedding_handle=embedding, embedding_dim=3, ngram=1,
-                                              output_dir=out_dir, pos_label="1")
+                                              output_dir=out_dir, pos_label=True)
 
         train_df = [["This is good", "entity1", "entity2"],
                     ["this is a cat not a hat", "mat protein", "cat protein"]]
@@ -27,10 +28,10 @@ class TestSitRelationExtractionLinearFactory(TestCase):
         val_data = [["This is hat", "entity1", "entity2"],
                     ["this is a cat not a mat", "mat protein", "cat protein"]]
 
-        labels = ["1", "0"]
-        cols =['abstract', 'entity1', 'entity2']
+        labels = [True, False]
+        cols = ['abstract', 'entity1', 'entity2']
         train_df = pd.DataFrame(train_df, columns=cols)
-        val_df = pd.DataFrame(val_data,columns=cols)
+        val_df = pd.DataFrame(val_data, columns=cols)
 
         # Act
         actual = sut(train_df, labels, val_df, labels)
@@ -38,9 +39,10 @@ class TestSitRelationExtractionLinearFactory(TestCase):
     def test_predict(self):
         # Arrange
         out_dir = tempfile.mkdtemp()
+
         embedding = StringIO(
             "\n".join(["hat 0.2 .34 0.8", "mat 0.5 .34 0.8", "entity1 0.5 .55 0.8", "entity2 0.3 .55 0.9"]))
-        pos_label = 1
+        pos_label = True
         sut = RelationExtractionLinearFactory(class_size=2, embedding_handle=embedding, embedding_dim=3, ngram=1,
                                               output_dir=out_dir, pos_label=pos_label)
 
@@ -48,20 +50,25 @@ class TestSitRelationExtractionLinearFactory(TestCase):
                     ["this is a cat not a hat", "mat protein", "cat protein"]]
 
         val_data = [["This is hat", "entity1", "entity2"],
-                    ["this is a cat not a mat", "mat protein", "cat protein"]]
+                    ["this is a cat not a mat jack", "mat protein", "cat protein"],
+                    ["this is block four", "mat protein", "cat protein"],
+                    ["this is white four five", "mat protein", "cat protein"]
+                    ]
 
-        labels = [1, 0]
+        labels = [True, False]
+        val_label = [True, False, True, False]
         cols = ['abstract', 'entity1', 'entity2']
         train_df = pd.DataFrame(train_df, columns=cols)
         val_df = pd.DataFrame(val_data, columns=cols)
 
-        model, expected_scores, expected_actual, expected_predicted = sut(train_df, labels, val_df, labels)
-
-        predictor = RelationExtractionLinearFactory.load(out_dir)
-
-        scorer = ResultScorer()
+        model, expected_scores, target, expected_predicted = sut(train_df, labels, val_df, val_label)
 
         # Act
+        predictor = RelationExtractionLinearFactory.load(out_dir)
         actual = predictor(val_df)
 
-        self.assertSequenceEqual(expected_scores, scorer(y_pred=actual, y_actual=labels, pos_label=1))
+        # Act
+        scorer = ResultScorer()
+        actual_scores = scorer(y_pred=actual, y_actual=val_label, pos_label=pos_label)
+
+        self.assertSequenceEqual(expected_scores, actual_scores)

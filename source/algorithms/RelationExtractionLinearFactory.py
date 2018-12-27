@@ -23,9 +23,8 @@ class RelationExtractionLinearFactory:
 
     def __init__(self, embedding_handle, embedding_dim: int, class_size: int, output_dir, learning_rate: float = 0.01,
                  momentum: float = 0.9, ngram: int = 3, epochs: int = 10, min_vocab_frequency=3, pos_label=1,
-                 vocab=None, classes=None):
+                 classes=None):
         self.classes = classes
-        self.vocab = vocab
         self.pos_label = pos_label
         self.min_vocab_frequency = min_vocab_frequency
         self.epochs = epochs
@@ -158,10 +157,12 @@ class RelationExtractionLinearFactory:
         self.logger.info("The vocab len is {}".format(len(train_vocab)))
         classes = self.transform_extract_label_number.transform(train_labels)
 
-
         transformer_labels = self.get_transformer_labels_to_integers(classes)
         transfomed_train_labels = transformer_labels.transform(train_labels)
         transfomed_val_labels = transformer_labels.transform(validation_labels)
+
+        self.logger.debug("Transformed train labels : {}".format(transfomed_train_labels))
+        self.logger.debug("Transformed val labels : {}".format(transfomed_val_labels))
 
         transformer_pipeline = self.get_data_pipeline(vocab=train_vocab)
         # Lengths of each column
@@ -180,9 +181,11 @@ class RelationExtractionLinearFactory:
             rand_words_weights_dict[word] = nn.Embedding(1, self.embedding_dim).weight.detach().numpy().tolist()[0]
 
         self.logger.info("Loading embeding..")
-        vocab, embedding_array = self.embedder_loader(self.embedding_handle, rand_words_weights_dict)
-        self.logger.info("loaded vocab size {}, embed array len {}, size of first element {}.".format(len(vocab), len(
-            embedding_array), len(embedding_array[0])))
+        embedding_array = self.get_embeddings(rand_words_weights_dict, train_vocab)
+
+        self.logger.info(
+            "loaded vocab size {}, embed array len {}, size of first element {}.".format(len(train_vocab), len(
+                embedding_array), len(embedding_array[0])))
 
         model = self.model_network(self.class_size, self.embedding_dim, embedding_array,
                                    feature_lengths=feature_lens)
@@ -196,12 +199,19 @@ class RelationExtractionLinearFactory:
                                    lr=self.learning_rate,
                                    momentum=self.momentum)
 
-        self.persist(outdir=self.output_dir, vocab=vocab, classes=classes, feature_lens=feature_lens)
+        self.persist(outdir=self.output_dir, vocab=train_vocab, classes=classes, feature_lens=feature_lens)
 
         # Invoke trainer
-        results = self.trainer(train_examples, val_examples, sort_key, model, self.loss_function, optimiser,
-                               self.output_dir, epoch=self.epochs, pos_label=pos_label)
-        return results
+        (model_network, val_results, val_actuals, val_predicted) = self.trainer(train_examples, val_examples, sort_key,
+                                                                                model, self.loss_function, optimiser,
+                                                                                self.output_dir, epoch=self.epochs,
+                                                                                pos_label=pos_label)
+
+        # Reformat results so that the labels are back into their original form, rather than numbers
+        val_actuals = [classes[p] for p in val_actuals]
+        val_predicted = [classes[p] for p in val_predicted]
+
+        return model_network, val_results, val_actuals, val_predicted
 
     def sum(self, x):
         return sum([len(getattr(x, c)) for c in x.__dict__ if c != 'label'])
@@ -230,12 +240,31 @@ class RelationExtractionLinearFactory:
         with open(feature_lens_file, "r") as f:
             feature_lens = numpy.asarray(json.loads(f.read()))
 
-        factory = RelationExtractionLinearFactory(class_size=0, vocab=vocab, embedding_handle=None, output_dir=None,
+        with open(classes_file, "r") as f:
+            classes = numpy.asarray(json.loads(f.read()))
+
+        factory = RelationExtractionLinearFactory(class_size=0, embedding_handle=None, output_dir=None,
                                                   embedding_dim=0)
 
         model = torch.load(model_file)
 
-        return lambda x: factory.predict(x, vocab, feature_lens, model)
+        return lambda x: factory.predict(x, vocab, feature_lens, model, classes)
+
+    def get_embeddings(self, rand_words_weights_dict, train_vocab):
+        # TODO clean this up, for now re-order the dict returned based on training vocab
+        vocab, embedding_array = self.embedder_loader(self.embedding_handle, rand_words_weights_dict)
+        self.logger.debug("Vocab returned from embeddings \n{}".format(vocab))
+        self.logger.debug("Embeddings loaded \n{}".format(embedding_array))
+
+        new_array = [[0]] * len(train_vocab)
+        for k in train_vocab.keys():
+            new_array[train_vocab[k]] = embedding_array[vocab[k]]
+        embedding_array = new_array
+
+        self.logger.debug("Training Vocab \n{}".format(train_vocab))
+        self.logger.debug("Embeddings after transformation loaded \n{}".format(embedding_array))
+
+        return embedding_array
 
     @staticmethod
     def _find_artifact(pattern):
@@ -246,11 +275,20 @@ class RelationExtractionLinearFactory:
         matched_file = matching[0]
         return matched_file
 
-    def predict(self, df, vocab, feature_lens, model):
+    def predict(self, df, vocab, feature_lens, model, classes):
+        self.logger.debug("Vocab: \n{}".format(vocab))
 
         transformer_pipeline = self.get_data_pipeline(vocab=vocab)
         transformer_examples = self.get_transform_examples(feature_lens)
 
         val_examples = transformer_examples.transform(transformer_pipeline.transform(df))
 
-        return self.trainer.predict(model, val_examples)
+        predictions = self.trainer.predict(model, val_examples)
+
+        self.logger.debug("Predictions_raw \n{}".format(predictions))
+
+        transformed_predictions = [classes[p] for p in predictions]
+
+        self.logger.debug("Predictions Transformed \n{}".format(transformed_predictions))
+
+        return transformed_predictions
