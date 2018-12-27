@@ -24,9 +24,8 @@ class RelationExtractorLinearNetworkDropoutWordFactory:
 
     def __init__(self, embedding_handle, embedding_dim: int, class_size: int, output_dir, learning_rate: float = 0.01,
                  momentum: float = 0.9, ngram: int = 3, epochs: int = 10, min_vocab_frequency=3, pos_label=1,
-                 vocab=None, classes=None):
+                 classes=None):
         self.classes = classes
-        self.vocab = vocab
         self.pos_label = pos_label
         self.min_vocab_frequency = min_vocab_frequency
         self.epochs = epochs
@@ -160,8 +159,12 @@ class RelationExtractorLinearNetworkDropoutWordFactory:
         classes = self.transform_extract_label_number.transform(train_labels)
 
         transformer_labels = self.get_transformer_labels_to_integers(classes)
+
         transfomed_train_labels = transformer_labels.transform(train_labels)
         transfomed_val_labels = transformer_labels.transform(validation_labels)
+
+        self.logger.debug("Transformed train labels : {}".format(transfomed_train_labels))
+        self.logger.debug("Transformed val labels : {}".format(transfomed_val_labels))
 
         transformer_pipeline = self.get_data_pipeline(vocab=train_vocab)
         # Lengths of each column
@@ -188,7 +191,7 @@ class RelationExtractorLinearNetworkDropoutWordFactory:
 
         self.logger.info(
             "loaded vocab size {}, embed array len {}, size of first element {}.".format(len(train_vocab), len(
-            embedding_array), len(embedding_array[0])))
+                embedding_array), len(embedding_array[0])))
 
         model = self.model_network(self.class_size, self.embedding_dim, embedding_array,
                                    feature_lengths=feature_lens)
@@ -205,9 +208,16 @@ class RelationExtractorLinearNetworkDropoutWordFactory:
         self.persist(outdir=self.output_dir, vocab=train_vocab, classes=classes, feature_lens=feature_lens)
 
         # Invoke trainer
-        results = self.trainer(train_examples, val_examples, sort_key, model, self.loss_function, optimiser,
-                               self.output_dir, epoch=self.epochs, pos_label=pos_label)
-        return results
+        (model_network, val_results, val_actuals, val_predicted) = self.trainer(train_examples, val_examples, sort_key,
+                                                                                model, self.loss_function, optimiser,
+                                                                                self.output_dir, epoch=self.epochs,
+                                                                                pos_label=pos_label)
+
+        # Reformat results so that the labels are back into their original form, rather than numbers
+        val_actuals = [classes[p] for p in val_actuals]
+        val_predicted = [classes[p] for p in val_predicted]
+
+        return model_network, val_results, val_actuals, val_predicted
 
     def get_embeddings(self, rand_words_weights_dict, train_vocab):
         # TODO clean this up, for now re-order the dict returned based on training vocab
@@ -255,13 +265,15 @@ class RelationExtractorLinearNetworkDropoutWordFactory:
         with open(feature_lens_file, "r") as f:
             feature_lens = numpy.asarray(json.loads(f.read()))
 
-        factory = RelationExtractorLinearNetworkDropoutWordFactory(class_size=0, vocab=vocab, embedding_handle=None,
+        with open(classes_file, "r") as f:
+            classes = numpy.asarray(json.loads(f.read()))
+
+        factory = RelationExtractorLinearNetworkDropoutWordFactory(class_size=0, embedding_handle=None,
                                                                    output_dir=None,
                                                                    embedding_dim=0)
-
         model = torch.load(model_file)
 
-        return lambda x: factory.predict(x, vocab, feature_lens, model)
+        return lambda x: factory.predict(x, vocab, feature_lens, model, classes)
 
     @staticmethod
     def _find_artifact(pattern):
@@ -272,11 +284,15 @@ class RelationExtractorLinearNetworkDropoutWordFactory:
         matched_file = matching[0]
         return matched_file
 
-    def predict(self, df, vocab, feature_lens, model):
+    def predict(self, df, vocab, feature_lens, model, classes):
 
         transformer_pipeline = self.get_data_pipeline(vocab=vocab)
         transformer_examples = self.get_transform_examples(feature_lens)
 
         val_examples = transformer_examples.transform(transformer_pipeline.transform(df))
 
-        return self.trainer.predict(model, val_examples)
+        predictions = self.trainer.predict(model, val_examples)
+
+        transformed_predictions = [classes[p] for p in predictions]
+
+        return transformed_predictions
