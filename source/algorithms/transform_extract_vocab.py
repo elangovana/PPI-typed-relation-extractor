@@ -2,7 +2,7 @@ import itertools
 import logging
 from collections import Counter
 
-from algorithms.Parser import EOS, UNKNOWN_WORD
+from algorithms.Parser import Parser
 
 """
 Extracts vocab from data frame columns which have already been tokenised into words
@@ -30,7 +30,7 @@ class TransformExtractVocab:
         for i in train_data.apply(lambda c: self.get_column_values_count(c), axis=0).values:
             vocab_token_counter += i
 
-        result = {EOS: 0, UNKNOWN_WORD: 1}
+        result = Parser.get_min_dictionary()
         for ik, iv in filter(lambda t: t[1] >= self.min_vocab_frequency, vocab_token_counter.items()):
             result[ik] = len(result)
 
