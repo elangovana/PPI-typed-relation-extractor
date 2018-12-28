@@ -44,14 +44,6 @@ Extracts relationship using a single layer
 
         self.output_layer = nn.Linear(layer5_size, class_size)
 
-    def add_unk(input_token_id, p):
-        # random.random() gives you a value between 0 and 1
-        # to avoid switching your padding to 0 we add 'input_token_id > 1'
-        if torch.random.random() < p and input_token_id > 1:
-            return 0
-        else:
-            return input_token_id
-
     def forward(self, batch_inputs):
         # Embed each feature
         merged_input = []
