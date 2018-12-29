@@ -65,7 +65,10 @@ class RelationExtractorCnnNetwork(nn.Module):
             nn.BatchNorm1d(layer2_cnn_output),
             nn.ReLU(),
             nn.MaxPool1d(kernel_size=layer2_pool_kernel, stride=layer2_pool_stride, padding=layer2_pool_padding))
-        self.fc = nn.Linear(layer2_pool_out_length * layer2_cnn_output, class_size)
+
+        fc_layer_size = 100
+        self.fc = nn.Sequential(nn.Linear(layer2_pool_out_length * layer2_cnn_output, fc_layer_size), nn.ReLU(),
+                                nn.Linear(fc_layer_size, class_size))
 
     @property
     def logger(self):
