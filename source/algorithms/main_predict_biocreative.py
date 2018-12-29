@@ -8,11 +8,17 @@ import pandas as pd
 from algorithms.RelationExtractionAverageFactory import RelationExtractionAverageFactory
 from algorithms.RelationExtractionLinearDropoutWordFactory import RelationExtractorLinearNetworkDropoutWordFactory
 from algorithms.RelationExtractionLinearFactory import RelationExtractionLinearFactory
+from algorithms.RelationExtractorCnnNetwork import RelationExtractorCnnNetwork
 
 networks_dict = {
     "Linear": RelationExtractionLinearFactory,
     "Avg": RelationExtractionAverageFactory,
-    "LinearWithDropout": RelationExtractorLinearNetworkDropoutWordFactory
+    "LinearWithDropout": RelationExtractorLinearNetworkDropoutWordFactory,
+    "Cnn": RelationExtractionLinearFactory,
+}
+
+model_dict = {
+    "Cnn": RelationExtractorCnnNetwork
 }
 
 
@@ -39,6 +45,9 @@ def run(network, data_file, artifactsdir, out_dir, self_relations_filter=True):
     logger.info("Data size after prep: {}".format(df_prep.shape))
 
     network_factory = networks_dict[network]
+    if network in model_dict:
+        network_factory.model_network = model_dict[network]
+
     predictor = network_factory.load(artifactsdir)
     results = predictor(df_prep)
 
