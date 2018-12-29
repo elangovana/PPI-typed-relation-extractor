@@ -22,7 +22,7 @@ class RelationExtractorCnnNetwork(nn.Module):
                                        embedding_dim) if type(
             pretrained_weights_or_embed_vocab_size) is int else nn.Embedding.from_pretrained(
             torch.FloatTensor(pretrained_weights_or_embed_vocab_size))
-        layer1_cnn_output = 16
+        layer1_cnn_output = 128
         layer1_cnn_kernel = min(ngram_context_size, sum(feature_lengths))
         layer1_cnn_stride = 1
         layer1_cnn_padding = 0
@@ -45,7 +45,7 @@ class RelationExtractorCnnNetwork(nn.Module):
             nn.ReLU(),
             nn.MaxPool1d(kernel_size=layer1_pool_kernel, stride=layer1_pool_stride, padding=layer1_pool_padding))
 
-        layer2_cnn_output = 16
+        layer2_cnn_output = 128
         layer2_cnn_kernel = min(abs(layer1_cnn_kernel - 2), 1)
         layer2_cnn_stride = 1
         layer2_cnn_padding = 0
