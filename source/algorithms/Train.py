@@ -130,14 +130,14 @@ class Train:
             self.logger.info("Train set result details:")
             self.results_writer(data_iter, actuals_train, predicted_train, pos_label, output_dir)
             train_results = self.results_scorer(y_actual=actuals_train, y_pred=predicted_train, pos_label=pos_label)
-            self.logger.info("{}".format(train_results))
+            self.logger.info("Train set result details: {}".format(train_results))
 
             self.logger.info("Validation set result details:")
             val_actuals, val_predicted, val_loss = self.validate(loss_function, model_network, val_iter)
             self.results_writer(data_iter, val_actuals, val_predicted, pos_label, output_dir)
             val_results = self.results_scorer(y_actual=val_actuals, y_pred=val_predicted, pos_label=pos_label)
             # Print training set confusion matrix
-            self.logger.info("{} ".format(val_results))
+            self.logger.info("Validation set result details: {} ".format(val_results))
 
             if val_results[score_type_f1] > best_score:
                 best_results = (model_network, val_results, val_actuals, val_predicted)
