@@ -184,7 +184,8 @@ class RelationExtractionLinearFactory:
 
         transformer_pipeline = self.get_data_pipeline(vocab=full_vocab)
         # Lengths of each column
-        feature_lens = transformer_pipeline.transform(train).apply(lambda c: max(c.apply(len))).values
+        feature_lens = transformer_pipeline.transform(train).apply(
+            lambda c: numpy.math.ceil(numpy.percentile(c.apply(len), 90))).values
         self.logger.info("Column length counts : {}".format(feature_lens))
         transformer_examples = self.get_transform_examples(feature_lens)
 
