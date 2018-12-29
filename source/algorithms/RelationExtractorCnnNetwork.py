@@ -11,7 +11,7 @@ from torch.distributions import Bernoulli
 class RelationExtractorCnnNetwork(nn.Module):
 
     def __init__(self, class_size, embedding_dim, pretrained_weights_or_embed_vocab_size, feature_lengths,
-                 ngram_context_size=5, seed=777, drop_rate=.2):
+                 ngram_context_size=3, seed=777, drop_rate=.2):
         self.feature_lengths = feature_lengths
         torch.manual_seed(seed)
 
@@ -24,7 +24,7 @@ class RelationExtractorCnnNetwork(nn.Module):
                                        embedding_dim) if type(
             pretrained_weights_or_embed_vocab_size) is int else nn.Embedding.from_pretrained(
             torch.FloatTensor(pretrained_weights_or_embed_vocab_size))
-        layer1_cnn_output = 32
+        layer1_cnn_output = 16
         layer1_cnn_kernel = min(ngram_context_size, sum(feature_lengths))
         layer1_cnn_stride = 1
         layer1_cnn_padding = 0
@@ -47,7 +47,7 @@ class RelationExtractorCnnNetwork(nn.Module):
             nn.ReLU(),
             nn.MaxPool1d(kernel_size=layer1_pool_kernel, stride=layer1_pool_stride, padding=layer1_pool_padding))
 
-        layer2_cnn_output = 32
+        layer2_cnn_output = 8
         layer2_cnn_kernel = min(abs(layer1_cnn_kernel - 2), 1)
         layer2_cnn_stride = 1
         layer2_cnn_padding = 0
