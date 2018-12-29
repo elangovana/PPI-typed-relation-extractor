@@ -9,7 +9,7 @@ import torch.nn.functional as F
 class RelationExtractorCnnNetwork(nn.Module):
 
     def __init__(self, class_size, embedding_dim, pretrained_weights_or_embed_vocab_size, feature_lengths,
-                 ngram_context_size=3, seed=777, drop_rate=.3):
+                 ngram_context_size=5, seed=777, drop_rate=.3):
         self.feature_lengths = feature_lengths
         torch.manual_seed(seed)
 
