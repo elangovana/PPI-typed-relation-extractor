@@ -1,27 +1,30 @@
 import logging
 import math
 
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torch.distributions import Bernoulli
 
 
 class RelationExtractorCnnNetwork(nn.Module):
 
     def __init__(self, class_size, embedding_dim, pretrained_weights_or_embed_vocab_size, feature_lengths,
-                 ngram_context_size=5, seed=777):
+                 ngram_context_size=5, seed=777, drop_rate=.2):
         self.feature_lengths = feature_lengths
         torch.manual_seed(seed)
 
         super(RelationExtractorCnnNetwork, self).__init__()
         self.logger.info("NGram Size is {}".format(ngram_context_size))
+        self.dropout_rate = drop_rate
         # Use random weights if vocab size if passed in else load pretrained weights
 
         self.embeddings = nn.Embedding(pretrained_weights_or_embed_vocab_size,
                                        embedding_dim) if type(
             pretrained_weights_or_embed_vocab_size) is int else nn.Embedding.from_pretrained(
             torch.FloatTensor(pretrained_weights_or_embed_vocab_size))
-        layer1_cnn_output = 16
+        layer1_cnn_output = 32
         layer1_cnn_kernel = min(ngram_context_size, sum(feature_lengths))
         layer1_cnn_stride = 1
         layer1_cnn_padding = 0
@@ -44,7 +47,7 @@ class RelationExtractorCnnNetwork(nn.Module):
             nn.ReLU(),
             nn.MaxPool1d(kernel_size=layer1_pool_kernel, stride=layer1_pool_stride, padding=layer1_pool_padding))
 
-        layer2_cnn_output = 16
+        layer2_cnn_output = 32
         layer2_cnn_kernel = min(abs(layer1_cnn_kernel - 2), 1)
         layer2_cnn_stride = 1
         layer2_cnn_padding = 0
@@ -70,11 +73,20 @@ class RelationExtractorCnnNetwork(nn.Module):
 
     def forward(self, batch_inputs):
         merged_input = []
-        for f, s in zip(batch_inputs, self.feature_lengths):
+        # Get longest feature
+        # Assume the longest column is the
+        max_words = max(self.feature_lengths)
+        for f, feature_len in zip(batch_inputs, self.feature_lengths):
             concat_sentence = f.transpose(0, 1)
             concat_sentence = torch.tensor(concat_sentence, dtype=torch.long)
 
             embeddings = self.embeddings(concat_sentence)
+            if feature_len == max_words:
+                # Set up success rate (rate of selecting the word) as 1 - dropout rate
+                bernoulli = Bernoulli(1 - self.dropout_rate)
+                rw = bernoulli.sample(torch.Size((embeddings.shape[0], embeddings.shape[1]))).numpy()
+                # Use zeros at where rw is zero
+                embeddings = torch.from_numpy(np.expand_dims(rw, 2)) * embeddings
 
             merged_input.append(embeddings)
 
