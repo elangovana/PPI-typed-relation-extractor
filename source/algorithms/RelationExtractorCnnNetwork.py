@@ -11,7 +11,7 @@ from torch.distributions import Bernoulli
 class RelationExtractorCnnNetwork(nn.Module):
 
     def __init__(self, class_size, embedding_dim, pretrained_weights_or_embed_vocab_size, feature_lengths,
-                 ngram_context_size=5, seed=777, drop_rate=.5):
+                 ngram_context_size=5, seed=777, drop_rate=.1):
         self.feature_lengths = feature_lengths
         torch.manual_seed(seed)
 
