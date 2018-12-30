@@ -12,7 +12,7 @@ Builds vocab based on training data and initiliases with random word embeddings
 
 class VocabRandomEmbeddingBuilder:
 
-    def __init__(self, embedding_dim, min_vocab_frequency=1):
+    def __init__(self, embedding_dim=200, min_vocab_frequency=1):
         self.min_vocab_frequency = min_vocab_frequency
         self.embedding_dim = embedding_dim
         self.transformer_vocab_extractor = None
