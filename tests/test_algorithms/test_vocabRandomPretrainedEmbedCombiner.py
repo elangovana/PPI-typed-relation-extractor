@@ -37,7 +37,7 @@ class TestVocabRandomPretrainedEmbedCombiner(TestCase):
 
         # Assert
         self.assertEqual(set(actual_vocab.keys()), expected_vocab_keys,
-                         "The vocab keys should be a combination of the tokens in embeddings and the vocab builder")
+                         "The vocab keys should be a combination of the tokens in pretrained embeddings and the vocab builder")
         self.assertEqual(len(actual_vocab), len(actual_embedding),
                          "The length of vocab should match length of embeddings")
         for w, i in actual_vocab.items():
