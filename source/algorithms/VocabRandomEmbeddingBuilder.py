@@ -39,14 +39,17 @@ Construct vocabulary from training data
             """
         # Extract train specific features
         train_specific_vocab = self.transformer_vocab_extractor.transform(train)
-        # Initialise train vocab with random weights,
-        rand_words_weights_dict = {}
 
-        for word in train_specific_vocab.keys():
+        # Initialise train vocab with random weights,
+        vocab_index = {}
+        weights = [0] * len(train_specific_vocab)
+
+        for k, v in train_specific_vocab.items():
+            vocab_index[k] = v
             # Pad character is a vector of all zeros
-            if word == PAD:
-                rand_words_weights_dict[word] = [0] * self.embedding_dim
+            if k == PAD:
+                weights[v] = [0] * self.embedding_dim
             else:
-                rand_words_weights_dict[word] = \
+                weights[v] = \
                     nn.Embedding(1, self.embedding_dim).weight.detach().numpy().tolist()[0]
-        return rand_words_weights_dict
+        return vocab_index, weights

@@ -11,7 +11,7 @@ from torch import optim, nn
 from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
 from algorithms.RelationExtractorLinearNetwork import RelationExtractorLinearNetwork
 from algorithms.Train import Train
-from algorithms.VocabRandomEmbeddingBuilder import VocabRandomEmbeddingBuilder
+from algorithms.VocabRandomPretrainedEmbedCombiner import VocabRandomPretrainedEmbedCombiner
 from algorithms.transform_extract_label_numbers import TransformExtractLabelNumbers
 from algorithms.transform_final_create_examples import TransformFinalCreateExamples
 from algorithms.transform_labels_to_numbers import TransformLabelsToNumbers
@@ -117,8 +117,8 @@ class RelationExtractionLinearFactory:
 
     @property
     def vocab_embedding_builder(self):
-        self.__vocab_embedding_builder__ = self.__vocab_embedding_builder__ or VocabRandomEmbeddingBuilder(
-            self.embedding_dim, self.min_vocab_frequency)
+        self.__vocab_embedding_builder__ = self.__vocab_embedding_builder__ or VocabRandomPretrainedEmbedCombiner(
+            self.embedding_handle)
         return self.__vocab_embedding_builder__
 
     @vocab_embedding_builder.setter
@@ -144,12 +144,7 @@ class RelationExtractionLinearFactory:
         return transformer
 
     def __call__(self, train, train_labels, validation, validation_labels):
-        rand_words_weights_dict = self.vocab_embedding_builder(train)
-
-        self.logger.info("Loading embeding..")
-        # The full vocab is a combination of train and embeddings..
-        full_vocab, embedding_array = self.embedder_loader(self.embedding_handle, rand_words_weights_dict)
-        self.logger.info("The vocab len is {}".format(len(full_vocab)))
+        full_vocab, embedding_array = self.vocab_embedding_builder(train)
 
         self.logger.info(
             "loaded vocab size {}, embed array len {}, size of first element {}.".format(len(full_vocab), len(

@@ -23,8 +23,10 @@ class TestVocabRandomEmbeddingBuilder(TestCase):
         sut.transformer_vocab_extractor = mock_vocab_extractor
 
         # Act
-        actual_embedding = sut(data_df)
+        actual_vocab, actual_embedding = sut(data_df)
 
         # Assert
+        self.assertEqual(actual_vocab, tokens,
+                         "The vocab should match all tokens")
         self.assertEqual(len(actual_embedding), len(tokens),
                          "The length of the embedding should match the number of tokens")
