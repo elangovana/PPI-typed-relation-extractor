@@ -8,12 +8,11 @@ import torch
 from sklearn.pipeline import Pipeline
 from torch import optim, nn
 
-from algorithms.Parser import PAD
 from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
 from algorithms.RelationExtractorLinearNetwork import RelationExtractorLinearNetwork
 from algorithms.Train import Train
+from algorithms.VocabRandomEmbeddingBuilder import VocabRandomEmbeddingBuilder
 from algorithms.transform_extract_label_numbers import TransformExtractLabelNumbers
-from algorithms.transform_extract_vocab import TransformExtractVocab
 from algorithms.transform_final_create_examples import TransformFinalCreateExamples
 from algorithms.transform_labels_to_numbers import TransformLabelsToNumbers
 from algorithms.transform_tokenise import TransformTokenise
@@ -45,6 +44,7 @@ class RelationExtractionLinearFactory:
         self.transform_extract_label_number = None
         self.transform_tokenise = None
         self.train_data_pipeline = None
+        self.vocab_embedding_builder = None
 
     @property
     def model_network(self):
@@ -107,21 +107,6 @@ class RelationExtractionLinearFactory:
         return pipeline
 
     @property
-    def train_data_pipeline(self):
-        if self.__train_data_pipeline__ is None:
-            # this is the default pipeline
-            self.__train_data_pipeline__ = Pipeline([
-                ('TransformExtractWords', self.transform_tokenise)
-                , ('TransformWordsIndices', TransformExtractVocab(min_vocab_frequency=self.min_vocab_frequency))
-            ])
-
-        return self.__train_data_pipeline__
-
-    @train_data_pipeline.setter
-    def train_data_pipeline(self, value):
-        self.__train_data_pipeline__ = value
-
-    @property
     def transform_extract_label_number(self):
         self.__transform_extract_label_number__ = self.__transform_extract_label_number__ or TransformExtractLabelNumbers()
         return self.__transform_extract_label_number__
@@ -129,6 +114,16 @@ class RelationExtractionLinearFactory:
     @transform_extract_label_number.setter
     def transform_extract_label_number(self, value):
         self.__transform_extract_label_number__ = value
+
+    @property
+    def vocab_embedding_builder(self):
+        self.__vocab_embedding_builder__ = self.__vocab_embedding_builder__ or VocabRandomEmbeddingBuilder(
+            self.embedding_dim, self.min_vocab_frequency)
+        return self.__vocab_embedding_builder__
+
+    @vocab_embedding_builder.setter
+    def vocab_embedding_builder(self, value):
+        self.__vocab_embedding_builder__ = value
 
     @property
     def transform_tokenise(self):
@@ -149,20 +144,7 @@ class RelationExtractionLinearFactory:
         return transformer
 
     def __call__(self, train, train_labels, validation, validation_labels):
-        """
-
-        :type data: Dataframe
-        """
-        # Extract train specific features
-        train_specific_vocab = self.train_data_pipeline.transform(train)
-        # Initialise train vocab with random weights,
-        rand_words_weights_dict = {}
-        for word in train_specific_vocab.keys():
-            # Pad character is a vector of all zeros
-            if word == PAD:
-                rand_words_weights_dict[word] = [0] * self.embedding_dim
-            else:
-                rand_words_weights_dict[word] = nn.Embedding(1, self.embedding_dim).weight.detach().numpy().tolist()[0]
+        rand_words_weights_dict = self.vocab_embedding_builder(train)
 
         self.logger.info("Loading embeding..")
         # The full vocab is a combination of train and embeddings..
@@ -259,7 +241,6 @@ class RelationExtractionLinearFactory:
 
     @staticmethod
     def _find_artifact(pattern):
-
         matching = glob.glob(pattern)
         assert len(matching) == 1, "Expected exactly one in {}, but found {}".format(pattern,
                                                                                      len(matching))
