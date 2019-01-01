@@ -1,3 +1,5 @@
+import os
+from logging.config import fileConfig
 from unittest import TestCase
 
 import torch
@@ -6,6 +8,8 @@ from algorithms.RelationExtractorCnnNetwork import RelationExtractorCnnNetwork
 
 
 class TestRelationExtractorLinearNetwork(TestCase):
+    def setUp(self):
+        fileConfig(os.path.join(os.path.dirname(__file__), 'logger.ini'))
 
     def test_forward(self):
         vocab_size = 10000
@@ -13,7 +17,7 @@ class TestRelationExtractorLinearNetwork(TestCase):
         vector_dim = 5
         class_size = 2
 
-        max_abstract_len = 2
+        max_abstract_len = 10
         abstract = torch.LongTensor(max_abstract_len, batch_size).random_(0, vocab_size)
 
         max_itype_len = 1
