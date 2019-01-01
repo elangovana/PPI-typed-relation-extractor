@@ -39,15 +39,15 @@ def up_sample_minority(train_df, self_relations_filter):
     if self_relations_filter:
         train_df = train_df.query('participant1 != participant2')
 
-    train_dat_0s = train_df.query('isValid == False')
-    train_dat_1s = train_df.query('isValid == True')
-
-    rep_1 = [train_dat_1s for x in range((train_dat_0s.shape[0] // train_dat_1s.shape[0]) // 3)]
-
-    keep_1s = pd.concat(rep_1, axis=0)
-
-    train_dat = pd.concat([keep_1s, train_dat_0s], axis=0)
-    return train_dat
+    # train_dat_0s = train_df.query('isValid == False')
+    # train_dat_1s = train_df.query('isValid == True')
+    #
+    # rep_1 = [train_dat_1s for x in range((train_dat_0s.shape[0] // train_dat_1s.shape[0]) // 3)]
+    #
+    # keep_1s = pd.concat(rep_1, axis=0)
+    #
+    # train_dat = pd.concat([keep_1s, train_dat_0s], axis=0)
+    return train_df
 
 
 def run(network, train_file, val_file, embedding_file, embed_dim, out_dir, epochs, self_relations_filter=True):
