@@ -129,7 +129,7 @@ if "__main__" == __name__:
                         default=True)
     parser.add_argument("--upsample", help="Fix class imbalance when true, Y or N ",
                         type=lambda x: (str(x).lower() == 'Y'),
-                        default=True)
+                        default=False)
 
     parser.add_argument("--log-level", help="Log level", default="INFO", choices={"INFO", "WARN", "DEBUG", "ERROR"})
 
