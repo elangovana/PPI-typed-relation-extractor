@@ -23,9 +23,12 @@ model_dict = {
 }
 
 
-
 def prepare_data(self_relations_filter, data_df):
+    logger = logging.getLogger(__name__)
+
     if self_relations_filter:
+        logger.info("Removing self relations")
+
         data_df = data_df.query('participant1 != participant2')
     labels = data_df[["isValid"]]
     data_df = data_df[["abstract", "participant1", "participant2"]]
@@ -35,22 +38,26 @@ def prepare_data(self_relations_filter, data_df):
 
 
 def up_sample_minority(train_df, self_relations_filter):
+    logger = logging.getLogger(__name__)
+
     # True is the minority class
     if self_relations_filter:
+        logger.info("Removing self relations")
         train_df = train_df.query('participant1 != participant2')
 
-    # train_dat_0s = train_df.query('isValid == False')
-    # train_dat_1s = train_df.query('isValid == True')
-    #
-    # rep_1 = [train_dat_1s for x in range((train_dat_0s.shape[0] // train_dat_1s.shape[0]) // 3)]
-    #
-    # keep_1s = pd.concat(rep_1, axis=0)
-    #
-    # train_dat = pd.concat([keep_1s, train_dat_0s], axis=0)
-    return train_df
+    train_dat_0s = train_df.query('isValid == False')
+    train_dat_1s = train_df.query('isValid == True')
+
+    rep_1 = [train_dat_1s for x in range((train_dat_0s.shape[0] // train_dat_1s.shape[0]) // 3)]
+
+    keep_1s = pd.concat(rep_1, axis=0)
+
+    train_dat = pd.concat([keep_1s, train_dat_0s], axis=0)
+    return train_dat
 
 
-def run(network, train_file, val_file, embedding_file, embed_dim, out_dir, epochs, self_relations_filter=True):
+def run(network, train_file, val_file, embedding_file, embed_dim, out_dir, epochs, self_relations_filter=True,
+        upsample=True):
     logger = logging.getLogger(__name__)
 
     if not os.path.exists(out_dir) or not os.path.isdir(out_dir):
@@ -58,29 +65,31 @@ def run(network, train_file, val_file, embedding_file, embed_dim, out_dir, epoch
 
     class_size = 2
 
-    logger.info("Running with self relations filter {}, network {}".format(self_relations_filter, network))
+    logger.info("Running with self relations filter {}, upsample {}, network {}".format(self_relations_filter, upsample,
+                                                                                        network))
 
     train_df = pd.read_json(train_file)
-    logger.info("Train size: {}, class distribution before upsampling\n {}".format(train_df.shape,
-                                                                                   train_df['isValid'].value_counts()))
+    logger.info("Original train size: {}, class distribution\n {}".format(train_df.shape,
+                                                                          train_df['isValid'].value_counts()))
     val_df = pd.read_json(val_file)
-    logger.info("Validation size: {}, class distribution before upsampling\n {}".format(val_df.shape,
-                                                                                        val_df[
-                                                                                            'isValid'].value_counts()))
+    logger.info("Original validation size: {}, class distribution\n {}".format(val_df.shape,
+                                                                               val_df[
+                                                                                   'isValid'].value_counts()))
+    if upsample:
+        train_df = up_sample_minority(train_df, self_relations_filter)
+        logger.info("Train size: {}, class distribution after upsampling \n{}".format(train_df.shape,
+                                                                                      train_df[
+                                                                                          'isValid'].value_counts()))
 
-    train_df = up_sample_minority(train_df, self_relations_filter)
-    logger.info("Train size: {}, class distribution after upsampling \n{}".format(train_df.shape,
-                                                                                  train_df['isValid'].value_counts()))
-
-    val_df = up_sample_minority(val_df, self_relations_filter)
-    logger.info("Validation size: {}, class distribution after upsampling \n{}".format(val_df.shape,
-                                                                                       val_df[
-                                                                                           'isValid'].value_counts()))
+        val_df = up_sample_minority(val_df, self_relations_filter)
+        logger.info("Validation size: {}, class distribution after upsampling \n{}".format(val_df.shape,
+                                                                                           val_df[
+                                                                                               'isValid'].value_counts()))
 
     train_df, train_labels = prepare_data(self_relations_filter, train_df)
-    logger.info("Train size: {}, class distribution after upsampling & data prep \n{}".format(train_df.shape,
-                                                                                              np.bincount(
-                                                                                                  train_labels)))
+    logger.info("Train size: {}, class distribution after data prep \n{}".format(train_df.shape,
+                                                                                 np.bincount(
+                                                                                     train_labels)))
 
     val_df, val_labels = prepare_data(self_relations_filter, val_df)
 
@@ -115,16 +124,20 @@ if "__main__" == __name__:
 
     parser.add_argument("outdir", help="The output dir")
     parser.add_argument("--epochs", help="The number of epochs", type=int, default=10)
-    parser.add_argument("--self-filter", help="Filter self relations, if true remove self relations", type=bool,
+    parser.add_argument("--self-filter", help="Filter self relations, if true remove self relations Y or N",
+                        type=lambda x: (str(x).lower() == 'Y'),
+                        default=True)
+    parser.add_argument("--upsample", help="Fix class imbalance when true, Y or N ",
+                        type=lambda x: (str(x).lower() == 'Y'),
                         default=True)
 
     parser.add_argument("--log-level", help="Log level", default="INFO", choices={"INFO", "WARN", "DEBUG", "ERROR"})
 
     args = parser.parse_args()
-
+    print(args.__dict__)
     # Set up logging
     logging.basicConfig(level=logging.getLevelName(args.log_level), handlers=[logging.StreamHandler(sys.stdout)],
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
     run(args.network, args.trainjson, args.valjson, args.embedding, args.embeddim,
-        args.outdir, args.epochs, args.self_filter)
+        args.outdir, args.epochs, args.self_filter, args.upsample)
