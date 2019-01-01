@@ -24,65 +24,49 @@ class RelationExtractorCnnNetwork(nn.Module):
                                        embedding_dim) if type(
             pretrained_weights_or_embed_vocab_size) is int else nn.Embedding.from_pretrained(
             torch.FloatTensor(pretrained_weights_or_embed_vocab_size))
-        layer1_cnn_output = 128
-        layer1_cnn_kernel = min(ngram_context_size, sum(feature_lengths))
-        layer1_cnn_stride = 1
-        layer1_cnn_padding = 0
-        layer1_cnn_out_length = math.ceil(
-            (sum(feature_lengths) + 2 * layer1_cnn_padding - layer1_cnn_kernel + 1) / layer1_cnn_stride)
 
-        layer1_pool_kernel = layer1_cnn_kernel
-        layer1_pool_padding = 1
-        layer1_pool_stride = 2
-        layer1_pool_out_length = math.ceil(
-            (layer1_cnn_out_length + 2 * layer1_pool_padding - layer1_pool_kernel + 1) / layer1_pool_stride)
+        self.windows_sizes = [5, 4, 3, 2, 1]
+        cnn_output = 128
+        cnn_stride = 1
+        pool_stride = 1
 
-        self.logger.info(
-            "Cnn layer 1 out length = {}, layer_cnn_kernel={}, pool layer length = {}, layer_pool_kernel={}".format(
-                layer1_cnn_out_length,
-                layer1_cnn_kernel,
-                layer1_pool_out_length,
-                layer1_pool_kernel
-            ))
+        self.cnn_layers = []
+        total_cnn_out_size = 0
+        for k in self.windows_sizes:
+            layer1_cnn_output = cnn_output
+            layer1_cnn_kernel = min(k, sum(feature_lengths))
+            layer1_cnn_stride = cnn_stride
+            layer1_cnn_padding = layer1_cnn_kernel // 2
+            layer1_cnn_out_length = math.ceil(
+                (sum(feature_lengths) + 2 * layer1_cnn_padding - layer1_cnn_kernel + 1) / layer1_cnn_stride)
 
-        self.layer1 = nn.Sequential(
-            nn.Conv1d(embedding_dim, layer1_cnn_output, kernel_size=layer1_cnn_kernel, stride=layer1_cnn_stride,
-                      padding=layer1_cnn_padding),
-            nn.BatchNorm1d(layer1_cnn_output),
-            nn.ReLU(),
-            nn.MaxPool1d(kernel_size=layer1_pool_kernel, stride=layer1_pool_stride, padding=layer1_pool_padding))
+            layer1_pool_kernel = layer1_cnn_kernel
+            layer1_pool_padding = layer1_pool_kernel // 2
+            layer1_pool_stride = pool_stride
+            layer1_pool_out_length = math.ceil(
+                (layer1_cnn_out_length + 2 * layer1_pool_padding - layer1_pool_kernel + 1) / layer1_pool_stride)
 
-        layer2_cnn_output = 128
-        layer2_cnn_kernel = max(layer1_cnn_kernel - 2, 1)
-        layer2_cnn_stride = 1
-        layer2_cnn_padding = layer2_cnn_kernel // 2
-        layer2_cnn_out_length = math.ceil(
-            (sum(feature_lengths) + 2 * layer2_cnn_padding - layer2_cnn_kernel + 1) / layer2_cnn_stride)
+            self.logger.info(
+                "Cnn layer  out length = {}, layer_cnn_kernel={}, pool layer length = {}, layer_pool_kernel={}".format(
+                    layer1_cnn_out_length,
+                    layer1_cnn_kernel,
+                    layer1_pool_out_length,
+                    layer1_pool_kernel
+                ))
 
-        layer2_pool_kernel = layer2_cnn_kernel
-        layer2_pool_padding = layer2_pool_kernel // 2
-        layer2_pool_stride = 2
-        layer2_pool_out_length = math.ceil(
-            (layer2_cnn_out_length + 2 * layer2_pool_padding - layer2_pool_kernel + 1) / layer2_pool_stride)
+            layer1 = nn.Sequential(
+                nn.Conv1d(embedding_dim, layer1_cnn_output, kernel_size=layer1_cnn_kernel, stride=layer1_cnn_stride,
+                          padding=layer1_cnn_padding),
+                nn.BatchNorm1d(layer1_cnn_output),
+                nn.ReLU(),
+                nn.MaxPool1d(kernel_size=layer1_pool_kernel, stride=layer1_pool_stride, padding=layer1_pool_padding))
 
-        self.logger.info(
-            "Cnn layer 2 out length = {}, layer_cnn_kernel={}, pool layer length = {}, layer_pool_kernel={}".format(
-                layer2_cnn_out_length,
-                layer2_cnn_kernel,
-                layer2_pool_out_length,
-                layer2_pool_kernel
-            ))
-
-        self.layer2 = nn.Sequential(
-            nn.Conv1d(embedding_dim, layer2_cnn_output, kernel_size=layer2_cnn_kernel, stride=layer2_cnn_stride,
-                      padding=layer2_cnn_padding),
-            nn.BatchNorm1d(layer2_cnn_output),
-            nn.ReLU(),
-            nn.MaxPool1d(kernel_size=layer2_pool_kernel, stride=layer2_pool_stride, padding=layer2_pool_padding))
+            self.cnn_layers.append(layer1)
+            total_cnn_out_size += layer1_pool_out_length * layer1_cnn_output
 
         fc_layer_size = 100
         self.fc = nn.Sequential(
-            nn.Linear(layer2_pool_out_length * layer2_cnn_output + layer1_pool_out_length * layer1_cnn_output,
+            nn.Linear(total_cnn_out_size,
                       fc_layer_size),
             nn.ReLU(),
             nn.Linear(fc_layer_size, class_size))
@@ -115,15 +99,15 @@ class RelationExtractorCnnNetwork(nn.Module):
         # Conv1d takes in (batch, channels, seq_len), but raw embedded is (batch, seq_len, channels)
         final_input = final_input.permute(0, 2, 1)
 
-        out1 = self.layer1(final_input)
+        outputs = []
+        for cnn_layer in self.cnn_layers:
+            out1 = cnn_layer(final_input)
+            outputs.append(out1)
 
-        out2 = self.layer2(final_input)
-
-        out = torch.cat([out1, out2], dim=2)
+        out = torch.cat(outputs, dim=2)
 
         out = out.reshape(out.size(0), -1)
 
-        print(out.shape)
         out = self.fc(out)
         log_probs = F.log_softmax(out, dim=1)
         return log_probs
