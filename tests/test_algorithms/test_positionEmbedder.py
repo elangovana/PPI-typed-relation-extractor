@@ -76,7 +76,22 @@ Tests the returned position is the max distance if the distance is larger than  
 
     def _invoke_sut__call__(self, entity, position_embeddings, tokens_array):
         # Initialise sut
-        sut = PositionEmbedder(position_embeddings)
+        sut = PositionEmbedder(embeddings=position_embeddings)
         # Act
         actual = sut(tokens_array, entity)
         return actual
+
+    def test__init_default_embedder(self):
+        """
+        Test the default initialiser
+        """
+        # Arrange
+        pos_range = [0, 1, 2, 4, 6, 8]
+        pos_dim = 2
+
+        # Act
+        sut = PositionEmbedder(pos_dim=pos_dim, pos_range=pos_range)
+        print(sut.embeddings)
+
+        # Assert
+        self.assertEqual(sut.embeddings.shape, (len(pos_range), pos_dim))
