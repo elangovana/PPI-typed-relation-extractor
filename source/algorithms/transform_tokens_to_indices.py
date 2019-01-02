@@ -11,7 +11,8 @@ Extracts words
 
 class TransformTokensToIndices:
 
-    def __init__(self, vocab):
+    def __init__(self, vocab, add_eos=False):
+        self.add_eos = add_eos
         self.vocab = vocab
 
     @property
@@ -25,10 +26,10 @@ class TransformTokensToIndices:
         df = df.applymap(lambda x: self._make_array(x, self.vocab))
         return df
 
-    def _make_array(self, tokens, vocab, add_eos=True):
+    def _make_array(self, tokens, vocab):
         unk_id = vocab[UNKNOWN_WORD]
         eos_id = vocab[EOS]
         ids = [vocab.get(token, unk_id) for token in tokens]
-        if add_eos:
+        if self.add_eos:
             ids.append(eos_id)
         return numpy.array(ids, numpy.int32)
