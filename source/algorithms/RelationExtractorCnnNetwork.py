@@ -1,11 +1,9 @@
 import logging
 import math
 
-import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.distributions import Bernoulli
 
 
 class RelationExtractorCnnNetwork(nn.Module):
@@ -86,12 +84,12 @@ class RelationExtractorCnnNetwork(nn.Module):
             concat_sentence = torch.tensor(concat_sentence, dtype=torch.long)
 
             embeddings = self.embeddings(concat_sentence)
-            if feature_len == max_words:
-                # Set up success rate (rate of selecting the word) as 1 - dropout rate
-                bernoulli = Bernoulli(1 - self.dropout_rate)
-                rw = bernoulli.sample(torch.Size((embeddings.shape[0], embeddings.shape[1]))).numpy()
-                # Use zeros at where rw is zero
-                embeddings = torch.from_numpy(np.expand_dims(rw, 2)) * embeddings
+            # if feature_len == max_words:
+            #     # Set up success rate (rate of selecting the word) as 1 - dropout rate
+            #     bernoulli = Bernoulli(1 - self.dropout_rate)
+            #     rw = bernoulli.sample(torch.Size((embeddings.shape[0], embeddings.shape[1]))).numpy()
+            #     # Use zeros at where rw is zero
+            #     embeddings = torch.from_numpy(np.expand_dims(rw, 2)) * embeddings
 
             merged_input.append(embeddings)
 
