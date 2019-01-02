@@ -10,16 +10,19 @@ from algorithms.RelationExtractionAverageFactory import RelationExtractionAverag
 from algorithms.RelationExtractionLinearDropoutWordFactory import RelationExtractorLinearNetworkDropoutWordFactory
 from algorithms.RelationExtractionLinearFactory import RelationExtractionLinearFactory
 from algorithms.RelationExtractorCnnNetwork import RelationExtractorCnnNetwork
+from algorithms.RelationExtractorCnnPosNetwork import RelationExtractorCnnPosNetwork
 
 networks_dict = {
     "Linear": RelationExtractionLinearFactory,
     "Avg": RelationExtractionAverageFactory,
     "LinearWithDropout": RelationExtractorLinearNetworkDropoutWordFactory,
     "Cnn": RelationExtractionLinearFactory,
+    "CnnPos": RelationExtractionLinearFactory
 }
 
 model_dict = {
-    "Cnn": RelationExtractorCnnNetwork
+    "Cnn": RelationExtractorCnnNetwork,
+    "CnnPos": RelationExtractorCnnPosNetwork
 }
 
 
