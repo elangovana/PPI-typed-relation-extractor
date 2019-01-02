@@ -23,8 +23,8 @@ class RelationExtractorCnnNetwork(nn.Module):
             pretrained_weights_or_embed_vocab_size) is int else nn.Embedding.from_pretrained(
             torch.FloatTensor(pretrained_weights_or_embed_vocab_size))
 
-        ##  self.windows_sizes = [5, 4, 3, 2, 1]
-        self.windows_sizes = [5]
+        self.windows_sizes = [5, 4, 3, 2, 1]
+        ## self.windows_sizes = [5]
         cnn_output = 128
         cnn_stride = 1
         pool_stride = 1
