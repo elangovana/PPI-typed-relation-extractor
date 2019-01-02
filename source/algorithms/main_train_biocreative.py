@@ -125,10 +125,10 @@ if "__main__" == __name__:
     parser.add_argument("outdir", help="The output dir")
     parser.add_argument("--epochs", help="The number of epochs", type=int, default=10)
     parser.add_argument("--self-filter", help="Filter self relations, if true remove self relations Y or N",
-                        type=lambda x: (str(x).lower() == 'Y'),
+                        type=lambda x: (str(x).lower() == 'y'),
                         default=True)
     parser.add_argument("--upsample", help="Fix class imbalance when true, Y or N ",
-                        type=lambda x: (str(x).lower() == 'Y'),
+                        type=lambda x: (str(x).lower() == 'y'),
                         default=False)
 
     parser.add_argument("--log-level", help="Log level", default="INFO", choices={"INFO", "WARN", "DEBUG", "ERROR"})
