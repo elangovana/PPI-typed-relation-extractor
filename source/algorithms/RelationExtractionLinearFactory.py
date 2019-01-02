@@ -57,7 +57,7 @@ class RelationExtractionLinearFactory:
 
     @property
     def optimiser(self):
-        self.__optimiser__ = self.__optimiser__ or optim.SGD
+        self.__optimiser__ = self.__optimiser__ or optim.RMSprop
         return self.__optimiser__
 
     @optimiser.setter
