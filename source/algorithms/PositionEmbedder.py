@@ -32,8 +32,9 @@ class PositionEmbedder:
         max_distance = self.embeddings.shape[0] - 1
         if len(entity_positions) == 0:
             logging.warning(
-                "The entity {} was not found in the tokens array {}. Hence returning max distance for all tokens".format(
-                    entity, tokens_array))
+                "The entity {} was not found in the tokens array. Hence returning max distance for all tokens".format(
+                    entity))
+            logging.debug("The entity {} was not found in the tokens array {}".format(entity, tokens_array))
             # returning max distance
             token_distance = [max_distance] * len(tokens_array)
         else:
