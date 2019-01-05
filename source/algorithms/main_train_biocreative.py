@@ -103,9 +103,12 @@ def run(network, train_file, val_file, embedding_file, embed_dim, out_dir, epoch
         head = embedding.readline()
         logger.info("The embedding header is {}".format(head))
         network_factory = networks_dict[network]
+
+        # TODO: Constructor issue..Not all support class weights
         train_factory = network_factory(embedding_handle=embedding, embedding_dim=embed_dim,
                                         class_size=class_size,
-                                        output_dir=out_dir, ngram=1, epochs=epochs, pos_label=True)
+                                        output_dir=out_dir, ngram=1, epochs=epochs, pos_label=True,
+                                        class_weights_dict={True: 2, False: 1})
         if network in model_dict:
             train_factory.model_network = model_dict[network]
 

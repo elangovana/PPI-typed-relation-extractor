@@ -23,7 +23,7 @@ class RelationExtractionLinearFactory:
 
     def __init__(self, embedding_handle, embedding_dim: int, class_size: int, output_dir, learning_rate: float = 0.001,
                  momentum: float = 0.9, ngram: int = 3, epochs: int = 10, min_vocab_frequency=3, pos_label=1,
-                 classes=None):
+                 classes=None, class_weights_dict=None):
         self.classes = classes
         self.pos_label = pos_label
         self.min_vocab_frequency = min_vocab_frequency
@@ -45,6 +45,8 @@ class RelationExtractionLinearFactory:
         self.transform_tokenise = None
         self.train_data_pipeline = None
         self.vocab_embedding_builder = None
+        self.class_weights_dict = class_weights_dict
+        self._class_weights = None
 
     @property
     def model_network(self):
@@ -66,7 +68,7 @@ class RelationExtractionLinearFactory:
 
     @property
     def loss_function(self):
-        self.__loss_function__ = self.__loss_function__ or nn.CrossEntropyLoss()
+        self.__loss_function__ = self.__loss_function__ or nn.CrossEntropyLoss(weight=self._class_weights)
         return self.__loss_function__
 
     @loss_function.setter
@@ -155,6 +157,16 @@ class RelationExtractionLinearFactory:
         transformer_labels = self.get_transformer_labels_to_integers(classes)
         transfomed_train_labels = transformer_labels.transform(train_labels)
         transfomed_val_labels = transformer_labels.transform(validation_labels)
+
+        # Set weights
+        if self.class_weights_dict is not None:
+            self._class_weights = [1] * len(classes)
+            for k, w in self.class_weights_dict.items():
+                class_int = transformer_labels.transform([k])[0]
+                self._class_weights[class_int] = w
+            self._class_weights = torch.Tensor(self._class_weights)
+            self.logger.info("Class weights dict is : {}".format(self.class_weights_dict))
+            self.logger.info("Class weights are is : {}".format(self._class_weights))
 
         self.logger.debug("Transformed train labels : {}".format(transfomed_train_labels))
         self.logger.debug("Transformed val labels : {}".format(transfomed_val_labels))
