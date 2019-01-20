@@ -52,7 +52,7 @@ class TestPubmedAbstractsToPubtatorFormat(TestCase):
         # Assert
         self.assertEqual(actual, expected)
 
-    def test_read_json(self):
+    def test_read_json_file(self):
         # Arrange
         # Set up mock
         mock_pubtator_formatter = Mock()
@@ -67,7 +67,7 @@ class TestPubmedAbstractsToPubtatorFormat(TestCase):
         output_handle = StringIO()
 
         # Act
-        sut.read_json(input_file, output_handle=output_handle)
+        sut.read_json_file(input_file, output_handle=output_handle)
         actual = output_handle.getvalue()
 
         # Assert
