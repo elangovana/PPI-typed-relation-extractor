@@ -76,4 +76,4 @@ Reads an entire directory of json files
         for input_file in files:
             with open(input_file, "r") as f:
                 input = json.loads(f.read())
-            self.__call__(input, output_handle)
+            self.read_json_file(input, output_handle)
