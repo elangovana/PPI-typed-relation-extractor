@@ -25,7 +25,7 @@ class RelationExtractorCnnNetwork(nn.Module):
 
         self.windows_sizes = [2, 1]
         ## self.windows_sizes = [5]
-        cnn_output = 128
+        cnn_output = 64
         cnn_stride = 1
         pool_stride = 1
 
