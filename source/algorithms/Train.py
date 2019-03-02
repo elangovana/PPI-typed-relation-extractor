@@ -64,7 +64,7 @@ class Train:
         :param mini_batch_size:
         :param device: For CPU -1, else set GPU device id
         :type eval_every_n_epoch: int
-        :param data_iter: An iterable record of tuples of the form (label, features).  The each feature must be the index of word vocab
+        :param data_iter: Torchtext dataset object. The each feature must be the index of word vocab
         :param model_network: A neural network
         :param loss_function: Pytorch loss function
         :param optimizer: Optimiser
