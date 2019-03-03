@@ -24,8 +24,7 @@ model_dict = {
 }
 
 
-def prepare_data(interaction_type, file):
-    data_df = pd.read_json(file)
+def prepare_data(interaction_type, data_df):
     if interaction_type is not None:
         data_df = data_df.query('interactionType == "{}"'.format(interaction_type))
     labels = data_df[["isNegative"]]
