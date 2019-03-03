@@ -24,9 +24,7 @@ model_dict = {
 }
 
 
-def prepare_data(interaction_type, data_df):
-    if interaction_type is not None:
-        data_df = data_df.query('interactionType == "{}"'.format(interaction_type))
+def prepare_data(data_df):
     labels = data_df[["isNegative"]]
     data_df = data_df[["pubmedabstract", "interactionType", "participant1Alias", "participant2Alias"]]
     data_df['participant1Alias'] = data_df['participant1Alias'].map(
@@ -37,19 +35,19 @@ def prepare_data(interaction_type, data_df):
     return data_df, labels
 
 
-def run(network, data_file, artifactsdir, out_dir, self_relations_filter=True):
+def run(network, data_file, artifactsdir, out_dir):
     logger = logging.getLogger(__name__)
 
     if not os.path.exists(out_dir) or not os.path.isdir(out_dir):
         raise FileNotFoundError("The path {} should exist and must be a directory".format(out_dir))
 
-    logger.info("Running with self relations filter {}, network {}".format(self_relations_filter, network))
+    logger.info("Running with self relations filter network {}".format(network))
 
     logger.info("Loading from file {}".format(data_file))
     df = pd.read_json(data_file)
     logger.info("Data size after load: {}".format(df.shape))
 
-    df_prep, labels = prepare_data(self_relations_filter, df)
+    df_prep, labels = prepare_data(df)
     logger.info("Data size after prep: {}".format(df_prep.shape))
 
     network_factory = networks_dict[network]
@@ -81,8 +79,6 @@ if "__main__" == __name__:
 
     parser.add_argument("artefactsdir", help="The artefacts dir that contains model, vocab etc")
     parser.add_argument("outdir", help="The output dir")
-    parser.add_argument("--self-filter", help="Filter self relations, if true remove self relations", type=bool,
-                        default=True)
 
     parser.add_argument("--log-level", help="Log level", default="INFO", choices={"INFO", "WARN", "DEBUG", "ERROR"})
 
@@ -94,4 +90,4 @@ if "__main__" == __name__:
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
     results = run(args.network, args.datajson, args.artefactsdir,
-                  args.outdir, args.self_filter)
+                  args.outdir)
