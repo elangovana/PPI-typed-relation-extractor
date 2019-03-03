@@ -46,7 +46,7 @@ def run(network, data_file, artifactsdir, out_dir, self_relations_filter=True):
 
     logger.info("Running with self relations filter {}, network {}".format(self_relations_filter, network))
 
-    df = pd.read_json(data_file, dtype={'docid': 'str'})
+    df = pd.read_json(data_file)
     logger.info("Data size after load: {}".format(df.shape))
 
     df_prep, labels = prepare_data(self_relations_filter, df)
@@ -88,6 +88,7 @@ if "__main__" == __name__:
 
     args = parser.parse_args()
 
+    print(args.__dict__)
     # Set up logging
     logging.basicConfig(level=logging.getLevelName(args.log_level), handlers=[logging.StreamHandler(sys.stdout)],
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
