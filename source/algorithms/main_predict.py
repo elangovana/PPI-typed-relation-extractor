@@ -46,6 +46,7 @@ def run(network, data_file, artifactsdir, out_dir, self_relations_filter=True):
 
     logger.info("Running with self relations filter {}, network {}".format(self_relations_filter, network))
 
+    logger.info("Loading from file {}".format(data_file))
     df = pd.read_json(data_file)
     logger.info("Data size after load: {}".format(df.shape))
 
