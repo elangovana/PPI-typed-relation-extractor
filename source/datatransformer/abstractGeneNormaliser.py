@@ -39,7 +39,7 @@ class AbstractGeneNormaliser:
     def geneIdConverter(self, value):
         self.__geneIdConverter__ = value
 
-    def __call__(self, df):
+    def transform(self, df):
 
         annotations_dict = self._construct_dict()
         df['normalised_abstract'] = df.apply(lambda r: annotations_dict[r['pubmedId']], axis=1)
@@ -60,15 +60,16 @@ class AbstractGeneNormaliser:
 
     def _normalise_abstract(self, annotations, abstract):
         offset = 0
-        annotations.sort(key=lambda x: x['start'], reverse=False)
+        annotations.sort(key=lambda x: int(x['start']), reverse=False)
         for a in annotations:
             if a['type'].lower() != 'gene': continue
 
             s = int(a['start']) + offset
             e = int(a['end']) + offset
+
             ncbi_id = a['normalised_id']
 
-            uniprot = self.geneIdConverter.convert(ncbi_id)[ncbi_id]
+            uniprot = self.geneIdConverter.convert(ncbi_id).get(ncbi_id, ncbi_id)
 
             abstract = abstract[:s] + uniprot + abstract[e:]
             offset += len(uniprot) - (e - s)
