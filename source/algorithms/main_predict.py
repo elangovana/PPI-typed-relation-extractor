@@ -25,7 +25,7 @@ model_dict = {
 
 
 def prepare_data(data_df):
-    labels = data_df[["isNegative"]]
+    labels = data_df[["isValid"]]
     data_df = data_df[["pubmedabstract", "interactionType", "participant1Alias", "participant2Alias"]]
     data_df['participant1Alias'] = data_df['participant1Alias'].map(
         lambda x: ", ".join(list(itertools.chain.from_iterable(x))))

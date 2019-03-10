@@ -46,7 +46,7 @@ class GnormplusNegativeSamplesAugmentor:
     def transform(self, input_df):
         """
 
-        :param input_df: A pandas dataframe like object with columns atleast these columns [interactionId, isNegative, pubmedId, particpant1Id, particpant2Id] .
+        :param input_df: A pandas dataframe like object with columns atleast these columns [interactionId, isValid, pubmedId, particpant1Id, particpant2Id] .
         """
 
         data_fake = pd.DataFrame(columns=input_df.columns)
@@ -77,7 +77,7 @@ class GnormplusNegativeSamplesAugmentor:
                 if not self.include_self_relations and p1 == p2: continue;
 
                 record = copy.deepcopy(template_record)
-                record["isNegative"] = True
+                record["isValid"] = False
                 record["participant1Id"] = p1
                 record["participant2Id"] = p2
                 record["participant1Alias"] = list(alias_map[p1])

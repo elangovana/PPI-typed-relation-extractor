@@ -20,7 +20,7 @@ class TestInteractionTypeNegativeSamplesAugmentor(TestCase):
         data = pd.DataFrame([
             {"interactionId": "1",
              "interactionType": "phosphorylation",
-             "isNegative": False,
+             "isValid": True,
              "participant1Id": "uni_10076",
              "participant1Alias": ["uni_10076_alias"],
              "participant2Id": "uni_5793",
@@ -29,7 +29,7 @@ class TestInteractionTypeNegativeSamplesAugmentor(TestCase):
 
             , {"interactionId": "2",
                "interactionType": "dephosphorylation",
-               "isNegative": False,
+               "isValid": True,
                "participant1Id": "uni_26401",
                "participant1Alias": ["uni_26401_alias"],
                "participant2Id": "uni_26419",
@@ -37,7 +37,7 @@ class TestInteractionTypeNegativeSamplesAugmentor(TestCase):
                "pubmedId": "25260751", "pubmedTitle": "Q", "pubmedabstract": "TEST"}
             , {"interactionId": "3",
                "interactionType": "methylation",
-               "isNegative": False,
+               "isValid": True,
                "participant1Id": "uni_264011",
                "participant1Alias": ["uni_264011_alias"],
                "participant2Id": "uni_26419",
@@ -48,7 +48,7 @@ class TestInteractionTypeNegativeSamplesAugmentor(TestCase):
         expected_fake = pd.DataFrame([
             {"interactionId": "random_guid_2_1",
              "interactionType": "dephosphorylation",
-             "isNegative": True,
+             "isValid": False,
              "participant1Id": "uni_10076",
              "participant1Alias": ["uni_10076_alias"],
              "participant2Id": "uni_5793",
@@ -57,7 +57,7 @@ class TestInteractionTypeNegativeSamplesAugmentor(TestCase):
 
             , {"interactionId": "random_guid_1",
                "interactionType": "methylation",
-               "isNegative": True,
+               "isValid": False,
                "participant1Id": "uni_10076",
                "participant1Alias": ["uni_10076_alias"],
                "participant2Id": "uni_5793",
@@ -66,7 +66,7 @@ class TestInteractionTypeNegativeSamplesAugmentor(TestCase):
 
             , {"interactionId": "2",
                "interactionType": "phosphorylation",
-               "isNegative": True,
+               "isValid": False,
                "participant1Id": "uni_264011",
                "participant1Alias": ["uni_264011_alias"],
                "participant2Id": "uni_26419",
@@ -79,7 +79,7 @@ class TestInteractionTypeNegativeSamplesAugmentor(TestCase):
         actual = sut.transform(data)
 
         # Assert
-        sort_keys = ['pubmedId', "isNegative", "interactionType", 'participant1Id', 'participant2Id']
+        sort_keys = ['pubmedId', "isValid", "interactionType", 'participant1Id', 'participant2Id']
         # dropping interaction_id because they are auto generated guids and may not remain consistent across tests.
         actual = actual.drop(["interactionId"], axis=1).sort_values(by=sort_keys)
         expected = pd.DataFrame(columns=data.columns)

@@ -28,7 +28,7 @@ def prepare_data(interaction_type, file):
     data_df = pd.read_json(file)
     if interaction_type is not None:
         data_df = data_df.query('interactionType == "{}"'.format(interaction_type))
-    labels = data_df[["isNegative"]]
+    labels = data_df[["isValid"]]
     data_df = data_df[["pubmedabstract", "interactionType", "participant1Alias", "participant2Alias"]]
     data_df['participant1Alias'] = data_df['participant1Alias'].map(
         lambda x: ", ".join(list(itertools.chain.from_iterable(x))))
@@ -61,7 +61,7 @@ def run(network, train_file, val_file, embedding_file, embed_dim, out_dir, epoch
 
         train_factory = network_factory(embedding_handle=embedding, embedding_dim=embed_dim,
                                         class_size=class_size,
-                                        output_dir=out_dir, ngram=1, epochs=epochs, pos_label=False)
+                                        output_dir=out_dir, ngram=1, epochs=epochs, pos_label=True)
 
         if network in model_dict:
             train_factory.model_network = model_dict[network]

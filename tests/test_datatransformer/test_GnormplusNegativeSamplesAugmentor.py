@@ -1,3 +1,6 @@
+import logging
+import os
+from logging.config import fileConfig
 from unittest import TestCase
 from unittest.mock import MagicMock
 
@@ -7,6 +10,10 @@ from datatransformer.gnormplusNegativeSamplesAugmentor import GnormplusNegativeS
 
 
 class TestGnormplusNegativeSamplesAugmentor(TestCase):
+
+    def setUp(self):
+        fileConfig(os.path.join(os.path.dirname(__file__), 'logger.ini'))
+
     def test_transform(self):
         # Arrange
         annotations = [{'id': '19167335', 'type': 'a',
@@ -38,7 +45,7 @@ class TestGnormplusNegativeSamplesAugmentor(TestCase):
         data = pd.DataFrame([
             {"interactionId": "1",
              "interactionType": "phosphorylation",
-             "isNegative": False,
+             "isValid": True,
              "participant1Id": "uni_10076",
              "participant1Alias": ["uni_10076_alias"],
              "participant2Id": "uni_5793",
@@ -47,7 +54,7 @@ class TestGnormplusNegativeSamplesAugmentor(TestCase):
 
             , {"interactionId": "2",
                "interactionType": "phosphorylation",
-               "isNegative": False,
+               "isValid": True,
                "participant1Id": "uni_26401",
                "participant1Alias": ["uni_26401_alias"],
                "participant2Id": "uni_26419",
@@ -59,14 +66,14 @@ class TestGnormplusNegativeSamplesAugmentor(TestCase):
             {
                 "interactionId": '2_0f63748e-10d6-4943-88a1-88c9a7778267_fake_annot',
                 "interactionType": 'phosphorylation',
-                "isNegative": True, "participant1Id": 'uni_26419', "participant2Id": 'uni_26416',
-                "pubmedId": '25260751', "pubmedTitle": 'Q', "pubmedabstract": 'TEST', "participant1Alias": ['JNK'],
-                "participant2Alias": ['p38']
+                "isValid": False, "participant2Id": 'uni_26419', "participant1Id": 'uni_26416',
+                "pubmedId": '25260751', "pubmedTitle": 'Q', "pubmedabstract": 'TEST', "participant2Alias": ['JNK'],
+                "participant1Alias": ['p38']
             }
             ,
             {"interactionId": '2_52039565-0320-4867-b8ee-fded5ef2ef36_fake_annot',
              "interactionType": 'phosphorylation',
-             "isNegative": True, "participant2Id": 'uni_26401', "participant1Id": 'uni_26416', "pubmedId": '25260751',
+             "isValid": False, "participant2Id": 'uni_26401', "participant1Id": 'uni_26416', "pubmedId": '25260751',
              "pubmedTitle": 'Q', "pubmedabstract": 'TEST', "participant2Alias": ['MEKK1', 'Map3k1'],
              "participant1Alias": ['p38']}
         ])
@@ -75,11 +82,33 @@ class TestGnormplusNegativeSamplesAugmentor(TestCase):
         actual = sut.transform(data)
 
         # Assert
-        sort_keys = ['pubmedId', 'participant1Id', 'participant2Id']
-        actual = actual.drop(["interactionId"], axis=1).sort_values(by=sort_keys)
+        # drop and sort columns so that each value can be compared..
+        sort_keys = ['pubmedId', 'isValid', 'participant1Id', 'participant2Id']
+        drop_columns = ["interactionId", 'participant1Id', 'participant2Id', 'participant2Alias', 'participant1Alias']
+        lambda_merge_particpants = lambda r: {r['participant1Id']}.union([r['participant2Id']])
+
+        # Merge actual participant and participant 2 into a set because the order doesnt matter
+        actual['participant_ids'] = actual.apply(lambda_merge_particpants, axis=1)
+        actual = actual.sort_values(by=sort_keys).drop(drop_columns, axis=1)
+
+        # format expected..
         expected = pd.DataFrame(columns=data.columns)
         expected = expected.append(expected_fake)
         expected = expected.append(data)
-        expected = expected.drop(["interactionId"], axis=1).sort_values(by=sort_keys)
+        # Merge participant and participant 2 into a set because the order doesnt matter
+        expected['participant_ids'] = expected.apply(lambda_merge_particpants,
+                                                     axis=1)
+        expected = expected.sort_values(by=sort_keys).drop(drop_columns, axis=1)
+
+        # logging
+        if logging.getLogger(__name__).isEnabledFor(logging.DEBUG):
+            logger = logging.getLogger(__name__)
+            for a, e in zip(actual.values, expected.values):
+                logger.debug("Actual {}".format(a))
+                logger.debug("Expect {}\n".format(e))
 
         self.assertEqual(len(actual.values), len(expected.values))
+
+        for a, e in zip(actual.values, expected.values):
+            for ac, ec in zip(a, e):
+                self.assertEqual(ac, ec)

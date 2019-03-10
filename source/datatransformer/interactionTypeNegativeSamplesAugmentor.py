@@ -33,7 +33,7 @@ class InteractionTypeNegativeSamplesAugmentor:
         for pubmedid in input_df['pubmedId'].unique():
             # input records matching the given pubmed
             input_records_pubmed = input_df[input_df.pubmedId == pubmedid]
-            pubmed_pos_relations = input_records_pubmed.query('isNegative == False')
+            pubmed_pos_relations = input_records_pubmed.query('isValid == True')
 
             # interaction types associated with current pubmed
             existing_interaction_types = input_records_pubmed['interactionType'].unique()
@@ -50,7 +50,7 @@ class InteractionTypeNegativeSamplesAugmentor:
                 i = (i + 1) % len(template_records)
                 template_record = template_records.iloc[i]
                 record = copy.deepcopy(template_record)
-                record["isNegative"] = True
+                record["isValid"] = False
                 record["interactionType"] = p
                 record["interactionId"] = record["interactionId"] + "_" + str(
                     uuid.uuid4()) + "_" + "fake_annot"
