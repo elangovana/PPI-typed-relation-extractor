@@ -1,5 +1,6 @@
 import copy
 import logging
+import random
 import uuid
 
 import pandas as pd
@@ -11,8 +12,9 @@ Adds negative samples by adding false interaction types
 
 class InteractionTypeNegativeSamplesAugmentor:
 
-    def __init__(self, seed=777):
+    def __init__(self, seed=777, max_negative_per_pubmed=1):
 
+        self.max_negative_per_pubmed = max_negative_per_pubmed
         self.seed = seed
 
     @property
@@ -39,6 +41,10 @@ class InteractionTypeNegativeSamplesAugmentor:
             existing_interaction_types = input_records_pubmed['interactionType'].unique()
 
             fake_interactions = set(interaction_types) - set(existing_interaction_types)
+
+            # Fix the max number of fake interactions to max_negative_per_pubmed
+            fake_interactions = random.sample(fake_interactions,
+                                              min(self.max_negative_per_pubmed, len(fake_interactions)))
 
             sample_size = tot_interactions if len(pubmed_pos_relations) >= tot_interactions else len(
                 pubmed_pos_relations)
