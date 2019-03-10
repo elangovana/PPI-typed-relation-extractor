@@ -1,5 +1,4 @@
 import argparse
-import itertools
 import logging
 import os
 import sys
@@ -29,11 +28,11 @@ def prepare_data(interaction_type, file):
     if interaction_type is not None:
         data_df = data_df.query('interactionType == "{}"'.format(interaction_type))
     labels = data_df[["isValid"]]
-    data_df = data_df[["pubmedabstract", "interactionType", "participant1Alias", "participant2Alias"]]
-    data_df['participant1Alias'] = data_df['participant1Alias'].map(
-        lambda x: ", ".join(list(itertools.chain.from_iterable(x))))
-    data_df['participant2Alias'] = data_df['participant2Alias'].map(
-        lambda x: ", ".join(list(itertools.chain.from_iterable(x))))
+    data_df = data_df[["normalised_abstract", "interactionType", "participant1Id", "participant2Id"]]
+    # data_df['participant1Alias'] = data_df['participant1Alias'].map(
+    #     lambda x: ", ".join(list(itertools.chain.from_iterable(x))))
+    # data_df['participant2Alias'] = data_df['participant2Alias'].map(
+    #     lambda x: ", ".join(list(itertools.chain.from_iterable(x))))
     labels = np.reshape(labels.values.tolist(), (-1,))
     return data_df, labels
 
