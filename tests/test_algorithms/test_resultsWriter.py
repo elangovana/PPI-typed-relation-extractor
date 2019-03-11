@@ -1,3 +1,4 @@
+import os
 import tempfile
 from unittest import TestCase
 
@@ -11,7 +12,21 @@ class TestResultsWriter(TestCase):
         sut = ResultWriter()
 
         # Act
+        out_dir = tempfile.mkdtemp()
         sut(x=[1, 2, 3], y_actual=[1, 0], y_pred=[1, 1], pos_label=1, filename_prefix="test",
-            output_dir=tempfile.mkdtemp())
+            output_dir=out_dir)
 
         # Assert
+
+        self.assertGreater(len(os.listdir(out_dir)), 0, "The output directorymust contain stleats one file")
+
+    def dump_object(self):
+        # Arrange
+        sut = ResultWriter()
+
+        # Act
+        out_dir = tempfile.mkdtemp()
+        sut.dump_object([1, 2, 3], out_dir, filename_prefix="test")
+
+        # Assert
+        self.assertGreater(len(os.listdir(out_dir)), 0, "The output directorymust contain stleats one file")

@@ -87,6 +87,8 @@ class Train:
         )
 
         best_score = 0
+        trainings_scores = []
+        validation_scores = []
         for epoch in range(epoch):
             train_iter.init_epoch()
             total_loss = 0
@@ -130,12 +132,14 @@ class Train:
             self.logger.info("Train set result details:")
             self.results_writer(data_iter, actuals_train, predicted_train, pos_label, output_dir)
             train_results = self.results_scorer(y_actual=actuals_train, y_pred=predicted_train, pos_label=pos_label)
+            trainings_scores.append({"epoch": epoch, "score": train_results})
             self.logger.info("Train set result details: {}".format(train_results))
 
             self.logger.info("Validation set result details:")
             val_actuals, val_predicted, val_loss = self.validate(loss_function, model_network, val_iter)
             self.results_writer(data_iter, val_actuals, val_predicted, pos_label, output_dir)
             val_results = self.results_scorer(y_actual=val_actuals, y_pred=val_predicted, pos_label=pos_label)
+            validation_scores.append({"epoch": epoch, "score": val_results})
             # Print training set confusion matrix
             self.logger.info("Validation set result details: {} ".format(val_results))
 
@@ -152,6 +156,9 @@ class Train:
                                                      100. * (1 + len(batch_x)) / len(train_iter), total_loss,
                                                      val_loss.item(), train_results[score_type_accuracy],
                                                      val_results[score_type_accuracy]))
+
+        self.results_writer.dump_object(validation_scores, output_dir, "validation_scores_epoch")
+        self.results_writer.dump_object(trainings_scores, output_dir, "training_scores_epoch")
 
         return best_results
 
