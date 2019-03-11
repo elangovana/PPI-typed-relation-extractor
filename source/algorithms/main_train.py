@@ -86,6 +86,7 @@ if "__main__" == __name__:
 
     args = parser.parse_args()
 
+    print(args.__dict__)
     # Set up logging
     logging.basicConfig(level=logging.getLevelName(args.log_level), handlers=[logging.StreamHandler(sys.stdout)],
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
