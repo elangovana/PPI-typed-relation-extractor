@@ -34,7 +34,7 @@ class RelationExtractorCnnPosNetwork(nn.Module):
 
         # self.windows_sizes = [5, 4, 3, 2, 1]
         self.windows_sizes = [3]
-        cnn_output = self.feature_lengths.max(axis=0) * 1
+        cnn_output = 64
         cnn_stride = 1
         pool_stride = 1
 
