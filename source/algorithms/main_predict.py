@@ -59,7 +59,7 @@ def run(network, data_file, artifactsdir, out_dir):
     predictor = network_factory.load(artifactsdir)
     results = predictor(df_prep)
 
-    df_prep["isValid"] = results
+    df_prep["predicted"] = results
 
     predictions_file = os.path.join(out_dir, "predicted.json")
     select_columns = list(set(df.columns.values) - {"isValid"})
