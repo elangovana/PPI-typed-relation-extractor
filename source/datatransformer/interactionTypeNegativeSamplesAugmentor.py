@@ -59,7 +59,7 @@ class InteractionTypeNegativeSamplesAugmentor:
                 record["isValid"] = False
                 record["interactionType"] = p
                 record["interactionId"] = record["interactionId"] + "_" + str(
-                    uuid.uuid4()) + "_" + "fake_annot"
+                    uuid.uuid4()) + "_" + "fake_interaction"
 
                 data_fake = data_fake.append(record)
 
