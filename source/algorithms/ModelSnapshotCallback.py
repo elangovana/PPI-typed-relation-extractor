@@ -50,8 +50,8 @@ class ModelSnapshotCallback:
 
         current_score = scores[metric]
         if current_score > best_accuracy:
-            self.logger.info("Snappshotting model becayse the current score {} is greater than previous best {}".format(
-                current_score, best_accuracy))
+            self.logger.info("Snappshotting model becayse the current {} {} is greater than previous best {}".format(
+                metric, current_score, best_accuracy))
             # save model, delete previous 'best_snapshot' files
             torch.save(model, snapshot_path)
 
