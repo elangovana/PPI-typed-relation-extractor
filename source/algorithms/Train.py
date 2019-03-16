@@ -7,7 +7,7 @@ import torchtext
 from torchtext.data import BucketIterator
 
 from algorithms.ModelSnapshotCallback import ModelSnapshotCallback
-from algorithms.result_scorer import score_type_f1, ResultScorer, score_type_accuracy
+from algorithms.result_scorer import ResultScorer, score_type_accuracy
 from algorithms.result_writer import ResultWriter
 
 
@@ -89,6 +89,8 @@ class Train:
         best_score = 0
         trainings_scores = []
         validation_scores = []
+        score_measure = score_type_accuracy
+        self.logger.info("using score : {}".format(score_measure))
         for epoch in range(epoch):
             train_iter.init_epoch()
             total_loss = 0
@@ -143,12 +145,12 @@ class Train:
             # Print training set confusion matrix
             self.logger.info("Validation set result details: {} ".format(val_results))
 
-            if val_results[score_type_f1] > best_score:
+            if val_results[score_measure] > best_score:
                 best_results = (model_network, val_results, val_actuals, val_predicted)
 
                 best_score = self.snapshotter(model_network, val_iter, best_score, output_dir=output_dir,
                                               pos_label=pos_label,
-                                              metric=score_type_f1)
+                                              metric=score_measure)
 
             # evaluate performance on validation set periodically
             self.logger.info(val_log_template.format((datetime.datetime.now() - start).seconds,
