@@ -155,6 +155,9 @@ class RelationExtractionLinearFactory:
         classes = self.transform_extract_label_number.transform(train_labels)
 
         transformer_labels = self.get_transformer_labels_to_integers(classes)
+        unique_labels = list(set(train_labels))
+        self.logger.info(
+            "Orginal labels {}, transformed to  {}".format(unique_labels, transformer_labels.transform(unique_labels)))
         transfomed_train_labels = transformer_labels.transform(train_labels)
         transfomed_val_labels = transformer_labels.transform(validation_labels)
 
@@ -262,12 +265,25 @@ class RelationExtractionLinearFactory:
 
         val_examples = transformer_examples.transform(transformer_pipeline.transform(df))
 
-        predictions = self.trainer.predict(model, val_examples)
+        predictions, confidence_scores = self.trainer.predict(model, val_examples)
 
         self.logger.debug("Predictions_raw \n{}".format(predictions))
 
         transformed_predictions = [classes[p] for p in predictions]
 
-        self.logger.debug("Predictions Transformed \n{}".format(transformed_predictions))
+        transformed_conf_scores = self._get_confidence_score_dict(classes, confidence_scores)
 
-        return transformed_predictions
+        self.logger.debug(
+            "Predictions Transformed \n{} \n {} ".format(transformed_predictions, transformed_conf_scores))
+
+        return transformed_predictions, transformed_conf_scores
+
+    def _get_confidence_score_dict(self, classes, confidence_scores):
+        transformed_conf_scores = []
+        for r in confidence_scores:
+            conf_score = {}
+            for i, s in enumerate(r):
+                conf_score[classes[i]] = s
+            transformed_conf_scores.append(conf_score)
+
+        return transformed_conf_scores

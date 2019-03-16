@@ -57,9 +57,10 @@ def run(network, data_file, artifactsdir, out_dir):
         network_factory.model_network = model_dict[network]
 
     predictor = network_factory.load(artifactsdir)
-    results = predictor(df_prep)
+    results, cofidence_scores = predictor(df_prep)
 
     df_prep["predicted"] = results
+    df_prep["confidence_scores"] = cofidence_scores
 
     predictions_file = os.path.join(out_dir, "predicted.json")
     select_columns = list(set(df.columns.values) - {"isValid"})
