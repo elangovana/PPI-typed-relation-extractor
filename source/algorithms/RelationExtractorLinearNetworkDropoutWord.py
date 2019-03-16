@@ -77,5 +77,5 @@ Extracts relationship using a single layer
         out = F.relu(self.linear5(out))
 
         out = self.output_layer(out)
-        log_probs = F.log_softmax(out, dim=1)
+        log_probs = F.softmax(out, dim=1)
         return log_probs

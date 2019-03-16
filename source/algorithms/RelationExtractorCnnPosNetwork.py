@@ -140,5 +140,5 @@ class RelationExtractorCnnPosNetwork(nn.Module):
         out = out.reshape(out.size(0), -1)
 
         out = self.fc(out)
-        log_probs = F.log_softmax(out, dim=1)
+        log_probs = F.softmax(out, dim=1)
         return log_probs
