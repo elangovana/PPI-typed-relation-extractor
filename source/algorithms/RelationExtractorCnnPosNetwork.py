@@ -111,7 +111,6 @@ class RelationExtractorCnnPosNetwork(nn.Module):
         embeddings = self.embeddings(text_transposed)
         merged_pos_embed = embeddings
 
-        print(embeddings.shape)
         for f in range(len(feature_tuples)):
             if f == self.text_column_index: continue
 
