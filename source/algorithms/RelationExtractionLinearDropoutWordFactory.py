@@ -275,8 +275,25 @@ class RelationExtractorLinearNetworkDropoutWordFactory:
 
         val_examples = transformer_examples.transform(transformer_pipeline.transform(df))
 
-        predictions = self.trainer.predict(model, val_examples)
+        predictions, confidence_scores = self.trainer.predict(model, val_examples)
+
+        self.logger.debug("Predictions_raw \n{}".format(predictions))
 
         transformed_predictions = [classes[p] for p in predictions]
 
-        return transformed_predictions
+        transformed_conf_scores = self._get_confidence_score_dict(classes, confidence_scores)
+
+        self.logger.debug(
+            "Predictions Transformed \n{} \n {} ".format(transformed_predictions, transformed_conf_scores))
+
+        return transformed_predictions, transformed_conf_scores
+
+    def _get_confidence_score_dict(self, classes, confidence_scores):
+        transformed_conf_scores = []
+        for r in confidence_scores:
+            conf_score = {}
+            for i, s in enumerate(r):
+                conf_score[classes[i]] = s
+            transformed_conf_scores.append(conf_score)
+
+        return transformed_conf_scores

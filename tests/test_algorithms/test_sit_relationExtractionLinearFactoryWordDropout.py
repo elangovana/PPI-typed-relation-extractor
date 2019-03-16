@@ -69,7 +69,7 @@ class TestSitRelationExtractionLinearFactoryWordDropout(TestCase):
 
         # Act
         predictor = RelationExtractorLinearNetworkDropoutWordFactory.load(out_dir)
-        actual = predictor(val_df)
+        actual, confidence_scores = predictor(val_df)
 
         # Assert
         scorer = ResultScorer()
