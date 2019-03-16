@@ -25,7 +25,7 @@ Extracts relationship using a single layer
             pretrained_weights_or_embed_vocab_size) is int else nn.Embedding.from_pretrained(
             torch.FloatTensor(pretrained_weights_or_embed_vocab_size))
         layer1_size = 150
-        layer2_size = 300
+        layer2_size = 250
         self.feature_lengths = feature_lengths
         # add 2 one for each entity
         self.linear1 = nn.Linear(sum([f * embedding_dim for f in feature_lengths]), layer1_size)
