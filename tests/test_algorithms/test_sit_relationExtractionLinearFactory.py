@@ -112,10 +112,10 @@ class TestSitRelationExtractionLinearFactory(TestCase):
 
         # Act
         predictor = RelationExtractionLinearFactory.load(out_dir)
-        actual = predictor(val_df)
+        actual, confidence_scores = predictor(val_df)
 
         # Act
         scorer = ResultScorer()
-        actual_scores = scorer(y_pred=actual, y_actual=val_label, pos_label=pos_label)
+        predictions = scorer(y_pred=actual, y_actual=val_label, pos_label=pos_label)
 
-        self.assertSequenceEqual(expected_scores, actual_scores)
+        self.assertSequenceEqual(expected_scores, predictions)
