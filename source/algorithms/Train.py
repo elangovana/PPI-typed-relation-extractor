@@ -7,7 +7,7 @@ import torchtext
 from torchtext.data import BucketIterator
 
 from algorithms.ModelSnapshotCallback import ModelSnapshotCallback
-from algorithms.result_scorer import ResultScorer, score_type_accuracy, score_type_precision
+from algorithms.result_scorer import ResultScorer, score_type_accuracy
 from algorithms.result_writer import ResultWriter
 
 
@@ -89,7 +89,7 @@ class Train:
         best_score = 0
         trainings_scores = []
         validation_scores = []
-        score_measure = score_type_precision
+        score_measure = score_type_accuracy
         self.logger.info("using score : {}".format(score_measure))
         for epoch in range(epoch):
             train_iter.init_epoch()
