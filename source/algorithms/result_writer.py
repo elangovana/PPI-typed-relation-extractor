@@ -22,7 +22,10 @@ class ResultWriter:
                                 "predictedvsactual_{}_{}.csv".format(str(uuid.uuid4()),
                                                                      datetime.datetime.strftime(datetime.datetime.now(),
                                                                                                 format="%Y%m%d_%H%M%S")))
-        self._save_data(y_pred, y_actual, filename)
+
+        if self.logger.isEnabledFor(logging.DEBUG):
+            self._save_data(y_pred, y_actual, filename)
+
         self.logger.info("Confusion matrix, full output in {}: \n{}".format(filename, cnf_matrix))
 
     def dump_object(self, object, output_dir, filename_prefix):
