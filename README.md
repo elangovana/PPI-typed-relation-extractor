@@ -92,3 +92,33 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
     python source/algorithms/main_train.py Linear train.json val.json ./tests/test_algorithms/sample_PubMed-and-PMC-w2v.bin.txt 200 outdir
     ```
 
+5. Consolidated train + predict
+    ```bash
+    # Init
+    # Type of network, Linear is MLP
+    network=Linear
+ 
+    # outputdir
+    fmtdt=`date +"%y%m%d_%H%M"`
+    outdir=/data/model_$network_$fmtdt   
+    echo $outdir
+     
+    export PYTHONPATH="./source"
+    
+    mkdir $outdir
+    
+    # Git head to trace to source to reproduce run
+    git log -1 > $outdir/run.log
+    
+    # Train
+    python ./source/algorithms/main_train.py $network  /data/train_unique_pub_v3_lessnegatve.json /data/val_unique_pub_v3_lessnegatve.json /data/wikipedia-pubmed-and-PMC-w2v.bin.txt 200 $outdir  --epochs 50  --log-level INFO >> $outdir/run.log 2>&1
+    
+    # Predict on validation set
+    python ./source/algorithms/main_predict.py Linear  /data/test_unique_pub_v3_lessnegatve.json $outdir  $outdir >> $outdir/run.log 2>&1
+    mv $outdir/predicted.json $outdir/predicted_test_unique_pub_v3_lessnegatve.json
+    
+    # Predict on test set
+    python ./source/algorithms/main_predict.py Linear  /data/val_unique_pub_v3_lessnegatve.json $outdir  $outdir >> $outdir/run.log 2>&1
+    mv $outdir/predicted.json $outdir/predicted_val_unique_pub_v3_lessnegatve.json
+
+    ```
