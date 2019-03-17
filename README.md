@@ -57,13 +57,13 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
     
     ```bash
     export PYTHONPATH=./source
-    python source/pipeline/main_pipeline_dataprep.py <inputdir containing imex xml files> <outputdir>
+    python source/pipeline/main_pipeline_dataprep.py "<inputdir containing imex xml files>" "outputdir"
     ```
 3. Create pubtator formatted abstracts so that GnormPlus can recognises entities
 
     ```bash
     export PYTHONPATH=./source
-    python source/dataformatters/pubtatorAbstractOnlyFormatter.py <datafilecreatedfrompreviousstep> <outputfile>
+    python source/dataformatters/pubtatorAbstractOnlyFormatter.py "<datafilecreatedfrompreviousstep>" "<outputfile>"
     ```
 4.  Extract entities using GNormPlus
     ```bash
@@ -94,31 +94,31 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
 
 5. Consolidated train + predict
     ```bash
-    # Init
-    # Type of network, Linear is MLP
-    network=Linear
- 
-    # outputdir
-    fmtdt=`date +"%y%m%d_%H%M"`
-    outdir=/data/model_$network_$fmtdt   
-    echo $outdir
+     #!/usr/bin/env bash
+  
+     # Init
+     # Type of network, Linear is MLP
+     network=Linear
+     # outputdir
+     fmtdt=`date +"%y%m%d_%H%M"`
+     outdir=/data/model_${network}_${fmtdt}   
+     echo ${outdir}
+      
+     export PYTHONPATH="./source"
      
-    export PYTHONPATH="./source"
-    
-    mkdir $outdir
-    
-    # Git head to trace to source to reproduce run
-    git log -1 > $outdir/run.log
-    
-    # Train
-    python ./source/algorithms/main_train.py $network  /data/train_unique_pub_v3_lessnegatve.json /data/val_unique_pub_v3_lessnegatve.json /data/wikipedia-pubmed-and-PMC-w2v.bin.txt 200 $outdir  --epochs 50  --log-level INFO >> $outdir/run.log 2>&1
-    
-    # Predict on validation set
-    python ./source/algorithms/main_predict.py Linear  /data/test_unique_pub_v3_lessnegatve.json $outdir  $outdir >> $outdir/run.log 2>&1
-    mv $outdir/predicted.json $outdir/predicted_test_unique_pub_v3_lessnegatve.json
-    
-    # Predict on test set
-    python ./source/algorithms/main_predict.py Linear  /data/val_unique_pub_v3_lessnegatve.json $outdir  $outdir >> $outdir/run.log 2>&1
-    mv $outdir/predicted.json $outdir/predicted_val_unique_pub_v3_lessnegatve.json
-
+     mkdir ${outdir}
+     
+     # Git head to trace to source to reproduce run
+     git log -1 > ${outdir}/run.log
+     
+     # Train
+     python ./source/algorithms/main_train.py ${network}  /data/train_unique_pub_v3_lessnegatve.json /data/val_unique_pub_v3_lessnegatve.json /data/wikipedia-pubmed-and-PMC-w2v.bin.txt 200 ${outdir}  --epochs 50  --log-level INFO >> ${outdir}/run.log 2>&1
+     
+     # Predict on validation set
+     python ./source/algorithms/main_predict.py Linear  /data/test_unique_pub_v3_lessnegatve.json ${outdir}  ${outdir} >> ${outdir}/run.log 2>&1
+     mv ${outdir}/predicted.json ${outdir}/predicted_test_unique_pub_v3_lessnegatve.json
+     
+     # Predict on test set
+     python ./source/algorithms/main_predict.py Linear  /data/val_unique_pub_v3_lessnegatve.json ${outdir}  ${outdir} >> ${outdir}/run.log 2>&1
+     mv ${outdir}/predicted.json ${outdir}/predicted_val_unique_pub_v3_lessnegatve.json
     ```
