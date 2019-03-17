@@ -1,3 +1,4 @@
+import logging
 import os
 import tempfile
 from unittest import TestCase
@@ -10,6 +11,7 @@ class TestResultsWriter(TestCase):
     def test___call__(self):
         # Arrange
         sut = ResultWriter()
+        sut.logger.setLevel(logging.DEBUG)
 
         # Act
         out_dir = tempfile.mkdtemp()
@@ -18,11 +20,12 @@ class TestResultsWriter(TestCase):
 
         # Assert
 
-        self.assertGreater(len(os.listdir(out_dir)), 0, "The output directorymust contain stleats one file")
+        self.assertGreater(len(os.listdir(out_dir)), 0, "The output directorymust contain atleast one file")
 
     def dump_object(self):
         # Arrange
         sut = ResultWriter()
+        sut.logger.setLevel(logging.DEBUG)
 
         # Act
         out_dir = tempfile.mkdtemp()
