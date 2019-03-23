@@ -34,7 +34,7 @@ def prepare_data(data_df):
     # data_df['participant2Alias'] = data_df['participant2Alias'].map(
     #     lambda x: ", ".join(list(itertools.chain.from_iterable(x))))
     labels = np.reshape(labels.values.tolist(), (-1,))
-    return data_df, labels
+    return data_df.copy(deep=True), labels
 
 
 def run(network, data_file, artifactsdir, out_dir):
