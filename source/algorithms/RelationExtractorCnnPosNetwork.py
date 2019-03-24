@@ -76,7 +76,7 @@ class RelationExtractorCnnPosNetwork(nn.Module):
             layer1 = nn.Sequential(
                 nn.Conv1d(total_dim_size, layer1_cnn_output, kernel_size=layer1_cnn_kernel, stride=layer1_cnn_stride,
                           padding=layer1_cnn_padding),
-                nn.BatchNorm1d(layer1_cnn_output),
+                # nn.BatchNorm1d(layer1_cnn_output),
                 nn.ReLU(),
                 nn.MaxPool1d(kernel_size=layer1_pool_kernel, stride=layer1_pool_stride, padding=layer1_pool_padding))
 
