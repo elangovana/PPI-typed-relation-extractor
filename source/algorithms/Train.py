@@ -183,7 +183,7 @@ class Train:
                 actuals.extend(val_y.numpy().tolist())
                 predicted.extend(pred_flat.numpy().tolist())
 
-        self.logger.info("The validation confidence scores are {}".format(scores))
+        self.logger.debug("The validation confidence scores are {}".format(scores))
         return actuals, predicted, val_loss
 
     def predict(self, model_network, dataset, batch_size=32):
