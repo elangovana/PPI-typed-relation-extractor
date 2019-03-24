@@ -113,7 +113,7 @@ class Train:
 
                 # Step 4. Compute your loss function. (Again, Torch wants the target
                 # word wrapped in a tensor)
-                loss = loss_function(predicted, torch.tensor(batch_y, dtype=torch.long))
+                loss = loss_function(predicted, batch_y.clone().detach())
 
                 # Step 5. Do the backward pass and update the gradient
                 loss.backward()
@@ -142,6 +142,10 @@ class Train:
             self.results_writer(data_iter, val_actuals, val_predicted, pos_label, output_dir)
             val_results = self.results_scorer(y_actual=val_actuals, y_pred=val_predicted, pos_label=pos_label)
             validation_scores.append({"epoch": epoch, "score": val_results})
+
+            val_actuals, val_predicted, val_loss = self.validate(loss_function, model_network, val_iter)
+            p, s = self.predict(model_network, validation_iter)
+            print("Run predict against avl", p, "\n", s)
             # Print training set confusion matrix
             self.logger.info("Validation set result details: {} ".format(val_results))
 
@@ -172,10 +176,12 @@ class Train:
         n_val_correct, val_loss = 0, 0
         actuals = []
         predicted = []
+        scores = []
         with torch.no_grad():
             for val_batch_idx, val_y in val_iter:
                 pred_batch_y = model_network(val_batch_idx)
-
+                scores.append(pred_batch_y)
+                print(pred_batch_y)
                 pred_flat = torch.max(pred_batch_y, 1)[1].view(val_y.size())
                 n_val_correct += (pred_flat == val_y).sum().item()
                 val_loss = loss_function(pred_batch_y, val_y)
@@ -193,6 +199,7 @@ class Train:
         with torch.no_grad():
             for val_batch_idx, _ in dataset_iterator:
                 pred_batch_y = model_network(val_batch_idx)
+                print(pred_batch_y)
                 scores.append(pred_batch_y)
                 pred_binary = torch.max(pred_batch_y, 1)[1]
                 pred_flat = pred_binary.view(pred_binary.size())
@@ -200,4 +207,5 @@ class Train:
                 predicted.extend(pred_flat.numpy().tolist())
 
         scores = [r.numpy().tolist() for r in torch.cat(scores, dim=0)]
+
         return predicted, scores
