@@ -1,3 +1,4 @@
+import argparse
 import glob
 import json
 import logging
@@ -86,3 +87,15 @@ Reads an entire directory of json files
         outfile = os.path.join(output_dir, "{}.txt".format(os.path.basename(input_file)))
         with open(outfile, "w") as output_handle:
             self.read_json_file(input, output_handle)
+
+
+if "__main__" == __name__:
+    logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler(sys.stdout)],
+                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    parser = argparse.ArgumentParser()
+    parser.add_argument("inputdir",
+                        help="The input dir containing json files")
+    parser.add_argument("outputdir", help="The output dir")
+    args = parser.parse_args()
+
+    PubmedAbstractsToPubtatorFormat().read_json_files_dir(args.inputdir, args.outputdir)
