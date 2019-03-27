@@ -3,6 +3,7 @@ import glob
 import json
 import logging
 import os
+import sys
 
 from dataformatters.pubtatorAbstractOnlyFormatter import PubtatorAbstractOnlyFormatter
 
@@ -76,6 +77,7 @@ Reads an entire directory of json files
         """
         files = glob.glob("{}/*.json".format(input_dir))
         for input_file in files:
+            self.logger.info("Processing file {}".format(input_file))
             self._process_file(input_file, output_dir)
 
     def _process_file(self, input_file, output_dir):
