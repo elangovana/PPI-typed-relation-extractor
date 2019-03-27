@@ -81,14 +81,10 @@ Reads an entire directory of json files
             self._process_file(input_file, output_dir)
 
     def _process_file(self, input_file, output_dir):
-        # Read input
-        with open(input_file, "r") as f:
-            input = json.loads(f.read())
-
         # Write out
         outfile = os.path.join(output_dir, "{}.txt".format(os.path.basename(input_file)))
         with open(outfile, "w") as output_handle:
-            self.read_json_file(input, output_handle)
+            self.read_json_file(input_file, output_handle)
 
 
 if "__main__" == __name__:
