@@ -19,7 +19,11 @@ Formats the data in pubtator abstract only format.
             if pubmedid in uniqueids: continue
 
             uniqueids.add(pubmedid)
-            abstract = text_func(item).replace("\n", " ").replace("|", " ")
 
-            line = "{}|{}|{}\n\n".format(pubmedid, "a", abstract)
+            abstract = text_func(item).replace("\n", " ").replace("|", " ");
+
+            # Remove unicode characters they cause issues with GNormPlus
+            clean_abstract = abstract.encode('ascii', 'ignore').decode("utf-8")
+
+            line = "{}|{}|{}\n\n".format(pubmedid, "a", clean_abstract)
             output_handle.write(line)
