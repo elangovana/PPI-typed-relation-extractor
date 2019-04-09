@@ -49,9 +49,16 @@ class NcbiGeneUniprotLocalDbMapper:
         # ignore head
         next(self.localdb)
         next(self.localdb)
+
         for l in self.localdb:
-            entries = l.split("\t")
-            if entries[1] != self.type: continue
-            result[entries[2].strip("\n")] = entries[0]
+            parts = l.split("\t")
+            uniprot_id = parts[0]
+            map_type = parts[1]
+            target_key = parts[2].strip("\n")
+            if map_type != self.type: continue
+
+            matching_uniprot_ids = result.get(target_key, [])
+            matching_uniprot_ids.append(uniprot_id)
+            result[target_key] = matching_uniprot_ids
 
         return result

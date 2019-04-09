@@ -41,6 +41,7 @@ class NcbiGeneUniprotMapper:
             if r.strip("\s") == "": break
 
             m = r.split("\t")
-
-            results[m[0]] = m[2]
+            mapped_value = results.get(m[0], [])
+            mapped_value.append(m[1])
+            results[m[0]] = mapped_value
         return results

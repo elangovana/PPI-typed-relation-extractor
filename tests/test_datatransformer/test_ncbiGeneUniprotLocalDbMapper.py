@@ -24,3 +24,17 @@ class TestNcbiGeneUniprotLocalDbMapper(TestCase):
 
             # Assert
             self.assertEqual(len(actual), expected_len)
+
+    @data(('6850', 3))
+    @unpack
+    def test_convert_more_than_one_match(self, geneid, expected_len):
+        # Arrange
+        localdb = os.path.join(os.path.dirname(os.path.realpath(__file__)), "data/sample_HUMAN_9606_idmapping.dat")
+        with open(localdb, "r") as handle:
+            sut = NcbiGeneUniprotLocalDbMapper(handle, "GeneID")
+
+            # Act
+            actual = sut.convert(geneid)
+
+            # Assert
+            self.assertEqual(expected_len, len(actual[geneid]))
