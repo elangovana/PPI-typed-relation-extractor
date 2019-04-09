@@ -69,7 +69,15 @@ class AbstractGeneNormaliser:
 
             ncbi_id = a['normalised_id']
 
-            uniprot = self.geneIdConverter.convert(ncbi_id).get(ncbi_id, ncbi_id)
+            # We might get more than one matching uniprot.
+            # e.g. {'6850': ['P43405','A0A024R244','A0A024R273']}
+            # or if no match then return the key as is, [ncbi_id]
+            uniprots = self.geneIdConverter.convert(ncbi_id).get(ncbi_id, [ncbi_id])
+
+            # # If preferrred on exists, use that else just pick the first one
+            # uniprot = preferred_uniprot if preferred_uniprot in uniprots else uniprots[0]
+
+            uniprot = uniprots[0]
 
             abstract = abstract[:s] + uniprot + abstract[e:]
             offset += len(uniprot) - (e - s)
