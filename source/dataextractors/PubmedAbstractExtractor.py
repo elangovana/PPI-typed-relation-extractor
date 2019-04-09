@@ -1,3 +1,4 @@
+import functools
 import logging
 import tempfile
 from urllib.parse import urlencode
@@ -12,16 +13,28 @@ class PubmedAbstractExtractor:
         self.pubmed_baseurl = pubmed_baseurl
 
     def extract_abstract_by_pubmedid(self, pubmed_id_list):
-        self._logger.info("Extracting pubmed abstract {}".format(",".join(pubmed_id_list)))
+        # One item
+        if type(pubmed_id_list) is not list:
+            return self._retrieve_single_abstracts(pubmed_id_list)
 
+        # Single length list
+        if len(pubmed_id_list) == 1:
+            return self._retrieve_single_abstracts(pubmed_id_list[0])
+
+        return self._retrieve_abstracts(pubmed_id_list)
+
+    @functools.lru_cache(maxsize=128)
+    def _retrieve_single_abstracts(self, pubmedid):
+        return self._retrieve_abstracts([pubmedid])
+
+    def _retrieve_abstracts(self, pubmed_id_list):
+        self._logger.info("Extracting pubmed abstract {}".format(",".join(pubmed_id_list)))
         query_string = urlencode({'db': 'pubmed'
                                      , 'id': ','.join(pubmed_id_list)
                                      , 'retmode': 'abstract'
                                      , 'rettype': 'xml'})
-
         uri = "{}?{}".format(self.pubmed_baseurl, query_string)
         self._logger.debug("Extracting pubmed abstract from url {}".format(uri))
-
         # Downloading pubmed abstracts Xml file
         r = requests.get(uri, allow_redirects=True)
         with tempfile.TemporaryFile(suffix=".csv", mode="wb+") as tmphandle:
@@ -81,7 +94,6 @@ class PubmedAbstractExtractor:
             self._logger.warning("Could not parse XML format {}".format(msg))
 
             raise e
-
 
         for event, elem in events:
             if event == "end" and elem.tag == name:
