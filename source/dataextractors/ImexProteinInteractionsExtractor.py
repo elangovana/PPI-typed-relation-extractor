@@ -1,10 +1,5 @@
 import logging
-import re
-from functools import lru_cache
-import json
 from xml.etree import ElementTree
-
-import pandas as pd
 
 from bioservices import UniProt
 
@@ -48,8 +43,10 @@ class ImexProteinInteractionsExtractor:
                                                                    self.namespaces):
                         interfactor_ref_id = ele_participant.find("df:interactorRef", self.namespaces).text
 
-                        uniprotid, alias_list = self.get_interactor_details(entry, interfactor_ref_id)
-                        participants.append({"uniprotid": uniprotid, "alias": alias_list})
+                        uniprotid, alias_list, alternative_uniprot = self.get_interactor_details(entry,
+                                                                                                 interfactor_ref_id)
+                        participants.append(
+                            {"uniprotid": uniprotid, "alias": alias_list, 'alternative_uniprots': alternative_uniprot})
 
                         i = i + 1
 
@@ -83,14 +80,20 @@ class ImexProteinInteractionsExtractor:
     def get_interactor_details(self, entry, interfactor_ref_id):
         interactor_xpath = "df:interactorList/df:interactor[@id='{}']".format(interfactor_ref_id)
         ele_interactor = entry.find(interactor_xpath, self.namespaces)
-        ele_unitprot = ele_interactor.find("df:xref/df:secondaryRef[@db='{}']".format("uniprotkb"), self.namespaces)
+        ele_unitprot = ele_interactor.find("df:xref/df:primaryRef[@db='{}']".format("uniprotkb"), self.namespaces)
         alias = []
         for e in ele_interactor.findall("df:names//*", self.namespaces):
             alias.append([e.text])
+
+        alternative_uniprots = []
+        for e in ele_interactor.findall("df:xref/df:secondaryRef[@db='{}']".format("uniprotkb"), self.namespaces):
+            alternative_uniprots.append(e.attrib['id'])
+
+        # If no primary ref, try the secondary ref
         if ele_unitprot is None:
-            ele_unitprot = ele_interactor.find("df:xref/df:primaryRef[@db='{}']".format("uniprotkb"), self.namespaces)
+            ele_unitprot = ele_interactor.find("df:xref/df:secondaryRef[@db='{}']".format("uniprotkb"), self.namespaces)
         if ele_unitprot is not None:
-            return ele_unitprot.attrib['id'], alias
+            return ele_unitprot.attrib['id'], alias, alternative_uniprots
         return None, None
 
     def get_pubmed_id(self, entry, experiment_ref_id):
