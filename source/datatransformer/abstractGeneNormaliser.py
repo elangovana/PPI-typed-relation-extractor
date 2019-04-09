@@ -45,7 +45,8 @@ class AbstractGeneNormaliser:
         df['normalised_abstract'] = df.apply(
             lambda r: self._normalise_abstract(annotations_dict[r['pubmedId']]["annotations"],
                                                annotations_dict[r['pubmedId']]["abstract"],
-                                               [r['participant1Id'], r['participant2Id']]),
+                                               {r['participant1Id']: r['participant1Alias'],
+                                                r['participant2Id']: r['participant2Alias']}),
             axis=1)
 
         return df
@@ -64,6 +65,12 @@ class AbstractGeneNormaliser:
         offset = 0
         annotations.sort(key=lambda x: int(x['start']), reverse=False)
         preferred_uniprots = preferred_uniprots or []
+
+        name_to_normalised_map = {}
+        for a in annotations:
+            if a['type'].lower() != 'gene': continue
+            name_to_normalised_map[a['name']] = a['normalised_id']
+
         for a in annotations:
             if a['type'].lower() != 'gene': continue
 
@@ -77,13 +84,24 @@ class AbstractGeneNormaliser:
             # or if no match then return the key as is, [ncbi_id]
             uniprots = self.geneIdConverter.convert(ncbi_id).get(ncbi_id, [ncbi_id])
 
-            # # If preferrred on exists, use that else just pick the first one
+            # # By default, use that else just pick the first one
             uniprot = uniprots[0]
 
+            match = False
             for p in preferred_uniprots:
                 if p in uniprots:
                     uniprot = p
+                    match = True
                     break
+
+            # Some of the uniprots dont match.. so try match with alias
+            if not match:
+                for g_in_anno in name_to_normalised_map:
+                    for u, aliases in preferred_uniprots.items():
+                        if g_in_anno in aliases:
+                            uniprot = u
+                            break;
+
 
             abstract = abstract[:s] + uniprot + abstract[e:]
             offset += len(uniprot) - (e - s)
