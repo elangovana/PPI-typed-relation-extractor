@@ -53,7 +53,7 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
     bash scripts/dowloadintactinteractions.sh "<localdir>" "<filepattern e.g. human*.xml>" "<optional s3 destination>"
     ```
 
-2. Create a dataset locally from source
+2. Create raw but json formatted dataset locally from source
     
     ```bash
     export PYTHONPATH=./source
@@ -63,12 +63,20 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
 
     ```bash
     export PYTHONPATH=./source
-    python source/dataformatters/pubtatorAbstractOnlyFormatter.py "<datafilecreatedfrompreviousstep>" "<outputfile>"
+    python source/dataformatters/main_formatter.py "<datafilecreatedfrompreviousstep>" "<outputfile>"
     ```
 4.  Extract entities using GNormPlus
+    
     ```bash
     docker pull lanax/gnormplus
-    docker run -it -v  lanax/gnormplus
+    cp 
+    docker run -it -v /data/:/gnormdata lanax/gnormplus
+
+    # within docker
+    # Step1  edit the setup.txt to human specifies only..
+    # Step 2 run process
+    java -Xmx10G -Xms10G -jar /GNormPlusJava/GNormPlus.jar /gnormdata/input /gnormdata/output setup.txt > /gnormdata/gnormplus.log 2>&1 &
+
     ```
     
     
