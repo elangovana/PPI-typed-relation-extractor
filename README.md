@@ -18,20 +18,19 @@ https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
 ### Download and analyse the dataset with elastic search
 #### Visualise
 1. Sample download intact files with pattern human0* and elastic search index
-```bash
-region=$1
-esdomain=$2
-accesskey=$3
-accesssecret=$4
-s3path=$5
-
-basedata=/home/ubuntu/data
-file_pattern=human0*
-
-script=scripts/run_pipeline_download_esindex.sh
-
-sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain --env AWS_ACCESS_KEY_ID=$accesskey   --env AWS_REGION=$region --env AWS_SECRET_ACCESS_KEY=$accesssecret lanax/kegg-pathway-extractor:latest $script /data $file_pattern $s3path 
-```
+    ```bash
+    region=$1
+    esdomain=$2
+    accesskey=$3
+    accesssecret=$4
+    s3path=$5
+ 
+    basedata=/home/ubuntu/data
+    file_pattern=human0*
+ 
+    script=scripts/run_pipeline_download_esindex.sh
+    sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain --env AWS_ACCESS_KEY_ID=$accesskey   --env AWS_REGION=$region --env AWS_SECRET_ACCESS_KEY=$accesssecret lanax/kegg-pathway-extractor:latest $script /data $file_pattern $s3path 
+    ```
 
 #### Prepare dataset
 
@@ -82,6 +81,7 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
     Sample setup.txt
     
     ```text
+    
     #===Annotation
     #Attribution setting:
     #FocusSpecies = Taxonomy ID
