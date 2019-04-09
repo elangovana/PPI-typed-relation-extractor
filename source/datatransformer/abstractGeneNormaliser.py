@@ -76,8 +76,9 @@ class AbstractGeneNormaliser:
         alternative_ncbi_uniprot = {}
         for g_in_anno, ncbi in name_to_ncbi_map.items():
             for u, aliases in preferred_uniprots.items():
-                flatened_alias = reduce(operator.concat, aliases)
-                if g_in_anno in flatened_alias:
+                flatened_alias = [i.lower() for i in reduce(operator.concat, aliases)]
+
+                if g_in_anno.lower() in flatened_alias:
                     alternative_ncbi_uniprot[ncbi] = u
 
         for a in annotations:

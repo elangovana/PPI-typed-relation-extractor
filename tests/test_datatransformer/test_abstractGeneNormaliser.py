@@ -161,7 +161,7 @@ class TestAbstractGeneNormaliser(TestCase):
              "interactionType": "phosphorylation",
              "isValid": True,
              "participant1Id": "uni_10076",
-             "participant1Alias": [["ABC"], ["NLRP3"]],
+             "participant1Alias": [["ABC"], ["nlrp3"]],
              "participant2Id": "uni_5793",
              "participant2Alias": [["uni_5793_alias"]],
              "pubmedId": "25605870", "pubmedTitle": "Q",
