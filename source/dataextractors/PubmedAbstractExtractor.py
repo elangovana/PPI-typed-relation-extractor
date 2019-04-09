@@ -24,14 +24,14 @@ class PubmedAbstractExtractor:
 
         # Downloading pubmed abstracts Xml file
         r = requests.get(uri, allow_redirects=True)
-        with tempfile.TemporaryFile(suffix=".csv", mode="wb+") as tmpfile:
+        with tempfile.TemporaryFile(suffix=".csv", mode="wb+") as tmphandle:
             self._logger.debug("Downloading {} to temp file".format(uri))
-            tmpfile.write(r.content)
-            tmpfile.seek(0)
+            tmphandle.write(r.content)
+            tmphandle.flush()
+            tmphandle.seek(0)
 
             # Start Extracting abstracts
-            return self.extract(tmpfile)
-
+            return self.extract(tmphandle)
 
     def extract(self, handle):
         """
@@ -68,12 +68,21 @@ class PubmedAbstractExtractor:
 
             })
 
-
         return result_arr
 
     def _iter_elements_by_name(self, handle, name):
-        events = ElementTree.iterparse(handle, events=("start", "end",))
-        _, root = next(events)  # Grab the root element.
+        try:
+            events = ElementTree.iterparse(handle, events=("start", "end",))
+            _, root = next(events)  # Grab the root element.
+        except Exception as e:
+            self._logger.warning("{}".format(e))
+            handle.seek(0)
+            msg = handle.read().decode("utf-8")
+            self._logger.warning("Could not parse XML format {}".format(msg))
+
+            raise e
+
+
         for event, elem in events:
             if event == "end" and elem.tag == name:
                 yield elem
