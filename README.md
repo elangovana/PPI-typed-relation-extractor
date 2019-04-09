@@ -71,6 +71,28 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
     docker run -it -v  lanax/gnormplus
     ```
     
+    
+4. Download NCBI to Uniprot Id mapping file
+   
+   From https://www.uniprot.org/downloads , download the ID mapping file ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/idmapping/. This contains the ID mapping between UNIPROT and NCBI. We need this as GNormplus use NCBI gene id and we need the protein names.
+   The dat file contains three columns, delimited by tab:
+   
+    - UniProtKB-AC 
+    - ID_type 
+    - ID
+    
+    e.g 
+    ```text
+    P43405	DNASU	6850
+    P43405	GeneID	6850
+    P43405	GenomeRNAi	6850
+    A0A024R244	GeneID	6850
+    A0A024R244	GenomeRNAi	6850
+    A0A024R273	GeneID	6850
+    A0A024R273	GenomeRNAi	6850
+    A8K4G2	DNASU	6850
+    ```
+ 
 4. Download wordtovec pretrained models (either pubmed+pmc trained or  pubmed+pmc+wikipedia)and convert to text format 
 
     ```bash
@@ -86,6 +108,7 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
  
     python ./source/dataformatters/main_wordToVecBinToText.py /data/wikipedia-pubmed-and-PMC-w2v.bin /data/wikipedia-pubmed-and-PMC-w2v.bin.txt
     ```
+
 4. Run train job
     ```bash
     export PYTHONPATH=./source
@@ -97,12 +120,17 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
      #!/usr/bin/env bash
   
      # Init
-     # Type of network, Linear is MLP
-     network=Linear
-     # outputdir
+     # Type of network, Linear is MLP, Cnn is Cnn, CnnPos is with position embedding
+     network=CnnPos
+     base_dir=/data
+     s3_dest=s3://yourbucket/results
+    
+    
      fmtdt=`date +"%y%m%d_%H%M"`
-     outdir=/data/model_${network}_${fmtdt}   
+     base_name=model_${network}_${fmtdt}
+     outdir=${base_dir}/${base_name}
      echo ${outdir}
+     mkdir ${outdir}
       
      export PYTHONPATH="./source"
      
@@ -115,10 +143,14 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
      python ./source/algorithms/main_train.py ${network}  /data/train_unique_pub_v3_lessnegatve.json /data/val_unique_pub_v3_lessnegatve.json /data/wikipedia-pubmed-and-PMC-w2v.bin.txt 200 ${outdir}  --epochs 50  --log-level INFO >> ${outdir}/run.log 2>&1
      
      # Predict on validation set
-     python ./source/algorithms/main_predict.py Linear  /data/test_unique_pub_v3_lessnegatve.json ${outdir}  ${outdir} >> ${outdir}/run.log 2>&1
+     python ./source/algorithms/main_predict.py ${network}  /data/test_unique_pub_v3_lessnegatve.json ${outdir}  ${outdir} >> ${outdir}/run.log 2>&1
      mv ${outdir}/predicted.json ${outdir}/predicted_test_unique_pub_v3_lessnegatve.json
      
      # Predict on test set
-     python ./source/algorithms/main_predict.py Linear  /data/val_unique_pub_v3_lessnegatve.json ${outdir}  ${outdir} >> ${outdir}/run.log 2>&1
+     python ./source/algorithms/main_predict.py ${network}  /data/val_unique_pub_v3_lessnegatve.json ${outdir}  ${outdir} >> ${outdir}/run.log 2>&1
      mv ${outdir}/predicted.json ${outdir}/predicted_val_unique_pub_v3_lessnegatve.json
+    
+     #Copy results to s3
+     aws s3 sync ${outdir} ${s3_dest}/${base_name} >> ${outdir}/synclog 2>&1
+    
     ```
