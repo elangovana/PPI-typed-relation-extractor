@@ -79,6 +79,36 @@ sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain -
 
     ```
     
+    Sample setup.txt
+    
+    ```text
+    #===Annotation
+    #Attribution setting:
+    #FocusSpecies = Taxonomy ID
+    #	All: All species
+    #	9606: Human
+    #	4932: yeast
+    #	7227: Fly
+    #	10090: Mouse
+    #	10116: Rat
+    #	7955: Zebrafish
+    #	3702: Arabidopsis thaliana
+    #open: True
+    #close: False
+    
+    [Focus Species]
+        FocusSpecies = 9606
+    [Dictionary & Model]
+        DictionaryFolder = Dictionary
+        GNRModel = Dictionary/GNR.Model
+        SCModel = Dictionary/SimConcept.Model
+        GeneIDMatch = True
+        Normalization2Protein = False
+        DeleteTmp = True
+
+
+    ```
+    
     
 4. Download NCBI to Uniprot Id mapping file
    
