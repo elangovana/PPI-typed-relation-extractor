@@ -50,7 +50,7 @@ class TestAbstractGeneNormaliser(TestCase):
 
         # Mock uniprot converter
         geneIdConverter = MagicMock()
-        geneIdConverter.convert.side_effect = lambda x: {x: "Q{}".format(x)}
+        geneIdConverter.convert.side_effect = lambda x: {x: ["Q{}".format(x)]}
 
         sut = AbstractGeneNormaliser(annotations, geneIdConverter=geneIdConverter)
 
