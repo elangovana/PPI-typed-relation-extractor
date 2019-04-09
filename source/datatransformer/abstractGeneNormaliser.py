@@ -42,7 +42,11 @@ class AbstractGeneNormaliser:
     def transform(self, df):
 
         annotations_dict = self._construct_dict()
-        df['normalised_abstract'] = df.apply(lambda r: annotations_dict[r['pubmedId']], axis=1)
+        df['normalised_abstract'] = df.apply(
+            lambda r: self._normalise_abstract(annotations_dict[r['pubmedId']]["annotations"],
+                                               annotations_dict[r['pubmedId']]["abstract"],
+                                               [r['participant1Id'], r['participant2Id']]),
+            axis=1)
 
         return df
 
@@ -53,14 +57,13 @@ class AbstractGeneNormaliser:
             abstract = self.abstract_func(r)
             annotations = self.annotations_func(r)
 
-            normalised_abstract = self._normalise_abstract(annotations, abstract)
-
-            result[key] = normalised_abstract
+            result[key] = {"abstract": abstract, "annotations": annotations}
         return result
 
-    def _normalise_abstract(self, annotations, abstract):
+    def _normalise_abstract(self, annotations, abstract, preferred_uniprots=None):
         offset = 0
         annotations.sort(key=lambda x: int(x['start']), reverse=False)
+        preferred_uniprots = preferred_uniprots or []
         for a in annotations:
             if a['type'].lower() != 'gene': continue
 
@@ -75,9 +78,12 @@ class AbstractGeneNormaliser:
             uniprots = self.geneIdConverter.convert(ncbi_id).get(ncbi_id, [ncbi_id])
 
             # # If preferrred on exists, use that else just pick the first one
-            # uniprot = preferred_uniprot if preferred_uniprot in uniprots else uniprots[0]
-
             uniprot = uniprots[0]
+
+            for p in preferred_uniprots:
+                if p in uniprots:
+                    uniprot = p
+                    break
 
             abstract = abstract[:s] + uniprot + abstract[e:]
             offset += len(uniprot) - (e - s)

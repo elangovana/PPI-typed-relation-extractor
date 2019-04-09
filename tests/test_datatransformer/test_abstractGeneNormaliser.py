@@ -87,3 +87,52 @@ class TestAbstractGeneNormaliser(TestCase):
 
         for e, r in zip(expected_data, result_df.values):
             self.assertEqual(e['normalised_abstract'], r[10])
+
+    def test_transform_preferred(self):
+        """
+        When more than one matching uniprot for a gene name ncbi, it should select the one matching either of the participants in the dataframe
+        :return:
+        """
+        # Arrange
+        annotations = [{'id': '25605870', 'type': 'a',
+                        'text': 'NLRP3 is the most crucial member of the NLR family',
+                        'annotations': [
+                            {'start': '0', 'end': '5', 'name': 'NLRP3', 'type': 'Gene', 'normalised_id': '114548'}]}
+                       ]
+
+        # Mock uniprot converter
+        geneIdConverter = MagicMock()
+        geneIdConverter.convert.side_effect = lambda x: {x: ["Q{}".format(x), "uni_10076"]}
+
+        sut = AbstractGeneNormaliser(annotations, geneIdConverter=geneIdConverter)
+
+        data = pd.DataFrame([
+            {"interactionId": "1",
+             "interactionType": "phosphorylation",
+             "isValid": True,
+             "participant1Id": "uni_10076",
+             "participant1Alias": ["uni_10076_alias"],
+             "participant2Id": "uni_5793",
+             "participant2Alias": ["uni_5793_alias"],
+             "pubmedId": "25605870", "pubmedTitle": "Q",
+             "pubmedabstract": 'NLRP3 is the most crucial member of the NLR family'}
+        ])
+
+        expected_data = [
+            {"interactionId": "1",
+             "interactionType": "phosphorylation",
+             "isValid": True,
+             "participant1Id": "uni_10076",
+             "participant1Alias": ["uni_10076_alias"],
+             "participant2Id": "uni_5793",
+             "participant2Alias": ["uni_5793_alias"],
+             "pubmedId": "25605870", "pubmedTitle": "Q",
+             "pubmedabstract": 'NLRP3 is the most crucial member of the NLR family',
+             "normalised_abstract": 'uni_10076 is the most crucial member of the NLR family'}
+
+        ]
+        # Act
+        result_df = sut.transform(data)
+
+        for e, r in zip(expected_data, result_df.values):
+            self.assertEqual(e['normalised_abstract'], r[10])
