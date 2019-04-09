@@ -161,9 +161,9 @@ class TestAbstractGeneNormaliser(TestCase):
              "interactionType": "phosphorylation",
              "isValid": True,
              "participant1Id": "uni_10076",
-             "participant1Alias": ["NLRP3"],
+             "participant1Alias": [["ABC"], ["NLRP3"]],
              "participant2Id": "uni_5793",
-             "participant2Alias": ["uni_5793_alias"],
+             "participant2Alias": [["uni_5793_alias"]],
              "pubmedId": "25605870", "pubmedTitle": "Q",
              "pubmedabstract": 'NLRP3 is the most crucial member of the NLR family'}
         ])
@@ -173,9 +173,9 @@ class TestAbstractGeneNormaliser(TestCase):
              "interactionType": "phosphorylation",
              "isValid": True,
              "participant1Id": "uni_10076",
-             "participant1Alias": ["uni_10076_alias"],
+             "participant1Alias": [["ABC"], ["NLRP3"]],
              "participant2Id": "uni_5793",
-             "participant2Alias": ["uni_5793_alias"],
+             "participant2Alias": [["uni_5793_alias"]],
              "pubmedId": "25605870", "pubmedTitle": "Q",
              "pubmedabstract": 'NLRP3 is the most crucial member of the NLR family',
              "normalised_abstract": 'uni_10076 is the most crucial member of the NLR family'}

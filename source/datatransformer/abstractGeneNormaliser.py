@@ -1,6 +1,8 @@
 """
 Replaces the gene name in abstract with the uniprot number
 """
+import operator
+from functools import reduce
 
 from datatransformer.ncbiGeneUniprotMapper import NcbiGeneUniprotMapper
 
@@ -66,10 +68,17 @@ class AbstractGeneNormaliser:
         annotations.sort(key=lambda x: int(x['start']), reverse=False)
         preferred_uniprots = preferred_uniprots or []
 
-        name_to_normalised_map = {}
+        name_to_ncbi_map = {}
         for a in annotations:
             if a['type'].lower() != 'gene': continue
-            name_to_normalised_map[a['name']] = a['normalised_id']
+            name_to_ncbi_map[a['name']] = a['normalised_id']
+
+        alternative_ncbi_uniprot = {}
+        for g_in_anno, ncbi in name_to_ncbi_map.items():
+            for u, aliases in preferred_uniprots.items():
+                flatened_alias = reduce(operator.concat, aliases)
+                if g_in_anno in flatened_alias:
+                    alternative_ncbi_uniprot[ncbi] = u
 
         for a in annotations:
             if a['type'].lower() != 'gene': continue
@@ -96,12 +105,7 @@ class AbstractGeneNormaliser:
 
             # Some of the uniprots dont match.. so try match with alias
             if not match:
-                for g_in_anno in name_to_normalised_map:
-                    for u, aliases in preferred_uniprots.items():
-                        if g_in_anno in aliases:
-                            uniprot = u
-                            break;
-
+                uniprot = alternative_ncbi_uniprot.get(ncbi_id, uniprot)
 
             abstract = abstract[:s] + uniprot + abstract[e:]
             offset += len(uniprot) - (e - s)
