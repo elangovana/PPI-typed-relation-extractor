@@ -19,7 +19,7 @@ class ImexProteinInteractionsExtractor:
         self._cache_kegg_entry_uniprots = {}
 
     def get_protein_interactions(self, xmlfile):
-        self._logger.info("Extracting PPIs for kegg pathway id {} ".format(xmlfile))
+        self._logger.info("Extracting PPIs for file {} ".format(xmlfile))
 
         with open(xmlfile, "r") as handle:
 
@@ -82,6 +82,7 @@ class ImexProteinInteractionsExtractor:
         ele_interactor = entry.find(interactor_xpath, self.namespaces)
         ele_unitprot = ele_interactor.find("df:xref/df:primaryRef[@db='{}']".format("uniprotkb"), self.namespaces)
         alias = []
+        result = (None, None, None)
         for e in ele_interactor.findall("df:names//*", self.namespaces):
             alias.append([e.text])
 
@@ -93,8 +94,9 @@ class ImexProteinInteractionsExtractor:
         if ele_unitprot is None:
             ele_unitprot = ele_interactor.find("df:xref/df:secondaryRef[@db='{}']".format("uniprotkb"), self.namespaces)
         if ele_unitprot is not None:
-            return ele_unitprot.attrib['id'], alias, alternative_uniprots
-        return None, None
+            result = ele_unitprot.attrib['id'], alias, alternative_uniprots
+
+        return result
 
     def get_pubmed_id(self, entry, experiment_ref_id):
         ele_experiment = entry.find("df:experimentList/df:experimentDescription[@id='{}']".format(experiment_ref_id),
