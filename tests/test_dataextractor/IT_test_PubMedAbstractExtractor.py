@@ -15,7 +15,7 @@ class ITTestPubmedAbstractExtractor(unittest.TestCase):
 
     def test_extract(self):
         # Arrange
-        sut = PubmedAbstractExtractor()
+        sut = PubmedAbstractExtractor(sleep_time=0)
 
         # Act
         actual = sut.extract_abstract_by_pubmedid(["25331875"])
@@ -25,7 +25,7 @@ class ITTestPubmedAbstractExtractor(unittest.TestCase):
 
     def test_extract_exception(self):
         # Arrange
-        sut = PubmedAbstractExtractor("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch2.fcgi")
+        sut = PubmedAbstractExtractor("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch2.fcgi", sleep_time=0)
 
         # Act
         with self.assertRaises(Exception) as context:

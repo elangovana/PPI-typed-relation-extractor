@@ -1,6 +1,7 @@
 import functools
 import logging
 import tempfile
+from time import sleep
 from urllib.parse import urlencode
 from xml.etree import cElementTree as ElementTree
 
@@ -8,9 +9,10 @@ import requests
 
 
 class PubmedAbstractExtractor:
-    def __init__(self, pubmed_baseurl="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"):
+    def __init__(self, pubmed_baseurl="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi", sleep_time=30):
         self._logger = logging.getLogger(__name__)
         self.pubmed_baseurl = pubmed_baseurl
+        self.sleep_time = sleep_time
 
     def extract_abstract_by_pubmedid(self, pubmed_id_list):
         # One item
@@ -28,6 +30,10 @@ class PubmedAbstractExtractor:
         return self._retrieve_abstracts([pubmedid])
 
     def _retrieve_abstracts(self, pubmed_id_list):
+        # TODO:
+        # The url is throttled and expects utmost 3 per minute..
+        sleep(self.sleep_time)
+        # End of throttle
         self._logger.info("Extracting pubmed abstract {}".format(",".join(pubmed_id_list)))
         query_string = urlencode({'db': 'pubmed'
                                      , 'id': ','.join(pubmed_id_list)
