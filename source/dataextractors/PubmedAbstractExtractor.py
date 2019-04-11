@@ -93,6 +93,10 @@ class PubmedAbstractExtractor:
         try:
             events = ElementTree.iterparse(handle, events=("start", "end",))
             _, root = next(events)  # Grab the root element.
+            for event, elem in events:
+                if event == "end" and elem.tag == name:
+                    yield elem
+                    elem.clear()
         except Exception as e:
             self._logger.warning("{}".format(e))
             handle.seek(0)
@@ -101,7 +105,3 @@ class PubmedAbstractExtractor:
 
             raise e
 
-        for event, elem in events:
-            if event == "end" and elem.tag == name:
-                yield elem
-                elem.clear()
