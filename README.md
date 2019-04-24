@@ -147,6 +147,8 @@ https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
     python ./source/dataformatters/main_wordToVecBinToText.py /data/wikipedia-pubmed-and-PMC-w2v.bin /data/wikipedia-pubmed-and-PMC-w2v.bin.txt
     ```
 
+4. Run the data exploration notebook [DataExploration.ipynb](DataExploration.ipynb) to clean data, generate negative samples and  normalise abstract 
+
 4. Run train job
     ```bash
     export PYTHONPATH=./source
