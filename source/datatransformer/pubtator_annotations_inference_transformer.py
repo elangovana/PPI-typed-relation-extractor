@@ -15,6 +15,7 @@ class PubtatorAnnotationsInferenceTransformer:
         """
         self.pubtator_annotations_reader = None
         self.interaction_types = interaction_types or ['phosphorylation']
+        self.geneIdConverter = None
 
     @property
     def logger(self):
