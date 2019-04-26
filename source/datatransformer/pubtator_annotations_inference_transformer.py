@@ -4,18 +4,20 @@ import logging
 
 from dataformatters.gnormplusPubtatorReader import GnormplusPubtatorReader
 from datatransformer.ncbiGeneUniprotMapper import NcbiGeneUniprotMapper
+from datatransformer.textGeneNormaliser import TextGeneNormaliser
 
 
 class PubtatorAnnotationsInferenceTransformer:
 
-    def __init__(self, interaction_types=None):
+    def __init__(self, interaction_types=None, geneIdConverter=None):
         """
         Prepares inference for these interaction types, by default uses 'phosphorylation'
         :type interaction_types: list
         """
         self.pubtator_annotations_reader = None
         self.interaction_types = interaction_types or ['phosphorylation']
-        self.geneIdConverter = None
+        self.geneIdConverter = geneIdConverter
+        self.textGeneNormaliser = None
 
     @property
     def logger(self):
@@ -39,6 +41,22 @@ Convert Ncbi geneId to uniprot
     def geneIdConverter(self, value):
         self.__geneIdConverter__ = value
 
+    @property
+    def textGeneNormaliser(self):
+        """
+Convert Ncbi geneId to uniprot
+        :return:
+        """
+        if self.__textGeneNormaliser__ is None:
+            self.__textGeneNormaliser__ = TextGeneNormaliser()
+            self.__textGeneNormaliser__.geneIdConverter = self.geneIdConverter
+
+        return self.__textGeneNormaliser__
+
+    @textGeneNormaliser.setter
+    def textGeneNormaliser(self, value):
+        self.__textGeneNormaliser__ = value
+
     @pubtator_annotations_reader.setter
     def pubtator_annotations_reader(self, value):
         self.__pubtator_annotations_reader__ = value
@@ -60,38 +78,9 @@ Convert Ncbi geneId to uniprot
             self.logger.info("Processing file {}".format(input_file))
             yield (r for r in self.load_file(input_file))
 
-    def _normalise_abstract(self, annotations, abstract):
-        offset = 0
-        annotations.sort(key=lambda x: int(x['start']), reverse=False)
-
-        name_to_ncbi_map = {}
-        for a in annotations:
-            if a['type'].lower() != 'gene': continue
-            name_to_ncbi_map[a['name']] = a['normalised_id']
-
-        for a in annotations:
-            if a['type'].lower() != 'gene': continue
-
-            s = int(a['start']) + offset
-            e = int(a['end']) + offset
-
-            ncbi_id = a['normalised_id']
-
-            # We might get more than one matching uniprot.
-            # e.g. {'6850': ['P43405','A0A024R244','A0A024R273']}
-            # or if no match then return the key as is, [ncbi_id]
-            uniprots = self.geneIdConverter.convert(ncbi_id).get(ncbi_id, [ncbi_id])
-
-            # # By default, use that else just pick the first one
-            uniprot = uniprots[0]
-
-            abstract = abstract[:s] + uniprot + abstract[e:]
-            offset += len(uniprot) - (e - s)
-        return abstract
-
     def parse(self, handle):
         for rec in self.pubtator_annotations_reader(handle):
-            normalised_abstract = self._normalise_abstract(rec['annotations'], rec['text'])
+            normalised_abstract = self.textGeneNormaliser(rec['text'], rec['annotations'])
             genes = self._get_genes(rec['annotations'])
 
             for gene_pair in itertools.combinations_with_replacement(genes, 2):
