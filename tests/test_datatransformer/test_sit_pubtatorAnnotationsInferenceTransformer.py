@@ -1,3 +1,6 @@
+import functools
+import operator
+import os
 from io import StringIO
 from unittest import TestCase
 from unittest.mock import MagicMock
@@ -63,8 +66,43 @@ class TestSitPubtatorAnnotationsInferenceTransformer(TestCase):
                "normalised_abstract": "Unlike the other MAP3Ks, Q26401 (encoded by Map3k1) contains a PHD motif. To understand the role of this motif, we have created a knockin mutant of mouse Map3k1 (Map3k1(m) (PHD)) with an inactive PHD motif. Map3k1(m) (PHD) ES cells demonstrate that the MEKK1 PHD controls p38 and JNK activation during TGF-b, EGF and microtubule disruption signalling, but does not affect MAPK responses to hyperosmotic stress. Protein microarray profiling identified the adaptor TAB1 as a PHD substrate, and TGF-b- or EGF-stimulated Map3k1(m) (PHD) ES cells exhibit defective non-canonical ubiquitination of MEKK1 and TAB1. The MEKK1 PHD binds and mediates the transfer of Lys63-linked poly-Ub, using the conjugating enzyme UBE2N, onto TAB1 to regulate TAK1 and MAPK activation by TGF-b and EGF. Both the MEKK1 PHD and TAB1 are critical for ES-cell differentiation and tumourigenesis. Map3k1(m) (PHD) (/+) mice exhibit aberrant cardiac tissue, B-cell development, testis and T-cell signalling. "}
         ]
 
+        # Act
         actual = sut.parse(input)
 
+        # Assert
         sort_func = lambda x: "{}#{}#{}#{}".format(x["pubmedId"], x["interactionType"], x["participant1Id"],
                                                    x["participant2Id"])
         self.assertEqual(expected, sorted(list(actual), key=sort_func))
+
+    def test_load_file(self):
+        # Arrange
+        sut = PubtatorAnnotationsInferenceTransformer()
+        input_file = os.path.join(os.path.dirname(__file__), "data_sample_annotation", "sample_1.txt")
+        expected_records = 3
+        mock_ncbi_converter = MagicMock()
+        mock_ncbi_converter.convert.side_effect = lambda x: {x: ["Q{}".format(x)]}
+        sut.geneIdConverter = mock_ncbi_converter
+
+        # Act
+        actual = sut.load_file(input_file)
+
+        # Assert
+        self.assertEqual(expected_records, len(list(actual)))
+
+    def test_load_directory(self):
+        # Arrange
+        sut = PubtatorAnnotationsInferenceTransformer()
+        input_file = os.path.join(os.path.dirname(__file__), "data_sample_annotation")
+        expected_parts_len = 2
+        expected_total_records = 4
+        mock_ncbi_converter = MagicMock()
+        mock_ncbi_converter.convert.side_effect = lambda x: {x: ["Q{}".format(x)]}
+        sut.geneIdConverter = mock_ncbi_converter
+
+        # Act
+        actual = sut.load_directory(input_file)
+
+        # Assert
+        actual_list = list(actual)
+        self.assertEqual(expected_parts_len, len(actual_list))
+        self.assertEqual(expected_total_records, len(list(functools.reduce(operator.iconcat, actual_list, []))))
