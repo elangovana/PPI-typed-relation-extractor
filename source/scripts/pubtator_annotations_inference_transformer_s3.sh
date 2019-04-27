@@ -29,7 +29,7 @@ aws s3 cp ${s3idmapping} ${iddat_local_path}
 # Run
 scripts_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 source_dir=${scripts_dir}/..
-export PYTHONPATH=${scripts_dir}
+export PYTHONPATH=${source_dir}
 
 python ${source_dir}/datatransformer/pubtator_annotations_inference_transformer.py ${src_local_path} ${dest_local_path} ${iddat_local_file}
 
