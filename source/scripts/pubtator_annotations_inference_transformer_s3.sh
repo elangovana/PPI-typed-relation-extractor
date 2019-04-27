@@ -31,7 +31,7 @@ scripts_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 source_dir=${scripts_dir}/..
 export PYTHONPATH=${scripts_dir}
 
-python ${scripts_dir}/datatransformer/pubtator_annotations_inference_transformer.py ${src_local_path} ${dest_local_path} ${iddat_local_file}
+python ${source_dir}/datatransformer/pubtator_annotations_inference_transformer.py ${src_local_path} ${dest_local_path} ${iddat_local_file}
 
 # Copy results back s3
 aws s3 cp --recursive ${dest_local_path}/ ${dest_s3}
