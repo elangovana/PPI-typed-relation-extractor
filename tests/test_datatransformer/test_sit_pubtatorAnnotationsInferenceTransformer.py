@@ -1,6 +1,8 @@
 import functools
+import json
 import operator
 import os
+import tempfile
 from io import StringIO
 from unittest import TestCase
 from unittest.mock import MagicMock
@@ -113,3 +115,31 @@ class TestSitPubtatorAnnotationsInferenceTransformer(TestCase):
         actual_list = list(actual)
         self.assertEqual(expected_parts_len, len(actual_list))
         self.assertEqual(expected_total_records, len(list(functools.reduce(operator.iconcat, actual_list, []))))
+
+    def test_load_directory_save(self):
+        # Arrange
+        sut = PubtatorAnnotationsInferenceTransformer()
+        input_dir = os.path.join(os.path.dirname(__file__), "data_sample_annotation")
+        dest_dir = tempfile.mkdtemp()
+        expected_parts_len = 2
+        expected_total_records = 4
+        mock_text_nomaliser = MagicMock()
+        mock_text_nomaliser.return_value = "Normalisedtext.."
+        sut.textGeneNormaliser = mock_text_nomaliser
+
+        mock_gene_converter = MagicMock()
+        mock_gene_converter.convert.side_effect = lambda x: {x: ["Q{}".format(x)]}
+        sut.geneIdConverter = mock_gene_converter
+
+        # Act
+        actual = sut.load_directory_save(input_dir, dest_dir)
+
+        # Assert
+        self.assertEqual(expected_parts_len, len(os.listdir(dest_dir)))
+
+        # Assert that the length of the array within the json file matches
+        total_actual = 0
+        for f in os.listdir(dest_dir):
+            with open(os.path.join(dest_dir, f), "r") as handle:
+                total_actual += len(json.load(handle))
+        self.assertEqual(expected_total_records, total_actual)

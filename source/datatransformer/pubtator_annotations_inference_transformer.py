@@ -1,8 +1,13 @@
+import argparse
 import glob
 import itertools
+import json
 import logging
+import os
+import sys
 
 from dataformatters.gnormplusPubtatorReader import GnormplusPubtatorReader
+from datatransformer.ncbiGeneUniprotLocalDbMapper import NcbiGeneUniprotLocalDbMapper
 from datatransformer.ncbiGeneUniprotMapper import NcbiGeneUniprotMapper
 from datatransformer.textGeneNormaliser import TextGeneNormaliser
 
@@ -78,6 +83,18 @@ Convert Ncbi geneId to uniprot
             self.logger.info("Processing file {}".format(input_file))
             yield (r for r in self.load_file(input_file))
 
+    def load_directory_save(self, input_dir, destination_dir):
+        files = glob.glob("{}/*.txt".format(input_dir))
+        total = 0;
+        for input_file in files:
+            result = [r for r in self.load_file(input_file)]
+            self.logger.info("Processed file {} with records {}".format(input_file, len(result)))
+            total += len(result)
+            destination_file = os.path.join(destination_dir, "{}.json".format(os.path.basename(input_file)))
+            with open(destination_file, "w") as fp:
+                json.dump(result, fp)
+        self.logger.info("Completed with {} files and {} records ".format(len(files), total))
+
     def parse(self, handle):
         for rec in self.pubtator_annotations_reader(handle):
             normalised_abstract = self.textGeneNormaliser(rec['text'], rec['annotations'])
@@ -93,3 +110,28 @@ Convert Ncbi geneId to uniprot
                         , 'abstract': rec['text']
                         , 'normalised_abstract': normalised_abstract
                            }
+
+
+if "__main__" == __name__:
+    logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler(sys.stdout)],
+                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    parser = argparse.ArgumentParser()
+    parser.add_argument("inputdir",
+                        help="The input dir containing annotated abstract files. The files should be *.txt formatted")
+    parser.add_argument("outputdir", help="The output dir, this will contain json files..")
+    parser.add_argument("idMappingDat", help="""The location of the idMapping dat file..
+    You can obtain this file ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/idmapping. 
+    This contains the ID mapping between UNIPROT and NCBI. We need this as GNormplus use NCBI gene id and we need the protein names.
+    The dat file contains three columns, delimited by tab:
+    - UniProtKB-AC
+    - ID_type
+    - ID
+""")
+
+    args = parser.parse_args()
+    with open(args.idMappingDat, "r") as h:
+        geneIdconverter = NcbiGeneUniprotLocalDbMapper(h)
+        obj = PubtatorAnnotationsInferenceTransformer(
+            ['acetylation', 'demethylation', 'dephosphorylation', 'deubiquitination', 'methylation', 'phosphorylation',
+             'ubiquitination'], geneIdconverter)
+        obj.load_directory_save(args.inputdir, args.outputdir)

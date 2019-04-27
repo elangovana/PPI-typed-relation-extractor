@@ -45,6 +45,7 @@ https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
 
 ## Run locally from source
 
+### Training and Validation
 
 1. Download dataset from Imex ftp site ftp.ebi.ac.uk
     ```bash
@@ -193,4 +194,21 @@ https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
      #Copy results to s3
      aws s3 sync ${outdir} ${s3_dest}/${base_name} >> ${outdir}/synclog 2>&1
     
+    ```
+    
+### Large scale inference on pubmed abstracts
+
+1. Download pubmed FTP and convert to json. For more details see https://github.com/elangovana/pubmed-downloader/tree/master 
+
+1. Convert json to pubtator format to prepare the dataset for GNormPlus
+
+    ```bash
+    export PYTHONPATH=./source
+    python source/dataformatters/pubmed_abstracts_to_pubtator_format.py "<inputdir_jsonfiles_result_of_step_1>" "<destination_dir_pubtator_format>"
+    ```
+1. Run GNormPlus to recognise entities using the pubtator formatted files from the previous step, without protein names  normalisation. See https://github.com/elangovana/docker-gnormplus 
+
+1. Generate json using the results of GNormplus annotations in pubtator format.
+    ```bash
+    python ./source/datatransformer/pubtator_annotations_inference_transformer.py tests/test_datatransformer/data_sample_annotation /tmp tmpmap.dat
     ```
