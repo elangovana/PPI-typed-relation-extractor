@@ -63,5 +63,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Register job
-    submit_multiple(args.job_name, args.queue, args.s3_source_prefix, args.s3_dest_prefix, args.s3_setup)
+    submit_multiple(args.job_name, args.queue, args.s3_source_prefix, args.s3_dest_prefix, args.s3_idmapping)
+    # submit_job(args.job_name, args.queue, args.s3_source_prefix, args.s3_dest_prefix, args.s3_idmapping)
     logger.info("Completed")

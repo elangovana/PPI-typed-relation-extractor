@@ -69,14 +69,14 @@ if __name__ == '__main__':
     logger = logging.getLogger(__name__)
 
     parser.add_argument("containerimage",
-                        help="Container image, e.g lanax/kegg-pathway-extractor")
+                        help="Container image, e.g lanax/kegg-pathway-extractor:latest")
 
     parser.add_argument("s3uri",
                         help="The s3 uri path that will contain the input/output data. e.g s3://mybucket/aws-batch-sample-python/")
 
     parser.add_argument("--job-name",
                         help="The name of the job",
-                        default="KeggPathwayExtractor_PubtatorAnnotationsInferenceTransformer")
+                        default="KeggPathwayExtractor_InferenceTransformer")
 
     parser.add_argument("--cpus",
                         help="The number of cpus", default=4, type=int)
