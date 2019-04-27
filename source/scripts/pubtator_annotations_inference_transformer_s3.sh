@@ -16,7 +16,7 @@ dest_local_path=${local_path}/${tmp_dir}
 
 
 mkdir -p ${src_local_path}
-mkdir -p {${iddat_local_path}
+mkdir -p ${iddat_local_path}
 mkdir -p ${dest_local_path}
 
 # install aws s3
@@ -24,7 +24,7 @@ pip3 install awscli
 
 # Copy data from s3
 aws s3 cp ${src_s3} ${src_local_path}
-aws s3 cp ${s3idmapping} ${iddat_local_path}
+aws s3 cp ${s3idmapping} ${iddat_local_path}/
 
 # Run
 scripts_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
