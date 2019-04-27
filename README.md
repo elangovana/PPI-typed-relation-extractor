@@ -210,5 +210,6 @@ https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
 
 1. Generate json using the results of GNormplus annotations in pubtator format.
     ```bash
+    export PYTHONPATH=./source
     python ./source/datatransformer/pubtator_annotations_inference_transformer.py tests/test_datatransformer/data_sample_annotation /tmp tmpmap.dat
     ```
