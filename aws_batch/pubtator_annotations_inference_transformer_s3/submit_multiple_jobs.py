@@ -11,7 +11,7 @@ from s3_utilities import list_files
 def submit_job(job_def, queue_name, src_s3, dest_s3, s3_iddatfile, local_path="/data"):
     client = boto3.client('batch')
     response = client.submit_job(
-        jobName='gnormplus_new',
+        jobName='InferenceDatasetPrep',
         jobQueue=queue_name,
         jobDefinition=job_def,
         parameters={
