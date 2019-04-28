@@ -79,10 +79,10 @@ if __name__ == '__main__':
                         default="KeggPathwayExtractor_InferenceTransformer")
 
     parser.add_argument("--cpus",
-                        help="The number of cpus", default=4, type=int)
+                        help="The number of cpus", default=2, type=int)
 
     parser.add_argument("--memoryMb",
-                        help="The memory in MB", default=2000, type=int)
+                        help="The memory in MB", default=4000, type=int)
 
     args = parser.parse_args()
 
