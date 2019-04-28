@@ -64,6 +64,6 @@ This is the job definition for this sample job.
             "user": ""
         },
         "retryStrategy": {
-            "attempts": 1
+            "attempts": 5
         }
     }
