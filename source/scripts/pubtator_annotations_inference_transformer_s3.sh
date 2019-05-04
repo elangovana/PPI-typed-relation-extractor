@@ -35,3 +35,8 @@ python ${source_dir}/datatransformer/pubtator_annotations_inference_transformer.
 
 # Copy results back s3
 aws s3 cp --recursive ${dest_local_path}/ ${dest_s3}
+
+# Clean up
+rm -rf ${dest_local_path}
+rm -rf ${src_local_path}
+rm -rf ${iddat_local_path}
