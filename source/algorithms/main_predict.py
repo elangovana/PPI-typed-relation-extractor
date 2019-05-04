@@ -1,5 +1,6 @@
 import argparse
 import logging
+import math
 import os
 import sys
 
@@ -35,15 +36,20 @@ def prepare_data(data_df):
     return data_df.copy(deep=True)
 
 
-def run(network, data_file, artifactsdir, out_dir):
+def run(network, data_file, artifactsdir, out_dir, postives_filter_threshold=0.0):
     logger = logging.getLogger(__name__)
 
     final_df = run_prediction(artifactsdir, data_file, network, out_dir)
-    predictions_file = os.path.join(out_dir, "predicted.json")
-
-    final_df.to_json(predictions_file)
 
     logger.info("Completed {}, {}".format(final_df.shape, final_df.columns.values))
+
+    if postives_filter_threshold > 0.0:
+        logger.info("Filtering True Positives with threshold > {}".format(postives_filter_threshold))
+        final_df = final_df.query("True >= {}".format(postives_filter_threshold))
+
+    predictions_file = os.path.join(out_dir, "predicted.json")
+    final_df.to_json(predictions_file)
+
     return final_df
 
 
@@ -73,6 +79,11 @@ def run_prediction(artifactsdir, data_file, network, out_dir):
     select_columns = df.columns.values
     final_df = df[select_columns].merge(df_prep[["predicted", "confidence_scores"]], how='inner', left_index=True,
                                         right_index=True)
+
+    # This is log softmax, convert to softmax prob
+    final_df["True"] = final_df["confidence_scores"].apply(lambda x: math.exp(x["True"]))
+    final_df["False"] = final_df["confidence_scores"].apply(lambda x: math.exp(x["False"]))
+
     return final_df
 
 
@@ -87,6 +98,7 @@ if "__main__" == __name__:
     parser.add_argument("outdir", help="The output dir")
 
     parser.add_argument("--log-level", help="Log level", default="INFO", choices={"INFO", "WARN", "DEBUG", "ERROR"})
+    parser.add_argument("--positives-filter-threshold", help="The threshold to filter positives", type=float)
 
     args = parser.parse_args()
 
