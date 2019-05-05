@@ -159,6 +159,10 @@ https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
 5. Consolidated train + predict
     ```bash
      #!/usr/bin/env bash
+    
+        
+     set -e
+     set -x
   
      # Init
      # Type of network, Linear is MLP, Cnn is Cnn, CnnPos is with position embedding
