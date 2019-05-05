@@ -21,7 +21,7 @@ This is the job definition for this sample job.
             "s3src": job_param_s3uri_destination,
             "s3network": job_param_s3uri_destination,
             "networktype": "CnnPos",
-            "threshold": 0.0
+            "threshold": "0.0"
         },
         # Specify container & jobs properties include entry point and job args that are referred to in parameters
         "containerProperties": {
