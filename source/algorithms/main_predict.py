@@ -81,8 +81,8 @@ def run_prediction(artifactsdir, data_file, network, out_dir):
                                         right_index=True)
 
     # This is log softmax, convert to softmax prob
-    final_df["True"] = final_df["confidence_scores"].apply(lambda x: math.exp(x["True"]))
-    final_df["False"] = final_df["confidence_scores"].apply(lambda x: math.exp(x["False"]))
+    final_df["True"] = final_df.apply(lambda x: math.exp(x["confidence_scores"]["True"]), axis=1)
+    final_df["False"] = final_df.apply(lambda x: math.exp(x["confidence_scores"]["False"]), axis=1)
 
     return final_df
 
