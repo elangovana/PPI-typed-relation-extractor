@@ -21,7 +21,7 @@ def submit_job(job_def, queue_name, src_s3, dest_s3, s3_network_prefix, network_
             "s3destination": dest_s3,
             "s3network": s3_network_prefix,
             "networktype": network_type,
-            "threshold": positives_filter_threshold
+            "threshold": str(positives_filter_threshold)
 
         },
         timeout={
@@ -73,7 +73,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Register job
-    submit_multiple(args.job_name, args.queue, args.s3_source_prefix, args.s3_dest_prefix,
-                    args.s3_network_artifacts_prefix, args.s3_network_type, args.positives_filter_threshold)
+    submit_job(args.job_name, args.queue, args.s3_source_prefix, args.s3_dest_prefix,
+               args.s3_network_artifacts_prefix, args.s3_network_type, args.positives_filter_threshold)
 
     logger.info("Completed")
