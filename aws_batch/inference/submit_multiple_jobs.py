@@ -73,7 +73,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Register job
-    submit_job(args.job_name, args.queue, args.s3_source_prefix, args.s3_dest_prefix,
-               args.s3_network_artifacts_prefix, args.s3_network_type, args.positives_filter_threshold)
+    submit_multiple(args.job_name, args.queue, args.s3_source_prefix, args.s3_dest_prefix,
+                    args.s3_network_artifacts_prefix, args.s3_network_type, args.positives_filter_threshold)
 
     logger.info("Completed")
