@@ -4,6 +4,7 @@ dest_s3=$2
 network_s3=$3
 network_type=$4
 local_path=$5
+threshold=$6
 
 set -e
 set -x
@@ -36,7 +37,7 @@ export PYTHONPATH=${source_dir}
 
 head -1 ${network_local_path}/run.log
 head -10 ${network_local_path}/run.log | tail -8
-python ${source_dir}/algorithms/main_predict.py ${network_type}  ${src_local_file}  ${network_local_path}  ${dest_local_path}
+python ${source_dir}/algorithms/main_predict.py ${network_type}  ${src_local_file}  ${network_local_path}  ${dest_local_path}  --positives-filter-threshold ${threshold}
 mv ${dest_local_path}/predicted.json ${dest_local_path}/${src_file_name}.prediction.json
 
 # Copy results back s3

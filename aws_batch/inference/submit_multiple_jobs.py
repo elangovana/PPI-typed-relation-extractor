@@ -8,7 +8,8 @@ import boto3
 from s3_utilities import list_files
 
 
-def submit_job(job_def, queue_name, src_s3, dest_s3, s3_network_prefix, network_type, local_path="/data"):
+def submit_job(job_def, queue_name, src_s3, dest_s3, s3_network_prefix, network_type, positives_filter_threshold,
+               local_path="/data"):
     client = boto3.client('batch')
     response = client.submit_job(
         jobName='Inference',
@@ -19,7 +20,8 @@ def submit_job(job_def, queue_name, src_s3, dest_s3, s3_network_prefix, network_
             "s3src": src_s3,
             "s3destination": dest_s3,
             "s3network": s3_network_prefix,
-            "networktype": network_type
+            "networktype": network_type,
+            "threshold": positives_filter_threshold
 
         },
         timeout={
@@ -31,6 +33,7 @@ def submit_job(job_def, queue_name, src_s3, dest_s3, s3_network_prefix, network_
 
 
 def submit_multiple(job_def, queue_name, s3_source_prefix, s3_destination_prefix, s3_network_prefix, network_type,
+                    positives_filter_threshold,
                     local_path="/data"):
     # Submit job for each prefix
     for s3_bucket, s3_key in list_files(s3_source_prefix):
@@ -64,10 +67,13 @@ if __name__ == '__main__':
     parser.add_argument("s3_network_type",
                         help="The type of network e.g. CnnPos, Cnn or Linear")
 
+    parser.add_argument("--positives-filter-threshold",
+                        help="Threshold to use", type=float, default=0.0)
+
     args = parser.parse_args()
 
     # Register job
     submit_multiple(args.job_name, args.queue, args.s3_source_prefix, args.s3_dest_prefix,
-                    args.s3_network_artifacts_prefix, args.s3_network_type)
+                    args.s3_network_artifacts_prefix, args.s3_network_type, args.positives_filter_threshold)
 
     logger.info("Completed")

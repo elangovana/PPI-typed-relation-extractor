@@ -20,7 +20,8 @@ This is the job definition for this sample job.
             "s3destination": job_param_s3uri_destination,
             "s3src": job_param_s3uri_destination,
             "s3network": job_param_s3uri_destination,
-            "networktype": "CnnPos"
+            "networktype": "CnnPos",
+            "threshold": 0.0
         },
         # Specify container & jobs properties include entry point and job args that are referred to in parameters
         "containerProperties": {
@@ -34,7 +35,8 @@ This is the job definition for this sample job.
                 "Ref::s3destination",
                 "Ref::s3network",
                 "Ref::networktype",
-                "Ref::localpath"
+                "Ref::localpath",
+                "Ref::threshold"
 
             ],
             "jobRoleArn": "arn:aws:iam::{}:role/{}".format(account, role_name),
