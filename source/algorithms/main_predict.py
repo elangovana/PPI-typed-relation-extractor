@@ -81,8 +81,9 @@ def run_prediction(artifactsdir, data_file, network, out_dir):
                                         right_index=True)
 
     # This is log softmax, convert to softmax prob
-    final_df["True"] = final_df.apply(lambda x: math.exp(x["confidence_scores"]["True"]), axis=1)
-    final_df["False"] = final_df.apply(lambda x: math.exp(x["confidence_scores"]["False"]), axis=1)
+
+    final_df["True"] = final_df.apply(lambda x: math.exp(x["confidence_scores"][True]), axis=1)
+    final_df["False"] = final_df.apply(lambda x: math.exp(x["confidence_scores"][False]), axis=1)
 
     return final_df
 
@@ -98,7 +99,8 @@ if "__main__" == __name__:
     parser.add_argument("outdir", help="The output dir")
 
     parser.add_argument("--log-level", help="Log level", default="INFO", choices={"INFO", "WARN", "DEBUG", "ERROR"})
-    parser.add_argument("--positives-filter-threshold", help="The threshold to filter positives", type=float)
+    parser.add_argument("--positives-filter-threshold", help="The threshold to filter positives", type=float,
+                        default=0.0)
 
     args = parser.parse_args()
 
@@ -108,4 +110,4 @@ if "__main__" == __name__:
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
     results = run(args.network, args.datajson, args.artefactsdir,
-                  args.outdir)
+                  args.outdir, args.positives_filter_threshold)
