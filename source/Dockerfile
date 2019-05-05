@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.6.5
 
 RUN mkdir -p /opt/program/kegg_protein_extractor
 #RUN apt-get install python3-lxml
