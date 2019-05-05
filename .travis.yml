@@ -1,6 +1,6 @@
 language: python
 python:
-  - "3.6.0"
+  - "3.6.5"
 install:
   - pip install pip==10.0.1
   - pip -V
