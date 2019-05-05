@@ -14,7 +14,7 @@ src_local_path=${local_path}/${tmp_dir}/input
 src_file_name=$(echo ${src_s3} | rev | cut -d/ -f1 | rev)
 src_local_file=${src_local_path}/${src_file_name}
 
-network_local_path=${local_path}/${tmp_dir}/dat
+network_local_path=${local_path}/${tmp_dir}/model_artefacts
 dest_local_path=${local_path}/${tmp_dir}
 
 
@@ -27,7 +27,7 @@ pip3 install awscli
 
 # Copy data from s3
 aws s3 cp ${src_s3} ${src_local_path}
-aws s3 cp ${network_s3} ${network_local_path} --recursive --exclude "*"  --include "*.json" --exclude "*vocab.json" --include "*.log"
+aws s3 cp ${network_s3} ${network_local_path} --recursive
 
 # Run
 scripts_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
