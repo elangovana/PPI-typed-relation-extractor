@@ -16,7 +16,7 @@ src_file_name=$(echo ${src_s3} | rev | cut -d/ -f1 | rev)
 src_local_file=${src_local_path}/${src_file_name}
 
 network_local_path=${local_path}/${tmp_dir}/model_artefacts
-dest_local_path=${local_path}/${tmp_dir}
+dest_local_path=${local_path}/${tmp_dir}/output
 
 
 mkdir -p ${src_local_path}

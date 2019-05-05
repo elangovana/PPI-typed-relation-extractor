@@ -12,7 +12,7 @@ tmp_dir=$(python -c 'import sys,uuid; sys.stdout.write(uuid.uuid4().hex)')
 src_local_path=${local_path}/${tmp_dir}/input
 iddat_local_path=${local_path}/${tmp_dir}/dat
 iddat_local_file=${iddat_local_path}/$(echo ${s3idmapping} | rev | cut -d/ -f1 | rev)
-dest_local_path=${local_path}/${tmp_dir}
+dest_local_path=${local_path}/${tmp_dir}/output
 
 
 mkdir -p ${src_local_path}
