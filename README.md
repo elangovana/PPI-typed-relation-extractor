@@ -217,3 +217,9 @@ https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
     export PYTHONPATH=./source
     python ./source/datatransformer/pubtator_annotations_inference_transformer.py tests/test_datatransformer/data_sample_annotation /tmp tmpmap.dat
     ```
+
+1. Run inference
+    ```bash
+     python ./algorithms/main_predict.py Cnn /data/val_unique_pub_v6_less_negative.json /tmp/model_artefacts /tmp --positives-filter-threshold .95
+
+    ```
