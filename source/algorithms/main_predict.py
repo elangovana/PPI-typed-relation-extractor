@@ -45,7 +45,7 @@ def run(network, data_file, artifactsdir, out_dir, postives_filter_threshold=0.0
 
     if postives_filter_threshold > 0.0:
         logger.info("Filtering True Positives with threshold > {}".format(postives_filter_threshold))
-        final_df = final_df.query("True >= {}".format(postives_filter_threshold))
+        final_df = final_df.query("confidence_true >= {}".format(postives_filter_threshold))
 
     predictions_file = os.path.join(out_dir, "predicted.json")
     final_df.to_json(predictions_file)
@@ -82,8 +82,8 @@ def run_prediction(artifactsdir, data_file, network, out_dir):
 
     # This is log softmax, convert to softmax prob
 
-    final_df["True"] = final_df.apply(lambda x: math.exp(x["confidence_scores"][True]), axis=1)
-    final_df["False"] = final_df.apply(lambda x: math.exp(x["confidence_scores"][False]), axis=1)
+    final_df["confidence_true"] = final_df.apply(lambda x: math.exp(x["confidence_scores"][True]), axis=1)
+    final_df["confidence_false"] = final_df.apply(lambda x: math.exp(x["confidence_scores"][False]), axis=1)
 
     return final_df
 
