@@ -39,7 +39,7 @@ def submit_multiple(job_def, queue_name, s3_source_prefix, s3_destination_prefix
     for s3_bucket, s3_key in list_files(s3_source_prefix):
         sleep(1)
         submit_job(job_def, queue_name, "s3://{}/{}".format(s3_bucket, s3_key), s3_destination_prefix,
-                   s3_network_prefix, network_type, local_path)
+                   s3_network_prefix, network_type, positives_filter_threshold, local_path)
 
 
 if __name__ == '__main__':
