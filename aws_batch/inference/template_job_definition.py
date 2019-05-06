@@ -43,7 +43,7 @@ This is the job definition for this sample job.
             "volumes": [
                 {
                     "host": {
-                        "sourcePath": job_def_name
+                        "sourcePath": "/dev/shm"
                     },
                     "name": "data"
                 }

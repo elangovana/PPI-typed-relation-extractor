@@ -82,7 +82,7 @@ if __name__ == '__main__':
                         help="The number of cpus", default=4, type=int)
 
     parser.add_argument("--memoryMb",
-                        help="The memory in MB", default=8000, type=int)
+                        help="The memory in MB", default=30720, type=int)
 
     args = parser.parse_args()
 
