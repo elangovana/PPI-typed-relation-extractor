@@ -44,7 +44,9 @@ def run(network, data_file, artifactsdir, out_dir, postives_filter_threshold=0.0
     logger.info("Completed {}, {}".format(final_df.shape, final_df.columns.values))
 
     if postives_filter_threshold > 0.0:
-        logger.info("Filtering True Positives with threshold > {}".format(postives_filter_threshold))
+        logger.info(
+            "Filtering True Positives with threshold > {}, currently {} records".format(postives_filter_threshold,
+                                                                                        final_df.shape))
         final_df = final_df.query("confidence_true >= {}".format(postives_filter_threshold))
         logger.info("Post filter shape {}".format(final_df.shape))
 
