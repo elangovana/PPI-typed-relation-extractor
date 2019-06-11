@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/elangovana/kegg-pathway-extractor.svg?branch=master)](https://travis-ci.org/elangovana/kegg-pathway-extractor)
+[![Build Status](https://travis-ci.org/elangovana/PPI-typed-relation-extractor.svg?branch=master)](https://travis-ci.org/elangovana/PPI-typed-relation-extractor)
 
 # PPI typed relation extraction
 Protein - protein interactions (PPI) play a very important role in various aspects of cell biology (Zhou & He, 2008). The PPI interactions form complex networks and can be represented as a graph, where each node represents a protein and an edge represents a type of relationship between the 2 proteins.
