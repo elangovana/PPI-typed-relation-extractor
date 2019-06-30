@@ -1,7 +1,14 @@
-[![Build Status](https://travis-ci.org/elangovana/kegg-pathway-extractor.svg?branch=master)](https://travis-ci.org/elangovana/kegg-pathway-extractor)
+[![Build Status](https://travis-ci.org/elangovana/PPI-typed-relation-extractor.svg?branch=master)](https://travis-ci.org/elangovana/PPI-typed-relation-extractor)
 
-# kegg-pathway-extractor
-Given a Kegg Pathway Id, e.g path:ko05215, extracts protein interactions defined in that pathway and the type of interaction.
+# PPI typed relation extraction
+Protein - protein interactions (PPI) play a very important role in various aspects of cell biology (Zhou & He, 2008). The PPI interactions form complex networks and can be represented as a graph, where each node represents a protein and an edge represents a type of relationship between the 2 proteins.
+Manually curating these networks by reading journals and regularly maintaining them with the latest information is beyond human lifespan (Baumgartner, Cohen, Fox, Acquaah-Mensah, & Hunter, 2007). 
+
+### Task definition
+For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiometrically by p42 mitogen-activated protein (MAP) kinase  in vitro” , 
+-	The protein name recognition phase recognizes “cPLA2” & “p42 mitogen-activated protein (MAP) kinase” as protein names. Some entity recognition tasks also involve recognizing the entity roles, such as “cPLA2” as the theme or the target protein, and “p42 mitogen-activated protein (MAP) kinase” as the agent protein or the source of the interaction.
+-	The protein-protein interaction extraction task recognizes “phosphorylate” as the relationship between “cPLA2” & “p42 mitogen-activated protein (MAP) kinase”.
+
 
 # Prerequisite
 1. Data
