@@ -13,7 +13,8 @@ Adds negative samples of entities (Uniprot numbers) found in annotations in a en
 
 class GnormplusNegativeSamplesAugmentor:
 
-    def __init__(self, pubmed_annotations: iter, geneIdConverter=None, include_self_relations=False):
+    def __init__(self, pubmed_annotations: iter, geneIdConverter=None, include_self_relations=False,
+                 max_negative_per_pubmed=2):
         """
          :param include_self_relations: Set this to true if you want self-relations to be included as negative samples
          :param pubmed_annotations: The pubmed anntations looks like this is an array of dict
@@ -26,6 +27,7 @@ class GnormplusNegativeSamplesAugmentor:
                          }]
          :param geneIdConverter:
          """
+        self.max_negative_per_pubmed = max_negative_per_pubmed
         self.include_self_relations = include_self_relations
         self.pubmed_annotations = pubmed_annotations
         self.geneIdConverter = geneIdConverter
@@ -67,7 +69,7 @@ class GnormplusNegativeSamplesAugmentor:
             new_participants = all_possible_participants - existing_participants
             template_record = input_df[input_df.pubmedId == pubmedid].iloc[0]
 
-            for p in new_participants:
+            for i, p in enumerate(new_participants):
 
                 l = list(p)
                 p1 = l[0]
@@ -87,10 +89,12 @@ class GnormplusNegativeSamplesAugmentor:
 
                 data_fake = data_fake.append(record)
 
+                if i + 1 == self.max_negative_per_pubmed:
+                    break
+
         # Data with negative samples
         data_fake = data_fake.append(input_df, ignore_index=True)
         return data_fake
-
 
     def _construct_pubmed_entities_map(self):
         map_gene_ids = {}

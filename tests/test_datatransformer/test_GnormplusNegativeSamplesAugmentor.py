@@ -41,7 +41,7 @@ class TestGnormplusNegativeSamplesAugmentor(TestCase):
         geneIdConverter = MagicMock()
         geneIdConverter.convert.side_effect = lambda x: {x: ["uni_{}".format(x)]}
 
-        sut = GnormplusNegativeSamplesAugmentor(annotations, geneIdConverter)
+        sut = GnormplusNegativeSamplesAugmentor(annotations, geneIdConverter, max_negative_per_pubmed=2)
         data = pd.DataFrame([
             {"interactionId": "1",
              "interactionType": "phosphorylation",
