@@ -21,7 +21,7 @@ from algorithms.transform_tokens_to_indices import TransformTokensToIndices
 
 class RelationExtractionLinearFactory:
 
-    def __init__(self, embedding_handle, embedding_dim: int, class_size: int, output_dir, learning_rate: float = 0.001,
+    def __init__(self, embedding_handle, embedding_dim: int, class_size: int, output_dir, learning_rate: float = 0.0001,
                  momentum: float = 0.9, ngram: int = 3, epochs: int = 10, min_vocab_frequency=3, pos_label=1,
                  classes=None, class_weights_dict=None):
         self.classes = classes
