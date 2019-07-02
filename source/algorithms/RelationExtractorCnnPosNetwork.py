@@ -78,7 +78,7 @@ class RelationExtractorCnnPosNetwork(nn.Module):
                           padding=layer1_cnn_padding),
                 # nn.BatchNorm1d(layer1_cnn_output),
                 nn.ReLU(),
-                nn.MaxPool1d(kernel_size=layer1_pool_kernel, stride=layer1_pool_stride, padding=layer1_pool_padding))
+                nn.AvgPool1d(kernel_size=layer1_pool_kernel, stride=layer1_pool_stride, padding=layer1_pool_padding))
 
             self.cnn_layers.append(layer1)
             total_cnn_out_size += layer1_pool_out_length * layer1_cnn_output
