@@ -88,6 +88,7 @@ class RelationExtractorCnnPosNetwork(nn.Module):
             nn.Linear(total_cnn_out_size,
                       fc_layer_size),
             nn.ReLU(),
+            nn.Dropout(0.5),
             nn.Linear(fc_layer_size, class_size))
 
     @property
