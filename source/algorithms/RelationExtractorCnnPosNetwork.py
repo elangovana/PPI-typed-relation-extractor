@@ -11,7 +11,7 @@ from algorithms.PositionEmbedder import PositionEmbedder
 class RelationExtractorCnnPosNetwork(nn.Module):
 
     def __init__(self, class_size, embedding_dim, pretrained_weights_or_embed_vocab_size, feature_lengths,
-                 ngram_context_size=5, seed=777, drop_rate=.1, pos_embedder=None, dropout_rate=0.5):
+                 ngram_context_size=5, seed=777, drop_rate=.1, pos_embedder=None):
         self.feature_lengths = feature_lengths
         torch.manual_seed(seed)
 
@@ -34,10 +34,11 @@ class RelationExtractorCnnPosNetwork(nn.Module):
 
         # self.windows_sizes = [5, 4, 3, 2, 1]
         self.windows_sizes = [3, 2, 1]
-        cnn_output = 10
+        cnn_output = 50
         cnn_stride = 1
         pool_stride = 1
-
+        dropout_rate_cnn = .1
+        dropout_rate_fc = 0.5
         self.cnn_layers = []
         total_cnn_out_size = 0
         # The total embedding size if the text column + position for the rest
@@ -78,19 +79,25 @@ class RelationExtractorCnnPosNetwork(nn.Module):
                           padding=layer1_cnn_padding),
                 # nn.BatchNorm1d(layer1_cnn_output),
                 nn.ReLU(),
-                nn.AvgPool1d(kernel_size=layer1_pool_kernel, stride=layer1_pool_stride, padding=layer1_pool_padding))
+                nn.AvgPool1d(kernel_size=layer1_pool_kernel, stride=layer1_pool_stride, padding=layer1_pool_padding),
+                nn.Dropout(dropout_rate_cnn),
+            )
 
             self.cnn_layers.append(layer1)
             total_cnn_out_size += layer1_pool_out_length * layer1_cnn_output
 
         fc_layer_size = 200
-
+        fc_layer_size2 = 300
         self.fc = nn.Sequential(
             nn.Linear(total_cnn_out_size,
                       fc_layer_size),
             nn.ReLU(),
-            nn.Dropout(dropout_rate),
-            nn.Linear(fc_layer_size, class_size))
+            nn.Dropout(dropout_rate_fc),
+            nn.Linear(fc_layer_size,
+                      fc_layer_size2),
+            nn.ReLU(),
+            nn.Dropout(dropout_rate_fc),
+            nn.Linear(fc_layer_size2, class_size))
 
     @property
     def logger(self):
