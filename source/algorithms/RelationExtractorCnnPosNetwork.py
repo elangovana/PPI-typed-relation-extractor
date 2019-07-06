@@ -83,7 +83,8 @@ class RelationExtractorCnnPosNetwork(nn.Module):
             self.cnn_layers.append(layer1)
             total_cnn_out_size += layer1_pool_out_length * layer1_cnn_output
 
-        fc_layer_size = 20
+        fc_layer_size = 200
+
         self.fc = nn.Sequential(
             nn.Linear(total_cnn_out_size,
                       fc_layer_size),
