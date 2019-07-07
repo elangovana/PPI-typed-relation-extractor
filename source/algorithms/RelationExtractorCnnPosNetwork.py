@@ -87,17 +87,13 @@ class RelationExtractorCnnPosNetwork(nn.Module):
             total_cnn_out_size += layer1_pool_out_length * layer1_cnn_output
 
         fc_layer_size = 100
-        fc_layer_size2 = 50
+
         self.fc = nn.Sequential(
             nn.Linear(total_cnn_out_size,
                       fc_layer_size),
             nn.ReLU(),
             nn.Dropout(dropout_rate_fc),
-            nn.Linear(fc_layer_size,
-                      fc_layer_size2),
-            nn.ReLU(),
-            nn.Dropout(dropout_rate_fc),
-            nn.Linear(fc_layer_size2, class_size))
+            nn.Linear(fc_layer_size, class_size))
 
     @property
     def logger(self):
