@@ -134,14 +134,14 @@ class Train:
             self.logger.info("Train set result details:")
             self.results_writer(data_iter, actuals_train, predicted_train, pos_label, output_dir)
             train_results = self.results_scorer(y_actual=actuals_train, y_pred=predicted_train, pos_label=pos_label)
-            trainings_scores.append({"epoch": epoch, "score": train_results})
+            trainings_scores.append({"epoch": epoch, "score": train_results, "loss": total_loss})
             self.logger.info("Train set result details: {}".format(train_results))
 
             self.logger.info("Validation set result details:")
             val_actuals, val_predicted, val_loss = self.validate(loss_function, model_network, val_iter)
             self.results_writer(data_iter, val_actuals, val_predicted, pos_label, output_dir)
             val_results = self.results_scorer(y_actual=val_actuals, y_pred=val_predicted, pos_label=pos_label)
-            validation_scores.append({"epoch": epoch, "score": val_results})
+            validation_scores.append({"epoch": epoch, "score": val_results, "loss": val_loss.item()})
             # Print training set confusion matrix
             self.logger.info("Validation set result details: {} ".format(val_results))
 
