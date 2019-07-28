@@ -7,7 +7,7 @@ class PretrainedEmbedderLoader:
     def logger(self):
         return logging.getLogger(__name__)
 
-    def __call__(self, handle, other_words_embed_dict, ignore_word_filter=None):
+    def __call__(self, handle, other_words_embed_dict=None, ignore_word_filter=None):
         """
 Expects the stream of strings to contain word embedding. Each record must be in space separated format with the first column containing the word itself.
 Each record is separated by new lines
