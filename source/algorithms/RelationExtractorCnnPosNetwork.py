@@ -10,8 +10,9 @@ from algorithms.PositionEmbedder import PositionEmbedder
 
 class RelationExtractorCnnPosNetwork(nn.Module):
 
-    def __init__(self, class_size, embedding_dim, pretrained_weights_or_embed_vocab_size, feature_lengths,
-                 ngram_context_size=5, seed=777, drop_rate=.1, pos_embedder=None):
+    def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0, ngram_context_size=5, seed=777,
+                 drop_rate=.1, pos_embedder=None):
+        self.embed_vocab_size = embed_vocab_size
         self.feature_lengths = feature_lengths
         torch.manual_seed(seed)
 
@@ -20,10 +21,8 @@ class RelationExtractorCnnPosNetwork(nn.Module):
         self.dropout_rate = drop_rate
         # Use random weights if vocab size if passed in else load pretrained weights
 
-        self.embeddings = nn.Embedding(pretrained_weights_or_embed_vocab_size,
-                                       embedding_dim) if type(
-            pretrained_weights_or_embed_vocab_size) is int else nn.Embedding.from_pretrained(
-            torch.FloatTensor(pretrained_weights_or_embed_vocab_size))
+        self.embeddings = None
+        self.embedding_dim = embedding_dim
 
         self.__pos_embedder__ = pos_embedder
 
@@ -94,6 +93,17 @@ class RelationExtractorCnnPosNetwork(nn.Module):
             nn.ReLU(),
             nn.Dropout(dropout_rate_fc),
             nn.Linear(fc_layer_size, class_size))
+
+    @property
+    def embeddings(self):
+        if self._embeddings is None:
+            assert self.embed_vocab_size > 0, "Please set the vocab size for using random embeddings "
+            self._embeddings = nn.Embedding(self.embed_vocab_size, self.embedding_dim)
+        return self._embeddings
+
+    @embeddings.setter
+    def embeddings(self, value):
+        self._embeddings = value
 
     @property
     def logger(self):
