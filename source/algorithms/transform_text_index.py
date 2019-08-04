@@ -1,6 +1,5 @@
 import logging
 
-import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 
 """
@@ -10,10 +9,12 @@ Extracts vocab from data frame columns which have already been tokenised into wo
 
 class TransformTextToIndex:
 
-    def __init__(self, min_vocab_frequency=2, vocab=None):
+    def __init__(self, max_feature_lens, min_vocab_frequency=2, vocab=None):
+        self.max_feature_lens = max_feature_lens
         self.min_vocab_frequency = min_vocab_frequency
         self.vocab = vocab
         self.vocab_index = None
+        self.pad = "!@#"
 
     @property
     def logger(self):
@@ -29,18 +30,31 @@ class TransformTextToIndex:
     def count_vectoriser(self, value):
         self.__count_vectoriser__ = value
 
-    def fit(self, df, Y=None):
-        x = np.reshape(df.values, (df.size))
-        self.count_vectoriser.fit(x)
-        self.vocab_index = {key: i for i, key in enumerate(self.count_vectoriser.get_feature_names())}
+    def fit(self, x, y):
+        for b_x, b_y in x:
+            text = [" ".join(t) for t in b_x]
+            self.count_vectoriser.fit(text)
+        self.vocab = self.count_vectoriser.get_feature_names()
+        self.vocab_index = {key: i for i, key in enumerate(self.vocab)}
         self.vocab_index["UNK"] = len(self.vocab_index)
+        self.vocab_index[self.pad] = len(self.vocab_index)
 
-    def transform(self, df, Y=None):
+    def transform(self, x):
         tokeniser = self.count_vectoriser.build_tokenizer()
-        df_transformed = df.applymap(lambda x: [self.vocab_index.get(w, self.vocab_index["UNK"]) for w in tokeniser(x)])
+        pad_index = self.vocab_index[self.pad]
 
-        return df_transformed
+        for b_x, b_y in x:
+            col = []
+            for c_index, c in enumerate(b_x):
+                row = []
+                max = self.max_feature_lens[c_index]
+                for r in c:
+                    tokens = [self.vocab_index.get(w, self.vocab_index["UNK"]) for w in tokeniser(r)][0:max]
+                    tokens = tokens + [pad_index] * (max - len(tokens))
+                    row.append(tokens)
+                col.append(row)
+            yield col
 
-    def fit_transform(self, df, Y=None):
-        self.fit(df, Y)
+    def fit_transform(self, df, y):
+        self.fit(df, y)
         return self.transform(df)
