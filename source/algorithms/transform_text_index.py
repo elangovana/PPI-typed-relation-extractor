@@ -1,5 +1,6 @@
 import logging
 
+import torch
 from sklearn.feature_extraction.text import CountVectorizer
 
 """
@@ -52,9 +53,11 @@ class TransformTextToIndex:
                     tokens = [self.vocab_index.get(w, self.vocab_index["UNK"]) for w in tokeniser(r)][0:max]
                     tokens = tokens + [pad_index] * (max - len(tokens))
                     row.append(tokens)
+                row = torch.Tensor(row)
                 col.append(row)
-            yield col
 
-    def fit_transform(self, df, y):
+            yield col, b_y
+
+    def fit_transform(self, df, y=None):
         self.fit(df, y)
         return self.transform(df)

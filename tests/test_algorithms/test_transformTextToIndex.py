@@ -29,8 +29,9 @@ class TestTransformTextToIndex(TestCase):
 
         # Assert the max feature length matchs
         unique_items = set()
-        for b in actual:
-            for ci, c in enumerate(b):
+        for b, y in actual:
+            for ci, c_tensor in enumerate(b):
+                c = c_tensor.tolist()
                 for r in c:
                     unique_items = unique_items.union(r)
                     feature_len = max_feature_lens[ci]
