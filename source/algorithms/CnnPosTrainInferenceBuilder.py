@@ -8,16 +8,18 @@ from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
 from algorithms.RelationExtractorCnnPosNetwork import RelationExtractorCnnPosNetwork
 from algorithms.Train import Train
 from algorithms.TrainInferencePipeline import TrainInferencePipeline
+from algorithms.transform_label_encoder import TransformLabelEncoder
+from algorithms.transform_label_rehaper import TransformLabelReshaper
 
 
-class CnnPosTrainInferenceFactory:
+class CnnPosTrainInferenceBuilder:
 
-    def __init__(self, dataset, embedding_handle, output_dir):
+    def __init__(self, dataset, embedding_dim, embedding_handle, output_dir):
         self.dataset = dataset
         self.learning_rate = .001
         self.momentum = .9
         self.embedding_handle = embedding_handle
-        self.embedding_dim = 200
+        self.embedding_dim = embedding_dim
         self.output_dir = output_dir
 
     def get_trainpipeline(self):
@@ -29,10 +31,14 @@ class CnnPosTrainInferenceFactory:
                                      , embeddings_handle=self.embedding_handle,
                                      pretrained_embedder_loader=embedder_loader)
 
-        label_pipeline = LabelPipeline()
+        # Label pipeline
+        class_size = self.dataset.class_size
+        label_reshaper = TransformLabelReshaper(num_classes=class_size)
+        label_encoder = TransformLabelEncoder()
+        label_pipeline = LabelPipeline(label_reshaper=label_reshaper, label_encoder=label_encoder)
 
         np_feature_lens = np.array(self.dataset.feature_lens)
-        model = RelationExtractorCnnPosNetwork(class_size=self.dataset, embedding_dim=self.embedding_dim,
+        model = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
                                                feature_lengths=np_feature_lens)
 
         # Optimiser
@@ -44,15 +50,11 @@ class CnnPosTrainInferenceFactory:
         # Trainer
         trainer = Train()
 
-        pipeline = TrainInferencePipeline(model=model, optimiser=optimiser,
-                                          loss_function=loss_function,
-                                          trainer=trainer,
-                                          data_pipeline=data_pipeline,
-                                          label_pipeline=label_pipeline,
-                                          class_size=self.dataset.class_size,
-                                          embedding_dim=self.embedding_dim,
-                                          embedder_loader=embedder_loader,
-                                          embedding_handle=self.embedding_handle,
+        pipeline = TrainInferencePipeline(model=model, optimiser=optimiser, loss_function=loss_function,
+                                          trainer=trainer, embedder_loader=embedder_loader,
+                                          embedding_handle=self.embedding_handle, embedding_dim=self.embedding_dim,
+                                          label_pipeline=label_pipeline, data_pipeline=data_pipeline,
+                                          class_size=class_size, pos_label=self.dataset.postive_label,
                                           output_dir=self.output_dir)
 
         return pipeline

@@ -5,6 +5,7 @@ import os
 
 import numpy
 import torch
+from algorithms.transform_final_create_examples import TransformFinalCreateExamples
 from sklearn.pipeline import Pipeline
 from torch import optim, nn
 
@@ -12,12 +13,6 @@ from algorithms.Parser import PAD
 from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
 from algorithms.RelationExtractorLinearNetworkDropoutWord import RelationExtractorLinearNetworkDropoutWord
 from algorithms.Train import Train
-from algorithms.transform_extract_label_numbers import TransformExtractLabelNumbers
-from algorithms.transform_extract_vocab import TransformExtractVocab
-from algorithms.transform_final_create_examples import TransformFinalCreateExamples
-from algorithms.transform_labels_to_numbers import TransformLabelsToNumbers
-from algorithms.transform_tokenise import TransformTokenise
-from algorithms.transform_tokens_to_indices import TransformTokensToIndices
 
 
 class RelationExtractorLinearNetworkDropoutWordFactory:

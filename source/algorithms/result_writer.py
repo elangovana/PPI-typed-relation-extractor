@@ -14,7 +14,7 @@ class ResultWriter:
     def logger(self):
         return logging.getLogger(__name__)
 
-    def __call__(self, x, y_actual, y_pred, pos_label, output_dir, x_meta=None, filename_prefix="results"):
+    def __call__(self, x, y_actual, y_pred, output_dir, x_meta=None, filename_prefix="results"):
         from sklearn.metrics import confusion_matrix
         cnf_matrix = confusion_matrix(y_actual, y_pred)
 

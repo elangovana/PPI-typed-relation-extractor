@@ -31,8 +31,10 @@ class TransformTextToIndex:
     def count_vectoriser(self, value):
         self.__count_vectoriser__ = value
 
-    def fit(self, x, y):
-        for b_x, b_y in x:
+    def fit(self, data_loader):
+        for idx, b in enumerate(data_loader):
+            b_x = b[0]
+
             text = [" ".join(t) for t in b_x]
             self.count_vectoriser.fit(text)
         self.vocab = self.count_vectoriser.get_feature_names()
@@ -44,20 +46,24 @@ class TransformTextToIndex:
         tokeniser = self.count_vectoriser.build_tokenizer()
         pad_index = self.vocab_index[self.pad]
 
-        for b_x, b_y in x:
+        batches = []
+        for idx, b in enumerate(x):
+            b_x = b[0]
+            b_y = b[1]
             col = []
             for c_index, c in enumerate(b_x):
                 row = []
                 max = self.max_feature_lens[c_index]
-                for r in c:
+                for _, r in enumerate(c):
                     tokens = [self.vocab_index.get(w, self.vocab_index["UNK"]) for w in tokeniser(r)][0:max]
                     tokens = tokens + [pad_index] * (max - len(tokens))
                     row.append(tokens)
-                row = torch.Tensor(row)
+                row = torch.Tensor(row).long()
                 col.append(row)
 
-            yield col, b_y
+            batches.append([col, b_y])
+        return batches
 
-    def fit_transform(self, df, y=None):
-        self.fit(df, y)
-        return self.transform(df)
+    def fit_transform(self, data_loader):
+        self.fit(data_loader)
+        return self.transform(data_loader)

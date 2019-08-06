@@ -10,9 +10,8 @@ from algorithms.PositionEmbedder import PositionEmbedder
 
 class RelationExtractorCnnPosNetwork(nn.Module):
 
-    def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0, ngram_context_size=5, seed=777,
-                 drop_rate=.1, pos_embedder=None):
-        self.embed_vocab_size = embed_vocab_size
+    def __init__(self, class_size, embedding_dim, pretrained_weights_or_embed_vocab_size, feature_lengths,
+                 ngram_context_size=5, seed=777, drop_rate=.1, pos_embedder=None):
         self.feature_lengths = feature_lengths
         torch.manual_seed(seed)
 
@@ -21,8 +20,10 @@ class RelationExtractorCnnPosNetwork(nn.Module):
         self.dropout_rate = drop_rate
         # Use random weights if vocab size if passed in else load pretrained weights
 
-        self.set_embeddings(None)
-        self.embedding_dim = embedding_dim
+        self.embeddings = nn.Embedding(pretrained_weights_or_embed_vocab_size,
+                                       embedding_dim) if type(
+            pretrained_weights_or_embed_vocab_size) is int else nn.Embedding.from_pretrained(
+            torch.FloatTensor(pretrained_weights_or_embed_vocab_size))
 
         self.__pos_embedder__ = pos_embedder
 
@@ -33,7 +34,7 @@ class RelationExtractorCnnPosNetwork(nn.Module):
 
         # self.windows_sizes = [5, 4, 3, 2, 1]
         self.windows_sizes = [3, 2, 1]
-        cnn_output = 50
+        cnn_output = 1
         cnn_stride = 1
         pool_stride = 1
         dropout_rate_cnn = .1
@@ -60,7 +61,7 @@ class RelationExtractorCnnPosNetwork(nn.Module):
                      self.text_column_index] + 2 * layer1_cnn_padding - layer1_cnn_kernel + 1) / layer1_cnn_stride)
 
             layer1_pool_kernel = layer1_cnn_kernel
-            layer1_pool_padding = layer1_pool_kernel // 2
+            layer1_pool_padding = 0
             layer1_pool_stride = pool_stride
             layer1_pool_out_length = math.ceil(
                 (layer1_cnn_out_length + 2 * layer1_pool_padding - layer1_pool_kernel + 1) / layer1_pool_stride)
@@ -74,36 +75,28 @@ class RelationExtractorCnnPosNetwork(nn.Module):
                 ))
 
             layer1 = nn.Sequential(
+
+                nn.AvgPool2d(kernel_size=(1, layer1_pool_kernel), stride=(layer1_pool_stride, layer1_pool_stride),
+                             padding=(layer1_pool_padding, layer1_pool_padding)),
                 nn.Conv1d(total_dim_size, layer1_cnn_output, kernel_size=layer1_cnn_kernel, stride=layer1_cnn_stride,
                           padding=layer1_cnn_padding),
-                # nn.BatchNorm1d(layer1_cnn_output),
+
                 nn.ReLU(),
-                nn.AvgPool1d(kernel_size=layer1_pool_kernel, stride=layer1_pool_stride, padding=layer1_pool_padding),
                 nn.Dropout(dropout_rate_cnn),
             )
+            layer1_pool_out_length = layer1_pool_out_length
 
             self.cnn_layers.append(layer1)
             total_cnn_out_size += layer1_pool_out_length * layer1_cnn_output
 
         fc_layer_size = 100
 
-        self._class_size = class_size
         self.fc = nn.Sequential(
             nn.Linear(total_cnn_out_size,
                       fc_layer_size),
             nn.ReLU(),
             nn.Dropout(dropout_rate_fc),
             nn.Linear(fc_layer_size, class_size))
-
-    @property
-    def embeddings(self):
-        if self.__embeddings is None:
-            assert self.embed_vocab_size > 0, "Please set the vocab size for using random embeddings "
-            self.__embeddings = nn.Embedding(self.embed_vocab_size, self.embedding_dim)
-        return self.__embeddings
-
-    def set_embeddings(self, value):
-        self.__embeddings = value
 
     @property
     def logger(self):
@@ -121,7 +114,7 @@ class RelationExtractorCnnPosNetwork(nn.Module):
 
         text_inputs = feature_tuples[self.text_column_index]
 
-        text_transposed = text_inputs  # text_inputs.transpose(0, 1)
+        text_transposed = text_inputs.transpose(0, 1)
 
         embeddings = self.embeddings(text_transposed)
         merged_pos_embed = embeddings
@@ -155,5 +148,4 @@ class RelationExtractorCnnPosNetwork(nn.Module):
 
         out = self.fc(out)
         log_probs = F.log_softmax(out, dim=1)
-        print(log_probs)
         return log_probs

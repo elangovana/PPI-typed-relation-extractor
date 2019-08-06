@@ -4,16 +4,16 @@ import logging
 import torch
 import torch.utils.data
 import torchtext
-from torchtext.data import BucketIterator
 
 from algorithms.ModelSnapshotCallback import ModelSnapshotCallback
-from algorithms.result_scorer import ResultScorer, score_type_accuracy, score_type_f1
+from algorithms.result_scorer import ResultScorerF1
 from algorithms.result_writer import ResultWriter
 
 
 class Train:
 
     def __init__(self):
+
         self.snapshotter = None
         self.results_scorer = None
         self.results_writer = None
@@ -37,7 +37,7 @@ class Train:
 
     @property
     def results_scorer(self):
-        self.__results_scorer__ = self.__results_scorer__ or ResultScorer()
+        self.__results_scorer__ = self.__results_scorer__ or ResultScorerF1()
         return self.__results_scorer__
 
     @results_scorer.setter
@@ -56,7 +56,7 @@ class Train:
     def __call__(self, data_iter, validation_iter, text_sort_key_lambda, model_network, loss_function, optimizer,
                  output_dir,
                  epoch=10, mini_batch_size=32,
-                 eval_every_n_epoch=1, device_type="cpu", pos_label=1):
+                 eval_every_n_epoch=1, device_type="cpu", pos_label=1, early_stopping_patience=20):
         """
     Runs train...
         :param validation_iter: Validation set
@@ -76,28 +76,20 @@ class Train:
         val_log_template = ' '.join(
             '{:>6.0f},{:>5.0f},{:>9.0f},{:>5.0f}/{:<5.0f} {:>7.0f}%,{:>8.6f},{:8.6f},{:12.4f},{:12.4f}'.split(','))
         val_log_template = "Run {}".format(val_log_template)
-        train_iter, val_iter = BucketIterator.splits(
-            (data_iter, validation_iter),  # we pass in the datasets we want the iterator to draw data from
-            batch_size=mini_batch_size,
-            device=torch.device(device_type),  # if you want to use the GPU, specify the GPU number here
-            sort_key=text_sort_key_lambda,
-            # the BucketIterator needs to be told what function it should use to group the data.
-            sort_within_batch=True,
-            repeat=False  # we pass repeat=False because we want to wrap this Iterator layer.
-        )
 
         best_score = 0
         trainings_scores = []
         validation_scores = []
-        score_measure = score_type_f1
-        self.logger.info("using score : {}".format(score_measure))
+        self.logger.info("using score : {}".format(type(self.results_scorer)))
         for epoch in range(epoch):
-            train_iter.init_epoch()
             total_loss = 0
             n_correct, n_total = 0, 0
             actuals_train = []
             predicted_train = []
-            for batch_x, batch_y in train_iter:
+            for idx, batch in enumerate(data_iter):
+                batch_x = batch[0]
+                batch_y = batch[1]
+                # batch_x = torch.Tensor(batch_x)
                 iterations += 1
                 # for feature, target in zip(batch_x, batch_y):
 
@@ -113,7 +105,7 @@ class Train:
 
                 # Step 4. Compute your loss function. (Again, Torch wants the target
                 # word wrapped in a tensor)
-                loss = loss_function(predicted, batch_y.clone().detach())
+                loss = loss_function(predicted, batch_y)
 
                 # Step 5. Do the backward pass and update the gradient
                 loss.backward()
@@ -132,32 +124,30 @@ class Train:
 
             # Print training set confusion matrix
             self.logger.info("Train set result details:")
-            self.results_writer(data_iter, actuals_train, predicted_train, pos_label, output_dir)
+            self.results_writer(data_iter, actuals_train, predicted_train, output_dir)
             train_results = self.results_scorer(y_actual=actuals_train, y_pred=predicted_train, pos_label=pos_label)
             trainings_scores.append({"epoch": epoch, "score": train_results, "loss": total_loss})
             self.logger.info("Train set result details: {}".format(train_results))
 
             self.logger.info("Validation set result details:")
-            val_actuals, val_predicted, val_loss = self.validate(loss_function, model_network, val_iter)
-            self.results_writer(data_iter, val_actuals, val_predicted, pos_label, output_dir)
+            val_actuals, val_predicted, val_loss = self.validate(loss_function, model_network, validation_iter)
+            self.results_writer(data_iter, val_actuals, val_predicted, output_dir)
             val_results = self.results_scorer(y_actual=val_actuals, y_pred=val_predicted, pos_label=pos_label)
             validation_scores.append({"epoch": epoch, "score": val_results, "loss": val_loss.item()})
             # Print training set confusion matrix
             self.logger.info("Validation set result details: {} ".format(val_results))
 
-            if val_results[score_measure] > best_score:
+            if val_results > best_score:
                 best_results = (model_network, val_results, val_actuals, val_predicted)
 
-                best_score = self.snapshotter(model_network, val_iter, best_score, output_dir=output_dir,
-                                              pos_label=pos_label,
-                                              metric=score_measure)
+                best_score = self.snapshotter(model_network, val_results, best_score, output_dir=output_dir)
 
             # evaluate performance on validation set periodically
             self.logger.info(val_log_template.format((datetime.datetime.now() - start).seconds,
-                                                     epoch, iterations, 1 + len(batch_x), len(train_iter),
-                                                     100. * (1 + len(batch_x)) / len(train_iter), total_loss,
-                                                     val_loss.item(), train_results[score_type_accuracy],
-                                                     val_results[score_type_accuracy]))
+                                                     epoch, iterations, 1 + len(batch_x), len(data_iter),
+                                                     100. * (1 + len(batch_x)) / len(data_iter), total_loss,
+                                                     val_loss.item(), train_results,
+                                                     val_results))
 
         self.results_writer.dump_object(validation_scores, output_dir, "validation_scores_epoch")
         self.results_writer.dump_object(trainings_scores, output_dir, "training_scores_epoch")
@@ -167,14 +157,15 @@ class Train:
     def validate(self, loss_function, model_network, val_iter):
         # switch model to evaluation mode
         model_network.eval()
-        val_iter.init_epoch()
         # calculate accuracy on validation set
         n_val_correct, val_loss = 0, 0
         actuals = []
         predicted = []
         scores = []
         with torch.no_grad():
-            for val_batch_idx, val_y in val_iter:
+            for idx, val in enumerate(val_iter):
+                val_batch_idx = val[0]
+                val_y = val[1]
                 pred_batch_y = model_network(val_batch_idx)
                 scores.append([pred_batch_y])
                 pred_flat = torch.max(pred_batch_y, 1)[1].view(val_y.size())

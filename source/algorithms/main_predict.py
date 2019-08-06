@@ -8,16 +8,16 @@ import pandas as pd
 
 from algorithms.RelationExtractionAverageFactory import RelationExtractionAverageFactory
 from algorithms.RelationExtractionLinearDropoutWordFactory import RelationExtractorLinearNetworkDropoutWordFactory
-from algorithms.RelationExtractionLinearFactory import RelationExtractionLinearFactory
 from algorithms.RelationExtractorCnnNetwork import RelationExtractorCnnNetwork
 from algorithms.RelationExtractorCnnPosNetwork import RelationExtractorCnnPosNetwork
+from algorithms.TrainInferencePipeline import TrainInferencePipeline
 
 networks_dict = {
-    "Linear": RelationExtractionLinearFactory,
+    "Linear": TrainInferencePipeline,
     "Avg": RelationExtractionAverageFactory,
     "LinearWithDropout": RelationExtractorLinearNetworkDropoutWordFactory,
-    "Cnn": RelationExtractionLinearFactory,
-    "CnnPos": RelationExtractionLinearFactory
+    "Cnn": TrainInferencePipeline,
+    "CnnPos": TrainInferencePipeline
 }
 
 model_dict = {

@@ -16,15 +16,38 @@ class TransformLabelEncoder:
     def logger(self):
         return logging.getLogger(__name__)
 
-    def fit(self, x, y=None):
-        self._encoder.fit(x)
+    def fit(self, data_loader):
+        y = []
+        for idx, b in enumerate(data_loader):
+            b_y = b[1]
+            y.extend(b_y)
+        self._encoder.fit(y)
 
-    def transform(self, x, y=None):
-        return self._encoder.transform(x)
+    def transform(self, data_loader):
+        # Check if iterable
+        try:
+            iter(data_loader)
+            iterable = not isinstance(data_loader, str)
+
+        except TypeError:
+            iterable = False
+
+        # Looks like single value
+        if not iterable:
+            return self._encoder.transform([data_loader])[0]
+
+        batches = []
+        for idx, b in enumerate(data_loader):
+            b_x = b[0]
+            b_y = b[1]
+            encoded_y = self._encoder.transform(b_y)
+            batches.append([b_x, encoded_y])
+        return batches
 
     def inverse_transform(self, Y):
         return self._encoder.inverse_transform(Y)
 
-    def fit_transform(self, x, y=None):
-        self.fit(x, y)
-        return self.transform(x, y)
+    def fit_transform(self, data_loader):
+
+        self.fit(data_loader)
+        return self.transform(data_loader)

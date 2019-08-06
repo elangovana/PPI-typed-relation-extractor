@@ -1,9 +1,6 @@
-from sklearn.pipeline import Pipeline
 from torch import nn
 
 from algorithms.Parser import PAD
-from algorithms.transform_extract_vocab import TransformExtractVocab
-from algorithms.transform_tokenise import TransformTokenise
 
 """
 Builds vocab based on training data and initiliases with random word embeddings
@@ -16,21 +13,6 @@ class VocabRandomEmbeddingBuilder:
         self.min_vocab_frequency = min_vocab_frequency
         self.embedding_dim = embedding_dim
         self.transformer_vocab_extractor = None
-
-    @property
-    def transformer_vocab_extractor(self):
-        if self.__transformer_vocab_extractor__ is None:
-            # this is the default pipeline
-            self.__transformer_vocab_extractor__ = Pipeline([
-                ('TransformExtractWords', TransformTokenise())
-                , ('TransformWordsIndices', TransformExtractVocab(min_vocab_frequency=self.min_vocab_frequency))
-            ])
-
-        return self.__transformer_vocab_extractor__
-
-    @transformer_vocab_extractor.setter
-    def transformer_vocab_extractor(self, value):
-        self.__transformer_vocab_extractor__ = value
 
     def __call__(self, train, **kwargs):
         """

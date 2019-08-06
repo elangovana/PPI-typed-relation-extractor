@@ -15,7 +15,7 @@ class TestResultsWriter(TestCase):
 
         # Act
         out_dir = tempfile.mkdtemp()
-        sut(x=[1, 2, 3], y_actual=[1, 0], y_pred=[1, 1], pos_label=1, filename_prefix="test",
+        sut(x=[1, 2, 3], y_actual=[1, 0], y_pred=[1, 1], filename_prefix="test",
             output_dir=out_dir)
 
         # Assert

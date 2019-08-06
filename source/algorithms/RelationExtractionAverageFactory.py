@@ -11,7 +11,6 @@ from torchtext import data
 from algorithms.Parser import Parser
 from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
 from algorithms.RelationExtractionAverageNetwork import RelationExtractorNetworkAverage
-from algorithms.Train import Train
 
 
 class RelationExtractionAverageFactory:
@@ -64,7 +63,7 @@ class RelationExtractionAverageFactory:
 
     @property
     def trainer(self):
-        self.__trainer__ = self.__trainer__ or Train()
+        self.__trainer__ = self.__trainer__
         return self.__trainer__
 
     @trainer.setter
@@ -109,7 +108,7 @@ class RelationExtractionAverageFactory:
             if w not in train_vocab:
                 train_vocab[w] = len(train_vocab)
 
-        # Initialise minwords with random weights
+        # Initialise min words with random weights
         rand_words_weights_dict = {}
         for word in train_vocab.keys():
             rand_words_weights_dict[word] = nn.Embedding(1, self.embedding_dim).weight.detach().numpy().tolist()[0]
@@ -137,7 +136,7 @@ class RelationExtractionAverageFactory:
         train_labels_encode = self.parser.encode_labels(train_labels, classes)
         validation_labels_encode = self.parser.encode_labels(validation_labels, classes)
 
-        pos_label = self.parser.encode_labels([self.pos_label], classes)[0]
+        encoded_pos_label = self.parser.encode_labels([self.pos_label], classes)[0]
 
         data_formatted, val_data_formatted = self.getexamples(self.col_names, processed_data,
                                                               train_labels_encode), self.getexamples(
@@ -155,7 +154,7 @@ class RelationExtractionAverageFactory:
 
         # Invoke trainer
         self.trainer(data_formatted, val_data_formatted, sort_key, model, self.loss_function, optimiser,
-                     self.output_dir, epoch=self.epochs, pos_label=pos_label)
+                     self.output_dir, epoch=self.epochs)
 
         return model
 
