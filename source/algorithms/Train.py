@@ -3,7 +3,6 @@ import logging
 
 import torch
 import torch.utils.data
-import torchtext
 
 from algorithms.ModelSnapshotCallback import ModelSnapshotCallback
 from algorithms.result_scorer import ResultScorerF1
@@ -177,21 +176,4 @@ class Train:
         self.logger.debug("The validation confidence scores are {}".format(scores))
         return actuals, predicted, val_loss
 
-    def predict(self, model_network, dataset, batch_size=32):
-        # switch model to evaluation mode
-        model_network.eval()
-        dataset_iterator = torchtext.data.Iterator(dataset, batch_size=batch_size, train=False, sort=False,
-                                                   shuffle=False)
-        predicted = []
-        scores = []
-        with torch.no_grad():
-            for val_batch_idx, _ in dataset_iterator:
-                pred_batch_y = model_network(val_batch_idx)
-                scores.append(pred_batch_y)
-                pred_binary = torch.max(pred_batch_y, 1)[1]
-                pred_flat = pred_binary.view(pred_binary.size())
 
-                predicted.extend(pred_flat.numpy().tolist())
-
-        scores = [r.numpy().tolist() for r in torch.cat(scores, dim=0)]
-        return predicted, scores
