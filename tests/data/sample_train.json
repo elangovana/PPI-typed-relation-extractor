@@ -1,0 +1,1593 @@
+{
+  "entityMentionsCount": {
+    "2226": 2,
+    "425": 8,
+    "7": 9,
+    "1846": 3,
+    "1441": 6,
+    "1892": 10,
+    "1648": 6,
+    "70": 4,
+    "1754": 3,
+    "321": 4,
+    "373": 3,
+    "1358": 5,
+    "2198": 5,
+    "1627": 2,
+    "1206": 3,
+    "995": 6,
+    "395": 4,
+    "1158": 6,
+    "2118": 5,
+    "2103": 4,
+    "260": 4,
+    "2338": 4,
+    "2197": 3,
+    "2070": 4,
+    "1148": 5,
+    "13": 7,
+    "1099": 3,
+    "44": 5,
+    "493": 7,
+    "1779": 6
+  },
+  "hasTriggerWord": {
+    "2226": true,
+    "425": true,
+    "7": true,
+    "1846": false,
+    "1441": true,
+    "1892": true,
+    "1648": true,
+    "70": true,
+    "1754": true,
+    "321": true,
+    "373": true,
+    "1358": true,
+    "2198": true,
+    "1627": true,
+    "1206": true,
+    "995": true,
+    "395": true,
+    "1158": false,
+    "2118": true,
+    "2103": true,
+    "260": true,
+    "2338": true,
+    "2197": false,
+    "2070": true,
+    "1148": true,
+    "13": true,
+    "1099": true,
+    "44": false,
+    "493": true,
+    "1779": true
+  },
+  "interactionId": {
+    "2226": "1556930",
+    "425": "1933970_4d6ad802-c3a9-4742-8b66-32a681bc2e59_fake_annot",
+    "7": "2739751_bc669290-8869-4e62-850c-bb5c4ea6e80b_fake_interaction",
+    "1846": "1182944",
+    "1441": "1828005_dcdd5bca-b87b-46c2-b4c5-aa0038123d3e_fake_annot",
+    "1892": "937461",
+    "1648": "598409",
+    "70": "11387_48b6bde4-4714-4878-a1b6-65947ce50baf_fake_interaction",
+    "1754": "1442221",
+    "321": "625995_16882d08-d2f8-4724-b142-f7a86121ff13_fake_interaction",
+    "373": "2700123_5ddb0a64-f28d-4e62-aa14-8adc8f446d19_fake_interaction",
+    "1358": "823583_6aec47ce-7b6c-40da-b8dc-5dff759334f6_fake_annot",
+    "2198": "799417",
+    "1627": "850244",
+    "1206": "1213763_637b155b-7137-451d-8eee-bc9458b50ed0_fake_annot",
+    "995": "861136_e1ea992d-a3ca-405f-8493-982e22c08157_fake_annot",
+    "395": "912971_dfe401d0-5cbb-4eec-8c38-e88ff50bb5bf_fake_interaction",
+    "1158": "680062_059a41cf-3831-4854-b5c6-6ade1fb7869b_fake_annot",
+    "2118": "103414",
+    "2103": "1159838",
+    "260": "1521360_ede7e050-1af3-45a5-ad38-31553ef83823_fake_interaction",
+    "2338": "1272453",
+    "2197": "711972",
+    "2070": "220259",
+    "1148": "799172_45324164-85b4-40f9-99e0-69bfb35096c0_fake_annot",
+    "13": "501491_9bcda33b-c381-4d17-9a82-8b5aa49882ec_fake_interaction",
+    "1099": "786046_b50a23c2-6c06-491b-a9f7-4b60f0e84afc_fake_annot",
+    "44": "510357_b1f31c09-01b1-433e-8263-763b4737e4eb_fake_interaction",
+    "493": "1202050_d8e8d665-016a-419e-85df-8c013bf3741f_fake_annot",
+    "1779": "794000"
+  },
+  "interactionType": {
+    "2226": "phosphorylation",
+    "425": "phosphorylation",
+    "7": "methylation",
+    "1846": "phosphorylation",
+    "1441": "dephosphorylation",
+    "1892": "phosphorylation",
+    "1648": "phosphorylation",
+    "70": "acetylation",
+    "1754": "phosphorylation",
+    "321": "methylation",
+    "373": "methylation",
+    "1358": "phosphorylation",
+    "2198": "dephosphorylation",
+    "1627": "phosphorylation",
+    "1206": "dephosphorylation",
+    "995": "phosphorylation",
+    "395": "acetylation",
+    "1158": "dephosphorylation",
+    "2118": "phosphorylation",
+    "2103": "methylation",
+    "260": "ubiquitination",
+    "2338": "phosphorylation",
+    "2197": "dephosphorylation",
+    "2070": "phosphorylation",
+    "1148": "dephosphorylation",
+    "13": "methylation",
+    "1099": "phosphorylation",
+    "44": "methylation",
+    "493": "phosphorylation",
+    "1779": "dephosphorylation"
+  },
+  "isValid": {
+    "2226": true,
+    "425": false,
+    "7": false,
+    "1846": true,
+    "1441": false,
+    "1892": true,
+    "1648": true,
+    "70": false,
+    "1754": true,
+    "321": false,
+    "373": false,
+    "1358": false,
+    "2198": true,
+    "1627": true,
+    "1206": false,
+    "995": false,
+    "395": false,
+    "1158": false,
+    "2118": true,
+    "2103": true,
+    "260": false,
+    "2338": true,
+    "2197": true,
+    "2070": true,
+    "1148": false,
+    "13": false,
+    "1099": false,
+    "44": false,
+    "493": false,
+    "1779": true
+  },
+  "lessThanThreshold": {
+    "2226": true,
+    "425": true,
+    "7": true,
+    "1846": true,
+    "1441": true,
+    "1892": true,
+    "1648": true,
+    "70": true,
+    "1754": true,
+    "321": true,
+    "373": true,
+    "1358": true,
+    "2198": true,
+    "1627": true,
+    "1206": true,
+    "995": true,
+    "395": true,
+    "1158": true,
+    "2118": true,
+    "2103": true,
+    "260": true,
+    "2338": true,
+    "2197": true,
+    "2070": true,
+    "1148": true,
+    "13": true,
+    "1099": true,
+    "44": true,
+    "493": true,
+    "1779": true
+  },
+  "participant1Alias": {
+    "2226": [
+      [
+        "moes_human"
+      ],
+      [
+        "Moesin"
+      ],
+      [
+        "Membrane-organizing extension spike protein"
+      ],
+      [
+        "MSN"
+      ]
+    ],
+    "425": [
+      "Bax"
+    ],
+    "7": [
+      [
+        "aurkb_human"
+      ],
+      [
+        "Aurora kinase B"
+      ],
+      [
+        "AIRK2"
+      ],
+      [
+        "Aurora- and IPL1-like midbody-associated protein 1"
+      ],
+      [
+        "Aurora\/IPL1-related kinase 2"
+      ],
+      [
+        "STK-1"
+      ],
+      [
+        "Serine\/threonine-protein kinase 12"
+      ],
+      [
+        "Serine\/threonine-protein kinase 5"
+      ],
+      [
+        "STK1"
+      ],
+      [
+        "STK5"
+      ],
+      [
+        "Aurora 1"
+      ],
+      [
+        "AURKB"
+      ],
+      [
+        "AIK2"
+      ],
+      [
+        "AIM1"
+      ],
+      [
+        "ARK2"
+      ],
+      [
+        "STK12"
+      ],
+      [
+        "Serine\/threonine-protein kinase aurora-B"
+      ]
+    ],
+    "1846": [
+      [
+        "h33_bovin"
+      ],
+      [
+        "Histone H3.3"
+      ],
+      [
+        "H3F3A"
+      ],
+      [
+        "H3F3B"
+      ]
+    ],
+    "1441": [
+      "ribosomal protein S6",
+      "rpS6"
+    ],
+    "1892": [
+      [
+        "e2ak2_human"
+      ],
+      [
+        "Interferon-induced, double-stranded RNA-activated protein kinase"
+      ],
+      [
+        "Interferon-inducible RNA-dependent protein kinase"
+      ],
+      [
+        "Eukaryotic translation initiation factor 2-alpha kinase 2"
+      ],
+      [
+        "Protein kinase RNA-activated"
+      ],
+      [
+        "p68 kinase"
+      ],
+      [
+        "P1\/eIF-2A protein kinase"
+      ],
+      [
+        "EIF2AK2"
+      ],
+      [
+        "PKR"
+      ],
+      [
+        "PRKR"
+      ],
+      [
+        "Tyrosine-protein kinase EIF2AK2"
+      ]
+    ],
+    "1648": [
+      [
+        "lck_human"
+      ],
+      [
+        "Tyrosine-protein kinase Lck"
+      ],
+      [
+        "LCK"
+      ],
+      [
+        "Lymphocyte cell-specific protein-tyrosine kinase"
+      ],
+      [
+        "p56-LCK"
+      ],
+      [
+        "Leukocyte C-terminal Src kinase"
+      ],
+      [
+        "Protein YT16"
+      ],
+      [
+        "Proto-oncogene Lck"
+      ],
+      [
+        "T cell-specific protein-tyrosine kinase"
+      ]
+    ],
+    "70": [
+      [
+        "foxo3_human"
+      ],
+      [
+        "Forkhead box protein O3"
+      ],
+      [
+        "FOXO3"
+      ],
+      [
+        "FKHRL1"
+      ],
+      [
+        "FOXO3A"
+      ],
+      [
+        "Forkhead in rhabdomyosarcoma-like 1"
+      ],
+      [
+        "AF6q21 protein"
+      ]
+    ],
+    "1754": [
+      [
+        "dyr1a_rat"
+      ],
+      [
+        "Dual specificity tyrosine-phosphorylation-regulated kinase 1A"
+      ],
+      [
+        "Dyrk1a"
+      ],
+      [
+        "Dyrk"
+      ],
+      [
+        "Dual specificity YAK1-related kinase"
+      ],
+      [
+        "Protein kinase minibrain homolog"
+      ],
+      [
+        "RP86"
+      ]
+    ],
+    "321": [
+      [
+        "abl1_human"
+      ],
+      [
+        "Tyrosine-protein kinase ABL1"
+      ],
+      [
+        "Abelson tyrosine-protein kinase 1"
+      ],
+      [
+        "ABL1"
+      ],
+      [
+        "ABL"
+      ],
+      [
+        "JTK7"
+      ],
+      [
+        "Abelson murine leukemia viral oncogene homolog 1"
+      ],
+      [
+        "Proto-oncogene c-Abl"
+      ],
+      [
+        "p150"
+      ]
+    ],
+    "373": [
+      [
+        "egfr_human"
+      ],
+      [
+        "Epidermal growth factor receptor"
+      ],
+      [
+        "ERBB1"
+      ],
+      [
+        "EGFR"
+      ],
+      [
+        "Receptor tyrosine-protein kinase erbB-1"
+      ],
+      [
+        "Proto-oncogene c-ErbB-1"
+      ],
+      [
+        "ERBB"
+      ],
+      [
+        "HER1"
+      ]
+    ],
+    "1358": [
+      "IFN"
+    ],
+    "2198": [
+      [
+        "src_human"
+      ],
+      [
+        "Proto-oncogene tyrosine-protein kinase Src"
+      ],
+      [
+        "pp60c-src"
+      ],
+      [
+        "SRC"
+      ],
+      [
+        "SRC1"
+      ],
+      [
+        "Proto-oncogene c-Src"
+      ]
+    ],
+    "1627": [
+      [
+        "ack1_human"
+      ],
+      [
+        "Activated CDC42 kinase 1"
+      ],
+      [
+        "ACK1"
+      ],
+      [
+        "TNK2"
+      ],
+      [
+        "Tyrosine kinase non-receptor protein 2"
+      ]
+    ],
+    "1206": [
+      "PP2Ac",
+      "PP2A"
+    ],
+    "995": [
+      "cofilin"
+    ],
+    "395": [
+      [
+        "src_human"
+      ],
+      [
+        "Proto-oncogene tyrosine-protein kinase Src"
+      ],
+      [
+        "pp60c-src"
+      ],
+      [
+        "SRC"
+      ],
+      [
+        "SRC1"
+      ],
+      [
+        "Proto-oncogene c-Src"
+      ]
+    ],
+    "1158": [
+      "stomach cancer-associated PTP 1",
+      "SAP-1"
+    ],
+    "2118": [
+      [
+        "synj1_rat"
+      ],
+      [
+        "Synaptojanin-1"
+      ],
+      [
+        "Synj1"
+      ],
+      [
+        "Synaptic inositol 1,4,5-trisphosphate 5-phosphatase 1"
+      ]
+    ],
+    "2103": [
+      [
+        "setd6_human"
+      ],
+      [
+        "N-lysine methyltransferase SETD6"
+      ],
+      [
+        "SETD6"
+      ],
+      [
+        "SET domain-containing protein 6"
+      ]
+    ],
+    "260": [
+      [
+        "kpci_human"
+      ],
+      [
+        "Protein kinase C iota type"
+      ],
+      [
+        "nPKC-iota"
+      ],
+      [
+        "Atypical protein kinase C-lambda\/iota"
+      ],
+      [
+        "PRKCI"
+      ],
+      [
+        "DXS1179E"
+      ]
+    ],
+    "2338": [
+      [
+        "rd23b_human"
+      ],
+      [
+        "UV excision repair protein RAD23 homolog B"
+      ],
+      [
+        "XP-C repair-complementing complex 58 kDa protein"
+      ],
+      [
+        "RAD23B"
+      ]
+    ],
+    "2197": [
+      [
+        "pp2aa_human"
+      ],
+      [
+        "Serine\/threonine-protein phosphatase 2A catalytic subunit alpha isoform"
+      ],
+      [
+        "PPP2CA"
+      ],
+      [
+        "Replication protein C"
+      ]
+    ],
+    "2070": [
+      [
+        "pten_human"
+      ],
+      [
+        "Phosphatidylinositol 3,4,5-trisphosphate 3-phosphatase and dual-specificity protein phosphatase PTEN"
+      ],
+      [
+        "Phosphatase and tensin homolog"
+      ],
+      [
+        "Mutated in multiple advanced cancers 1"
+      ],
+      [
+        "PTEN"
+      ],
+      [
+        "MMAC1"
+      ],
+      [
+        "TEP1"
+      ]
+    ],
+    "1148": [
+      "PTP1B"
+    ],
+    "13": [
+      [
+        "mk14_human"
+      ],
+      [
+        "Mitogen-activated protein kinase 14"
+      ],
+      [
+        "Mitogen-activated protein kinase p38 alpha"
+      ],
+      [
+        "Cytokine suppressive anti-inflammatory drug-binding protein"
+      ],
+      [
+        "MAX-interacting protein 2"
+      ],
+      [
+        "MAP kinase MXI2"
+      ],
+      [
+        "SAPK2A"
+      ],
+      [
+        "MAPK14"
+      ],
+      [
+        "CSBP"
+      ],
+      [
+        "CSBP1"
+      ],
+      [
+        "CSBP2"
+      ],
+      [
+        "CSPB1"
+      ],
+      [
+        "MXI2"
+      ],
+      [
+        "Stress-activated protein kinase 2a"
+      ]
+    ],
+    "1099": [
+      "VRK1",
+      "Vaccinia-related kinase 1"
+    ],
+    "44": [
+      [
+        "pdk1_human"
+      ],
+      [
+        "[Pyruvate dehydrogenase (acetyl-transferring)] kinase isozyme 1, mitochondrial"
+      ],
+      [
+        "PDK1"
+      ],
+      [
+        "PDHK1"
+      ],
+      [
+        "Pyruvate dehydrogenase kinase isoform 1"
+      ]
+    ],
+    "493": [
+      "MK2"
+    ],
+    "1779": [
+      [
+        "ptn1_human"
+      ],
+      [
+        "Tyrosine-protein phosphatase non-receptor type 1"
+      ],
+      [
+        "PTPN1"
+      ],
+      [
+        "PTP1B"
+      ],
+      [
+        "Protein-tyrosine phosphatase 1B"
+      ]
+    ]
+  },
+  "participant1Id": {
+    "2226": "P26038",
+    "425": "Q07812",
+    "7": "Q96GD4",
+    "1846": "Q5E9F8",
+    "1441": "P62753",
+    "1892": "P19525",
+    "1648": "P06239",
+    "70": "O43524",
+    "1754": "Q63470",
+    "321": "P00519",
+    "373": "P00533",
+    "1358": "P01562",
+    "2198": "P12931",
+    "1627": "Q07912",
+    "1206": "P67775",
+    "995": "P23528",
+    "395": "P12931",
+    "1158": "Q9HD43",
+    "2118": "Q62910",
+    "2103": "Q8TBK2",
+    "260": "P41743",
+    "2338": "P54727",
+    "2197": "P67775",
+    "2070": "P60484",
+    "1148": "P18031",
+    "13": "Q16539",
+    "1099": "Q99986",
+    "44": "Q15118",
+    "493": "P49137",
+    "1779": "P18031"
+  },
+  "participant2Alias": {
+    "2226": [
+      [
+        "lrrk2_human"
+      ],
+      [
+        "Leucine-rich repeat serine\/threonine-protein kinase 2"
+      ],
+      [
+        "LRRK2"
+      ],
+      [
+        "PARK8"
+      ],
+      [
+        "Dardarin"
+      ]
+    ],
+    "425": [
+      "Bcl-xL"
+    ],
+    "7": [
+      [
+        "kat5_human"
+      ],
+      [
+        "Histone acetyltransferase KAT5"
+      ],
+      [
+        "KAT5"
+      ],
+      [
+        "TIP60"
+      ],
+      [
+        "HTATIP"
+      ],
+      [
+        "Lysine acetyltransferase 5"
+      ],
+      [
+        "cPLA(2)-interacting protein"
+      ],
+      [
+        "Histone acetyltransferase HTATIP"
+      ],
+      [
+        "60 kDa Tat-interactive protein"
+      ]
+    ],
+    "1846": [
+      [
+        "aurkb_human"
+      ],
+      [
+        "Aurora kinase B"
+      ],
+      [
+        "AIRK2"
+      ],
+      [
+        "Aurora- and IPL1-like midbody-associated protein 1"
+      ],
+      [
+        "Aurora\/IPL1-related kinase 2"
+      ],
+      [
+        "STK-1"
+      ],
+      [
+        "Serine\/threonine-protein kinase 12"
+      ],
+      [
+        "Serine\/threonine-protein kinase 5"
+      ],
+      [
+        "STK1"
+      ],
+      [
+        "STK5"
+      ],
+      [
+        "Aurora 1"
+      ],
+      [
+        "AURKB"
+      ],
+      [
+        "AIK2"
+      ],
+      [
+        "AIM1"
+      ],
+      [
+        "ARK2"
+      ],
+      [
+        "STK12"
+      ],
+      [
+        "Serine\/threonine-protein kinase aurora-B"
+      ]
+    ],
+    "1441": [
+      "S6K1"
+    ],
+    "1892": [
+      [
+        "cdk1_human"
+      ],
+      [
+        "Cyclin-dependent kinase 1"
+      ],
+      [
+        "p34 protein kinase"
+      ],
+      [
+        "Cell division protein kinase 1"
+      ],
+      [
+        "CDK1"
+      ],
+      [
+        "CDC2"
+      ],
+      [
+        "Cell division control protein 2 homolog"
+      ],
+      [
+        "CDC28A"
+      ],
+      [
+        "CDKN1"
+      ],
+      [
+        "P34CDC2"
+      ]
+    ],
+    "1648": [
+      [
+        "zap70_human"
+      ],
+      [
+        "Tyrosine-protein kinase ZAP-70"
+      ],
+      [
+        "ZAP70"
+      ],
+      [
+        "SRK"
+      ],
+      [
+        "Syk-related tyrosine kinase"
+      ],
+      [
+        "70 kDa zeta-chain associated protein"
+      ]
+    ],
+    "70": [
+      [
+        "akt1_human"
+      ],
+      [
+        "RAC-alpha serine\/threonine-protein kinase"
+      ],
+      [
+        "AKT1"
+      ],
+      [
+        "PKB"
+      ],
+      [
+        "RAC"
+      ],
+      [
+        "RAC-PK-alpha"
+      ],
+      [
+        "Protein kinase B"
+      ],
+      [
+        "Proto-oncogene c-Akt"
+      ],
+      [
+        "Protein kinase B alpha"
+      ]
+    ],
+    "1754": [
+      [
+        "dyr1a_rat"
+      ],
+      [
+        "Dual specificity tyrosine-phosphorylation-regulated kinase 1A"
+      ],
+      [
+        "Dyrk1a"
+      ],
+      [
+        "Dyrk"
+      ],
+      [
+        "Dual specificity YAK1-related kinase"
+      ],
+      [
+        "Protein kinase minibrain homolog"
+      ],
+      [
+        "RP86"
+      ]
+    ],
+    "321": [
+      [
+        "ctnb1_human"
+      ],
+      [
+        "Catenin beta-1"
+      ],
+      [
+        "Beta-catenin"
+      ],
+      [
+        "OK\/SW-cl.35"
+      ],
+      [
+        "PRO2286"
+      ],
+      [
+        "CTNNB1"
+      ],
+      [
+        "CTNNB"
+      ]
+    ],
+    "373": [
+      [
+        "egfr_human"
+      ],
+      [
+        "Epidermal growth factor receptor"
+      ],
+      [
+        "ERBB1"
+      ],
+      [
+        "EGFR"
+      ],
+      [
+        "Receptor tyrosine-protein kinase erbB-1"
+      ],
+      [
+        "Proto-oncogene c-ErbB-1"
+      ],
+      [
+        "ERBB"
+      ],
+      [
+        "HER1"
+      ]
+    ],
+    "1358": [
+      "DDX3X"
+    ],
+    "2198": [
+      [
+        "ptn1_human"
+      ],
+      [
+        "Tyrosine-protein phosphatase non-receptor type 1"
+      ],
+      [
+        "PTPN1"
+      ],
+      [
+        "PTP1B"
+      ],
+      [
+        "Protein-tyrosine phosphatase 1B"
+      ]
+    ],
+    "1627": [
+      [
+        "ack1_human"
+      ],
+      [
+        "Activated CDC42 kinase 1"
+      ],
+      [
+        "ACK1"
+      ],
+      [
+        "TNK2"
+      ],
+      [
+        "Tyrosine kinase non-receptor protein 2"
+      ]
+    ],
+    "1206": [
+      "Rel"
+    ],
+    "995": [
+      "Limk2"
+    ],
+    "395": [
+      [
+        "tens3_human"
+      ],
+      [
+        "Tensin-3"
+      ],
+      [
+        "TNS3"
+      ],
+      [
+        "TEM6"
+      ],
+      [
+        "TENS1"
+      ],
+      [
+        "TPP"
+      ],
+      [
+        "Tumor endothelial marker 6"
+      ],
+      [
+        "Tensin-like SH2 domain-containing protein 1"
+      ]
+    ],
+    "1158": [
+      "Pyst-2"
+    ],
+    "2118": [
+      [
+        "cdk5_human"
+      ],
+      [
+        "Cyclin-dependent-like kinase 5"
+      ],
+      [
+        "CDK5"
+      ],
+      [
+        "Cell division protein kinase 5"
+      ],
+      [
+        "Tau protein kinase II catalytic subunit"
+      ],
+      [
+        "Serine\/threonine-protein kinase PSSALRE"
+      ],
+      [
+        "CDKN5"
+      ]
+    ],
+    "2103": [
+      [
+        "setd6_human"
+      ],
+      [
+        "N-lysine methyltransferase SETD6"
+      ],
+      [
+        "SETD6"
+      ],
+      [
+        "SET domain-containing protein 6"
+      ]
+    ],
+    "260": [
+      [
+        "sox2_human"
+      ],
+      [
+        "Transcription factor SOX-2"
+      ],
+      [
+        "SOX2"
+      ]
+    ],
+    "2338": [
+      [
+        "plk1_human"
+      ],
+      [
+        "Serine\/threonine-protein kinase PLK1"
+      ],
+      [
+        "Polo-like kinase 1"
+      ],
+      [
+        "Serine\/threonine-protein kinase 13"
+      ],
+      [
+        "PLK1"
+      ],
+      [
+        "PLK"
+      ]
+    ],
+    "2197": [
+      [
+        "rgap1_human"
+      ],
+      [
+        "Rac GTPase-activating protein 1"
+      ],
+      [
+        "Male germ cell RacGap"
+      ],
+      [
+        "RACGAP1"
+      ],
+      [
+        "KIAA1478"
+      ],
+      [
+        "MGCRACGAP"
+      ],
+      [
+        "Protein CYK4 homolog"
+      ]
+    ],
+    "2070": [
+      [
+        "mast2_mouse"
+      ],
+      [
+        "Microtubule-associated serine\/threonine-protein kinase 2"
+      ],
+      [
+        "Mast205"
+      ],
+      [
+        "Mast2"
+      ]
+    ],
+    "1148": [
+      "Erythropoietin",
+      "EPO"
+    ],
+    "13": [
+      [
+        "ncoa3_human"
+      ],
+      [
+        "Nuclear receptor coactivator 3"
+      ],
+      [
+        "NCOA3"
+      ],
+      [
+        "AIB1"
+      ],
+      [
+        "RAC3"
+      ],
+      [
+        "Thyroid hormone receptor activator molecule 1"
+      ],
+      [
+        "Receptor-associated coactivator 3"
+      ],
+      [
+        "BHLHE42"
+      ],
+      [
+        "Steroid receptor coactivator protein 3"
+      ],
+      [
+        "CBP-interacting protein"
+      ],
+      [
+        "Amplified in breast cancer 1 protein"
+      ],
+      [
+        "ACTR"
+      ],
+      [
+        "Class E basic helix-loop-helix protein 42"
+      ],
+      [
+        "TRAM1"
+      ]
+    ],
+    "1099": [
+      "p53"
+    ],
+    "44": [
+      [
+        "sgk3_human"
+      ],
+      [
+        "Serine\/threonine-protein kinase Sgk3"
+      ],
+      [
+        "SGKL"
+      ],
+      [
+        "Serum\/glucocorticoid-regulated kinase 3"
+      ],
+      [
+        "Serum\/glucocorticoid-regulated kinase-like"
+      ],
+      [
+        "SGK3"
+      ],
+      [
+        "CISK"
+      ],
+      [
+        "Cytokine-independent survival kinase"
+      ]
+    ],
+    "493": [
+      "MK3"
+    ],
+    "1779": [
+      [
+        "irs1_rat"
+      ],
+      [
+        "Insulin receptor substrate 1"
+      ],
+      [
+        "pp185"
+      ],
+      [
+        "Irs1"
+      ],
+      [
+        "Irs-1"
+      ]
+    ]
+  },
+  "participant2Id": {
+    "2226": "Q5S007",
+    "425": "Q07817",
+    "7": "Q92993",
+    "1846": "Q96GD4",
+    "1441": "P23443",
+    "1892": "P06493",
+    "1648": "P43403",
+    "70": "P31749",
+    "1754": "Q63470",
+    "321": "P35222",
+    "373": "P00533",
+    "1358": "O00571",
+    "2198": "P18031",
+    "1627": "Q07912",
+    "1206": "Q04864",
+    "995": "P53671",
+    "395": "Q68CZ2",
+    "1158": "Q16829",
+    "2118": "Q00535",
+    "2103": "Q8TBK2",
+    "260": "P48431",
+    "2338": "P53350",
+    "2197": "Q9H0H5",
+    "2070": "Q60592",
+    "1148": "P01588",
+    "13": "Q9Y6Q9",
+    "1099": "P04637",
+    "44": "Q96BR1",
+    "493": "Q16644",
+    "1779": "P35570"
+  },
+  "participants_count": {
+    "2226": 2,
+    "425": 2,
+    "7": 2,
+    "1846": 2,
+    "1441": 2,
+    "1892": 2,
+    "1648": 2,
+    "70": 2,
+    "1754": 1,
+    "321": 2,
+    "373": 1,
+    "1358": 2,
+    "2198": 2,
+    "1627": 1,
+    "1206": 2,
+    "995": 2,
+    "395": 2,
+    "1158": 2,
+    "2118": 2,
+    "2103": 2,
+    "260": 2,
+    "2338": 2,
+    "2197": 2,
+    "2070": 2,
+    "1148": 2,
+    "13": 2,
+    "1099": 1,
+    "44": 2,
+    "493": 2,
+    "1779": 2
+  },
+  "pubmedId": {
+    "2226": "24695735",
+    "425": "26763134",
+    "7": "26829474",
+    "1846": "21407176",
+    "1441": "21986499",
+    "1892": "20395957",
+    "1648": "16461343",
+    "70": "10102273",
+    "1754": "23809146",
+    "321": "17318191",
+    "373": "23273428",
+    "1358": "18583960",
+    "2198": "17974954",
+    "1627": "16472662",
+    "1206": "11591705",
+    "995": "19424295",
+    "395": "19732724",
+    "1158": "12907755",
+    "2118": "14704270",
+    "2103": "21131967",
+    "260": "24525231",
+    "2338": "21887822",
+    "2197": "18201571",
+    "2070": "15951562",
+    "1148": "14527337",
+    "13": "16456540",
+    "1099": "15542844",
+    "44": "16888620",
+    "493": "21575178",
+    "1779": "10660596"
+  },
+  "pubmedTitle": {
+    "2226": null,
+    "425": null,
+    "7": "Acetylation of Aurora B by TIP60 ensures accurate chromosomal segregation.",
+    "1846": null,
+    "1441": null,
+    "1892": null,
+    "1648": null,
+    "70": null,
+    "1754": null,
+    "321": null,
+    "373": "Insights into the aberrant activity of mutant EGFR kinase domain and drug recognition.",
+    "1358": null,
+    "2198": null,
+    "1627": null,
+    "1206": null,
+    "995": null,
+    "395": null,
+    "1158": null,
+    "2118": null,
+    "2103": null,
+    "260": null,
+    "2338": null,
+    "2197": null,
+    "2070": null,
+    "1148": null,
+    "13": null,
+    "1099": null,
+    "44": null,
+    "493": null,
+    "1779": null
+  },
+  "pubmedabstract": {
+    "2226": "The effect of leucine-rich repeat kinase 2 (LRRK2) mutation I2020T on its kinase activity has been controversial, with both increased and decreased effects being reported. We conducted steady-state and pre-steady-state kinetic studies on LRRKtide and its analog LRRKtide(S). Their phosphorylation differs by the rate-limiting steps: product release is rate-limiting for LRRKtide and phosphoryl transfer is rate-limiting for LRRKtide(S). As a result, we observed that the I2020T mutant is more active than wild type (WT) LRRK2 for LRRKtide(S) phosphorylation, whereas it is less active than WT for LRRKtide phosphorylation. Our pre-steady-state kinetic data suggest that (i) the I2020T mutant accelerates the rates of phosphoryl transfer of both reactions by 3-7-fold; (ii) this increase is masked by a rate-limiting product release step for LRRKtide phosphorylation; and (iii) the observed lower activity of the mutant for LRRKtide phosphorylation is a consequence of its instability: the concentration of the active form of the mutant is 3-fold lower than WT. The I2020T mutant has a dramatically low KATP and therefore leads to resistance to ATP competitive inhibitors. Two well known DFG-out or type II inhibitors are also weaker toward the mutant because they inhibit the mutant in an unexpected ATP competitive mechanism. The I2020 residue lies next to the DYG motif of the activation loop of the LRRK2 kinase domain. Our modeling and metadynamic simulations suggest that the I2020T mutant stabilizes the DYG-in active conformation and creates an unusual allosteric pocket that can bind type II inhibitors but in an ATP competitive fashion. ",
+    "425": "Bax-dependent mitochondrial permeabilization during apoptosis is controlled by multiple factors, including the phosphorylation by the protein kinase AKT. We used the heterologous co-expression of human Bax and AKT1 in yeast to investigate how the kinase modulates the different steps underlying Bax activation. We found that AKT activated Bax and increased its cellular content. Both effects were dependent on Ser184, but a phosphorylation of this residue did not fully explain the effects of AKT. Additional experiments with mutants substituted on Ser184 suggested that the regulation of Bax dynamic equilibrium between the cytosol and mitochondria might be more tightly regulated by Bcl-xL when Bax is phosphorylated. ",
+    "7": "Faithful segregation of chromosomes in mammalian cells requires bi-orientation of sister chromatids, which relies on the sensing of correct attachments between spindle microtubules and kinetochores. Although the mechanisms underlying cyclin-dependent kinase 1 (CDK1) activation, which triggers mitotic entry, have been extensively studied, the regulatory mechanisms that couple CDK1-cyclin B activity to chromosome stability are not well understood. Here, we identified a signaling axis in which Aurora B activity is modulated by CDK1-cyclin B via the acetyltransferase TIP60 in human cell division. CDK1-cyclin B phosphorylates Ser90 of TIP60, which elicits TIP60-dependent acetylation of Aurora B and promotes accurate chromosome segregation in mitosis. Mechanistically, TIP60 acetylation of Aurora B at Lys215 protects Aurora B's activation loop from dephosphorylation by the phosphatase PP2A to ensure a robust, error-free metaphase-anaphase transition. These findings delineate a conserved signaling cascade that integrates protein phosphorylation and acetylation with cell cycle progression for maintenance of genomic stability. ",
+    "1846": "Fidelity of chromosome segregation is ensured by a tension-dependent error correction system that prevents stabilization of incorrect chromosome-microtubule attachments. Unattached or incorrectly attached chromosomes also activate the spindle assembly checkpoint, thus delaying mitotic exit until all chromosomes are bioriented. The Aurora B kinase is widely recognized as a component of error correction. Conversely, its role in the checkpoint is controversial. Here, we report an analysis of the role of Aurora B in the spindle checkpoint under conditions believed to uncouple the effects of Aurora B inhibition on the checkpoint from those on error correction. Partial inhibition of several checkpoint and kinetochore components, including Mps1 and Ndc80, strongly synergizes with inhibition of Aurora B activity and dramatically affects the ability of cells to arrest in mitosis in the presence of spindle poisons. Thus, Aurora B might contribute to spindle checkpoint signalling independently of error correction. Our results support a model in which Aurora B is at the apex of a signalling pyramid whose sensory apparatus promotes the concomitant activation of error correction and checkpoint signalling pathways.",
+    "1441": "PHLPP is a family of Ser\/Thr protein phosphatases that contains PHLPP1 and PHLPP2 isoforms. We have shown previously that PHLPP functions as a tumor suppressor by negatively regulating Akt signaling in cancer cells. Here we report the identification of ribosomal protein S6 kinase 1 (S6K1) as a novel substrate of PHLPP. Overexpression of both PHLPP isoforms resulted in a decrease in S6K1 phosphorylation in cells, and this PHLPP-mediated dephosphorylation of S6K1 was independent of its ability to dephosphorylate Akt. Conversely, S6K1 phosphorylation was increased in cells depleted of PHLPP expression. Furthermore, we showed that the insulin receptor substrate 1 (IRS-1) expression and insulin-induced Akt phosphorylation were significantly decreased as the result of activation of the S6K-dependent negative feedback loop in PHLPP knockdown cells. Functionally, the phosphorylation of ribosomal protein S6 (rpS6) and the amount of phosphorylated rpS6 bound to the translation initiation complex were increased in PHLPP-knockdown cells. This correlated with increased cell size, protein content, and rate of cap-dependent translation. Taken together, our results demonstrate that loss of PHLPP expression activates the S6K-dependent negative feedback loop and that PHLPP is a novel player involved in regulating protein translation initiation and cell size via direct dephosphorylation of S6K1.",
+    "1892": "Cell division cycle 2 (Cdc2) protein is an essential subunit of M-phase kinase (MPK), which has a key role in G2\/M transition. Even though the control of MPK activity has been well established with regard to the phosphorylation of Cdc2 at Thr 14 and\/or Tyr 15 and Thr 161, little is known about the proteolytic control of Cdc2. In this study, we observed that Cdc2 was downregulated under genotoxic stresses and that double-stranded RNA-activated protein kinase (PKR) was involved in the process. The PKR-mediated Tyr4 phosphorylation triggered Cdc2 ubiquitination. Phospho-mimic mutations at the Tyr 4 residue (Y4D or Y4E) caused significant ubiquitination of Cdc2 even in the absence of PKR. Our findings demonstrate that (i) PKR, Ser\/Thr kinase, phosphorylates its new substrate Cdc2 at the Tyr 4 residue, (ii) PKR-mediated Tyr 4-phosphorylation facilitates Cdc2 ubiquitination and proteosomal degradation, (iii) unphosphorylated Tyr 4 prevents Cdc2 ubiquitination, and (iv) downstream from p53, PKR has a crucial role in G2 arrest and triggers Cdc2 downregulation under genotoxic conditions.",
+    "1648": "Stimulation of mature T cells activates a downstream signaling cascade involving temporally and spatially regulated phosphorylation and dephosphorylation events mediated by protein-tyrosine kinases and phosphatases, respectively. PTPN22 (Lyp), a non-receptor protein-tyrosine phosphatase, is expressed exclusively in cells of hematopoietic origin, notably in T cells where it represses signaling through the T cell receptor. We used substrate trapping coupled with mass spectrometry-based peptide identification in an unbiased approach to identify physiological substrates of PTPN22. Several potential substrates were identified in lysates from pervanadate-stimulated Jurkat cells using PTPN22-D195A\/C227S, an optimized substrate trap mutant of PTPN22. These included three novel PTPN22 substrates (Vav, CD3epsilon, and valosin containing protein) and two known substrates of PEP, the mouse homolog of PTPN22 (Lck and Zap70). T cell antigen receptor (TCR) zeta was also identified as a potential substrate in Jurkat lysates by direct immunoblotting. In vitro experiments with purified recombinant proteins demonstrated that PTPN22-D195A\/C227S interacted directly with activated Lck, Zap70, and TCRzeta, confirming the initial substrate trap results. Native PTPN22 dephosphorylated Lck and Zap70 at their activating tyrosine residues Tyr-394 and Tyr-493, respectively, but not at the regulatory tyrosines Tyr-505 (Lck) or Tyr-319 (Zap70). Native PTPN22 also dephosphorylated TCRzeta in vitro and in cells, and its substrate trap variant co-immunoprecipitated with TCRzeta when both were coexpressed in 293T cells, establishing TCRzeta as a direct substrate of PTPN22.",
+    "70": "Survival factors can suppress apoptosis in a transcription-independent manner by activating the serine\/ threonine kinase Akt, which then phosphorylates and inactivates components of the apoptotic machinery, including BAD and Caspase 9. In this study, we demonstrate that Akt also regulates the activity of FKHRL1, a member of the Forkhead family of transcription factors. In the presence of survival factors, Akt phosphorylates FKHRL1, leading to FKHRL1's association with 14-3-3 proteins and FKHRL1's retention in the cytoplasm. Survival factor withdrawal leads to FKHRL1 dephosphorylation, nuclear translocation, and target gene activation. Within the nucleus, FKHRL1 triggers apoptosis most likely by inducing the expression of genes that are critical for cell death, such as the Fas ligand gene.",
+    "1754": "The function of many protein kinases is controlled by the phosphorylation of a critical tyrosine residue in the activation loop. Dual specificity tyrosine-phosphorylation-regulated kinases (DYRKs) autophosphorylate on this tyrosine residue but phosphorylate substrates on aliphatic amino acids. This study addresses the mechanism of dual specificity kinase activity in DYRK1A and related kinases. Tyrosine autophosphorylation of DYRK1A occurred rapidly during in vitro translation and did not depend on the non-catalytic domains or other proteins. Expression in bacteria as well as in mammalian cells revealed that tyrosine kinase activity of DYRK1A is not restricted to the co-translational autophosphorylation in the activation loop. Moreover, mature DYRK1A was still capable of tyrosine autophosphorylation. Point mutants of DYRK1A and DYRK2 lacking the activation loop tyrosine showed enhanced tyrosine kinase activity. A series of structurally diverse DYRK1A inhibitors was used to pharmacologically distinguish different conformational states of the catalytic domain that are hypothesized to account for the dual specificity kinase activity. All tested compounds inhibited substrate phosphorylation with higher potency than autophosphorylation but none of the tested inhibitors differentially inhibited threonine and tyrosine kinase activity. Finally, the related cyclin-dependent kinase-like kinases (CLKs), which lack the activation loop tyrosine, autophosphorylated on tyrosine both in vitro and in living cells. We propose a model of DYRK autoactivation in which tyrosine autophosphorylation in the activation loop stabilizes a conformation of the catalytic domain with enhanced serine\/threonine kinase activity without disabling tyrosine phosphorylation. The mechanism of dual specificity kinase activity probably applies to related serine\/threonine kinases that depend on tyrosine autophosphorylation for maturation.",
+    "321": "Self-renewal of Bcr-Abl(+) chronic myeloid leukemia (CML) cells is sustained by a nuclear activated serine\/threonine-(S\/T) unphosphorylated beta-catenin. Although beta-catenin can be tyrosine (Y)-phosphorylated, the occurrence and biological relevance of this covalent modification in Bcr-Abl-associated leukemogenesis is unknown. Here we show that Bcr-Abl levels control the degree of beta-catenin protein stabilization by affecting its Y\/S\/T-phospho content in CML cells. Bcr-Abl physically interacts with beta-catenin, and its oncogenic tyrosine kinase activity is required to phosphorylate beta-catenin at Y86 and Y654 residues. This Y-phospho beta-catenin binds to the TCF4 transcription factor, thus representing a transcriptionally active pool. Imatinib, a Bcr-Abl antagonist, impairs the beta-catenin\/TCF-related transcription causing a rapid cytosolic retention of Y-unphosphorylated beta-catenin, which presents an increased binding affinity for the Axin\/GSK3beta complex. Although Bcr-Abl does not affect GSK3beta autophosphorylation, it prevents, through its effect on beta-catenin Y phosphorylation, Axin\/GSK3beta binding to beta-catenin and its subsequent S\/T phosphorylation. Silencing of beta-catenin by small interfering RNA inhibited proliferation and clonogenicity of Bcr-Abl(+) CML cells, in synergism with Imatinib. These findings indicate the Bcr-Abl triggered Y phosphorylation of beta-catenin as a new mechanism responsible for its protein stabilization and nuclear signalling activation in CML.",
+    "373": "The oncogenicity of the L858R mutant form of the epidermal growth factor receptor (EGFR) in non-small-cell lung cancer is thought to be due to the constitutive activation of its kinase domain. The selectivity of the marketed drugs gefitinib and erlotinib for L858R mutant is attributed to their specific recognition of the active kinase and to weaker ATP binding by L858R EGFR. We present crystal structures showing that neither L858R nor the drug-resistant L858R+T790M EGFR kinase domain is in the constitutively active conformation. Additional co-crystal structures show that gefitinib and dacomitinib, an irreversible anilinoquinazoline derivative currently in clinical development, may not be conformation specific for the active state of the enzyme. Structural data further reveal the potential mode of recognition of one of the autophosphorylation sites in the C-terminal tail, Tyr-1016, by the kinase domain. Biochemical and biophysical evidence suggest that the oncogenic mutations impact the conformational dynamics of the enzyme.",
+    "1358": "TANK-binding kinase 1 (TBK1) is of central importance for the induction of type-I interferon (IFN) in response to pathogens. We identified the DEAD-box helicase DDX3X as an interaction partner of TBK1. TBK1 and DDX3X acted synergistically in their ability to stimulate the IFN promoter, whereas RNAi-mediated reduction of DDX3X expression led to an impairment of IFN production. Chromatin immunoprecipitation indicated that DDX3X is recruited to the IFN promoter upon infection with Listeria monocytogenes, suggesting a transcriptional mechanism of action. DDX3X was found to be a TBK1 substrate in vitro and in vivo. Phosphorylation-deficient mutants of DDX3X failed to synergize with TBK1 in their ability to stimulate the IFN promoter. Overall, our data imply that DDX3X is a critical effector of TBK1 that is necessary for type I IFN induction.",
+    "2198": "Src-specific activity has been reported to be elevated in a high percentage of colon cancer cell lines and tumors, but the underlying mechanisms are largely unknown. In this study, we report that, in the seven cancer cell lines tested, Src-specific activity was elevated (5.2- to 18.7-fold) relative to normal colon cells (FHC). This activation of Src correlated with reduced phosphorylation at Y530 of Src, whereas there was no significant change in the level of phosphorylation at Y419. The membrane tyrosine phosphatase activity for a Src family-specific phosphopeptide substrate FCP (Fyn COOH-terminal peptide phosphorylated by Csk) was greatly increased in the cancer cells and was attributed to PTP1B in most of the cell lines. Membrane PTP1B protein levels were also greatly increased. Overexpression of PTP1B increased Src specific activity in colon cancer cells by reducing phosphorylation at Y530 of Src. It also increased anchorage-independent cell growth and this increase was blocked by the Src inhibitor PP2 and Src small interfering RNA (siRNA). Down-regulating PTP1B activity by PTP1B inhibitor CinnGEL 2Me or knocking down PTP1B using siRNA also reduced Src kinase activity and colony formation ability of colon cancer cells. PTP1B siRNA reduced tumor growth in nonobese diabetic\/severe combined immunodeficient mice. This study suggests that (a) PTP1B can act as an important activator of Src in colon cancer cells via dephosphorylation at Y530 of Src and (b) elevated levels of PTP1B can increase tumorigenicity of colon cancer cells by activating Src.",
+    "1627": "The activated Cdc42 associated kinases (ACKs) are nonreceptor tyrosine kinases that are specific targets of Cdc42. To study the biochemical properties of ACK1, we expressed and purified the enzyme using the baculovirus\/Sf9 cell system. This ACK1 construct contains (from N- to C-terminus) the kinase catalytic domain, SH3 domain, and Cdc42-binding CRIB domain. We describe enzyme activity assays based on synthetic peptide substrates. The best such substrate is a peptide derived from the site of ACK1-catalyzed phosphorylation of the Wiskott-Aldrich syndrome protein (WASP). Although the SH3 and CRIB domains of purified ACK1 are able to bind ligands (a polyproline peptide and Cdc42, respectively), the ligands did not stimulate in vitro tyrosine kinase activity. Purified ACK1 undergoes autophosphorylation at Tyr284, and autophosphorylation increases kinase activity.",
+    "1206": "Nuclear factor-kappa B (NF-kappa B)\/Rel transcription factors are key regulators of a variety of genes involved in inflammatory responses, growth, differentiation, apoptosis, and development. There are increasing lines of evidence that NF-kappa B\/Rel activity is controlled to a great extent by its phosphorylation state. In this study, we demonstrated that RelA physically associated with protein phosphatase 2A (PP2A) subunit A (PR65). Both the N- and C-terminal regions of RelA were responsible for the PP2A binding. RelA co-immunoprecipitated with PP2A in melanocytes in the absence of stimulation, indicating that RelA forms a signaling complex with PP2A in the cells. RelA was dephosphorylated by a purified PP2A core enzyme, a heterodimer formed by the catalytic subunit of PP2A (PP2Ac) and PR65, in a concentration-dependent manner. Okadaic acid, an inhibitor of PP2A at lower concentration, increased the basal phosphorylation of RelA in melanocytes and blocked the dephosphorylation of RelA after interleukin-1 stimulation. Interestingly, PP2A immunoprecipitated from melanocytes was able to dephosphorylate RelA, whereas PP2A immunoprecipitated from melanoma cell lines exhibited decreased capacity to dephosphorylate RelA in vitro. Moreover, in melanoma cells in which I kappa B kinase activity was inhibited by sulindac to a similar level as in melanocytes, the phosphorylation state of RelA and the relative NF-kappa B activity were still higher than those in normal melanocytes. These data suggest that the constitutive activation of RelA in melanoma cells (Yang, J., and Richmond, A. (2001) Cancer Res. 61, 4901-4909) could be due, at least in part, to the deficiency of PP2A, which exhibits decreased dephosphorylation of NF-kappa B\/RelA.",
+    "995": "Proper regulation of the cAMP-dependent protein kinase (protein kinase A, PKA) is necessary for cellular homeostasis, and dysregulation of this kinase is crucial in human disease. Mouse embryonic fibroblasts (MEFs) lacking the PKA regulatory subunit Prkar1a show altered cell morphology and enhanced migration. At the molecular level, these cells showed increased phosphorylation of cofilin, a crucial modulator of actin dynamics, and these changes could be mimicked by stimulating the activity of PKA. Previous studies of cofilin have shown that it is phosphorylated primarily by the LIM domain kinases Limk1 and Limk2, which are under the control of the Rho GTPases and their downstream effectors. In Prkar1a(-\/-) MEFs, neither Rho nor Rac was activated; rather, we showed that PKA could directly phosphorylate Limk1 and thus enhance the phosphorylation of cofilin. These data indicate that PKA is crucial in cell morphology and migration through its ability to modulate directly the activity of LIM kinase.",
+    "395": "In cell lines from advanced lung cancer, breast cancer, and melanoma, endogenous tensin-3 contributes to cell migration, anchorage-independent growth, and tumorigenesis. Although SH2 domains have not been reported previously to be phosphorylated, the tensin-3 SH2 domain is a physiologic substrate for Src. Tyrosines in the SH2 domain contribute to the biological activity of tensin-3, and phosphorylation of these tyrosines can regulate ligand binding. In a mouse breast cancer model, tensin-3 tyrosines are phosphorylated in a Src-associated manner in primary tumors, and experimental metastases induced by tumor-derived cell lines depend on endogenous tensin-3. Thus, tensin-3 is implicated as an oncoprotein regulated by Src and possessing an SH2 domain with a previously undescribed mechanism for the regulation of ligand binding.",
+    "1158": "Protein tyrosine phosphatases (PTPs) play key roles in switching off tyrosine phosphorylation cascades, such as initiated by cytokine receptors. We have used substrate-trapping mutants of a large set of PTPs to identify members of the PTP family that have substrate specificity for the phosphorylated human GH receptor (GHR) intracellular domain. Among 31 PTPs tested, T cell (TC)-PTP, PTP-beta, PTP1B, stomach cancer-associated PTP 1 (SAP-1), Pyst-2, Meg-2, and PTP-H1 showed specificity for phosphorylated GHR that had been produced by coexpression with a kinase in bacteria. We then used GH-induced, phosphorylated GH receptor, purified from overexpressing mammalian cells, in a Far Western-based approach to test whether these seven PTPs were also capable of recognizing ligand-induced, physiologically phosphorylated GHR. In this assay, only TC-PTP, PTP1B, PTP-H1, and SAP-1 interacted with the mature form of the phosphorylated GHR. In parallel, we show that these PTPs recognize very different subsets of the seven GHR tyrosines that are potentially phosphorylated. Finally, mRNA tissue distribution of these PTPs by RT-PCR analysis and coexpression of the wild-type PTPs to test their ability to dephosphorylate ligand-activated GHR suggest PTP-H1 and PTP1B as potential candidates involved in GHR signaling.",
+    "2118": "Synaptojanin 1 is a polyphosphoinositide phosphatase concentrated in presynaptic nerve terminals, where it dephosphorylates a pool of phosphatidylinositol 4,5-bisphosphate implicated in synaptic vesicle recycling. Like other proteins with a role in endocytosis, synaptojanin 1 undergoes constitutive phosphorylation in resting synapses and stimulation-dependent dephosphorylation by calcineurin. Here, we show that cyclin-dependent kinase 5 (Cdk5) phosphorylates synaptojanin 1 and regulates its function both in vitro and in intact synaptosomes. Cdk5 phosphorylation inhibited the inositol 5-phosphatase activity of synaptojanin 1, whereas dephosphorylation by calcineurin stimulated such activity. The activity of synaptojanin 1 was also stimulated by its interaction with endophilin 1, its major binding partner at the synapse. Notably, Cdk5 phosphorylated serine 1144, which is adjacent to the endophilin binding site. Mutation of serine 1144 to aspartic acid to mimic phosphorylation by Cdk5 inhibited the interaction of synaptojanin 1 with endophilin 1. These results suggest that Cdk5 and calcineurin may have an antagonistic role in the regulation of synaptojanin 1 recruitment and activity, and therefore in the regulation of phosphatidylinositol 4,5-bisphosphate turnover at synapses.",
+    "2103": "Signaling via the methylation of lysine residues in proteins has been linked to diverse biological and disease processes, yet the catalytic activity and substrate specificity of many human protein lysine methyltransferases (PKMTs) are unknown. We screened over 40 candidate PKMTs and identified SETD6 as a methyltransferase that monomethylated chromatin-associated transcription factor NF-\u03baB subunit RelA at Lys310 (RelAK310me1). SETD6-mediated methylation rendered RelA inert and attenuated RelA-driven transcriptional programs, including inflammatory responses in primary immune cells. RelAK310me1 was recognized by the ankryin repeat of the histone methyltransferase GLP, which under basal conditions promoted a repressed chromatin state at RelA target genes through GLP-mediated methylation of histone H3 Lys9 (H3K9). NF-\u03baB-activation-linked phosphorylation of RelA at Ser311 by protein kinase C-\u03b6 (PKC-\u03b6) blocked the binding of GLP to RelAK310me1 and relieved repression of the target gene. Our findings establish a previously uncharacterized mechanism by which chromatin signaling regulates inflammation programs.",
+    "260": "We report that two oncogenes coamplified on chromosome 3q26, PRKCI and SOX2, cooperate to drive a stem-like phenotype in lung squamous cell carcinoma (LSCC). Protein kinase C\u03b9 (PKC\u03b9) phosphorylates SOX2, a master transcriptional regulator of stemness, and recruits it to the promoter of Hedgehog (Hh) acyltransferase (HHAT) that catalyzes the rate-limiting step in Hh ligand production. PKC\u03b9-mediated SOX2 phosphorylation is required for HHAT promoter occupancy, HHAT expression, and maintenance of a stem-like phenotype. Primary LSCC tumors coordinately overexpress PKC\u03b9, SOX2, and HHAT and require PKC\u03b9-SOX2-HHAT signaling to maintain a stem-like phenotype. Thus, PKC\u03b9 and SOX2 are genetically, biochemically, and functionally linked in LSCC, and together they drive tumorigenesis by establishing a cell-autonomous Hh signaling axis. ",
+    "2338": "We previously demonstrated that when arsenic trioxide (ATO)-induced mitotically arrested HeLa S3 cells (AIMACs) were treated with staurosporine (SSP) the cells rapidly exited mitosis. To better define the cellular targets and the underlying mechanisms of AIMACs, we applied 2-D DIGE followed by LC-MS\/MS analysis and showed that SSP induced a significant change in the phosphoproteome of AIMACs. Among the proteins whose phosphorylation was modulated by SSP, we identified Hsp70, Rad 23B, and eukaryotic translation initiation factor 4B as potentially new substrates of polo-like kinase 1 (Plk1), an essential serine\/threonine kinase with versatile mitotic functions. Since Hsp70 is a stress protein responsible for ATO treatment, we further identified Thr(13) , Ser(362) , Ser(631) , and Ser(633)  on Hsp70 intracellularly phosphorylated in AIMACs by combining TiO(2)  phospho-peptides enrichment and MS\/MS analysis. Using antibody specifically against phosph-Ser(631)  Hsp70 and further aided by expression of kinase-dead Plk1 and pharmacological inhibition of Plk1, we concluded that Ser(631)  on Hsp70 is phosphorylated by Plk1 in AIMACs. By immnuofluorescent staining, we found the colocalization of Hsp70 and Plk1 in AIMACs but not in interphase cells. In addition, Plk1-mediated phosphorylation of Hsp70 prevented AIMACs from mitotic death. Our results reveal that Hsp70 is a novel substrate of Plk1 and that its phosphorylation contributes to attenuation of ATO-induced mitotic abnormalities.",
+    "2197": "MgcRacGAP, a Rho GAP essential to cytokinesis, works both as a Rho GTPase regulator and as a scaffolding protein. MgcRacGAP interacts with MKLP1 to form the centralspindlin complex and associates with the RhoGEF Ect2. The GAP activity of MgcRacGAP is regulated by Aurora B phosphorylation. We have isolated B56epsilon, a PP2A regulatory subunit, as a new MgcRacGAP partner. We report here that (i) MgcRacGAP is phosphorylated by Aurora B and Cdk1, (ii) PP2A dephosphorylates Aurora B and Cdk1 phosphorylated sites and (iii) inhibition of PP2A abrogates MgcRacGAP\/Ect2 interaction. Therefore, PP2A may regulate cytokinesis by dephosphorylating MgcRacGAP and its interacting partners.",
+    "2070": "The tumor suppressor phosphatase PTEN is a key regulator of cell growth and apoptosis that interacts with PDZ domains from regulatory proteins, including MAGI-1\/2\/3, hDlg, and MAST205. Here we identified novel PTEN-binding PDZ domains within the MAST205-related proteins, syntrophin-associated serine\/threonine kinase and MAST3, characterized the regions of PTEN involved in its interaction with distinctive PDZ domains, and analyzed the functional consequences on PTEN of PDZ domain binding. Using a panel of PTEN mutations, as well as PTEN chimeras containing distinct domains of the related protein TPTE, we found that the PTP and C2 domains of PTEN do not affect PDZ domain binding and that the C-terminal tail of PTEN (residues 350-403) provides selectivity to recognize specific PDZ domains from MAGI-2, hDlg, and MAST205. Binding of PTEN to the PDZ-2 domain from MAGI-2 increased PTEN protein stability. Furthermore, binding of PTEN to the PDZ domains from microtubule-associated serine\/threonine kinases facilitated PTEN phosphorylation at its C terminus by these kinases. Our results suggest an important role for the C-terminal region of PTEN in the selective association with scaffolding and\/or regulatory molecules and provide evidence that PDZ domain binding stabilizes PTEN and targets this tumor suppressor for phosphorylation by microtubule-associated serine\/threonine kinases.",
+    "1148": "Erythropoietin (EPO) is the principal hormone regulating the proliferation of erythroid precursors and their differentiation into erythrocytes. Binding of ligand to the cell-surface EPO-R (EPO receptor) induces dimerization and JAK2 (Janus kinase 2)-mediated tyrosine phosphorylation of the receptor. Less than 1% of the EPO-Rs are displayed on the cell surface; most of the receptor molecules are retained in intracellular compartments, including the ER (endoplasmic reticulum). Using pervanadate (PV) as a potent tool to inhibit cellular PTPs (protein tyrosine phosphatases), we demonstrated previously the accumulation of mature (endoglycosidase H-resistant) tyrosine-phosphorylated EPO-R [Cohen, Altaratz, Zick, Klingmuller and Neumann (1997) Biochem. J. 327, 391-397]. In the present study, we investigated the participation of the ER-associated PTP1B in the dephosphorylation of intracellular EPO-R. We demonstrate tyrosine phosphorylation of EPO-R in BOSC-23T cells co-expressing EPO-R and the 'substrate-trapping' mutant form of PTP1B, PTP1B D181A (referred to as PTP1BD). In vivo interaction between EPO-R and PTP1B suggested that PTP1B dephosphorylates the EPO-R intracellularly. Endoglycosidase H resistance of tyrosine-phosphorylated EPO-R in cells expressing PTP1BD suggested that mature EPO-R is dephosphorylated by PTP1B. Stimulation with EPO of cells co-expressing EPO-R and either PTP1BD or PTP1B resulted in an increase or decrease respectively in phosphotyrosine EPO-R. We thus suggest that PTP1B dephosphorylates EPO-stimulated EPO-R and participates in the down-regulation cascade of EPO-mediated signal transduction.",
+    "13": "Nuclear retinoic acid (RA) receptors (RARs) activate gene expression through dynamic interactions with coregulators in coordination with the ligand and phosphorylation processes. Here we show that during RA-dependent activation of the RARalpha isotype, the p160 coactivator pCIP\/ACTR\/AIB-1\/RAC-3\/TRAM-1\/SRC-3 is phosphorylated by p38MAPK. SRC-3 phosphorylation has been correlated to an initial facilitation of RARalpha-target genes activation, via the control of the dynamics of the interactions of the coactivator with RARalpha. Then, phosphorylation inhibits transcription via promoting the degradation of SRC-3. In line with this, inhibition of p38MAPK markedly enhances RARalpha-mediated transcription and RA-dependent induction of cell differentiation. SRC-3 phosphorylation and degradation occur only within the context of RARalpha complexes, suggesting that the RAR isotype defines a phosphorylation code through dictating the accessibility of the coactivator to p38MAPK. We propose a model in which RARalpha transcriptional activity is regulated by SRC-3 through coordinated events that are fine-tuned by RA and p38MAPK.",
+    "1099": "Variations in intracellular levels of p53 regulate many cellular functions and determine tumor susceptibility. Major mechanisms modulating p53 levels include phosphorylation and interaction of p53 with specific ubiquitin ligases that promote its degradation. N-terminal phosphorylation regulates the interaction of p53 with several regulatory molecules. Vaccinia-related kinase 1 (VRK1) is the prototype of a new Ser-Thr kinase family in the human kinome. VRK1 is located in the nucleus outside the nucleolus. Overexpression of VRK1 increases the stability of p53 by a posttranslational mechanism leading to its accumulation by a mechanism independent of the Chk2 kinase. Catalytically inactive VRK1 protein (a K179E mutant) does not induce p53 accumulation. VRK1 phosphorylates human p53 in Thr18 and disrupts p53-Mdm2 interaction in vitro, although a significant decrease in p53 ubiquitination by Mdm2 in vivo was not detected. VRK1 kinase does not phosphorylate Mdm2. VRK1-mediated p53 stabilization was also detected in Mdm2(-\/-) cells. VRK1 also has an additive effect with MdmX or p300 to stabilize p53, and p300 coactivation and acetylation of p53 is enhanced by VRK1. The p53 stabilized by VRK1 is transcriptionally active. Suppression of VRK1 expression by specific small interfering RNA provokes several defects in proliferation, situating the protein in the regulation of this process. VRK1 might function as a switch controlling the proteins that interact with p53 and thus modifying its stability and activity. We propose VRK1 as the first step in a new pathway regulating p53 activity during cell proliferation.",
+    "44": "HER2 overexpression in cancers causes hyperactivation of the PI 3-kinase pathway and elevated levels of the chemokine receptor CXCR4, which is strongly associated with increased metastatic potential. Here, we provide evidence that the cytokine-independent survival kinase CISK is activated downstream of the PI 3-kinase-dependent kinase PDK1 on endosomes and negatively regulates the lysosomal degradation of CXCR4. We demonstrate that CISK prevents CXCR4 degradation by inhibiting sorting of the receptor from early endosomes to lysosomes. In contrast, CISK does not interfere with ligand-induced degradation of epidermal growth factor receptors. CISK strongly interacts and colocalizes with the E3 ubiquitin ligase AIP4, which is important for the ubiquitin-dependent lysosomal degradation of CXCR4. Moreover, the observed inhibition is both dependent on the interaction between CISK and AIP4 and on the activation status of CISK. Consistent with this, an activated form of CISK but not of the related kinase SGK1 phosphorylates specific sites of AIP4 in vitro. Taken together, these results reveal a critical function of CISK in specifically attenuating ubiquitin-dependent degradation of CXCR4, and provide a mechanistic link between the PI 3-kinase pathway and CXCR4 stability.",
+    "493": "Classical mammalian mitogen-activated protein kinase (MAPK) pathways consist of a cascade of three successive phosphorylation events resulting in the phosphorylation of a variety of substrates, including another class of protein kinases referred to as MAPK-activating protein kinases (MAPKAPKs). The MAPKAPKs MK2, MK3 and MK5 are closely related, but MK2 and MK3 are the major downstream targets of the p38MAPK pathway, while MK5 can be activated by the atypical MAPK ERK3 and ERK4, protein kinase A (PKA), and maybe p38MAPK. MK2, MK3, and MK5 can phosphorylate the common substrate small heat shock protein 27 (HSP27), a modification that regulates the role of HSP27 in actin polymerization. Both stress and cAMP elevating stimuli can cause F-actin remodeling, but whereas the in vivo role of p38MAPK-MK2 in stress-triggered HSP27 phosphorylation and actin reorganization is well established, it is not known whether MK2 is involved in cAMP\/PKA-induced F-actin rearrangements. On the other hand, MK5 can phosphorylate HSP27 and cause cytoskeletal changes in a cAMP\/PKA-dependent manner, but its role as HSP27 kinase in stress-induced F-actin remodeling is disputed. Therefore, we wanted to investigate the implication of MK2 and MK5 in stress- and PKA-induced HSP27 phosphorylation.",
+    "1779": "Regulation of the steady-state tyrosine phosphorylation of the insulin receptor and its postreceptor substrates are essential determinants of insulin signal transduction. However, little is known regarding the molecular interactions that influence the balance of these processes, especially the phosphorylation state of postinsulin receptor substrates, such as insulin receptor substrate-1 (IRS-1). The specific activity of four candidate protein-tyrosine phosphatases (protein-tyrosine phosphatase 1B (PTP1B), SH2 domain-containing PTPase-2 (SHP-2), leukocyte common antigen-related (LAR), and leukocyte antigen-related phosphatase) (LRP) toward IRS-1 dephosphorylation was studied using recombinant proteins in vitro. PTP1B exhibited the highest specific activity (percentage dephosphorylated per microg per min), and the enzyme activities varied over a range of 5.5 x 10(3). When evaluated as a ratio of activity versus IRS-1 to that versus p-nitrophenyl phosphate, PTP1B remained significantly more active by 3.1-293-fold, respectively. Overlay blots with recombinant Src homology 2 domains of IRS-1 adaptor proteins showed that the loss of IRS-1 binding of Crk, GRB2, SHP-2, and the p85 subunit of phosphatidylinositol 3'-kinase paralleled the rate of overall IRS-1 dephosphorylation. Further studies revealed that the adaptor protein GRB2 strongly promoted the formation of a stable protein complex between tyrosine-phosphorylated IRS-1 and catalytically inactive PTP1B, increasing their co-immunoprecipitation from an equimolar solution by 13.5 +\/- 3.3-fold (n = 7; p < 0.01). Inclusion of GRB2 in a reaction mixture of IRS-1 and active PTP1B also increased the overall rate of IRS-1 tyrosine dephosphorylation by 2.7-3.9-fold (p < 0.01). These results provide new insight into novel molecular interactions involving PTP1B and GRB2 that may influence the steady-state capacity of IRS-1 to function as a phosphotyrosine scaffold and possibly affect the balance of postreceptor insulin signaling."
+  },
+  "normalised_abstract": {
+    "2226": "The effect of Q5S007 (Q5S007) mutation I2020T on its kinase activity has been controversial, with both increased and decreased effects being reported. We conducted steady-state and pre-steady-state kinetic studies on LRRKtide and its analog LRRKtide(S). Their phosphorylation differs by the rate-limiting steps: product release is rate-limiting for LRRKtide and phosphoryl transfer is rate-limiting for LRRKtide(S). As a result, we observed that the I2020T mutant is more active than wild type (WT) Q5S007 for LRRKtide(S) phosphorylation, whereas it is less active than WT for LRRKtide phosphorylation. Our pre-steady-state kinetic data suggest that (i) the I2020T mutant accelerates the rates of phosphoryl transfer of both reactions by 3-7-fold; (ii) this increase is masked by a rate-limiting product release step for LRRKtide phosphorylation; and (iii) the observed lower activity of the mutant for LRRKtide phosphorylation is a consequence of its instability: the concentration of the active form of the mutant is 3-fold lower than WT. The I2020T mutant has a dramatically low KATP and therefore leads to resistance to ATP competitive inhibitors. Two well known DFG-out or type II inhibitors are also weaker toward the mutant because they inhibit the mutant in an unexpected ATP competitive mechanism. The I2020 residue lies next to the DYG motif of the activation loop of the Q5S007 kinase domain. Our modeling and metadynamic simulations suggest that the I2020T mutant stabilizes the DYG-in active conformation and creates an unusual allosteric pocket that can bind type II inhibitors but in an ATP competitive fashion. ",
+    "425": "Q07812-dependent mitochondrial permeabilization during apoptosis is controlled by multiple factors, including the phosphorylation by the protein kinase P31749. We used the heterologous co-expression of human Q07812 and P31749 in yeast to investigate how the kinase modulates the different steps underlying Q07812 activation. We found that P31749 activated Q07812 and increased its cellular content. Both effects were dependent on Ser184, but a phosphorylation of this residue did not fully explain the effects of P31749. Additional experiments with mutants substituted on Ser184 suggested that the regulation of Q07812 dynamic equilibrium between the cytosol and mitochondria might be more tightly regulated by Q07817 when Q07812 is phosphorylated. ",
+    "7": "Faithful segregation of chromosomes in mammalian cells requires bi-orientation of sister chromatids, which relies on the sensing of correct attachments between spindle microtubules and kinetochores. Although the mechanisms underlying P06493 (P06493) activation, which triggers mitotic entry, have been extensively studied, the regulatory mechanisms that couple P06493-cyclin B activity to chromosome stability are not well understood. Here, we identified a signaling axis in which Q96GD4 activity is modulated by P06493-cyclin B via the acetyltransferase Q92993 in human cell division. P06493-cyclin B phosphorylates Ser90 of Q92993, which elicits Q92993-dependent acetylation of Q96GD4 and promotes accurate chromosome segregation in mitosis. Mechanistically, Q92993 acetylation of Q96GD4 at Lys215 protects Q96GD4's activation loop from dephosphorylation by the phosphatase Q15257 to ensure a robust, error-free metaphase-anaphase transition. These findings delineate a conserved signaling cascade that integrates protein phosphorylation and acetylation with cell cycle progression for maintenance of genomic stability. ",
+    "1846": "Fidelity of chromosome segregation is ensured by a tension-dependent error correction system that prevents stabilization of incorrect chromosome-microtubule attachments. Unattached or incorrectly attached chromosomes also activate the spindle assembly checkpoint, thus delaying mitotic exit until all chromosomes are bioriented. The Q96GD4 kinase is widely recognized as a component of error correction. Conversely, its role in the checkpoint is controversial. Here, we report an analysis of the role of Q96GD4 in the spindle checkpoint under conditions believed to uncouple the effects of Q96GD4 inhibition on the checkpoint from those on error correction. Partial inhibition of several checkpoint and kinetochore components, including Q2M385 and O14777, strongly synergizes with inhibition of Q96GD4 activity and dramatically affects the ability of cells to arrest in mitosis in the presence of spindle poisons. Thus, Q96GD4 might contribute to spindle checkpoint signalling independently of error correction. Our results support a model in which Q96GD4 is at the apex of a signalling pyramid whose sensory apparatus promotes the concomitant activation of error correction and checkpoint signalling pathways.",
+    "1441": "O60346 is a family of Ser\/Thr protein phosphatases that contains O60346 and Q6ZVD8 isoforms. We have shown previously that O60346 functions as a tumor suppressor by negatively regulating Akt signaling in cancer cells. Here we report the identification of P62753 kinase 1 (P23443) as a novel substrate of O60346. Overexpression of both O60346 isoforms resulted in a decrease in P23443 phosphorylation in cells, and this O60346-mediated dephosphorylation of P23443 was independent of its ability to dephosphorylate Akt. Conversely, P23443 phosphorylation was increased in cells depleted of O60346 expression. Furthermore, we showed that the P35568 (P35568) expression and insulin-induced Akt phosphorylation were significantly decreased as the result of activation of the S6K-dependent negative feedback loop in O60346 knockdown cells. Functionally, the phosphorylation of P62753 (P62753) and the amount of phosphorylated P62753 bound to the translation initiation complex were increased in O60346-knockdown cells. This correlated with increased cell size, protein content, and rate of cap-dependent translation. Taken together, our results demonstrate that loss of O60346 expression activates the S6K-dependent negative feedback loop and that O60346 is a novel player involved in regulating protein translation initiation and cell size via direct dephosphorylation of P23443.",
+    "1892": "P06493 (P06493) protein is an essential subunit of M-phase kinase (MPK), which has a key role in G2\/M transition. Even though the control of MPK activity has been well established with regard to the phosphorylation of P06493 at Thr 14 and\/or Tyr 15 and Thr 161, little is known about the proteolytic control of P06493. In this study, we observed that P06493 was downregulated under genotoxic stresses and that double-stranded RNA-activated protein kinase (P19525) was involved in the process. The P19525-mediated Tyr4 phosphorylation triggered P06493 ubiquitination. Phospho-mimic mutations at the Tyr 4 residue (Y4D or Y4E) caused significant ubiquitination of P06493 even in the absence of P19525. Our findings demonstrate that (i) P19525, Ser\/Thr kinase, phosphorylates its new substrate P06493 at the Tyr 4 residue, (ii) P19525-mediated Tyr 4-phosphorylation facilitates P06493 ubiquitination and proteosomal degradation, (iii) unphosphorylated Tyr 4 prevents P06493 ubiquitination, and (iv) downstream from P04637, P19525 has a crucial role in G2 arrest and triggers P06493 downregulation under genotoxic conditions.",
+    "1648": "Stimulation of mature T cells activates a downstream signaling cascade involving temporally and spatially regulated phosphorylation and dephosphorylation events mediated by protein-tyrosine kinases and phosphatases, respectively. Q9Y2R2 (Q9Y2R2), a non-receptor protein-tyrosine phosphatase, is expressed exclusively in cells of hematopoietic origin, notably in T cells where it represses signaling through the T cell receptor. We used substrate trapping coupled with mass spectrometry-based peptide identification in an unbiased approach to identify physiological substrates of Q9Y2R2. Several potential substrates were identified in lysates from pervanadate-stimulated Jurkat cells using Q9Y2R2-D195A\/C227S, an optimized substrate trap mutant of Q9Y2R2. These included three novel Q9Y2R2 substrates (P15498, P07766, and P55072) and two known substrates of PEP, the mouse homolog of Q9Y2R2 (P06239 and P43403). 6962 (6962) zeta was also identified as a potential substrate in Jurkat lysates by direct immunoblotting. In vitro experiments with purified recombinant proteins demonstrated that Q9Y2R2-D195A\/C227S interacted directly with activated P06239, P43403, and TCRzeta, confirming the initial substrate trap results. Native Q9Y2R2 dephosphorylated P06239 and P43403 at their activating tyrosine residues Tyr-394 and Tyr-493, respectively, but not at the regulatory tyrosines Tyr-505 (P06239) or Tyr-319 (P43403). Native Q9Y2R2 also dephosphorylated TCRzeta in vitro and in cells, and its substrate trap variant co-immunoprecipitated with TCRzeta when both were coexpressed in 293T cells, establishing TCRzeta as a direct substrate of Q9Y2R2.",
+    "70": "Survival factors can suppress apoptosis in a transcription-independent manner by activating the serine\/ threonine kinase P31749, which then phosphorylates and inactivates components of the apoptotic machinery, including BAD and P55211. In this study, we demonstrate that P31749 also regulates the activity of O43524, a member of the Forkhead family of transcription factors. In the presence of survival factors, P31749 phosphorylates O43524, leading to O43524's association with 14-3-3 proteins and O43524's retention in the cytoplasm. Survival factor withdrawal leads to O43524 dephosphorylation, nuclear translocation, and target gene activation. Within the nucleus, O43524 triggers apoptosis most likely by inducing the expression of genes that are critical for cell death, such as the P48023 gene.",
+    "1754": "The function of many protein kinases is controlled by the phosphorylation of a critical tyrosine residue in the activation loop. Dual specificity tyrosine-phosphorylation-regulated kinases (DYRKs) autophosphorylate on this tyrosine residue but phosphorylate substrates on aliphatic amino acids. This study addresses the mechanism of dual specificity kinase activity in Q63470 and related kinases. Tyrosine autophosphorylation of Q63470 occurred rapidly during in vitro translation and did not depend on the non-catalytic domains or other proteins. Expression in bacteria as well as in mammalian cells revealed that tyrosine kinase activity of Q63470 is not restricted to the co-translational autophosphorylation in the activation loop. Moreover, mature Q63470 was still capable of tyrosine autophosphorylation. Point mutants of Q63470 and Q92630 lacking the activation loop tyrosine showed enhanced tyrosine kinase activity. A series of structurally diverse Q63470 inhibitors was used to pharmacologically distinguish different conformational states of the catalytic domain that are hypothesized to account for the dual specificity kinase activity. All tested compounds inhibited substrate phosphorylation with higher potency than autophosphorylation but none of the tested inhibitors differentially inhibited threonine and tyrosine kinase activity. Finally, the related cyclin-dependent kinase-like kinases (CLKs), which lack the activation loop tyrosine, autophosphorylated on tyrosine both in vitro and in living cells. We propose a model of Q63470 autoactivation in which tyrosine autophosphorylation in the activation loop stabilizes a conformation of the catalytic domain with enhanced serine\/threonine kinase activity without disabling tyrosine phosphorylation. The mechanism of dual specificity kinase activity probably applies to related serine\/threonine kinases that depend on tyrosine autophosphorylation for maturation.",
+    "321": "Self-renewal of P00519(+) chronic myeloid leukemia (CML) cells is sustained by a nuclear activated serine\/threonine-(S\/T) unphosphorylated P35222. Although P35222 can be tyrosine (Y)-phosphorylated, the occurrence and biological relevance of this covalent modification in P00519-associated leukemogenesis is unknown. Here we show that P00519 levels control the degree of P35222 protein stabilization by affecting its Y\/S\/T-phospho content in CML cells. P00519 physically interacts with P35222, and its oncogenic tyrosine kinase activity is required to phosphorylate P35222 at Y86 and Y654 residues. This Y-phospho P35222 binds to the P15884 transcription factor, thus representing a transcriptionally active pool. Imatinib, a P00519 antagonist, impairs the P35222\/P41235-related transcription causing a rapid cytosolic retention of Y-unphosphorylated P35222, which presents an increased binding affinity for the O15169\/P49841 complex. Although P00519 does not affect P49841 autophosphorylation, it prevents, through its effect on P35222 Y phosphorylation, O15169\/P49841 binding to P35222 and its subsequent S\/T phosphorylation. Silencing of P35222 by small interfering RNA inhibited proliferation and clonogenicity of P00519(+) CML cells, in synergism with Imatinib. These findings indicate the P00519 triggered Y phosphorylation of P35222 as a new mechanism responsible for its protein stabilization and nuclear signalling activation in CML.",
+    "373": "The oncogenicity of the L858R mutant form of the P00533 (P00533) in non-small-cell lung cancer is thought to be due to the constitutive activation of its kinase domain. The selectivity of the marketed drugs gefitinib and erlotinib for L858R mutant is attributed to their specific recognition of the active kinase and to weaker ATP binding by L858R P00533. We present crystal structures showing that neither L858R nor the drug-resistant L858R+T790M P00533 kinase domain is in the constitutively active conformation. Additional co-crystal structures show that gefitinib and dacomitinib, an irreversible anilinoquinazoline derivative currently in clinical development, may not be conformation specific for the active state of the enzyme. Structural data further reveal the potential mode of recognition of one of the autophosphorylation sites in the C-terminal tail, Tyr-1016, by the kinase domain. Biochemical and biophysical evidence suggest that the oncogenic mutations impact the conformational dynamics of the enzyme.",
+    "1358": "Q9UHD2 (Q9UHD2) is of central importance for the induction of type-I interferon (P01562) in response to pathogens. We identified the DEAD-box helicase Q62167 as an interaction partner of Q9UHD2. Q9UHD2 and Q62167 acted synergistically in their ability to stimulate the P01562 promoter, whereas RNAi-mediated reduction of Q62167 expression led to an impairment of P01562 production. Chromatin immunoprecipitation indicated that Q62167 is recruited to the P01562 promoter upon infection with Listeria monocytogenes, suggesting a transcriptional mechanism of action. Q62167 was found to be a Q9UHD2 substrate in vitro and in vivo. Phosphorylation-deficient mutants of Q62167 failed to synergize with Q9UHD2 in their ability to stimulate the P01562 promoter. Overall, our data imply that Q62167 is a critical effector of Q9UHD2 that is necessary for type I P01562 induction.",
+    "2198": "P12931-specific activity has been reported to be elevated in a high percentage of colon cancer cell lines and tumors, but the underlying mechanisms are largely unknown. In this study, we report that, in the seven cancer cell lines tested, P12931-specific activity was elevated (5.2- to 18.7-fold) relative to normal colon cells (P01130). This activation of P12931 correlated with reduced phosphorylation at Y530 of P12931, whereas there was no significant change in the level of phosphorylation at Y419. The membrane tyrosine phosphatase activity for a P12931 family-specific phosphopeptide substrate 2221 (Fyn COOH-terminal peptide phosphorylated by P41240) was greatly increased in the cancer cells and was attributed to P18031 in most of the cell lines. Membrane P18031 protein levels were also greatly increased. Overexpression of P18031 increased P12931 specific activity in colon cancer cells by reducing phosphorylation at Y530 of P12931. It also increased anchorage-independent cell growth and this increase was blocked by the P12931 inhibitor 4888 and P12931 small interfering RNA (siRNA). Down-regulating P18031 activity by P18031 inhibitor CinnGEL 2Me or knocking down P18031 using siRNA also reduced P12931 kinase activity and colony formation ability of colon cancer cells. P18031 siRNA reduced tumor growth in nonobese diabetic\/severe combined immunodeficient mice. This study suggests that (a) P18031 can act as an important activator of P12931 in colon cancer cells via dephosphorylation at Y530 of P12931 and (b) elevated levels of P18031 can increase tumorigenicity of colon cancer cells by activating P12931.",
+    "1627": "The activated P60953 associated kinases (ACKs) are nonreceptor tyrosine kinases that are specific targets of P60953. To study the biochemical properties of Q07912, we expressed and purified the enzyme using the baculovirus\/Sf9 cell system. This Q07912 construct contains (from N- to C-terminus) the kinase catalytic domain, SH3 domain, and P60953-binding CRIB domain. We describe enzyme activity assays based on synthetic peptide substrates. The best such substrate is a peptide derived from the site of Q07912-catalyzed phosphorylation of the Wiskott-Aldrich syndrome protein (WASP). Although the SH3 and CRIB domains of purified Q07912 are able to bind ligands (a polyproline peptide and P60953, respectively), the ligands did not stimulate in vitro tyrosine kinase activity. Purified Q07912 undergoes autophosphorylation at Tyr284, and autophosphorylation increases kinase activity.",
+    "1206": "P19838 (P19838)\/Q04864 transcription factors are key regulators of a variety of genes involved in inflammatory responses, growth, differentiation, apoptosis, and development. There are increasing lines of evidence that P19838\/Q04864 activity is controlled to a great extent by its phosphorylation state. In this study, we demonstrated that Q04206 physically associated with protein phosphatase 2A (P67775) subunit A (PR65). Both the N- and C-terminal regions of Q04206 were responsible for the P67775 binding. Q04206 co-immunoprecipitated with P67775 in melanocytes in the absence of stimulation, indicating that Q04206 forms a signaling complex with P67775 in the cells. Q04206 was dephosphorylated by a purified P67775 core enzyme, a heterodimer formed by the catalytic subunit of P67775 (P67775) and PR65, in a concentration-dependent manner. Okadaic acid, an inhibitor of P67775 at lower concentration, increased the basal phosphorylation of Q04206 in melanocytes and blocked the dephosphorylation of Q04206 after interleukin-1 stimulation. Interestingly, P67775 immunoprecipitated from melanocytes was able to dephosphorylate Q04206, whereas P67775 immunoprecipitated from melanoma cell lines exhibited decreased capacity to dephosphorylate Q04206 in vitro. Moreover, in melanoma cells in which I kappa B kinase activity was inhibited by sulindac to a similar level as in melanocytes, the phosphorylation state of Q04206 and the relative P19838 activity were still higher than those in normal melanocytes. These data suggest that the constitutive activation of Q04206 in melanoma cells (Yang, J., and Richmond, A. (2001) Cancer Res. 61, 4901-4909) could be due, at least in part, to the deficiency of P67775, which exhibits decreased dephosphorylation of P19838\/Q04206.",
+    "995": "Proper regulation of the cAMP-dependent protein kinase (protein kinase A, PKA) is necessary for cellular homeostasis, and dysregulation of this kinase is crucial in human disease. Mouse embryonic fibroblasts (MEFs) lacking the PKA regulatory subunit P10644 show altered cell morphology and enhanced migration. At the molecular level, these cells showed increased phosphorylation of P23528, a crucial modulator of actin dynamics, and these changes could be mimicked by stimulating the activity of PKA. Previous studies of P23528 have shown that it is phosphorylated primarily by the LIM domain kinases P53667 and P53671, which are under the control of the Rho GTPases and their downstream effectors. In P10644(-\/-) MEFs, neither Rho nor Rac was activated; rather, we showed that PKA could directly phosphorylate P53667 and thus enhance the phosphorylation of P23528. These data indicate that PKA is crucial in cell morphology and migration through its ability to modulate directly the activity of LIM kinase.",
+    "395": "In cell lines from advanced lung cancer, breast cancer, and melanoma, endogenous Q68CZ2 contributes to cell migration, anchorage-independent growth, and tumorigenesis. Although SH2 domains have not been reported previously to be phosphorylated, the Q68CZ2 SH2 domain is a physiologic substrate for P12931. Tyrosines in the SH2 domain contribute to the biological activity of Q68CZ2, and phosphorylation of these tyrosines can regulate ligand binding. In a mouse breast cancer model, Q68CZ2 tyrosines are phosphorylated in a P12931-associated manner in primary tumors, and experimental metastases induced by tumor-derived cell lines depend on endogenous Q68CZ2. Thus, Q68CZ2 is implicated as an oncoprotein regulated by P12931 and possessing an SH2 domain with a previously undescribed mechanism for the regulation of ligand binding.",
+    "1158": "Protein tyrosine phosphatases (PTPs) play key roles in switching off tyrosine phosphorylation cascades, such as initiated by cytokine receptors. We have used substrate-trapping mutants of a large set of PTPs to identify members of the PTP family that have substrate specificity for the phosphorylated human P10912 (P10912) intracellular domain. Among 31 PTPs tested, P17706, P23467, P18031, Q9HD43 (Q9HD43), Q16829, P43378, and P26045 showed specificity for phosphorylated P10912 that had been produced by coexpression with a kinase in bacteria. We then used GH-induced, phosphorylated P10912, purified from overexpressing mammalian cells, in a Far Western-based approach to test whether these seven PTPs were also capable of recognizing ligand-induced, physiologically phosphorylated P10912. In this assay, only P17706, P18031, P26045, and Q9HD43 interacted with the mature form of the phosphorylated P10912. In parallel, we show that these PTPs recognize very different subsets of the seven P10912 tyrosines that are potentially phosphorylated. Finally, mRNA tissue distribution of these PTPs by RT-PCR analysis and coexpression of the wild-type PTPs to test their ability to dephosphorylate ligand-activated P10912 suggest P26045 and P18031 as potential candidates involved in P10912 signaling.",
+    "2118": "O43426 is a polyphosphoinositide phosphatase concentrated in presynaptic nerve terminals, where it dephosphorylates a pool of phosphatidylinositol 4,5-bisphosphate implicated in synaptic vesicle recycling. Like other proteins with a role in endocytosis, O43426 undergoes constitutive phosphorylation in resting synapses and stimulation-dependent dephosphorylation by calcineurin. Here, we show that Q00535 (Q00535) phosphorylates O43426 and regulates its function both in vitro and in intact synaptosomes. Q00535 phosphorylation inhibited the inositol 5-phosphatase activity of O43426, whereas dephosphorylation by calcineurin stimulated such activity. The activity of O43426 was also stimulated by its interaction with Q99962, its major binding partner at the synapse. Notably, Q00535 phosphorylated serine 1144, which is adjacent to the endophilin binding site. Mutation of serine 1144 to aspartic acid to mimic phosphorylation by Q00535 inhibited the interaction of O43426 with Q99962. These results suggest that Q00535 and calcineurin may have an antagonistic role in the regulation of O43426 recruitment and activity, and therefore in the regulation of phosphatidylinositol 4,5-bisphosphate turnover at synapses.",
+    "2103": "Signaling via the methylation of lysine residues in proteins has been linked to diverse biological and disease processes, yet the catalytic activity and substrate specificity of many human protein lysine methyltransferases (PKMTs) are unknown. We screened over 40 candidate PKMTs and identified Q8TBK2 as a methyltransferase that monomethylated chromatin-associated transcription factor NF-B subunit Q04206 at Lys310 (RelAK310me1). Q8TBK2-mediated methylation rendered Q04206 inert and attenuated Q04206-driven transcriptional programs, including inflammatory responses in primary immune cells. RelAK310me1 was recognized by the ankryin repeat of the histone methyltransferase GLP, which under basal conditions promoted a repressed chromatin state at Q04206 target genes through GLP-mediated methylation of histone H3 Lys9 (H3K9). NF-B-activation-linked phosphorylation of Q04206 at Ser311 by protein kinase C- (PKC-) blocked the binding of GLP to RelAK310me1 and relieved repression of the target gene. Our findings establish a previously uncharacterized mechanism by which chromatin signaling regulates inflammation programs.",
+    "260": "We report that two oncogenes coamplified on chromosome 3q26, P41743 and P48431, cooperate to drive a stem-like phenotype in lung squamous cell carcinoma (LSCC). Protein kinase C (PKC) phosphorylates P48431, a master transcriptional regulator of stemness, and recruits it to the promoter of Hedgehog (Hh) acyltransferase (Q5VTY9) that catalyzes the rate-limiting step in Hh ligand production. PKC-mediated P48431 phosphorylation is required for Q5VTY9 promoter occupancy, Q5VTY9 expression, and maintenance of a stem-like phenotype. Primary LSCC tumors coordinately overexpress PKC, P48431, and Q5VTY9 and require PKC-P48431-Q5VTY9 signaling to maintain a stem-like phenotype. Thus, PKC and P48431 are genetically, biochemically, and functionally linked in LSCC, and together they drive tumorigenesis by establishing a cell-autonomous Hh signaling axis. ",
+    "2338": "We previously demonstrated that when arsenic trioxide (ATO)-induced mitotically arrested HeLa S3 cells (AIMACs) were treated with staurosporine (SSP) the cells rapidly exited mitosis. To better define the cellular targets and the underlying mechanisms of AIMACs, we applied 2-D DIGE followed by LC-MS\/MS analysis and showed that SSP induced a significant change in the phosphoproteome of AIMACs. Among the proteins whose phosphorylation was modulated by SSP, we identified P34932, P54727, and P23588 as potentially new substrates of P53350 (P53350), an essential serine\/threonine kinase with versatile mitotic functions. Since P34932 is a stress protein responsible for ATO treatment, we further identified Thr(13) , Ser(362) , Ser(631) , and Ser(633)  on P34932 intracellularly phosphorylated in AIMACs by combining TiO(2)  phospho-peptides enrichment and MS\/MS analysis. Using antibody specifically against phosph-Ser(631)  P34932 and further aided by expression of kinase-dead P53350 and pharmacological inhibition of P53350, we concluded that Ser(631)  on P34932 is phosphorylated by P53350 in AIMACs. By immnuofluorescent staining, we found the colocalization of P34932 and P53350 in AIMACs but not in interphase cells. In addition, P53350-mediated phosphorylation of P34932 prevented AIMACs from mitotic death. Our results reveal that P34932 is a novel substrate of P53350 and that its phosphorylation contributes to attenuation of ATO-induced mitotic abnormalities.",
+    "2197": "Q9H0H5, a Rho GAP essential to cytokinesis, works both as a Rho GTPase regulator and as a scaffolding protein. Q9H0H5 interacts with Q02241 to form the centralspindlin complex and associates with the RhoGEF Q9H8V3. The GAP activity of Q9H0H5 is regulated by Q96GD4 phosphorylation. We have isolated B56epsilon, a Q15257 regulatory subunit, as a new Q9H0H5 partner. We report here that (i) Q9H0H5 is phosphorylated by Q96GD4 and P06493, (ii) Q15257 dephosphorylates Q96GD4 and P06493 phosphorylated sites and (iii) inhibition of Q15257 abrogates Q9H0H5\/Q9H8V3 interaction. Therefore, Q15257 may regulate cytokinesis by dephosphorylating Q9H0H5 and its interacting partners.",
+    "2070": "The tumor suppressor phosphatase P60484 is a key regulator of cell growth and apoptosis that interacts with PDZ domains from regulatory proteins, including 9223;9863;260425, Q12959, and Q60592. Here we identified novel P60484-binding PDZ domains within the Q60592-related proteins, Q9Y2H9 and O60307, characterized the regions of P60484 involved in its interaction with distinctive PDZ domains, and analyzed the functional consequences on P60484 of PDZ domain binding. Using a panel of P60484 mutations, as well as P60484 chimeras containing distinct domains of the related protein P56180, we found that the PTP and C2 domains of P60484 do not affect PDZ domain binding and that the C-terminal tail of P60484 (residues 350-403) provides selectivity to recognize specific PDZ domains from Q86UL8, Q12959, and Q60592. Binding of P60484 to the PDZ-2 domain from Q86UL8 increased P60484 protein stability. Furthermore, binding of P60484 to the PDZ domains from microtubule-associated serine\/threonine kinases facilitated P60484 phosphorylation at its C terminus by these kinases. Our results suggest an important role for the C-terminal region of P60484 in the selective association with scaffolding and\/or regulatory molecules and provide evidence that PDZ domain binding stabilizes P60484 and targets this tumor suppressor for phosphorylation by microtubule-associated serine\/threonine kinases.",
+    "1148": "P01588 (P01588) is the principal hormone regulating the proliferation of erythroid precursors and their differentiation into erythrocytes. Binding of ligand to the cell-surface P19235 (P19235) induces dimerization and O60674 (O60674)-mediated tyrosine phosphorylation of the receptor. Less than 1% of the P01588-Rs are displayed on the cell surface; most of the receptor molecules are retained in intracellular compartments, including the ER (endoplasmic reticulum). Using pervanadate (PV) as a potent tool to inhibit cellular PTPs (protein tyrosine phosphatases), we demonstrated previously the accumulation of mature (endoglycosidase H-resistant) tyrosine-phosphorylated P01588-R [Cohen, Altaratz, Zick, Klingmuller and Neumann (1997) Biochem. J. 327, 391-397]. In the present study, we investigated the participation of the ER-associated P18031 in the dephosphorylation of intracellular P19235. We demonstrate tyrosine phosphorylation of P19235 in BOSC-23T cells co-expressing P19235 and the 'substrate-trapping' mutant form of P18031, P18031 D181A (referred to as PTP1BD). In vivo interaction between P19235 and P18031 suggested that P18031 dephosphorylates the P19235 intracellularly. Endoglycosidase H resistance of tyrosine-phosphorylated P19235 in cells expressing PTP1BD suggested that mature P19235 is dephosphorylated by P18031. Stimulation with P01588 of cells co-expressing P19235 and either PTP1BD or P18031 resulted in an increase or decrease respectively in phosphotyrosine P19235. We thus suggest that P18031 dephosphorylates P01588-stimulated P19235 and participates in the down-regulation cascade of P01588-mediated signal transduction.",
+    "13": "Nuclear retinoic acid (RA) receptors (RARs) activate gene expression through dynamic interactions with coregulators in coordination with the ligand and phosphorylation processes. Here we show that during RA-dependent activation of the P10276 isotype, the Q9BQG0 coactivator pCIP\/Q9Y6Q9\/Q9Y6Q9\/P60763\/Q15629\/Q9Y6Q9 is phosphorylated by p38MAPK. Q9Y6Q9 phosphorylation has been correlated to an initial facilitation of P10276-target genes activation, via the control of the dynamics of the interactions of the coactivator with P10276. Then, phosphorylation inhibits transcription via promoting the degradation of Q9Y6Q9. In line with this, inhibition of p38MAPK markedly enhances P10276-mediated transcription and RA-dependent induction of cell differentiation. Q9Y6Q9 phosphorylation and degradation occur only within the context of P10276 complexes, suggesting that the P10276 isotype defines a phosphorylation code through dictating the accessibility of the coactivator to p38MAPK. We propose a model in which P10276 transcriptional activity is regulated by Q9Y6Q9 through coordinated events that are fine-tuned by RA and p38MAPK.",
+    "1099": "Variations in intracellular levels of P04637 regulate many cellular functions and determine tumor susceptibility. Major mechanisms modulating P04637 levels include phosphorylation and interaction of P04637 with specific ubiquitin ligases that promote its degradation. N-terminal phosphorylation regulates the interaction of P04637 with several regulatory molecules. Q99986 (Q99986) is the prototype of a new Ser-Thr kinase family in the human kinome. Q99986 is located in the nucleus outside the nucleolus. Overexpression of Q99986 increases the stability of P04637 by a posttranslational mechanism leading to its accumulation by a mechanism independent of the O96017 kinase. Catalytically inactive Q99986 protein (a K179E mutant) does not induce P04637 accumulation. Q99986 phosphorylates human P04637 in Thr18 and disrupts P04637-Q00987 interaction in vitro, although a significant decrease in P04637 ubiquitination by Q00987 in vivo was not detected. Q99986 kinase does not phosphorylate Q00987. Q99986-mediated P04637 stabilization was also detected in Q00987(-\/-) cells. Q99986 also has an additive effect with O15151 or Q09472 to stabilize P04637, and Q09472 coactivation and acetylation of P04637 is enhanced by Q99986. The P04637 stabilized by Q99986 is transcriptionally active. Suppression of Q99986 expression by specific small interfering RNA provokes several defects in proliferation, situating the protein in the regulation of this process. Q99986 might function as a switch controlling the proteins that interact with P04637 and thus modifying its stability and activity. We propose Q99986 as the first step in a new pathway regulating P04637 activity during cell proliferation.",
+    "44": "P04626 overexpression in cancers causes hyperactivation of the PI 3-kinase pathway and elevated levels of the chemokine receptor P61073, which is strongly associated with increased metastatic potential. Here, we provide evidence that the cytokine-independent survival kinase Q96BR1 is activated downstream of the PI 3-kinase-dependent kinase Q15118 on endosomes and negatively regulates the lysosomal degradation of P61073. We demonstrate that Q96BR1 prevents P61073 degradation by inhibiting sorting of the receptor from early endosomes to lysosomes. In contrast, Q96BR1 does not interfere with ligand-induced degradation of epidermal growth factor receptors. Q96BR1 strongly interacts and colocalizes with the E3 ubiquitin ligase Q96J02, which is important for the ubiquitin-dependent lysosomal degradation of P61073. Moreover, the observed inhibition is both dependent on the interaction between Q96BR1 and Q96J02 and on the activation status of Q96BR1. Consistent with this, an activated form of Q96BR1 but not of the related kinase O00141 phosphorylates specific sites of Q96J02 in vitro. Taken together, these results reveal a critical function of Q96BR1 in specifically attenuating ubiquitin-dependent degradation of P61073, and provide a mechanistic link between the PI 3-kinase pathway and P61073 stability.",
+    "493": "Classical mammalian mitogen-activated protein kinase (MAPK) pathways consist of a cascade of three successive phosphorylation events resulting in the phosphorylation of a variety of substrates, including another class of protein kinases referred to as MAPK-activating protein kinases (MAPKAPKs). The MAPKAPKs P49137, Q16644 and Q8IW41 are closely related, but P49137 and Q16644 are the major downstream targets of the p38MAPK pathway, while Q8IW41 can be activated by the atypical MAPK P53778 and P31152, protein kinase A (PKA), and maybe p38MAPK. P49137, Q16644, and Q8IW41 can phosphorylate the common substrate small P04792 (P04792), a modification that regulates the role of P04792 in actin polymerization. Both stress and cAMP elevating stimuli can cause F-actin remodeling, but whereas the in vivo role of p38MAPK-P49137 in stress-triggered P04792 phosphorylation and actin reorganization is well established, it is not known whether P49137 is involved in cAMP\/PKA-induced F-actin rearrangements. On the other hand, Q8IW41 can phosphorylate P04792 and cause cytoskeletal changes in a cAMP\/PKA-dependent manner, but its role as P04792 kinase in stress-induced F-actin remodeling is disputed. Therefore, we wanted to investigate the implication of P49137 and Q8IW41 in stress- and PKA-induced P04792 phosphorylation.",
+    "1779": "Regulation of the steady-state tyrosine phosphorylation of the insulin receptor and its postreceptor substrates are essential determinants of insulin signal transduction. However, little is known regarding the molecular interactions that influence the balance of these processes, especially the phosphorylation state of postinsulin receptor substrates, such as P35570 (P35570). The specific activity of four candidate protein-tyrosine phosphatases (P18031 (P18031), Q06124 (Q06124), leukocyte common antigen-related (LAR), and leukocyte antigen-related phosphatase) (LRP) toward P35570 dephosphorylation was studied using recombinant proteins in vitro. P18031 exhibited the highest specific activity (percentage dephosphorylated per microg per min), and the enzyme activities varied over a range of 5.5 x 10(3). When evaluated as a ratio of activity versus P35570 to that versus p-nitrophenyl phosphate, P18031 remained significantly more active by 3.1-293-fold, respectively. Overlay blots with recombinant Src homology 2 domains of P35570 adaptor proteins showed that the loss of P35570 binding of P46108, P62993, Q06124, and the p85 subunit of phosphatidylinositol 3'-kinase paralleled the rate of overall P35570 dephosphorylation. Further studies revealed that the adaptor protein P62993 strongly promoted the formation of a stable protein complex between tyrosine-phosphorylated P35570 and catalytically inactive P18031, increasing their co-immunoprecipitation from an equimolar solution by 13.5 +\/- 3.3-fold (n = 7; p < 0.01). Inclusion of P62993 in a reaction mixture of P35570 and active P18031 also increased the overall rate of P35570 tyrosine dephosphorylation by 2.7-3.9-fold (p < 0.01). These results provide new insight into novel molecular interactions involving P18031 and P62993 that may influence the steady-state capacity of P35570 to function as a phosphotyrosine scaffold and possibly affect the balance of postreceptor insulin signaling."
+  },
+  "particpant1Exists": {
+    "2226": false,
+    "425": true,
+    "7": true,
+    "1846": false,
+    "1441": false,
+    "1892": true,
+    "1648": true,
+    "70": true,
+    "1754": true,
+    "321": true,
+    "373": true,
+    "1358": true,
+    "2198": true,
+    "1627": true,
+    "1206": true,
+    "995": false,
+    "395": true,
+    "1158": true,
+    "2118": false,
+    "2103": true,
+    "260": true,
+    "2338": true,
+    "2197": false,
+    "2070": true,
+    "1148": true,
+    "13": false,
+    "1099": true,
+    "44": true,
+    "493": true,
+    "1779": true
+  },
+  "particpant2Exists": {
+    "2226": true,
+    "425": true,
+    "7": true,
+    "1846": true,
+    "1441": true,
+    "1892": true,
+    "1648": true,
+    "70": true,
+    "1754": true,
+    "321": true,
+    "373": true,
+    "1358": true,
+    "2198": true,
+    "1627": true,
+    "1206": true,
+    "995": true,
+    "395": true,
+    "1158": true,
+    "2118": true,
+    "2103": true,
+    "260": true,
+    "2338": true,
+    "2197": true,
+    "2070": true,
+    "1148": true,
+    "13": true,
+    "1099": true,
+    "44": true,
+    "493": true,
+    "1779": true
+  },
+  "bothParticpantsExist": {
+    "2226": false,
+    "425": true,
+    "7": true,
+    "1846": false,
+    "1441": false,
+    "1892": true,
+    "1648": true,
+    "70": true,
+    "1754": true,
+    "321": true,
+    "373": true,
+    "1358": true,
+    "2198": true,
+    "1627": true,
+    "1206": true,
+    "995": false,
+    "395": true,
+    "1158": true,
+    "2118": false,
+    "2103": true,
+    "260": true,
+    "2338": true,
+    "2197": false,
+    "2070": true,
+    "1148": true,
+    "13": false,
+    "1099": true,
+    "44": true,
+    "493": true,
+    "1779": true
+  },
+  "noParticpantsExist": {
+    "2226": false,
+    "425": false,
+    "7": false,
+    "1846": false,
+    "1441": false,
+    "1892": false,
+    "1648": false,
+    "70": false,
+    "1754": false,
+    "321": false,
+    "373": false,
+    "1358": false,
+    "2198": false,
+    "1627": false,
+    "1206": false,
+    "995": false,
+    "395": false,
+    "1158": false,
+    "2118": false,
+    "2103": false,
+    "260": false,
+    "2338": false,
+    "2197": false,
+    "2070": false,
+    "1148": false,
+    "13": false,
+    "1099": false,
+    "44": false,
+    "493": false,
+    "1779": false
+  }
+}

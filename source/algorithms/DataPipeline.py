@@ -5,9 +5,8 @@ class DataPipeline:
 
     def __init__(self, pretrained_embedder_loader, embeddings_handle, max_feature_lens):
         self.max_feature_lengths = max_feature_lens
-        self.pretrained_embedder_loader = pretrained_embedder_loader
         self.vocab = None
-        self.embeddings_handle = embeddings_handle
+        self._vocab_index, _ = pretrained_embedder_loader(embeddings_handle)
 
     @property
     def text_to_index(self):
@@ -31,7 +30,7 @@ class DataPipeline:
 
     def fit(self, dataloader):
         # Load pretrained vocab
-        vocab_index, _ = self.pretrained_embedder_loader(self.embeddings_handle)
+        vocab_index = self._vocab_index
         self.vocab = [None] * len(vocab_index)
         for k, v in vocab_index.items():
             self.vocab[v] = k

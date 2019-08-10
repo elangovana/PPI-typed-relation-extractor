@@ -6,7 +6,7 @@ import sys
 from torch.utils.data import DataLoader
 
 from algorithms.CnnPosTrainInferenceBuilder import CnnPosTrainInferenceBuilder
-from algorithms.ppiDataset import PPIDataset
+from algorithms.PpiDataset import PPIDataset
 
 
 def run(train_file, val_file, embedding_file, embed_dim, out_dir, epochs, interaction_type=None):

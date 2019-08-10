@@ -32,7 +32,7 @@ class PPIDataset(Dataset):
         return self._data_df.shape[0]
 
     def __getitem__(self, index):
-        return self._data_df.iloc[index, :], self._labels[index]
+        return self._data_df.iloc[index, :].tolist(), self._labels[index].tolist()
 
     @property
     def class_size(self):
@@ -40,7 +40,7 @@ class PPIDataset(Dataset):
 
     @property
     def positive_label(self):
-        return "yes"
+        return True
 
     @property
     def feature_lens(self):

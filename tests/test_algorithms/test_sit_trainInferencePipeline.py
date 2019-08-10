@@ -5,11 +5,11 @@ import tempfile
 from io import StringIO
 from logging.config import fileConfig
 from unittest import TestCase
-from unittest.mock import MagicMock
 
 from torch.utils.data import DataLoader
 
 from algorithms.CnnPosTrainInferenceBuilder import CnnPosTrainInferenceBuilder
+from algorithms.PpiDataset import PPIDataset
 
 
 class TestSitTrainInferencePipeline(TestCase):
@@ -31,26 +31,17 @@ class TestSitTrainInferencePipeline(TestCase):
 
     def _get_sut_train_pipeline(self, mock_dataset, out_dir=tempfile.mkdtemp()):
         embedding = StringIO(
-            "\n".join(["hat 0.2 .34 0.8", "mat 0.5 .34 0.8", "entity1 0.5 .55 0.8", "entity2 0.3 .55 0.9"]))
+            "\n".join(["4 3", "hat 0.2 .34 0.8", "mat 0.5 .34 0.8", "entity1 0.5 .55 0.8", "entity2 0.3 .55 0.9"]))
         factory = CnnPosTrainInferenceBuilder(dataset=mock_dataset, embedding_handle=embedding, embedding_dim=3,
-                                              output_dir=out_dir)
+                                              output_dir=out_dir, epochs=5)
         sut = factory.get_trainpipeline()
         return sut
 
     def _get_mock_dataset(self):
         # Arrange
         # Arrange
-        mock_dataset = MagicMock()
-        mock_dataset.data = [[["This is sample text", "entity1", "entity2", "phosphorylation"], "yes"],
-                             [["This is sample text2", "entity1", "entity2", "phosphorylation"], "no"]]
-        mock_dataset.feature_lens = [10, 1, 1, 1]
-        mock_dataset.class_size = 2
-        mock_dataset.positive_label = "yes"
-        mock_dataset.__len__.return_value = len(mock_dataset.data)
-        mock_dataset.__getitem__.side_effect = lambda i: (mock_dataset.data[i][0], mock_dataset.data[i][1])
-        val_data = [["This is hat", "entity1", "entity2"],
-                    ["this is a cat not a mat", "mat protein", "cat protein"]]
-        cols = ['abstract', 'entity1', 'entity2']
+        train_file = os.path.join(os.path.dirname(__file__), "..", "data", "sample_train.json")
+        mock_dataset = PPIDataset(train_file)
         return mock_dataset
 
     def test_predict(self):

@@ -7,8 +7,8 @@ import sys
 import pandas as pd
 from torch.utils.data import DataLoader
 
+from algorithms.PpiDataset import PPIDataset
 from algorithms.TrainInferencePipeline import TrainInferencePipeline
-from algorithms.ppiDataset import PPIDataset
 
 
 def prepare_data(data_df):

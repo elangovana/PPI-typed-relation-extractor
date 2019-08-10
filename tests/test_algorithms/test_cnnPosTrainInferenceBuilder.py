@@ -20,7 +20,7 @@ class TestCnnPosTrainInferenceBuilder(TestCase):
         mock_dataset.__getitem__.side_effect = lambda i: (mock_dataset.data[i][0], mock_dataset.data[i][1])
 
         embedding = StringIO(
-            "\n".join(["hat 0.2 .34 0.8", "mat 0.5 .34 0.8", "entity1 0.5 .55 0.8", "entity2 0.3 .55 0.9"]))
+            "\n".join(["4 4", "hat 0.2 .34 0.8", "mat 0.5 .34 0.8", "entity1 0.5 .55 0.8", "entity2 0.3 .55 0.9"]))
 
         out_dir = tempfile.mkdtemp()
 

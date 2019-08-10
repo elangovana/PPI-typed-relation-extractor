@@ -26,7 +26,9 @@ sandberger 0.072617 -0.51393 0.4728 -0.52202 -0.35534 0.34629 0.23211 0.23096 0.
         other_words_embed = other_words_embed or {}
 
         # Load embeddings from file
-        for _, line in enumerate(handle):
+        for i, line in enumerate(handle):
+            # skip first line as it contains just the dim
+            if i == 0: continue
             values = line.split()
             word = values[0]
 
