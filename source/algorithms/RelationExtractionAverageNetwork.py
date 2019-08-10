@@ -33,7 +33,7 @@ Extracts relationship using a single layer
         # index 0 is multiword
         merged_input = []
         for f in batch_inputs:
-            concat_sentence = f.transpose(0, 1)
+            concat_sentence = f
             concat_sentence = torch.tensor(concat_sentence, dtype=torch.long)
             embeds = torch.sum(self.embeddings(concat_sentence), dim=1) / len(concat_sentence)
             merged_input.append(embeds)

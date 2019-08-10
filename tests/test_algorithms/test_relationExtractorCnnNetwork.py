@@ -18,10 +18,11 @@ class TestRelationExtractorLinearNetwork(TestCase):
         class_size = 2
 
         max_abstract_len = 10
-        abstract = torch.LongTensor(max_abstract_len, batch_size).random_(0, vocab_size)
+        abstract = torch.LongTensor(batch_size, max_abstract_len).random_(0, vocab_size)
 
         max_itype_len = 1
-        interaction_type = torch.LongTensor(max_itype_len, batch_size).random_(0, vocab_size)
+        interaction_type = torch.LongTensor(batch_size, max_itype_len).random_(0, vocab_size)
+
 
         sut = RelationExtractorCnnNetwork(class_size=class_size, embedding_dim=vector_dim,
                                           pretrained_weights_or_embed_vocab_size=vocab_size,

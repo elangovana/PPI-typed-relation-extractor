@@ -80,7 +80,7 @@ class RelationExtractorCnnNetwork(nn.Module):
         # Assume the longest column is the
         max_words = max(self.feature_lengths)
         for f, feature_len in zip(batch_inputs, self.feature_lengths):
-            concat_sentence = f.transpose(0, 1)
+            concat_sentence = f
             concat_sentence = torch.tensor(concat_sentence, dtype=torch.long)
 
             embeddings = self.embeddings(concat_sentence)

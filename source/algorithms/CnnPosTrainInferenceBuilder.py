@@ -14,7 +14,8 @@ from algorithms.transform_label_rehaper import TransformLabelReshaper
 
 class CnnPosTrainInferenceBuilder:
 
-    def __init__(self, dataset, embedding_dim, embedding_handle, output_dir):
+    def __init__(self, dataset, embedding_dim, embedding_handle, output_dir, epochs=100):
+        self.epochs = 100
         self.dataset = dataset
         self.learning_rate = .001
         self.momentum = .9
@@ -54,7 +55,7 @@ class CnnPosTrainInferenceBuilder:
                                           trainer=trainer, embedder_loader=embedder_loader,
                                           embedding_handle=self.embedding_handle, embedding_dim=self.embedding_dim,
                                           label_pipeline=label_pipeline, data_pipeline=data_pipeline,
-                                          class_size=class_size, pos_label=self.dataset.postive_label,
-                                          output_dir=self.output_dir)
+                                          class_size=class_size, pos_label=self.dataset.positive_label,
+                                          output_dir=self.output_dir, epochs=self.epochs)
 
         return pipeline

@@ -78,8 +78,8 @@ class RelationExtractorCnnPosNetwork(nn.Module):
                           padding=layer1_cnn_padding),
                 # nn.BatchNorm1d(layer1_cnn_output),
                 nn.ReLU(),
-                nn.AvgPool1d(kernel_size=layer1_pool_kernel, stride=layer1_pool_stride, padding=layer1_pool_padding),
-                nn.Dropout(dropout_rate_cnn),
+                nn.AvgPool1d(kernel_size=layer1_pool_kernel, stride=layer1_pool_stride, padding=layer1_pool_padding)
+                # nn.Dropout(dropout_rate_cnn)
             )
 
             self.cnn_layers.append(layer1)
@@ -92,7 +92,7 @@ class RelationExtractorCnnPosNetwork(nn.Module):
             nn.Linear(total_cnn_out_size,
                       fc_layer_size),
             nn.ReLU(),
-            nn.Dropout(dropout_rate_fc),
+            ##nn.Dropout(dropout_rate_fc),
             nn.Linear(fc_layer_size, class_size))
 
     @property
@@ -121,7 +121,7 @@ class RelationExtractorCnnPosNetwork(nn.Module):
 
         text_inputs = feature_tuples[self.text_column_index]
 
-        text_transposed = text_inputs  # text_inputs.transpose(0, 1)
+        text_transposed = text_inputs
 
         embeddings = self.embeddings(text_transposed)
         merged_pos_embed = embeddings
@@ -129,7 +129,7 @@ class RelationExtractorCnnPosNetwork(nn.Module):
         for f in range(len(feature_tuples)):
             if f == self.text_column_index: continue
 
-            entity = feature_tuples[f].transpose(0, 1)
+            entity = feature_tuples[f]  #.transpose(0, 1)
 
             # TODO: avoid this loop, use builtin
             pos_embedding = []

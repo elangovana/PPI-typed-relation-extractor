@@ -5,6 +5,8 @@ import pickle
 
 import torch
 
+from algorithms.Predictor import Predictor
+
 
 class TrainInferencePipeline:
 
@@ -29,6 +31,7 @@ class TrainInferencePipeline:
         self.embedding_dim = embedding_dim
         self.class_size = class_size
 
+    @property
     def logger(self):
         return logging.getLogger(__name__)
 
@@ -59,25 +62,23 @@ class TrainInferencePipeline:
 
         encoded_pos_label = self.label_pipeline.transform(self.pos_label)
 
-        sort_key = lambda x: self.sum(x)
-
         # Set up optimiser
 
         self.persist(outdir=self.output_dir)
 
         # Invoke trainer
-        (model_network, val_results, val_actuals, val_predicted) = self.trainer(transformed_train_x, transformed_val_x,
-                                                                                sort_key,
-                                                                                self.model, self.loss_function,
-                                                                                self.optimiser,
-                                                                                self.output_dir, epoch=self.epochs,
-                                                                                pos_label=encoded_pos_label)
+        (val_results, val_actuals, val_predicted) = self.trainer(transformed_train_x, transformed_val_x,
+
+                                                                 self.model, self.loss_function,
+                                                                 self.optimiser,
+                                                                 self.output_dir, epoch=self.epochs,
+                                                                 pos_label=encoded_pos_label)
 
         # Reformat results so that the labels are back into their original form, rather than numbers
         val_actuals = self.label_pipeline.label_reverse_encoder_func(val_actuals)
         val_predicted = self.label_pipeline.label_reverse_encoder_func(val_predicted)
 
-        return model_network, val_results, val_actuals, val_predicted
+        return val_results, val_actuals, val_predicted
 
     def sum(self, x):
         return sum([len(getattr(x, c)) for c in x.__dict__ if c != 'label'])
@@ -86,20 +87,27 @@ class TrainInferencePipeline:
         with open(os.path.join(outdir, "picked_datapipeline.pb"), "wb") as f:
             pickle.dump(self.data_pipeline, f)
 
+        with open(os.path.join(outdir, "picked_labelpipeline.pb"), "wb") as f:
+            pickle.dump(self.label_pipeline, f)
+
     @staticmethod
     def load(artifacts_dir):
         model_file = TrainInferencePipeline._find_artifact("{}/*model.pt".format(artifacts_dir))
-        datapipeline_file = TrainInferencePipeline._find_artifact(
-            "{}/*picked_datapipeline.pb".format(artifacts_dir))
 
-        with open(datapipeline_file, "r") as f:
-            datapipeline = pickle.load(f.read())
+        data_pipeline = TrainInferencePipeline._load_artifact("{}/*picked_datapipeline.pb".format(artifacts_dir))
+        label_pipeline = TrainInferencePipeline._load_artifact("{}/*picked_labelpipeline.pb".format(artifacts_dir))
 
         model = torch.load(model_file)
 
-        factory = TrainInferencePipeline(None, None, None, None, None, None, -1, None, None, -1, None, None)
+        return lambda x: TrainInferencePipeline.predict(x, model, data_pipeline, label_pipeline)
 
-        return lambda x: factory.predict(x, model, datapipeline)
+    @staticmethod
+    def _load_artifact(pickled_file_search_filter):
+        datapipeline_file = TrainInferencePipeline._find_artifact(pickled_file_search_filter)
+        with open(datapipeline_file, "rb") as f:
+            datapipeline = pickle.load(f)
+
+        return datapipeline
 
     @staticmethod
     def _find_artifact(pattern):
@@ -109,30 +117,28 @@ class TrainInferencePipeline:
         matched_file = matching[0]
         return matched_file
 
-    def predict(self, df, model, datapipeline):
-        self.datapipeline = datapipeline
+    @staticmethod
+    def predict(dataloader, model, data_pipeline, label_pipeline):
 
-        val_examples = self.datapipeline.transform(df)
+        val_examples = data_pipeline.transform(dataloader)
 
-        predictions, confidence_scores = self.trainer.predict(model, val_examples)
+        predictor = Predictor()
 
-        self.logger.debug("Predictions_raw \n{}".format(predictions))
+        predictions, confidence_scores = predictor.predict(model, val_examples)
 
-        transformed_predictions = self.label_pipeline.label_reverse_encoder_func(predictions)
+        transformed_predictions = label_pipeline.label_reverse_encoder_func(predictions)
 
-        transformed_conf_scores = self._get_confidence_score_dict(confidence_scores)
-
-        self.logger.debug(
-            "Predictions Transformed \n{} \n {} ".format(transformed_predictions, transformed_conf_scores))
+        transformed_conf_scores = TrainInferencePipeline._get_confidence_score_dict(label_pipeline, confidence_scores)
 
         return transformed_predictions, transformed_conf_scores
 
-    def _get_confidence_score_dict(self, confidence_scores):
+    @staticmethod
+    def _get_confidence_score_dict(label_pipeline, confidence_scores):
         transformed_conf_scores = []
         for r in confidence_scores:
             conf_score = {}
             for i, s in enumerate(r):
-                conf_score[self.datapipeline.label_reverse_encoder_func([i])] = s
+                conf_score[label_pipeline.label_reverse_encoder_func(i)] = s
             transformed_conf_scores.append(conf_score)
 
         return transformed_conf_scores

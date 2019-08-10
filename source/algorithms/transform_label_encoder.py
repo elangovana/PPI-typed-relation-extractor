@@ -45,7 +45,17 @@ class TransformLabelEncoder:
         return batches
 
     def inverse_transform(self, Y):
-        return self._encoder.inverse_transform(Y)
+        # Check if iterable
+        try:
+            int(Y)
+            return self._encoder.inverse_transform([Y])[0]
+        except TypeError:
+            pass
+
+        i = []
+        for _, b in enumerate(Y):
+            i.append(b)
+        return self._encoder.inverse_transform(i)
 
     def fit_transform(self, data_loader):
 

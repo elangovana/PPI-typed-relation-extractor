@@ -1,5 +1,3 @@
-from sklearn.pipeline import Pipeline
-
 from algorithms.transform_text_index import TransformTextToIndex
 
 
@@ -12,17 +10,19 @@ class DataPipeline:
         self.embeddings_handle = embeddings_handle
 
     @property
-    def count_vectoriser(self):
-        self.__count_vectoriser__ = getattr(self, "__count_vectoriser__", None) or TransformTextToIndex(
+    def text_to_index(self):
+        self.__text_to_index__ = getattr(self, "__text_to_index__", None) or TransformTextToIndex(
             vocab=self.vocab, max_feature_lens=self.max_feature_lengths)
-        return self.__count_vectoriser__
+        return self.__text_to_index__
 
-    @count_vectoriser.setter
-    def count_vectoriser(self, value):
-        self.__count_vectoriser__ = value
+    @text_to_index.setter
+    def text_to_index(self, value):
+        self.__text_to_index__ = value
 
     def transform(self, dataloader):
-        transformed_x = self.feature_pipeline.transform(dataloader)
+        transformed_x = dataloader
+        for name, p in self.feature_pipeline:
+            transformed_x = p.transform(transformed_x)
         return transformed_x
 
     def fit_transform(self, dataloader):
@@ -31,19 +31,17 @@ class DataPipeline:
 
     def fit(self, dataloader):
         # Load pretrained vocab
-        self.embeddings_handle.seek(0)
         vocab_index, _ = self.pretrained_embedder_loader(self.embeddings_handle)
         self.vocab = [None] * len(vocab_index)
         for k, v in vocab_index.items():
             self.vocab[v] = k
 
         # set up pipeline
-        self.feature_pipeline = Pipeline(
-            steps=[("count_vector", self.count_vectoriser)])
+        self.feature_pipeline = [("text_to_index", self.text_to_index)]
 
         # load count vectoriser after loading pretrained vocab
-        for name, p in self.feature_pipeline.steps:
+        for name, p in self.feature_pipeline:
             p.fit(dataloader)
 
         # update vocab after fit
-        self.vocab = self.count_vectoriser.vocab
+        self.vocab = self.text_to_index.vocab

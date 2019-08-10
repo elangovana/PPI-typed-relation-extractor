@@ -20,8 +20,7 @@ class ModelSnapshotCallback:
             self.logger.info("Snappshotting model becayse the current {} is greater than previous best {}".format(
                 current_score, best_score_so_far))
             # save model, delete previous 'best_snapshot' files
+
             torch.save(model, snapshot_path)
 
-            best_score_so_far = current_score
 
-        return best_score_so_far

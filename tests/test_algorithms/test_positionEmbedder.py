@@ -113,7 +113,6 @@ Tests case where the entity is not present in the text
 
         # Act
         sut = PositionEmbedder(pos_dim=pos_dim, pos_range=pos_range)
-        print(sut.embeddings)
 
         # Assert
         self.assertEqual(sut.embeddings.shape, (len(pos_range), pos_dim))

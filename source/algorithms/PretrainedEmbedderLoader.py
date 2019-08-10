@@ -26,7 +26,7 @@ sandberger 0.072617 -0.51393 0.4728 -0.52202 -0.35534 0.34629 0.23211 0.23096 0.
         other_words_embed = other_words_embed or {}
 
         # Load embeddings from file
-        for line in handle:
+        for _, line in enumerate(handle):
             values = line.split()
             word = values[0]
 

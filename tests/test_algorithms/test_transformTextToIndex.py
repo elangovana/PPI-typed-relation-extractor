@@ -25,7 +25,7 @@ class TestTransformTextToIndex(TestCase):
         data_loader = DataLoader(mock_dataset, batch_size=2)
 
         # Act
-        actual = list(sut.fit_transform(data_loader, None))
+        actual = list(sut.fit_transform(data_loader))
 
         # Assert the max feature length matchs
         unique_items = set()

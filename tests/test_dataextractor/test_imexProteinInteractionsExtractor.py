@@ -113,7 +113,6 @@ class TestImexProteinInteractionsExtractor(TestCase):
 
         # Act
         actual = list(sut.get_protein_interactions(full_xml_file_path))
-        print(actual)
 
         # Assert
         self.assertEqual(expected, actual)

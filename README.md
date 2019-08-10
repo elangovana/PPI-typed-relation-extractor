@@ -160,7 +160,7 @@ https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
 4. Run train job
     ```bash
     export PYTHONPATH=./source
-    python source/algorithms/main_train.py Linear train.json val.json ./tests/test_algorithms/sample_PubMed-and-PMC-w2v.bin.txt 200 outdir
+    python source/algorithms/main_train.py  train.json val.json ./tests/test_algorithms/sample_PubMed-and-PMC-w2v.bin.txt 200 outdir
     ```
 
 5. Consolidated train + predict
@@ -172,14 +172,12 @@ https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
      set -x
   
      # Init
-     # Type of network, Linear is MLP, Cnn is Cnn, CnnPos is with position embedding
-     network=CnnPos
      base_dir=/data
      s3_dest=s3://yourbucket/results
     
     
      fmtdt=`date +"%y%m%d_%H%M"`
-     base_name=model_${network}_${fmtdt}
+     base_name=model_${fmtdt}
      outdir=${base_dir}/${base_name}
      echo ${outdir}
      mkdir ${outdir}
@@ -192,14 +190,14 @@ https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
      git log -1 > ${outdir}/run.log
      
      # Train
-     python ./source/algorithms/main_train.py ${network}  /data/train_unique_pub_v3_lessnegatve.json /data/val_unique_pub_v3_lessnegatve.json /data/wikipedia-pubmed-and-PMC-w2v.bin.txt 200 ${outdir}  --epochs 50  --log-level INFO >> ${outdir}/run.log 2>&1
+     python ./source/algorithms/main_train.py   /data/train_unique_pub_v3_lessnegatve.json /data/val_unique_pub_v3_lessnegatve.json /data/wikipedia-pubmed-and-PMC-w2v.bin.txt 200 ${outdir}  --epochs 50  --log-level INFO >> ${outdir}/run.log 2>&1
      
      # Predict on validation set
-     python ./source/algorithms/main_predict.py ${network}  /data/test_unique_pub_v3_lessnegatve.json ${outdir}  ${outdir} >> ${outdir}/run.log 2>&1
+     python ./source/algorithms/main_predict.py   /data/test_unique_pub_v3_lessnegatve.json ${outdir}  ${outdir} >> ${outdir}/run.log 2>&1
      mv ${outdir}/predicted.json ${outdir}/predicted_test_unique_pub_v3_lessnegatve.json
      
      # Predict on test set
-     python ./source/algorithms/main_predict.py ${network}  /data/val_unique_pub_v3_lessnegatve.json ${outdir}  ${outdir} >> ${outdir}/run.log 2>&1
+     python ./source/algorithms/main_predict.py   /data/val_unique_pub_v3_lessnegatve.json ${outdir}  ${outdir} >> ${outdir}/run.log 2>&1
      mv ${outdir}/predicted.json ${outdir}/predicted_val_unique_pub_v3_lessnegatve.json
     
      #Copy results to s3

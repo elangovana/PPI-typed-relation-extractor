@@ -22,8 +22,11 @@ class PPIDataset(Dataset):
         self._data_df = data_df[["normalised_abstract", "interactionType", "participant1Id", "participant2Id"]]
 
         # Set up labels
-        self._labels = data_df[["isValid"]]
-        self._labels = np.reshape(self._labels.values.tolist(), (-1,))
+        if "isValid" in data_df.columns:
+            self._labels = data_df[["isValid"]]
+            self._labels = np.reshape(self._labels.values.tolist(), (-1,))
+        else:
+            self._labels = np.reshape([-1] * data_df.shape[0], (-1,))
 
     def __len__(self):
         return self._data_df.shape[0]

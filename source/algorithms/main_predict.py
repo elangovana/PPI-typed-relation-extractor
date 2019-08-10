@@ -5,25 +5,10 @@ import os
 import sys
 
 import pandas as pd
+from torch.utils.data import DataLoader
 
-from algorithms.RelationExtractionAverageFactory import RelationExtractionAverageFactory
-from algorithms.RelationExtractionLinearDropoutWordFactory import RelationExtractorLinearNetworkDropoutWordFactory
-from algorithms.RelationExtractorCnnNetwork import RelationExtractorCnnNetwork
-from algorithms.RelationExtractorCnnPosNetwork import RelationExtractorCnnPosNetwork
 from algorithms.TrainInferencePipeline import TrainInferencePipeline
-
-networks_dict = {
-    "Linear": TrainInferencePipeline,
-    "Avg": RelationExtractionAverageFactory,
-    "LinearWithDropout": RelationExtractorLinearNetworkDropoutWordFactory,
-    "Cnn": TrainInferencePipeline,
-    "CnnPos": TrainInferencePipeline
-}
-
-model_dict = {
-    "Cnn": RelationExtractorCnnNetwork,
-    "CnnPos": RelationExtractorCnnPosNetwork
-}
+from algorithms.ppiDataset import PPIDataset
 
 
 def prepare_data(data_df):
@@ -64,19 +49,18 @@ def run_prediction(artifactsdir, data_file, network, out_dir):
 
     logger.info("Running with self relations filter network {}".format(network))
     logger.info("Loading from file {}".format(data_file))
+
     df = pd.read_json(data_file)
 
     logger.info("Data size after load: {}".format(df.shape))
     df_prep = prepare_data(df)
     logger.info("Data size after prep: {}".format(df_prep.shape))
 
-    network_factory = networks_dict[network]
-    if network in model_dict:
-        network_factory.model_network = model_dict[network]
-    predictor = network_factory.load(artifactsdir)
+    predictor = TrainInferencePipeline.load(artifactsdir)
+    val_dataloader = DataLoader(PPIDataset(data_file), shuffle=False)
 
     # Run prediction
-    results, confidence_scores = predictor(df_prep)
+    results, confidence_scores = predictor(val_dataloader)
     df_prep["predicted"] = results
     df_prep["confidence_scores"] = confidence_scores
     select_columns = df.columns.values
@@ -93,8 +77,7 @@ def run_prediction(artifactsdir, data_file, network, out_dir):
 
 if "__main__" == __name__:
     parser = argparse.ArgumentParser()
-    parser.add_argument("network",
-                        help="The type of network to use", choices=set(list(networks_dict.keys())))
+
     parser.add_argument("datajson",
                         help="The json data to predict")
 
@@ -112,5 +95,5 @@ if "__main__" == __name__:
     logging.basicConfig(level=logging.getLevelName(args.log_level), handlers=[logging.StreamHandler(sys.stdout)],
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-    results = run(args.network, args.datajson, args.artefactsdir,
+    results = run(args.datajson, args.artefactsdir,
                   args.outdir, args.positives_filter_threshold)

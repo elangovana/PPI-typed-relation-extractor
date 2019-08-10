@@ -52,7 +52,7 @@ Extracts relationship using a single layer
         max_words = max(self.feature_lengths)
 
         for input, feature_len in zip(batch_inputs, self.feature_lengths):
-            concat_sentence = input.transpose(0, 1)
+            concat_sentence = input
             concat_sentence = torch.tensor(concat_sentence, dtype=torch.long)
 
             embeddings = self.embeddings(concat_sentence)

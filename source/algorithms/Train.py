@@ -52,7 +52,7 @@ class Train:
     def results_writer(self, value):
         self.__results_writer__ = value
 
-    def __call__(self, data_iter, validation_iter, text_sort_key_lambda, model_network, loss_function, optimizer,
+    def __call__(self, data_iter, validation_iter, model_network, loss_function, optimizer,
                  output_dir,
                  epoch=10, mini_batch_size=32,
                  eval_every_n_epoch=1, device_type="cpu", pos_label=1, early_stopping_patience=20):
@@ -137,9 +137,11 @@ class Train:
             self.logger.info("Validation set result details: {} ".format(val_results))
 
             if val_results > best_score:
-                best_results = (model_network, val_results, val_actuals, val_predicted)
+                best_results = (val_results, val_actuals, val_predicted)
 
-                best_score = self.snapshotter(model_network, val_results, best_score, output_dir=output_dir)
+                self.snapshotter(model_network, val_results, best_score, output_dir=output_dir)
+
+                best_score = val_results
 
             # evaluate performance on validation set periodically
             self.logger.info(val_log_template.format((datetime.datetime.now() - start).seconds,

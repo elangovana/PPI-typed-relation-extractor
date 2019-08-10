@@ -24,7 +24,8 @@ class TestCnnPosTrainInferenceBuilder(TestCase):
 
         out_dir = tempfile.mkdtemp()
 
-        sut = CnnPosTrainInferenceBuilder(dataset=mock_dataset, embedding_handle=embedding, output_dir=out_dir)
+        sut = CnnPosTrainInferenceBuilder(dataset=mock_dataset, embedding_handle=embedding, output_dir=out_dir,
+                                          embedding_dim=3)
 
         # Act
         actual = sut.get_trainpipeline()

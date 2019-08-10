@@ -19,13 +19,13 @@ class TestRelationExtractorCnnPosNetwork(TestCase):
         class_size = 2
 
         max_abstract_len = 10
-        abstract = torch.LongTensor(max_abstract_len, batch_size).random_(0, vocab_size)
+        abstract = torch.LongTensor(batch_size, max_abstract_len).random_(0, vocab_size)
 
         max_itype_len = 1
-        interaction_type = torch.LongTensor(max_itype_len, batch_size).random_(0, vocab_size)
+        interaction_type = torch.LongTensor(batch_size, max_itype_len).random_(0, vocab_size)
 
         max_entype_len = 1
-        entity = torch.LongTensor(max_itype_len, batch_size).random_(0, vocab_size)
+        entity = torch.LongTensor(batch_size, max_entype_len).random_(0, vocab_size)
 
         sut = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=vector_dim, feature_lengths=np.array(
             [max_abstract_len, max_itype_len, max_entype_len]), embed_vocab_size=vocab_size)
