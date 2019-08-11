@@ -160,7 +160,7 @@ https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
 4. Run train job
     ```bash
     export PYTHONPATH=./source
-    python source/algorithms/main_train.py  train.json val.json ./tests/test_algorithms/sample_PubMed-and-PMC-w2v.bin.txt 200 outdir
+    python source/algorithms/main_train.py  tests/data/sample_train.json tests/data/sample_train.json ./tests/test_algorithms/sample_PubMed-and-PMC-w2v.bin.txt 200 outdir
     ```
 
 5. Consolidated train + predict
