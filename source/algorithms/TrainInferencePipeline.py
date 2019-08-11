@@ -61,6 +61,7 @@ class TrainInferencePipeline:
         # Lengths of each column
 
         encoded_pos_label = self.label_pipeline.transform(self.pos_label)
+        self.logger.info("Positive label {} is {}".format(self.pos_label, encoded_pos_label))
 
         # Set up optimiser
 
