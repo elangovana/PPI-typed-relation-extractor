@@ -43,6 +43,7 @@ class TransformTextToIndex:
         self.vocab_index[self.pad] = len(self.vocab_index)
 
     def transform(self, x):
+        self.logger.info("Transforming TransformTextToIndex")
         tokeniser = self.count_vectoriser.build_tokenizer()
         pad_index = self.vocab_index[self.pad]
 
@@ -62,6 +63,7 @@ class TransformTextToIndex:
                 col.append(row)
 
             batches.append([col, b_y])
+        self.logger.info("Completed TransformTextToIndex")
         return batches
 
     def fit_transform(self, data_loader):

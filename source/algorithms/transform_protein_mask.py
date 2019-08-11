@@ -21,7 +21,7 @@ class TransformProteinMask:
         pass
 
     def transform(self, x):
-
+        self.logger.info("Running TransformProteinMask ")
         batches = []
         for idx, b in enumerate(x):
             b_x = b[0]
@@ -44,6 +44,8 @@ class TransformProteinMask:
             transformed_b_x[self.entity_column_index] = masked_entity
 
             batches.append([transformed_b_x, b_y])
+        self.logger.info("Completed TransformProteinMask ")
+
         return batches
 
     def fit_transform(self, data_loader):

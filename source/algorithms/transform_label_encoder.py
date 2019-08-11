@@ -17,11 +17,14 @@ class TransformLabelEncoder:
         return logging.getLogger(__name__)
 
     def fit(self, data_loader):
+        self.logger.info("Running TransformLabelEncoder")
         y = []
         for idx, b in enumerate(data_loader):
             b_y = b[1]
             y.extend(b_y)
         self._encoder.fit(y)
+        self.logger.info("Complete TransformLabelEncoder")
+
 
     def transform(self, data_loader):
         # Check if iterable
