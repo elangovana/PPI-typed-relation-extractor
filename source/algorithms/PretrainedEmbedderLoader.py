@@ -48,11 +48,11 @@ sandberger 0.072617 -0.51393 0.4728 -0.52202 -0.35534 0.34629 0.23211 0.23096 0.
             if ignore_word_filter is not None and ignore_word_filter(w): continue
 
             # Not ignored word
-
-            word_index_dict[w] = len(word_index_dict)
-            random_embedding = nn.Embedding(1, embedding_dim).weight.detach().numpy().tolist()[0]
-            embeddings_array.append(random_embedding)
-            words_not_in_embedding.add(w)
+            if word_index_dict.get(w, None) is None:
+                word_index_dict[w] = len(word_index_dict)
+                random_embedding = nn.Embedding(1, embedding_dim).weight.detach().numpy().tolist()[0]
+                embeddings_array.append(random_embedding)
+                words_not_in_embedding.add(w)
 
         self.logger.info("The number of words intialised without embbeder is {}".format(len(words_not_in_embedding)))
         self.logger.debug("The words intialised without embbeder is \n {}".format(words_not_in_embedding))
