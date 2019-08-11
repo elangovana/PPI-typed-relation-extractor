@@ -3,23 +3,24 @@ import pandas as pd
 from torch.utils.data import Dataset
 
 """
-Represents the custom PPI dataset
+Represents the custom PPIm dataset
 """
 
 
-class PPIDataset(Dataset):
+class PPIMDataset(Dataset):
 
-    def __init__(self, file_path, interaction_type=None):
+    def __init__(self, file_path, self_relations_filter=True):
         self._file_path = file_path
         # Read json
         data_df = pd.read_json(self._file_path)
 
         # Filter interaction types if required
-        if interaction_type is not None:
-            data_df = data_df.query('interactionType == "{}"'.format(interaction_type))
+        if self_relations_filter:
+            data_df = data_df.query('participant1 != participant2')
+        data_df = data_df[["abstract", "participant1", "participant2"]]
 
         # Filter features
-        self._data_df = data_df[["normalised_abstract", "interactionType", "participant1Id", "participant2Id"]]
+        self._data_df = data_df[["abstract", "participant1", "participant2"]]
 
         # Set up labels
         if "isValid" in data_df.columns:
@@ -44,7 +45,7 @@ class PPIDataset(Dataset):
 
     @property
     def feature_lens(self):
-        return [250, 1, 1, 1]
+        return [250, 1, 1]
 
     @property
     def entity_column_indices(self):

@@ -3,7 +3,8 @@ from algorithms.transform_text_index import TransformTextToIndex
 
 class DataPipeline:
 
-    def __init__(self, pretrained_embedder_loader, embeddings_handle, max_feature_lens):
+    def __init__(self, pretrained_embedder_loader, embeddings_handle, max_feature_lens, preprocess_steps=None):
+        self.preprocess_steps = preprocess_steps or []
         self.max_feature_lengths = max_feature_lens
         self.vocab = None
         self._vocab_index, _ = pretrained_embedder_loader(embeddings_handle)
@@ -36,7 +37,7 @@ class DataPipeline:
             self.vocab[v] = k
 
         # set up pipeline
-        self.feature_pipeline = [("text_to_index", self.text_to_index)]
+        self.feature_pipeline = self.preprocess_steps + [("text_to_index", self.text_to_index)]
 
         # load count vectoriser after loading pretrained vocab
         for name, p in self.feature_pipeline:
