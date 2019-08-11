@@ -17,8 +17,10 @@ def run(train_file, val_file, embedding_file, embed_dim, out_dir, epochs, intera
     if not os.path.exists(out_dir) or not os.path.isdir(out_dir):
         raise FileNotFoundError("The path {} should exist and must be a directory".format(out_dir))
 
-    train_loader = DataLoader(train, shuffle=True, batch_size=32)
-    val_loader = DataLoader(val, shuffle=False, batch_size=32)
+    # TODO: Add CPU count
+    num_workers = 1 if os.cpu_count() == 1 else os.cpu_count() - 1
+    train_loader = DataLoader(train, shuffle=True, batch_size=32, num_workers=num_workers)
+    val_loader = DataLoader(val, shuffle=False, batch_size=32, num_workers=num_workers)
 
     with open(embedding_file, "r") as embedding:
         # Ignore the first line as it contains the number of words and vector dim
