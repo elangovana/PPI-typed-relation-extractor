@@ -10,16 +10,6 @@ class PretrainedEmbedderLoader:
     def logger(self):
         return logging.getLogger(__name__)
 
-    def get_vocab_dict(self, handle):
-        vocab_dict = {}
-        for i, line in enumerate(handle):
-            # skip first line as it contains just the dim
-            if i == 0: continue
-            values = line.split()
-            word = values[0]
-            vocab_dict[word] = vocab_dict.get(word, len(vocab_dict))
-        return vocab_dict
-
     def __call__(self, handle, initial_words_index_dict=None):
         """
 Expects the stream of strings to contain word embedding. Each record must be in space separated format with the first column containing the word itself.
