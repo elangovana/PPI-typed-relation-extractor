@@ -7,45 +7,58 @@ from sklearn.feature_extraction.text import CountVectorizer
 Extracts vocab from data frame columns which have already been tokenised into words
 """
 
+pad = "!@#"
+
 
 class TransformTextToIndex:
 
-    def __init__(self, max_feature_lens, min_vocab_frequency=2, vocab=None):
+    def __init__(self, max_feature_lens, min_vocab_frequency=2, vocab_dict=None):
+        self._vocab_dict = vocab_dict or {}
+
         self.max_feature_lens = max_feature_lens
         self.min_vocab_frequency = min_vocab_frequency
-        self.vocab = vocab
-        self.vocab_index = None
-        self.pad = "!@#"
+
+        # Load pretrained vocab
 
     @property
     def logger(self):
         return logging.getLogger(__name__)
 
-    @property
-    def count_vectoriser(self):
-        self.__count_vectoriser__ = getattr(self, "__count_vectoriser__", None) or CountVectorizer(
-            vocabulary=self.vocab)
-        return self.__count_vectoriser__
+    def construct_vocab_dict(self, data_loader):
+        return self._get_vocab_dict(data_loader)
 
-    @count_vectoriser.setter
-    def count_vectoriser(self, value):
-        self.__count_vectoriser__ = value
+    @property
+    def vocab_dict(self):
+        return self._vocab_dict
+
+    @vocab_dict.setter
+    def vocab_dict(self, vocab_index):
+        self._vocab_dict = vocab_index
+
 
     def fit(self, data_loader):
+        if self._vocab_dict is None or len(self._vocab_dict) == 0:
+            self._vocab_dict = self._get_vocab_dict(data_loader)
+
+    @staticmethod
+    def _get_vocab_dict(data_loader):
+        count_vectoriser = CountVectorizer()
         for idx, b in enumerate(data_loader):
             b_x = b[0]
 
             text = [" ".join(t) for t in b_x]
-            self.count_vectoriser.fit(text)
-        self.vocab = self.count_vectoriser.get_feature_names()
-        self.vocab_index = {key: i for i, key in enumerate(self.vocab)}
-        self.vocab_index["UNK"] = len(self.vocab_index)
-        self.vocab_index[self.pad] = len(self.vocab_index)
+            count_vectoriser.fit(text)
+
+        vocab_index = count_vectoriser.vocabulary_
+
+        vocab_index[pad] = len(vocab_index)
+        vocab_index["UNK"] = len(vocab_index)
+        return vocab_index
 
     def transform(self, x):
         self.logger.info("Transforming TransformTextToIndex")
-        tokeniser = self.count_vectoriser.build_tokenizer()
-        pad_index = self.vocab_index[self.pad]
+        tokeniser = CountVectorizer().build_tokenizer()
+        pad_index = self._vocab_dict[pad]
 
         batches = []
         for idx, b in enumerate(x):
@@ -56,7 +69,7 @@ class TransformTextToIndex:
                 row = []
                 max = self.max_feature_lens[c_index]
                 for _, r in enumerate(c):
-                    tokens = [self.vocab_index.get(w, self.vocab_index["UNK"]) for w in tokeniser(r)][0:max]
+                    tokens = [self._vocab_dict.get(w, self._vocab_dict["UNK"]) for w in tokeniser(r)][0:max]
                     tokens = tokens + [pad_index] * (max - len(tokens))
                     row.append(tokens)
                 row = torch.Tensor(row).long()
