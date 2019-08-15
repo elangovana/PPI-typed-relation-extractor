@@ -10,7 +10,8 @@ from algorithms.Predictor import Predictor
 
 class TrainInferencePipeline:
 
-    def __init__(self, model, optimiser, loss_function, trainer, embedder_loader, embedding_handle, embedding_dim: int,
+    def __init__(self, model, optimiser, loss_function, trainer, train_vocab_extractor, embedder_loader,
+                 embedding_handle, embedding_dim: int,
                  label_pipeline, data_pipeline, class_size: int, pos_label, output_dir, ngram: int = 3,
                  epochs: int = 10, min_vocab_frequency=3, class_weights_dict=None):
         self.trainer = trainer
@@ -30,21 +31,25 @@ class TrainInferencePipeline:
         self.ngram = ngram
         self.embedding_dim = embedding_dim
         self.class_size = class_size
+        self.train_vocab_extractor = train_vocab_extractor
 
     @property
     def logger(self):
         return logging.getLogger(__name__)
 
     def __call__(self, train, validation):
+
+        # Merge train vocab and the pretrained vocab
+        self.embedding_handle.seek(0)
+        train_vocab_dict = self.train_vocab_extractor.construct_vocab_dict(train)
+        full_vocab_dict, embedding_array = self.embedder_loader(self.embedding_handle, train_vocab_dict)
+        self.data_pipeline.update_vocab_dict(full_vocab_dict)
+
         transformed_train_x = self.data_pipeline.fit_transform(train)
         transformed_val_x = self.data_pipeline.transform(validation)
 
         transformed_train_x = self.label_pipeline.fit_transform(transformed_train_x)
         transformed_val_x = self.label_pipeline.transform(transformed_val_x)
-
-        self.embedding_handle.seek(0)
-        self.data_pipeline.vocab, embedding_array = self.embedder_loader(self.embedding_handle,
-                                                                         other_words_embed=self.data_pipeline.vocab)
 
         tensor_embeddings = torch.nn.Embedding.from_pretrained(torch.FloatTensor(embedding_array))
         self.model.set_embeddings(tensor_embeddings)

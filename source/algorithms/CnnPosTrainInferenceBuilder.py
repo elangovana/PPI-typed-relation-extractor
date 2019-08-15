@@ -11,6 +11,7 @@ from algorithms.TrainInferencePipeline import TrainInferencePipeline
 from algorithms.transform_label_encoder import TransformLabelEncoder
 from algorithms.transform_label_rehaper import TransformLabelReshaper
 from algorithms.transform_protein_mask import TransformProteinMask
+from algorithms.transform_text_index import TransformTextToIndex
 
 
 class CnnPosTrainInferenceBuilder:
@@ -29,7 +30,7 @@ class CnnPosTrainInferenceBuilder:
         # Embedder loader
         embedder_loader = PretrainedEmbedderLoader()
 
-        # preprocess steps
+        # preprocess steps TransformProteinMask
         preprocess_steps = []
         for i in self.dataset.entity_column_indices:
             transformer = TransformProteinMask(entity_column_index=i, text_column_index=self.dataset.text_column_index,
@@ -37,9 +38,8 @@ class CnnPosTrainInferenceBuilder:
             preprocess_steps.append(("mask_{}".format(i), transformer))
 
         # Create data and label pipeline
-        data_pipeline = DataPipeline(max_feature_lens=self.dataset.feature_lens
-                                     , embeddings_handle=self.embedding_handle,
-                                     pretrained_embedder_loader=embedder_loader, preprocess_steps=preprocess_steps)
+        text_to_index = TransformTextToIndex(max_feature_lens=self.dataset.feature_lens)
+        data_pipeline = DataPipeline(preprocess_steps=preprocess_steps, text_to_index=text_to_index)
 
         # Label pipeline
         class_size = self.dataset.class_size
@@ -61,7 +61,8 @@ class CnnPosTrainInferenceBuilder:
         trainer = Train()
 
         pipeline = TrainInferencePipeline(model=model, optimiser=optimiser, loss_function=loss_function,
-                                          trainer=trainer, embedder_loader=embedder_loader,
+                                          trainer=trainer, train_vocab_extractor=text_to_index,
+                                          embedder_loader=embedder_loader,
                                           embedding_handle=self.embedding_handle, embedding_dim=self.embedding_dim,
                                           label_pipeline=label_pipeline, data_pipeline=data_pipeline,
                                           class_size=class_size, pos_label=self.dataset.positive_label,

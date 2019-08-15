@@ -25,8 +25,7 @@ class TestSitDataPipeline(TestCase):
         mock_dataset.__getitem__.side_effect = lambda i: (mock_dataset.data[i][0], mock_dataset.data[i][1])
 
         mock_embedder_loader = PretrainedEmbedderLoader()
-        sut = DataPipeline(embeddings_handle=embedding, max_feature_lens=mock_dataset.feature_lens,
-                           pretrained_embedder_loader=mock_embedder_loader)
+        sut = DataPipeline(text_to_index=MagicMock())
 
         # Act
         sut.fit_transform(DataLoader(mock_dataset))

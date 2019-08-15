@@ -42,6 +42,7 @@ sandberger 0.072617 -0.51393 0.4728 -0.52202 -0.35534 0.34629 0.23211 0.23096 0.
 
             # Not ignored word
             embeddings = [float(v) for v in values[1:]]
+            embedding_dim = len(embeddings)
             if word not in initial_words_index_dict:
                 result_words_index_dict[word] = len(embeddings_array)
                 embeddings_array.append([])
@@ -50,7 +51,6 @@ sandberger 0.072617 -0.51393 0.4728 -0.52202 -0.35534 0.34629 0.23211 0.23096 0.
 
             embeddings_array[result_words_index_dict[word]] = embeddings
 
-        embedding_dim = len(embeddings_array[0])
         words_not_in_embedding = []
         for k in initial_words_index_dict:
             # Word not found in embedding, init with random
