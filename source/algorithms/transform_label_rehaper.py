@@ -32,7 +32,7 @@ class TransformLabelReshaper:
         if is_int:
             assert 0 <= data_loader < self.num_classes, "The value must be greater than equal to zero and less than {} ".format(
                 self.num_classes)
-
+            self.logger.info("Loading int {} to tensor {}".format(int(data_loader), torch.Tensor(int(data_loader))))
             tensor = torch.Tensor(int(data_loader))
             return tensor
 
