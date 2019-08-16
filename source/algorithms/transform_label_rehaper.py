@@ -1,5 +1,6 @@
 import logging
 
+import numpy as np
 import torch
 
 """
@@ -32,8 +33,8 @@ class TransformLabelReshaper:
         if is_int:
             assert 0 <= data_loader < self.num_classes, "The value must be greater than equal to zero and less than {} ".format(
                 self.num_classes)
-            self.logger.info("Loading int {} to tensor {}".format(int(data_loader), torch.Tensor(int(data_loader))))
-            tensor = torch.Tensor(int(data_loader))
+            tensor = torch.from_numpy(np.array([data_loader]))
+            self.logger.info("Loading int {} to tensor {}".format(int(data_loader), tensor))
             return tensor
 
         batches = []
@@ -45,7 +46,6 @@ class TransformLabelReshaper:
             encoded_y = torch.from_numpy(b_y)
 
             batches.append([b_x, encoded_y])
-
         return batches
 
     def fit_transform(self, data_loader):
