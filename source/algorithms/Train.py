@@ -133,20 +133,20 @@ class Train:
             val_actuals, val_predicted, val_loss = self.validate(loss_function, model_network, validation_iter)
             self.results_writer(data_iter, val_actuals, val_predicted, output_dir)
             val_results = self.results_scorer(y_actual=val_actuals, y_pred=val_predicted, pos_label=pos_label)
-            validation_scores.append({"epoch": epoch, "score": val_results, "loss": val_loss.item()})
+            validation_scores.append({"epoch": epoch, "score": val_results, "loss": val_loss})
             # Print training set confusion matrix
             self.logger.info("Validation set result details: {} ".format(val_results))
 
             # Optmise on loss..
             if best_score is None:
-                best_score = val_loss.item() + 1
+                best_score = val_loss + 1
 
-            if val_loss.item() < best_score:
+            if val_loss < best_score:
                 best_results = (val_results, val_actuals, val_predicted)
                 # Use negative score so that - val > - best_score
-                self.snapshotter(model_network, -1 * val_loss.item(), -1 * best_score, output_dir=output_dir)
+                self.snapshotter(model_network, -1 * val_loss, -1 * best_score, output_dir=output_dir)
 
-                best_score = val_loss.item()
+                best_score = val_loss
                 no_improvement_epochs = 0
             else:
                 no_improvement_epochs += 1
@@ -155,7 +155,7 @@ class Train:
             self.logger.info(val_log_template.format((datetime.datetime.now() - start).seconds,
                                                      epoch, iterations, 1 + len(batch_x), len(data_iter),
                                                      100. * (1 + len(batch_x)) / len(data_iter), total_loss,
-                                                     val_loss.item(), train_results,
+                                                     val_loss, train_results,
                                                      val_results))
 
             if no_improvement_epochs > early_stopping_patience:
