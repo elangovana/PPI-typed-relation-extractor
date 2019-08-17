@@ -149,7 +149,7 @@ class Train:
                 best_score = val_loss.item()
                 no_improvement_epochs = 0
             else:
-                no_improvement_epochs += 0
+                no_improvement_epochs += 1
 
             # evaluate performance on validation set periodically
             self.logger.info(val_log_template.format((datetime.datetime.now() - start).seconds,
