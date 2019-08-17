@@ -9,6 +9,7 @@ from unittest import TestCase
 from torch.utils.data import DataLoader
 
 from algorithms.CnnPosTrainInferenceBuilder import CnnPosTrainInferenceBuilder
+from algorithms.Collator import Collator
 from algorithms.PpiDataset import PPIDataset
 
 
@@ -22,8 +23,9 @@ class TestSitTrainInferencePipeline(TestCase):
         mock_dataset_val = self._get_mock_dataset()
 
         sut = self._get_sut_train_pipeline(mock_dataset_train)
-        train_loader = DataLoader(mock_dataset_train, shuffle=True)
-        val_loader = DataLoader(mock_dataset_val, shuffle=False)
+        train_loader = DataLoader(mock_dataset_train, shuffle=True, collate_fn=Collator())
+        val_loader = DataLoader(mock_dataset_val, shuffle=False, collate_fn=Collator())
+
 
         # Act
 
@@ -51,8 +53,8 @@ class TestSitTrainInferencePipeline(TestCase):
         out_dir = tempfile.mkdtemp()
 
         sut = self._get_sut_train_pipeline(mock_dataset_train, out_dir=out_dir)
-        train_loader = DataLoader(mock_dataset_train, shuffle=True)
-        val_loader = DataLoader(mock_dataset_val, shuffle=False)
+        train_loader = DataLoader(mock_dataset_train, shuffle=True, collate_fn=Collator())
+        val_loader = DataLoader(mock_dataset_val, shuffle=False, collate_fn=Collator())
 
         # get predictions
         # Todo: fix the return from sut.... it is not a batch of scores but flattened
@@ -61,9 +63,9 @@ class TestSitTrainInferencePipeline(TestCase):
 
         # Act
         predictor = sut.load(out_dir)
-        actual, confidence_scores = predictor(val_loader)
+        predicted, confidence_scores = predictor(val_loader)
 
         # Assert
-        flat_actual = functools.reduce(operator.iconcat, actual, [])
+        flat_actual = functools.reduce(operator.iconcat, predicted, [])
 
         self.assertSequenceEqual(expected_predicted, flat_actual)

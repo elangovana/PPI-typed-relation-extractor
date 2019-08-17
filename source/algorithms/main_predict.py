@@ -7,6 +7,7 @@ import sys
 import pandas as pd
 from torch.utils.data import DataLoader
 
+from algorithms.Collator import Collator
 from algorithms.PpiDataset import PPIDataset
 from algorithms.TrainInferencePipeline import TrainInferencePipeline
 
@@ -21,10 +22,10 @@ def prepare_data(data_df):
     return data_df.copy(deep=True)
 
 
-def run(network, data_file, artifactsdir, out_dir, postives_filter_threshold=0.0):
+def run(data_file, artifactsdir, out_dir, postives_filter_threshold=0.0):
     logger = logging.getLogger(__name__)
 
-    final_df = run_prediction(artifactsdir, data_file, network, out_dir)
+    final_df = run_prediction(artifactsdir, data_file, out_dir)
 
     logger.info("Completed {}, {}".format(final_df.shape, final_df.columns.values))
 
@@ -41,13 +42,12 @@ def run(network, data_file, artifactsdir, out_dir, postives_filter_threshold=0.0
     return final_df
 
 
-def run_prediction(artifactsdir, data_file, network, out_dir):
+def run_prediction(artifactsdir, data_file, out_dir):
     logger = logging.getLogger(__name__)
 
     if not os.path.exists(out_dir) or not os.path.isdir(out_dir):
         raise FileNotFoundError("The path {} should exist and must be a directory".format(out_dir))
 
-    logger.info("Running with self relations filter network {}".format(network))
     logger.info("Loading from file {}".format(data_file))
 
     df = pd.read_json(data_file)
@@ -57,10 +57,11 @@ def run_prediction(artifactsdir, data_file, network, out_dir):
     logger.info("Data size after prep: {}".format(df_prep.shape))
 
     predictor = TrainInferencePipeline.load(artifactsdir)
-    val_dataloader = DataLoader(PPIDataset(data_file), shuffle=False)
+    val_dataloader = DataLoader(PPIDataset(data_file), shuffle=False, collate_fn=Collator())
 
     # Run prediction
     results, confidence_scores = predictor(val_dataloader)
+    print(confidence_scores)
     df_prep["predicted"] = results
     df_prep["confidence_scores"] = confidence_scores
     select_columns = df.columns.values
@@ -68,7 +69,7 @@ def run_prediction(artifactsdir, data_file, network, out_dir):
                                         right_index=True)
 
     # This is log softmax, convert to softmax prob
-
+    print(df_prep.values)
     final_df["confidence_true"] = final_df.apply(lambda x: math.exp(x["confidence_scores"][True]), axis=1)
     final_df["confidence_false"] = final_df.apply(lambda x: math.exp(x["confidence_scores"][False]), axis=1)
 

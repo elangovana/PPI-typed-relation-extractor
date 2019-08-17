@@ -6,6 +6,7 @@ import sys
 from torch.utils.data import DataLoader
 
 from algorithms.CnnPosTrainInferenceBuilder import CnnPosTrainInferenceBuilder
+from algorithms.Collator import Collator
 from algorithms.PpiDataset import PPIDataset
 
 
@@ -19,8 +20,8 @@ def run(train_file, val_file, embedding_file, embed_dim, out_dir, epochs, intera
 
     # TODO: Add CPU count
     num_workers = 1 if os.cpu_count() == 1 else os.cpu_count() - 1
-    train_loader = DataLoader(train, shuffle=True, batch_size=32, num_workers=num_workers)
-    val_loader = DataLoader(val, shuffle=False, batch_size=32, num_workers=num_workers)
+    train_loader = DataLoader(train, shuffle=True, batch_size=32, num_workers=num_workers, collate_fn=Collator())
+    val_loader = DataLoader(val, shuffle=False, batch_size=32, num_workers=num_workers, collate_fn=Collator())
 
     with open(embedding_file, "r") as embedding:
         # Ignore the first line as it contains the number of words and vector dim

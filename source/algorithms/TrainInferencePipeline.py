@@ -141,10 +141,11 @@ class TrainInferencePipeline:
     @staticmethod
     def _get_confidence_score_dict(label_pipeline, confidence_scores):
         transformed_conf_scores = []
-        for r in confidence_scores:
-            conf_score = {}
-            for i, s in enumerate(r):
-                conf_score[label_pipeline.label_reverse_encoder_func(i)] = s
-            transformed_conf_scores.append(conf_score)
+        for b in confidence_scores:
+            for r in b:
+                conf_score = {}
+                for i, s in enumerate(r):
+                    conf_score[label_pipeline.label_reverse_encoder_func(i)] = s
+                transformed_conf_scores.append(conf_score)
 
         return transformed_conf_scores
