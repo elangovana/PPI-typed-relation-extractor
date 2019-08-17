@@ -14,7 +14,7 @@ Adds negative samples of entities (Uniprot numbers) found in annotations in a en
 class GnormplusNegativeSamplesAugmentor:
 
     def __init__(self, pubmed_annotations: iter, geneIdConverter=None, include_self_relations=False,
-                 max_negative_per_pubmed=2):
+                 max_negative_per_pubmed=None):
         """
          :param include_self_relations: Set this to true if you want self-relations to be included as negative samples
          :param pubmed_annotations: The pubmed anntations looks like this is an array of dict
@@ -89,7 +89,7 @@ class GnormplusNegativeSamplesAugmentor:
 
                 data_fake = data_fake.append(record)
 
-                if i + 1 == self.max_negative_per_pubmed:
+                if self.max_negative_per_pubmed is not None and self.max_negative_per_pubmed == i:
                     break
 
         # Data with negative samples
