@@ -48,7 +48,8 @@ class TestBiocToDataFrameJson(TestCase):
 
         sut = BiocToDataFrame()
 
-        expected_json = [{"passage": "Simple text 1"
+        expected_json = [{"docid": "AIMed_d30",
+                          "passage": "Simple text 1"
                              , "participant1": "delta-catenin"
                              , "participant2": "presenilin (PS) 1"
                              , "isValid": False
@@ -104,7 +105,8 @@ class TestBiocToDataFrameJson(TestCase):
 
         sut = BiocToDataFrame()
 
-        expected_json = [{"passage": "Simple text 1"
+        expected_json = [{"docid": "AIMed_d30"
+                             , "passage": "Simple text 1"
                              , "participant1": "delta-catenin"
                              , "participant2": "presenilin (PS) 1"
                              , "isValid": True
