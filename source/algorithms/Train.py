@@ -76,9 +76,10 @@ class Train:
             '{:>6.0f},{:>5.0f},{:>9.0f},{:>5.0f}/{:<5.0f} {:>7.0f}%,{:>8.6f},{:8.6f},{:12.4f},{:12.4f}'.split(','))
         val_log_template = "Run {}".format(val_log_template)
 
-        best_score = 0
+        best_score = None
         trainings_scores = []
         validation_scores = []
+        no_improvement_epochs = 0
         self.logger.info("using score : {}".format(type(self.results_scorer)))
         for epoch in range(epoch):
             total_loss = 0
@@ -136,12 +137,19 @@ class Train:
             # Print training set confusion matrix
             self.logger.info("Validation set result details: {} ".format(val_results))
 
-            if val_results > best_score:
+            # Optmise on loss..
+            if best_score is None:
+                best_score = val_loss.item() + 1
+
+            if val_loss.item() < best_score:
                 best_results = (val_results, val_actuals, val_predicted)
+                # Use negative score so that - val > - best_score
+                self.snapshotter(model_network, -1 * val_loss.item(), -1 * best_score, output_dir=output_dir)
 
-                self.snapshotter(model_network, val_results, best_score, output_dir=output_dir)
-
-                best_score = val_results
+                best_score = val_loss.item()
+                no_improvement_epochs = 0
+            else:
+                no_improvement_epochs += 0
 
             # evaluate performance on validation set periodically
             self.logger.info(val_log_template.format((datetime.datetime.now() - start).seconds,
@@ -149,6 +157,10 @@ class Train:
                                                      100. * (1 + len(batch_x)) / len(data_iter), total_loss,
                                                      val_loss.item(), train_results,
                                                      val_results))
+
+            if no_improvement_epochs > early_stopping_patience:
+                self.logger.info("Early stopping.. with no improvement in {}".format(no_improvement_epochs))
+                break
 
         self.results_writer.dump_object(validation_scores, output_dir, "validation_scores_epoch")
         self.results_writer.dump_object(trainings_scores, output_dir, "training_scores_epoch")
@@ -177,5 +189,3 @@ class Train:
 
         self.logger.debug("The validation confidence scores are {}".format(scores))
         return actuals, predicted, val_loss
-
-
