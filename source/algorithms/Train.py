@@ -84,8 +84,8 @@ class Train:
         for epoch in range(epoch):
             total_loss = 0
             n_correct, n_total = 0, 0
-            actuals_train = []
-            predicted_train = []
+            actuals_train = torch.tensor([])
+            predicted_train = torch.tensor([])
             for idx, batch in enumerate(data_iter):
                 batch_x = batch[0]
                 batch_y = batch[1]
@@ -116,23 +116,26 @@ class Train:
 
                 losses.append(total_loss)
 
-                actuals_train.extend(batch_y)
-                predicted_train.extend(torch.max(predicted, 1)[1].view(batch_y.size()))
+                actuals_train = torch.cat((actuals_train.long(), batch_y))
+                predicted_train = torch.cat((predicted_train.long(), torch.max(predicted, 1)[1].view(batch_y.size())))
 
                 n_correct += (torch.max(predicted, 1)[1].view(batch_y.size()) == batch_y).sum().item()
                 n_total += len(batch_y)
 
+            actuals_train = actuals_train.numpy()
+            predicted_train = predicted_train.numpy()
             # Print training set confusion matrix
             self.logger.info("Train set result details:")
             self.results_writer(data_iter, actuals_train, predicted_train, output_dir)
-            train_results = self.results_scorer(y_actual=actuals_train, y_pred=predicted_train, pos_label=pos_label)
+            train_results = self.results_scorer(y_actual=actuals_train, y_pred=predicted_train,
+                                                pos_label=pos_label.item())
             trainings_scores.append({"epoch": epoch, "score": train_results, "loss": total_loss})
             self.logger.info("Train set result details: {}".format(train_results))
 
             self.logger.info("Validation set result details:")
             val_actuals, val_predicted, val_loss = self.validate(loss_function, model_network, validation_iter)
             self.results_writer(data_iter, val_actuals, val_predicted, output_dir)
-            val_results = self.results_scorer(y_actual=val_actuals, y_pred=val_predicted, pos_label=pos_label)
+            val_results = self.results_scorer(y_actual=val_actuals, y_pred=val_predicted, pos_label=pos_label.item())
             validation_scores.append({"epoch": epoch, "score": val_results, "loss": val_loss})
             # Print training set confusion matrix
             self.logger.info("Validation set result details: {} ".format(val_results))

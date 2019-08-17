@@ -10,7 +10,7 @@ class TestTransformLabelReshaper(TestCase):
         # Arrange
         input = 2
         sut = TransformLabelReshaper(num_classes=3)
-        expected = torch.Tensor([input]).long()
+        expected = torch.tensor(input)
 
         # Act
         actual = sut.fit_transform(input)

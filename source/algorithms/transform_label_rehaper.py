@@ -1,6 +1,5 @@
 import logging
 
-import numpy as np
 import torch
 
 """
@@ -33,7 +32,7 @@ class TransformLabelReshaper:
         if is_int:
             assert 0 <= data_loader < self.num_classes, "The value must be greater than equal to zero and less than {} ".format(
                 self.num_classes)
-            tensor = torch.from_numpy(np.array([data_loader]))
+            tensor = torch.tensor(data_loader)
             self.logger.info("Loading int {} to tensor {}".format(int(data_loader), tensor))
             return tensor
 

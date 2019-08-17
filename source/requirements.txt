@@ -9,5 +9,5 @@ aws-requests-auth==0.4.1
 scikit-learn==0.19.2
 pandas==0.23.0
 matplotlib==3.0.0
-torch==0.4.1
+torch==1.0.0
 nltk==3.4
