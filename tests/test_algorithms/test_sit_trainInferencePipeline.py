@@ -1,5 +1,3 @@
-import functools
-import operator
 import os
 import tempfile
 from io import StringIO
@@ -66,6 +64,4 @@ class TestSitTrainInferencePipeline(TestCase):
         predicted, confidence_scores = predictor(val_loader)
 
         # Assert
-        flat_actual = functools.reduce(operator.iconcat, predicted, [])
-
-        self.assertSequenceEqual(expected_predicted, flat_actual)
+        self.assertSequenceEqual(expected_predicted, predicted.tolist())
