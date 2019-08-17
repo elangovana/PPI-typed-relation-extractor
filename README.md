@@ -17,8 +17,7 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
    wget http://mips.helmholtz-muenchen.de/proj/ppi/data/mppi.gz
    gunzip mppi.gz 
    ```  
-2. Download pretrained word embeddings
-https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
+
 
 ## Run Docker
 
@@ -227,4 +226,19 @@ https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
     ```bash
      python ./algorithms/main_predict.py Cnn /data/val_unique_pub_v6_less_negative.json /tmp/model_artefacts /tmp --positives-filter-threshold .95
 
+    ```
+
+
+
+## Other datasets
+
+### AImed
+
+1. Download data AIMed dataset in BiocFormat from http://corpora.informatik.hu-berlin.de/
+
+2. Convert Bioc to pandas dataframe json format
+    
+    ```text
+    export PYTHONPATH=./source
+    python source/datatransformer/BiocToDataFrame.py tests/test_datatransformer/data/sample_aimed.xml /tmp/df.json
     ```

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection>
+    <source></source>
+    <date></date>
+    <key></key>
+    <document>
+        <id>AIMed_d30</id>
+        <passage>
+            <offset>0</offset>
+            <text>Isolation of human delta-catenin and its binding specificity with presenilin 1.
+                We screened proteins for interaction with presenilin (PS) 1, and cloned the full-length cDNA of human
+                delta-catenin, which encoded 1225 amino acids.
+                Yeast two-hybrid assay, GST binding assay and immunoprecipitation demonstrated that delta-catenin
+                interacted with a hydrophilic loop region in the endoproteolytic C-terminal fragment of PS1, but not
+                with that of PS-2.
+                These results suggest that PS1 and PS2 partly differ in function.
+                PS1 loop fragment containing the pathogenic mutation retained the binding ability.
+                We also found another armadillo-protein, p0071, interacted with PS1.
+            </text>
+            <annotation id="T1">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="19" length="13"></location>
+                <text>delta-catenin</text>
+            </annotation>
+            <annotation id="T3">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="122" length="17"></location>
+                <text>presenilin (PS) 1</text>
+            </annotation>
+            <annotation id="T2">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="66" length="12"></location>
+                <text>presenilin 1</text>
+            </annotation>
+            <annotation id="T6">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="415" length="3"></location>
+                <text>PS1</text>
+            </annotation>
+            <annotation id="T7">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="441" length="4"></location>
+                <text>PS-2</text>
+            </annotation>
+            <annotation id="T4">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="182" length="13"></location>
+                <text>delta-catenin</text>
+            </annotation>
+            <annotation id="T5">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="313" length="13"></location>
+                <text>delta-catenin</text>
+            </annotation>
+            <annotation id="T10">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="513" length="3"></location>
+                <text>PS1</text>
+            </annotation>
+            <annotation id="T11">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="618" length="17"></location>
+                <text>armadillo-protein</text>
+            </annotation>
+            <annotation id="T12">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="637" length="5"></location>
+                <text>p0071</text>
+            </annotation>
+            <annotation id="T8">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="474" length="3"></location>
+                <text>PS1</text>
+            </annotation>
+            <annotation id="T13">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="660" length="3"></location>
+                <text>PS1</text>
+            </annotation>
+            <annotation id="T9">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="482" length="3"></location>
+                <text>PS2</text>
+            </annotation>
+            <relation id="R4">
+                <infon key="relation type">Interaction</infon>
+                <infon key="file">ann</infon>
+                <infon key="type">Relation</infon>
+                <node refid="T12" role="Arg1"></node>
+                <node refid="T13" role="Arg2"></node>
+            </relation>
+            <relation id="R2">
+                <infon key="relation type">Interaction</infon>
+                <infon key="file">ann</infon>
+                <infon key="type">Relation</infon>
+                <node refid="T3" role="Arg1"></node>
+                <node refid="T4" role="Arg2"></node>
+            </relation>
+            <relation id="R3">
+                <infon key="relation type">Interaction</infon>
+                <infon key="file">ann</infon>
+                <infon key="type">Relation</infon>
+                <node refid="T5" role="Arg1"></node>
+                <node refid="T6" role="Arg2"></node>
+            </relation>
+            <relation id="R1">
+                <infon key="relation type">Interaction</infon>
+                <infon key="file">ann</infon>
+                <infon key="type">Relation</infon>
+                <node refid="T1" role="Arg1"></node>
+                <node refid="T2" role="Arg2"></node>
+            </relation>
+        </passage>
+    </document>
+    <document>
+        <id>AIMed_d192</id>
+        <passage>
+            <offset>0</offset>
+            <text>Activation of interferon-gamma inducing factor mediated by interleukin-1beta converting enzyme.
+                The interleukin-1beta (IL-1beta) converting enzyme (ICE) processes the inactive IL-1beta precursor to
+                the proinflammatory cytokine.
+                ICE was also shown to cleave the precursor of interferon-gamma inducing factor (IGIF) at the authentic
+                processing site with high efficiency, thereby activating IGIF and facilitating its export.
+                Lipopolysaccharide-activated ICE-deficient (ICE-/-) Kupffer cells synthesized the IGIF precursor but
+                failed to process it into the active form.
+                Interferon-gamma and IGIF were diminished in the sera of ICE-/- mice exposed to Propionibacterium acnes
+                and lipopolysaccharide.
+                The lack of multiple proinflammatory cytokines in ICE-/- mice may account for their protection from
+                septic shock.
+            </text>
+            <annotation id="T1">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="14" length="16"></location>
+                <text>interferon-gamma</text>
+            </annotation>
+            <annotation id="T3">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="59" length="17"></location>
+                <text>interleukin-1beta</text>
+            </annotation>
+            <annotation id="T2">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="14" length="32"></location>
+                <text>interferon-gamma inducing factor</text>
+            </annotation>
+            <annotation id="T6">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="119" length="8"></location>
+                <text>IL-1beta</text>
+            </annotation>
+            <annotation id="T7">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="100" length="46"></location>
+                <text>interleukin-1beta (IL-1beta) converting enzyme</text>
+            </annotation>
+            <annotation id="T4">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="59" length="35"></location>
+                <text>interleukin-1beta converting enzyme</text>
+            </annotation>
+            <annotation id="T5">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="100" length="17"></location>
+                <text>interleukin-1beta</text>
+            </annotation>
+            <annotation id="T10">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="228" length="3"></location>
+                <text>ICE</text>
+            </annotation>
+            <annotation id="T11">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="274" length="16"></location>
+                <text>interferon-gamma</text>
+            </annotation>
+            <annotation id="T12">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="274" length="32"></location>
+                <text>interferon-gamma inducing factor</text>
+            </annotation>
+            <annotation id="T8">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="148" length="3"></location>
+                <text>ICE</text>
+            </annotation>
+            <annotation id="T13">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="308" length="4"></location>
+                <text>IGIF</text>
+            </annotation>
+            <annotation id="T14">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="388" length="4"></location>
+                <text>IGIF</text>
+            </annotation>
+            <annotation id="T9">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="176" length="8"></location>
+                <text>IL-1beta</text>
+            </annotation>
+            <annotation id="T15">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="451" length="3"></location>
+                <text>ICE</text>
+            </annotation>
+            <annotation id="T16">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="504" length="4"></location>
+                <text>IGIF</text>
+            </annotation>
+            <annotation id="T17">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="566" length="16"></location>
+                <text>Interferon-gamma</text>
+            </annotation>
+            <annotation id="T18">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="587" length="4"></location>
+                <text>IGIF</text>
+            </annotation>
+            <annotation id="T19">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="623" length="3"></location>
+                <text>ICE</text>
+            </annotation>
+            <annotation id="T20">
+                <infon key="file">ann</infon>
+                <infon key="type">protein</infon>
+                <location offset="744" length="3"></location>
+                <text>ICE</text>
+            </annotation>
+            <relation id="R6">
+                <infon key="relation type">Interaction</infon>
+                <infon key="file">ann</infon>
+                <infon key="type">Relation</infon>
+                <node refid="T10" role="Arg1"></node>
+                <node refid="T14" role="Arg2"></node>
+            </relation>
+            <relation id="R4">
+                <infon key="relation type">Interaction</infon>
+                <infon key="file">ann</infon>
+                <infon key="type">Relation</infon>
+                <node refid="T10" role="Arg1"></node>
+                <node refid="T12" role="Arg2"></node>
+            </relation>
+            <relation id="R5">
+                <infon key="relation type">Interaction</infon>
+                <infon key="file">ann</infon>
+                <infon key="type">Relation</infon>
+                <node refid="T10" role="Arg1"></node>
+                <node refid="T13" role="Arg2"></node>
+            </relation>
+            <relation id="R2">
+                <infon key="relation type">Interaction</infon>
+                <infon key="file">ann</infon>
+                <infon key="type">Relation</infon>
+                <node refid="T5" role="Arg1"></node>
+                <node refid="T8" role="Arg2"></node>
+            </relation>
+            <relation id="R3">
+                <infon key="relation type">Interaction</infon>
+                <infon key="file">ann</infon>
+                <infon key="type">Relation</infon>
+                <node refid="T6" role="Arg1"></node>
+                <node refid="T8" role="Arg2"></node>
+            </relation>
+            <relation id="R1">
+                <infon key="relation type">Interaction</infon>
+                <infon key="file">ann</infon>
+                <infon key="type">Relation</infon>
+                <node refid="T2" role="Arg1"></node>
+                <node refid="T4" role="Arg2"></node>
+            </relation>
+        </passage>
+    </document>
+</collection>
