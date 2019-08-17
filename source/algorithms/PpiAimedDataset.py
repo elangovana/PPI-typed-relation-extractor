@@ -7,7 +7,7 @@ Represents the custom PPIm dataset
 """
 
 
-class PPIMDataset(Dataset):
+class PpiAimedDataset(Dataset):
 
     def __init__(self, file_path, self_relations_filter=True):
         self._file_path = file_path
@@ -17,10 +17,9 @@ class PPIMDataset(Dataset):
         # Filter interaction types if required
         if self_relations_filter:
             data_df = data_df.query('participant1 != participant2')
-        data_df = data_df[["abstract", "participant1", "participant2"]]
 
         # Filter features
-        self._data_df = data_df[["abstract", "participant1", "participant2"]]
+        self._data_df = data_df[["passage", "participant1", "participant2"]]
 
         # Set up labels
         if "isValid" in data_df.columns:
@@ -28,6 +27,8 @@ class PPIMDataset(Dataset):
             self._labels = np.reshape(self._labels.values.tolist(), (-1,))
         else:
             self._labels = np.reshape([-1] * data_df.shape[0], (-1,))
+
+        print(self._labels)
 
     def __len__(self):
         return self._data_df.shape[0]

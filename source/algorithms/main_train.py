@@ -15,6 +15,9 @@ def run(train_file, val_file, embedding_file, embed_dim, out_dir, epochs, intera
     train = PPIDataset(train_file, interaction_type=interaction_type)
     val = PPIDataset(val_file, interaction_type=interaction_type)
 
+    # train = PpiAimedDataset(train_file)
+    # val = PpiAimedDataset(val_file)
+
     if not os.path.exists(out_dir) or not os.path.isdir(out_dir):
         raise FileNotFoundError("The path {} should exist and must be a directory".format(out_dir))
 
