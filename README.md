@@ -232,13 +232,13 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
 
 ## Other datasets
 
-### AImed
+### AImed  
 
 1. Download data AIMed dataset in BiocFormat from http://corpora.informatik.hu-berlin.de/
 
-2. Convert Bioc to pandas dataframe json format
+2. Convert AIMed txt files to pandas dataframe json format
     
     ```text
     export PYTHONPATH=./source
-    python source/datatransformer/BiocToDataFrame.py tests/test_datatransformer/data/sample_aimed.xml /tmp/df.json
+    python source/datatransformer/AimedToDataFrame.py tests/test_datatransformer/data/aimed /tmp/df.json
     ```

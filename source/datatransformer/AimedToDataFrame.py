@@ -1,4 +1,6 @@
 import argparse
+import glob
+import logging
 import os
 import re
 
@@ -15,16 +17,23 @@ class AimedToDataFrame:
         with open(aimed_file, "r") as txt_handle:
             return self.parse(txt_handle, file_name)
 
+    @property
+    def _logger(self):
+        return logging.getLogger(__name__)
+
     def parse(self, txt_handle, doc_id):
+        result_json = self._parse_to_json(doc_id, txt_handle)
+
+        return pd.DataFrame(result_json)
+
+    def _parse_to_json(self, doc_id, txt_handle):
         result_json = []
         doc_id = doc_id
-
         for line_no, line in enumerate(txt_handle):
             json_line = self._parse_line(doc_id, line, line_no)
 
             if json_line is not None: result_json.append(json_line)
-
-        return pd.DataFrame(result_json)
+        return result_json
 
     def _parse_line(self, doc_id, line, line_no):
         # Regex
@@ -72,12 +81,24 @@ class AimedToDataFrame:
 
         return json_line
 
+    def load_dir(self, dir):
+        assert os.path.isdir(dir), "{} must be a directory".format(dir)
+
+        files = glob.glob("{}/*".format(dir.rstrip("/")))
+        result = []
+        for input_file in files:
+            self._logger.info("Processing file {}".format(input_file))
+            with open(input_file, "r") as f:
+                result.extend(self._parse_to_json(os.path.basename(input_file), f))
+
+        return pd.DataFrame(result)
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("input",
-                        help="The bioc xml formatted json")
+    parser.add_argument("input_dir",
+                        help="The dir file containing abstracts")
 
     parser.add_argument("output",
                         help="The output_file")
@@ -85,5 +106,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Run
-    # result = AimedToDataFrame().parse(args.input)
-    # result.to_json(args.output)
+    result = AimedToDataFrame().load_dir(args.input_dir)
+    result.to_json(args.output)

@@ -10,7 +10,7 @@ from datatransformer.AimedToDataFrame import AimedToDataFrame
 class TestAimedToDataFrame(TestCase):
     def test___call__(self):
         # Arrange
-        input_file = os.path.join(os.path.dirname(__file__), "data", "abstract_11780382")
+        input_file = os.path.join(os.path.dirname(__file__), "data", "aimed", "abstract_11780382")
         sut = AimedToDataFrame()
         expected_json = [{"docid": "abstract_11780382",
                           "line_no": 1,
