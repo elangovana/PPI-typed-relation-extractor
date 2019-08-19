@@ -1,5 +1,6 @@
 import argparse
 import glob
+import itertools
 import logging
 import os
 import re
@@ -32,7 +33,7 @@ class AimedToDataFrame:
         for line_no, line in enumerate(txt_handle):
             json_line = self._parse_line(doc_id, line, line_no)
 
-            if json_line is not None: result_json.append(json_line)
+            if json_line is not None: result_json.extend(json_line)
         return result_json
 
     def _parse_line(self, doc_id, line, line_no):
@@ -40,46 +41,44 @@ class AimedToDataFrame:
         protein_regex_str = r'<prot>\s*(.*?)\s*</prot>'
         protein_regex = re.compile(protein_regex_str)
         whitespace_regex = re.compile(r"\s+")
-        relation_regex = re.compile(r'(<p(\d)\s+pair=\d\s*>\s*({})\s*</p\2>)'.format(protein_regex_str))
+        relation_regex = re.compile(r'(<p(\d)\s+pair=(\d)\s*>\s*({})\s*</p\2>)'.format(protein_regex_str))
 
         # find matches
         protien_matches = protein_regex.findall(line)
         relation_pair_matched = relation_regex.findall(line)
-        assert len(
-            protien_matches) <= 2, "Maximum match of proteins per sentcence is 2, but found {} in line {}".format(
-            len(protien_matches), line)
-        assert len(
-            relation_pair_matched) in [0,
-                                       2], \
-            "Maximum match of relation_pair_matched per sentence is either zero or 1, but found {} in line {}".format(
-                len(relation_pair_matched), line)
 
-        # No proteins , so return none
-        if len(protien_matches) == 0:
-            return None
+        relation_protein_pairs_set = self._extract_relations(relation_pair_matched)
+        protein_names_set = self._extract_proteins(protien_matches)
 
-        # p1
-        p1 = protien_matches[0]
-
-        p2 = None
-        if len(protien_matches) == 2:
-            p2 = protien_matches[1]
-
-        cleaned_line = relation_regex.sub(r'\3', line)
+        cleaned_line = relation_regex.sub(r'\4', line)
         cleaned_line = protein_regex.sub(r'\1', cleaned_line)
         cleaned_line = whitespace_regex.sub(" ", cleaned_line)
         cleaned_line = cleaned_line.strip("\n")
 
-        is_valid = len(relation_pair_matched) > 0
+        result_json = []
 
-        json_line = {"docid": doc_id,
-                     "line_no": line_no + 1,
-                     "passage": cleaned_line,
-                     "participant1": p1,
-                     "participant2": p2,
-                     "isValid": is_valid}
+        for protein_combination in itertools.combinations(sorted(protein_names_set), 2):
+            # sort names so it is easier to test
+            protein_combination = sorted(protein_combination)
+            participant1 = protein_combination[0]
+            participant2 = protein_combination[1]
 
-        return json_line
+            protein_combination = frozenset(protein_combination)
+            is_valid = protein_combination in relation_protein_pairs_set
+
+            json_line = {"docid": doc_id,
+                         "line_no": line_no + 1,
+                         "passage": cleaned_line,
+                         "participant1": participant1,
+                         "participant2": participant2,
+                         "isValid": is_valid}
+
+            result_json.append(json_line)
+
+        # Case just on protein found:
+        # TODO: no self relations allowed now..
+
+        return result_json
 
     def load_dir(self, dir):
         assert os.path.isdir(dir), "{} must be a directory".format(dir)
@@ -92,6 +91,31 @@ class AimedToDataFrame:
                 result.extend(self._parse_to_json(os.path.basename(input_file), f))
 
         return pd.DataFrame(result)
+
+    def _extract_relations(self, relation_pair_matched):
+        result = {}
+        for r in relation_pair_matched:
+            pair_id = r[2]
+            protein_name = r[4]
+
+            if pair_id not in result:
+                result[pair_id] = []
+
+            result[pair_id].append(protein_name)
+
+        result = set([frozenset(v) for k, v in result.items()])
+
+        return result
+
+    def _extract_proteins(self, proteins_matched):
+        result = []
+        for r in proteins_matched:
+            protein_name = r
+            result.append(protein_name)
+
+        result = set(result)
+
+        return result
 
 
 if __name__ == '__main__':
