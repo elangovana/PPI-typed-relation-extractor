@@ -145,8 +145,6 @@ class TrainInferencePipeline:
 
         predictions, confidence_scores = predictor.predict(model, val_examples)
 
-        print(predictions)
-
         transformed_predictions = label_pipeline.label_reverse_encoder_func(predictions)
 
         transformed_conf_scores = TrainInferencePipeline._get_confidence_score_dict(label_pipeline, confidence_scores)
