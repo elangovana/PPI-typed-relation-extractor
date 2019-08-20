@@ -9,10 +9,10 @@ from algorithms.TrainInferencePipeline import TrainInferencePipeline
 
 
 class InferencePipeline:
-    def run(self, data_file, artifactsdir, out_dir, postives_filter_threshold=0.0):
+    def run(self, dataset, data_file, artifactsdir, out_dir, postives_filter_threshold=0.0):
         logger = logging.getLogger(__name__)
 
-        final_df = self.run_prediction(artifactsdir, data_file, out_dir)
+        final_df = self.run_prediction(dataset, artifactsdir, data_file, out_dir)
 
         logger.info("Completed {}, {}".format(final_df.shape, final_df.columns.values))
 
@@ -36,7 +36,7 @@ class InferencePipeline:
         logger.info("Post filter shape {}".format(final_df.shape))
         return final_df
 
-    def run_prediction(self, artifactsdir, data_file, out_dir):
+    def run_prediction(self, dataset, artifactsdir, data_file, out_dir):
         logger = logging.getLogger(__name__)
 
         if not os.path.exists(out_dir) or not os.path.isdir(out_dir):
@@ -47,10 +47,9 @@ class InferencePipeline:
         df = pd.read_json(data_file)
 
         predictor = TrainInferencePipeline.load(artifactsdir)
-        val_dataset = self.get_dataset(data_file)
 
         # Run prediction
-        results, confidence_scores = predictor(val_dataset)
+        results, confidence_scores = predictor(dataset)
         df["predicted"] = results
         df["confidence_scores"] = confidence_scores
 

@@ -4,21 +4,17 @@ import os
 import sys
 
 from algorithms.CnnPosTrainInferenceBuilder import CnnPosTrainInferenceBuilder
-from algorithms.PpiDataset import PPIDataset
+from algorithms.dataset_mapper import str_to_dataset_class, get_datasets
 
 
-def run(train_file, val_file, embedding_file, embed_dim, out_dir, epochs, interaction_type=None):
+def run(dataset_type, train_file, val_file, embedding_file, embed_dim, out_dir, epochs):
     logger = logging.getLogger(__name__)
-    train = PPIDataset(train_file, interaction_type=interaction_type)
-    val = PPIDataset(val_file, interaction_type=interaction_type)
 
-    # train = PpiAimedDataset(train_file)
-    # val = PpiAimedDataset(val_file)
+    dataset_class = str_to_dataset_class(dataset_type)
+    train, val = dataset_class(train_file), dataset_class(val_file)
 
     if not os.path.exists(out_dir) or not os.path.isdir(out_dir):
         raise FileNotFoundError("The path {} should exist and must be a directory".format(out_dir))
-
-    # TODO: Add CPU count
 
     with open(embedding_file, "r") as embedding:
         # Ignore the first line as it contains the number of words and vector dim
@@ -32,7 +28,7 @@ def run(train_file, val_file, embedding_file, embed_dim, out_dir, epochs, intera
 
 if "__main__" == __name__:
     parser = argparse.ArgumentParser()
-
+    parser.add_argument("dataset", help="The dataset type", choices=get_datasets().keys())
     parser.add_argument("trainjson",
                         help="The input train json data")
     parser.add_argument("valjson",
@@ -53,5 +49,5 @@ if "__main__" == __name__:
     logging.basicConfig(level=logging.getLevelName(args.log_level), handlers=[logging.StreamHandler(sys.stdout)],
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-    run(args.trainjson, args.valjson, args.embedding, args.embeddim,
-        args.outdir, args.epochs, args.interaction_type)
+    run(args.dataset, args.trainjson, args.valjson, args.embedding, args.embeddim,
+        args.outdir, args.epochs)

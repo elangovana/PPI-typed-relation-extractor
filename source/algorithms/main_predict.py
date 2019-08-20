@@ -3,12 +3,16 @@ import logging
 import sys
 
 from algorithms.InferencePipeline import InferencePipeline
+from algorithms.dataset_mapper import get_datasets, str_to_dataset_class
 
 if "__main__" == __name__:
     parser = argparse.ArgumentParser()
 
+    parser.add_argument("dataset", help="The dataset type", choices=get_datasets().keys())
+
     parser.add_argument("datajson",
                         help="The json data to predict")
+
 
     parser.add_argument("artefactsdir", help="The artefacts dir that contains model, vocab etc")
     parser.add_argument("outdir", help="The output dir")
@@ -24,5 +28,7 @@ if "__main__" == __name__:
     logging.basicConfig(level=logging.getLevelName(args.log_level), handlers=[logging.StreamHandler(sys.stdout)],
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-    results = InferencePipeline().run(args.datajson, args.artefactsdir,
+    dataset_class = str_to_dataset_class(args.dataset)
+    dataset = dataset_class(args.datajson)
+    results = InferencePipeline().run(dataset, args.datajson, args.artefactsdir,
                                       args.outdir, args.positives_filter_threshold)
