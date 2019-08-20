@@ -5,21 +5,9 @@ import os
 import sys
 
 import pandas as pd
-from torch.utils.data import DataLoader
 
-from algorithms.Collator import Collator
 from algorithms.PpiDataset import PPIDataset
 from algorithms.TrainInferencePipeline import TrainInferencePipeline
-
-
-def prepare_data(data_df):
-    data_df = data_df[["normalised_abstract", "interactionType", "participant1Id", "participant2Id"]]
-    # data_df['participant1Alias'] = data_df['participant1Alias'].map(
-    #     lambda x: ", ".join(list(itertools.chain.from_iterable(x))))
-    # data_df['participant2Alias'] = data_df['participant2Alias'].map(
-    #     lambda x: ", ".join(list(itertools.chain.from_iterable(x))))
-
-    return data_df.copy(deep=True)
 
 
 def run(data_file, artifactsdir, out_dir, postives_filter_threshold=0.0):
@@ -52,28 +40,21 @@ def run_prediction(artifactsdir, data_file, out_dir):
 
     df = pd.read_json(data_file)
 
-    logger.info("Data size after load: {}".format(df.shape))
-    df_prep = prepare_data(df)
-    logger.info("Data size after prep: {}".format(df_prep.shape))
-
     predictor = TrainInferencePipeline.load(artifactsdir)
-    val_dataloader = DataLoader(PPIDataset(data_file), shuffle=False, collate_fn=Collator())
+    val_dataset = PPIDataset(data_file)
 
     # Run prediction
-    results, confidence_scores = predictor(val_dataloader)
+    results, confidence_scores = predictor(val_dataset)
     print(confidence_scores)
-    df_prep["predicted"] = results
-    df_prep["confidence_scores"] = confidence_scores
-    select_columns = df.columns.values
-    final_df = df[select_columns].merge(df_prep[["predicted", "confidence_scores"]], how='inner', left_index=True,
-                                        right_index=True)
+    df["predicted"] = results
+    df["confidence_scores"] = confidence_scores
 
     # This is log softmax, convert to softmax prob
-    print(df_prep.values)
-    final_df["confidence_true"] = final_df.apply(lambda x: math.exp(x["confidence_scores"][True]), axis=1)
-    final_df["confidence_false"] = final_df.apply(lambda x: math.exp(x["confidence_scores"][False]), axis=1)
 
-    return final_df
+    df["confidence_true"] = df.apply(lambda x: math.exp(x["confidence_scores"][True]), axis=1)
+    df["confidence_false"] = df.apply(lambda x: math.exp(x["confidence_scores"][False]), axis=1)
+
+    return df
 
 
 if "__main__" == __name__:

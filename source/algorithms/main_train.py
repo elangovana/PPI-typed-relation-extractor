@@ -3,10 +3,7 @@ import logging
 import os
 import sys
 
-from torch.utils.data import DataLoader
-
 from algorithms.CnnPosTrainInferenceBuilder import CnnPosTrainInferenceBuilder
-from algorithms.Collator import Collator
 from algorithms.PpiDataset import PPIDataset
 
 
@@ -22,9 +19,6 @@ def run(train_file, val_file, embedding_file, embed_dim, out_dir, epochs, intera
         raise FileNotFoundError("The path {} should exist and must be a directory".format(out_dir))
 
     # TODO: Add CPU count
-    num_workers = 1 if os.cpu_count() == 1 else os.cpu_count() - 1
-    train_loader = DataLoader(train, shuffle=True, batch_size=32, num_workers=num_workers, collate_fn=Collator())
-    val_loader = DataLoader(val, shuffle=False, batch_size=32, num_workers=num_workers, collate_fn=Collator())
 
     with open(embedding_file, "r") as embedding:
         # Ignore the first line as it contains the number of words and vector dim
@@ -33,7 +27,7 @@ def run(train_file, val_file, embedding_file, embed_dim, out_dir, epochs, intera
         builder = CnnPosTrainInferenceBuilder(dataset=train, embedding_dim=embed_dim, embedding_handle=embedding,
                                               output_dir=out_dir, epochs=epochs)
         train_pipeline = builder.get_trainpipeline()
-        train_pipeline(train_loader, val_loader)
+        train_pipeline(train, val)
 
 
 if "__main__" == __name__:

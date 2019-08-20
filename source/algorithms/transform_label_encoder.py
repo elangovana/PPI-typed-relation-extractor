@@ -57,7 +57,12 @@ class TransformLabelEncoder:
 
         i = []
         for _, b in enumerate(Y):
-            i.append(b)
+            # Check if batched.. If not batched b is an int
+            if isinstance(b, int):
+                i.append(b)
+            # this is a iterable
+            else:
+                i.extend(b)
         return self._encoder.inverse_transform(i)
 
     def fit_transform(self, data_loader):

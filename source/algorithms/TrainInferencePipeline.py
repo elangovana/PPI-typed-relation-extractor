@@ -4,7 +4,9 @@ import os
 import pickle
 
 import torch
+from torch.utils.data import DataLoader
 
+from algorithms.Collator import Collator
 from algorithms.Predictor import Predictor
 
 
@@ -13,7 +15,12 @@ class TrainInferencePipeline:
     def __init__(self, model, optimiser, loss_function, trainer, train_vocab_extractor, embedder_loader,
                  embedding_handle, embedding_dim: int,
                  label_pipeline, data_pipeline, class_size: int, pos_label, output_dir, ngram: int = 3,
-                 epochs: int = 10, min_vocab_frequency=3, class_weights_dict=None):
+                 epochs: int = 10, min_vocab_frequency=3, class_weights_dict=None, num_workers=None, batch_size=32):
+        self.batch_size = batch_size
+        self.num_workers = num_workers
+        if self.num_workers is None:
+            self.num_workers = 1 if os.cpu_count() == 1 else os.cpu_count() - 1
+
         self.trainer = trainer
         self.class_weights_dict = class_weights_dict
         self.embedding_handle = embedding_handle
@@ -38,15 +45,19 @@ class TrainInferencePipeline:
         return logging.getLogger(__name__)
 
     def __call__(self, train, validation):
+        train_loader = DataLoader(train, shuffle=True, batch_size=self.batch_size, num_workers=self.num_workers,
+                                  collate_fn=Collator())
+        val_loader = DataLoader(validation, shuffle=False, batch_size=self.batch_size, num_workers=self.num_workers,
+                                collate_fn=Collator())
 
         # Merge train vocab and the pretrained vocab
         self.embedding_handle.seek(0)
-        train_vocab_dict = self.train_vocab_extractor.construct_vocab_dict(train)
+        train_vocab_dict = self.train_vocab_extractor.construct_vocab_dict(train_loader)
         full_vocab_dict, embedding_array = self.embedder_loader(self.embedding_handle, train_vocab_dict)
         self.data_pipeline.update_vocab_dict(full_vocab_dict)
 
-        transformed_train_x = self.data_pipeline.fit_transform(train)
-        transformed_val_x = self.data_pipeline.transform(validation)
+        transformed_train_x = self.data_pipeline.fit_transform(train_loader)
+        transformed_val_x = self.data_pipeline.transform(val_loader)
 
         transformed_train_x = self.label_pipeline.fit_transform(transformed_train_x)
         transformed_val_x = self.label_pipeline.transform(transformed_val_x)
@@ -124,13 +135,17 @@ class TrainInferencePipeline:
         return matched_file
 
     @staticmethod
-    def predict(dataloader, model, data_pipeline, label_pipeline):
+    def predict(dataset, model, data_pipeline, label_pipeline):
+        dataloader = DataLoader(dataset, shuffle=False, batch_size=32, num_workers=1,
+                                collate_fn=Collator())
 
         val_examples = data_pipeline.transform(dataloader)
 
         predictor = Predictor()
 
         predictions, confidence_scores = predictor.predict(model, val_examples)
+
+        print(predictions)
 
         transformed_predictions = label_pipeline.label_reverse_encoder_func(predictions)
 
