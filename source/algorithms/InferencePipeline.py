@@ -4,7 +4,6 @@ import os
 
 import pandas as pd
 
-from algorithms.PpiDataset import PPIDataset
 from algorithms.TrainInferencePipeline import TrainInferencePipeline
 
 
@@ -60,6 +59,3 @@ class InferencePipeline:
 
         return df
 
-    def get_dataset(self, data_file):
-        val_dataset = PPIDataset(data_file)
-        return val_dataset
