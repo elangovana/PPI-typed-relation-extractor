@@ -28,8 +28,6 @@ class PpiAimedDataset(Dataset):
         else:
             self._labels = np.reshape([-1] * data_df.shape[0], (-1,))
 
-        print(self._labels)
-
     def __len__(self):
         return self._data_df.shape[0]
 
