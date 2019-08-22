@@ -2,6 +2,9 @@ import sys
 
 
 def str_to_dataset_class(class_name):
+    from algorithms.PpiAimedDataset import PpiAimedDataset
+    from algorithms.PpiDataset import PPIDataset
+
     valid_datasets_module = get_datasets()
     if class_name not in valid_datasets_module:
         raise "Unknown dataset, expected one of these {} ".format(" , ".join(valid_datasets_module.keys()))
