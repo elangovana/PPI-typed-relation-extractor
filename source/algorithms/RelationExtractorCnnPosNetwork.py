@@ -115,6 +115,7 @@ class RelationExtractorCnnPosNetwork(nn.Module):
         return self.__pos_embedder__
 
     def forward(self, feature_tuples):
+
         # The input format is tuples of features.. where each item in tuple is a shape feature_len * batch_szie
 
         # Assume text is when the feature length is max..
@@ -123,8 +124,11 @@ class RelationExtractorCnnPosNetwork(nn.Module):
 
         text_transposed = text_inputs
 
+        self.logger.debug("Executing embeddings")
         embeddings = self.embeddings(text_transposed)
+
         merged_pos_embed = embeddings
+        self.logger.debug("Executing pos embedding")
 
         for f in range(len(feature_tuples)):
             if f == self.text_column_index: continue
@@ -144,6 +148,7 @@ class RelationExtractorCnnPosNetwork(nn.Module):
         # Conv1d takes in (batch, channels, seq_len), but raw embedded is (batch, seq_len, channels)
         final_input = merged_pos_embed.permute(0, 2, 1)
 
+        self.logger.debug("Running through layers")
         outputs = []
         for cnn_layer in self.cnn_layers:
             out1 = cnn_layer(final_input)
@@ -153,6 +158,9 @@ class RelationExtractorCnnPosNetwork(nn.Module):
 
         out = out.reshape(out.size(0), -1)
 
+        self.logger.debug("Running fc")
         out = self.fc(out)
+
+        self.logger.debug("Running softmax")
         log_probs = F.log_softmax(out, dim=1)
         return log_probs
