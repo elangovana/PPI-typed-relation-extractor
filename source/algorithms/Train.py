@@ -86,7 +86,10 @@ class Train:
             n_correct, n_total = 0, 0
             actuals_train = torch.tensor([])
             predicted_train = torch.tensor([])
+            self.logger.debug("Running epoch {}".format(epoch))
+
             for idx, batch in enumerate(data_iter):
+                self.logger.debug("Running batch {}".format(idx))
                 batch_x = batch[0]
                 batch_y = batch[1]
                 # batch_x = torch.Tensor(batch_x)
@@ -101,16 +104,20 @@ class Train:
 
                 # Step 3. Run the forward pass, getting log probabilities over next
                 # words
+                self.logger.debug("Running forward")
                 predicted = model_network(batch_x)
 
                 # Step 4. Compute your loss function. (Again, Torch wants the target
                 # word wrapped in a tensor)
+                self.logger.debug("Running loss")
                 loss = loss_function(predicted, batch_y)
 
                 # Step 5. Do the backward pass and update the gradient
+                self.logger.debug("Running backwoard")
                 loss.backward()
                 optimizer.step()
 
+                self.logger.debug("total loss")
                 # Get the Python number from a 1-element Tensor by calling tensor.item()
                 total_loss += loss.item()
 
