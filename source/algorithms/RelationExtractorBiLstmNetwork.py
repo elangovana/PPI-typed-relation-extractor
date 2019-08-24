@@ -30,24 +30,23 @@ class RelationExtractorBiLstmNetwork(nn.Module):
         self.logger.info("The text feature is index {}, the feature lengths are {}".format(self.text_column_index,
                                                                                            self.feature_lengths))
 
-        # self.windows_sizes = [5, 4, 3, 2, 1]
-        self.windows_sizes = [3, 2, 1]
-        cnn_output = 50
-
         dropout_rate_fc = 0.5
 
         # The total embedding size if the text column + position for the rest
         pos_embed_total_dim = (len(self.feature_lengths) - 1) * \
                               self.pos_embedder.embeddings.shape[1]
         total_dim_size = embedding_dim + pos_embed_total_dim
-        self.logger.info(
-            "Word embedding size is {}, pos embedding size is {}, cnn_output size {}, total is {}".format(embedding_dim,
-                                                                                                          pos_embed_total_dim,
-                                                                                                          cnn_output,
-                                                                                                          total_dim_size))
+
         hidden_size = 50
         bidirectional = True
         num_directions = 2 if bidirectional else 1
+
+        self.logger.info(
+            "Word embedding size is {}, pos embedding size is {}, totaldim is {}, hidden_size  {}".format(embedding_dim,
+                                                                                                          pos_embed_total_dim,
+                                                                                                          total_dim_size,
+                                                                                                          hidden_size
+                                                                                                          ))
 
         self.lstm = nn.LSTM(total_dim_size, hidden_size=hidden_size, num_layers=2, batch_first=True,
                             bidirectional=bidirectional)
