@@ -5,7 +5,7 @@ from torch.optim import SGD
 from algorithms.DataPipeline import DataPipeline
 from algorithms.LabelPipeline import LabelPipeline
 from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
-from algorithms.RelationExtractorCnnPosNetwork import RelationExtractorCnnPosNetwork
+from algorithms.RelationExtractorBiLstmNetwork import RelationExtractorBiLstmNetwork
 from algorithms.Train import Train
 from algorithms.TrainInferencePipeline import TrainInferencePipeline
 from algorithms.transform_label_encoder import TransformLabelEncoder
@@ -48,7 +48,7 @@ class CnnPosTrainInferenceBuilder:
         label_pipeline = LabelPipeline(label_reshaper=label_reshaper, label_encoder=label_encoder)
 
         np_feature_lens = np.array(self.dataset.feature_lens)
-        model = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
+        model = RelationExtractorBiLstmNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
                                                feature_lengths=np_feature_lens)
 
         # Optimiser
