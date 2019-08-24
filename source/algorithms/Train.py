@@ -141,7 +141,7 @@ class Train:
 
             self.logger.info("Validation set result details:")
             val_actuals, val_predicted, val_loss = self.validate(loss_function, model_network, validation_iter)
-            self.results_writer(data_iter, val_actuals, val_predicted, output_dir)
+            self.results_writer(validation_iter, val_actuals, val_predicted, output_dir)
             val_results = self.results_scorer(y_actual=val_actuals, y_pred=val_predicted, pos_label=pos_label.item())
             validation_scores.append({"epoch": epoch, "score": val_results, "loss": val_loss})
             # Print training set confusion matrix
