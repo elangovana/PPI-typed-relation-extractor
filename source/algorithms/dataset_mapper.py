@@ -14,5 +14,5 @@ def str_to_dataset_class(class_name):
 
 
 def get_datasets():
-    valid_datasets_module = {"PPIDataset": "algorithms.PpiDataset", "PpiAimedDataset": "algorithms.PpiAimedDataset"}
+    valid_datasets_module = {"PPIDataset": "datasets.PpiDataset", "PpiAimedDataset": "datasets.PpiAimedDataset"}
     return valid_datasets_module
