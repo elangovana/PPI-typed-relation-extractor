@@ -14,7 +14,7 @@ from algorithms.transform_protein_mask import TransformProteinMask
 from algorithms.transform_text_index import TransformTextToIndex
 
 
-class CnnPosTrainInferenceBuilder:
+class TrainInferenceBuilder:
 
     def __init__(self, dataset, embedding_dim, embedding_handle, output_dir, epochs=100):
         self.epochs = epochs

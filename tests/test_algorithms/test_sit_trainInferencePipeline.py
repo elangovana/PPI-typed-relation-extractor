@@ -4,7 +4,7 @@ from io import StringIO
 from logging.config import fileConfig
 from unittest import TestCase
 
-from algorithms.CnnPosTrainInferenceBuilder import CnnPosTrainInferenceBuilder
+from algorithms.TrainInferenceBuilder import TrainInferenceBuilder
 from datasets.PpiDataset import PPIDataset
 
 
@@ -25,8 +25,8 @@ class TestSitTrainInferencePipeline(TestCase):
     def _get_sut_train_pipeline(self, mock_dataset, out_dir=tempfile.mkdtemp(), epochs=5):
         embedding = StringIO(
             "\n".join(["4 3", "hat 0.2 .34 0.8", "mat 0.5 .34 0.8", "entity1 0.5 .55 0.8", "entity2 0.3 .55 0.9"]))
-        factory = CnnPosTrainInferenceBuilder(dataset=mock_dataset, embedding_handle=embedding, embedding_dim=3,
-                                              output_dir=out_dir, epochs=epochs)
+        factory = TrainInferenceBuilder(dataset=mock_dataset, embedding_handle=embedding, embedding_dim=3,
+                                        output_dir=out_dir, epochs=epochs)
         sut = factory.get_trainpipeline()
         return sut
 

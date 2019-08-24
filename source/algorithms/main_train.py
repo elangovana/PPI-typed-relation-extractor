@@ -3,7 +3,7 @@ import logging
 import os
 import sys
 
-from algorithms.CnnPosTrainInferenceBuilder import CnnPosTrainInferenceBuilder
+from algorithms.TrainInferenceBuilder import TrainInferenceBuilder
 from algorithms.dataset_mapper import str_to_dataset_class, get_datasets
 
 
@@ -20,8 +20,8 @@ def run(dataset_type, train_file, val_file, embedding_file, embed_dim, out_dir, 
         # Ignore the first line as it contains the number of words and vector dim
         head = embedding.readline()
         logger.info("The embedding header is {}".format(head))
-        builder = CnnPosTrainInferenceBuilder(dataset=train, embedding_dim=embed_dim, embedding_handle=embedding,
-                                              output_dir=out_dir, epochs=epochs)
+        builder = TrainInferenceBuilder(dataset=train, embedding_dim=embed_dim, embedding_handle=embedding,
+                                        output_dir=out_dir, epochs=epochs)
         train_pipeline = builder.get_trainpipeline()
         train_pipeline(train, val)
 

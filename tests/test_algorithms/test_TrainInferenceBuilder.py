@@ -4,10 +4,10 @@ from unittest import TestCase
 from unittest.mock import MagicMock
 
 from algorithms import TrainInferencePipeline
-from algorithms.CnnPosTrainInferenceBuilder import CnnPosTrainInferenceBuilder
+from algorithms.TrainInferenceBuilder import TrainInferenceBuilder
 
 
-class TestCnnPosTrainInferenceBuilder(TestCase):
+class TestTrainInferenceBuilder(TestCase):
     def test_get_trainpipeline(self):
         # Arrange
         mock_dataset = MagicMock()
@@ -24,8 +24,8 @@ class TestCnnPosTrainInferenceBuilder(TestCase):
 
         out_dir = tempfile.mkdtemp()
 
-        sut = CnnPosTrainInferenceBuilder(dataset=mock_dataset, embedding_handle=embedding, output_dir=out_dir,
-                                          embedding_dim=3)
+        sut = TrainInferenceBuilder(dataset=mock_dataset, embedding_handle=embedding, output_dir=out_dir,
+                                    embedding_dim=3)
 
         # Act
         actual = sut.get_trainpipeline()
