@@ -19,7 +19,7 @@ class TrainInferenceBuilder:
     def __init__(self, dataset, embedding_dim, embedding_handle, output_dir, epochs=100):
         self.epochs = epochs
         self.dataset = dataset
-        self.learning_rate = .001
+        self.learning_rate = .01
         self.momentum = .9
         self.embedding_handle = embedding_handle
         self.embedding_dim = embedding_dim
@@ -52,8 +52,8 @@ class TrainInferenceBuilder:
                                                feature_lengths=np_feature_lens)
 
         # Optimiser
-        # optimiser = SGD(lr=self.learning_rate, momentum=self.momentum, params=model.parameters())
-        optimiser = Adam(params=model.parameters())
+        optimiser = SGD(lr=self.learning_rate, momentum=self.momentum, params=model.parameters())
+        # optimiser = Adam(params=model.parameters())
 
         # Loss function
         loss_function = nn.CrossEntropyLoss()
