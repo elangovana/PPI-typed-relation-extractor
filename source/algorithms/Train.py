@@ -193,7 +193,7 @@ class Train:
                 scores.append([pred_batch_y])
                 pred_flat = torch.max(pred_batch_y, 1)[1].view(val_y.size())
                 n_val_correct += (pred_flat == val_y).sum().item()
-                val_loss = loss_function(pred_batch_y, val_y).item()
+                val_loss += loss_function(pred_batch_y, val_y).item()
                 actuals.extend(val_y.numpy().tolist())
                 predicted.extend(pred_flat.numpy().tolist())
 
