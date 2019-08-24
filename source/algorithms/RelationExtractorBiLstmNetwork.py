@@ -37,7 +37,7 @@ class RelationExtractorBiLstmNetwork(nn.Module):
                               self.pos_embedder.embeddings.shape[1]
         total_dim_size = embedding_dim + pos_embed_total_dim
 
-        hidden_size = 50
+        hidden_size = 124
         bidirectional = True
         num_directions = 2 if bidirectional else 1
 
@@ -48,10 +48,10 @@ class RelationExtractorBiLstmNetwork(nn.Module):
                                                                                                           hidden_size
                                                                                                           ))
 
-        self.lstm = nn.LSTM(total_dim_size, hidden_size=hidden_size, num_layers=2, batch_first=True,
+        self.lstm = nn.LSTM(total_dim_size, hidden_size=hidden_size, num_layers=1, batch_first=True,
                             bidirectional=bidirectional)
 
-        fc_layer_size = 100
+        fc_layer_size = 30
 
         self._class_size = class_size
         self.fc = nn.Sequential(
