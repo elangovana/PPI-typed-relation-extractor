@@ -2,8 +2,8 @@ import sys
 
 
 def str_to_dataset_class(class_name):
-    from algorithms.PpiAimedDataset import PpiAimedDataset
-    from algorithms.PpiDataset import PPIDataset
+    from datasets.PpiAimedDataset import PpiAimedDataset
+    from datasets.PpiDataset import PPIDataset
 
     valid_datasets_module = get_datasets()
     if class_name not in valid_datasets_module:

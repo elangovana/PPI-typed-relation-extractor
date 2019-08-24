@@ -5,7 +5,7 @@ from logging.config import fileConfig
 from unittest import TestCase
 
 from algorithms.CnnPosTrainInferenceBuilder import CnnPosTrainInferenceBuilder
-from algorithms.PpiDataset import PPIDataset
+from datasets.PpiDataset import PPIDataset
 
 
 class TestSitTrainInferencePipeline(TestCase):
