@@ -60,6 +60,8 @@ class RelationExtractorBiLstmNetwork(nn.Module):
             nn.ReLU(),
             ##nn.Dropout(dropout_rate_fc),
             nn.Linear(fc_layer_size, class_size))
+        # No softmax
+        # nn.LogSoftmax())
 
     @property
     def embeddings(self):
@@ -124,6 +126,6 @@ class RelationExtractorBiLstmNetwork(nn.Module):
         self.logger.debug("Running fc")
         out = self.fc(out)
 
-        self.logger.debug("Running softmax")
-        log_probs = F.log_softmax(out, dim=1)
-        return log_probs
+        # self.logger.debug("Running softmax")
+        # log_probs = self.softmax(out, dim=1)
+        return out
