@@ -162,5 +162,5 @@ class RelationExtractorCnnPosNetwork(nn.Module):
         out = self.fc(out)
 
         self.logger.debug("Running softmax")
-        log_probs = F.log_softmax(out, dim=1)
-        return log_probs
+
+        return out
