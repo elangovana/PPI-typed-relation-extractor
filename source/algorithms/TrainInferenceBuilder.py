@@ -52,8 +52,8 @@ class TrainInferenceBuilder:
                                                feature_lengths=np_feature_lens)
 
         # Optimiser
-        optimiser = SGD(lr=self.learning_rate, momentum=self.momentum, params=model.parameters())
-        # optimiser = Adam(params=model.parameters())
+        # optimiser = SGD(lr=self.learning_rate, momentum=self.momentum, params=model.parameters())
+        optimiser = Adam(params=model.parameters())
 
         # Loss function
         loss_function = nn.CrossEntropyLoss()
