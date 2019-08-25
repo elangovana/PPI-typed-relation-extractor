@@ -30,7 +30,7 @@ class RelationExtractorBiLstmNetwork(nn.Module):
         self.logger.info("The text feature is index {}, the feature lengths are {}".format(self.text_column_index,
                                                                                            self.feature_lengths))
 
-        dropout_rate_fc = 0.5
+        dropout_rate_fc = 0.2
 
         # The total embedding size if the text column + position for the rest
         pos_embed_total_dim = (len(self.feature_lengths) - 1) * \
@@ -48,8 +48,10 @@ class RelationExtractorBiLstmNetwork(nn.Module):
                                                                                                           hidden_size
                                                                                                           ))
 
-        self.lstm = nn.LSTM(total_dim_size, hidden_size=hidden_size, num_layers=1, batch_first=True,
-                            bidirectional=bidirectional)
+        self.lstm = nn.Sequential(
+            nn.LSTM(total_dim_size, hidden_size=hidden_size, num_layers=1, batch_first=True,
+                    bidirectional=bidirectional)
+            , nn.Dropout(.2))
 
         fc_layer_size = 30
 
@@ -58,7 +60,7 @@ class RelationExtractorBiLstmNetwork(nn.Module):
             nn.Linear(hidden_size * num_directions,
                       fc_layer_size),
             nn.ReLU(),
-            ##nn.Dropout(dropout_rate_fc),
+            nn.Dropout(dropout_rate_fc),
             nn.Linear(fc_layer_size, class_size))
         # No softmax
         # nn.LogSoftmax())
