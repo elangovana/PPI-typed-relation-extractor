@@ -50,8 +50,7 @@ class RelationExtractorBiLstmNetwork(nn.Module):
 
         self.lstm = nn.Sequential(
             nn.LSTM(total_dim_size, hidden_size=hidden_size, num_layers=1, batch_first=True,
-                    bidirectional=bidirectional)
-            , nn.Dropout(.2))
+                    bidirectional=bidirectional, dropout=.3))
 
         fc_layer_size = 30
 
