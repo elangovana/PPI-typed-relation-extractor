@@ -1,3 +1,5 @@
+import logging
+
 import numpy as np
 from torch import nn
 from torch.optim import SGD, Adam
@@ -26,6 +28,10 @@ class TrainInferenceBuilder:
         self.output_dir = output_dir
         self.protein_mask = "PROTEIN_{}"
 
+    @property
+    def logger(self):
+        return logging.getLogger(__name__)
+
     def get_trainpipeline(self):
         # Embedder loader
         embedder_loader = PretrainedEmbedderLoader()
@@ -48,15 +54,20 @@ class TrainInferenceBuilder:
         label_pipeline = LabelPipeline(label_reshaper=label_reshaper, label_encoder=label_encoder)
 
         np_feature_lens = np.array(self.dataset.feature_lens)
+
+        # network
         model = RelationExtractorBiLstmNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
                                                feature_lengths=np_feature_lens)
+        self.logger.info("Using model {}".format(type(model)))
 
         # Optimiser
         # optimiser = SGD(lr=self.learning_rate, momentum=self.momentum, params=model.parameters())
         optimiser = Adam(params=model.parameters())
+        self.logger.info("Using optimiser {}".format(type(optimiser)))
 
         # Loss function
         loss_function = nn.CrossEntropyLoss()
+        self.logger.info("Using loss function {}".format(type(loss_function)))
 
         # Trainer
         trainer = Train()
