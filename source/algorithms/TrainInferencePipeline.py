@@ -88,7 +88,7 @@ class TrainInferencePipeline:
 
                                                                  self.model, self.loss_function,
                                                                  self.optimiser,
-                                                                 self.output_dir, epoch=self.epochs,
+                                                                 self.output_dir, epochs=self.epochs,
                                                                  pos_label=encoded_pos_label)
 
         # Reformat results so that the labels are back into their original form, rather than numbers
