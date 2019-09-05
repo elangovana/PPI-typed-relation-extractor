@@ -35,4 +35,4 @@ class TestRelationExtractorBiLstmNetwork(TestCase):
         actual = sut((abstract, interaction_type, entity))
 
         # assert
-        self.assertEqual(actual.shape, torch.Size([batch_size, class_size]))
+        self.assertEqual(torch.Size([batch_size, class_size]), actual.shape)
