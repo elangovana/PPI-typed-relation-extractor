@@ -39,7 +39,7 @@ class RelationExtractorBiLstmNetwork(nn.Module):
                               self.pos_embedder.embeddings.shape[1]
         total_dim_size = embedding_dim + pos_embed_total_dim
 
-        hidden_size = 150
+        hidden_size = 75
         bidirectional = True
         num_directions = 2 if bidirectional else 1
 
