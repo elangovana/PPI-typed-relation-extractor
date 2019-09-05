@@ -11,7 +11,8 @@ from algorithms.PositionEmbedder import PositionEmbedder
 class RelationExtractorBiLstmNetwork(nn.Module):
 
     def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0, seed=777,
-                 drop_rate=.1, pos_embedder=None):
+                 drop_rate=.1, pos_embedder=None, hidden_size=75, dropout_rate_fc=0.2, kernal_size=4, fc_layer_size=30,
+                 lstm_dropout=.3):
         self.embed_vocab_size = embed_vocab_size
         self.feature_lengths = feature_lengths
         torch.manual_seed(seed)
@@ -32,14 +33,11 @@ class RelationExtractorBiLstmNetwork(nn.Module):
         self.logger.info("The text feature is index {}, the feature lengths are {}".format(self.text_column_index,
                                                                                            self.feature_lengths))
 
-        dropout_rate_fc = 0.2
-
         # The total embedding size if the text column + position for the rest
         pos_embed_total_dim = (len(self.feature_lengths) - 1) * \
                               self.pos_embedder.embeddings.shape[1]
         total_dim_size = embedding_dim + pos_embed_total_dim
 
-        hidden_size = 75
         bidirectional = True
         num_directions = 2 if bidirectional else 1
 
@@ -52,15 +50,12 @@ class RelationExtractorBiLstmNetwork(nn.Module):
 
         self.lstm = nn.Sequential(
             nn.LSTM(total_dim_size, hidden_size=hidden_size, num_layers=2, batch_first=True,
-                    bidirectional=bidirectional, dropout=.3))
+                    bidirectional=bidirectional, dropout=lstm_dropout))
 
-        kernal_size = 4
         self.max_pooling = nn.MaxPool1d(kernel_size=kernal_size)
         self.avg_pooling = nn.AvgPool1d(kernel_size=kernal_size)
         #
         self.fc_input_size = (self.max_sequence_len // kernal_size) * 2 * (hidden_size * num_directions)
-
-        fc_layer_size = 30
 
         self._class_size = class_size
         self.fc = nn.Sequential(
