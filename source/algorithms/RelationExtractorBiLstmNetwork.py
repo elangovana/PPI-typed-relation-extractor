@@ -27,6 +27,8 @@ class RelationExtractorBiLstmNetwork(nn.Module):
 
         self.text_column_index = self.feature_lengths.argmax(axis=0)
 
+        self.max_sequence_len = self.feature_lengths[self.text_column_index]
+
         self.logger.info("The text feature is index {}, the feature lengths are {}".format(self.text_column_index,
                                                                                            self.feature_lengths))
 
@@ -52,11 +54,17 @@ class RelationExtractorBiLstmNetwork(nn.Module):
             nn.LSTM(total_dim_size, hidden_size=hidden_size, num_layers=2, batch_first=True,
                     bidirectional=bidirectional, dropout=.3))
 
+        kernal_size = 4
+        self.max_pooling = nn.MaxPool1d(kernel_size=kernal_size)
+        self.avg_pooling = nn.AvgPool1d(kernel_size=kernal_size)
+        #
+        self.fc_input_size = (self.max_sequence_len // kernal_size) * 2 * (hidden_size * num_directions)
+
         fc_layer_size = 30
 
         self._class_size = class_size
         self.fc = nn.Sequential(
-            nn.Linear(hidden_size * num_directions,
+            nn.Linear(self.fc_input_size,
                       fc_layer_size),
             nn.ReLU(),
             nn.Dropout(dropout_rate_fc),
@@ -91,8 +99,6 @@ class RelationExtractorBiLstmNetwork(nn.Module):
 
         text_inputs = feature_tuples[self.text_column_index]
 
-        last_time_step_index = text_inputs.shape[1] - 1
-
         text_transposed = text_inputs
 
         self.logger.debug("Executing embeddings")
@@ -122,11 +128,20 @@ class RelationExtractorBiLstmNetwork(nn.Module):
         self.logger.debug("Running through layers")
         outputs, (_, _) = self.lstm(merged_pos_embed)
 
-        out = outputs[:, last_time_step_index, :]
+        outputs = outputs.permute(0, 2, 1)
+
+        max_pool_out = self.max_pooling(outputs)
+
+        avg_pool_out = self.avg_pooling(outputs)
+
+        # out = outputs[:, last_time_step_index, :]
 
         self.logger.debug("Running fc")
-        out = self.fc(out)
+        # out = self.fc(out)
+        out = torch.cat([max_pool_out, avg_pool_out], dim=2)
 
+        out = out.view(-1, self.fc_input_size)
+        out = self.fc(out)
         # self.logger.debug("Running softmax")
         # log_probs = self.softmax(out, dim=1)
         return out
