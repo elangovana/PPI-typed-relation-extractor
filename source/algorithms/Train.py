@@ -5,7 +5,7 @@ import torch
 import torch.utils.data
 
 from algorithms.ModelSnapshotCallback import ModelSnapshotCallback
-from algorithms.result_scorer import ResultScorerF1
+from algorithms.result_scorer_f1 import ResultScorerF1
 from algorithms.result_writer import ResultWriter
 
 
