@@ -136,14 +136,14 @@ class Train:
             self.results_writer(data_iter, actuals_train, predicted_train, output_dir)
             train_results = self.results_scorer(y_actual=actuals_train, y_pred=predicted_train,
                                                 pos_label=pos_label.item())
-            trainings_scores.append({"epoch": epochs, "score": train_results, "loss": total_loss})
+            trainings_scores.append({"epoch": epoch, "score": train_results, "loss": total_loss})
             self.logger.info("Train set result details: {}".format(train_results))
 
             self.logger.info("Validation set result details:")
             val_actuals, val_predicted, val_loss = self.validate(loss_function, model_network, validation_iter)
             self.results_writer(validation_iter, val_actuals, val_predicted, output_dir)
             val_results = self.results_scorer(y_actual=val_actuals, y_pred=val_predicted, pos_label=pos_label.item())
-            validation_scores.append({"epoch": epochs, "score": val_results, "loss": val_loss})
+            validation_scores.append({"epoch": epoch, "score": val_results, "loss": val_loss})
             # Print training set confusion matrix
             self.logger.info("Validation set result details: {} ".format(val_results))
 
@@ -163,7 +163,7 @@ class Train:
 
             # evaluate performance on validation set periodically
             self.logger.info(val_log_template.format((datetime.datetime.now() - start).seconds,
-                                                     epochs, iterations, 1 + len(batch_x), len(data_iter),
+                                                     epoch, iterations, 1 + len(batch_x), len(data_iter),
                                                      100. * (1 + len(batch_x)) / len(data_iter), total_loss,
                                                      val_loss, train_results,
                                                      val_results))
