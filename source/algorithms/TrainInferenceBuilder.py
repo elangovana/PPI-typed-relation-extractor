@@ -57,9 +57,9 @@ class TrainInferenceBuilder:
 
         # network
         model = RelationExtractorBiLstmNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
-                                               feature_lengths=np_feature_lens, hidden_size=75, dropout_rate_fc=0.2,
+                                               feature_lengths=np_feature_lens, hidden_size=150, dropout_rate_fc=0.3,
                                                kernal_size=4, fc_layer_size=30,
-                                               lstm_dropout=.3)
+                                               lstm_dropout=.4)
         self.logger.info("Using model {}".format(type(model)))
 
         # Optimiser
