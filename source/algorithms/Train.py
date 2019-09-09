@@ -160,7 +160,7 @@ class Train:
                 no_improvement_epochs = 0
 
             # Here is the score if the same, but lower loss
-            elif best_score == val_results and lowest_loss is not None and val_loss < lowest_loss:
+            elif best_score == val_results and (lowest_loss is None or val_loss < lowest_loss):
                 best_results = (val_results, val_actuals, val_predicted)
 
                 self.logger.info(
