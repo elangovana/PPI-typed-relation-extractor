@@ -76,6 +76,7 @@ class Train:
             '{:>6.0f},{:>5.0f},{:>9.0f},{:>5.0f}/{:<5.0f} {:>7.0f}%,{:>8.6f},{:8.6f},{:12.4f},{:12.4f}'.split(','))
         val_log_template = "Run {}".format(val_log_template)
 
+        lowest_loss = None
         best_score = None
         trainings_scores = []
         validation_scores = []
@@ -147,16 +148,26 @@ class Train:
             # Print training set confusion matrix
             self.logger.info("Validation set result details: {} ".format(val_results))
 
-            # Optmise on loss..
-            if best_score is None:
-                best_score = val_loss + 1
+            # Snapshot best score
+            if (best_score is None or best_score > val_results):
 
-            if val_loss < best_score:
                 best_results = (val_results, val_actuals, val_predicted)
-                # Use negative score so that - val > - best_score
-                self.snapshotter(model_network, -1 * val_loss, -1 * best_score, output_dir=output_dir)
+                self.logger.info(
+                    "Snapshotting because the current score {} is greater than {} ".format(val_results, best_score))
+                self.snapshotter(model_network, output_dir=output_dir)
 
-                best_score = val_loss
+                best_score = val_results
+                no_improvement_epochs = 0
+
+            # Here is the score if the same, but lower loss
+            elif best_score == val_results and lowest_loss is not None and val_loss < lowest_loss:
+                best_results = (val_results, val_actuals, val_predicted)
+
+                self.logger.info(
+                    "Snapshotting because the current loss {} is lower than {} ".format(val_loss, lowest_loss))
+                self.snapshotter(model_network, output_dir=output_dir)
+
+                lowest_loss = val_loss
                 no_improvement_epochs = 0
             else:
                 no_improvement_epochs += 1

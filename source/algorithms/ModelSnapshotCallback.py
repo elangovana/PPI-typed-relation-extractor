@@ -10,17 +10,13 @@ class ModelSnapshotCallback:
     def logger(self):
         return logging.getLogger(__name__)
 
-    def __call__(self, model, current_score, best_score_so_far, output_dir, prefix="best_snaphsot"):
+    def __call__(self, model, output_dir, prefix="best_snaphsot"):
         # found a model with better validation set accuracy
 
         snapshot_prefix = os.path.join(output_dir, prefix)
         snapshot_path = snapshot_prefix + 'model.pt'
 
-        if current_score > best_score_so_far:
-            self.logger.info("Snappshotting model becayse the current {} is greater than previous best {}".format(
-                current_score, best_score_so_far))
-            # save model, delete previous 'best_snapshot' files
+        self.logger.info("Snappshotting model to {}".format(snapshot_path))
+        # save model, delete previous 'best_snapshot' files
 
-            torch.save(model, snapshot_path)
-
-
+        torch.save(model, snapshot_path)
