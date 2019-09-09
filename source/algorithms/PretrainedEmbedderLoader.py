@@ -6,6 +6,9 @@ from torch import nn
 
 class PretrainedEmbedderLoader:
 
+    def __init__(self, pad_token):
+        self.pad_token = pad_token
+
     @property
     def logger(self):
         return logging.getLogger(__name__)
@@ -52,14 +55,17 @@ sandberger 0.072617 -0.51393 0.4728 -0.52202 -0.35534 0.34629 0.23211 0.23096 0.
             embeddings_array[result_words_index_dict[word]] = embeddings
 
         words_not_in_embedding = []
-        for k in initial_words_index_dict:
+        for word in initial_words_index_dict:
             # Word not found in embedding, init with random
-            if embeddings_array[initial_words_index_dict[k]] == []:
-                result_words_index_dict[k] = initial_words_index_dict[k]
-                words_not_in_embedding.append(k)
-                embeddings_array[initial_words_index_dict[k]] = \
-                    nn.Embedding(1, embedding_dim).weight.detach().numpy().tolist()[
-                        0]
+            if embeddings_array[initial_words_index_dict[word]] == []:
+                result_words_index_dict[word] = initial_words_index_dict[word]
+                words_not_in_embedding.append(word)
+                if word == self.pad_token:
+                    embeddings_array[initial_words_index_dict[word]] = np.zeros(embedding_dim, np.int)
+                else:
+                    embeddings_array[initial_words_index_dict[word]] = \
+                        nn.Embedding(1, embedding_dim).weight.detach().numpy().tolist()[
+                            0]
 
         self.logger.info("The number of words intialised without embbeder is {}".format(len(words_not_in_embedding)))
         self.logger.debug("The words intialised without embbeder is \n {}".format(words_not_in_embedding))

@@ -7,7 +7,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 Extracts vocab from data frame columns which have already been tokenised into words
 """
 
-pad = "!@#"
+
 
 
 class TransformTextToIndex:
@@ -26,6 +26,10 @@ class TransformTextToIndex:
 
     def construct_vocab_dict(self, data_loader):
         return self._get_vocab_dict(data_loader)
+
+    @staticmethod
+    def pad_token():
+        return "!@#"
 
     @property
     def vocab_dict(self):
@@ -51,14 +55,14 @@ class TransformTextToIndex:
 
         vocab_index = count_vectoriser.vocabulary_
 
-        vocab_index[pad] = len(vocab_index)
+        vocab_index[TransformTextToIndex.pad_token()] = len(vocab_index)
         vocab_index["UNK"] = len(vocab_index)
         return vocab_index
 
     def transform(self, x):
         self.logger.info("Transforming TransformTextToIndex")
         tokeniser = CountVectorizer().build_tokenizer()
-        pad_index = self._vocab_dict[pad]
+        pad_index = self._vocab_dict[self.pad_token()]
 
         batches = []
         for idx, b in enumerate(x):

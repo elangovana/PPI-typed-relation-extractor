@@ -24,7 +24,8 @@ class TestSitDataPipeline(TestCase):
         mock_dataset.__len__.return_value = len(mock_dataset.data)
         mock_dataset.__getitem__.side_effect = lambda i: (mock_dataset.data[i][0], mock_dataset.data[i][1])
 
-        mock_embedder_loader = PretrainedEmbedderLoader()
+        pad = "#$@"
+        mock_embedder_loader = PretrainedEmbedderLoader(pad)
         sut = DataPipeline(text_to_index=MagicMock())
 
         # Act
