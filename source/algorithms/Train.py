@@ -55,7 +55,7 @@ class Train:
     def __call__(self, data_iter, validation_iter, model_network, loss_function, optimizer,
                  output_dir,
                  epochs=10, mini_batch_size=32,
-                 eval_every_n_epoch=1, device_type="cpu", pos_label=1, early_stopping_patience=50):
+                 eval_every_n_epoch=1, device_type="cpu", pos_label=1, early_stopping_patience=20):
         """
     Runs train...
         :param validation_iter: Validation set
