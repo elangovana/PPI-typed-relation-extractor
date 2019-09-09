@@ -149,7 +149,7 @@ class Train:
             self.logger.info("Validation set result details: {} ".format(val_results))
 
             # Snapshot best score
-            if (best_score is None or best_score > val_results):
+            if (best_score is None or val_results > best_score):
 
                 best_results = (val_results, val_actuals, val_predicted)
                 self.logger.info(
@@ -157,6 +157,7 @@ class Train:
                 self.snapshotter(model_network, output_dir=output_dir)
 
                 best_score = val_results
+                lowest_loss = val_loss
                 no_improvement_epochs = 0
 
             # Here is the score if the same, but lower loss
