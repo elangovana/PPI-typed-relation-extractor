@@ -44,7 +44,7 @@ class PpiAimedDataset(Dataset):
 
     @property
     def feature_lens(self):
-        return [175, 1, 1]
+        return [150, 1, 1]
 
     @property
     def entity_column_indices(self):
