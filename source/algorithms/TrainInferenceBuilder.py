@@ -8,6 +8,7 @@ from algorithms.DataPipeline import DataPipeline
 from algorithms.LabelPipeline import LabelPipeline
 from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
 from algorithms.RelationExtractorBiLstmNetwork import RelationExtractorBiLstmNetwork
+from algorithms.RelationExtractorCnnPosNetwork import RelationExtractorCnnPosNetwork
 from algorithms.Train import Train
 from algorithms.TrainInferencePipeline import TrainInferencePipeline
 from algorithms.transform_label_encoder import TransformLabelEncoder
@@ -56,10 +57,12 @@ class TrainInferenceBuilder:
         np_feature_lens = np.array(self.dataset.feature_lens)
 
         # network
-        model = RelationExtractorBiLstmNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
-                                               feature_lengths=np_feature_lens, hidden_size=150, dropout_rate_fc=0.5,
-                                               kernal_size=4, fc_layer_size=30,
-                                               lstm_dropout=.5)
+        # model = RelationExtractorBiLstmNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
+        #                                        feature_lengths=np_feature_lens, hidden_size=150, dropout_rate_fc=0.5,
+        #                                        kernal_size=4, fc_layer_size=30,
+        #                                        lstm_dropout=.5)
+        model = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
+                                               feature_lengths=np_feature_lens)
         self.logger.info("Using model {}".format(type(model)))
 
         # Optimiser
