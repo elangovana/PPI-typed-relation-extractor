@@ -31,8 +31,6 @@ class TestTransformSentenceTokenisor(TestCase):
         # Act
         actual = sut.fit_transform(DataLoader(mock_dataset))
 
-        print(expected)
-        print(actual)
 
         # Assert
         self.assertSequenceEqual(expected, actual)
