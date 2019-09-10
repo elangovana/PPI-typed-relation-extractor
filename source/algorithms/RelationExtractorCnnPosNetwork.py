@@ -33,7 +33,7 @@ class RelationExtractorCnnPosNetwork(nn.Module):
                                                                                            self.feature_lengths))
 
         # self.windows_sizes = [5, 4, 3, 2, 1]
-        self.windows_sizes = [3, 2, 1]
+        self.windows_sizes = [5, 4, 3, 2, 1]
 
         cnn_stride = 1
         pool_stride = 1
