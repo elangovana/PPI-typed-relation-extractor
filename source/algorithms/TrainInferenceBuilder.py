@@ -62,7 +62,8 @@ class TrainInferenceBuilder:
         #                                        kernal_size=4, fc_layer_size=30,
         #                                        lstm_dropout=.5)
         model = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
-                                               feature_lengths=np_feature_lens)
+                                               feature_lengths=np_feature_lens, cnn_output=150, dropout_rate_cnn=.5,
+                                               dropout_rate_fc=0.5)
         self.logger.info("Using model {}".format(type(model)))
 
         # Optimiser

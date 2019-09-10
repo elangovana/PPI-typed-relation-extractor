@@ -11,7 +11,8 @@ from algorithms.PositionEmbedder import PositionEmbedder
 class RelationExtractorCnnPosNetwork(nn.Module):
 
     def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0, ngram_context_size=5, seed=777,
-                 drop_rate=.1, pos_embedder=None, dropout_rate_cnn=.5, dropout_rate_fc=0.5, cnn_output=50):
+                 drop_rate=.1, pos_embedder=None, dropout_rate_cnn=.5, dropout_rate_fc=0.5, cnn_output=50,
+                 fc_layer_size=100):
         self.embed_vocab_size = embed_vocab_size
         self.feature_lengths = feature_lengths
         torch.manual_seed(seed)
@@ -83,8 +84,6 @@ class RelationExtractorCnnPosNetwork(nn.Module):
 
             self.cnn_layers.append(layer1)
             total_cnn_out_size += layer1_pool_out_length * layer1_cnn_output
-
-        fc_layer_size = 100
 
         self._class_size = class_size
         self.fc = nn.Sequential(
