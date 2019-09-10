@@ -14,6 +14,7 @@ from algorithms.TrainInferencePipeline import TrainInferencePipeline
 from algorithms.transform_label_encoder import TransformLabelEncoder
 from algorithms.transform_label_rehaper import TransformLabelReshaper
 from algorithms.transform_protein_mask import TransformProteinMask
+from algorithms.transform_sentence_tokeniser import TransformSentenceTokenisor
 from algorithms.transform_text_index import TransformTextToIndex
 
 
@@ -43,6 +44,11 @@ class TrainInferenceBuilder:
             transformer = TransformProteinMask(entity_column_index=i, text_column_index=self.dataset.text_column_index,
                                                mask=self.protein_mask.format(i))
             preprocess_steps.append(("mask_{}".format(i), transformer))
+
+        # Add sentence tokenisor
+        sentence_tokenisor = TransformSentenceTokenisor(text_column_index=self.dataset.text_column_index,
+                                                        eos_token="<EOS>")
+        preprocess_steps.append(("Sentence_tokenisor", sentence_tokenisor))
 
         # Create data and label pipeline
         text_to_index = TransformTextToIndex(max_feature_lens=self.dataset.feature_lens)
