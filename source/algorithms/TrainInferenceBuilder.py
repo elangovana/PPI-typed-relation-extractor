@@ -66,13 +66,13 @@ class TrainInferenceBuilder:
         np_feature_lens = np.array(self.dataset.feature_lens)
 
         # network
-        # model = RelationExtractorBiLstmNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
-        #                                        feature_lengths=np_feature_lens, hidden_size=150, dropout_rate_fc=0.5,
-        #                                        kernal_size=4, fc_layer_size=30,
-        #                                        lstm_dropout=.5)
-        model = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
-                                               feature_lengths=np_feature_lens, cnn_output=250, dropout_rate_cnn=.5,
-                                               dropout_rate_fc=0.5)
+        model = RelationExtractorBiLstmNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
+                                               feature_lengths=np_feature_lens, hidden_size=150, dropout_rate_fc=0.5,
+                                               kernal_size=4, fc_layer_size=30,
+                                               lstm_dropout=.5)
+        # model = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
+        #                                        feature_lengths=np_feature_lens, cnn_output=250, dropout_rate_cnn=.5,
+        #                                        dropout_rate_fc=0.5)
         self.logger.info("Using model {}".format(type(model)))
 
         # Optimiser
