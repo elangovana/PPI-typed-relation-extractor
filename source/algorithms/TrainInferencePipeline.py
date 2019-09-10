@@ -19,7 +19,7 @@ class TrainInferencePipeline:
         self.batch_size = batch_size
         self.num_workers = num_workers
         if self.num_workers is None:
-            self.num_workers = 1 if os.cpu_count() == 1 else os.cpu_count() - 1
+            self.num_workers = 1 if os.cpu_count() == 1 else max(int(os.cpu_count() / 4), 1)
 
         self.trainer = trainer
         self.class_weights_dict = class_weights_dict
