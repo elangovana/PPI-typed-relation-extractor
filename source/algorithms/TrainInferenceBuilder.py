@@ -40,18 +40,21 @@ class TrainInferenceBuilder:
 
         # preprocess steps TransformProteinMask
         preprocess_steps = []
+        special_words = []
         for i in self.dataset.entity_column_indices:
+            mask_format = self.protein_mask.format(i)
             transformer = TransformProteinMask(entity_column_index=i, text_column_index=self.dataset.text_column_index,
-                                               mask=self.protein_mask.format(i))
+                                               mask=mask_format)
+            special_words.append(mask_format)
             preprocess_steps.append(("mask_{}".format(i), transformer))
 
         # Add sentence tokenisor
         sentence_tokenisor = TransformSentenceTokenisor(text_column_index=self.dataset.text_column_index,
-                                                        eos_token="<EOS>")
+                                                        eos_token=TransformTextToIndex.eos_token())
         preprocess_steps.append(("Sentence_tokenisor", sentence_tokenisor))
 
         # Create data and label pipeline
-        text_to_index = TransformTextToIndex(max_feature_lens=self.dataset.feature_lens)
+        text_to_index = TransformTextToIndex(max_feature_lens=self.dataset.feature_lens, special_words=special_words)
         data_pipeline = DataPipeline(preprocess_steps=preprocess_steps, text_to_index=text_to_index)
 
         # Label pipeline

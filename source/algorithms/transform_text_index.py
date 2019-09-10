@@ -8,11 +8,10 @@ Extracts vocab from data frame columns which have already been tokenised into wo
 """
 
 
-
-
 class TransformTextToIndex:
 
-    def __init__(self, max_feature_lens, min_vocab_frequency=2, vocab_dict=None):
+    def __init__(self, max_feature_lens, min_vocab_frequency=2, vocab_dict=None, special_words=None):
+        self.special_words = special_words or []
         self._vocab_dict = vocab_dict or {}
 
         self.max_feature_lens = max_feature_lens
@@ -25,11 +24,15 @@ class TransformTextToIndex:
         return logging.getLogger(__name__)
 
     def construct_vocab_dict(self, data_loader):
-        return self._get_vocab_dict(data_loader)
+        return self._get_vocab_dict(data_loader, self.special_words)
 
     @staticmethod
     def pad_token():
         return "!@#"
+
+    @staticmethod
+    def eos_token():
+        return "<EOS>"
 
     @property
     def vocab_dict(self):
@@ -39,13 +42,12 @@ class TransformTextToIndex:
     def vocab_dict(self, vocab_index):
         self._vocab_dict = vocab_index
 
-
     def fit(self, data_loader):
         if self._vocab_dict is None or len(self._vocab_dict) == 0:
-            self._vocab_dict = self._get_vocab_dict(data_loader)
+            self._vocab_dict = self._get_vocab_dict(data_loader, self.special_words)
 
     @staticmethod
-    def _get_vocab_dict(data_loader):
+    def _get_vocab_dict(data_loader, special_words):
         count_vectoriser = CountVectorizer()
         for idx, b in enumerate(data_loader):
             b_x = b[0]
@@ -55,8 +57,14 @@ class TransformTextToIndex:
 
         vocab_index = count_vectoriser.vocabulary_
 
-        vocab_index[TransformTextToIndex.pad_token()] = len(vocab_index)
-        vocab_index["UNK"] = len(vocab_index)
+        vocab_index[TransformTextToIndex.pad_token()] = vocab_index.get(TransformTextToIndex.pad_token(),
+                                                                        len(vocab_index))
+        vocab_index["UNK"] = vocab_index.get("UNK", len(vocab_index))
+        vocab_index[TransformTextToIndex.eos_token()] = vocab_index.get(TransformTextToIndex.eos_token(),
+                                                                        len(vocab_index))
+        for w in set(special_words):
+            vocab_index[w] = vocab_index.get(w, len(vocab_index))
+
         return vocab_index
 
     def transform(self, x):
