@@ -59,6 +59,7 @@ class RelationExtractorBiLstmNetwork(nn.Module):
 
         self._class_size = class_size
         self.fc = nn.Sequential(
+            nn.Dropout(dropout_rate_fc),
             nn.Linear(self.fc_input_size,
                       fc_layer_size),
             nn.ReLU(),
