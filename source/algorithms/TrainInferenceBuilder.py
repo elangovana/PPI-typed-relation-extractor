@@ -30,7 +30,7 @@ class TrainInferenceBuilder:
         self.output_dir = output_dir
         self.protein_mask = "PROTEIN_{}"
         self.additional_args = extra_args or {}
-        self.batch_size = self._get_value(self.additional_args, "batch_size", 32)
+        self.batch_size = self._get_value(self.additional_args, "batchsize", 32)
 
     def _get_value(self, kwargs, key, default):
         value = kwargs.get(key, default)
