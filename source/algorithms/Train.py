@@ -202,10 +202,11 @@ class Train:
         model_network.eval()
         # calculate accuracy on validation set
         n_val_correct, val_loss = 0, 0
-        actuals = []
-        predicted = []
+
         scores = []
         with torch.no_grad():
+            actuals = torch.tensor([]).to(device=self.device)
+            predicted = torch.tensor([]).to(device=self.device)
             for idx, val in enumerate(val_iter):
                 val_batch_idx =[ t.to(device=self.device) for t in val[0]]
                 val_y = val[1].to(device=self.device)
@@ -214,8 +215,8 @@ class Train:
                 pred_flat = torch.max(pred_batch_y, 1)[1].view(val_y.size())
                 n_val_correct += (pred_flat == val_y).sum().item()
                 val_loss += loss_function(pred_batch_y, val_y).item()
-                actuals.extend(val_y.numpy().tolist())
-                predicted.extend(pred_flat.numpy().tolist())
+                actuals=torch.cat([actuals.long(), val_y])
+                predicted= torch.cat([predicted.long(), pred_flat])
 
         self.logger.debug("The validation confidence scores are {}".format(scores))
-        return actuals, predicted, val_loss
+        return actuals.cpu().numpy().tolist(), predicted.cpu().numpy().tolist(), val_loss
