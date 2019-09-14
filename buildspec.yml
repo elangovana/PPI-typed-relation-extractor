@@ -7,8 +7,6 @@ phases:
       - apt-get install zip
   pre_build:
     commands:
-      - pip install pytest==3.6.3
-      - pip install pyflakes==2.0.0
        ## CONFIGURE THIS: Repo name, please make sure this repo exists in ECR
       - export projectname=ppi-extractor
       - export IMAGE_REPO_NAME=ppi-extractor
@@ -21,11 +19,7 @@ phases:
 
   build:
     commands:
-      - echo Building project $projectname
-      - pip install -r source/requirements_dev.txt
-      - export PYTHONPATH=./source
       - echo Building the Docker image...
-
 
       ## TODO: Automate version tagging based on datetime for now, ideally should be tied to release tags
       - export LATEST_TAG=latest
