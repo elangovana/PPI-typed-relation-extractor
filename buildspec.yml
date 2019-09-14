@@ -1,5 +1,7 @@
 version: 0.2
 
+# Builds SM pytorch container and adds the Sagemaker pre-requisites
+
 phases:
   install:
     commands:
