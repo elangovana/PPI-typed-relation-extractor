@@ -16,7 +16,7 @@ phases:
       # AWS cli version to login into ecr. This needs to be compatible with the version of boto3 in the requirements file
       - export awscli_version=1.16.35
       - export AWS_PYTORCH_ECR_ACCOUNT=520713654638
-      - export DOCKERFILE=container_sm/Dockerfile
+      - export DOCKERFILE="container_sm/Dockerfile"
 
 
   build:
