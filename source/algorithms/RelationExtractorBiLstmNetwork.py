@@ -113,7 +113,7 @@ class RelationExtractorBiLstmNetwork(nn.Module):
             for t, e in zip(text_transposed, entity):
                 pos_embedding.append(self.pos_embedder(t, e[0]))
 
-            pos_embedding_tensor = torch.stack(pos_embedding)
+            pos_embedding_tensor = torch.stack(pos_embedding).to(device=merged_pos_embed.device)
 
             merged_pos_embed = torch.cat([merged_pos_embed, pos_embedding_tensor], dim=2)
 
