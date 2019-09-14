@@ -21,15 +21,9 @@ phases:
 
   build:
     commands:
-      # Run Tests
       - echo Building project $projectname
       - pip install -r source/requirements_dev.txt
-      - pip install -r tests/requirements.txt
-      #- pyflakes ./**/*.py
       - export PYTHONPATH=./source
-      - pytest
-
-      ## Tests passed, so build docker
       - echo Building the Docker image...
 
 
