@@ -25,7 +25,7 @@ phases:
       - echo Building project $projectname
       - pip install -r source/requirements_dev.txt
       - pip install -r tests/requirements.txt
-      - pyflakes ./**/*.py
+      #- pyflakes ./**/*.py
       - export PYTHONPATH=./source
       - pytest
 
