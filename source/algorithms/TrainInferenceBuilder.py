@@ -30,7 +30,11 @@ class TrainInferenceBuilder:
         self.output_dir = output_dir
         self.protein_mask = "PROTEIN_{}"
         self.additional_args = extra_args or {}
-        self.batch_size = self._get_value(self.additional_args, "batchsize", 32)
+        self.batch_size = int(self._get_value(self.additional_args, "batchsize", "32"))
+        self.lstm_hidden_size = int(self._get_value(self.additional_args, "lstmhiddensize", "100"))
+        self.dropout_rate_fc = float(self._get_value(self.additional_args, "hiddensize", ".5"))
+        self.pooling_kernel_size = float(self._get_value(self.additional_args, "poolingkernelsize", "4"))
+        self.kernel_size = float(self._get_value(self.additional_args, "kernelsize", "4"))
 
     def _get_value(self, kwargs, key, default):
         value = kwargs.get(key, default)
@@ -74,8 +78,9 @@ class TrainInferenceBuilder:
 
         # network
         model = RelationExtractorBiLstmNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
-                                               feature_lengths=np_feature_lens, hidden_size=100, dropout_rate_fc=0.5,
-                                               kernal_size=4, fc_layer_size=30,
+                                               feature_lengths=np_feature_lens, hidden_size=self.lstm_hidden_size,
+                                               dropout_rate_fc=self.dropout_rate_fc,
+                                               kernal_size=self.pooling_kernel_size, fc_layer_size=30,
                                                lstm_dropout=.5)
         # model = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
         #                                        feature_lengths=np_feature_lens, cnn_output=250, dropout_rate_cnn=.5,

@@ -51,15 +51,21 @@ if "__main__" == __name__:
     parser.add_argument("--embeddim", help="the embed dim", type=int, required=True)
 
     parser.add_argument("--epochs", help="The number of epochs", type=int, default=10)
-    parser.add_argument("--batchsize", help="The number of epochs", type=int, default=32)
 
     parser.add_argument("--interaction-type", help="The interction type", default=None)
 
     parser.add_argument("--log-level", help="Log level", default="INFO", choices={"INFO", "WARN", "DEBUG", "ERROR"})
 
-    args = parser.parse_args()
+    args, additional = parser.parse_known_args()
+
+    # Convert additional args into dict
+    print(additional)
+    additional_dict = {}
+    for i in range(0, len(additional), 2):
+        additional_dict[additional[i].lstrip("--")] = additional[i + 1]
 
     print(args.__dict__)
+    print(additional_dict)
     # Set up logging
     logging.basicConfig(level=logging.getLevelName(args.log_level), handlers=[logging.StreamHandler(sys.stdout)],
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -68,4 +74,4 @@ if "__main__" == __name__:
     valjson = os.path.join(args.valdir, args.valfile)
     embeddingfile = os.path.join(args.embeddingdir, args.embeddingfile)
     run(args.dataset, trainjson, valjson, embeddingfile, args.embeddim,
-        args.outdir, args.epochs, args.__dict__)
+        args.outdir, args.epochs, additional_dict)
