@@ -133,8 +133,8 @@ class Train:
                 n_correct += (torch.max(predicted, 1)[1].view(batch_y.size()) == batch_y).sum().item()
                 n_total += len(batch_y)
 
-            actuals_train = actuals_train.numpy()
-            predicted_train = predicted_train.numpy()
+            actuals_train = actuals_train.cpu().numpy()
+            predicted_train = predicted_train.cpu().numpy()
             # Print training set confusion matrix
             self.logger.info("Train set result details:")
             self.results_writer(data_iter, actuals_train, predicted_train, output_dir)
