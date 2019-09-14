@@ -28,15 +28,28 @@ def run(dataset_type, train_file, val_file, embedding_file, embed_dim, out_dir, 
 
 if "__main__" == __name__:
     parser = argparse.ArgumentParser()
-    parser.add_argument("dataset", help="The dataset type", choices=get_datasets().keys())
-    parser.add_argument("trainjson",
-                        help="The input train json data")
-    parser.add_argument("valjson",
-                        help="The input val json data")
-    parser.add_argument("embedding", help="The embedding file")
-    parser.add_argument("embeddim", help="the embed dim", type=int)
+    parser.add_argument("--dataset", help="The dataset type", choices=get_datasets().keys(), required=True)
 
-    parser.add_argument("outdir", help="The output dir")
+    parser.add_argument("--trainfile",
+                        help="The input train file wrt to train  dir", required=True)
+
+    parser.add_argument("--traindir",
+                        help="The input train  dir", default=os.environ.get("SM_CHANNEL_TRAIN", "."))
+
+    parser.add_argument("--valfile",
+                        help="The input val file wrt to val  dir", required=True)
+
+    parser.add_argument("--valdir",
+                        help="The input val dir", default=os.environ.get("SM_CHANNEL_VAL", "."))
+
+    parser.add_argument("--embeddingfile", help="The embedding file wrt to the embedding dir", required=True )
+
+    parser.add_argument("--embeddingdir", help="The embedding dir", default=os.environ.get("SM_CHANNEL_EMBEDDING", "."))
+
+    parser.add_argument("--outdir", help="The output dir", default=os.environ.get("SM_MODEL_DIR", "."))
+
+    parser.add_argument("--embeddim", help="the embed dim", type=int, required=True)
+
     parser.add_argument("--epochs", help="The number of epochs", type=int, default=10)
     parser.add_argument("--interaction-type", help="The interction type", default=None)
 
@@ -49,5 +62,8 @@ if "__main__" == __name__:
     logging.basicConfig(level=logging.getLevelName(args.log_level), handlers=[logging.StreamHandler(sys.stdout)],
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-    run(args.dataset, args.trainjson, args.valjson, args.embedding, args.embeddim,
+    trainjson= os.path.join( args.traindir , args.trainfile)
+    valjson = os.path.join(args.valdir, args.valfile)
+    embeddingfile = os.path.join(args.embeddingdir, args.embeddingfile)
+    run(args.dataset, trainjson, valjson, embeddingfile, args.embeddim,
         args.outdir, args.epochs)
