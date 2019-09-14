@@ -1,0 +1,82 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - apt-get update
+      - apt-get install zip
+  pre_build:
+    commands:
+      - pip install pytest==3.6.3
+      - pip install pyflakes==2.0.0
+       ## CONFIGURE THIS: Repo name, please make sure this repo exists in ECR
+      - export projectname=ppi-extractor
+      - export IMAGE_REPO_NAME=ppi-extractor
+      - export PYTORCH_VERSION=1.0.0
+      # AWS cli version to login into ecr. This needs to be compatible with the version of boto3 in the requirements file
+      - export awscli_version=1.16.35
+      - export AWS_PYTORCH_ECR_ACCOUNT=520713654638
+      - export DOCKERFILE=container_sm/Dockerfile
+
+
+  build:
+    commands:
+      # Run Tests
+      - echo Building project $projectname
+      - pip install -r source/requirements_dev.txt
+      - pip install -r tests/requirements.txt
+      - pyflakes ./**/*.py
+      - export PYTHONPATH=./source
+      - pytest
+
+      ## Tests passed, so build docker
+      - echo Building the Docker image...
+
+
+      ## TODO: Automate version tagging based on datetime for now, ideally should be tied to release tags
+      - export LATEST_TAG=latest
+      - export VERSION_TAG=$(date '+%Y%m%d%H%M')
+      # Get AWS Account Id
+      - export AWS_ACCOUNT_ID=$(echo $CODEBUILD_BUILD_ARN | cut -d':' -f 5)
+
+       # fix awscli version so nothing breaks...
+      - pip install awscli==$awscli_version
+      - echo Logging in to Amazon ECR...
+
+      # Build docker image for gpu
+      - export DEVICE=gpu
+      - export VERSION_DEVICE_TAG=${DEVICE}-${PYTORCH_VERSION}-${VERSION_TAG}
+      # Get the login command from ECR in order to pull down the SageMaker PyTorch image
+      - $(aws ecr get-login --registry-ids $AWS_PYTORCH_ECR_ACCOUNT --region $AWS_DEFAULT_REGION --no-include-email)
+      - docker build -t $IMAGE_REPO_NAME:$LATEST_TAG   --build-arg REGION=$AWS_DEFAULT_REGION  --build-arg DEVICE=$DEVICE --build-arg AWS_PYTORCH_SAGEMAKER_ECR_ACCOUNT=$AWS_PYTORCH_ECR_ACCOUNT -f $DOCKERFILE $CODEBUILD_SRC_DIR
+      - docker tag $IMAGE_REPO_NAME:$LATEST_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$LATEST_TAG
+      - docker tag $IMAGE_REPO_NAME:$LATEST_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$VERSION_DEVICE_TAG
+      # Push Docker Image
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$VERSION_DEVICE_TAG
+
+      # Build docker image for cpu
+      - export DEVICE=cpu
+      - export VERSION_DEVICE_TAG=${DEVICE}-${PYTORCH_VERSION}-${VERSION_TAG}
+      # Get the login command from ECR in order to pull down the SageMaker PyTorch image
+      - $(aws ecr get-login --registry-ids $AWS_PYTORCH_ECR_ACCOUNT --region $AWS_DEFAULT_REGION --no-include-email)
+      - docker build -t $IMAGE_REPO_NAME:$LATEST_TAG   --build-arg REGION=$AWS_DEFAULT_REGION  --build-arg DEVICE=$DEVICE --build-arg AWS_PYTORCH_SAGEMAKER_ECR_ACCOUNT=$AWS_PYTORCH_ECR_ACCOUNT -f $DOCKERFILE $CODEBUILD_SRC_DIR
+      - docker tag $IMAGE_REPO_NAME:$LATEST_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$LATEST_TAG
+      - docker tag $IMAGE_REPO_NAME:$LATEST_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$VERSION_DEVICE_TAG
+      # Push Docker Image
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$LATEST_TAG
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$VERSION_DEVICE_TAG
+
+
+      # Optionally copy source code to s3
+      - mkdir $CODEBUILD_SRC_DIR/buildoutput
+      - cd $CODEBUILD_SRC_DIR/src && zip -r ../buildoutput/source.zip .
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: buildoutput
+  name: ${projectname}_$(date +%Y%m%d%H%M%S)_$CODEBUILD_SOURCE_VERSION

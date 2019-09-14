@@ -4,7 +4,7 @@ python:
 install:
   - pip install pip==10.0.1
   - pip -V
-  - pip install --progress-bar off -r source/requirements.txt
+  - pip install --progress-bar off -r source/requirements_dev.txt
 script:
   - export PYTHONPATH=./source
   - pytest --tb=short
