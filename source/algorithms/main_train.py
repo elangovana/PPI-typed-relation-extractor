@@ -7,7 +7,7 @@ from algorithms.TrainInferenceBuilder import TrainInferenceBuilder
 from algorithms.dataset_mapper import str_to_dataset_class, get_datasets
 
 
-def run(dataset_type, train_file, val_file, embedding_file, embed_dim, out_dir, epochs):
+def run(dataset_type, train_file, val_file, embedding_file, embed_dim, out_dir, epochs, additionalargs):
     logger = logging.getLogger(__name__)
 
     dataset_class = str_to_dataset_class(dataset_type)
@@ -21,7 +21,7 @@ def run(dataset_type, train_file, val_file, embedding_file, embed_dim, out_dir, 
         head = embedding.readline()
         logger.info("The embedding header is {}".format(head))
         builder = TrainInferenceBuilder(dataset=train, embedding_dim=embed_dim, embedding_handle=embedding,
-                                        output_dir=out_dir, epochs=epochs)
+                                        output_dir=out_dir, epochs=epochs, extra_args=additionalargs)
         train_pipeline = builder.get_trainpipeline()
         train_pipeline(train, val)
 
@@ -42,7 +42,7 @@ if "__main__" == __name__:
     parser.add_argument("--valdir",
                         help="The input val dir", default=os.environ.get("SM_CHANNEL_VAL", "."))
 
-    parser.add_argument("--embeddingfile", help="The embedding file wrt to the embedding dir", required=True )
+    parser.add_argument("--embeddingfile", help="The embedding file wrt to the embedding dir", required=True)
 
     parser.add_argument("--embeddingdir", help="The embedding dir", default=os.environ.get("SM_CHANNEL_EMBEDDING", "."))
 
@@ -51,6 +51,8 @@ if "__main__" == __name__:
     parser.add_argument("--embeddim", help="the embed dim", type=int, required=True)
 
     parser.add_argument("--epochs", help="The number of epochs", type=int, default=10)
+    parser.add_argument("--batchsize", help="The number of epochs", type=int, default=32)
+
     parser.add_argument("--interaction-type", help="The interction type", default=None)
 
     parser.add_argument("--log-level", help="Log level", default="INFO", choices={"INFO", "WARN", "DEBUG", "ERROR"})
@@ -62,8 +64,8 @@ if "__main__" == __name__:
     logging.basicConfig(level=logging.getLevelName(args.log_level), handlers=[logging.StreamHandler(sys.stdout)],
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-    trainjson= os.path.join( args.traindir , args.trainfile)
+    trainjson = os.path.join(args.traindir, args.trainfile)
     valjson = os.path.join(args.valdir, args.valfile)
     embeddingfile = os.path.join(args.embeddingdir, args.embeddingfile)
     run(args.dataset, trainjson, valjson, embeddingfile, args.embeddim,
-        args.outdir, args.epochs)
+        args.outdir, args.epochs, args.__dict__)

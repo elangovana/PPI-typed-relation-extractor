@@ -1,9 +1,9 @@
 from distutils.core import setup
 
 setup(
-    name='KeggProteinInteractionsExtractor',
+    name='PPITypedExtractor',
     version='',
-    # packages=['tests'],
+    packages=['algorithms'],
     url='',
     license='',
     author='aparnaelangovan',

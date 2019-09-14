@@ -20,7 +20,7 @@ from algorithms.transform_text_index import TransformTextToIndex
 
 class TrainInferenceBuilder:
 
-    def __init__(self, dataset, embedding_dim, embedding_handle, output_dir, epochs=100):
+    def __init__(self, dataset, embedding_dim, embedding_handle, output_dir, epochs=100, extra_args=None):
         self.epochs = epochs
         self.dataset = dataset
         self.learning_rate = .01
@@ -29,6 +29,13 @@ class TrainInferenceBuilder:
         self.embedding_dim = embedding_dim
         self.output_dir = output_dir
         self.protein_mask = "PROTEIN_{}"
+        self.additional_args = extra_args or {}
+        self.batch_size = self._get_value(self.additional_args, "batch_size", 32)
+
+    def _get_value(self, kwargs, key, default):
+        value = kwargs.get(key, default)
+        self.logger.info("Retrieving key {} with default {}, found {}".format(key, default, value))
+        return value
 
     @property
     def logger(self):
@@ -89,7 +96,7 @@ class TrainInferenceBuilder:
 
         pipeline = TrainInferencePipeline(model=model, optimiser=optimiser, loss_function=loss_function,
                                           trainer=trainer, train_vocab_extractor=text_to_index,
-                                          embedder_loader=embedder_loader,
+                                          embedder_loader=embedder_loader, batch_size=self.batch_size,
                                           embedding_handle=self.embedding_handle, embedding_dim=self.embedding_dim,
                                           label_pipeline=label_pipeline, data_pipeline=data_pipeline,
                                           class_size=class_size, pos_label=self.dataset.positive_label,
