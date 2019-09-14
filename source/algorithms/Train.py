@@ -83,7 +83,7 @@ class Train:
         no_improvement_epochs = 0
         self.logger.info("using score : {}".format(type(self.results_scorer)))
         for epoch in range(epochs):
-            total_loss = 0
+            train_loss = 0
             n_correct, n_total = 0, 0
             actuals_train = torch.tensor([])
             predicted_train = torch.tensor([])
@@ -120,9 +120,9 @@ class Train:
 
                 self.logger.debug("total loss")
                 # Get the Python number from a 1-element Tensor by calling tensor.item()
-                total_loss += loss.item()
+                train_loss += loss.item()
 
-                losses.append(total_loss)
+                losses.append(train_loss)
 
                 actuals_train = torch.cat((actuals_train.long(), batch_y))
                 predicted_train = torch.cat((predicted_train.long(), torch.max(predicted, 1)[1].view(batch_y.size())))
@@ -135,34 +135,34 @@ class Train:
             # Print training set confusion matrix
             self.logger.info("Train set result details:")
             self.results_writer(data_iter, actuals_train, predicted_train, output_dir)
-            train_results = self.results_scorer(y_actual=actuals_train, y_pred=predicted_train,
-                                                pos_label=pos_label.item())
-            trainings_scores.append({"epoch": epoch, "score": train_results, "loss": total_loss})
-            self.logger.info("Train set result details: {}".format(train_results))
+            train_score = self.results_scorer(y_actual=actuals_train, y_pred=predicted_train,
+                                              pos_label=pos_label.item())
+            trainings_scores.append({"epoch": epoch, "score": train_score, "loss": train_loss})
+            self.logger.info("Train set result details: {}".format(train_score))
 
             self.logger.info("Validation set result details:")
             val_actuals, val_predicted, val_loss = self.validate(loss_function, model_network, validation_iter)
             self.results_writer(validation_iter, val_actuals, val_predicted, output_dir)
-            val_results = self.results_scorer(y_actual=val_actuals, y_pred=val_predicted, pos_label=pos_label.item())
-            validation_scores.append({"epoch": epoch, "score": val_results, "loss": val_loss})
+            val_score = self.results_scorer(y_actual=val_actuals, y_pred=val_predicted, pos_label=pos_label.item())
+            validation_scores.append({"epoch": epoch, "score": val_score, "loss": val_loss})
             # Print training set confusion matrix
-            self.logger.info("Validation set result details: {} ".format(val_results))
+            self.logger.info("Validation set result details: {} ".format(val_score))
 
             # Snapshot best score
-            if (best_score is None or val_results > best_score):
+            if (best_score is None or val_score > best_score):
 
-                best_results = (val_results, val_actuals, val_predicted)
+                best_results = (val_score, val_actuals, val_predicted)
                 self.logger.info(
-                    "Snapshotting because the current score {} is greater than {} ".format(val_results, best_score))
+                    "Snapshotting because the current score {} is greater than {} ".format(val_score, best_score))
                 self.snapshotter(model_network, output_dir=output_dir)
 
-                best_score = val_results
+                best_score = val_score
                 lowest_loss = val_loss
                 no_improvement_epochs = 0
 
             # Here is the score if the same, but lower loss
-            elif best_score == val_results and (lowest_loss is None or val_loss < lowest_loss):
-                best_results = (val_results, val_actuals, val_predicted)
+            elif best_score == val_score and (lowest_loss is None or val_loss < lowest_loss):
+                best_results = (val_score, val_actuals, val_predicted)
 
                 self.logger.info(
                     "Snapshotting because the current loss {} is lower than {} ".format(val_loss, lowest_loss))
@@ -176,9 +176,14 @@ class Train:
             # evaluate performance on validation set periodically
             self.logger.info(val_log_template.format((datetime.datetime.now() - start).seconds,
                                                      epoch, iterations, 1 + len(batch_x), len(data_iter),
-                                                     100. * (1 + len(batch_x)) / len(data_iter), total_loss,
-                                                     val_loss, train_results,
-                                                     val_results))
+                                                     100. * (1 + len(batch_x)) / len(data_iter), train_loss,
+                                                     val_loss, train_score,
+                                                     val_score))
+
+            print("###score: train_loss### {}".format(train_loss))
+            print("###score: val_loss### {}".format(val_loss))
+            print("###score: train_fscore### {}".format(train_score))
+            print("###score: val_fscore### {}".format(val_score))
 
             if no_improvement_epochs > early_stopping_patience:
                 self.logger.info("Early stopping.. with no improvement in {}".format(no_improvement_epochs))
