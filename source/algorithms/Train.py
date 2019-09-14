@@ -88,8 +88,8 @@ class Train:
         for epoch in range(epochs):
             train_loss = 0
             n_correct, n_total = 0, 0
-            actuals_train = torch.tensor([])
-            predicted_train = torch.tensor([])
+            actuals_train = torch.tensor([]).to(device=self.device)
+            predicted_train = torch.tensor([]).to(device=self.device)
             self.logger.debug("Running epoch {}".format(epochs))
 
             for idx, batch in enumerate(data_iter):
