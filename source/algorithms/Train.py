@@ -11,11 +11,13 @@ from algorithms.result_writer import ResultWriter
 
 class Train:
 
-    def __init__(self):
+    def __init__(self, device=None):
 
         self.snapshotter = None
         self.results_scorer = None
         self.results_writer = None
+        self.device = device or ('cuda:0' if torch.cuda.is_available() else 'cpu')
+
 
     @property
     def logger(self):
@@ -55,7 +57,7 @@ class Train:
     def __call__(self, data_iter, validation_iter, model_network, loss_function, optimizer,
                  output_dir,
                  epochs=10, mini_batch_size=32,
-                 eval_every_n_epoch=1, device_type="cpu", pos_label=1, early_stopping_patience=20):
+                 eval_every_n_epoch=1,  pos_label=1, early_stopping_patience=20):
         """
     Runs train...
         :param validation_iter: Validation set
@@ -82,6 +84,7 @@ class Train:
         validation_scores = []
         no_improvement_epochs = 0
         self.logger.info("using score : {}".format(type(self.results_scorer)))
+        model_network.to(device=self.device)
         for epoch in range(epochs):
             train_loss = 0
             n_correct, n_total = 0, 0
@@ -91,8 +94,8 @@ class Train:
 
             for idx, batch in enumerate(data_iter):
                 self.logger.debug("Running batch {}".format(idx))
-                batch_x = batch[0]
-                batch_y = batch[1]
+                batch_x = [t.to(device=self.device) for t in batch[0] ]
+                batch_y = batch[1].to(device=self.device)
                 # batch_x = torch.Tensor(batch_x)
                 iterations += 1
                 # for feature, target in zip(batch_x, batch_y):
@@ -204,8 +207,8 @@ class Train:
         scores = []
         with torch.no_grad():
             for idx, val in enumerate(val_iter):
-                val_batch_idx = val[0]
-                val_y = val[1]
+                val_batch_idx =[ t.to(device=self.device) for t in val[0]]
+                val_y = val[1].to(device=self.device)
                 pred_batch_y = model_network(val_batch_idx)
                 scores.append([pred_batch_y])
                 pred_flat = torch.max(pred_batch_y, 1)[1].view(val_y.size())
