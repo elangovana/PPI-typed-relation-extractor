@@ -64,13 +64,3 @@ phases:
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$LATEST_TAG
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$VERSION_DEVICE_TAG
 
-
-      # Optionally copy source code to s3
-      - mkdir $CODEBUILD_SRC_DIR/buildoutput
-      - cd $CODEBUILD_SRC_DIR/src && zip -r ../buildoutput/source.zip .
-
-artifacts:
-  files:
-    - '**/*'
-  base-directory: buildoutput
-  name: ${projectname}_$(date +%Y%m%d%H%M%S)_$CODEBUILD_SOURCE_VERSION
