@@ -10,15 +10,15 @@ from algorithms.PositionEmbedder import PositionEmbedder
 
 class RelationExtractorBiLstmNetwork(nn.Module):
 
-    def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0, seed=777,
-                 drop_rate=.1, pos_embedder=None, hidden_size=75, dropout_rate_fc=0.2, kernal_size=4, fc_layer_size=30,
+    def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0, seed=777, pos_embedder=None,
+                 hidden_size=75, dropout_rate_fc=0.2, kernal_size=4, fc_layer_size=30,
+                 num_layers=2,
                  lstm_dropout=.3):
         self.embed_vocab_size = embed_vocab_size
         self.feature_lengths = feature_lengths
         torch.manual_seed(seed)
 
         super(RelationExtractorBiLstmNetwork, self).__init__()
-        self.dropout_rate = drop_rate
         # Use random weights if vocab size if passed in else load pretrained weights
 
         self.set_embeddings(None)
@@ -49,7 +49,7 @@ class RelationExtractorBiLstmNetwork(nn.Module):
                                                                                                           ))
 
         self.lstm = nn.Sequential(
-            nn.LSTM(total_dim_size, hidden_size=hidden_size, num_layers=2, batch_first=True,
+            nn.LSTM(total_dim_size, hidden_size=hidden_size, num_layers=num_layers, batch_first=True,
                     bidirectional=bidirectional, dropout=lstm_dropout))
 
         self.max_pooling = nn.MaxPool1d(kernel_size=kernal_size)

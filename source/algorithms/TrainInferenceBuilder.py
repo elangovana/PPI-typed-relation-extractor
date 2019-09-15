@@ -35,7 +35,8 @@ class TrainInferenceBuilder:
         self.lstm_hidden_size = int(self._get_value(self.additional_args, "lstmhiddensize", "100"))
         self.dropout_rate_fc = float(self._get_value(self.additional_args, "hiddensize", ".5"))
         self.pooling_kernel_size = int(self._get_value(self.additional_args, "poolingkernelsize", "4"))
-        self.fc_layer_size =  int(self._get_value(self.additional_args, "fclayersize", "25"))
+        self.fc_layer_size = int(self._get_value(self.additional_args, "fclayersize", "25"))
+        self.num_layers = int(self._get_value(self.additional_args, "numlayers", "2"))
 
     def _get_value(self, kwargs, key, default):
         value = kwargs.get(key, default)
@@ -80,7 +81,7 @@ class TrainInferenceBuilder:
         # network
         model = RelationExtractorBiLstmNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
                                                feature_lengths=np_feature_lens, hidden_size=self.lstm_hidden_size,
-                                               dropout_rate_fc=self.dropout_rate_fc,
+                                               dropout_rate_fc=self.dropout_rate_fc, num_layers=self.num_layers,
                                                kernal_size=self.pooling_kernel_size, fc_layer_size=self.fc_layer_size,
                                                lstm_dropout=.5)
         # model = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
