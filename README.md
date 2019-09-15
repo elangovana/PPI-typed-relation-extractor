@@ -159,7 +159,7 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
 4. Run train job
     ```bash
     export PYTHONPATH=./source
-    python source/algorithms/main_train.py  --dataset PPIDataset --trainfile sample_train.json --traindir tests/data/ --valfile sample_train.json  --valdir tests/data --embeddingfile sample_PubMed-and-PMC-w2v.bin.txt --embeddingdir ./tests/test_algorithms --embeddim 200 --outdir outdir --model outdir
+    python source/algorithms/main_train.py  --dataset PPIDataset --trainfile sample_train.json --traindir tests/data/ --valfile sample_train.json  --valdir tests/data --embeddingfile sample_PubMed-and-PMC-w2v.bin.txt --embeddingdir ./tests/test_algorithms --embeddim 200 --outdir outdir --modeldir outdir
     ```
 
 5. Consolidated train + predict
