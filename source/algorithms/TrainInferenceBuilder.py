@@ -20,7 +20,8 @@ from algorithms.transform_text_index import TransformTextToIndex
 
 class TrainInferenceBuilder:
 
-    def __init__(self, dataset, embedding_dim, embedding_handle, output_dir, epochs=100, extra_args=None):
+    def __init__(self, dataset, embedding_dim, embedding_handle, model_dir, output_dir, epochs=100, extra_args=None):
+        self.model_dir = model_dir
         self.epochs = epochs
         self.dataset = dataset
         self.learning_rate = .01
@@ -100,6 +101,7 @@ class TrainInferenceBuilder:
 
         pipeline = TrainInferencePipeline(model=model, optimiser=optimiser, loss_function=loss_function,
                                           trainer=trainer, train_vocab_extractor=text_to_index,
+                                          model_dir=self.model_dir,
                                           embedder_loader=embedder_loader, batch_size=self.batch_size,
                                           embedding_handle=self.embedding_handle, embedding_dim=self.embedding_dim,
                                           label_pipeline=label_pipeline, data_pipeline=data_pipeline,

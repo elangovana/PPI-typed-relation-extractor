@@ -25,6 +25,7 @@ class TestTrainInferenceBuilder(TestCase):
         out_dir = tempfile.mkdtemp()
 
         sut = TrainInferenceBuilder(dataset=mock_dataset, embedding_handle=embedding, output_dir=out_dir,
+                                    model_dir=out_dir,
                                     embedding_dim=3)
 
         # Act

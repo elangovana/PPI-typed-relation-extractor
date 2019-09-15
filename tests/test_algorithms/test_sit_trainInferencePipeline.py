@@ -26,7 +26,7 @@ class TestSitTrainInferencePipeline(TestCase):
         embedding = StringIO(
             "\n".join(["4 3", "hat 0.2 .34 0.8", "mat 0.5 .34 0.8", "entity1 0.5 .55 0.8", "entity2 0.3 .55 0.9"]))
         factory = TrainInferenceBuilder(dataset=mock_dataset, embedding_handle=embedding, embedding_dim=3,
-                                        output_dir=out_dir, epochs=epochs)
+                                        output_dir=out_dir,model_dir=out_dir, epochs=epochs)
         sut = factory.get_trainpipeline()
         return sut
 

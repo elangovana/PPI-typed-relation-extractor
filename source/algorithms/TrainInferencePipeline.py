@@ -14,8 +14,9 @@ class TrainInferencePipeline:
 
     def __init__(self, model, optimiser, loss_function, trainer, train_vocab_extractor, embedder_loader,
                  embedding_handle, embedding_dim: int,
-                 label_pipeline, data_pipeline, class_size: int, pos_label, output_dir, ngram: int = 3,
+                 label_pipeline, data_pipeline, class_size: int, pos_label, model_dir, output_dir, ngram: int = 3,
                  epochs: int = 10, min_vocab_frequency=3, class_weights_dict=None, num_workers=None, batch_size=32):
+        self.model_dir = model_dir
         self.batch_size = batch_size
         self.num_workers = num_workers
         if self.num_workers is None:
@@ -81,13 +82,13 @@ class TrainInferencePipeline:
 
         # Set up optimiser
 
-        self.persist(outdir=self.output_dir)
+        self.persist(outdir=self.model_dir)
 
         # Invoke trainer
         (val_results, val_actuals, val_predicted) = self.trainer(transformed_train_x, transformed_val_x,
 
                                                                  self.model, self.loss_function,
-                                                                 self.optimiser,
+                                                                 self.optimiser,self.model_dir,
                                                                  self.output_dir, epochs=self.epochs,
                                                                  pos_label=encoded_pos_label)
 

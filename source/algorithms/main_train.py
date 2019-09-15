@@ -7,7 +7,7 @@ from algorithms.TrainInferenceBuilder import TrainInferenceBuilder
 from algorithms.dataset_mapper import str_to_dataset_class, get_datasets
 
 
-def run(dataset_type, train_file, val_file, embedding_file, embed_dim, out_dir, epochs, additionalargs):
+def run(dataset_type, train_file, val_file, embedding_file, embed_dim, model_dir, out_dir, epochs, additionalargs):
     logger = logging.getLogger(__name__)
 
     dataset_class = str_to_dataset_class(dataset_type)
@@ -16,12 +16,16 @@ def run(dataset_type, train_file, val_file, embedding_file, embed_dim, out_dir, 
     if not os.path.exists(out_dir) or not os.path.isdir(out_dir):
         raise FileNotFoundError("The path {} should exist and must be a directory".format(out_dir))
 
+    if not os.path.exists(model_dir) or not os.path.isdir(model_dir):
+        raise FileNotFoundError("The path {} should exist and must be a directory".format(model_dir))
+
     with open(embedding_file, "r") as embedding:
         # Ignore the first line as it contains the number of words and vector dim
         head = embedding.readline()
         logger.info("The embedding header is {}".format(head))
         builder = TrainInferenceBuilder(dataset=train, embedding_dim=embed_dim, embedding_handle=embedding,
-                                        output_dir=out_dir, epochs=epochs, extra_args=additionalargs)
+                                        model_dir=model_dir, output_dir=out_dir, epochs=epochs,
+                                        extra_args=additionalargs)
         train_pipeline = builder.get_trainpipeline()
         train_pipeline(train, val)
 
@@ -46,7 +50,9 @@ if "__main__" == __name__:
 
     parser.add_argument("--embeddingdir", help="The embedding dir", default=os.environ.get("SM_CHANNEL_EMBEDDING", "."))
 
-    parser.add_argument("--outdir", help="The output dir", default=os.environ.get("SM_MODEL_DIR", "."))
+    parser.add_argument("--outdir", help="The output dir", default=os.environ.get("SM_OUTPUT_DATA_DIR", "."))
+
+    parser.add_argument("--modeldir", help="The output dir", default=os.environ.get("SM_MODEL_DIR", "."))
 
     parser.add_argument("--embeddim", help="the embed dim", type=int, required=True)
 
@@ -74,4 +80,4 @@ if "__main__" == __name__:
     valjson = os.path.join(args.valdir, args.valfile)
     embeddingfile = os.path.join(args.embeddingdir, args.embeddingfile)
     run(args.dataset, trainjson, valjson, embeddingfile, args.embeddim,
-        args.outdir, args.epochs, additional_dict)
+        args.modeldir, args.outdir, args.epochs, additional_dict)

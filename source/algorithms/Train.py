@@ -18,7 +18,6 @@ class Train:
         self.results_writer = None
         self.device = device or ('cuda:0' if torch.cuda.is_available() else 'cpu')
 
-
     @property
     def logger(self):
         return logging.getLogger(__name__)
@@ -54,15 +53,14 @@ class Train:
     def results_writer(self, value):
         self.__results_writer__ = value
 
-    def __call__(self, data_iter, validation_iter, model_network, loss_function, optimizer,
+    def __call__(self, data_iter, validation_iter, model_network, loss_function, optimizer, model_dir,
                  output_dir,
-                 epochs=10, mini_batch_size=32,
-                 eval_every_n_epoch=1,  pos_label=1, early_stopping_patience=20):
+                 epochs=10,
+                 eval_every_n_epoch=1, pos_label=1, early_stopping_patience=20):
         """
     Runs train...
         :param validation_iter: Validation set
         :param epochs:
-        :param mini_batch_size:
         :param device: For CPU -1, else set GPU device id
         :type eval_every_n_epoch: int
         :param data_iter: Torchtext dataset object. The each feature must be the index of word vocab
@@ -94,7 +92,7 @@ class Train:
 
             for idx, batch in enumerate(data_iter):
                 self.logger.debug("Running batch {}".format(idx))
-                batch_x = [t.to(device=self.device) for t in batch[0] ]
+                batch_x = [t.to(device=self.device) for t in batch[0]]
                 batch_y = batch[1].to(device=self.device)
                 # batch_x = torch.Tensor(batch_x)
                 iterations += 1
@@ -157,7 +155,7 @@ class Train:
                 best_results = (val_score, val_actuals, val_predicted)
                 self.logger.info(
                     "Snapshotting because the current score {} is greater than {} ".format(val_score, best_score))
-                self.snapshotter(model_network, output_dir=output_dir)
+                self.snapshotter(model_network, output_dir=model_dir)
 
                 best_score = val_score
                 lowest_loss = val_loss
@@ -208,15 +206,15 @@ class Train:
             actuals = torch.tensor([]).to(device=self.device)
             predicted = torch.tensor([]).to(device=self.device)
             for idx, val in enumerate(val_iter):
-                val_batch_idx =[ t.to(device=self.device) for t in val[0]]
+                val_batch_idx = [t.to(device=self.device) for t in val[0]]
                 val_y = val[1].to(device=self.device)
                 pred_batch_y = model_network(val_batch_idx)
                 scores.append([pred_batch_y])
                 pred_flat = torch.max(pred_batch_y, 1)[1].view(val_y.size())
                 n_val_correct += (pred_flat == val_y).sum().item()
                 val_loss += loss_function(pred_batch_y, val_y).item()
-                actuals=torch.cat([actuals.long(), val_y])
-                predicted= torch.cat([predicted.long(), pred_flat])
+                actuals = torch.cat([actuals.long(), val_y])
+                predicted = torch.cat([predicted.long(), pred_flat])
 
         self.logger.debug("The validation confidence scores are {}".format(scores))
         return actuals.cpu().numpy().tolist(), predicted.cpu().numpy().tolist(), val_loss
