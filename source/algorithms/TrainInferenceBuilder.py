@@ -33,7 +33,7 @@ class TrainInferenceBuilder:
         self.additional_args = extra_args or {}
         self.batch_size = int(self._get_value(self.additional_args, "batchsize", "32"))
         self.lstm_hidden_size = int(self._get_value(self.additional_args, "lstmhiddensize", "100"))
-        self.dropout_rate_fc = float(self._get_value(self.additional_args, "hiddensize", ".5"))
+        self.dropout_rate_fc = float(self._get_value(self.additional_args, "dropout_rate_fc", ".5"))
         self.pooling_kernel_size = int(self._get_value(self.additional_args, "poolingkernelsize", "4"))
         self.fc_layer_size = int(self._get_value(self.additional_args, "fclayersize", "25"))
         self.num_layers = int(self._get_value(self.additional_args, "numlayers", "2"))
