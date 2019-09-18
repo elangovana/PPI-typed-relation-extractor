@@ -62,7 +62,7 @@ class RelationExtractorBiLstmNetwork(nn.Module):
             nn.Dropout(dropout_rate_fc),
             nn.Linear(self.fc_input_size,
                       fc_layer_size),
-            nn.ReLU(),
+            nn.Sigmoid(),
             nn.Dropout(dropout_rate_fc),
             nn.Linear(fc_layer_size, class_size))
         # No softmax
