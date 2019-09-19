@@ -15,7 +15,7 @@ class TrainInferencePipeline:
     def __init__(self, model, optimiser, loss_function, trainer, train_vocab_extractor, embedder_loader,
                  embedding_handle, embedding_dim: int,
                  label_pipeline, data_pipeline, class_size: int, pos_label, model_dir, output_dir, ngram: int = 3,
-                 epochs: int = 10, min_vocab_frequency=3, class_weights_dict=None, num_workers=None, batch_size=32):
+                 min_vocab_frequency=3, class_weights_dict=None, num_workers=None, batch_size=32):
         self.model_dir = model_dir
         self.batch_size = batch_size
         self.num_workers = num_workers
@@ -34,7 +34,6 @@ class TrainInferencePipeline:
 
         self.pos_label = pos_label
         self.min_vocab_frequency = min_vocab_frequency
-        self.epochs = epochs
         self.output_dir = output_dir
         self.ngram = ngram
         self.embedding_dim = embedding_dim
@@ -88,9 +87,8 @@ class TrainInferencePipeline:
         (val_results, val_actuals, val_predicted) = self.trainer(transformed_train_x, transformed_val_x,
 
                                                                  self.model, self.loss_function,
-                                                                 self.optimiser,self.model_dir,
-                                                                 self.output_dir, epochs=self.epochs,
-                                                                 pos_label=encoded_pos_label)
+                                                                 self.optimiser, self.model_dir,
+                                                                 self.output_dir, pos_label=encoded_pos_label)
 
         # Reformat results so that the labels are back into their original form, rather than numbers
         val_actuals = self.label_pipeline.label_reverse_encoder_func(val_actuals)

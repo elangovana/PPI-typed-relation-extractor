@@ -7,7 +7,8 @@ from algorithms.TrainInferenceBuilder import TrainInferenceBuilder
 from algorithms.dataset_mapper import str_to_dataset_class, get_datasets
 
 
-def run(dataset_type, train_file, val_file, embedding_file, embed_dim, model_dir, out_dir, epochs, additionalargs):
+def run(dataset_type, train_file, val_file, embedding_file, embed_dim, model_dir, out_dir, epochs,
+        earlystoppingpatience, additionalargs):
     logger = logging.getLogger(__name__)
 
     dataset_class = str_to_dataset_class(dataset_type)
@@ -25,6 +26,7 @@ def run(dataset_type, train_file, val_file, embedding_file, embed_dim, model_dir
         logger.info("The embedding header is {}".format(head))
         builder = TrainInferenceBuilder(dataset=train, embedding_dim=embed_dim, embedding_handle=embedding,
                                         model_dir=model_dir, output_dir=out_dir, epochs=epochs,
+                                        patience_epochs=earlystoppingpatience,
                                         extra_args=additionalargs)
         train_pipeline = builder.get_trainpipeline()
         train_pipeline(train, val)
@@ -58,6 +60,8 @@ if "__main__" == __name__:
 
     parser.add_argument("--epochs", help="The number of epochs", type=int, default=10)
 
+    parser.add_argument("--earlystoppingpatience", help="The number of pateince epochs epochs", type=int, default=10)
+
     parser.add_argument("--interaction-type", help="The interction type", default=None)
 
     parser.add_argument("--log-level", help="Log level", default="INFO", choices={"INFO", "WARN", "DEBUG", "ERROR"})
@@ -80,4 +84,4 @@ if "__main__" == __name__:
     valjson = os.path.join(args.valdir, args.valfile)
     embeddingfile = os.path.join(args.embeddingdir, args.embeddingfile)
     run(args.dataset, trainjson, valjson, embeddingfile, args.embeddim,
-        args.modeldir, args.outdir, args.epochs, additional_dict)
+        args.modeldir, args.outdir, args.epochs, args.earlystoppingpatience, additional_dict)

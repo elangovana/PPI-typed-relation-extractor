@@ -20,7 +20,9 @@ from algorithms.transform_text_index import TransformTextToIndex
 
 class TrainInferenceBuilder:
 
-    def __init__(self, dataset, embedding_dim, embedding_handle, model_dir, output_dir, epochs=100, extra_args=None):
+    def __init__(self, dataset, embedding_dim, embedding_handle, model_dir, output_dir, epochs=100, patience_epochs=20,
+                 extra_args=None):
+        self.patience_epochs = patience_epochs
         self.model_dir = model_dir
         self.epochs = epochs
         self.dataset = dataset
@@ -99,7 +101,7 @@ class TrainInferenceBuilder:
         self.logger.info("Using loss function {}".format(type(loss_function)))
 
         # Trainer
-        trainer = Train()
+        trainer = Train(epochs=self.epochs, early_stopping_patience=self.patience_epochs)
 
         pipeline = TrainInferencePipeline(model=model, optimiser=optimiser, loss_function=loss_function,
                                           trainer=trainer, train_vocab_extractor=text_to_index,
@@ -108,6 +110,6 @@ class TrainInferenceBuilder:
                                           embedding_handle=self.embedding_handle, embedding_dim=self.embedding_dim,
                                           label_pipeline=label_pipeline, data_pipeline=data_pipeline,
                                           class_size=class_size, pos_label=self.dataset.positive_label,
-                                          output_dir=self.output_dir, epochs=self.epochs)
+                                          output_dir=self.output_dir)
 
         return pipeline

@@ -11,8 +11,10 @@ from algorithms.result_writer import ResultWriter
 
 class Train:
 
-    def __init__(self, device=None):
+    def __init__(self, device=None, epochs=10,early_stopping_patience=20):
 
+        self.early_stopping_patience = early_stopping_patience
+        self.epochs = epochs
         self.snapshotter = None
         self.results_scorer = None
         self.results_writer = None
@@ -55,8 +57,8 @@ class Train:
 
     def __call__(self, data_iter, validation_iter, model_network, loss_function, optimizer, model_dir,
                  output_dir,
-                 epochs=10,
-                 eval_every_n_epoch=1, pos_label=1, early_stopping_patience=20):
+
+                 eval_every_n_epoch=1, pos_label=1):
         """
     Runs train...
         :param validation_iter: Validation set
@@ -83,12 +85,12 @@ class Train:
         no_improvement_epochs = 0
         self.logger.info("using score : {}".format(type(self.results_scorer)))
         model_network.to(device=self.device)
-        for epoch in range(epochs):
+        for epoch in range(self.epochs):
             train_loss = 0
             n_correct, n_total = 0, 0
             actuals_train = torch.tensor([]).to(device=self.device)
             predicted_train = torch.tensor([]).to(device=self.device)
-            self.logger.debug("Running epoch {}".format(epochs))
+            self.logger.debug("Running epoch {}".format(self.epochs))
 
             for idx, batch in enumerate(data_iter):
                 self.logger.debug("Running batch {}".format(idx))
@@ -186,7 +188,7 @@ class Train:
             print("###score: train_fscore### {}".format(train_score))
             print("###score: val_fscore### {}".format(val_score))
 
-            if no_improvement_epochs > early_stopping_patience:
+            if no_improvement_epochs > self.early_stopping_patience:
                 self.logger.info("Early stopping.. with no improvement in {}".format(no_improvement_epochs))
                 break
 
