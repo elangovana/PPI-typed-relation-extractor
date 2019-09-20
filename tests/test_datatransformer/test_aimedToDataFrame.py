@@ -131,9 +131,6 @@ class TestAimedToDataFrame(TestCase):
         actual_list = list(sut._extract_relations(input_line))
         actual_list.sort()
 
-        print(actual_list)
-        print(expected_list)
-
         # Assert
         self.assertSequenceEqual(actual_list, expected_list)
 
@@ -149,9 +146,6 @@ class TestAimedToDataFrame(TestCase):
         # Act
         actual_list = list(sut._extract_relations(input_line))
         actual_list.sort()
-
-        print(actual_list)
-        print(expected_list)
 
         # Assert
         self.assertSequenceEqual(actual_list, expected_list)
