@@ -12,6 +12,21 @@ class AimedToDataFrame:
 
     def __init__(self):
         self.namespaces = {}
+        # can be nested
+        # <prot>  <prot>  keratinocyte growth factor </prot>  receptor </prot>
+
+        # Extract relations, including nested on
+        #  <p1  pair=1 >  <p1  pair=2 >  <p1  pair=3 >  <prot> FGF - 7 </prot>  </p1>  </p1>  </p1>
+        relation_start_regex_s = r'(<p(\d)\s+pair=\s*(\d)\s*>\s*)'
+        relation_end_regex_s = r'(</p\3>\s*)'
+        protein_regex_s = r'<prot>\s*(.*?)\s*</prot>'
+
+        self._relation_regex_s = r'({}+\s*{}\s*{}+)'.format(relation_start_regex_s, protein_regex_s,
+                                                            relation_end_regex_s)
+
+        self._relation_start_regex = re.compile(relation_start_regex_s)
+        self._relation_regex = re.compile(self._relation_regex_s)
+        self._whitespace_regex = re.compile(r'\s+')
 
     def __call__(self, aimed_file):
         file_name = os.path.basename(aimed_file).split(".txt")[0]
@@ -38,21 +53,15 @@ class AimedToDataFrame:
 
     def _parse_line(self, doc_id, line, line_no):
         # Regex
-        protein_regex_str = r'<prot>\s*(.*?)\s*</prot>'
-        protein_regex = re.compile(protein_regex_str)
-        whitespace_regex = re.compile(r"\s+")
-        relation_regex = re.compile(r'(<p(\d)\s+pair=(\d)\s*>\s*({})\s*</p\2>)'.format(protein_regex_str))
 
         # find matches
-        protien_matches = protein_regex.findall(line)
-        relation_pair_matched = relation_regex.findall(line)
 
-        relation_protein_pairs_set = self._extract_relations(relation_pair_matched)
-        protein_names_set = self._extract_proteins(protien_matches)
+        relation_protein_pairs_set = self._extract_relations(line)
+        protein_names_set = self._extract_proteins(line)
 
-        cleaned_line = relation_regex.sub(r'\4', line)
-        cleaned_line = protein_regex.sub(r'\1', cleaned_line)
-        cleaned_line = whitespace_regex.sub(" ", cleaned_line)
+        cleaned_line = self._relation_regex.sub(r'\5 ', line)
+        cleaned_line = self._strip_protein_tags(cleaned_line)
+        cleaned_line = self._whitespace_regex.sub(" ", cleaned_line)
         cleaned_line = cleaned_line.strip("\n")
 
         result_json = []
@@ -80,6 +89,11 @@ class AimedToDataFrame:
 
         return result_json
 
+    def _strip_protein_tags(self, text_to_clean):
+        cleaned_line = text_to_clean.replace("<prot>", "").replace("</prot>", "")
+        cleaned_line = self._whitespace_regex.sub(" ", cleaned_line)
+        return cleaned_line
+
     def load_dir(self, dir):
         assert os.path.isdir(dir), "{} must be a directory".format(dir)
 
@@ -92,28 +106,83 @@ class AimedToDataFrame:
 
         return pd.DataFrame(result)
 
-    def _extract_relations(self, relation_pair_matched):
+    # def _extract_relations(self, text):
+    #     result = {}
+    #     relation_pair_matched = self._relation_regex.findall(text)
+    #
+    #     for r in relation_pair_matched:
+    #         # loop through protein name
+    #         protein_names = self._extract_proteins(r[0])
+    #         # loop through nested rel
+    #         rel_starts = self._relation_start_regex.findall(r[0])
+    #
+    #         for rs in rel_starts:
+    #             node_type = "src" if rs[1] == "1" else "dest"
+    #
+    #             pair_id = rs[2]
+    #
+    #             for protein_name in protein_names:
+    #                 # add <p1> as the key
+    #                 if pair_id not in result:
+    #                     result[pair_id] = {}
+    #                 if node_type not in result[pair_id]:
+    #                     result[pair_id][node_type] = []
+    #                 result[pair_id][node_type].append(protein_name)
+    #
+    #     protein_pairs = []
+    #     for _, pair in result.items():
+    #         for src in sorted(pair.get("src",[])):
+    #             for dest in sorted(pair.get("dest",[])):
+    #                 protein_pairs.append(frozenset(sorted([src, dest])))
+    #
+    #     return protein_pairs
+
+    def _extract_relations(self, text):
+        src_proteins = self._parse_start_rel(text, "<p1", "</p1>")
+
+        dest_proteins = self._parse_start_rel(text, "<p2", "</p2>")
+
+        protein_pairs = []
+        for pair_id in sorted(src_proteins.keys()):
+            for src in sorted(src_proteins[pair_id]):
+                for dest in sorted(dest_proteins.get(pair_id, [])):
+                    protein_pairs.append(frozenset(sorted([src, dest])))
+
+        return protein_pairs
+
+    def _parse_start_rel(self, text, start_tag, end_tag):
         result = {}
-        for r in relation_pair_matched:
-            pair_id = r[2]
-            protein_name = r[4]
+        src_stack = []
 
-            if pair_id not in result:
-                result[pair_id] = []
+        words = text.split(" ")
+        for i, w in enumerate(words):
+            if w.startswith(start_tag):
+                j = i
+                while (not words[j].startswith("pair=")):
+                    j += 1
 
-            result[pair_id].append(protein_name)
+                src_stack.append((j , words[j].strip("pair=")))
 
-        result = set([frozenset(v) for k, v in result.items()])
+            if w == end_tag:
+                w_start_index, pair_id = src_stack.pop()
+                proteins = self._extract_proteins(" ".join(words[w_start_index:i]))
+                result[pair_id] = proteins
 
         return result
 
-    def _extract_proteins(self, proteins_matched):
-        result = []
-        for r in proteins_matched:
-            protein_name = r
-            result.append(protein_name)
+    def _extract_proteins(self, text):
+        words = text.split(" ")
+        stack = []
+        result = set()
+        for i, w in enumerate(words):
+            if w == '<prot>':
+                stack.append(i + 1)
 
-        result = set(result)
+            if w == '</prot>':
+                w_start_index = stack.pop()
+                protein_name = " ".join(words[w_start_index:i])
+                protein_name = self._strip_protein_tags(protein_name).strip(" ")
+                result = result.union([protein_name])
 
         return result
 

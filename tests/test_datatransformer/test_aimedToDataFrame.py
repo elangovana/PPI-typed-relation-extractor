@@ -23,15 +23,15 @@ class TestAimedToDataFrame(TestCase):
             #
             #                   },
 
-                         {"docid": "abstract_11780382",
-                          "line_no": 2,
-                          "passage": "Cytokines measurements during IFN - alpha treatment showed a trend to decreasing levels of IL - 4 at 4 , 12 , and 24 weeks ."
-                             , "participant1": "IFN - alpha"
-                             , "participant2": "IL - 4"
-                             , "isValid": False
+            {"docid": "abstract_11780382",
+             "line_no": 2,
+             "passage": "Cytokines measurements during IFN - alpha treatment showed a trend to decreasing levels of IL - 4 at 4 , 12 , and 24 weeks ."
+                , "participant1": "IFN - alpha"
+                , "participant2": "IL - 4"
+                , "isValid": False
 
-                          },
-                         ]
+             },
+        ]
         expected_df = pd.DataFrame(expected_json)
 
         # Act
@@ -42,8 +42,6 @@ class TestAimedToDataFrame(TestCase):
         actual_list = actual_df.values.tolist()
         expected_list = expected_df.values.tolist()
 
-        print(actual_list)
-        print(expected_list)
         self.assertSequenceEqual(actual_list, expected_list)
 
     def test_parse(self):
@@ -70,9 +68,6 @@ class TestAimedToDataFrame(TestCase):
 
         actual_list = actual_df.values.tolist()
         expected_list = expected_df.values.tolist()
-
-        print(actual_list)
-        print(expected_list)
 
         self.assertSequenceEqual(actual_list, expected_list)
 
@@ -117,6 +112,57 @@ class TestAimedToDataFrame(TestCase):
         actual_list = actual_df.values.tolist()
         expected_list = expected_df.values.tolist()
 
+        self.assertSequenceEqual(actual_list, expected_list)
+
+    def test_parse_nested_relationships(self):
+        sut = AimedToDataFrame()
+        input_line = " <p1  pair=1 >  <p1  pair=2 >  <p1  pair=3 >  <prot> FGF - 7 </prot>  </p1>  </p1>  </p1>  recognizes one FGFR isoform known as the <p2  pair=1 >  <prot>  FGFR2 IIIb </prot>  </p2>  isoform or <p2  pair=2 >  <prot>  <prot>  keratinocyte growth factor </prot>  receptor </prot>  </p2>  ( <p2  pair=3 >  <prot>  KGFR </prot>  </p2>  ) , whereas <p1  pair=4 >  <p1  pair=5 >  <p1  pair=6 >  <p1  pair=7 >  <prot>  FGF - 2 </prot>  </p1>  </p1>  </p1>  </p1>  binds well to <p2  pair=4 >  <prot>  FGFR1 </prot>  </p2>  , <p2  pair=5 >  <prot>  FGFR2 </prot>  </p2>  , and <p2  pair=6 >  <prot>  FGFR4 </prot>  </p2>  but interacts poorly with <p2  pair=7 >  <prot>  KGFR </prot>  </p2>"
+        expected_list = [frozenset(["FGF - 7", "FGFR2 IIIb"])
+            , frozenset(["FGF - 7", "keratinocyte growth factor"])
+            , frozenset(["FGF - 7", "keratinocyte growth factor receptor"])
+            , frozenset(["FGF - 7", "KGFR"])
+            , frozenset(["FGF - 2", "FGFR1"])
+            , frozenset(["FGF - 2", "FGFR2"])
+            , frozenset(["FGF - 2", "FGFR4"])
+            , frozenset(["FGF - 2", "KGFR"])]
+        expected_list.sort()
+
+        # Act
+        actual_list = list(sut._extract_relations(input_line))
+        actual_list.sort()
+
         print(actual_list)
         print(expected_list)
+
+        # Assert
+        self.assertSequenceEqual(actual_list, expected_list)
+
+    def test_parse_nested_relationships_2(self):
+        sut = AimedToDataFrame()
+        input_line = "Mutagenesis , recombinant protein expression , and physicochemical characterization were used to investigate the structural basis for the homodimerization and <p1  pair=4 >  <prot>  AKAP75 </prot>  </p1>  binding activities of <p1  pair=3 >  <p2  pair=3 >  <p2  pair=4 >  <prot>  RII beta </prot>  </p2>  </p2>  </p1>  "
+        expected_list = [
+            frozenset(["RII beta"])  # 3
+            , frozenset(["AKAP75", "RII beta"])  # 4
+        ]
+        expected_list.sort()
+
+        # Act
+        actual_list = list(sut._extract_relations(input_line))
+        actual_list.sort()
+
+        print(actual_list)
+        print(expected_list)
+
+        # Assert
+        self.assertSequenceEqual(actual_list, expected_list)
+
+    def test_parse_nested_proteins(self):
+        sut = AimedToDataFrame()
+        input_line = "<p2  pair=2 >  <prot>  <prot>  keratinocyte growth factor </prot>  receptor </prot>  </p2> "
+        expected_list = {"keratinocyte growth factor", "keratinocyte growth factor receptor"}
+
+        # Act
+        actual_list = sut._extract_proteins(input_line)
+
+        # Assert
         self.assertSequenceEqual(actual_list, expected_list)
