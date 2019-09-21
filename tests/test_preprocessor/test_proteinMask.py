@@ -39,9 +39,27 @@ class TestProteinMasker(TestCase):
         # Arrange
         data = ["entity2 This is sample entity1 entity2 entity2", "entity2", 31, "entity1", 23, "phosphorylation"]
 
-        expected = ["entity2 This is sample PROTEIN_1 PROTEIN_2 entity2", "PROTEIN_2", 31, "PROTEIN_1", 23,  "phosphorylation"]
+        expected = ["entity2 This is sample PROTEIN_1 PROTEIN_2 entity2", "PROTEIN_2", 31, "PROTEIN_1", 23,
+                    "phosphorylation"]
 
         sut = ProteinMasker(entity_column_indices=[1, 3], text_column_index=0, masks=["PROTEIN_2", "PROTEIN_1"],
+                            entity_offset_indices=[2, 4])
+
+        # Act
+        actual = sut(data)
+
+        # Assert
+        self.assertSequenceEqual(expected, actual)
+
+    def test_transform_mullti_case2(self):
+        # Arrange
+        data = [
+            'This observation supports a model in which p60 functions at an intermediate stage of PR assembly to facilitate formation of subsequent PR complexes lacking p60.',
+            'p60', 156, 'PR', 85]
+
+        expected = ["This observation supports a model in which p60 functions at an intermediate stage of PROTEIN_2 assembly to facilitate formation of subsequent PR complexes lacking PROTEIN_1.", "PROTEIN_1", 156, "PROTEIN_2", 85]
+
+        sut = ProteinMasker(entity_column_indices=[1, 3], text_column_index=0, masks=["PROTEIN_1", "PROTEIN_2"],
                             entity_offset_indices=[2, 4])
 
         # Act

@@ -5,6 +5,7 @@ from logging.config import fileConfig
 from unittest import TestCase
 
 from algorithms.TrainInferenceBuilder import TrainInferenceBuilder
+from datasets.PpiAimedDataset import PpiAimedDataset
 from datasets.PpiDataset import PPIDataset
 
 
@@ -12,10 +13,20 @@ class TestSitTrainInferencePipeline(TestCase):
     def setUp(self):
         fileConfig(os.path.join(os.path.dirname(__file__), 'logger.ini'))
 
-    def test_call(self):
+    def test_call_ppidataset(self):
         # Arrange
-        mock_dataset_train = self._get_mock_dataset()
-        mock_dataset_val = self._get_mock_dataset()
+        mock_dataset_train = self._get_ppidataset()
+        mock_dataset_val = self._get_ppidataset()
+
+        sut = self._get_sut_train_pipeline(mock_dataset_train)
+
+        # Act
+        actual = sut(mock_dataset_train, mock_dataset_val)
+
+    def test_call_aimeddataset(self):
+        # Arrange
+        mock_dataset_train = self._get_aimeddataset()
+        mock_dataset_val = self._get_aimeddataset()
 
         sut = self._get_sut_train_pipeline(mock_dataset_train)
 
@@ -30,17 +41,24 @@ class TestSitTrainInferencePipeline(TestCase):
         sut = factory.get_trainpipeline()
         return sut
 
-    def _get_mock_dataset(self):
+    def _get_ppidataset(self):
         # Arrange
         # Arrange
         train_file = os.path.join(os.path.dirname(__file__), "..", "data", "sample_train.json")
         mock_dataset = PPIDataset(train_file)
         return mock_dataset
 
+    def _get_aimeddataset(self):
+        # Arrange
+        # Arrange
+        train_file = os.path.join(os.path.dirname(__file__), "..", "data", "Aimedsample.json")
+        mock_dataset = PpiAimedDataset(train_file)
+        return mock_dataset
+
     def test_predict(self):
         # Arrange
-        mock_dataset_train = self._get_mock_dataset()
-        mock_dataset_val = self._get_mock_dataset()
+        mock_dataset_train = self._get_ppidataset()
+        mock_dataset_val = self._get_ppidataset()
         out_dir = tempfile.mkdtemp()
 
         sut = self._get_sut_train_pipeline(mock_dataset_train, out_dir=out_dir, epochs=20)

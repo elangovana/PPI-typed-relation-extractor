@@ -13,7 +13,6 @@ from algorithms.Train import Train
 from algorithms.TrainInferencePipeline import TrainInferencePipeline
 from algorithms.transform_label_encoder import TransformLabelEncoder
 from algorithms.transform_label_rehaper import TransformLabelReshaper
-from algorithms.transform_protein_mask import TransformProteinMask
 from algorithms.transform_sentence_tokeniser import TransformSentenceTokenisor
 from algorithms.transform_text_index import TransformTextToIndex
 
@@ -56,12 +55,6 @@ class TrainInferenceBuilder:
         # preprocess steps TransformProteinMask
         preprocess_steps = []
         special_words = []
-        for i in self.dataset.entity_column_indices:
-            mask_format = self.protein_mask.format(i)
-            transformer = TransformProteinMask(entity_column_index=i, text_column_index=self.dataset.text_column_index,
-                                               mask=mask_format)
-            special_words.append(mask_format)
-            preprocess_steps.append(("mask_{}".format(i), transformer))
 
         # Add sentence tokenisor
         sentence_tokenisor = TransformSentenceTokenisor(text_column_index=self.dataset.text_column_index,

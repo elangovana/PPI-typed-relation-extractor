@@ -2,6 +2,9 @@ import numpy as np
 import pandas as pd
 from torch.utils.data import Dataset
 
+from preprocessor.Preprocessor import Preprocessor
+from preprocessor.ProteinMasker import ProteinMasker
+
 """
 Represents the custom PPI dataset
 """
@@ -9,7 +12,8 @@ Represents the custom PPI dataset
 
 class PPIDataset(Dataset):
 
-    def __init__(self, file_path, interaction_type=None):
+    def __init__(self, file_path, interaction_type=None, transformer=None):
+        self.transformer = transformer or self._get_transformer()
         self._file_path = file_path
         # Read json
         data_df = pd.read_json(self._file_path)
@@ -32,7 +36,7 @@ class PPIDataset(Dataset):
         return self._data_df.shape[0]
 
     def __getitem__(self, index):
-        return self._data_df.iloc[index, :].tolist(), self._labels[index].tolist()
+        return self.transformer(self._data_df.iloc[index, :].tolist()), self._labels[index].tolist()
 
     @property
     def class_size(self):
@@ -53,3 +57,9 @@ class PPIDataset(Dataset):
     @property
     def text_column_index(self):
         return 0
+
+    def _get_transformer(self):
+        mask = ProteinMasker(entity_column_indices=self.entity_column_indices, masks=["PROTEIN_1", "PROTEIN_2"],
+                             text_column_index=self.text_column_index)
+
+        return Preprocessor([mask])

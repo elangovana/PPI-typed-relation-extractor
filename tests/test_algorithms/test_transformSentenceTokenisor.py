@@ -3,7 +3,6 @@ from unittest.mock import MagicMock
 
 from torch.utils.data import DataLoader
 
-from algorithms.transform_protein_mask import TransformProteinMask
 from algorithms.transform_sentence_tokeniser import TransformSentenceTokenisor
 
 
@@ -30,7 +29,6 @@ class TestTransformSentenceTokenisor(TestCase):
 
         # Act
         actual = sut.fit_transform(DataLoader(mock_dataset))
-
 
         # Assert
         self.assertSequenceEqual(expected, actual)

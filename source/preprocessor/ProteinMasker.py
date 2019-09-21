@@ -48,7 +48,7 @@ If entity_offset is specified, then only the value in that location is replaced,
 
     def __call__(self, row_x):
         if self.entity_offset_indices is not None:
-            offset_values = numpy.array(row_x)[self.entity_offset_indices]
+            offset_values = numpy.array(row_x)[self.entity_offset_indices].astype(int).tolist()
             sorted_c_index = numpy.argsort(offset_values)
 
             sorted_entities_cols = numpy.array(self.entity_column_indices)[sorted_c_index].tolist()
@@ -61,15 +61,20 @@ If entity_offset is specified, then only the value in that location is replaced,
 
         text = row_x[self.text_column_index]
         adj = 0
-        for e, o, m in zip(sorted_entities_cols, sorted_offset_cols, sorted_masks):
-            if o == None:
-                text = text.replace(row_x[e], m)
+        for ei, oi, m in zip(sorted_entities_cols, sorted_offset_cols, sorted_masks):
+            e = row_x[ei]
+
+            if oi == None:
+                text = text.replace(e, m)
             else:
-                pos = row_x[o] + adj
-                pos_e = pos + len(row_x[e])
-                text = text[:pos] + m + text[pos_e:]
-                adj = len(m) - len(row_x[e])
-            row_x[e] = m
+                pos_s = row_x[oi] + adj
+                pos_e = pos_s + len(e)
+                offset_text = text[pos_s: pos_e]
+                assert offset_text == e, "The text at offset_start {} must match entity '{}', but found '{}'".format(
+                    pos_s, ei, offset_text)
+                text = text[:pos_s] + m + text[pos_e:]
+                adj = len(m) - len(row_x[ei])
+            row_x[ei] = m
 
         row_x[self.text_column_index] = text
 
