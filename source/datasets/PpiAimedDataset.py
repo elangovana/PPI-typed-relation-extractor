@@ -19,7 +19,7 @@ class PpiAimedDataset(Dataset):
             data_df = data_df.query('participant1 != participant2')
 
         # Filter features
-        self._data_df = data_df[["passage", "participant1", "participant2"]]
+        self._data_df = data_df[["passage", "participant1", "participant1_loc", "participant2", "participant2_loc"]]
 
         # Set up labels
         if "isValid" in data_df.columns:
@@ -44,11 +44,11 @@ class PpiAimedDataset(Dataset):
 
     @property
     def feature_lens(self):
-        return [150, 1, 1]
+        return [150, 1, 1, 1, 1]
 
     @property
     def entity_column_indices(self):
-        return [1, 2]
+        return [1, 3]
 
     @property
     def text_column_index(self):

@@ -25,14 +25,7 @@ class TestAimedXmlToDataFrame(TestCase):
 
         sut = AimedXmlToDataFrame()
 
-        expected_json = [{"docid": "AIMed.d0"
-                             , "passage": "Th1/Th2 type cytokines in hepatitis B patients treated with interferon-alpha."
-                             , "passageid": "AIMed.d0.s0"
-                             , "participant1": "interferon-alpha"
-                             , "participant2": "interferon-alpha"
-                             , "isValid": False
-
-                          }]
+        expected_json = []
 
         expected_df = pd.DataFrame(expected_json)
 
@@ -64,7 +57,11 @@ class TestAimedXmlToDataFrame(TestCase):
                           "passage": "Cytokines measurements during IFN-alpha treatment showed a trend to decreasing levels of IL-4 at 4, 12, and 24 weeks."
                              , "passageid": "AIMed.d0.s5"
                              , "participant1": "IFN-alpha"
+                             , "participant1_loc": "30-38"
+
                              , "participant2": "IL-4"
+                             , "participant2_loc": "89-92"
+
                              , "isValid": False
 
                           }]
@@ -99,8 +96,11 @@ class TestAimedXmlToDataFrame(TestCase):
                              ,
                           "passage": "We also found another armadillo-protein, p0071, interacted with PS1."
                              , "passageid": "AIMed.d30.s255"
-                             , "participant1": "PS1"
-                             , "participant2": "p0071"
+                             , "participant1": "p0071"
+                             , "participant1_loc": "41-45"
+                             , "participant2": "PS1"
+                             , "participant2_loc": "64-66"
+
                              , "isValid": True
 
                           }]
@@ -136,30 +136,40 @@ class TestAimedXmlToDataFrame(TestCase):
                              ,
                           "passage": "We also found another armadillo-protein, p0071, interacted with PS1."
                              , "passageid": "AIMed.d30.s255"
-                             , "participant1": "PS1"
-                             , "participant2": "p0071"
+                             , "participant1": "p0071"
+                             , "participant1_loc": "41-45"
+                             , "participant2": "PS1"
+                             , "participant2_loc": "64-66"
+
                              , "isValid": True
 
                           },
                          {"docid": "AIMed.d0"
                              , "passage": "We also found another armadillo-protein, p0071, interacted with PS1."
                              , "passageid": "AIMed.d30.s255"
+                             , "participant1_loc": "22-38"
+
                              , "participant1": "armadillo-protein"
                              , "participant2": "p0071"
+                             , "participant2_loc": "41-45"
+
                              , "isValid": False
 
                           },
                          {"docid": "AIMed.d0"
                              , "passage": "We also found another armadillo-protein, p0071, interacted with PS1."
                              , "passageid": "AIMed.d30.s255"
-                             , "participant1": "PS1"
-                             , "participant2": "armadillo-protein"
+                             , "participant1": "armadillo-protein"
+                             , "participant1_loc": "22-38"
+                             , "participant2": "PS1"
+                             , "participant2_loc": "64-66"
+
                              , "isValid": False
 
                           }
                          ]
 
-        sort_cols = ["isValid", "participant1", "participant2"]
+        sort_cols = ["isValid", "participant1_loc", "participant2_loc"]
         expected_df = pd.DataFrame(expected_json).sort_values(by=sort_cols)
 
         # Act
@@ -188,9 +198,7 @@ class TestAimedXmlToDataFrame(TestCase):
 
         sut = AimedXmlToDataFrame()
 
-        expected_count = 2
-
-
+        expected_count = 1
 
         # Act
         dataframe = sut(xml_handle)

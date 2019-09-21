@@ -36,26 +36,23 @@ class AimedXmlToDataFrame:
                 passageid = passage_ele.attrib["id"]
 
                 # Get all proteins and offsets in the sentence
-                protein_offsets = [(p, l) for p, l in self._find_protein_annotations(passage_ele)]
-
-                # make them unique
-                proteins = set([p for p, _ in protein_offsets])
+                protein_offsets_dict = {l: p for p, l in self._find_protein_annotations(passage_ele)}
 
                 rel_protein_pairs = set()
-                rel_location = {}
                 for (p1, p1_l), (p2, p2_l) in self._find_protein_relations(passage_ele):
-                    pair = frozenset([p1, p2])
+                    pair = frozenset([p1_l, p2_l])
                     rel_protein_pairs.add(pair)
-                    rel_location[pair] = {p1: p1_l, p2: p2_l}
 
+                comb_func = itertools.combinations
 
-                comb_func = itertools.combinations_with_replacement if len(proteins) == 1 else itertools.combinations
-
-                for protein_combination in comb_func(proteins, 2, ):
+                for protein_combination in comb_func(set(protein_offsets_dict.keys()), 2, ):
                     # sort names so it is easier to test
                     protein_combination = sorted(protein_combination)
-                    participant1 = protein_combination[0]
-                    participant2 = protein_combination[1]
+                    participant1_offset = protein_combination[0]
+                    participant1 = protein_offsets_dict[participant1_offset]
+
+                    participant2_offset = protein_combination[1]
+                    participant2 = protein_offsets_dict[participant2_offset]
 
                     protein_combination = frozenset(protein_combination)
                     is_valid = protein_combination in rel_protein_pairs
@@ -64,12 +61,17 @@ class AimedXmlToDataFrame:
                                            , "passage": passage
                                            , "passageid": passageid
                                            , "participant1": participant1
+                                           , "participant1_loc": participant1_offset
+
                                            , "participant2": participant2
+                                           , "participant2_loc": participant2_offset
+
                                            , "isValid": is_valid
 
                                         })
 
         return pd.DataFrame(result_json)
+
 
     @staticmethod
     def _find_protein_annotations(passage_ele):
@@ -77,6 +79,7 @@ class AimedXmlToDataFrame:
             if entity_ele.attrib["type"] != 'protein': continue
 
             yield (entity_ele.attrib["text"], entity_ele.attrib["charOffset"])
+
 
     @staticmethod
     def _find_protein_relations(passage_ele):
@@ -108,6 +111,7 @@ class AimedXmlToDataFrame:
             participant2_offset = participant2_entity_ele.attrib["charOffset"]
 
             yield (participant1, participant1_offset), (participant2, participant2_offset)
+
 
     @staticmethod
     def _iter_elements_by_name(handle, name, namespace):
