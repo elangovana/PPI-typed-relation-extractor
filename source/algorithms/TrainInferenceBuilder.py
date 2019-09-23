@@ -25,7 +25,6 @@ class TrainInferenceBuilder:
         self.model_dir = model_dir
         self.epochs = epochs
         self.dataset = dataset
-        self.learning_rate = .01
         self.momentum = .9
         self.embedding_handle = embedding_handle
         self.embedding_dim = embedding_dim
@@ -38,6 +37,7 @@ class TrainInferenceBuilder:
         self.pooling_kernel_size = int(self._get_value(self.additional_args, "poolingkernelsize", "4"))
         self.fc_layer_size = int(self._get_value(self.additional_args, "fclayersize", "25"))
         self.num_layers = int(self._get_value(self.additional_args, "numlayers", "2"))
+        self.learning_rate = float(self._get_value(self.additional_args, "learningrate", ".01"))
 
     def _get_value(self, kwargs, key, default):
         value = kwargs.get(key, default)
@@ -86,7 +86,7 @@ class TrainInferenceBuilder:
 
         # Optimiser
         # optimiser = SGD(lr=self.learning_rate, momentum=self.momentum, params=model.parameters())
-        optimiser = Adam(params=model.parameters())
+        optimiser = Adam(params=model.parameters(), lr=self.learning_rate)
         self.logger.info("Using optimiser {}".format(type(optimiser)))
 
         # Loss function
