@@ -45,6 +45,7 @@ class TrainInferencePipeline:
         return logging.getLogger(__name__)
 
     def __call__(self, train, validation):
+        self.logger.info("Train set has {} records, val has {}".format(len(train), len(validation)))
         train_loader = DataLoader(train, shuffle=True, batch_size=self.batch_size, num_workers=self.num_workers,
                                   collate_fn=Collator())
         val_loader = DataLoader(validation, shuffle=False, batch_size=self.batch_size, num_workers=self.num_workers,
