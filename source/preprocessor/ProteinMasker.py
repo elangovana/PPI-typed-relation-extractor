@@ -70,8 +70,12 @@ If entity_offset is specified, then only the value in that location is replaced,
                 pos_s = row_x[oi] + adj
                 pos_e = pos_s + len(e)
                 offset_text = text[pos_s: pos_e]
-                assert offset_text == e, "The text at offset_start {} must match entity '{}', but found '{}'".format(
-                    pos_s, ei, offset_text)
+                # assert offset_text == e, "The text at offset_start {} must match entity '{}', but found '{}'".format(
+                #     pos_s, ei, offset_text)
+                if offset_text != e:
+                    self.logger.warning(
+                        "The text at offset_start {} must match entity '{}', but found '{}' for text \n{}".format(pos_s, ei,
+                                                                                                    offset_text, text))
                 text = text[:pos_s] + m + text[pos_e:]
                 adj = len(m) - len(row_x[ei])
             row_x[ei] = m
