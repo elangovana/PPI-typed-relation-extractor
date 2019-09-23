@@ -10,12 +10,15 @@ from algorithms.PositionEmbedder import PositionEmbedder
 
 class RelationExtractorBiLstmNetwork(nn.Module):
 
-    def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0, seed=777, pos_embedder=None,
+    def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0, seed=None, pos_embedder=None,
                  hidden_size=75, dropout_rate_fc=0.2, kernal_size=4, fc_layer_size=30,
                  num_layers=2,
                  lstm_dropout=.3):
         self.embed_vocab_size = embed_vocab_size
         self.feature_lengths = feature_lengths
+        if seed is None:
+            seed = torch.initial_seed() & ((1<<63)-1)
+        self.logger.info("Using seed {}".format(seed))
         torch.manual_seed(seed)
 
         super(RelationExtractorBiLstmNetwork, self).__init__()
