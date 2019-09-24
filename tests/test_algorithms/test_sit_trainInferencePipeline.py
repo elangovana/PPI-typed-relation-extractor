@@ -5,8 +5,7 @@ from logging.config import fileConfig
 from unittest import TestCase
 
 from algorithms.TrainInferenceBuilder import TrainInferenceBuilder
-from datasets.PpiAimedDataset import PpiAimedDataset
-from datasets.PpiDataset import PPIDataset
+from algorithms.dataset_factory import DatasetFactory
 
 
 class TestSitTrainInferencePipeline(TestCase):
@@ -37,7 +36,7 @@ class TestSitTrainInferencePipeline(TestCase):
         embedding = StringIO(
             "\n".join(["4 3", "hat 0.2 .34 0.8", "mat 0.5 .34 0.8", "entity1 0.5 .55 0.8", "entity2 0.3 .55 0.9"]))
         factory = TrainInferenceBuilder(dataset=mock_dataset, embedding_handle=embedding, embedding_dim=3,
-                                        output_dir=out_dir,model_dir=out_dir, epochs=epochs)
+                                        output_dir=out_dir, model_dir=out_dir, epochs=epochs)
         sut = factory.get_trainpipeline()
         return sut
 
@@ -45,15 +44,15 @@ class TestSitTrainInferencePipeline(TestCase):
         # Arrange
         # Arrange
         train_file = os.path.join(os.path.dirname(__file__), "..", "data", "sample_train.json")
-        mock_dataset = PPIDataset(train_file)
-        return mock_dataset
+        factory = DatasetFactory().get_datasetfactory("PpiDatasetFactory")
+        dataset = factory.get_dataset(train_file)
+        return dataset
 
     def _get_aimeddataset(self):
-        # Arrange
-        # Arrange
         train_file = os.path.join(os.path.dirname(__file__), "..", "data", "Aimedsample.json")
-        mock_dataset = PpiAimedDataset(train_file)
-        return mock_dataset
+        factory = DatasetFactory().get_datasetfactory("PpiAimedDatasetFactory")
+        dataset = factory.get_dataset(train_file)
+        return dataset
 
     def test_predict(self):
         # Arrange

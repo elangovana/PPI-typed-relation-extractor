@@ -4,15 +4,16 @@ import os
 import sys
 
 from algorithms.TrainInferenceBuilder import TrainInferenceBuilder
-from algorithms.dataset_mapper import str_to_dataset_class, get_datasets
+from algorithms.dataset_factory import DatasetFactory
 
 
-def run(dataset_type, train_file, val_file, embedding_file, embed_dim, model_dir, out_dir, epochs,
+def run(dataset_factory_name, train_file, val_file, embedding_file, embed_dim, model_dir, out_dir, epochs,
         earlystoppingpatience, additionalargs):
     logger = logging.getLogger(__name__)
 
-    dataset_class = str_to_dataset_class(dataset_type)
-    train, val = dataset_class(train_file), dataset_class(val_file)
+    dataset_factory = DatasetFactory().get_datasetfactory(dataset_factory_name)
+
+    train, val = dataset_factory.get_dataset(train_file), dataset_factory.get_dataset(val_file)
 
     if not os.path.exists(out_dir) or not os.path.isdir(out_dir):
         raise FileNotFoundError("The path {} should exist and must be a directory".format(out_dir))
@@ -34,7 +35,8 @@ def run(dataset_type, train_file, val_file, embedding_file, embed_dim, model_dir
 
 if "__main__" == __name__:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset", help="The dataset type", choices=get_datasets().keys(), required=True)
+    parser.add_argument("--dataset", help="The dataset type", choices=DatasetFactory().dataset_factory_names,
+                        required=True)
 
     parser.add_argument("--trainfile",
                         help="The input train file wrt to train  dir", required=True)

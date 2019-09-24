@@ -1,20 +1,17 @@
 import numpy as np
 import pandas as pd
-from torch.utils.data import Dataset
 
-from preprocessor.Preprocessor import Preprocessor
-from preprocessor.ProteinMasker import ProteinMasker
-
-"""
-Represents the custom PPIm dataset
-"""
+from datasets.custom_dataset_base import CustomDatasetBase
 
 
-class PpiAimedDataset(Dataset):
+class PpiAimedDataset(CustomDatasetBase):
+    """
+    Represents the custom PPI Aimed dataset
+    """
 
     def __init__(self, file_path, self_relations_filter=True, transformer=None):
         self._file_path = file_path
-        self.transformer = transformer or self._get_transformer()
+        self.transformer = transformer
         # Read json
         data_df = pd.read_json(self._file_path)
 
@@ -41,8 +38,16 @@ class PpiAimedDataset(Dataset):
         row_values[2] = int(row_values[2].split("-")[0])
         row_values[4] = int(row_values[4].split("-")[0])
 
-        transformed = np.array(self.transformer(row_values))[[0, 1, 3]].tolist()
-        return transformed, self._labels[index].tolist()
+        # transform
+        if self.transformer is not None:
+            self.row_values = self.transformer(row_values)
+
+        # remove the location offsets
+        x = np.array(row_values)[[0, 1, 3]].tolist()
+
+        # y
+        y = self._labels[index].tolist()
+        return x, y
 
     @property
     def class_size(self):
@@ -61,11 +66,9 @@ class PpiAimedDataset(Dataset):
         return [1, 3]
 
     @property
+    def entity_offset_indices(self):
+        return [2, 4]
+
+    @property
     def text_column_index(self):
         return 0
-
-    def _get_transformer(self):
-        mask = ProteinMasker(entity_column_indices=self.entity_column_indices, masks=["PROTEIN_1", "PROTEIN_2"],
-                             text_column_index=self.text_column_index, entity_offset_indices=[2, 4])
-
-        return Preprocessor([mask])
