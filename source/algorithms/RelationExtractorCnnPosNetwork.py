@@ -3,7 +3,6 @@ import math
 
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 
 from algorithms.PositionEmbedder import PositionEmbedder
 
@@ -33,12 +32,12 @@ class RelationExtractorCnnPosNetwork(nn.Module):
                                                                                            self.feature_lengths))
 
         # self.windows_sizes = [5, 4, 3, 2, 1]
-        self.windows_sizes = [5, 4, 3, 2, 1]
+        self.windows_sizes = [5]
 
         cnn_stride = 1
         pool_stride = 1
 
-        self.cnn_layers = []
+        self.cnn_layers = nn.ModuleList()
         total_cnn_out_size = 0
         # The total embedding size if the text column + position for the rest
         pos_embed_total_dim = (len(self.feature_lengths) - 1) * \
@@ -81,6 +80,7 @@ class RelationExtractorCnnPosNetwork(nn.Module):
                 nn.AvgPool1d(kernel_size=layer1_pool_kernel, stride=layer1_pool_stride, padding=layer1_pool_padding)
                 , nn.Dropout(dropout_rate_cnn)
             )
+
 
             self.cnn_layers.append(layer1)
             total_cnn_out_size += layer1_pool_out_length * layer1_cnn_output
@@ -138,7 +138,7 @@ class RelationExtractorCnnPosNetwork(nn.Module):
             for t, e in zip(text_transposed, entity):
                 pos_embedding.append(self.pos_embedder(t, e[0]))
 
-            pos_embedding_tensor = torch.stack(pos_embedding)
+            pos_embedding_tensor = torch.stack(pos_embedding).to(device=merged_pos_embed.device)
 
             merged_pos_embed = torch.cat([merged_pos_embed, pos_embedding_tensor], dim=2)
 
@@ -159,6 +159,5 @@ class RelationExtractorCnnPosNetwork(nn.Module):
         self.logger.debug("Running fc")
         out = self.fc(out)
 
-        self.logger.debug("Running softmax")
 
         return out
