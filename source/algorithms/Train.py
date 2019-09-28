@@ -11,7 +11,7 @@ from algorithms.result_writer import ResultWriter
 
 class Train:
 
-    def __init__(self, device=None, epochs=10,early_stopping_patience=20):
+    def __init__(self, device=None, epochs=10, early_stopping_patience=20):
 
         self.early_stopping_patience = early_stopping_patience
         self.epochs = epochs
@@ -86,10 +86,7 @@ class Train:
         self.logger.info("using score : {}".format(type(self.results_scorer)))
         model_network.to(device=self.device)
         for epoch in range(self.epochs):
-            train_loss = 0
-            n_correct, n_total = 0, 0
-            actuals_train = torch.tensor([]).to(device=self.device)
-            predicted_train = torch.tensor([]).to(device=self.device)
+
             self.logger.debug("Running epoch {}".format(self.epochs))
 
             for idx, batch in enumerate(data_iter):
@@ -98,21 +95,17 @@ class Train:
                 batch_y = batch[1].to(device=self.device)
                 # batch_x = torch.Tensor(batch_x)
                 iterations += 1
-                # for feature, target in zip(batch_x, batch_y):
 
-                # Step 2. Recall that torch *accumulates* gradients. Before passing in a
-                # new instance, you need to zero out the gradients from the old
-                # instance
+                # Step 2. train
                 model_network.train()
                 model_network.zero_grad()
 
-                # Step 3. Run the forward pass, getting log probabilities over next
+                # Step 3. Run the forward pass
                 # words
                 self.logger.debug("Running forward")
                 predicted = model_network(batch_x)
 
-                # Step 4. Compute your loss function. (Again, Torch wants the target
-                # word wrapped in a tensor)
+                # Step 4. Compute loss
                 self.logger.debug("Running loss")
                 loss = loss_function(predicted, batch_y)
 
@@ -121,20 +114,10 @@ class Train:
                 loss.backward()
                 optimizer.step()
 
-                self.logger.debug("total loss")
-                # Get the Python number from a 1-element Tensor by calling tensor.item()
-                train_loss += loss.item()
+                losses.append(loss.item())
 
-                losses.append(train_loss)
+            actuals_train, predicted_train, train_loss = self.validate(loss_function, model_network, data_iter)
 
-                actuals_train = torch.cat((actuals_train.long(), batch_y))
-                predicted_train = torch.cat((predicted_train.long(), torch.max(predicted, 1)[1].view(batch_y.size())))
-
-                n_correct += (torch.max(predicted, 1)[1].view(batch_y.size()) == batch_y).sum().item()
-                n_total += len(batch_y)
-
-            actuals_train = actuals_train.cpu().numpy()
-            predicted_train = predicted_train.cpu().numpy()
             # Print training set confusion matrix
             self.logger.info("Train set result details:")
             self.results_writer(data_iter, actuals_train, predicted_train, output_dir)
