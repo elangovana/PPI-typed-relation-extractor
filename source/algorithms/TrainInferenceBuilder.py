@@ -51,7 +51,7 @@ class TrainInferenceBuilder:
 
     def get_trainpipeline(self):
         # Embedder loader
-        embedder_loader = PretrainedEmbedderLoader(TransformTextToIndex.pad_token)
+        embedder_loader = PretrainedEmbedderLoader(TransformTextToIndex.pad_token())
 
         # preprocess steps TransformProteinMask
         preprocess_steps = []
