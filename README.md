@@ -242,3 +242,14 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
     export PYTHONPATH=./source
     python source/datatransformer/AimedToDataFrame.py tests/test_datatransformer/data/aimed /tmp/df.json
     ```
+    
+    
+## Other embeddings
+
+1. To use the embedding from Collobert https://ronan.collobert.com/pub/matos/2014_hellinger_eacl.pdf . They can be downloaded from http://www.lebret.ch/words/embeddings/. First convert the vocab / words format into a single file as shown here. 
+   The resulting file can then be used as the normal embedding file.
+   
+    ```bash
+    python ./source/algorithms/collobert_embedding_formatter.py  --vocabfile vocab.txt --embedfile words.txt --outputfile words_vocab_collabert.txt
+    ```
+ 
