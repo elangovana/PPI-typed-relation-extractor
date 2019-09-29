@@ -2,7 +2,7 @@ import logging
 
 import numpy as np
 from torch import nn
-from torch.optim import Adam
+from torch.optim import RMSprop
 
 from algorithms.DataPipeline import DataPipeline
 from algorithms.LabelPipeline import LabelPipeline
@@ -88,7 +88,8 @@ class TrainInferenceBuilder:
 
         # Optimiser
         # optimiser = SGD(lr=self.learning_rate, momentum=self.momentum, params=model.parameters())
-        optimiser = Adam(params=model.parameters(), lr=self.learning_rate)
+        # optimiser = Adam(params=model.parameters(), lr=self.learning_rate)
+        optimiser = RMSprop(params=model.parameters(), lr=self.learning_rate)
         self.logger.info("Using optimiser {}".format(type(optimiser)))
 
         # Loss function
