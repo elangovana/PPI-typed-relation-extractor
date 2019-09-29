@@ -58,8 +58,8 @@ class RelationExtractorCnnPosNetwork(nn.Module):
                 (feature_lengths[
                      self.text_column_index] + 2 * layer1_cnn_padding - layer1_cnn_kernel + 1) / layer1_cnn_stride)
 
-            layer1_pool_kernel = layer1_cnn_kernel
-            layer1_pool_padding = layer1_pool_kernel // 2
+            layer1_pool_kernel = int(self.feature_lengths[self.text_column_index])
+            layer1_pool_padding = 0
             layer1_pool_stride = pool_stride
             layer1_pool_out_length = math.ceil(
                 (layer1_cnn_out_length + 2 * layer1_pool_padding - layer1_pool_kernel + 1) / layer1_pool_stride)
@@ -77,21 +77,24 @@ class RelationExtractorCnnPosNetwork(nn.Module):
                           padding=layer1_cnn_padding),
                 # nn.BatchNorm1d(layer1_cnn_output),
                 nn.ReLU(),
-                nn.AvgPool1d(kernel_size=layer1_pool_kernel, stride=layer1_pool_stride, padding=layer1_pool_padding)
+                nn.MaxPool1d(kernel_size=layer1_pool_kernel, stride=layer1_pool_stride, padding=layer1_pool_padding)
                 , nn.Dropout(dropout_rate_cnn)
             )
-
 
             self.cnn_layers.append(layer1)
             total_cnn_out_size += layer1_pool_out_length * layer1_cnn_output
 
         self._class_size = class_size
+        # self.fc = nn.Sequential(
+        #     nn.Linear(total_cnn_out_size,
+        #               fc_layer_size),
+        #     nn.ReLU(),
+        #     nn.Dropout(dropout_rate_fc),
+        #     nn.Linear(fc_layer_size, class_size))
+
         self.fc = nn.Sequential(
             nn.Linear(total_cnn_out_size,
-                      fc_layer_size),
-            nn.ReLU(),
-            nn.Dropout(dropout_rate_fc),
-            nn.Linear(fc_layer_size, class_size))
+                      class_size))
 
     @property
     def embeddings(self):
@@ -158,6 +161,5 @@ class RelationExtractorCnnPosNetwork(nn.Module):
 
         self.logger.debug("Running fc")
         out = self.fc(out)
-
 
         return out
