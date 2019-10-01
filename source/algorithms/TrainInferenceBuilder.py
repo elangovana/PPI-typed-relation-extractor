@@ -2,12 +2,12 @@ import logging
 
 import numpy as np
 from torch import nn
-from torch.optim import RMSprop
+from torch.optim import Adam
 
 from algorithms.DataPipeline import DataPipeline
 from algorithms.LabelPipeline import LabelPipeline
 from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
-from algorithms.RelationExtractorCnnPosNetwork import RelationExtractorCnnPosNetwork
+from algorithms.RelationExtractorStackedCnnPosNetwork import RelationExtractorStackedCnnPosNetwork
 from algorithms.Train import Train
 from algorithms.TrainInferencePipeline import TrainInferencePipeline
 from algorithms.transform_label_encoder import TransformLabelEncoder
@@ -30,18 +30,11 @@ class TrainInferenceBuilder:
         self.output_dir = output_dir
         self.protein_mask = "PROTEIN_{}"
         self.additional_args = extra_args or {}
-        self.batch_size = int(self._get_value(self.additional_args, "batchsize", "32"))
         # self.lstm_hidden_size = int(self._get_value(self.additional_args, "lstmhiddensize", "100"))
-        self.dropout_rate_fc = float(self._get_value(self.additional_args, "dropout_rate_fc", ".5"))
         # self.pooling_kernel_size = int(self._get_value(self.additional_args, "poolingkernelsize", "4"))
         # self.fc_layer_size = int(self._get_value(self.additional_args, "fclayersize", "25"))
         # self.num_layers = int(self._get_value(self.additional_args, "numlayers", "2"))
-        self.learning_rate = float(self._get_value(self.additional_args, "learningrate", ".01"))
-        self.cnn_output = int(self._get_value(self.additional_args, "cnn_output", "100"))
-        self.dropout_rate_cnn = float(self._get_value(self.additional_args, "dropout_rate_cnn", ".2"))
-
-
-
+        self.batch_size = int(self._get_value(self.additional_args, "batchsize", "32"))
 
     def _get_value(self, kwargs, key, default):
         value = kwargs.get(key, default)
@@ -83,16 +76,32 @@ class TrainInferenceBuilder:
         #                                        dropout_rate_fc=self.dropout_rate_fc, num_layers=self.num_layers,
         #                                        kernal_size=self.pooling_kernel_size, fc_layer_size=self.fc_layer_size,
         #                                        lstm_dropout=.5)
-        model = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
-                                               feature_lengths=np_feature_lens, cnn_output=self.cnn_output,
-                                               dropout_rate_cnn=self.dropout_rate_cnn,
-                                               dropout_rate_fc=self.dropout_rate_fc)
+        # model = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
+        #                                        feature_lengths=np_feature_lens, cnn_output=self.cnn_output,
+        #                                        dropout_rate_cnn=self.dropout_rate_cnn,
+        #                                        dropout_rate_fc=self.dropout_rate_fc)
+
+        dropout_rate_cnn = float(self._get_value(self.additional_args, "dropout_rate_cnn", ".5"))
+        pooling_kernel_size = int(self._get_value(self.additional_args, "pooling_kernel_size", "3"))
+        pool_stride = int(self._get_value(self.additional_args, "pool_stride", "2"))
+        cnn_kernel_size = int(self._get_value(self.additional_args, "cnn_kernel_size", "3"))
+        cnn_num_layers = int(self._get_value(self.additional_args, "cnn_num_layers", "3"))
+        cnn_output = int(self._get_value(self.additional_args, "cnn_output", "64"))
+        model = RelationExtractorStackedCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
+                                                      feature_lengths=np_feature_lens,
+                                                      windows_size=cnn_kernel_size, dropout_rate_cnn=dropout_rate_cnn,
+                                                      cnn_output=cnn_output,
+                                                      cnn_num_layers=cnn_num_layers,
+                                                      cnn_stride=1, pool_kernel=pooling_kernel_size,
+                                                      pool_stride=pool_stride)
         self.logger.info("Using model {}".format(type(model)))
 
         # Optimiser
+        learning_rate = float(self._get_value(self.additional_args, "learningrate", ".01"))
+
         # optimiser = SGD(lr=self.learning_rate, momentum=self.momentum, params=model.parameters())
-        # optimiser = Adam(params=model.parameters(), lr=self.learning_rate)
-        optimiser = RMSprop(params=model.parameters(), lr=self.learning_rate)
+        optimiser = Adam(params=model.parameters(), lr=learning_rate)
+        # optimiser = RMSprop(params=model.parameters(), lr=learning_rate)
         self.logger.info("Using optimiser {}".format(type(optimiser)))
 
         # Loss function
