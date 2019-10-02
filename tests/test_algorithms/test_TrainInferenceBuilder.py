@@ -13,7 +13,7 @@ class TestTrainInferenceBuilder(TestCase):
         mock_dataset = MagicMock()
         mock_dataset.data = [[["This is sample text", "entity1", "entity2", "phosphorylation"], ["yes"]],
                              [["This is sample text2", "entity1", "entity2", "phosphorylation"], ["no"]]]
-        mock_dataset.feature_lens = [10, 1, 1, 1]
+        mock_dataset.feature_lens = [100, 1, 1, 1]
         mock_dataset.class_size = 2
 
         mock_dataset.__len__.return_value = len(mock_dataset.data)
