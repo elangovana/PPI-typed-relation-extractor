@@ -63,7 +63,7 @@ class RelationExtractorStackedCnnPosNetwork(nn.Module):
                 nn.BatchNorm1d(cnn_output),
                 nn.ReLU(),
                 nn.MaxPool1d(kernel_size=pool_kernel, stride=pool_stride, padding=pool_padding)
-                #   , nn.Dropout(dropout_rate_cnn)
+                , nn.Dropout(dropout_rate_cnn)
             )
 
             self.cnn_layers.add_module("layer_{}".format(k), layer)
