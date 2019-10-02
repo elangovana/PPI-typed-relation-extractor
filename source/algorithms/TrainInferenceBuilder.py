@@ -99,7 +99,7 @@ class TrainInferenceBuilder:
                                                       cnn_stride=1, pool_kernel=pooling_kernel_size,
                                                       pool_stride=pool_stride, fc_layer_size=fc_layer_size,
                                                       fc_dropout_rate=fc_drop_out_rate,
-                                                      input_drop_out_rate=input_drop_out_rate)
+                                                      input_dropout_rate=input_drop_out_rate)
         self.logger.info("Using model {}".format(type(model)))
 
         # Optimiser
