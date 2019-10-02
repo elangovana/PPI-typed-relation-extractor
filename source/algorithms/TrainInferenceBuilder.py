@@ -89,6 +89,7 @@ class TrainInferenceBuilder:
         cnn_output = int(self._get_value(self.additional_args, "cnn_output", "64"))
         fc_layer_size = int(self._get_value(self.additional_args, "fc_layer_size", "64"))
         fc_drop_out_rate = float(self._get_value(self.additional_args, "fc_drop_out_rate", ".5"))
+        input_drop_out_rate = float(self._get_value(self.additional_args, "input_drop_out_rate", ".8"))
 
         model = RelationExtractorStackedCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
                                                       feature_lengths=np_feature_lens,
@@ -97,7 +98,8 @@ class TrainInferenceBuilder:
                                                       cnn_num_layers=cnn_num_layers,
                                                       cnn_stride=1, pool_kernel=pooling_kernel_size,
                                                       pool_stride=pool_stride, fc_layer_size=fc_layer_size,
-                                                      fc_dropout_rate=fc_drop_out_rate)
+                                                      fc_dropout_rate=fc_drop_out_rate,
+                                                      input_drop_out_rate=input_drop_out_rate)
         self.logger.info("Using model {}".format(type(model)))
 
         # Optimiser
