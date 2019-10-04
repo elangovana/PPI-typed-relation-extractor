@@ -10,7 +10,9 @@ Extracts vocab from data frame columns which have already been tokenised into wo
 
 class TransformTextToIndex:
 
-    def __init__(self, max_feature_lens, min_vocab_frequency=2, vocab_dict=None, special_words=None):
+    def __init__(self, max_feature_lens, min_vocab_frequency=2, case_insensitive=True, vocab_dict=None,
+                 special_words=None):
+        self.case_insensitive = case_insensitive
         self.special_words = special_words or []
         self._vocab_dict = vocab_dict or {}
 
@@ -24,7 +26,7 @@ class TransformTextToIndex:
         return logging.getLogger(__name__)
 
     def construct_vocab_dict(self, data_loader):
-        return self._get_vocab_dict(data_loader, self.special_words)
+        return self._get_vocab_dict(data_loader, self.special_words, case_insensitive=self.case_insensitive)
 
     @staticmethod
     def pad_token():
@@ -44,11 +46,11 @@ class TransformTextToIndex:
 
     def fit(self, data_loader):
         if self._vocab_dict is None or len(self._vocab_dict) == 0:
-            self._vocab_dict = self._get_vocab_dict(data_loader, self.special_words)
+            self._vocab_dict = self._get_vocab_dict(data_loader, self.special_words, self.case_insensitive)
 
     @staticmethod
-    def _get_vocab_dict(data_loader, special_words):
-        count_vectoriser = CountVectorizer()
+    def _get_vocab_dict(data_loader, special_words, case_insensitive):
+        count_vectoriser = CountVectorizer(lowercase=case_insensitive)
         for idx, b in enumerate(data_loader):
             b_x = b[0]
 
@@ -81,7 +83,10 @@ class TransformTextToIndex:
                 row = []
                 max = self.max_feature_lens[c_index]
                 for _, r in enumerate(c):
-                    tokens = [self._vocab_dict.get(w, self._vocab_dict["UNK"]) for w in tokeniser(r)][0:max]
+                    f = lambda x: x
+                    if self.case_insensitive:
+                        f = lambda x: x.lower()
+                    tokens = [self._vocab_dict.get(f(w), self._vocab_dict["UNK"]) for w in tokeniser(r)][0:max]
                     tokens = tokens + [pad_index] * (max - len(tokens))
                     row.append(tokens)
                 row = torch.Tensor(row).long()
