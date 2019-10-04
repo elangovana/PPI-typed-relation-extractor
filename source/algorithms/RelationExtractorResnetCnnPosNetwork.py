@@ -154,9 +154,7 @@ class RelationExtractorResnetCnnPosNetwork(nn.Module):
 
         self.logger.debug("Running resnet block")
         for m in self.resnet_blocks:
-            fx = m(x)
-            x += fx
-            x = self.activation(x)
+            x = self.activation(x + m(x))
 
         self.logger.debug("Running final block")
         x = self.final_block(x)
