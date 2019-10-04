@@ -76,8 +76,10 @@ class RelationExtractorResnetCnnPosNetwork(nn.Module):
 
             resnetblock = nn.Sequential(
                 nn.Conv1d(cnn_output, cnn_output, kernel_size=cnn_kernel, stride=cnn_stride, padding=cnn_padding),
+                nn.BatchNorm1d(cnn_output),
                 nn.ReLU(),
                 nn.Conv1d(cnn_output, cnn_output, kernel_size=cnn_kernel, stride=cnn_stride, padding=cnn_padding),
+                nn.BatchNorm1d(cnn_output)
             )
 
             self.resnet_blocks.add_module("ResidualBlock_{}".format(k), resnetblock)
@@ -88,6 +90,8 @@ class RelationExtractorResnetCnnPosNetwork(nn.Module):
         self.final_block = nn.Sequential(
             nn.MaxPool1d(kernel_size=pool_kernel, stride=pool_stride,
                          padding=pool_padding)
+            , nn.Dropout(p=dropout_rate_cnn)
+
         )
 
         self.fc = nn.Sequential(nn.Linear(cnn_output * pool_out_length,
