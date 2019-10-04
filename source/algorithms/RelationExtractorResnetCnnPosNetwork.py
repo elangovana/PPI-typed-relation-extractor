@@ -66,10 +66,12 @@ class RelationExtractorResnetCnnPosNetwork(nn.Module):
         pool_out_length = math.ceil(
             (cnn_out_length + 2 * pool_padding - pool_kernel + 1) / pool_stride)
 
-        cnn_out_length = pool_out_length
+        pool_out_length = pool_out_length
+
+        self.pooling_blocks = nn.ModuleList()
         for k in range(1, self.num_layers + 1):
             cnn_out_length = math.ceil(
-                (cnn_out_length + 2 * cnn_padding - cnn_kernel + 1) / cnn_stride)
+                (pool_out_length + 2 * cnn_padding - cnn_kernel + 1) / cnn_stride)
             # twice for 2 layers of CNN
             cnn_out_length = math.ceil(
                 (cnn_out_length + 2 * cnn_padding - cnn_kernel + 1) / cnn_stride)
@@ -84,15 +86,13 @@ class RelationExtractorResnetCnnPosNetwork(nn.Module):
 
             self.resnet_blocks.add_module("ResidualBlock_{}".format(k), resnetblock)
 
-        pool_out_length = math.ceil(
-            (cnn_out_length + 2 * pool_padding - pool_kernel + 1) / pool_stride)
+            poollayer = nn.MaxPool1d(kernel_size=pool_kernel, stride=pool_stride,
+                                     padding=pool_padding)
 
-        self.final_block = nn.Sequential(
-            nn.MaxPool1d(kernel_size=pool_kernel, stride=pool_stride,
-                         padding=pool_padding)
-            , nn.Dropout(p=dropout_rate_cnn)
+            pool_out_length = math.ceil(
+                (cnn_out_length + 2 * pool_padding - pool_kernel + 1) / pool_stride)
 
-        )
+            self.pooling_blocks.add_module("poolinglayer{}".format(k), poollayer)
 
         self.fc = nn.Sequential(nn.Linear(cnn_output * pool_out_length,
                                           fc_layer_size),
@@ -157,11 +157,10 @@ class RelationExtractorResnetCnnPosNetwork(nn.Module):
         x = self.input_block(final_input)
 
         self.logger.debug("Running resnet block")
-        for m in self.resnet_blocks:
+        for _, (m, p) in enumerate(zip(self.resnet_blocks, self.pooling_blocks)):
             x = self.activation(x + m(x))
+            x = p(x)
 
-        self.logger.debug("Running final block")
-        x = self.final_block(x)
 
         self.logger.debug("Running fc")
 
