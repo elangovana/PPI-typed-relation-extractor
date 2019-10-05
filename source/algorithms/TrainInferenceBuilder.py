@@ -89,7 +89,9 @@ class TrainInferenceBuilder:
         model_factory = NetworkFactoryLocator().get_factory(self.network_factory_name)
         model = model_factory.get_network(class_size, self.embedding_dim, np_feature_lens, **self.additional_args)
 
+
         self.logger.info("Using model {}".format(type(model)))
+        self.logger.info("\n{}".format(model))
 
         # Optimiser
         learning_rate = float(self._get_value(self.additional_args, "learningrate", ".01"))
