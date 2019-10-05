@@ -70,9 +70,11 @@ class RelationExtractorSimpleResnetCnnPosNetwork(nn.Module):
             resnetblock = nn.Sequential(
                 nn.Conv1d(cnn_output, cnn_output, kernel_size=cnn_kernel, stride=cnn_stride, padding=cnn_padding),
                 nn.Dropout(p=dropout_rate_cnn),
+                nn.BatchNorm1d(cnn_output),
                 nn.ReLU(),
                 nn.Conv1d(cnn_output, cnn_output, kernel_size=cnn_kernel, stride=cnn_stride, padding=cnn_padding),
-                nn.Dropout(p=dropout_rate_cnn)
+                nn.Dropout(p=dropout_rate_cnn),
+                nn.BatchNorm1d(cnn_output)
             )
 
             self.resnet_blocks.add_module("ResidualBlock_{}".format(k), resnetblock)
