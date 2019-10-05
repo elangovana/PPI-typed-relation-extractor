@@ -6,7 +6,6 @@ import numpy as np
 import torch
 
 from algorithms.RelationExtractorBiLstmNetwork import RelationExtractorBiLstmNetwork
-from algorithms.RelationExtractorCnnPosNetwork import RelationExtractorCnnPosNetwork
 
 
 class TestRelationExtractorBiLstmNetwork(TestCase):

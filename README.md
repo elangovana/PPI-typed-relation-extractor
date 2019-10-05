@@ -149,7 +149,7 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
     
     ```bash
     # Download word to vec trained only on pubmed and pmc and wikipedia
-    wget  -O /data/PubMed-and-PMC-w2v.bin http://evexdb.org/pmresources/vec-space-models/wikipedia-pubmed-and-PMC-w2v.bin
+    wget  -O /data/wikipedia-pubmed-and-PMC-w2v.bin http://evexdb.org/pmresources/vec-space-models/wikipedia-pubmed-and-PMC-w2v.bin
  
     python ./source/dataformatters/main_wordToVecBinToText.py /data/wikipedia-pubmed-and-PMC-w2v.bin /data/wikipedia-pubmed-and-PMC-w2v.bin.txt
     ```
@@ -159,7 +159,7 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
 4. Run train job
     ```bash
     export PYTHONPATH=./source
-    python source/algorithms/main_train.py  --dataset PPIDataset --trainfile sample_train.json --traindir tests/data/ --valfile sample_train.json  --valdir tests/data --embeddingfile sample_PubMed-and-PMC-w2v.bin.txt --embeddingdir ./tests/test_algorithms --embeddim 200 --outdir outdir --modeldir outdir
+    python source/algorithms/main_train.py  --dataset PpiDatasetFactory --trainfile sample_train.json --traindir tests/data/ --valfile sample_train.json  --valdir tests/data --embeddingfile sample_PubMed-and-PMC-w2v.bin.txt --embeddingdir ./tests/test_algorithms --embeddim 200 --outdir outdir --modeldir outdir
     ```
 
 5. Consolidated train + predict
@@ -189,14 +189,14 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
      git log -1 > ${outdir}/run.log
      
      # Train
-     python ./source/algorithms/main_train.py --dataset PPIDataset --trainfile train_unique_pub_v3_lessnegatve.json --traindir /data  --valfile val_unique_pub_v3_lessnegatve.json --valfile /data --embeddingfile wikipedia-pubmed-and-PMC-w2v.bin.txt  --embeddingdir /data --embeddim 200 --outdir ${outdir}  --epochs 50  --log-level INFO >> ${outdir}/run.log 2>&1
+     python ./source/algorithms/main_train.py --dataset PpiDatasetFactory --trainfile train_unique_pub_v3_lessnegatve.json --traindir /data  --valfile val_unique_pub_v3_lessnegatve.json --valfile /data --embeddingfile wikipedia-pubmed-and-PMC-w2v.bin.txt  --embeddingdir /data --embeddim 200 --outdir ${outdir}  --epochs 50  --log-level INFO >> ${outdir}/run.log 2>&1
      
      # Predict on validation set
-     python ./source/algorithms/main_predict.py PPIDataset /data/test_unique_pub_v3_lessnegatve.json ${outdir}  ${outdir} >> ${outdir}/run.log 2>&1
+     python ./source/algorithms/main_predict.py PpiDatasetFactory /data/test_unique_pub_v3_lessnegatve.json ${outdir}  ${outdir} >> ${outdir}/run.log 2>&1
      mv ${outdir}/predicted.json ${outdir}/predicted_test_unique_pub_v3_lessnegatve.json
      
      # Predict on test set
-     python ./source/algorithms/main_predict.py PPIDataset  /data/val_unique_pub_v3_lessnegatve.json ${outdir}  ${outdir} >> ${outdir}/run.log 2>&1
+     python ./source/algorithms/main_predict.py PpiDatasetFactory  /data/val_unique_pub_v3_lessnegatve.json ${outdir}  ${outdir} >> ${outdir}/run.log 2>&1
      mv ${outdir}/predicted.json ${outdir}/predicted_val_unique_pub_v3_lessnegatve.json
     
      #Copy results to s3

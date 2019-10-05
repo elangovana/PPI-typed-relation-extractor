@@ -5,7 +5,7 @@ from unittest import TestCase
 import numpy as np
 import torch
 
-from algorithms.RelationExtractorCnnPosNetwork import RelationExtractorCnnPosNetwork
+from modelnetworks.RelationExtractorCnnPosNetwork import RelationExtractorCnnPosNetwork
 
 
 class TestRelationExtractorCnnPosNetwork(TestCase):

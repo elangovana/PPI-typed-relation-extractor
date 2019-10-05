@@ -7,9 +7,9 @@ from torch.optim import Adam
 from algorithms.DataPipeline import DataPipeline
 from algorithms.LabelPipeline import LabelPipeline
 from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
-from algorithms.RelationExtractorCnnPosNetwork import RelationExtractorCnnPosNetwork
 from algorithms.Train import Train
 from algorithms.TrainInferencePipeline import TrainInferencePipeline
+from algorithms.network_factory_locator import NetworkFactoryLocator
 from algorithms.transform_label_encoder import TransformLabelEncoder
 from algorithms.transform_label_rehaper import TransformLabelReshaper
 from algorithms.transform_sentence_tokeniser import TransformSentenceTokenisor
@@ -19,7 +19,8 @@ from algorithms.transform_text_index import TransformTextToIndex
 class TrainInferenceBuilder:
 
     def __init__(self, dataset, embedding_dim, embedding_handle, model_dir, output_dir, epochs=100, patience_epochs=20,
-                 extra_args=None):
+                 extra_args=None, network_factory_name="RelationExtractorCnnPosNetworkFactory"):
+        self.network_factory_name = network_factory_name
         self.patience_epochs = patience_epochs
         self.model_dir = model_dir
         self.epochs = epochs
@@ -77,13 +78,16 @@ class TrainInferenceBuilder:
         #                                        kernal_size=self.pooling_kernel_size, fc_layer_size=self.fc_layer_size,
         #                                        lstm_dropout=.5)
 
-        dropout_rate_cnn = float(self._get_value(self.additional_args, "dropout_rate_cnn", ".5"))
-        cnn_output = int(self._get_value(self.additional_args, "cnn_output", "100"))
-        fc_drop_out_rate = float(self._get_value(self.additional_args, "fc_drop_out_rate", ".5"))
-        model = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
-                                               feature_lengths=np_feature_lens, cnn_output=cnn_output,
-                                               dropout_rate_cnn=dropout_rate_cnn,
-                                               dropout_rate_fc=fc_drop_out_rate)
+        # dropout_rate_cnn = float(self._get_value(self.additional_args, "dropout_rate_cnn", ".5"))
+        # cnn_output = int(self._get_value(self.additional_args, "cnn_output", "100"))
+        # fc_drop_out_rate = float(self._get_value(self.additional_args, "fc_drop_out_rate", ".5"))
+        # model = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
+        #                                        feature_lengths=np_feature_lens, cnn_output=cnn_output,
+        #                                        dropout_rate_cnn=dropout_rate_cnn,
+        #                                        dropout_rate_fc=fc_drop_out_rate)
+
+        model_factory = NetworkFactoryLocator().get_factory(self.network_factory_name)
+        model = model_factory.get_network(class_size, self.embedding_dim, np_feature_lens, **self.additional_args)
 
         # dropout_rate_cnn = float(self._get_value(self.additional_args, "dropout_rate_cnn", ".5"))
         # pooling_kernel_size = int(self._get_value(self.additional_args, "pooling_kernel_size", "3"))
