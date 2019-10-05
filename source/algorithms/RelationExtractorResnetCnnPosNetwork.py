@@ -51,8 +51,9 @@ class RelationExtractorResnetCnnPosNetwork(nn.Module):
         self._class_size = class_size
         self.activation = nn.ReLU()
 
+        first_cnn_kernel = 1
         self.input_block = nn.Sequential(nn.Dropout(input_dropout_rate),
-                                         nn.Conv1d(total_dim_size, cnn_output, kernel_size=cnn_kernel,
+                                         nn.Conv1d(total_dim_size, cnn_output, kernel_size=first_cnn_kernel,
                                                    stride=cnn_stride,
                                                    padding=cnn_padding),
                                          nn.MaxPool1d(kernel_size=pool_kernel, stride=pool_stride,
@@ -61,7 +62,7 @@ class RelationExtractorResnetCnnPosNetwork(nn.Module):
         self.resnet_blocks = nn.ModuleList()
 
         cnn_out_length = math.ceil(
-            (self.text_column_size + 2 * cnn_padding - cnn_kernel + 1) / cnn_stride)
+            (self.text_column_size + 2 * cnn_padding - first_cnn_kernel + 1) / cnn_stride)
 
         pool_out_length = math.ceil(
             (cnn_out_length + 2 * pool_padding - pool_kernel + 1) / pool_stride)
