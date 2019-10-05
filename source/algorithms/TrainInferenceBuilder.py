@@ -89,25 +89,6 @@ class TrainInferenceBuilder:
         model_factory = NetworkFactoryLocator().get_factory(self.network_factory_name)
         model = model_factory.get_network(class_size, self.embedding_dim, np_feature_lens, **self.additional_args)
 
-        # dropout_rate_cnn = float(self._get_value(self.additional_args, "dropout_rate_cnn", ".5"))
-        # pooling_kernel_size = int(self._get_value(self.additional_args, "pooling_kernel_size", "3"))
-        # pool_stride = int(self._get_value(self.additional_args, "pool_stride", "2"))
-        # cnn_kernel_size = int(self._get_value(self.additional_args, "cnn_kernel_size", "3"))
-        # cnn_num_layers = int(self._get_value(self.additional_args, "cnn_num_layers", "3"))
-        # cnn_output = int(self._get_value(self.additional_args, "cnn_output", "64"))
-        # fc_layer_size = int(self._get_value(self.additional_args, "fc_layer_size", "64"))
-        # fc_drop_out_rate = float(self._get_value(self.additional_args, "fc_drop_out_rate", ".5"))
-        # input_drop_out_rate = float(self._get_value(self.additional_args, "input_drop_out_rate", ".8"))
-        #
-        # model = RelationExtractorResnetCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
-        #                                              feature_lengths=np_feature_lens,
-        #                                              windows_size=cnn_kernel_size, dropout_rate_cnn=dropout_rate_cnn,
-        #                                              cnn_output=cnn_output,
-        #                                              cnn_num_layers=cnn_num_layers,
-        #                                              cnn_stride=1, pool_kernel=pooling_kernel_size,
-        #                                              pool_stride=pool_stride, fc_layer_size=fc_layer_size,
-        #                                              fc_dropout_rate=fc_drop_out_rate,
-        #                                              input_dropout_rate=input_drop_out_rate)
         self.logger.info("Using model {}".format(type(model)))
 
         # Optimiser
