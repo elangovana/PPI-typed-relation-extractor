@@ -96,9 +96,36 @@ Tests case where the entity is not present in the text
         self.assertEqual(actual.shape, expected.shape)
         self.assertSequenceEqual(actual.ravel().tolist(), expected.ravel().tolist())
 
-    def _invoke_sut__call__(self, entity, position_embeddings, tokens_array):
+    def test__call__case_pad_token(self):
+        """
+Tests case where the pad token is passed.
+        """
+        # Arrange
+        max_dist = 2
+        pos_dim = 2
+        max_len = 10
+        pad_token_id = 99
+        position_embeddings = np.random.uniform(0, 1, (max_dist, pos_dim))
+        entity_token_id = 1
+        # Input data such that the last half is just pad token
+        entity_token_len = (max_len // 2)
+        pad_token_len = max_len - entity_token_len
+        tokens_array = [entity_token_id] * entity_token_len + [pad_token_id] * pad_token_len
+
+        # Expected output
+        expected = np.asarray(
+            [position_embeddings[0]] * entity_token_len + [np.zeros((pos_dim,))] * pad_token_len)
+
+        # Act
+        actual = self._invoke_sut__call__(entity_token_id, position_embeddings, tokens_array, pad_token_id=pad_token_id)
+
+        # Assert
+        self.assertEqual(actual.shape, expected.shape)
+        self.assertSequenceEqual(actual.ravel().tolist(), expected.ravel().tolist())
+
+    def _invoke_sut__call__(self, entity, position_embeddings, tokens_array, pad_token_id=None):
         # Initialise sut
-        sut = PositionEmbedder(embeddings=position_embeddings)
+        sut = PositionEmbedder(embeddings=position_embeddings, pad_token_id=pad_token_id)
         # Act
         actual = sut(tokens_array, entity)
         return actual
