@@ -1,13 +1,13 @@
 import logging
 
 import numpy as np
-from algorithms.RelationExtractorResnetCnnPosNetwork import RelationExtractorResnetCnnPosNetwork
 from torch import nn
 from torch.optim import Adam
 
 from algorithms.DataPipeline import DataPipeline
 from algorithms.LabelPipeline import LabelPipeline
 from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
+from algorithms.RelationExtractorCnnPosNetwork import RelationExtractorCnnPosNetwork
 from algorithms.Train import Train
 from algorithms.TrainInferencePipeline import TrainInferencePipeline
 from algorithms.transform_label_encoder import TransformLabelEncoder
@@ -76,30 +76,34 @@ class TrainInferenceBuilder:
         #                                        dropout_rate_fc=self.dropout_rate_fc, num_layers=self.num_layers,
         #                                        kernal_size=self.pooling_kernel_size, fc_layer_size=self.fc_layer_size,
         #                                        lstm_dropout=.5)
-        # model = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
-        #                                        feature_lengths=np_feature_lens, cnn_output=self.cnn_output,
-        #                                        dropout_rate_cnn=self.dropout_rate_cnn,
-        #                                        dropout_rate_fc=self.dropout_rate_fc)
 
         dropout_rate_cnn = float(self._get_value(self.additional_args, "dropout_rate_cnn", ".5"))
-        pooling_kernel_size = int(self._get_value(self.additional_args, "pooling_kernel_size", "3"))
-        pool_stride = int(self._get_value(self.additional_args, "pool_stride", "2"))
-        cnn_kernel_size = int(self._get_value(self.additional_args, "cnn_kernel_size", "3"))
-        cnn_num_layers = int(self._get_value(self.additional_args, "cnn_num_layers", "3"))
-        cnn_output = int(self._get_value(self.additional_args, "cnn_output", "64"))
-        fc_layer_size = int(self._get_value(self.additional_args, "fc_layer_size", "64"))
+        cnn_output = int(self._get_value(self.additional_args, "cnn_output", "100"))
         fc_drop_out_rate = float(self._get_value(self.additional_args, "fc_drop_out_rate", ".5"))
-        input_drop_out_rate = float(self._get_value(self.additional_args, "input_drop_out_rate", ".8"))
+        model = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
+                                               feature_lengths=np_feature_lens, cnn_output=cnn_output,
+                                               dropout_rate_cnn=dropout_rate_cnn,
+                                               dropout_rate_fc=fc_drop_out_rate)
 
-        model = RelationExtractorResnetCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
-                                                     feature_lengths=np_feature_lens,
-                                                     windows_size=cnn_kernel_size, dropout_rate_cnn=dropout_rate_cnn,
-                                                     cnn_output=cnn_output,
-                                                     cnn_num_layers=cnn_num_layers,
-                                                     cnn_stride=1, pool_kernel=pooling_kernel_size,
-                                                     pool_stride=pool_stride, fc_layer_size=fc_layer_size,
-                                                     fc_dropout_rate=fc_drop_out_rate,
-                                                     input_dropout_rate=input_drop_out_rate)
+        # dropout_rate_cnn = float(self._get_value(self.additional_args, "dropout_rate_cnn", ".5"))
+        # pooling_kernel_size = int(self._get_value(self.additional_args, "pooling_kernel_size", "3"))
+        # pool_stride = int(self._get_value(self.additional_args, "pool_stride", "2"))
+        # cnn_kernel_size = int(self._get_value(self.additional_args, "cnn_kernel_size", "3"))
+        # cnn_num_layers = int(self._get_value(self.additional_args, "cnn_num_layers", "3"))
+        # cnn_output = int(self._get_value(self.additional_args, "cnn_output", "64"))
+        # fc_layer_size = int(self._get_value(self.additional_args, "fc_layer_size", "64"))
+        # fc_drop_out_rate = float(self._get_value(self.additional_args, "fc_drop_out_rate", ".5"))
+        # input_drop_out_rate = float(self._get_value(self.additional_args, "input_drop_out_rate", ".8"))
+        #
+        # model = RelationExtractorResnetCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
+        #                                              feature_lengths=np_feature_lens,
+        #                                              windows_size=cnn_kernel_size, dropout_rate_cnn=dropout_rate_cnn,
+        #                                              cnn_output=cnn_output,
+        #                                              cnn_num_layers=cnn_num_layers,
+        #                                              cnn_stride=1, pool_kernel=pooling_kernel_size,
+        #                                              pool_stride=pool_stride, fc_layer_size=fc_layer_size,
+        #                                              fc_dropout_rate=fc_drop_out_rate,
+        #                                              input_dropout_rate=input_drop_out_rate)
         self.logger.info("Using model {}".format(type(model)))
 
         # Optimiser
