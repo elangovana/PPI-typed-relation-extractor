@@ -133,7 +133,7 @@ class RelationExtractorResnetCnnPosNetwork(nn.Module):
         self.logger.debug("Executing embeddings")
         embeddings = self.embeddings(text_transposed)
 
-        merged_pos_embed = embeddings
+        embeddings_with_pos = embeddings
         self.logger.debug("Executing pos embedding")
 
         for f in range(len(feature_tuples)):
@@ -142,17 +142,23 @@ class RelationExtractorResnetCnnPosNetwork(nn.Module):
             entity = feature_tuples[f]  # .transpose(0, 1)
 
             # TODO: avoid this loop, use builtin
-            pos_embedding = []
-            for t, e in zip(text_transposed, entity):
-                pos_embedding.append(self.pos_embedder(t, e[0]))
+            batch_pos_embedding_entity = []
 
-            pos_embedding_tensor = torch.stack(pos_embedding).to(device=merged_pos_embed.device)
+            for i, (t, e, sentence_embedding) in enumerate(zip(text_transposed, entity, embeddings)):
+                sentence_pos_embedding = self.pos_embedder(t, e[0])
 
-            merged_pos_embed = torch.cat([merged_pos_embed, pos_embedding_tensor], dim=2)
+                # Set pos_embedding to zero when pad token ( indicated by zero embedding)
+                sentence_pos_embedding[torch.all(sentence_embedding.eq(0.0), dim=1)] = 0.0
+                batch_pos_embedding_entity.append(sentence_pos_embedding)
+
+            batch_pos_embedding_entity_tensor = torch.stack(batch_pos_embedding_entity).to(
+                device=embeddings_with_pos.device)
+
+            embeddings_with_pos = torch.cat([embeddings_with_pos, batch_pos_embedding_entity_tensor], dim=2)
 
         # Final output
         # Conv1d takes in (batch, channels, seq_len), but raw embedded is (batch, seq_len, channels)
-        final_input = merged_pos_embed.permute(0, 2, 1)
+        final_input = embeddings_with_pos.permute(0, 2, 1)
 
         self.logger.debug("Running input block")
         x = self.input_block(final_input)
