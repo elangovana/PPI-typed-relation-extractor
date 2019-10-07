@@ -1,7 +1,6 @@
 import logging
 
 import numpy as np
-from torch import nn
 
 
 class PretrainedEmbedderLoader:
@@ -63,9 +62,12 @@ sandberger 0.072617 -0.51393 0.4728 -0.52202 -0.35534 0.34629 0.23211 0.23096 0.
                 if word == self.pad_token:
                     embeddings_array[initial_words_index_dict[word]] = np.zeros(embedding_dim, np.int)
                 else:
+                    # Use uniform distribution
                     embeddings_array[initial_words_index_dict[word]] = \
-                        nn.Embedding(1, embedding_dim).weight.detach().numpy().tolist()[
-                            0]
+                    np.random.uniform(low=-0.001, high=0.001, size=(1, embedding_dim)).tolist()[0]
+
+                    # nn.Embedding(1, embedding_dim).weight.detach().numpy().tolist()[
+                    #     0]
 
         self.logger.info("The number of words intialised without embbeder is {}".format(len(words_not_in_embedding)))
         self.logger.debug("The words intialised without embbeder is \n {}".format(words_not_in_embedding))
