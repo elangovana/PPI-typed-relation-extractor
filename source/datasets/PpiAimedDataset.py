@@ -9,11 +9,18 @@ class PpiAimedDataset(CustomDatasetBase):
     Represents the custom PPI Aimed dataset
     """
 
-    def __init__(self, file_path, self_relations_filter=True, transformer=None):
-        self._file_path = file_path
+    def __init__(self, file_path_or_dataframe, self_relations_filter=True, transformer=None):
+        self._file_path = file_path_or_dataframe
         self.transformer = transformer
         # Read json
-        data_df = pd.read_json(self._file_path)
+        if isinstance(file_path_or_dataframe, str):
+            data_df = pd.read_json(self._file_path)
+        elif isinstance(file_path_or_dataframe, pd.DataFrame):
+            data_df = file_path_or_dataframe
+        else:
+            raise ValueError(
+                "The type of argument file_path_or_dataframe  must be a str or pandas dataframe, but is {}".format(
+                    type(file_path_or_dataframe)))
 
         # Filter interaction types if required
         if self_relations_filter:
