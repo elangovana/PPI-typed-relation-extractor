@@ -2,7 +2,6 @@ import logging
 
 import numpy as np
 from torch import nn
-from torch.optim import Adam
 
 from algorithms.DataPipeline import DataPipeline
 from algorithms.LabelPipeline import LabelPipeline
@@ -19,7 +18,7 @@ from algorithms.transform_text_index import TransformTextToIndex
 class TrainInferenceBuilder:
 
     def __init__(self, dataset, embedding_dim, embedding_handle, model_dir, output_dir, epochs=100, patience_epochs=20,
-                 extra_args=None, network_factory_name="RelationExtractorCnnPosNetworkFactory"):
+                 extra_args=None, network_factory_name="RelationExtractorSimpleResnetCnnPosNetworkFactory"):
         self.network_factory_name = network_factory_name
         self.patience_epochs = patience_epochs
         self.model_dir = model_dir
@@ -93,14 +92,7 @@ class TrainInferenceBuilder:
         self.logger.info("Using model {}".format(type(model)))
         self.logger.info("\n{}".format(model))
 
-        # Optimiser
-        learning_rate = float(self._get_value(self.additional_args, "learningrate", ".01"))
 
-        # optimiser = SGD(lr=self.learning_rate, momentum=self.momentum, params=model.parameters())
-        weight_decay = float(self._get_value(self.additional_args, "weight_decay", ".0001"))
-        optimiser = Adam(params=model.parameters(), lr=learning_rate, weight_decay=weight_decay)
-        # optimiser = RMSprop(params=model.parameters(), lr=learning_rate)
-        self.logger.info("Using optimiser {}".format(type(optimiser)))
 
         # Loss function
         loss_function = nn.CrossEntropyLoss()
@@ -109,13 +101,13 @@ class TrainInferenceBuilder:
         # Trainer
         trainer = Train(epochs=self.epochs, early_stopping_patience=self.patience_epochs)
 
-        pipeline = TrainInferencePipeline(model=model, optimiser=optimiser, loss_function=loss_function,
+        pipeline = TrainInferencePipeline(model=model, loss_function=loss_function,
                                           trainer=trainer, train_vocab_extractor=text_to_index,
                                           model_dir=self.model_dir,
                                           embedder_loader=embedder_loader, batch_size=self.batch_size,
                                           embedding_handle=self.embedding_handle, embedding_dim=self.embedding_dim,
                                           label_pipeline=label_pipeline, data_pipeline=data_pipeline,
                                           class_size=class_size, pos_label=self.dataset.positive_label,
-                                          output_dir=self.output_dir)
+                                          output_dir=self.output_dir, additional_args=self.additional_args)
 
         return pipeline

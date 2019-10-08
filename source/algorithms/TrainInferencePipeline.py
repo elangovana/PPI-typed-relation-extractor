@@ -4,6 +4,7 @@ import os
 import pickle
 
 import torch
+from torch.optim import Adam
 from torch.utils.data import DataLoader
 
 from algorithms.Collator import Collator
@@ -12,10 +13,11 @@ from algorithms.Predictor import Predictor
 
 class TrainInferencePipeline:
 
-    def __init__(self, model, optimiser, loss_function, trainer, train_vocab_extractor, embedder_loader,
+    def __init__(self, model, loss_function, trainer, train_vocab_extractor, embedder_loader,
                  embedding_handle, embedding_dim: int,
                  label_pipeline, data_pipeline, class_size: int, pos_label, model_dir, output_dir, ngram: int = 3,
-                 min_vocab_frequency=3, class_weights_dict=None, num_workers=None, batch_size=32):
+                 min_vocab_frequency=3, class_weights_dict=None, num_workers=None, batch_size=32, additional_args=None):
+        self.additional_args = additional_args or {}
         self.model_dir = model_dir
         self.batch_size = batch_size
         self.num_workers = num_workers
@@ -27,7 +29,6 @@ class TrainInferencePipeline:
         self.embedding_handle = embedding_handle
         self.embedder_loader = embedder_loader
         self.loss_function = loss_function
-        self.optimiser = optimiser
         self.model = model
         self.data_pipeline = data_pipeline
         self.label_pipeline = label_pipeline
@@ -43,6 +44,11 @@ class TrainInferencePipeline:
     @property
     def logger(self):
         return logging.getLogger(__name__)
+
+    def _get_value(self, kwargs, key, default):
+        value = kwargs.get(key, default)
+        self.logger.info("Retrieving key {} with default {}, found {}".format(key, default, value))
+        return value
 
     def __call__(self, train, validation):
         self.logger.info("Train set has {} records, val has {}".format(len(train), len(validation)))
@@ -65,6 +71,15 @@ class TrainInferencePipeline:
 
         tensor_embeddings = torch.nn.Embedding.from_pretrained(torch.FloatTensor(embedding_array))
         self.model.set_embeddings(tensor_embeddings)
+
+        # Optimiser
+        learning_rate = float(self._get_value(self.additional_args, "learningrate", ".01"))
+
+        # optimiser = SGD(lr=self.learning_rate, momentum=self.momentum, params=model.parameters())
+        weight_decay = float(self._get_value(self.additional_args, "weight_decay", ".0001"))
+        optimiser = Adam(params=self.model.parameters(), lr=learning_rate, weight_decay=weight_decay)
+        # optimiser = RMSprop(params=model.parameters(), lr=learning_rate)
+        self.logger.info("Using optimiser {}".format(type(optimiser)))
         # Set weights
         # if self.class_weights_dict is not None:
         #     self._class_weights = [1] * len(classes)
@@ -88,7 +103,7 @@ class TrainInferencePipeline:
         (val_results, val_actuals, val_predicted) = self.trainer(transformed_train_x, transformed_val_x,
 
                                                                  self.model, self.loss_function,
-                                                                 self.optimiser, self.model_dir,
+                                                                 optimiser, self.model_dir,
                                                                  self.output_dir, pos_label=encoded_pos_label)
 
         # Reformat results so that the labels are back into their original form, rather than numbers
