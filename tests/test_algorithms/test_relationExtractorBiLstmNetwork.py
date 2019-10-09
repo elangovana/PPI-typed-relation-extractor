@@ -5,7 +5,7 @@ from unittest import TestCase
 import numpy as np
 import torch
 
-from algorithms.RelationExtractorBiLstmNetwork import RelationExtractorBiLstmNetwork
+from modelnetworks.RelationExtractorBiLstmNetwork import RelationExtractorBiLstmNetwork
 
 
 class TestRelationExtractorBiLstmNetwork(TestCase):

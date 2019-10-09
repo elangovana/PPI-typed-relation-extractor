@@ -1,9 +1,7 @@
 import logging
-import math
 
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 
 from algorithms.PositionEmbedder import PositionEmbedder
 
@@ -17,7 +15,7 @@ class RelationExtractorBiLstmNetwork(nn.Module):
         self.embed_vocab_size = embed_vocab_size
         self.feature_lengths = feature_lengths
         if seed is None:
-            seed = torch.initial_seed() & ((1<<63)-1)
+            seed = torch.initial_seed() & ((1 << 63) - 1)
         self.logger.info("Using seed {}".format(seed))
         torch.manual_seed(seed)
 
@@ -103,7 +101,8 @@ class RelationExtractorBiLstmNetwork(nn.Module):
         self.logger.debug("Executing embeddings")
         embeddings = self.embeddings(text_transposed)
 
-        merged_pos_embed = embeddings
+        # TODO: avoid this loop, use builtin
+        embeddings_with_pos = embeddings
         self.logger.debug("Executing pos embedding")
 
         for f in range(len(feature_tuples)):
@@ -112,20 +111,25 @@ class RelationExtractorBiLstmNetwork(nn.Module):
             entity = feature_tuples[f]  # .transpose(0, 1)
 
             # TODO: avoid this loop, use builtin
-            pos_embedding = []
-            for t, e in zip(text_transposed, entity):
-                pos_embedding.append(self.pos_embedder(t, e[0]))
+            batch_pos_embedding_entity = []
 
-            pos_embedding_tensor = torch.stack(pos_embedding).to(device=merged_pos_embed.device)
+            for i, (t, e, sentence_embedding) in enumerate(zip(text_transposed, entity, embeddings)):
+                sentence_pos_embedding = self.pos_embedder(t, e[0])
 
-            merged_pos_embed = torch.cat([merged_pos_embed, pos_embedding_tensor], dim=2)
+                # Set pos_embedding to zero when pad token ( indicated by zero embedding)
+                sentence_pos_embedding[torch.all(sentence_embedding.eq(0.0), dim=1)] = 0.0
+                batch_pos_embedding_entity.append(sentence_pos_embedding)
 
+            batch_pos_embedding_entity_tensor = torch.stack(batch_pos_embedding_entity).to(
+                device=embeddings_with_pos.device)
+
+            embeddings_with_pos = torch.cat([embeddings_with_pos, batch_pos_embedding_entity_tensor], dim=2)
         # Final output
         # reshape takes in (batch, channels, seq_len), but raw embedded is (batch, seq_len, channels)
         # final_input = merged_pos_embed.permute(0, 2, 1)
 
         self.logger.debug("Running through layers")
-        outputs, (_, _) = self.lstm(merged_pos_embed)
+        outputs, (_, _) = self.lstm(embeddings_with_pos)
 
         outputs = outputs.permute(0, 2, 1)
 
