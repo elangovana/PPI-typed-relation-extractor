@@ -17,5 +17,5 @@ class RawDistanceEmbedder(BaseDistanceEmbedder):
         return logging.getLogger(__name__)
 
     def __call__(self):
-        position_enc = torch.tensor([[i for i in range(self.max_pos + 1)]])
+        position_enc = torch.tensor([[i for i in range(self.max_pos + 1)]]).float()
         return position_enc
