@@ -2,18 +2,17 @@ import logging
 
 import numpy as np
 
-from algorithms.SinusoidalDistanceEmbedder import SinusoidalDistanceEmbedder
-
-"""
-Embeds position vectors  with the distance to the nearest entity
-"""
+from algorithms.RawDistanceEmbedder import RawDistanceEmbedder
 
 
 class PositionEmbedder():
+    """
+    Embeds position vectors  with the distance to the nearest entity
+    """
 
     def __init__(self, embeddings=None, pad_token_id=None):
         self.pad_token_id = pad_token_id
-        self.embeddings = embeddings if embeddings is not None else SinusoidalDistanceEmbedder()()
+        self.embeddings = embeddings if embeddings is not None else RawDistanceEmbedder()()
 
     def logger(self):
         return logging.getLogger(__name__)
