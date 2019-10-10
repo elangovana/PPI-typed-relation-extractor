@@ -130,16 +130,3 @@ Tests case where the pad token is passed.
         actual = sut(tokens_array, entity)
         return actual
 
-    def test__init_default_embedder(self):
-        """
-        Test the default initialiser
-        """
-        # Arrange
-        pos_range = [0, 1, 2, 4, 6, 8]
-        pos_dim = 2
-
-        # Act
-        sut = PositionEmbedder(pos_dim=pos_dim, pos_range=pos_range)
-
-        # Assert
-        self.assertEqual(sut.embeddings.shape, (len(pos_range), pos_dim))

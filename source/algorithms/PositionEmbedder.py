@@ -1,29 +1,19 @@
 import logging
 
 import numpy as np
-import torch
+
+from algorithms.SinusoidalDistanceEmbedder import SinusoidalDistanceEmbedder
 
 """
 Embeds position vectors  with the distance to the nearest entity
 """
 
 
-class PositionEmbedder:
+class PositionEmbedder():
 
-    def __init__(self, embeddings=None, pos_dim=3, pos_range=None, pad_token_id=None):
+    def __init__(self, embeddings=None, pad_token_id=None):
         self.pad_token_id = pad_token_id
-        pos_range = pos_range if pos_range is not None else range(0, 10)
-        self.embeddings = embeddings if embeddings is not None else self.get_embedder(pos_dim, pos_range)
-
-    def get_embedder(self, d_pos_vec, pos_range):
-        # keep dim 0 for padding token position encoding zero vector
-        position_enc = np.array([
-            [pos / np.power(10000, 2 * i / d_pos_vec) for i in range(d_pos_vec)]
-            if pos != 0 else np.zeros(d_pos_vec) for pos in pos_range])
-
-        position_enc[1:, 0::2] = np.sin(position_enc[1:, 0::2])  # dim 2i
-        position_enc[1:, 1::2] = np.cos(position_enc[1:, 1::2])  # dim 2i+1
-        return torch.from_numpy(position_enc).type(torch.FloatTensor)
+        self.embeddings = embeddings if embeddings is not None else SinusoidalDistanceEmbedder()()
 
     def logger(self):
         return logging.getLogger(__name__)
