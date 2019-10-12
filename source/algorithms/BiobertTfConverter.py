@@ -5,7 +5,9 @@ from pytorch_pretrained_bert.convert_tf_checkpoint_to_pytorch import convert_tf_
 
 
 class BioBertConverter:
-
+    """
+    Wrapper around pytorch_pretrained_bert.convert_tf_checkpoint_to_pytorch  to convert Pytorch pretrained bert to pytorch
+    """
     def __call__(self, base_dir, output_dir):
         convert_tf_checkpoint_to_pytorch(
             os.path.join(base_dir, 'model.ckpt-1000000'),
