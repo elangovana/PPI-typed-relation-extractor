@@ -12,14 +12,22 @@ class BioBertConverter:
 
     def __call__(self, base_dir, output_dir):
         config_file = os.path.join(base_dir, 'bert_config.json')
+        vocab_file = os.path.join(base_dir, 'vocab.txt')
+
         config_file_dest = os.path.join(output_dir, 'bert_config.json')
+        vocab_file_dest = os.path.join(output_dir, 'vocab.txt')
+
         # Convert
         convert_tf_checkpoint_to_pytorch(
             os.path.join(base_dir, 'model.ckpt-1000000'),
             config_file,
             os.path.join(output_dir, 'pytorch_model.bin'))
+
         # copy config file
         copyfile(config_file, config_file_dest)
+
+        # copy vocab file
+        copyfile(vocab_file, vocab_file_dest)
 
 
 if "__main__" == __name__:
