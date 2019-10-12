@@ -1,6 +1,7 @@
 class DataPipeline:
 
-    def __init__(self, text_to_index, preprocess_steps=None):
+    def __init__(self, text_to_index, preprocess_steps=None, processing_steps=None):
+        self.processing_steps = processing_steps
         self.text_to_index = text_to_index
         self.preprocess_steps = preprocess_steps or []
 
@@ -20,7 +21,8 @@ class DataPipeline:
     def fit(self, dataloader):
 
         # set up pipeline
-        self.feature_pipeline = self.preprocess_steps + [("text_to_index", self.text_to_index)]
+        self.feature_pipeline = self.processing_steps or (
+                self.preprocess_steps + [("text_to_index", self.text_to_index)])
 
         # load count vectoriser after loading pretrained vocab
         for name, p in self.feature_pipeline:
