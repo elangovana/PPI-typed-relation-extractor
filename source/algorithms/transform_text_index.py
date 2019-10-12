@@ -26,7 +26,18 @@ class TransformTextToIndex:
         return logging.getLogger(__name__)
 
     def construct_vocab_dict(self, data_loader):
-        return self._get_vocab_dict(data_loader, self.special_words, case_insensitive=self.case_insensitive)
+        #  return self._get_vocab_dict(data_loader, self.special_words, case_insensitive=self.case_insensitive)
+        tokens = [self.pad_token(), self.eos_token(), "PROTEIN1", "PROTEIN2", "PROTEIN_1",
+                  "PROTEIN_2", self.UNK_token()]
+
+        key_func = lambda x: x
+
+        if self.case_insensitive:
+            key_func = lambda x: x.lower()
+
+        tokens_dict = {key_func(k): i for i, k in enumerate(tokens)}
+
+        return tokens_dict
 
     @staticmethod
     def pad_token():
@@ -35,6 +46,10 @@ class TransformTextToIndex:
     @staticmethod
     def eos_token():
         return "<EOS>"
+
+    @staticmethod
+    def UNK_token():
+        return "<UNK>"
 
     @property
     def vocab_dict(self):
@@ -61,7 +76,8 @@ class TransformTextToIndex:
 
         vocab_index[TransformTextToIndex.pad_token()] = vocab_index.get(TransformTextToIndex.pad_token(),
                                                                         len(vocab_index))
-        vocab_index["UNK"] = vocab_index.get("UNK", len(vocab_index))
+        vocab_index[TransformTextToIndex.UNK_token()] = vocab_index.get(TransformTextToIndex.UNK_token(),
+                                                                        len(vocab_index))
         vocab_index[TransformTextToIndex.eos_token()] = vocab_index.get(TransformTextToIndex.eos_token(),
                                                                         len(vocab_index))
         for w in set(special_words):
@@ -71,8 +87,13 @@ class TransformTextToIndex:
 
     def transform(self, x):
         self.logger.info("Transforming TransformTextToIndex")
+        f = lambda x: x
+        if self.case_insensitive:
+            f = lambda x: x.lower()
+
+
         tokeniser = CountVectorizer().build_tokenizer()
-        pad_index = self._vocab_dict[self.pad_token()]
+        pad_index = self._vocab_dict[f(self.pad_token())]
 
         batches = []
         for idx, b in enumerate(x):
@@ -83,10 +104,8 @@ class TransformTextToIndex:
                 row = []
                 max = self.max_feature_lens[c_index]
                 for _, r in enumerate(c):
-                    f = lambda x: x
-                    if self.case_insensitive:
-                        f = lambda x: x.lower()
-                    tokens = [self._vocab_dict.get(f(w), self._vocab_dict["UNK"]) for w in tokeniser(r)][0:max]
+                    tokens = [self._vocab_dict.get(f(w), self._vocab_dict[f(TransformTextToIndex.UNK_token())]) for w in
+                              tokeniser(r)][0:max]
                     tokens = tokens + [pad_index] * (max - len(tokens))
                     row.append(tokens)
                 row = torch.Tensor(row).long()
