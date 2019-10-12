@@ -87,7 +87,7 @@ class TestPretrainedEmbedderLoader(TestCase):
 
     def test___call__padembedding(self):
         """
-        Test with new words not in embedding
+        Test with pad character embedding is zero
         :return:
         """
         embed_dim = 3
@@ -101,10 +101,6 @@ class TestPretrainedEmbedderLoader(TestCase):
         pad = "[#$%]"
         # Additional dictionary pad
         existing_word_dict = {pad: 0}
-
-        embed_words_size = len(embeddings_list) - 1
-        # One new word in the existing word dictionary
-        total_words = embed_words_size + 1
 
         sut = PretrainedEmbedderLoader(pad)
 
