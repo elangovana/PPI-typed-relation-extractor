@@ -31,6 +31,7 @@ class TransformBertTextTokenToIndex:
     @vocab_dict.setter
     def vocab_dict(self, vocab_index):
         self.logger.warning("Vocab will not be updated...")
+        raise NotImplementedError
 
     def fit(self, data_loader):
         # Do Nothing
