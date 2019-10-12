@@ -253,3 +253,14 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
     python ./source/algorithms/collobert_embedding_formatter.py  --vocabfile vocab.txt --embedfile words.txt --outputfile words_vocab_collabert.txt
     ```
  
+ 
+## Pretrained biobert
+
+1. Download pretrained biobert from https://github.com/naver/biobert-pretrained/releases, specifically https://github.com/naver/biobert-pretrained/releases/download/v1.1-pubmed/biobert_v1.1_pubmed.tar.gz
+
+   
+2. Convert the tf model to a pytorch model
+   
+    ```bash
+    python ./source/algorithms/BiobertTfConverter.py  --modeldir "<modeldir>" --outputdir "<outputdir>"
+    ```
