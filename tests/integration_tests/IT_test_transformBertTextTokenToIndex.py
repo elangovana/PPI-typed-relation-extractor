@@ -8,7 +8,7 @@ from algorithms.transform_berttext_token_to_index import TransformBertTextTokenT
 
 class ITTransformBertTextTokenToIndex(TestCase):
 
-    def test___init__(self):
+    def test__call__(self):
         base_model_dir = os.path.join(os.path.dirname(__file__), "..", "temp", "biobert")
 
         assert len(os.listdir(
@@ -16,9 +16,9 @@ class ITTransformBertTextTokenToIndex(TestCase):
             base_model_dir)
 
         # Arrange
-        max_feature_lens = [30, 5, 5]
+        text_index = 0
         case_insensitive = False
-        sut = TransformBertTextTokenToIndex(base_model_dir, case_insensitive)
+        sut = TransformBertTextTokenToIndex(base_model_dir, case_insensitive, text_col_index=text_index)
 
         input = [
             # batch
@@ -63,7 +63,7 @@ class ITTransformBertTextTokenToIndex(TestCase):
         # Entire n of batches
         self.assertEqual(len(actual[0]), len(input[0]))
         # Size of columns
-        self.assertEqual(len(actual[0][0]), len(input[0][0]))
+        self.assertEqual(len(actual[0][0]), 1)
         # Tensor of columns
-        self.assertEqual(len(actual[0][0][0]), len(input[0][0][0]))
-        self.assertIsInstance(actual[0][0][0], torch.Tensor)
+        self.assertEqual(len(actual[0][0][text_index]), len(input[0][0][text_index]))
+        self.assertIsInstance(actual[0][0][text_index], torch.Tensor)

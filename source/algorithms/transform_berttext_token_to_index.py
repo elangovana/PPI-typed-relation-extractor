@@ -9,7 +9,8 @@ class TransformBertTextTokenToIndex:
     Transform token to index
     """
 
-    def __init__(self, bert_model_dir, case_insensitive=False):
+    def __init__(self, bert_model_dir, case_insensitive=False, text_col_index=0):
+        self.text_col_index = text_col_index
         self.case_insensitive = case_insensitive
 
         self.tokeniser = BertTokenizer.from_pretrained(bert_model_dir, do_lower_case=case_insensitive)
@@ -45,7 +46,10 @@ class TransformBertTextTokenToIndex:
             b_y = b[1]
             col = []
             for c_index, c in enumerate(b_x):
+                if c_index != self.text_col_index: continue
+
                 row = []
+
                 for _, r in enumerate(c):
                     tokens = id_converter(r)
                     row.append(tokens)
