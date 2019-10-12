@@ -54,16 +54,28 @@ class ITTransformBertTextTokenToIndex(TestCase):
             ]  # end of batch
         ]
 
+        expected = [
+            # batch
+            [
+                # x
+                torch.tensor([[1188, 1110, 170, 4520, 11629, 14697, 27514, 2249, 1475, 119,
+                               11629, 14697, 27514, 2249, 1475, 185, 23414, 13252, 22948, 3052,
+                               11629, 14697, 27514, 2249, 1477, 0, 0, 0, 0, 0]])
+                ,
+                ['Yes']
+            ]  # end of batch
+        ]
+
         # Act
         actual = sut.fit_transform(input)
 
         # Assert
-        # Entire len
-        self.assertEqual(len(actual), len(input))
         # Entire n of batches
-        self.assertEqual(len(actual[0]), len(input[0]))
-        # Size of columns
-        self.assertEqual(len(actual[0][0]), 1)
-        # Tensor of columns
-        self.assertEqual(len(actual[0][0][text_index]), len(input[0][0][text_index]))
-        self.assertIsInstance(actual[0][0][text_index], torch.Tensor)
+        self.assertEqual(len(actual), len(expected), "Number of batches do not match ")
+        # Entire n of batches
+        for (b_a_x, b_a_y), (b_e_x, b_e_y) in zip(actual, expected):
+            self.assertIsInstance(b_a_x, torch.Tensor)
+
+            # Tensor of columns
+            self.assertSequenceEqual(b_a_x.shape, b_e_x.shape, "The tensor shape of actual and expected do not match")
+            self.assertSequenceEqual(b_a_y, b_e_y, "The sequence of y  actual and expected do not match")

@@ -44,19 +44,16 @@ class TransformBertTextTokenToIndex:
         for idx, b in enumerate(x):
             b_x = b[0]
             b_y = b[1]
-            col = []
-            for c_index, c in enumerate(b_x):
-                if c_index != self.text_col_index: continue
 
-                row = []
-
-                for _, r in enumerate(c):
-                    tokens = id_converter(r)
-                    row.append(tokens)
-                row = torch.Tensor(row).long()
-                col.append(row)
+            text_col = b_x[self.text_col_index]
+            rows = []
+            for _, r in enumerate(text_col):
+                tokens = id_converter(r)
+                rows.append(tokens)
+            col = torch.Tensor(rows).long()
 
             batches.append([col, b_y])
+
         self.logger.info("Completed TransformBertTextTokenToIndex")
         return batches
 
