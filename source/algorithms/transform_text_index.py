@@ -11,7 +11,8 @@ Extracts vocab from data frame columns which have already been tokenised into wo
 class TransformTextToIndex:
 
     def __init__(self, max_feature_lens, min_vocab_frequency=2, case_insensitive=True, vocab_dict=None,
-                 special_words=None):
+                 special_words=None, use_training_data=False):
+        self.use_data = use_training_data
         self.case_insensitive = case_insensitive
         self.special_words = special_words or []
         self._vocab_dict = vocab_dict or {}
@@ -26,17 +27,18 @@ class TransformTextToIndex:
         return logging.getLogger(__name__)
 
     def construct_vocab_dict(self, data_loader):
-        #  return self._get_vocab_dict(data_loader, self.special_words, case_insensitive=self.case_insensitive)
+        if self.use_data:
+            return self._get_vocab_dict(data_loader, self.special_words, case_insensitive=self.case_insensitive)
+        else:
+            return self.get_specialwords_dict()
+
+    def get_specialwords_dict(self):
         tokens = [self.pad_token(), self.eos_token(), "PROTEIN1", "PROTEIN2", "PROTEIN_1",
                   "PROTEIN_2", self.UNK_token()]
-
         key_func = lambda x: x
-
         if self.case_insensitive:
             key_func = lambda x: x.lower()
-
         tokens_dict = {key_func(k): i for i, k in enumerate(tokens)}
-
         return tokens_dict
 
     @staticmethod
@@ -66,6 +68,10 @@ class TransformTextToIndex:
     @staticmethod
     def _get_vocab_dict(data_loader, special_words, case_insensitive):
         count_vectoriser = CountVectorizer(lowercase=case_insensitive)
+        f = lambda x: x
+        if case_insensitive:
+            f = lambda x: x.lower()
+
         for idx, b in enumerate(data_loader):
             b_x = b[0]
 
@@ -74,14 +80,14 @@ class TransformTextToIndex:
 
         vocab_index = count_vectoriser.vocabulary_
 
-        vocab_index[TransformTextToIndex.pad_token()] = vocab_index.get(TransformTextToIndex.pad_token(),
-                                                                        len(vocab_index))
-        vocab_index[TransformTextToIndex.UNK_token()] = vocab_index.get(TransformTextToIndex.UNK_token(),
-                                                                        len(vocab_index))
-        vocab_index[TransformTextToIndex.eos_token()] = vocab_index.get(TransformTextToIndex.eos_token(),
-                                                                        len(vocab_index))
+        vocab_index[f(TransformTextToIndex.pad_token())] = vocab_index.get(f(TransformTextToIndex.pad_token()),
+                                                                           len(vocab_index))
+        vocab_index[f(TransformTextToIndex.UNK_token())] = vocab_index.get(f(TransformTextToIndex.UNK_token()),
+                                                                           len(vocab_index))
+        vocab_index[(TransformTextToIndex.eos_token())] = vocab_index.get(f(TransformTextToIndex.eos_token()),
+                                                                          len(vocab_index))
         for w in set(special_words):
-            vocab_index[w] = vocab_index.get(w, len(vocab_index))
+            vocab_index[f(w)] = vocab_index.get(f(w), len(vocab_index))
 
         return vocab_index
 
@@ -90,7 +96,6 @@ class TransformTextToIndex:
         f = lambda x: x
         if self.case_insensitive:
             f = lambda x: x.lower()
-
 
         tokeniser = CountVectorizer().build_tokenizer()
         pad_index = self._vocab_dict[f(self.pad_token())]
