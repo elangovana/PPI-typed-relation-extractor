@@ -9,7 +9,7 @@ class PpiNoInteractionDatasetFactory(CustomDatasetFactoryBase):
     def get_dataset(self, file_path):
         dataset = PpiNoInteractionDataset(file_path=file_path, interaction_type=None)
 
-        mask = ProteinMasker(entity_column_indices=dataset.entity_column_indices, masks=["PROTEIN_1", "PROTEIN_2"],
+        mask = ProteinMasker(entity_column_indices=dataset.entity_column_indices, masks=["PROTEIN1", "PROTEIN2"],
                              text_column_index=dataset.text_column_index)
 
         transformer = Preprocessor([mask])
