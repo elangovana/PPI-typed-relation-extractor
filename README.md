@@ -262,5 +262,14 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
 2. Convert the tf model to a pytorch model
    
     ```bash
+    PYTHONPATH=./source
     python ./source/algorithms/BiobertTfConverter.py  --modeldir "<modeldir>" --outputdir "<outputdir>"
+    ```
+    
+3. Train
+
+    ```bash
+    export PYTHONPATH=./source
+    python ./source/algorithms/main_train_bert.py --dataset PpiAimedDatasetFactory --trainfile Aimedsample.json --traindir tests/data/ --valfile Aimedsample.json --valdir tests/data --pretrained_biobert_dir <biobertdir>
+""
     ```

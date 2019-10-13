@@ -16,7 +16,7 @@ class RelationExtractorBioBertFactory(NetworkFactoryBase):
         return value
 
     def get_network(self, class_size, embedding_dim, feature_lens, **kwargs):
-        model_dir = self._get_value(kwargs, "biobert_model_dir", None)
+        model_dir = self._get_value(kwargs, "pretrained_biobert_dir", None)
 
         assert model_dir is not None, "The model directory is mandatory and must contain the pretrained Biobert artifacts"
 

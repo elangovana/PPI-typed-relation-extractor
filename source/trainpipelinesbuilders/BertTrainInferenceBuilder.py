@@ -44,7 +44,7 @@ class BertTrainInferenceBuilder:
         # 512 is the size of pretrained bio bert
         max_feature_lens = [min(l * 7, 512) for l in self.dataset.feature_lens]
         case_insensitive = False
-        base_model_dir = self._get_value(self.additional_args, "biobert_model_dir", None)
+        base_model_dir = self._get_value(self.additional_args, "pretrained_biobert_dir", None)
         assert base_model_dir is not None, "The value for base_model_dir must be passed and must be a valid dir with biobert artifacts"
         text_to_token = TransformBertTextTokenise(base_model_dir, max_feature_lens, case_insensitive)
 
