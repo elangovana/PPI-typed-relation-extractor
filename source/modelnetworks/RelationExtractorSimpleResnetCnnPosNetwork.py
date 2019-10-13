@@ -6,7 +6,13 @@ import torch.nn as nn
 
 
 class RelationExtractorSimpleResnetCnnPosNetwork(nn.Module):
+    """
+     Attempt to  implement this papaer
 
+     H. Zhang et al., "Deep Residual Convolutional Neural Network for Protein-Protein Interaction Extraction," in IEEE Access, vol. 7, pp. 89354-89365, 2019.
+    doi: 10.1109/ACCESS.2019.2927253
+
+    """
     def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0,
                  windows_size=3, dropout_rate_cnn=.5, cnn_output=64, cnn_num_layers=3, cnn_stride=1, pool_kernel=3,
                  pool_stride=2, fc_layer_size=256, fc_dropout_rate=.5, input_dropout_rate=.2, seed=777):
