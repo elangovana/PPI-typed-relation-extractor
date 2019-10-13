@@ -2,9 +2,8 @@ import os
 import tempfile
 from unittest import TestCase
 
-from trainpipelines.BertTrainInferenceBuilder import BertTrainInferenceBuilder
-
 from algorithms.dataset_factory import DatasetFactory
+from trainpipelinesbuilders.BertTrainInferenceBuilder import BertTrainInferenceBuilder
 
 
 class ITTestBertTrainInferencePipeline(TestCase):
