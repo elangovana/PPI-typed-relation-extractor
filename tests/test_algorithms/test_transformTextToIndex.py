@@ -58,7 +58,7 @@ class TestTransformTextToIndex(TestCase):
 
         mock_dataset.__getitem__.side_effect = lambda i: (mock_dataset.data[i][0], mock_dataset.data[i][1])
 
-        sut = TransformTextToIndex(max_feature_lens, vocab_dict=initial_vocab_dict)
+        sut = TransformTextToIndex(max_feature_lens, vocab_dict=initial_vocab_dict, use_training_data=True)
 
         data_loader = DataLoader(mock_dataset, batch_size=2)
 
