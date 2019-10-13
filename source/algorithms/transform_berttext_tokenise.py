@@ -57,8 +57,8 @@ class TransformBertTextTokenise:
                 row = []
                 max = self.max_feature_lens[c_index]
                 for _, r in enumerate(c):
-                    tokens = tokeniser(r)[0:max]
-                    tokens = tokens + [pad] * (max - len(tokens))
+                    tokens = tokeniser(r)[0:max - 2]
+                    tokens = ['[CLS]'] + tokens + [pad] * (max - 2 - len(tokens)) + ['[SEP]']
                     row.append(tokens)
                 col.append(row)
 

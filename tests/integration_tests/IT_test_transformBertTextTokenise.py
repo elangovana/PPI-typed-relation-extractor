@@ -14,7 +14,7 @@ class ITTransformBertTextTokenise(TestCase):
             base_model_dir)
 
         # Arrange
-        max_feature_lens = [30, 5, 5]
+        max_feature_lens = [30, 7, 7]
         case_insensitive = False
         sut = TransformBertTextTokenise(base_model_dir, max_feature_lens, case_insensitive)
 
@@ -56,18 +56,19 @@ class ITTransformBertTextTokenise(TestCase):
                     # 3 columns
                     [
 
-                        ['This', 'is', 'a', 'map', 'PR', '##OT', '##EI', '##N', '##1', '.', 'PR', '##OT', '##EI',
+                        ["[CLS]", 'This', 'is', 'a', 'map', 'PR', '##OT', '##EI', '##N', '##1', '.', 'PR', '##OT',
+                         '##EI',
                          '##N', '##1', 'p', '##hop', '##hor', '##yla', '##tes', 'PR', '##OT', '##EI', '##N', '##2',
-                         "[PAD]", "[PAD]", "[PAD]", "[PAD]", "[PAD]"]
+                         "[PAD]", "[PAD]", "[PAD]", "[SEP]"]
 
                     ]
                     ,
                     [
-                        ['PR', '##OT', '##EI', '##N', '##1']
+                        ["[CLS]", 'PR', '##OT', '##EI', '##N', '##1', "[SEP]"]
                     ]
                     ,
                     [
-                        ['PR', '##OT', '##EI', '##N', '##2']
+                        ["[CLS]", 'PR', '##OT', '##EI', '##N', '##2', "[SEP]"]
                     ]
 
                 ]  # end of x
@@ -83,6 +84,9 @@ class ITTransformBertTextTokenise(TestCase):
 
         # Act
         actual = sut.fit_transform(input)
+        print(actual)
+        print(expected)
+
 
         # Assert
         self.assertSequenceEqual(expected, actual)
