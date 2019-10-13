@@ -91,7 +91,7 @@ class BertTrain:
 
             for idx, batch in enumerate(data_iter):
                 self.logger.debug("Running batch {}".format(idx))
-                batch_x = batch[0]
+                batch_x = batch[0].to(device=self.device)
                 batch_y = batch[1].to(device=self.device)
                 # batch_x = torch.Tensor(batch_x)
                 iterations += 1
@@ -191,7 +191,7 @@ class BertTrain:
             actuals = torch.tensor([]).to(device=self.device)
             predicted = torch.tensor([]).to(device=self.device)
             for idx, val in enumerate(val_iter):
-                val_batch_idx = val[0]
+                val_batch_idx = val[0].to(device=self.device)
                 val_y = val[1].to(device=self.device)
                 pred_batch_y = model_network(val_batch_idx)
                 scores.append([pred_batch_y])
