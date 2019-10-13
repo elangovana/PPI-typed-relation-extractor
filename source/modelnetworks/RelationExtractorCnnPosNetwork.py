@@ -101,10 +101,14 @@ class RelationExtractorCnnPosNetwork(nn.Module):
         if self.__embeddings is None:
             assert self.embed_vocab_size > 0, "Please set the vocab size for using random embeddings "
             self.__embeddings = nn.Embedding(self.embed_vocab_size, self.embedding_dim)
+            self.__embeddings.weight.requires_grad = True
+
         return self.__embeddings
 
     def set_embeddings(self, value):
         self.__embeddings = value
+        if self.__embeddings is not None:
+            self.__embeddings.weight.requires_grad = True
 
     @property
     def logger(self):
