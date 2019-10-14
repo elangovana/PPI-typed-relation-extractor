@@ -28,9 +28,13 @@ class TransformTextToIndex:
 
     def construct_vocab_dict(self, data_loader):
         if self.use_dataset_vocab:
-            return self._get_vocab_dict(data_loader, self.special_words, case_insensitive=self.case_insensitive)
+            vocab = self._get_vocab_dict(data_loader, self.special_words, case_insensitive=self.case_insensitive)
         else:
-            return self.get_specialwords_dict()
+            vocab = self.get_specialwords_dict()
+
+        self.logger.info("Constructed vocab of size {}".format(len(vocab)))
+
+        return vocab
 
     def get_specialwords_dict(self):
         tokens = [self.pad_token(), self.eos_token(), "PROTEIN1", "PROTEIN2", "PROTEIN_1",
