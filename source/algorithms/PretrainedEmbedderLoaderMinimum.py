@@ -8,7 +8,8 @@ class PretrainedEmbedderLoaderMinimum:
     Only uses words in  vocab
     """
 
-    def __init__(self, pad_token):
+    def __init__(self, pad_token, dim):
+        self.dim = dim
         self.pad_token = pad_token
 
     @property
@@ -35,9 +36,11 @@ sandberger 0.072617 -0.51393 0.4728 -0.52202 -0.35534 0.34629 0.23211 0.23096 0.
                 max(initial_words_index_dict.values()))
             assert min(initial_words_index_dict.values()) == 0, "The word index dict must be zero indexed values"
 
-        embeddings_array = [[]] * len(initial_words_index_dict)
+        embeddings_array = 0.002 * np.random.random_sample((len(initial_words_index_dict), self.dim)) - 0.001
 
-        result_words_index_dict = {}
+        embeddings_array[initial_words_index_dict[self.pad_token]] = 0.
+
+        result_words_index_dict = initial_words_index_dict.copy()
         total_embed_words = 0
 
         # Load embeddings from file
@@ -49,9 +52,8 @@ sandberger 0.072617 -0.51393 0.4728 -0.52202 -0.35534 0.34629 0.23211 0.23096 0.
 
             # Not ignored word
             embeddings = [float(v) for v in values[1:]]
-            if word in initial_words_index_dict:
-                result_words_index_dict[word] = initial_words_index_dict[word]
 
+            if word in result_words_index_dict:
                 embeddings_array[result_words_index_dict[word]] = embeddings
             total_embed_words = i
 
