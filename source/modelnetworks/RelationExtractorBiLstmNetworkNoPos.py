@@ -5,6 +5,12 @@ import torch.nn as nn
 
 
 class RelationExtractorBiLstmNetworkNoPos(nn.Module):
+    """
+    Implement paper:
+Identifying Protein-protein Interactions in Biomedical Literature using Recurrent Neural Networks with Long Short-Term Memory. / Hsieh, Yu Lun; Chang, Yung-Chun; Chang, Nai Wen; Hsu, Wen Lian.
+
+Proceedings of the Eighth International Joint Conference on Natural Language Processing. Asian Federation of Natural Language Processing, 2017. p. 240-245 (Proceedings of the Eighth International Joint Conference on Natural Language Processing).
+    """
 
     def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0, seed=None,
                  hidden_size=75, dropout_rate_fc=0.2, kernal_size=4, fc_layer_size=30,
@@ -39,8 +45,6 @@ class RelationExtractorBiLstmNetworkNoPos(nn.Module):
         self.lstm = nn.Sequential(
             nn.LSTM(total_dim_size, hidden_size=hidden_size, num_layers=num_layers, batch_first=True,
                     bidirectional=bidirectional, dropout=lstm_dropout))
-
-
 
         #
         self.fc_input_size = (hidden_size * num_directions) * self.max_sequence_len
@@ -89,8 +93,6 @@ class RelationExtractorBiLstmNetworkNoPos(nn.Module):
 
         # transform such that the shape is batch, seq, embedding
         outputs = outputs.permute(0, 2, 1).contiguous()
-
-
 
         # out = outputs[:, last_time_step_index, :]
 
