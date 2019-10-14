@@ -5,7 +5,7 @@ from torch import nn
 
 from algorithms.DataPipeline import DataPipeline
 from algorithms.LabelPipeline import LabelPipeline
-from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
+from algorithms.PretrainedEmbedderLoaderMinimum import PretrainedEmbedderLoaderMinimum
 from algorithms.Train import Train
 from algorithms.TrainInferencePipeline import TrainInferencePipeline
 from algorithms.network_factory_locator import NetworkFactoryLocator
@@ -47,7 +47,8 @@ class TrainInferenceBuilder:
 
     def get_trainpipeline(self):
         # Embedder loader
-        embedder_loader = PretrainedEmbedderLoader(TransformTextToIndex.pad_token())
+        # embedder_loader = PretrainedEmbedderLoader(TransformTextToIndex.pad_token())
+        embedder_loader = PretrainedEmbedderLoaderMinimum(TransformTextToIndex.pad_token())
 
         # preprocess steps TransformProteinMask
         preprocess_steps = []
