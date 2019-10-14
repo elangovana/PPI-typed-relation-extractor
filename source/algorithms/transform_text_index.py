@@ -10,7 +10,7 @@ Extracts vocab from data frame columns which have already been tokenised into wo
 
 class TransformTextToIndex:
 
-    def __init__(self, max_feature_lens, min_vocab_frequency=2, case_insensitive=True, vocab_dict=None,
+    def __init__(self, max_feature_lens, min_vocab_doc_frequency=4, case_insensitive=True, vocab_dict=None,
                  special_words=None, use_dataset_vocab=True):
         self.use_dataset_vocab = use_dataset_vocab
         self.case_insensitive = case_insensitive
@@ -18,7 +18,7 @@ class TransformTextToIndex:
         self._vocab_dict = vocab_dict or {}
 
         self.max_feature_lens = max_feature_lens
-        self.min_vocab_frequency = min_vocab_frequency
+        self.min_vocab_doc_frequency = min_vocab_doc_frequency
 
         # Load pretrained vocab
 
@@ -28,7 +28,8 @@ class TransformTextToIndex:
 
     def construct_vocab_dict(self, data_loader):
         if self.use_dataset_vocab:
-            vocab = self._get_vocab_dict(data_loader, self.special_words, case_insensitive=self.case_insensitive)
+            vocab = self._get_vocab_dict(data_loader, self.special_words, case_insensitive=self.case_insensitive,
+                                         min_vocab_doc_frequency=self.min_vocab_doc_frequency)
         else:
             vocab = self.get_specialwords_dict()
 
@@ -67,11 +68,12 @@ class TransformTextToIndex:
 
     def fit(self, data_loader):
         if self._vocab_dict is None or len(self._vocab_dict) == 0:
-            self._vocab_dict = self._get_vocab_dict(data_loader, self.special_words, self.case_insensitive)
+            self._vocab_dict = self._get_vocab_dict(data_loader, self.special_words, self.case_insensitive,
+                                                    self.min_vocab_doc_frequency)
 
     @staticmethod
-    def _get_vocab_dict(data_loader, special_words, case_insensitive):
-        count_vectoriser = CountVectorizer(lowercase=case_insensitive)
+    def _get_vocab_dict(data_loader, special_words, case_insensitive, min_vocab_doc_frequency):
+        count_vectoriser = CountVectorizer(lowercase=case_insensitive, min_df=min_vocab_doc_frequency)
         f = lambda x: x
         if case_insensitive:
             f = lambda x: x.lower()
