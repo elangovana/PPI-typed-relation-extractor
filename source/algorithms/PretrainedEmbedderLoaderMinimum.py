@@ -42,7 +42,7 @@ sandberger 0.072617 -0.51393 0.4728 -0.52202 -0.35534 0.34629 0.23211 0.23096 0.
 
         result_words_index_dict = initial_words_index_dict.copy()
         total_embed_words = 0
-
+        total_random_init_word = 0
         # Load embeddings from file
         for i, line in enumerate(handle):
             # skip first line as it contains just the dim
@@ -55,10 +55,13 @@ sandberger 0.072617 -0.51393 0.4728 -0.52202 -0.35534 0.34629 0.23211 0.23096 0.
 
             if word in result_words_index_dict:
                 embeddings_array[result_words_index_dict[word]] = embeddings
+            else:
+                total_random_init_word += 1
             total_embed_words = i
 
         self.logger.info("Total words in original embedding handle is {}".format(total_embed_words))
-        self.logger.info("Total words in embedding is {}".format(len(result_words_index_dict)))
+        self.logger.info("Total words in final embedding is {}".format(len(result_words_index_dict)))
+        self.logger.info("Total words randomly initialized is {}".format(total_random_init_word))
 
         # Convert to ndarray or cupy
         embeddings_array = np.array(embeddings_array)
