@@ -1,6 +1,7 @@
 import logging
 
 from modelnetworks.NetworkFactoryBase import NetworkFactoryBase
+from modelnetworks.RelationExtractorBiLstmNetworkNoPos import RelationExtractorBiLstmNetworkNoPos
 
 
 class RelationExtractorBiLstmNetworkFactoryNoPos(NetworkFactoryBase):
@@ -16,10 +17,8 @@ class RelationExtractorBiLstmNetworkFactoryNoPos(NetworkFactoryBase):
 
     def get_network(self, class_size, embedding_dim, feature_lens, **kwargs):
         lstm_dropout = float(self._get_value(kwargs, "lstm_dropout", ".5"))
-        pooling_kernel_size = int(self._get_value(kwargs, "pooling_kernel_size", "3"))
 
         lstm_num_layers = int(self._get_value(kwargs, "lstm_num_layers", "3"))
-        fc_layer_size = int(self._get_value(kwargs, "fc_layer_size", "64"))
         dropout_rate_fc = float(self._get_value(kwargs, "fc_drop_out_rate", ".5"))
 
         lstm_hidden_size = int(self._get_value(kwargs, "lstm_hidden_size", "64"))
@@ -27,7 +26,6 @@ class RelationExtractorBiLstmNetworkFactoryNoPos(NetworkFactoryBase):
         model = RelationExtractorBiLstmNetworkNoPos(class_size=class_size, embedding_dim=embedding_dim,
                                                     feature_lengths=feature_lens, hidden_size=lstm_hidden_size,
                                                     dropout_rate_fc=dropout_rate_fc, num_layers=lstm_num_layers,
-                                                    kernal_size=pooling_kernel_size, fc_layer_size=fc_layer_size,
                                                     lstm_dropout=lstm_dropout)
 
         return model

@@ -13,9 +13,7 @@ Proceedings of the Eighth International Joint Conference on Natural Language Pro
     """
 
     def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0, seed=None,
-                 hidden_size=75, dropout_rate_fc=0.2, kernal_size=4, fc_layer_size=30,
-                 num_layers=2,
-                 lstm_dropout=.3):
+                 hidden_size=75, dropout_rate_fc=0.2, num_layers=2, lstm_dropout=.3):
         self.embed_vocab_size = embed_vocab_size
         self.feature_lengths = feature_lengths
         if seed is None:
