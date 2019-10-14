@@ -35,6 +35,7 @@ sandberger 0.072617 -0.51393 0.4728 -0.52202 -0.35534 0.34629 0.23211 0.23096 0.
         embeddings_array = [[]] * len(initial_words_index_dict)
 
         result_words_index_dict = {}
+        total_embed_words = 0
         # Load embeddings from file
         for i, line in enumerate(handle):
             # skip first line as it contains just the dim
@@ -52,6 +53,9 @@ sandberger 0.072617 -0.51393 0.4728 -0.52202 -0.35534 0.34629 0.23211 0.23096 0.
                 result_words_index_dict[word] = initial_words_index_dict[word]
 
             embeddings_array[result_words_index_dict[word]] = embeddings
+            total_embed_words = i
+
+        self.logger.info("Total words in embedding is {}".format(total_embed_words))
 
         words_not_in_embedding = []
         for word in initial_words_index_dict:
@@ -70,6 +74,7 @@ sandberger 0.072617 -0.51393 0.4728 -0.52202 -0.35534 0.34629 0.23211 0.23096 0.
                     #     0]
 
         self.logger.info("The number of words intialised without embbeder is {}".format(len(words_not_in_embedding)))
+        self.logger.info("Total words {}".format(len(result_words_index_dict)))
         self.logger.debug("The words intialised without embbeder is \n {}".format(words_not_in_embedding))
 
         # Convert to ndarray or cupy
