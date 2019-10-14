@@ -40,20 +40,16 @@ class RelationExtractorBiLstmNetworkNoPos(nn.Module):
             nn.LSTM(total_dim_size, hidden_size=hidden_size, num_layers=num_layers, batch_first=True,
                     bidirectional=bidirectional, dropout=lstm_dropout))
 
-        self.max_pooling = nn.MaxPool1d(kernel_size=kernal_size)
-        self.avg_pooling = nn.AvgPool1d(kernel_size=kernal_size)
+
 
         #
-        self.fc_input_size = (self.max_sequence_len // kernal_size) * 2 * (hidden_size * num_directions)
+        self.fc_input_size = (hidden_size * num_directions) * self.max_sequence_len
 
         self._class_size = class_size
         self.fc = nn.Sequential(
             nn.Dropout(dropout_rate_fc),
             nn.Linear(self.fc_input_size,
-                      fc_layer_size),
-            nn.ReLU(),
-            nn.Dropout(dropout_rate_fc),
-            nn.Linear(fc_layer_size, class_size))
+                      class_size))
         # No softmax
         # nn.LogSoftmax())
 
@@ -91,19 +87,17 @@ class RelationExtractorBiLstmNetworkNoPos(nn.Module):
         self.logger.debug("Running through layers")
         outputs, (_, _) = self.lstm(embeddings)
 
-        outputs = outputs.permute(0, 2, 1)
+        # transform such that the shape is batch, seq, embedding
+        outputs = outputs.permute(0, 2, 1).contiguous()
 
-        max_pool_out = self.max_pooling(outputs)
 
-        avg_pool_out = self.avg_pooling(outputs)
 
         # out = outputs[:, last_time_step_index, :]
 
         self.logger.debug("Running fc")
         # out = self.fc(out)
-        out = torch.cat([max_pool_out, avg_pool_out], dim=2)
 
-        out = out.view(-1, self.fc_input_size)
+        out = outputs.view(-1, self.fc_input_size)
         out = self.fc(out)
         # self.logger.debug("Running softmax")
         # log_probs = self.softmax(out, dim=1)
