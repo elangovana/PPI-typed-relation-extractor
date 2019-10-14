@@ -88,11 +88,8 @@ class TrainInferenceBuilder:
         model_factory = NetworkFactoryLocator().get_factory(self.network_factory_name)
         model = model_factory.get_network(class_size, self.embedding_dim, np_feature_lens, **self.additional_args)
 
-
         self.logger.info("Using model {}".format(type(model)))
         self.logger.info("\n{}".format(model))
-
-
 
         # Loss function
         loss_function = nn.CrossEntropyLoss()
@@ -101,6 +98,10 @@ class TrainInferenceBuilder:
         # Trainer
         trainer = Train(epochs=self.epochs, early_stopping_patience=self.patience_epochs)
 
+        # merge train val vocab
+        merge_vocab_train_val = bool(int(self._get_value(self.additional_args, "train_val_vocab_merge", "0")))
+        self.logger.info("Merging train val vocab true: {}".format(merge_vocab_train_val))
+
         pipeline = TrainInferencePipeline(model=model, loss_function=loss_function,
                                           trainer=trainer, train_vocab_extractor=text_to_index,
                                           model_dir=self.model_dir,
@@ -108,6 +109,7 @@ class TrainInferenceBuilder:
                                           embedding_handle=self.embedding_handle, embedding_dim=self.embedding_dim,
                                           label_pipeline=label_pipeline, data_pipeline=data_pipeline,
                                           class_size=class_size, pos_label=self.dataset.positive_label,
-                                          output_dir=self.output_dir, additional_args=self.additional_args)
+                                          output_dir=self.output_dir, additional_args=self.additional_args,
+                                          merge_train_val_vocab=merge_vocab_train_val)
 
         return pipeline

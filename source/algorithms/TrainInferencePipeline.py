@@ -9,6 +9,7 @@ from torch.utils.data import DataLoader
 
 from algorithms.Collator import Collator
 from algorithms.Predictor import Predictor
+from algorithms.VocabMerge import VocabMerger
 
 
 class TrainInferencePipeline:
@@ -16,7 +17,9 @@ class TrainInferencePipeline:
     def __init__(self, model, loss_function, trainer, train_vocab_extractor, embedder_loader,
                  embedding_handle, embedding_dim: int,
                  label_pipeline, data_pipeline, class_size: int, pos_label, model_dir, output_dir, ngram: int = 3,
-                 min_vocab_frequency=3, class_weights_dict=None, num_workers=None, batch_size=32, additional_args=None):
+                 min_vocab_frequency=3, class_weights_dict=None, num_workers=None, batch_size=32, additional_args=None,
+                 merge_train_val_vocab=False):
+        self.merge_train_val_vocab = merge_train_val_vocab
         self.additional_args = additional_args or {}
         self.model_dir = model_dir
         self.batch_size = batch_size
@@ -60,6 +63,11 @@ class TrainInferencePipeline:
         # Merge train vocab and the pretrained vocab
         self.embedding_handle.seek(0)
         train_vocab_dict = self.train_vocab_extractor.construct_vocab_dict(train_loader)
+
+        if self.merge_train_val_vocab:
+            val_dict = self.train_vocab_extractor.construct_vocab_dict(val_loader)
+            train_vocab_dict = VocabMerger()(train_vocab_dict, val_dict)
+
         full_vocab_dict, embedding_array = self.embedder_loader(self.embedding_handle, train_vocab_dict)
         self.data_pipeline.update_vocab_dict(full_vocab_dict)
 
