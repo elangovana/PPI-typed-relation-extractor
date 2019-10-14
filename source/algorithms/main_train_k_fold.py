@@ -12,7 +12,7 @@ from algorithms.dataset_factory import DatasetFactory
 from algorithms.network_factory_locator import NetworkFactoryLocator
 
 
-def k_fold(data_file, n_splits=10):
+def k_fold_unique_pubmed(data_file, n_splits=10):
     kf = KFold(n_splits=n_splits, random_state=777, shuffle=True)
     df = pd.read_json(data_file)
     unique_docids = df.docid.unique()
@@ -24,6 +24,15 @@ def k_fold(data_file, n_splits=10):
 
         yield (train, val)
 
+
+def k_fold(data_file, n_splits=10):
+    kf = KFold(n_splits=n_splits, random_state=777, shuffle=True)
+    df = pd.read_json(data_file)
+
+    for train_index, test_index in kf.split(df, groups=df["isValid"]):
+        train, val = df.iloc[train_index], df.iloc[test_index]
+
+        yield (train, val)
 
 def run(dataset_factory_name, network_factory_name, train_file, embedding_file, embed_dim, model_dir, out_dir,
         epochs, earlystoppingpatience, additionalargs):
