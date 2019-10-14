@@ -76,6 +76,8 @@ class TransformTextToIndex:
         if case_insensitive:
             f = lambda x: x.lower()
 
+        # fit pad first so that it has index zero
+
         for idx, b in enumerate(data_loader):
             b_x = b[0]
 
@@ -84,8 +86,10 @@ class TransformTextToIndex:
 
         vocab_index = count_vectoriser.vocabulary_
 
-        vocab_index[f(TransformTextToIndex.pad_token())] = vocab_index.get(f(TransformTextToIndex.pad_token()),
-                                                                           len(vocab_index))
+        # Set up so that the vocab of pad token
+        vocab_index = {k: v + 1 for k, v in vocab_index.items()}
+        vocab_index[f(TransformTextToIndex.pad_token())] = 0
+
         vocab_index[f(TransformTextToIndex.UNK_token())] = vocab_index.get(f(TransformTextToIndex.UNK_token()),
                                                                            len(vocab_index))
         vocab_index[(TransformTextToIndex.eos_token())] = vocab_index.get(f(TransformTextToIndex.eos_token()),

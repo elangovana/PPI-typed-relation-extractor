@@ -85,3 +85,29 @@ class TestTransformTextToIndex(TestCase):
         self.assertEqual(expected_unique_item_no, len(unique_items),
                          "The number of unique words doesnt match to unique indexes including padding{}".format(
                              unique_items))
+
+    def test_transform_pad(self):
+        """
+        Test case to make ensure that pad index is zero
+        """
+        mock_dataset = MagicMock()
+        initial_vocab_dict = {"random": 0, "initial": 1}
+        mock_dataset.data = [[["This is sample text", "entity1", "entity2", "phosphorylation"], ["yes"]],
+                             [["This is sample text2", "entity1", "entity2", "phosphorylation"], ["no"]]]
+        max_feature_lens = [10, 1, 1, 1]
+        # Unique words + pad character ( ignore labels)
+        expected_unique_item_no = 9
+
+        mock_dataset.__len__.return_value = len(mock_dataset.data)
+
+        mock_dataset.__getitem__.side_effect = lambda i: (mock_dataset.data[i][0], mock_dataset.data[i][1])
+
+        sut = TransformTextToIndex(max_feature_lens, vocab_dict=initial_vocab_dict, use_dataset_vocab=True)
+
+        data_loader = DataLoader(mock_dataset, batch_size=2)
+
+        # Act
+        vocab_dict = sut.construct_vocab_dict(data_loader)
+
+        # Assert the max feature length matchs
+        self.assertEqual(vocab_dict[sut.pad_token()], 0, "Index of pas token {} must be zero".format(sut.pad_token()))
