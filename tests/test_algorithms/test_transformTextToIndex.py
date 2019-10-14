@@ -12,10 +12,10 @@ class TestTransformTextToIndex(TestCase):
         mock_dataset = MagicMock()
         initial_vocab_dict = None  # ["random", "initial"]
         mock_dataset.data = [[["This is sample text", "entity1", "entity2", "phosphorylation"], ["yes"]],
-                             [["This is sample text2", "entity1", "entity2", "phosphorylation"], ["no"]]]
+                             [["Completey random text2", "entity11", "entity12", "phosphorylation1"], ["no"]]]
         max_feature_lens = [10, 1, 1, 1]
         # Unique words + pad character ( ignore labels)
-        expected_unique_item_no = 9
+        expected_unique_item_no = 13 + 1
 
         mock_dataset.__len__.return_value = len(mock_dataset.data)
 
@@ -49,10 +49,10 @@ class TestTransformTextToIndex(TestCase):
         mock_dataset = MagicMock()
         initial_vocab_dict = {"random": 0, "initial": 1}
         mock_dataset.data = [[["This is sample text", "entity1", "entity2", "phosphorylation"], ["yes"]],
-                             [["This is sample text2", "entity1", "entity2", "phosphorylation"], ["no"]]]
+                             [["Minoritt word random unknown", "entity1", "entity2", "phosphorylation"], ["no"]]]
         max_feature_lens = [10, 1, 1, 1]
         # Unique words + pad character ( ignore labels)
-        expected_unique_item_no = 9
+        expected_unique_item_no = 12
 
         mock_dataset.__len__.return_value = len(mock_dataset.data)
 

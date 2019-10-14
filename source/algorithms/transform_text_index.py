@@ -78,11 +78,15 @@ class TransformTextToIndex:
 
         # fit pad first so that it has index zero
 
+        text = []
         for idx, b in enumerate(data_loader):
             b_x = b[0]
 
-            text = [" ".join(t) for t in b_x]
-            count_vectoriser.fit(text)
+            column_text = [" ".join(t) for t in b_x]
+            text.extend(column_text)
+
+        count_vectoriser.fit(text)
+
 
         vocab_index = count_vectoriser.vocabulary_
 
