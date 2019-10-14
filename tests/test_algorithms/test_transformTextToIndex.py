@@ -23,7 +23,7 @@ class TestTransformTextToIndex(TestCase):
 
         sut = TransformTextToIndex(max_feature_lens, vocab_dict=initial_vocab_dict)
 
-        data_loader = DataLoader(mock_dataset, batch_size=2)
+        data_loader = DataLoader(mock_dataset, batch_size=1)
 
         # Act
         actual = list(sut.fit_transform(data_loader))
