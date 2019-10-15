@@ -41,8 +41,9 @@ Proceedings of the Eighth International Joint Conference on Natural Language Pro
         num_directions = 2 if bidirectional else 1
 
         self.lstm = nn.Sequential(
+            nn.Dropout(p=lstm_dropout),
             nn.LSTM(total_dim_size, hidden_size=hidden_size, num_layers=num_layers, batch_first=True,
-                    bidirectional=bidirectional, dropout=lstm_dropout))
+                    bidirectional=bidirectional))
 
         #
         self.fc_input_size = (hidden_size * num_directions) * self.max_sequence_len
