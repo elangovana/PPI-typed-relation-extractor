@@ -84,7 +84,7 @@ class TrainInferencePipeline:
         learning_rate = float(self._get_value(self.additional_args, "learningrate", ".01"))
 
         # optimiser = SGD(lr=self.learning_rate, momentum=self.momentum, params=model.parameters())
-        weight_decay = float(self._get_value(self.additional_args, "weight_decay", ".0001"))
+        #  weight_decay = float(self._get_value(self.additional_args, "weight_decay", ".0001"))
         # optimiser = Adam(params=self.model.parameters(), lr=learning_rate, weight_decay=weight_decay)
         optimiser = RMSprop(params=self.model.parameters(), lr=learning_rate)
         self.logger.info("Using optimiser {}".format(type(optimiser)))
