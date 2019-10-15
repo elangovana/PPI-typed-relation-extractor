@@ -4,7 +4,7 @@ import os
 import pickle
 
 import torch
-from torch.optim import Adam
+from keras.optimizers import RMSprop
 from torch.utils.data import DataLoader
 
 from algorithms.Collator import Collator
@@ -85,8 +85,8 @@ class TrainInferencePipeline:
 
         # optimiser = SGD(lr=self.learning_rate, momentum=self.momentum, params=model.parameters())
         weight_decay = float(self._get_value(self.additional_args, "weight_decay", ".0001"))
-        optimiser = Adam(params=self.model.parameters(), lr=learning_rate, weight_decay=weight_decay)
-        # optimiser = RMSprop(params=model.parameters(), lr=learning_rate)
+        # optimiser = Adam(params=self.model.parameters(), lr=learning_rate, weight_decay=weight_decay)
+        optimiser = RMSprop(params=self.model.parameters(), lr=learning_rate)
         self.logger.info("Using optimiser {}".format(type(optimiser)))
         # Set weights
         # if self.class_weights_dict is not None:
