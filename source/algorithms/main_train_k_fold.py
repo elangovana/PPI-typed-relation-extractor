@@ -5,9 +5,8 @@ import sys
 
 import numpy as np
 import pandas as pd
-from sklearn.metrics import precision_recall_fscore_support
+from sklearn.metrics import precision_recall_fscore_support, confusion_matrix
 from sklearn.model_selection import KFold
-from tensorflow import confusion_matrix
 
 from algorithms.TrainInferenceBuilder import TrainInferenceBuilder
 from algorithms.dataset_factory import DatasetFactory
