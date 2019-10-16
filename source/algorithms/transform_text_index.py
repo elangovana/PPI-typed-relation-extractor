@@ -10,7 +10,7 @@ Extracts vocab from data frame columns which have already been tokenised into wo
 
 class TransformTextToIndex:
 
-    def __init__(self, max_feature_lens, min_vocab_doc_frequency=2, case_insensitive=True, vocab_dict=None,
+    def __init__(self, max_feature_lens, min_vocab_doc_frequency=3, case_insensitive=True, vocab_dict=None,
                  special_words=None, use_dataset_vocab=True):
         self.use_dataset_vocab = use_dataset_vocab
         self.case_insensitive = case_insensitive
