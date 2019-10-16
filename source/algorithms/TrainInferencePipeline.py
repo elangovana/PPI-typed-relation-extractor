@@ -65,6 +65,7 @@ class TrainInferencePipeline:
         train_vocab_dict = self.train_vocab_extractor.construct_vocab_dict(train_loader)
 
         if self.merge_train_val_vocab:
+            self.logger.info("Merging train and val vocab")
             val_dict = self.train_vocab_extractor.construct_vocab_dict(val_loader)
             train_vocab_dict = VocabMerger()(train_vocab_dict, val_dict)
 
