@@ -4,7 +4,7 @@ import os
 import pickle
 
 import torch
-from keras.optimizers import RMSprop
+from torch.optim import RMSprop
 from torch.utils.data import DataLoader
 
 from algorithms.Collator import Collator
