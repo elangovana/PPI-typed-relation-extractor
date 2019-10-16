@@ -5,7 +5,9 @@ import sys
 
 import numpy as np
 import pandas as pd
+from sklearn.metrics import precision_recall_fscore_support
 from sklearn.model_selection import KFold
+from tensorflow import confusion_matrix
 
 from algorithms.TrainInferenceBuilder import TrainInferenceBuilder
 from algorithms.dataset_factory import DatasetFactory
@@ -34,6 +36,7 @@ def k_fold(data_file, n_splits=10):
 
         yield (train, val)
 
+
 def run(dataset_factory_name, network_factory_name, train_file, embedding_file, embed_dim, model_dir, out_dir,
         epochs, earlystoppingpatience, additionalargs):
     logger = logging.getLogger(__name__)
@@ -47,6 +50,8 @@ def run(dataset_factory_name, network_factory_name, train_file, embedding_file, 
         raise FileNotFoundError("The path {} should exist and must be a directory".format(model_dir))
 
     k_val_results = []
+    k_pr_recall_results = []
+    k_t_n_results = []
     for k, (train_df, val_df) in enumerate(k_fold(train_file)):
         train = dataset_factory.get_dataset(train_df)
         val = dataset_factory.get_dataset(val_df)
@@ -61,12 +66,23 @@ def run(dataset_factory_name, network_factory_name, train_file, embedding_file, 
                                             extra_args=additionalargs, network_factory_name=network_factory_name)
             train_pipeline = builder.get_trainpipeline()
 
-            val_results, _, _ = train_pipeline(train, val)
-            k_val_results.append(val_results)
+            val_results, val_actuals, val_predicted = train_pipeline(train, val)
+            precision, recall, fscore, support = precision_recall_fscore_support(val_actuals, val_predicted,
+                                                                                 average='binary')
+            tn, fp, fn, tp = confusion_matrix(val_actuals, val_predicted).ravel()
 
-        logger.info("Fold {}, F-score is {}".format(k, val_results))
+            k_val_results.append(val_results)
+            k_t_n_results.append((tn, fp, fn, tp))
+            k_pr_recall_results.append((precision, recall, fscore, support))
+
+            logger.info("tn, fp, fn, tp  is {}".format((tn, fp, fn, tp)))
+            logger.info("precision, recall, fscore, support".format((precision, recall, fscore, support)))
+
+            logger.info("Fold {}, F-score is {}".format(k, val_results))
 
     print("Average F-score", np.asarray(k_val_results).mean())
+    print("K Fold tn, fp, fn, tp", k_t_n_results)
+    print("K Fold precision, recall, fscore, support", k_pr_recall_results)
 
 
 if "__main__" == __name__:
