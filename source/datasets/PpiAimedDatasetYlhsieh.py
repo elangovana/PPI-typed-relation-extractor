@@ -23,11 +23,11 @@ class PpiAimedDatasetYlhsieh(CustomDatasetBase):
                     type(file_path_or_dataframe)))
 
         # Filter features
-        self._data_df = data_df[["text", "label"]]
+        self._data_df = data_df[["text"]]
 
         # Set up labels
-        if "label" in data_df.columns:
-            self._labels = data_df[["label"]]
+        if "isValid" in data_df.columns:
+            self._labels = data_df[["isValid"]]
             self._labels = np.reshape(self._labels.values.tolist(), (-1,))
         else:
             self._labels = np.reshape([-1] * data_df.shape[0], (-1,))
@@ -55,11 +55,11 @@ class PpiAimedDatasetYlhsieh(CustomDatasetBase):
 
     @property
     def positive_label(self):
-        return True
+        return "P"
 
     @property
     def feature_lens(self):
-        return [100, 1, 1]
+        return [100]
 
     @property
     def entity_column_indices(self):
