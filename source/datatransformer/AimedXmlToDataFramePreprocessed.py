@@ -49,27 +49,19 @@ class AimedXmlToDataFramePreprocessed:
                 for protein_combination in comb_func(set(protein_offsets_dict.keys()), 2, ):
                     # sort names so it is easier to test
                     protein_combination = sorted(protein_combination)
-                    participant1_offset = protein_combination[0]
-                    participant1 = protein_offsets_dict[participant1_offset]
-
-                    participant2_offset = protein_combination[1]
-                    participant2 = protein_offsets_dict[participant2_offset]
 
                     protein_combination = frozenset(protein_combination)
                     is_valid = protein_combination in rel_protein_pairs
 
                     protiens_with_no_rel_offset = set(protein_offsets_dict.keys()) - protein_combination
+                    protiens_with_rel_offset = protein_combination
 
-                    normalised_passage = self._normalise_protien_names(passage, protiens_with_no_rel_offset)
+                    normalised_passage = self._normalise_protien_names(passage, protiens_with_no_rel_offset,
+                                                                       protiens_with_rel_offset)
 
                     result_json.append({"docid": doc_id
                                            , "passage": normalised_passage
                                            , "passageid": passageid
-                                           , "participant1": participant1
-                                           , "participant1_loc": participant1_offset
-
-                                           , "participant2": participant2
-                                           , "participant2_loc": participant2_offset
 
                                            , "isValid": is_valid
 
@@ -133,15 +125,29 @@ class AimedXmlToDataFramePreprocessed:
                 yield elem
                 elem.clear()
 
-    def _normalise_protien_names(self, passage, protiens_with_no_rel_offset):
+    def _normalise_protien_names(self, passage, protiens_with_no_rel_offset, protiens_with_rel_offset):
         offset_dict = {}
+        offset_rel_only_dict = {}
         for i in protiens_with_no_rel_offset:
             start_pos, end_pos = int(i.split("-")[0]), int(i.split("-")[1])
             offset_dict[start_pos] = end_pos
 
+        for i in protiens_with_rel_offset:
+            start_pos, end_pos = int(i.split("-")[0]), int(i.split("-")[1])
+            offset_dict[start_pos] = end_pos
+            offset_rel_only_dict[start_pos] = end_pos
+
         adjustment = 0
+
+        assert len(offset_rel_only_dict.keys()) <= 2, "Expected only 2 items in relation, but found {}".format(
+            offset_rel_only_dict.keys())
+
+        rel_masks = [" PROTEIN2 ", " PROTEIN1 "]
         for s, e in sorted(offset_dict.items(), key=lambda kv: kv[0], reverse=False):
             mask = " PROTEIN "
+            if s in offset_rel_only_dict:
+                mask = rel_masks.pop()
+
             adj_s = s + adjustment
             adj_e = e + adjustment
 

@@ -53,13 +53,9 @@ class TestAimedXmlToDataFramePreprocessed(TestCase):
 
         expected_json = [{"docid": "AIMed.d0"
                              ,
-                          "passage": "Cytokines measurements during IFN-alpha treatment showed a trend to decreasing levels of IL-4 at 4, 12, and 24 weeks."
+                          "passage": "Cytokines measurements during PROTEIN1 treatment showed a trend to decreasing levels of PROTEIN2 at 4, 12, and 24 weeks."
                              , "passageid": "AIMed.d0.s5"
-                             , "participant1": "IFN-alpha"
-                             , "participant1_loc": "30-38"
 
-                             , "participant2": "IL-4"
-                             , "participant2_loc": "89-92"
 
                              , "isValid": False
 
@@ -69,6 +65,9 @@ class TestAimedXmlToDataFramePreprocessed(TestCase):
 
         # Act
         dataframe = sut(xml_handle)
+
+        print(dataframe.values.tolist())
+        print(expected_df.values.tolist())
 
         # Assert
         self.assertSequenceEqual(dataframe.values.tolist(), expected_df.values.tolist())
@@ -93,12 +92,9 @@ class TestAimedXmlToDataFramePreprocessed(TestCase):
 
         expected_json = [{"docid": "AIMed.d0"
                              ,
-                          "passage": "We also found another armadillo-protein, p0071, interacted with PS1."
+                          "passage": "We also found another armadillo-protein, PROTEIN1 , interacted with PROTEIN2 ."
                              , "passageid": "AIMed.d30.s255"
-                             , "participant1": "p0071"
-                             , "participant1_loc": "41-45"
-                             , "participant2": "PS1"
-                             , "participant2_loc": "64-66"
+
 
                              , "isValid": True
 
@@ -133,42 +129,30 @@ class TestAimedXmlToDataFramePreprocessed(TestCase):
 
         expected_json = [{"docid": "AIMed.d0"
                              ,
-                          "passage": "We also found another PROTEIN , p0071, interacted with PS1."
+                          "passage": "We also found another PROTEIN , PROTEIN1 , interacted with PROTEIN2 ."
                              , "passageid": "AIMed.d30.s255"
-                             , "participant1": "p0071"
-                             , "participant1_loc": "41-45"
-                             , "participant2": "PS1"
-                             , "participant2_loc": "64-66"
 
                              , "isValid": True
 
                           },
                          {"docid": "AIMed.d0"
-                             , "passage": "We also found another armadillo-protein, p0071, interacted with PROTEIN ."
+                             , "passage": "We also found another PROTEIN1 , PROTEIN2 , interacted with PROTEIN ."
                              , "passageid": "AIMed.d30.s255"
-                             , "participant1_loc": "22-38"
-
-                             , "participant1": "armadillo-protein"
-                             , "participant2": "p0071"
-                             , "participant2_loc": "41-45"
 
                              , "isValid": False
 
                           },
                          {"docid": "AIMed.d0"
-                             , "passage": "We also found another armadillo-protein, PROTEIN , interacted with PS1."
+                             , "passage": "We also found another PROTEIN1 , PROTEIN , interacted with PROTEIN2 ."
                              , "passageid": "AIMed.d30.s255"
-                             , "participant1": "armadillo-protein"
-                             , "participant1_loc": "22-38"
-                             , "participant2": "PS1"
-                             , "participant2_loc": "64-66"
+
 
                              , "isValid": False
 
                           }
                          ]
 
-        sort_cols = ["isValid", "participant1_loc", "participant2_loc"]
+        sort_cols = ["isValid", "passage"]
         expected_df = pd.DataFrame(expected_json).sort_values(by=sort_cols)
 
         # Act
@@ -209,14 +193,17 @@ class TestAimedXmlToDataFramePreprocessed(TestCase):
         # Arrange
         text = "A B C D"
 
-        offsets = ["6-7", "0-1", "4-5"]
+        offsets = ["4-5"]
 
-        expected = " PROTEIN B PROTEIN PROTEIN "
+        rel_offsets = ["6-7", "0-1"]
+
+        expected = " PROTEIN1 B PROTEIN PROTEIN2 "
 
         sut = AimedXmlToDataFramePreprocessed()
 
         # Act
-        actual = sut._normalise_protien_names(passage=text, protiens_with_no_rel_offset=offsets)
+        actual = sut._normalise_protien_names(passage=text, protiens_with_no_rel_offset=offsets,
+                                              protiens_with_rel_offset=rel_offsets)
 
         # Assert
         self.assertEqual(expected, actual)
