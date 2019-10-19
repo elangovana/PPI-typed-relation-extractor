@@ -234,13 +234,19 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
 
 ### AImed  
 
-1. Download data AIMed dataset in BiocFormat from http://corpora.informatik.hu-berlin.de/
+1. Download from ftp://ftp.cs.utexas.edu/pub/mooney/bio-data/interactions.tar.gz"
 
-2. Convert AIMed txt files to pandas dataframe json format
+2. Convert the raw dataset into XML for using instructions in http://mars.cs.utu.fi/PPICorpora/
+      ```bash
+      convert_aimed.py -i  aimed_interactions_input_dir -o aimed.xml
+
+      ```
+
+1. Next convert the xml to dataframe json and pre-process so that protien names that are not relevant are masked as "PROTEIN"
     
     ```text
     export PYTHONPATH=./source
-    python source/datatransformer/AimedToDataFrame.py tests/test_datatransformer/data/aimed /tmp/df.json
+    python source/datatransformer/AimedXmlToDataFramePreprocessed.py tests/test_datatransformer/data/sample_aimed_pyyasaol_converted.xml /tmp/df.json
     ```
     
     

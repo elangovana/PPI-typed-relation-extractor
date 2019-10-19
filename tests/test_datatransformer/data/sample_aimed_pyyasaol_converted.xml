@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<corpus source="AIMed">
+    <document id="AIMed.d0">
+        <sentence id="AIMed.d0.s0" text="Th1/Th2 type cytokines in hepatitis B patients treated with interferon-alpha."
+                  seqId="s0">
+            <entity id="AIMed.d0.s0.e0" charOffset="60-75" type="protein" text="interferon-alpha" seqId="e0"/>
+        </sentence>
+        <sentence id="AIMed.d0.s1"
+                  text="OBJECTIVE: To investigate the relationship between the expression of Th1/Th2 type cytokines and the effect of interferon-alpha therapy."
+                  seqId="s1">
+            <entity id="AIMed.d0.s1.e0" charOffset="110-125" type="protein" text="interferon-alpha" seqId="e1"/>
+        </sentence>
+        <sentence id="AIMed.d0.s2"
+                  text="METHODS: Th1/Th2 type cytokines were assayed by enzyme-linked immunosorbent assay (ELISA) and reverse transcription polymerase chain reaction (RT-PCR) on 23 patients with chronic hepatitis B who were treated with interferon-alpha."
+                  seqId="s2">
+            <entity id="AIMed.d0.s2.e0" charOffset="213-228" type="protein" text="interferon-alpha" seqId="e2"/>
+        </sentence>
+        <sentence id="AIMed.d0.s3"
+                  text="RESULTS: Levels of IFN-gamma in the supernatant of peripheral blood mononuclear cells (PBMC) cultures from the patients with hepatitis B were slightly lower than those of controls (P = 0.07)."
+                  seqId="s3">
+            <entity id="AIMed.d0.s3.e0" charOffset="19-27" type="protein" text="IFN-gamma" seqId="e3"/>
+        </sentence>
+        <sentence id="AIMed.d0.s4" text="However, the levels of IL-4 were higher than those of controls (P = 0.01)."
+                  seqId="s4">
+            <entity id="AIMed.d0.s4.e0" charOffset="23-26" type="protein" text="IL-4" seqId="e4"/>
+        </sentence>
+        <sentence id="AIMed.d0.s5"
+                  text="Cytokines measurements during IFN-alpha treatment showed a trend to decreasing levels of IL-4 at 4, 12, and 24 weeks."
+                  seqId="s5">
+            <entity id="AIMed.d0.s5.e0" charOffset="30-38" type="protein" text="IFN-alpha" seqId="e5"/>
+            <entity id="AIMed.d0.s5.e1" charOffset="89-92" type="protein" text="IL-4" seqId="e6"/>
+        </sentence>
+        <sentence id="AIMed.d0.s6"
+                  text="Levels of IFN-gamma were slightly increased following IFN-alpha treatment (P = 0.09)."
+                  seqId="s6">
+            <entity id="AIMed.d0.s6.e0" charOffset="10-18" type="protein" text="IFN-gamma" seqId="e7"/>
+            <entity id="AIMed.d0.s6.e1" charOffset="54-62" type="protein" text="IFN-alpha" seqId="e8"/>
+        </sentence>
+        <sentence id="AIMed.d0.s7"
+                  text="In patients with a complete response to IFN-alpha, the levels of IFN-gamma were higher at 24 weeks following IFN-alpha treatment than that of pre-treatment (P = 0.04), and the levels of IL-4 decreased markedly at 12 and 24 weeks (P = 0.02, 0.03, respectively). mRNA expression positively correlated with the level of Th1/Th2 type cytokines in the supernatant."
+                  seqId="s7">
+            <entity id="AIMed.d0.s7.e0" charOffset="40-48" type="protein" text="IFN-alpha" seqId="e9"/>
+            <entity id="AIMed.d0.s7.e1" charOffset="65-73" type="protein" text="IFN-gamma" seqId="e10"/>
+            <entity id="AIMed.d0.s7.e2" charOffset="109-117" type="protein" text="IFN-alpha" seqId="e11"/>
+            <entity id="AIMed.d0.s7.e3" charOffset="186-189" type="protein" text="IL-4" seqId="e12"/>
+        </sentence>
+        <sentence id="AIMed.d0.s8"
+                  text="CONCLUSION: The expression of Th2 type cytokines is predominant in patients with chronic hepatitis B."
+                  seqId="s8">
+        </sentence>
+        <sentence id="AIMed.d0.s9"
+                  text="Interferon-alpha therapy can modulate the balance of Th1/Th2 type cytokines, and this is related to its clinical effect."
+                  seqId="s9">
+            <entity id="AIMed.d0.s9.e0" charOffset="0-15" type="protein" text="Interferon-alpha" seqId="e13"/>
+        </sentence>
+        <sentence id="AIMed.d0.s10"
+                  text="Levels of Th1/Th2 type cytokines could be a predictor of clinical response during Interferon-alpha treatment."
+                  seqId="s10">
+            <entity id="AIMed.d0.s10.e0" charOffset="82-97" type="protein" text="Interferon-alpha" seqId="e14"/>
+        </sentence>
+    </document>
+</corpus>

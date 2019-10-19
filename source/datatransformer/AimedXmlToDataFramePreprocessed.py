@@ -156,7 +156,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     parser.add_argument("input",
-                        help="The bioc xml formatted json")
+                        help="The input xml file formatted as instructed in http://mars.cs.utu.fi/PPICorpora/, pyysalo et.al")
 
     parser.add_argument("output",
                         help="The output_file")
