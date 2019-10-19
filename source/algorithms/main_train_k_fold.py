@@ -67,7 +67,8 @@ def run(dataset_factory_name, network_factory_name, train_file, embedding_file, 
 
             val_results, val_actuals, val_predicted = train_pipeline(train, val)
             precision, recall, fscore, support = precision_recall_fscore_support(val_actuals, val_predicted,
-                                                                                 average='binary')
+                                                                                 average='binary',
+                                                                                 pos_label=train.positive_label)
             tn, fp, fn, tp = confusion_matrix(val_actuals, val_predicted).ravel()
 
             k_val_results.append(val_results)
