@@ -8,10 +8,12 @@ from algorithms.PositionEmbedder import PositionEmbedder
 
 class RelationExtractorBiLstmNetwork(nn.Module):
 
-    def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0, seed=None, pos_embedder=None,
+    def __init__(self, class_size, embedding_dim, feature_lengths, entity_markers, embed_vocab_size=0, seed=None,
+                 pos_embedder=None,
                  hidden_size=75, dropout_rate_fc=0.2, kernal_size=4, fc_layer_size=30,
                  num_layers=2,
                  lstm_dropout=.3):
+        self.entity_markers = entity_markers
         self.embed_vocab_size = embed_vocab_size
         self.feature_lengths = feature_lengths
         if seed is None:
@@ -35,7 +37,7 @@ class RelationExtractorBiLstmNetwork(nn.Module):
                                                                                            self.feature_lengths))
 
         # The total embedding size if the text column + position for the rest
-        pos_embed_total_dim = (len(self.feature_lengths) - 1) * \
+        pos_embed_total_dim = (len(self.entity_markers)) * \
                               self.pos_embedder.embeddings.shape[1]
         total_dim_size = embedding_dim + pos_embed_total_dim
 
@@ -100,25 +102,21 @@ class RelationExtractorBiLstmNetwork(nn.Module):
 
         text_inputs = feature_tuples[self.text_column_index]
 
-        text_transposed = text_inputs
 
         self.logger.debug("Executing embeddings")
-        embeddings = self.embeddings(text_transposed)
+        embeddings = self.embeddings(text_inputs)
 
         # TODO: avoid this loop, use builtin
         embeddings_with_pos = embeddings
         self.logger.debug("Executing pos embedding")
 
-        for f in range(len(feature_tuples)):
-            if f == self.text_column_index: continue
-
-            entity = feature_tuples[f]  # .transpose(0, 1)
+        for _, entity in enumerate(self.entity_markers):
 
             # TODO: avoid this loop, use builtin
             batch_pos_embedding_entity = []
 
-            for i, (t, e, sentence_embedding) in enumerate(zip(text_transposed, entity, embeddings)):
-                sentence_pos_embedding = self.pos_embedder(t, e[0])
+            for i, (t, sentence_embedding) in enumerate(zip(text_inputs, embeddings)):
+                sentence_pos_embedding = self.pos_embedder(t, entity)
 
                 # Set pos_embedding to zero when pad token ( indicated by zero embedding)
                 sentence_pos_embedding[torch.all(sentence_embedding.eq(0.0), dim=1)] = 0.0

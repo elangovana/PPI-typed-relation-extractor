@@ -21,17 +21,13 @@ class TestRelationExtractorBiLstmNetwork(TestCase):
         max_abstract_len = 10
         abstract = torch.LongTensor(batch_size, max_abstract_len).random_(0, vocab_size)
 
-        max_itype_len = 1
-        interaction_type = torch.LongTensor(batch_size, max_itype_len).random_(0, vocab_size)
-
-        max_entype_len = 1
-        entity = torch.LongTensor(batch_size, max_entype_len).random_(0, vocab_size)
+        entity_markers = [1, 2]
 
         sut = RelationExtractorBiLstmNetwork(class_size=class_size, embedding_dim=vector_dim, feature_lengths=np.array(
-            [max_abstract_len, max_itype_len, max_entype_len]), embed_vocab_size=vocab_size)
+            [max_abstract_len]), embed_vocab_size=vocab_size, entity_markers=entity_markers)
 
         # Act
-        actual = sut((abstract, interaction_type, entity))
+        actual = sut((abstract,))
 
         # assert
         self.assertEqual(torch.Size([batch_size, class_size]), actual.shape)
