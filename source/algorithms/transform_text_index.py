@@ -28,7 +28,8 @@ class TransformTextToIndex:
 
     def construct_vocab_dict(self, data_loader):
         if self.use_dataset_vocab:
-            vocab = self._get_vocab_dict(data_loader, self.special_words, case_insensitive=self.case_insensitive,
+            vocab = self._get_vocab_dict(data_loader, self.get_specialwords_dict(),
+                                         case_insensitive=self.case_insensitive,
                                          min_vocab_doc_frequency=self.min_vocab_doc_frequency)
         else:
             vocab = self.get_specialwords_dict()
@@ -38,12 +39,21 @@ class TransformTextToIndex:
         return vocab
 
     def get_specialwords_dict(self):
+        """
+        Ensure that the id of these words dont change
+        :return:
+        """
         tokens = [self.pad_token(), self.eos_token(), "PROTEIN1", "PROTEIN2", "PROTEIN_1",
                   "PROTEIN_2", self.UNK_token()]
         key_func = lambda x: x
         if self.case_insensitive:
             key_func = lambda x: x.lower()
         tokens_dict = {key_func(k): i for i, k in enumerate(tokens)}
+
+        for k in self.special_words:
+            if k not in tokens_dict:
+                tokens_dict[k] = len(tokens_dict)
+
         return tokens_dict
 
     @staticmethod
@@ -68,11 +78,11 @@ class TransformTextToIndex:
 
     def fit(self, data_loader):
         if self._vocab_dict is None or len(self._vocab_dict) == 0:
-            self._vocab_dict = self._get_vocab_dict(data_loader, self.special_words, self.case_insensitive,
+            self._vocab_dict = self._get_vocab_dict(data_loader, self.get_specialwords_dict(), self.case_insensitive,
                                                     self.min_vocab_doc_frequency)
 
     @staticmethod
-    def _get_vocab_dict(data_loader, special_words, case_insensitive, min_vocab_doc_frequency):
+    def _get_vocab_dict(data_loader, special_words_dict, case_insensitive, min_vocab_doc_frequency):
         count_vectoriser = CountVectorizer(lowercase=case_insensitive, min_df=min_vocab_doc_frequency)
         f = lambda x: x
         if case_insensitive:
@@ -91,21 +101,15 @@ class TransformTextToIndex:
 
         count_vectoriser.fit(text)
 
-
-        vocab_index = count_vectoriser.vocabulary_
+        vocab_index_train = count_vectoriser.vocabulary_
 
         # Set up so that the vocab of pad token
-        vocab_index = {k: v + 1 for k, v in vocab_index.items()}
-        vocab_index[f(TransformTextToIndex.pad_token())] = 0
+        final_dict = special_words_dict.copy()
+        for k in vocab_index_train:
+            if k not in final_dict:
+                final_dict[k] = len(final_dict)
 
-        vocab_index[f(TransformTextToIndex.UNK_token())] = vocab_index.get(f(TransformTextToIndex.UNK_token()),
-                                                                           len(vocab_index))
-        vocab_index[(TransformTextToIndex.eos_token())] = vocab_index.get(f(TransformTextToIndex.eos_token()),
-                                                                          len(vocab_index))
-        for w in set(special_words):
-            vocab_index[f(w)] = vocab_index.get(f(w), len(vocab_index))
-
-        return vocab_index
+        return final_dict
 
     def transform(self, x):
         self.logger.info("Transforming TransformTextToIndex")
