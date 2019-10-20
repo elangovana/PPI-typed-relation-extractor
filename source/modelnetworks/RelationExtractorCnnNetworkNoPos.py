@@ -4,19 +4,17 @@ import math
 import torch
 import torch.nn as nn
 
-from algorithms.PositionEmbedder import PositionEmbedder
 
-
-class RelationExtractorCnnPosNetwork(nn.Module):
+class RelationExtractorCnnNetworkNoPos(nn.Module):
 
     def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0, ngram_context_size=5, seed=777,
-                 drop_rate=.1, pos_embedder=None, dropout_rate_cnn=.5, dropout_rate_fc=0.5, cnn_output=50,
+                 drop_rate=.1, dropout_rate_cnn=.5, dropout_rate_fc=0.5, cnn_output=50,
                  fc_layer_size=100):
         self.embed_vocab_size = embed_vocab_size
         self.feature_lengths = feature_lengths
         torch.manual_seed(seed)
 
-        super(RelationExtractorCnnPosNetwork, self).__init__()
+        super(RelationExtractorCnnNetworkNoPos, self).__init__()
         self.logger.info("NGram Size is {}".format(ngram_context_size))
         self.dropout_rate = drop_rate
         # Use random weights if vocab size if passed in else load pretrained weights
@@ -24,7 +22,6 @@ class RelationExtractorCnnPosNetwork(nn.Module):
         self.set_embeddings(None)
         self.embedding_dim = embedding_dim
 
-        self.__pos_embedder__ = pos_embedder
 
         self.text_column_index = self.feature_lengths.argmax(axis=0)
 
@@ -39,15 +36,12 @@ class RelationExtractorCnnPosNetwork(nn.Module):
 
         self.cnn_layers = nn.ModuleList()
         total_cnn_out_size = 0
-        # The total embedding size if the text column + position for the rest
-        pos_embed_total_dim = (len(self.feature_lengths) - 1) * \
-                              self.pos_embedder.embeddings.shape[1]
-        total_dim_size = embedding_dim + pos_embed_total_dim
+
+        total_dim_size = embedding_dim
         self.logger.info(
-            "Word embedding size is {}, pos embedding size is {}, cnn_output size {}, total is {}".format(embedding_dim,
-                                                                                                          pos_embed_total_dim,
-                                                                                                          cnn_output,
-                                                                                                          total_dim_size))
+            "Word embedding size is {},  cnn_output size {}, total is {}".format(embedding_dim,
+                                                                                 cnn_output,
+                                                                                 total_dim_size))
 
         for k in self.windows_sizes:
             layer1_cnn_output = cnn_output
@@ -114,10 +108,6 @@ class RelationExtractorCnnPosNetwork(nn.Module):
     def logger(self):
         return logging.getLogger(__name__)
 
-    @property
-    def pos_embedder(self):
-        self.__pos_embedder__ = self.__pos_embedder__ or PositionEmbedder()
-        return self.__pos_embedder__
 
     def forward(self, feature_tuples):
 
@@ -132,32 +122,10 @@ class RelationExtractorCnnPosNetwork(nn.Module):
         self.logger.debug("Executing embeddings")
         embeddings = self.embeddings(text_transposed)
 
-        embeddings_with_pos = embeddings
-        self.logger.debug("Executing pos embedding")
-
-        for f in range(len(feature_tuples)):
-            if f == self.text_column_index: continue
-
-            entity = feature_tuples[f]  # .transpose(0, 1)
-
-            # TODO: avoid this loop, use builtin
-            batch_pos_embedding_entity = []
-
-            for i, (t, e, sentence_embedding) in enumerate(zip(text_transposed, entity, embeddings)):
-                sentence_pos_embedding = self.pos_embedder(t, e[0])
-
-                # Set pos_embedding to zero when pad token ( indicated by zero embedding)
-                sentence_pos_embedding[torch.all(sentence_embedding.eq(0.0), dim=1)] = 0.0
-                batch_pos_embedding_entity.append(sentence_pos_embedding)
-
-            batch_pos_embedding_entity_tensor = torch.stack(batch_pos_embedding_entity).to(
-                device=embeddings_with_pos.device)
-
-            embeddings_with_pos = torch.cat([embeddings_with_pos, batch_pos_embedding_entity_tensor], dim=2)
 
         # Final output
         # Conv1d takes in (batch, channels, seq_len), but raw embedded is (batch, seq_len, channels)
-        final_input = embeddings_with_pos.permute(0, 2, 1)
+        final_input = embeddings.permute(0, 2, 1)
 
         self.logger.debug("Running through layers")
         outputs = []

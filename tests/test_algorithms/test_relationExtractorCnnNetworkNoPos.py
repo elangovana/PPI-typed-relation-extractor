@@ -5,10 +5,10 @@ from unittest import TestCase
 import numpy as np
 import torch
 
-from modelnetworks.RelationExtractorCnnPosNetwork import RelationExtractorCnnPosNetwork
+from modelnetworks.RelationExtractorCnnNetworkNoPos import RelationExtractorCnnNetworkNoPos
 
 
-class TestRelationExtractorCnnPosNetwork(TestCase):
+class TestRelationExtractorCnnNetworkNoPos(TestCase):
     def setUp(self):
         fileConfig(os.path.join(os.path.dirname(__file__), 'logger.ini'))
 
@@ -27,7 +27,8 @@ class TestRelationExtractorCnnPosNetwork(TestCase):
         max_entype_len = 1
         entity = torch.LongTensor(batch_size, max_entype_len).random_(0, vocab_size)
 
-        sut = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=vector_dim, feature_lengths=np.array(
+        sut = RelationExtractorCnnNetworkNoPos(class_size=class_size, embedding_dim=vector_dim,
+                                               feature_lengths=np.array(
             [max_abstract_len, max_itype_len, max_entype_len]), embed_vocab_size=vocab_size)
 
         # Act
