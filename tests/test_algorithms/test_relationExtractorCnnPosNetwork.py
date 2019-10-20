@@ -5,10 +5,10 @@ from unittest import TestCase
 import numpy as np
 import torch
 
-from modelnetworks.RelationExtractorCnnPosNetworkProtein import RelationExtractorCnnPosNetworkProtein
+from modelnetworks.RelationExtractorCnnPosNetwork import RelationExtractorCnnPosNetwork
 
 
-class TestRelationExtractorCnnPosNetworkProtein(TestCase):
+class TestRelationExtractorCnnPosNetwork(TestCase):
     def setUp(self):
         fileConfig(os.path.join(os.path.dirname(__file__), 'logger.ini'))
 
@@ -21,13 +21,13 @@ class TestRelationExtractorCnnPosNetworkProtein(TestCase):
         max_abstract_len = 10
         abstract = torch.LongTensor(batch_size, max_abstract_len).random_(0, vocab_size)
 
-        sut = RelationExtractorCnnPosNetworkProtein(class_size=class_size, embedding_dim=vector_dim,
-                                                    feature_lengths=np.array(
+        sut = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=vector_dim,
+                                             feature_lengths=np.array(
                                                         [max_abstract_len]), embed_vocab_size=vocab_size,
-                                                    entity_markers=[1, 2])
+                                             entity_markers=[1, 2])
 
         # Act
-        actual = sut((abstract))
+        actual = sut((abstract,))
 
         # assert
         self.assertEqual(actual.shape, torch.Size([batch_size, class_size]))

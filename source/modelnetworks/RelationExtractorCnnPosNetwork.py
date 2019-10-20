@@ -7,7 +7,7 @@ import torch.nn as nn
 from algorithms.PositionEmbedder import PositionEmbedder
 
 
-class RelationExtractorCnnPosNetworkProtein(nn.Module):
+class RelationExtractorCnnPosNetwork(nn.Module):
 
     def __init__(self, class_size, embedding_dim, feature_lengths, entity_markers, embed_vocab_size=0,
                  ngram_context_size=5, seed=777,
@@ -18,7 +18,7 @@ class RelationExtractorCnnPosNetworkProtein(nn.Module):
         self.feature_lengths = feature_lengths
         torch.manual_seed(seed)
 
-        super(RelationExtractorCnnPosNetworkProtein, self).__init__()
+        super(RelationExtractorCnnPosNetwork, self).__init__()
         self.logger.info("NGram Size is {}".format(ngram_context_size))
         self.dropout_rate = drop_rate
         # Use random weights if vocab size if passed in else load pretrained weights
@@ -120,12 +120,12 @@ class RelationExtractorCnnPosNetworkProtein(nn.Module):
         self.__pos_embedder__ = self.__pos_embedder__ or PositionEmbedder()
         return self.__pos_embedder__
 
-    def forward(self, input):
+    def forward(self, features):
 
         # The input format is tuples of features.. where each item in tuple is a shape feature_len * batch_szie
 
         # Assume text is when the feature length is max..
-
+        input = features[0]
         self.logger.debug("Executing embeddings")
         embeddings = self.embeddings(input)
 

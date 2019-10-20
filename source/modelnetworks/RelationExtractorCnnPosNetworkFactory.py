@@ -1,10 +1,10 @@
 import logging
 
 from modelnetworks.NetworkFactoryBase import NetworkFactoryBase
-from modelnetworks.RelationExtractorCnnPosNetworkProtein import RelationExtractorCnnPosNetworkProtein
+from modelnetworks.RelationExtractorCnnPosNetwork import RelationExtractorCnnPosNetwork
 
 
-class RelationExtractorCnnPosNetworkFactoryProtein(NetworkFactoryBase):
+class RelationExtractorCnnPosNetworkFactory(NetworkFactoryBase):
 
     def get_network(self, class_size, embedding_dim, feature_lens, **kwargs):
         dropout_rate_cnn = float(self._get_value(kwargs, "dropout_rate_cnn", ".5"))
@@ -12,11 +12,11 @@ class RelationExtractorCnnPosNetworkFactoryProtein(NetworkFactoryBase):
         fc_drop_out_rate = float(self._get_value(kwargs, "fc_drop_out_rate", ".5"))
 
         entity_markers_indices = kwargs["entity_markers_indices"]
-        model = RelationExtractorCnnPosNetworkProtein(class_size=class_size, embedding_dim=embedding_dim,
-                                                      feature_lengths=feature_lens, cnn_output=cnn_output,
-                                                      dropout_rate_cnn=dropout_rate_cnn,
-                                                      dropout_rate_fc=fc_drop_out_rate,
-                                                      entity_markers=entity_markers_indices)
+        model = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=embedding_dim,
+                                               feature_lengths=feature_lens, cnn_output=cnn_output,
+                                               dropout_rate_cnn=dropout_rate_cnn,
+                                               dropout_rate_fc=fc_drop_out_rate,
+                                               entity_markers=entity_markers_indices)
 
         return model
 
