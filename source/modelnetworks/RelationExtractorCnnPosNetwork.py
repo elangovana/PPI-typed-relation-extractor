@@ -13,7 +13,7 @@ class RelationExtractorCnnPosNetwork(nn.Module):
                  ngram_context_size=5, seed=777,
                  drop_rate=.1, pos_embedder=None, dropout_rate_cnn=.5, dropout_rate_fc=0.5, cnn_output=50,
                  fc_layer_size=100):
-        self.entity_markers = entity_markers or ["PROTEIN1", "PROTEIN2"]
+        self.entity_markers = entity_markers
         self.embed_vocab_size = embed_vocab_size
         self.feature_lengths = feature_lengths
         torch.manual_seed(seed)
