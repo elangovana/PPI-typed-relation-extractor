@@ -9,6 +9,10 @@ class PpiAimedDatasetYlhsieh(CustomDatasetBase):
     Represents the custom PPI Aimed dataset
     """
 
+    @property
+    def entity_markers(self):
+        return ["PROTEIN1", "PROTEIN2"]
+
     def __init__(self, file_path_or_dataframe, transformer=None):
         self._file_path = file_path_or_dataframe
         self.transformer = transformer
@@ -63,7 +67,7 @@ class PpiAimedDatasetYlhsieh(CustomDatasetBase):
 
     @property
     def entity_column_indices(self):
-        return [1, 3]
+        raise NotImplementedError
 
     @property
     def text_column_index(self):

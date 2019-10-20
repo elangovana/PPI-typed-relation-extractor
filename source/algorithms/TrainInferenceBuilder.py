@@ -52,7 +52,7 @@ class TrainInferenceBuilder:
 
         # preprocess steps TransformProteinMask
         preprocess_steps = []
-        special_words = []
+        special_words = self.dataset.entity_markers
 
         # Add sentence tokenisor
         sentence_tokenisor = TransformSentenceTokenisor(text_column_index=self.dataset.text_column_index,
@@ -86,6 +86,8 @@ class TrainInferenceBuilder:
         #                                        dropout_rate_cnn=dropout_rate_cnn,
         #                                        dropout_rate_fc=fc_drop_out_rate)
 
+        special_words_dict = text_to_index.get_specialwords_dict()
+        self.additional_args["entity_markers_indices"] = [special_words_dict[e] for e in self.dataset.entity_markers]
         model_factory = NetworkFactoryLocator().get_factory(self.network_factory_name)
         model = model_factory.get_network(class_size, self.embedding_dim, np_feature_lens, **self.additional_args)
 

@@ -9,6 +9,10 @@ class PpiNoInteractionDataset(CustomDatasetBase):
     Represents the custom PPI dataset with no interaction
     """
 
+    @property
+    def entity_markers(self):
+        return ["PROTEIN1", "PROTEIN2"]
+
     def __init__(self, file_path, interaction_type=None, transformer=None):
         self.transformer = transformer
         self._file_path = file_path

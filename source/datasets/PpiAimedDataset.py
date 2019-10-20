@@ -9,6 +9,10 @@ class PpiAimedDataset(CustomDatasetBase):
     Represents the custom PPI Aimed dataset
     """
 
+    @property
+    def entity_markers(self):
+        return []
+
     def __init__(self, file_path_or_dataframe, self_relations_filter=True, transformer=None):
         self._file_path = file_path_or_dataframe
         self.transformer = transformer

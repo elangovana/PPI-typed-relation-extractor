@@ -9,7 +9,15 @@ class PpiAimedDatasetPreprocessed(CustomDatasetBase):
     Represents the custom PPI Aimed dataset
     """
 
-    def __init__(self, file_path_or_dataframe, self_relations_filter=True, transformer=None):
+    @property
+    def entity_column_indices(self):
+        raise NotImplementedError
+
+    @property
+    def entity_markers(self):
+        return ["PROTEIN1", "PROTEIN2"]
+
+    def __init__(self, file_path_or_dataframe, transformer=None):
         self._file_path = file_path_or_dataframe
         self.transformer = transformer
         # Read json

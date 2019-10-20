@@ -58,3 +58,7 @@ class PPIDataset(CustomDatasetBase):
     @property
     def text_column_index(self):
         return 0
+
+    @property
+    def entity_markers(self):
+        return []

@@ -22,3 +22,7 @@ class CustomDatasetBase(Dataset):
     @property
     def text_column_index(self):
         raise NotImplementedError
+
+    @property
+    def entity_markers(self):
+        raise NotImplementedError
