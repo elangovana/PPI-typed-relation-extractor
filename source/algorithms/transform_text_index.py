@@ -103,7 +103,7 @@ class TransformTextToIndex:
 
         vocab_index_train = count_vectoriser.vocabulary_
 
-        # Set up so that the vocab of pad token
+        # Set up so that the special words index doesnt change
         final_dict = special_words_dict.copy()
         for k in vocab_index_train:
             if k not in final_dict:
