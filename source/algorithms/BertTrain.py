@@ -11,8 +11,15 @@ from algorithms.result_writer import ResultWriter
 
 class BertTrain:
 
-    def __init__(self, device=None, epochs=10, early_stopping_patience=20):
+    def __init__(self, device=None, epochs=10, early_stopping_patience=20, accumulation_steps=1):
+        """
 
+        :param device:
+        :param epochs:
+        :param early_stopping_patience:
+        :param accumulation_steps: The accumulation steps for gradient accumulation
+        """
+        self.accumulation_steps = accumulation_steps
         self.early_stopping_patience = early_stopping_patience
         self.epochs = epochs
         self.snapshotter = None
@@ -70,7 +77,6 @@ class BertTrain:
         :param loss_function: Pytorch loss function
         :param optimizer: Optimiser
         """
-        losses = []
         best_results = None
         start = datetime.datetime.now()
         iterations = 0
@@ -98,7 +104,6 @@ class BertTrain:
 
                 # Step 2. train
                 model_network.train()
-                model_network.zero_grad()
 
                 # Step 3. Run the forward pass
                 # words
@@ -107,14 +112,15 @@ class BertTrain:
 
                 # Step 4. Compute loss
                 self.logger.debug("Running loss")
-                loss = loss_function(predicted, batch_y)
+                loss = loss_function(predicted, batch_y) / self.accumulation_steps
+                loss.backward()
 
                 # Step 5. Do the backward pass and update the gradient
-                self.logger.debug("Running backwoard")
-                loss.backward()
-                optimizer.step()
-
-                losses.append(loss.item())
+                # this would accumulate gradient
+                if (idx + 1) % self.accumulation_steps == 0:
+                    self.logger.debug("Running backwoard")
+                    optimizer.step()
+                    model_network.zero_grad()
 
             actuals_train, predicted_train, train_loss = self.validate(loss_function, model_network, data_iter)
 

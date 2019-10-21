@@ -77,7 +77,9 @@ class BertTrainInferenceBuilder:
         self.logger.info("Using loss function {}".format(type(loss_function)))
 
         # Trainer
-        trainer = BertTrain(epochs=self.epochs, early_stopping_patience=self.patience_epochs)
+        accumulation_steps = int(self._get_value(self.additional_args, "accumulation_steps", 1))
+        trainer = BertTrain(epochs=self.epochs, early_stopping_patience=self.patience_epochs,
+                            accumulation_steps=accumulation_steps)
 
         pipeline = BertTrainInferencePipeline(model=model, loss_function=loss_function,
                                               trainer=trainer,
