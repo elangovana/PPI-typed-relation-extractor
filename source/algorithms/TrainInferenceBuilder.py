@@ -5,6 +5,7 @@ from torch import nn
 
 from algorithms.DataPipeline import DataPipeline
 from algorithms.LabelPipeline import LabelPipeline
+from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
 from algorithms.PretrainedEmbedderLoaderMinimum import PretrainedEmbedderLoaderMinimum
 from algorithms.Train import Train
 from algorithms.TrainInferencePipeline import TrainInferencePipeline
@@ -47,8 +48,12 @@ class TrainInferenceBuilder:
 
     def get_trainpipeline(self):
         # Embedder loader
-        # embedder_loader = PretrainedEmbedderLoader(TransformTextToIndex.pad_token())
-        embedder_loader = PretrainedEmbedderLoaderMinimum(TransformTextToIndex.pad_token(), dim=self.embedding_dim)
+        # TODO clean this up
+        use_min_dict = bool(int(self._get_value(self.additional_args, "use_min_dict", "1")))
+        if use_min_dict:
+            embedder_loader = PretrainedEmbedderLoaderMinimum(TransformTextToIndex.pad_token(), dim=self.embedding_dim)
+        else:
+            embedder_loader = PretrainedEmbedderLoader(TransformTextToIndex.pad_token())
 
         # preprocess steps TransformProteinMask
         preprocess_steps = []
@@ -70,21 +75,6 @@ class TrainInferenceBuilder:
         label_pipeline = LabelPipeline(label_reshaper=label_reshaper, label_encoder=label_encoder)
 
         np_feature_lens = np.array(self.dataset.feature_lens)
-
-        # network
-        # model = RelationExtractorBiLstmNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
-        #                                        feature_lengths=np_feature_lens, hidden_size=self.lstm_hidden_size,
-        #                                        dropout_rate_fc=self.dropout_rate_fc, num_layers=self.num_layers,
-        #                                        kernal_size=self.pooling_kernel_size, fc_layer_size=self.fc_layer_size,
-        #                                        lstm_dropout=.5)
-
-        # dropout_rate_cnn = float(self._get_value(self.additional_args, "dropout_rate_cnn", ".5"))
-        # cnn_output = int(self._get_value(self.additional_args, "cnn_output", "100"))
-        # fc_drop_out_rate = float(self._get_value(self.additional_args, "fc_drop_out_rate", ".5"))
-        # model = RelationExtractorCnnPosNetwork(class_size=class_size, embedding_dim=self.embedding_dim,
-        #                                        feature_lengths=np_feature_lens, cnn_output=cnn_output,
-        #                                        dropout_rate_cnn=dropout_rate_cnn,
-        #                                        dropout_rate_fc=fc_drop_out_rate)
 
         special_words_dict = text_to_index.get_specialwords_dict()
         self.additional_args["entity_markers_indices"] = [special_words_dict[e] for e in self.dataset.entity_markers]
