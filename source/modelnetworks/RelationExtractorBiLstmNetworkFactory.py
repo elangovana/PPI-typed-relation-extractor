@@ -26,10 +26,13 @@ class RelationExtractorBiLstmNetworkFactory(NetworkFactoryBase):
         lstm_hidden_size = int(self._get_value(kwargs, "lstm_hidden_size", "64"))
         entity_markers_indices = kwargs["entity_markers_indices"]
 
+        fine_tune_embeddings = bool(int(self._get_value(kwargs, "fine_tune_embeddings", "1")))
+
         model = RelationExtractorBiLstmNetwork(class_size=class_size, embedding_dim=embedding_dim,
                                                feature_lengths=feature_lens, hidden_size=lstm_hidden_size,
                                                dropout_rate_fc=dropout_rate_fc, num_layers=lstm_num_layers,
                                                kernal_size=pooling_kernel_size, fc_layer_size=fc_layer_size,
-                                               lstm_dropout=lstm_dropout, entity_markers=entity_markers_indices)
+                                               lstm_dropout=lstm_dropout, entity_markers=entity_markers_indices,
+                                               fine_tune_embeddings=fine_tune_embeddings)
 
         return model
