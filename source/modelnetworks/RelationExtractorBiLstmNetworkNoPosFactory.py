@@ -22,10 +22,12 @@ class RelationExtractorBiLstmNetworkFactoryNoPos(NetworkFactoryBase):
         dropout_rate_fc = float(self._get_value(kwargs, "fc_drop_out_rate", ".5"))
 
         lstm_hidden_size = int(self._get_value(kwargs, "lstm_hidden_size", "64"))
+        fine_tune_embeddings = bool(int(self._get_value(kwargs, "fine_tune_embeddings", "1")))
 
         model = RelationExtractorBiLstmNetworkNoPos(class_size=class_size, embedding_dim=embedding_dim,
                                                     feature_lengths=feature_lens, hidden_size=lstm_hidden_size,
                                                     dropout_rate_fc=dropout_rate_fc, num_layers=lstm_num_layers,
-                                                    lstm_dropout=lstm_dropout)
+                                                    lstm_dropout=lstm_dropout,
+                                                    fine_tune_embeddings=fine_tune_embeddings)
 
         return model

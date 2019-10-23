@@ -13,7 +13,8 @@ Proceedings of the Eighth International Joint Conference on Natural Language Pro
     """
 
     def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0, seed=None,
-                 hidden_size=75, dropout_rate_fc=0.2, num_layers=2, lstm_dropout=.3):
+                 hidden_size=75, dropout_rate_fc=0.2, num_layers=2, lstm_dropout=.3, fine_tune_embeddings=True):
+        self.fine_tune_embeddings = fine_tune_embeddings
         self.embed_vocab_size = embed_vocab_size
         self.feature_lengths = feature_lengths
         if seed is None:
@@ -61,14 +62,14 @@ Proceedings of the Eighth International Joint Conference on Natural Language Pro
         if self.__embeddings is None:
             assert self.embed_vocab_size > 0, "Please set the vocab size for using random embeddings "
             self.__embeddings = nn.Embedding(self.embed_vocab_size, self.embedding_dim)
-            self.__embeddings.weight.requires_grad = True
+            self.__embeddings.weight.requires_grad = self.fine_tune_embeddings
 
         return self.__embeddings
 
     def set_embeddings(self, value):
         self.__embeddings = value
         if self.__embeddings is not None:
-            self.__embeddings.weight.requires_grad = True
+            self.__embeddings.weight.requires_grad = self.fine_tune_embeddings
 
     @property
     def logger(self):
