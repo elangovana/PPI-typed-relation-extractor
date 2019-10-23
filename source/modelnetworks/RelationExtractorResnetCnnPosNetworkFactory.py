@@ -26,6 +26,8 @@ class RelationExtractorResnetCnnPosNetworkFactory(NetworkFactoryBase):
         fc_drop_out_rate = float(self._get_value(kwargs, "fc_drop_out_rate", ".5"))
         input_drop_out_rate = float(self._get_value(kwargs, "input_drop_out_rate", ".8"))
 
+        fine_tune_embeddings = bool(int(self._get_value(kwargs, "fine_tune_embeddings", "1")))
+
         model = RelationExtractorResnetCnnPosNetwork(class_size=class_size, embedding_dim=embedding_dim,
                                                      feature_lengths=feature_lens,
                                                      windows_size=cnn_kernel_size, dropout_rate_cnn=dropout_rate_cnn,
@@ -34,6 +36,7 @@ class RelationExtractorResnetCnnPosNetworkFactory(NetworkFactoryBase):
                                                      cnn_stride=1, pool_kernel=pooling_kernel_size,
                                                      pool_stride=pool_stride, fc_layer_size=fc_layer_size,
                                                      fc_dropout_rate=fc_drop_out_rate,
-                                                     input_dropout_rate=input_drop_out_rate)
+                                                     input_dropout_rate=input_drop_out_rate,
+                                                     fine_tune_embeddings=fine_tune_embeddings)
 
         return model

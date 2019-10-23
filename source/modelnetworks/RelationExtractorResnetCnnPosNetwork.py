@@ -11,7 +11,9 @@ class RelationExtractorResnetCnnPosNetwork(nn.Module):
 
     def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0, pos_embedder=None,
                  windows_size=3, dropout_rate_cnn=.5, cnn_output=64, cnn_num_layers=3, cnn_stride=1, pool_kernel=3,
-                 pool_stride=2, fc_layer_size=256, fc_dropout_rate=.5, input_dropout_rate=.2, seed=777):
+                 pool_stride=2, fc_layer_size=256, fc_dropout_rate=.5, input_dropout_rate=.2, seed=777,
+                 fine_tune_embeddings=True):
+        self.fine_tune_embeddings = fine_tune_embeddings
         self.embed_vocab_size = embed_vocab_size
         self.feature_lengths = feature_lengths
         torch.manual_seed(seed)
@@ -106,14 +108,14 @@ class RelationExtractorResnetCnnPosNetwork(nn.Module):
         if self.__embeddings is None:
             assert self.embed_vocab_size > 0, "Please set the vocab size for using random embeddings "
             self.__embeddings = nn.Embedding(self.embed_vocab_size, self.embedding_dim)
-            self.__embeddings.weight.requires_grad = True
+            self.__embeddings.weight.requires_grad = self.fine_tune_embeddings
 
         return self.__embeddings
 
     def set_embeddings(self, value):
         self.__embeddings = value
         if self.__embeddings is not None:
-            self.__embeddings.weight.requires_grad = True
+            self.__embeddings.weight.requires_grad = self.fine_tune_embeddings
 
     @property
     def logger(self):
