@@ -4,7 +4,7 @@ from modelnetworks.NetworkFactoryBase import NetworkFactoryBase
 from modelnetworks.RelationExtractorDynamicEntityBiLstmNetwork import RelationExtractorDynamicEntityBiLstmNetwork
 
 
-class RelationExtractorBiLstmNetworkFactory(NetworkFactoryBase):
+class RelationExtractorDynamicEntityBiLstmNetworkFactory(NetworkFactoryBase):
 
     @property
     def logger(self):
