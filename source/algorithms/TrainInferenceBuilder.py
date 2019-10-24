@@ -65,7 +65,9 @@ class TrainInferenceBuilder:
         preprocess_steps.append(("Sentence_tokenisor", sentence_tokenisor))
 
         # Create data and label pipeline
-        text_to_index = TransformTextToIndex(max_feature_lens=self.dataset.feature_lens, special_words=special_words)
+        min_word_doc_frequency = int(self._get_value(self.additional_args, "min_word_doc_frequency", "5"))
+        text_to_index = TransformTextToIndex(max_feature_lens=self.dataset.feature_lens, special_words=special_words,
+                                             min_vocab_doc_frequency=min_word_doc_frequency)
         data_pipeline = DataPipeline(preprocess_steps=preprocess_steps, text_to_index=text_to_index)
 
         # Label pipeline
