@@ -119,8 +119,9 @@ class TransformTextToIndex:
 
         tokeniser = CountVectorizer().build_tokenizer()
         pad_index = self._vocab_dict[f(self.pad_token())]
-
+        unknown_index = self._vocab_dict[f(TransformTextToIndex.UNK_token())]
         batches = []
+        unknown_words_count = 0
         for idx, b in enumerate(x):
             b_x = b[0]
             b_y = b[1]
@@ -129,14 +130,20 @@ class TransformTextToIndex:
                 row = []
                 max = self.max_feature_lens[c_index]
                 for _, r in enumerate(c):
-                    tokens = [self._vocab_dict.get(f(w), self._vocab_dict[f(TransformTextToIndex.UNK_token())]) for w in
+                    tokens = [self._vocab_dict.get(f(w), unknown_index) for w in
                               tokeniser(r)][0:max]
                     tokens = tokens + [pad_index] * (max - len(tokens))
                     row.append(tokens)
+                    # Unknown words count
+
+                    unknown_words_count += sum(t == unknown_index for t in tokens)
                 row = torch.Tensor(row).long()
                 col.append(row)
 
             batches.append([col, b_y])
+
+        self.logger.info("Total number of unknown occurances {}".format(unknown_words_count))
+
         self.logger.info("Completed TransformTextToIndex")
         return batches
 
