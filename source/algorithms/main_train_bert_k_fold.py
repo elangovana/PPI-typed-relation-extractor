@@ -2,21 +2,29 @@ import argparse
 import logging
 import os
 import sys
+import tempfile
 
-from sklearn.metrics import precision_recall_fscore_support, confusion_matrix
+import pandas as pd
+from sklearn.model_selection import KFold
 
 from algorithms.dataset_factory import DatasetFactory
-from trainpipelinesbuilders.BertTrainInferenceBuilder import BertTrainInferenceBuilder
+from algorithms.main_train_bert import run
 
 
-def run(dataset_factory_name, network_factory_name, train_file, val_file, model_dir, out_dir,
-        epochs,
-        earlystoppingpatience, additionalargs):
+def k_fold(data_file, n_splits=10):
+    kf = KFold(n_splits=n_splits, random_state=777, shuffle=True)
+    df = pd.read_json(data_file)
+
+    for train_index, test_index in kf.split(df, groups=df["isValid"]):
+        train, val = df.iloc[train_index], df.iloc[test_index]
+
+        yield (train, val)
+
+
+def run_k_fold(dataset_factory_name, network_factory_name, train_file, val_file, model_dir, out_dir,
+               epochs,
+               earlystoppingpatience, additionalargs):
     logger = logging.getLogger(__name__)
-
-    dataset_factory = DatasetFactory().get_datasetfactory(dataset_factory_name)
-
-    train, val = dataset_factory.get_dataset(train_file), dataset_factory.get_dataset(val_file)
 
     if not os.path.exists(out_dir) or not os.path.isdir(out_dir):
         raise FileNotFoundError("The path {} should exist and must be a directory".format(out_dir))
@@ -24,22 +32,24 @@ def run(dataset_factory_name, network_factory_name, train_file, val_file, model_
     if not os.path.exists(model_dir) or not os.path.isdir(model_dir):
         raise FileNotFoundError("The path {} should exist and must be a directory".format(model_dir))
 
-    builder = BertTrainInferenceBuilder(dataset=train,
-                                        model_dir=model_dir, output_dir=out_dir, epochs=epochs,
-                                        patience_epochs=earlystoppingpatience,
-                                        extra_args=additionalargs, network_factory_name=network_factory_name)
-    train_pipeline = builder.get_trainpipeline()
-    val_results, val_actuals, val_predicted = train_pipeline(train, val)
-    precision, recall, fscore, support = precision_recall_fscore_support(val_actuals, val_predicted,
-                                                                         average='binary',
-                                                                         pos_label=train.positive_label)
-    tn, fp, fn, tp = confusion_matrix(val_actuals, val_predicted).ravel()
+    k_val_results = []
+    for k, (train_df, val_df) in enumerate(k_fold(train_file)):
+        with tempfile.NamedTemporaryFile() as tmp_train_spilt_file:
+            train_df.to_json(tmp_train_spilt_file.name)
+            with tempfile.NamedTemporaryFile() as tmp_val_split_file:
+                val_df.to_json(tmp_val_split_file.name)
 
-    logger.info("Confusion matrix: tn, fp, fn, tp  is {}".format((tn, fp, fn, tp)))
-    logger.info("Scores: precision, recall, fscore, support {}".format((precision, recall, fscore, support)))
-    logger.info(" F-score is {}".format(fscore))
+                logger.info("Running fold {}".format(k))
 
-    return val_results, val_actuals, val_predicted
+                val_results, val_actuals, val_predicted = run(dataset_factory_name, network_factory_name,
+                                                              tmp_train_spilt_file.name, tmp_val_split_file.name,
+                                                              model_dir, out_dir,
+                                                              epochs,
+                                                              earlystoppingpatience, additionalargs)
+
+            k_val_results.append(val_results)
+
+            logger.info("Fold {}, F-score is {}".format(k, val_results))
 
 
 if "__main__" == __name__:
@@ -55,12 +65,6 @@ if "__main__" == __name__:
 
     parser.add_argument("--traindir",
                         help="The input train  dir", default=os.environ.get("SM_CHANNEL_TRAIN", "."))
-
-    parser.add_argument("--valfile",
-                        help="The input val file wrt to val  dir", required=True)
-
-    parser.add_argument("--valdir",
-                        help="The input val dir", default=os.environ.get("SM_CHANNEL_VAL", "."))
 
     parser.add_argument("--pretrained_biobert_dir", help="The pretained biobert model dir",
                         default=os.environ.get("SM_CHANNEL_PRETRAINED_BIOBERT", None))
@@ -95,5 +99,5 @@ if "__main__" == __name__:
 
     trainjson = os.path.join(args.traindir, args.trainfile)
     valjson = os.path.join(args.valdir, args.valfile)
-    run(args.dataset, args.network, trainjson, valjson,
-        args.modeldir, args.outdir, args.epochs, args.earlystoppingpatience, additional_dict)
+    run_k_fold(args.dataset, args.network, trainjson, valjson,
+               args.modeldir, args.outdir, args.epochs, args.earlystoppingpatience, additional_dict)
