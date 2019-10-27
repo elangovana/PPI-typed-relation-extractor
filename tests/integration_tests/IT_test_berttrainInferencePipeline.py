@@ -33,7 +33,7 @@ class ITTestBertTrainInferencePipeline(TestCase):
 
         factory = BertTrainInferenceBuilder(dataset=mock_dataset,
                                             output_dir=out_dir, model_dir=out_dir, epochs=epochs,
-                                            extra_args={"biobert_model_dir": base_model_dir})
+                                            extra_args={"pretrained_biobert_dir": base_model_dir})
         sut = factory.get_trainpipeline()
         return sut
 
