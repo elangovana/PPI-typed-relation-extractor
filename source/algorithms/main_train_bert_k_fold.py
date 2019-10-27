@@ -21,7 +21,7 @@ def k_fold(data_file, n_splits=10):
         yield (train, val)
 
 
-def run_k_fold(dataset_factory_name, network_factory_name, train_file, val_file, model_dir, out_dir,
+def run_k_fold(dataset_factory_name, network_factory_name, train_file, model_dir, out_dir,
                epochs,
                earlystoppingpatience, additionalargs):
     logger = logging.getLogger(__name__)
@@ -98,6 +98,5 @@ if "__main__" == __name__:
     additional_dict["pretrained_biobert_dir"] = args.pretrained_biobert_dir
 
     trainjson = os.path.join(args.traindir, args.trainfile)
-    valjson = os.path.join(args.valdir, args.valfile)
-    run_k_fold(args.dataset, args.network, trainjson, valjson,
+    run_k_fold(args.dataset, args.network, trainjson,
                args.modeldir, args.outdir, args.epochs, args.earlystoppingpatience, additional_dict)
