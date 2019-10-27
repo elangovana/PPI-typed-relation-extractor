@@ -2,14 +2,14 @@ import argparse
 import logging
 import os
 import sys
+import tempfile
 
 import numpy as np
 import pandas as pd
-from sklearn.metrics import precision_recall_fscore_support, confusion_matrix
 from sklearn.model_selection import KFold
 
-from algorithms.TrainInferenceBuilder import TrainInferenceBuilder
 from algorithms.dataset_factory import DatasetFactory
+from algorithms.main_train import run
 from algorithms.network_factory_locator import NetworkFactoryLocator
 
 
@@ -36,11 +36,10 @@ def k_fold(data_file, n_splits=10):
         yield (train, val)
 
 
-def run(dataset_factory_name, network_factory_name, train_file, embedding_file, embed_dim, model_dir, out_dir,
-        epochs, earlystoppingpatience, additionalargs):
+def run_k_fold(dataset_factory_name, network_factory_name, train_file, embedding_file, embed_dim, model_dir, out_dir,
+               epochs, earlystoppingpatience, additionalargs):
     logger = logging.getLogger(__name__)
 
-    dataset_factory = DatasetFactory().get_datasetfactory(dataset_factory_name)
 
     if not os.path.exists(out_dir) or not os.path.isdir(out_dir):
         raise FileNotFoundError("The path {} should exist and must be a directory".format(out_dir))
@@ -49,40 +48,26 @@ def run(dataset_factory_name, network_factory_name, train_file, embedding_file, 
         raise FileNotFoundError("The path {} should exist and must be a directory".format(model_dir))
 
     k_val_results = []
-    k_pr_recall_results = []
-    k_t_n_results = []
-    for k, (train_df, val_df) in enumerate(k_fold(train_file)):
-        train = dataset_factory.get_dataset(train_df)
-        val = dataset_factory.get_dataset(val_df)
-        logger.info("Running fold {}".format(k))
-        with open(embedding_file, "r") as embedding:
-            # Ignore the first line as it contains the number of words and vector dim
-            head = embedding.readline()
-            logger.info("The embedding header is {}".format(head))
-            builder = TrainInferenceBuilder(dataset=train, embedding_dim=embed_dim, embedding_handle=embedding,
-                                            model_dir=model_dir, output_dir=out_dir, epochs=epochs,
-                                            patience_epochs=earlystoppingpatience,
-                                            extra_args=additionalargs, network_factory_name=network_factory_name)
-            train_pipeline = builder.get_trainpipeline()
 
-            val_results, val_actuals, val_predicted = train_pipeline(train, val)
-            precision, recall, fscore, support = precision_recall_fscore_support(val_actuals, val_predicted,
-                                                                                 average='binary',
-                                                                                 pos_label=train.positive_label)
-            tn, fp, fn, tp = confusion_matrix(val_actuals, val_predicted).ravel()
+    for k, (train_df, val_df) in enumerate(k_fold(train_file)):
+        with tempfile.NamedTemporaryFile() as tmp_train_spilt_file:
+            train_df.to_json(tmp_train_spilt_file.name)
+            with tempfile.NamedTemporaryFile() as tmp_val_split_file:
+                val_df.to_json(tmp_val_split_file.name)
+
+                logger.info("Running fold {}".format(k))
+
+                val_results, val_actuals, val_predicted = run(dataset_factory_name, network_factory_name,
+                                                              tmp_train_spilt_file.name, tmp_val_split_file.name,
+                                                              embedding_file, embed_dim, model_dir, out_dir,
+                                                              epochs,
+                                                              earlystoppingpatience, additionalargs)
 
             k_val_results.append(val_results)
-            k_t_n_results.append((tn, fp, fn, tp))
-            k_pr_recall_results.append((precision, recall, fscore, support))
-
-            logger.info("tn, fp, fn, tp  is {}".format((tn, fp, fn, tp)))
-            logger.info("precision, recall, fscore, support".format((precision, recall, fscore, support)))
 
             logger.info("Fold {}, F-score is {}".format(k, val_results))
 
     print("Average F-score", np.asarray(k_val_results).mean())
-    print("K Fold tn, fp, fn, tp", k_t_n_results)
-    print("K Fold precision, recall, fscore, support", k_pr_recall_results)
 
 
 if "__main__" == __name__:
@@ -133,5 +118,5 @@ if "__main__" == __name__:
 
     trainjson = os.path.join(args.traindir, args.trainfile)
     embeddingfile = os.path.join(args.embeddingdir, args.embeddingfile)
-    run(args.dataset, args.network, trainjson, embeddingfile, args.embeddim,
-        args.modeldir, args.outdir, args.epochs, args.earlystoppingpatience, additional_dict)
+    run_k_fold(args.dataset, args.network, trainjson, embeddingfile, args.embeddim,
+               args.modeldir, args.outdir, args.epochs, args.earlystoppingpatience, additional_dict)

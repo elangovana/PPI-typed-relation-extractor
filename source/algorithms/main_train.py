@@ -3,7 +3,7 @@ import logging
 import os
 import sys
 
-from algorithms.TrainInferenceBuilder import TrainInferenceBuilder
+from algorithms.TrainWorkflow import TrainWorkflow
 from algorithms.dataset_factory import DatasetFactory
 from algorithms.network_factory_locator import NetworkFactoryLocator
 
@@ -13,26 +13,21 @@ def run(dataset_factory_name, network_factory_name, train_file, val_file, embedd
         earlystoppingpatience, additionalargs):
     logger = logging.getLogger(__name__)
 
-    dataset_factory = DatasetFactory().get_datasetfactory(dataset_factory_name)
-
-    train, val = dataset_factory.get_dataset(train_file), dataset_factory.get_dataset(val_file)
-
     if not os.path.exists(out_dir) or not os.path.isdir(out_dir):
         raise FileNotFoundError("The path {} should exist and must be a directory".format(out_dir))
 
     if not os.path.exists(model_dir) or not os.path.isdir(model_dir):
         raise FileNotFoundError("The path {} should exist and must be a directory".format(model_dir))
 
-    with open(embedding_file, "r") as embedding:
-        # Ignore the first line as it contains the number of words and vector dim
-        head = embedding.readline()
-        logger.info("The embedding header is {}".format(head))
-        builder = TrainInferenceBuilder(dataset=train, embedding_dim=embed_dim, embedding_handle=embedding,
-                                        model_dir=model_dir, output_dir=out_dir, epochs=epochs,
-                                        patience_epochs=earlystoppingpatience,
-                                        extra_args=additionalargs, network_factory_name=network_factory_name)
-        train_pipeline = builder.get_trainpipeline()
-        train_pipeline(train, val)
+    workflow = TrainWorkflow(dataset_factory_name=dataset_factory_name, network_factory_name=network_factory_name,
+                             embedding_dim=embed_dim, embedding_file=embedding_file,
+                             model_dir=model_dir, out_dir=out_dir, epochs=epochs,
+                             patience_epochs=earlystoppingpatience,
+                             extra_args=additionalargs)
+
+    val_results, val_actuals, val_predicted = workflow(train_file, val_file)
+
+    return val_results, val_actuals, val_predicted
 
 
 if "__main__" == __name__:
