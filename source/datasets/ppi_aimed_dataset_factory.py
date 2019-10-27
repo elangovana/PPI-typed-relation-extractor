@@ -7,7 +7,7 @@ from preprocessor.ProteinMasker import ProteinMasker
 class PpiAimedDatasetFactory(CustomDatasetFactoryBase):
 
     def get_dataset(self, file_path):
-        dataset = PpiAimedDataset(file_path_or_dataframe=file_path, self_relations_filter=True)
+        dataset = PpiAimedDataset(file_path_or_dataframe=file_path)
 
         mask = ProteinMasker(entity_column_indices=dataset.entity_column_indices, masks=["PROTEIN1", "PROTEIN2"],
                              text_column_index=dataset.text_column_index,

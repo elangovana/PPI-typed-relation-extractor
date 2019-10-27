@@ -13,7 +13,7 @@ class PpiAimedDataset(CustomDatasetBase):
     def entity_markers(self):
         return []
 
-    def __init__(self, file_path_or_dataframe, self_relations_filter=True, transformer=None):
+    def __init__(self, file_path_or_dataframe, transformer=None):
         self._file_path = file_path_or_dataframe
         self.transformer = transformer
         # Read json
@@ -25,10 +25,6 @@ class PpiAimedDataset(CustomDatasetBase):
             raise ValueError(
                 "The type of argument file_path_or_dataframe  must be a str or pandas dataframe, but is {}".format(
                     type(file_path_or_dataframe)))
-
-        # Filter interaction types if required
-        if self_relations_filter:
-            data_df = data_df.query('participant1 != participant2')
 
         # Filter features
         self._data_df = data_df[["passage", "participant1", "participant1_loc", "participant2", "participant2_loc"]]
