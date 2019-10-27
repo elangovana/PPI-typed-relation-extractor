@@ -8,15 +8,15 @@ from trainpipelinesbuilders.BertTrainInferenceBuilder import BertTrainInferenceB
 
 class ITTestBertTrainInferencePipeline(TestCase):
 
-    # def test_call_ppidataset(self):
-    #     # Arrange
-    #     mock_dataset_train = self._get_ppidataset()
-    #     mock_dataset_val = self._get_ppidataset()
-    #
-    #     sut = self._get_sut_train_pipeline(mock_dataset_train)
-    #
-    #     # Act
-    #     actual = sut(mock_dataset_train, mock_dataset_val)
+    def test_call_ppidataset(self):
+        # Arrange
+        mock_dataset_train = self._get_ppidataset()
+        mock_dataset_val = self._get_ppidataset()
+
+        sut = self._get_sut_train_pipeline(mock_dataset_train)
+
+        # Act
+        actual = sut(mock_dataset_train, mock_dataset_val)
 
     def test_call_aimeddataset(self):
         # Arrange
@@ -38,7 +38,6 @@ class ITTestBertTrainInferencePipeline(TestCase):
         return sut
 
     def _get_ppidataset(self):
-        # Arrange
         # Arrange
         train_file = os.path.join(os.path.dirname(__file__), "..", "data", "sample_train.json")
         factory = DatasetFactory().get_datasetfactory("PpiDatasetFactory")
