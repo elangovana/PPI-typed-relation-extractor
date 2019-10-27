@@ -47,7 +47,7 @@ class TrainWorkflow:
         tn, fp, fn, tp = confusion_matrix(val_actuals, val_predicted).ravel()
 
         self.logger.info("Confusion matrix: tn, fp, fn, tp  is {}".format((tn, fp, fn, tp)))
-        self.logger.info("Scores: precision, recall, fscore, support".format((precision, recall, fscore, support)))
+        self.logger.info("Scores: precision, recall, fscore, support {}".format((precision, recall, fscore, support)))
 
         self.logger.info(" F-score is {}".format(fscore))
 
