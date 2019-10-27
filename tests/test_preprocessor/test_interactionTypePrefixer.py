@@ -14,7 +14,6 @@ class TestInteractionTypePrefixer(TestCase):
 
         # Act
         actual = sut(data)
-        print(actual)
 
         # Assert
         self.assertSequenceEqual(expected, actual)

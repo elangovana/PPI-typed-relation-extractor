@@ -18,3 +18,5 @@ class InteractionTypePrefixer:
 
     def __call__(self, row_x):
         row_x[self.col_to_transform] = "QUERY{} {}".format(row_x[self.prefixer_col_index], row_x[self.col_to_transform])
+
+        return row_x
