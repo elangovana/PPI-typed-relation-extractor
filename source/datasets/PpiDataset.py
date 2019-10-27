@@ -20,7 +20,7 @@ class PPIDataset(CustomDatasetBase):
             data_df = data_df.query('interactionType == "{}"'.format(interaction_type))
 
         # Filter features
-        self._data_df = data_df[["normalised_abstract", "interactionType", "participant1Id", "participant2Id"]]
+        self._data_df = data_df[["normalised_abstract", "participant1Id", "participant2Id", "interactionType"]]
 
         # Set up labels
         if "isValid" in data_df.columns:
