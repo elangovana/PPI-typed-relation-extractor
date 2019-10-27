@@ -244,11 +244,18 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
 
 1. Next convert the xml to dataframe json and pre-process so that protien names that are not relevant are masked as "PROTEIN"
     
-    ```text
+    ```bash
     export PYTHONPATH=./source
     python source/datatransformer/AimedXmlToDataFramePreprocessed.py tests/test_datatransformer/data/sample_aimed_pyyasaol_converted.xml /tmp/df.json
     ```
     
+1. Run 10 fold training
+    
+    ```bash
+    python ./source/algorithms/main_train_k_fold.py  --trainfile aimedsample.json --traindir tests/data --embeddingfile tests/test_algorithms/sample_PubMed-and-PMC-w2v.bin.txt --outdir /tmp --modeldir /tmp --embeddim 200 --epochs 2 --dataset PpiAimedDatasetPreprocessedFactory
+
+    ```
+
     
 ## Other embeddings
 
@@ -277,5 +284,7 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
     ```bash
     export PYTHONPATH=./source
     python ./source/algorithms/main_train_bert.py --dataset PpiAimedDatasetFactory --trainfile Aimedsample.json --traindir tests/data/ --valfile Aimedsample.json --valdir tests/data --pretrained_biobert_dir <biobertdir>
-""
+
     ```
+    
+    
