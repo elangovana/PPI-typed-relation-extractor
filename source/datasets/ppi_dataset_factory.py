@@ -1,5 +1,6 @@
 from datasets.PpiDataset import PPIDataset
 from datasets.custom_dataset_factory_base import CustomDatasetFactoryBase
+from preprocessor.InteractionTypePrefixer import InteractionTypePrefixer
 from preprocessor.Preprocessor import Preprocessor
 from preprocessor.ProteinMasker import ProteinMasker
 
@@ -12,7 +13,9 @@ class PpiDatasetFactory(CustomDatasetFactoryBase):
         mask = ProteinMasker(entity_column_indices=dataset.entity_column_indices, masks=["PROTEIN1", "PROTEIN2"],
                              text_column_index=dataset.text_column_index)
 
-        transformer = Preprocessor([mask])
+        interaction_type_prefixer = InteractionTypePrefixer(col_to_transform=dataset.text_column_index,
+                                                            prefixer_col_index=3)
+        transformer = Preprocessor([mask, interaction_type_prefixer])
 
         dataset.transformer = transformer
 
