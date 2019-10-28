@@ -31,6 +31,10 @@ class TransformBertTextTokenise:
     def eos_token():
         return "<EOS>"
 
+    @staticmethod
+    def unk_token():
+        return "[UNK]"
+
     @property
     def vocab_dict(self):
         return self.tokeniser.vocab
@@ -49,6 +53,7 @@ class TransformBertTextTokenise:
         tokeniser = self.tokeniser.tokenize
 
         batches = []
+        unknown_tokens = 0
         for idx, b in enumerate(x):
             b_x = b[0]
             b_y = b[1]
@@ -58,11 +63,13 @@ class TransformBertTextTokenise:
                 max = self.max_feature_lens[c_index]
                 for _, r in enumerate(c):
                     tokens = tokeniser(r)[0:max - 2]
+                    unknown_tokens += sum([1 for t in tokens if t == self.unk_token()])
                     tokens = ['[CLS]'] + tokens + [pad] * (max - 2 - len(tokens)) + ['[SEP]']
                     row.append(tokens)
                 col.append(row)
 
             batches.append([col, b_y])
+        self.logger.info("Unknown tokens count {}".format(unknown_tokens))
         self.logger.info("Completed TransformBertTextTokenise")
         return batches
 
