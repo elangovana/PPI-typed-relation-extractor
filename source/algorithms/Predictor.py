@@ -14,7 +14,6 @@ class Predictor:
             for _, (batch_x, batch_y) in enumerate(dataloader):
 
                 # TODO: CLean this up
-
                 if isinstance(batch_x, list):
                     val_batch_idx = [t.to(device=device) for t in batch_x]
                 else:
@@ -25,7 +24,7 @@ class Predictor:
                 pred_binary = torch.max(pred_batch_y, 1)[1]
                 pred_flat = pred_binary.view(pred_binary.size())
 
-                predicted.append(pred_flat.numpy().tolist())
+                predicted.append(pred_flat.cpu().numpy().tolist())
 
-        scores = [r.numpy().tolist() for r in scores]
+        scores = [r.cpu().numpy().tolist() for r in scores]
         return predicted, scores
