@@ -51,7 +51,8 @@ class PpiMulticlassDataset(CustomDatasetBase):
 
     @property
     def positive_label(self):
-        return True
+        # Randomly return a label
+        return self._labels[0].tolist()[0]
 
     @property
     def feature_lens(self):
