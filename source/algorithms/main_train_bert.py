@@ -41,9 +41,9 @@ def run(dataset_factory_name, network_factory_name, train_file, val_file, model_
 
     print_average_scores(val_actuals, val_predicted, pos_label=train.positive_label, average='macro')
 
-    tn, fp, fn, tp = confusion_matrix(val_actuals, val_predicted).ravel()
+    confusion_matrix_results = confusion_matrix(val_actuals, val_predicted).ravel()
 
-    logger.info("Confusion matrix: tn, fp, fn, tp  is {}".format((tn, fp, fn, tp)))
+    logger.info("Confusion matrix: tn, fp, fn, tp  is {}".format(confusion_matrix_results))
 
     if test_file is not None:
         predict_test_set(dataset_factory, model_dir, out_dir, test_file, train_pipeline)

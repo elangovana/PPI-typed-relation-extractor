@@ -54,9 +54,9 @@ class TrainWorkflow:
 
         self.print_average_scores(val_actuals, val_predicted, pos_label=train.positive_label, average='macro')
 
-        tn, fp, fn, tp = confusion_matrix(val_actuals, val_predicted).ravel()
+        confusion_matrix_results = confusion_matrix(val_actuals, val_predicted).ravel()
 
-        self.logger.info("Confusion matrix: tn, fp, fn, tp  is {}".format((tn, fp, fn, tp)))
+        self.logger.info("Confusion matrix: tn, fp, fn, tp  is {}".format(confusion_matrix_results))
 
         if test_file is not None:
             train_pipeline = builder.get_trainpipeline()
