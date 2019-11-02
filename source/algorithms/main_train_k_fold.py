@@ -58,7 +58,7 @@ def run_k_fold(dataset_factory_name, network_factory_name, train_file, embedding
                 logger.info("Running fold {}".format(k))
 
                 val_results, val_actuals, val_predicted = run(dataset_factory_name, network_factory_name,
-                                                              tmp_train_spilt_file.name, tmp_val_split_file.name,
+                                                              tmp_train_spilt_file.name, tmp_val_split_file.name, None,
                                                               embedding_file, embed_dim, model_dir, out_dir,
                                                               epochs,
                                                               earlystoppingpatience, additionalargs)
