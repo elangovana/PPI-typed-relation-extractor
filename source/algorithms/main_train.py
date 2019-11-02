@@ -1,3 +1,4 @@
+
 import argparse
 import logging
 import os
@@ -8,7 +9,8 @@ from algorithms.dataset_factory import DatasetFactory
 from algorithms.network_factory_locator import NetworkFactoryLocator
 
 
-def run(dataset_factory_name, network_factory_name, train_file, val_file, embedding_file, embed_dim, model_dir, out_dir,
+def run(dataset_factory_name, network_factory_name, train_file, val_file, test_file, embedding_file, embed_dim,
+        model_dir, out_dir,
         epochs,
         earlystoppingpatience, additionalargs):
     logger = logging.getLogger(__name__)
@@ -25,9 +27,12 @@ def run(dataset_factory_name, network_factory_name, train_file, val_file, embedd
                              patience_epochs=earlystoppingpatience,
                              extra_args=additionalargs)
 
-    val_results, val_actuals, val_predicted = workflow(train_file, val_file)
+    val_results, val_actuals, val_predicted = workflow(train_file, val_file, test_file=test_file)
+
+
 
     return val_results, val_actuals, val_predicted
+
 
 
 if "__main__" == __name__:
@@ -49,6 +54,12 @@ if "__main__" == __name__:
 
     parser.add_argument("--valdir",
                         help="The input val dir", default=os.environ.get("SM_CHANNEL_VAL", "."))
+
+    parser.add_argument("--testfile",
+                        help="The input test file wrt to val  dir", required=False, default=None)
+
+    parser.add_argument("--testdir",
+                        help="The input test dir", default=os.environ.get("SM_CHANNEL_TEST", "."))
 
     parser.add_argument("--embeddingfile", help="The embedding file wrt to the embedding dir", required=True)
 
@@ -84,6 +95,11 @@ if "__main__" == __name__:
 
     trainjson = os.path.join(args.traindir, args.trainfile)
     valjson = os.path.join(args.valdir, args.valfile)
+
+    testjson = None
+    if args.testfile is not None:
+        testjson = os.path.join(args.testdir, args.testfile)
+
     embeddingfile = os.path.join(args.embeddingdir, args.embeddingfile)
-    run(args.dataset, args.network, trainjson, valjson, embeddingfile, args.embeddim,
+    run(args.dataset, args.network, trainjson, valjson, testjson, embeddingfile, args.embeddim,
         args.modeldir, args.outdir, args.epochs, args.earlystoppingpatience, additional_dict)

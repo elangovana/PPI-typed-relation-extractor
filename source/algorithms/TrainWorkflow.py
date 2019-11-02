@@ -1,5 +1,7 @@
 import logging
+import os
 
+import pandas as pd
 from sklearn.metrics import precision_recall_fscore_support, confusion_matrix
 
 from algorithms.TrainInferenceBuilder import TrainInferenceBuilder
@@ -26,7 +28,7 @@ class TrainWorkflow:
     def logger(self):
         return logging.getLogger(__name__)
 
-    def __call__(self, train_file, val_file):
+    def __call__(self, train_file, val_file, test_file=None):
         dataset_factory = DatasetFactory().get_datasetfactory(self.dataset_factory_name)
 
         train, val = dataset_factory.get_dataset(train_file), dataset_factory.get_dataset(val_file)
@@ -51,4 +53,30 @@ class TrainWorkflow:
 
         self.logger.info(" F-score is {}".format(fscore))
 
+        if test_file is not None:
+            train_pipeline = builder.get_trainpipeline()
+
+            self.predict_test_set(dataset_factory, self.model_dir, self.out_dir, test_file, train_pipeline)
+
         return val_results, val_actuals, val_predicted
+
+    def predict_test_set(self, dataset_factory, model_dir, out_dir, test_file, train_pipeline):
+        logger = logging.getLogger(__name__)
+        logger.info("Evaluating test set {}".format(test_file))
+        test_dataset = dataset_factory.get_dataset(test_file)
+        predictor = train_pipeline.load(model_dir)
+        predicted, confidence_scores = predictor(test_dataset)
+
+        # Add results to raw dataset
+        test_df = pd.read_json(test_file)
+        logger.info("Test data shape: {}".format(test_df.shape))
+
+        test_df["predicted"] = predicted
+        test_df["confidence_scores"] = confidence_scores
+        # # This is log softmax, convert to softmax prob
+        # test_df["confidence_true"] = test_df.apply(lambda x: math.exp(x["confidence_scores"][True]), axis=1)
+        # test_df["confidence_false"] = test_df.apply(lambda x: math.exp(x["confidence_scores"][False]), axis=1)
+        predictions_file = os.path.join(out_dir, "predicted.json")
+        test_df.to_json(predictions_file)
+
+        logger.info("Evaluating test set complete, results in {}".format(predictions_file))
