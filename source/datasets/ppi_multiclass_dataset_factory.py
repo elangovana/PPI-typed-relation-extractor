@@ -4,7 +4,7 @@ from preprocessor.Preprocessor import Preprocessor
 from preprocessor.ProteinMasker import ProteinMasker
 
 
-class PpiNoInteractionDatasetFactory(CustomDatasetFactoryBase):
+class PpiMulticlassDatasetFactory(CustomDatasetFactoryBase):
 
     def get_dataset(self, file_path):
         dataset = PpiMulticlassDataset(file_path=file_path, interaction_type=None)
