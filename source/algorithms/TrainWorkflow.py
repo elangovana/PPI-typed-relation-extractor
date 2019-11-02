@@ -69,11 +69,11 @@ class TrainWorkflow:
         precision, recall, fscore, support = precision_recall_fscore_support(val_actuals, val_predicted,
                                                                              average=average,
                                                                              pos_label=pos_label)
-        self.logger.info(
-            "Binary average scores: precision, recall, fscore, support {}".format(
-                (precision, recall, fscore, support)))
 
-        self.logger.info("F-score () : is {}".format(average, fscore))
+        self.logger.info("{} average scores: precision, recall, fscore, support {}".format(
+            average, (precision, recall, fscore, support)))
+
+        self.logger.info("F-score {} : is {}".format(average, fscore))
 
     def predict_test_set(self, dataset_factory, model_dir, out_dir, test_file, train_pipeline):
         logger = logging.getLogger(__name__)

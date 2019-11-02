@@ -30,14 +30,20 @@ def run(dataset_factory_name, network_factory_name, train_file, val_file, model_
                                         extra_args=additionalargs, network_factory_name=network_factory_name)
     train_pipeline = builder.get_trainpipeline()
     val_results, val_actuals, val_predicted = train_pipeline(train, val)
-    precision, recall, fscore, support = precision_recall_fscore_support(val_actuals, val_predicted,
-                                                                         average='binary',
-                                                                         pos_label=train.positive_label)
+
+    # Get binary average
+    try:
+        print_average_scores(val_actuals, val_predicted, pos_label=train.positive_label, average='binary')
+    except ValueError as ev:
+        logger.info("Could not be not be binary class {}, failed with error ".format(ev))
+
+    print_average_scores(val_actuals, val_predicted, pos_label=train.positive_label, average='micro')
+
+    print_average_scores(val_actuals, val_predicted, pos_label=train.positive_label, average='macro')
+
     tn, fp, fn, tp = confusion_matrix(val_actuals, val_predicted).ravel()
 
     logger.info("Confusion matrix: tn, fp, fn, tp  is {}".format((tn, fp, fn, tp)))
-    logger.info("Scores: precision, recall, fscore, support {}".format((precision, recall, fscore, support)))
-    logger.info(" F-score is {}".format(fscore))
 
     if test_file is not None:
         predict_test_set(dataset_factory, model_dir, out_dir, test_file, train_pipeline)
@@ -65,6 +71,19 @@ def predict_test_set(dataset_factory, model_dir, out_dir, test_file, train_pipel
     test_df.to_json(predictions_file)
 
     logger.info("Evaluating test set complete, results in {}".format(predictions_file))
+
+
+def print_average_scores(val_actuals, val_predicted, pos_label=None, average='macro'):
+    logger = logging.getLogger(__name__)
+
+    precision, recall, fscore, support = precision_recall_fscore_support(val_actuals, val_predicted,
+                                                                         average=average,
+                                                                         pos_label=pos_label)
+    logger.info(
+        "{} average scores: precision, recall, fscore, support {}".format(
+            average, (precision, recall, fscore, support)))
+
+    logger.info("F-score {} : is {}".format(average, fscore))
 
 
 if "__main__" == __name__:
