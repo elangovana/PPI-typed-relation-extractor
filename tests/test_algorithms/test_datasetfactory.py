@@ -9,7 +9,7 @@ class TestDatasetFactory(TestCase):
     def test_dataset_factory_names(self):
         # Arrange
         sut = DatasetFactory()
-        expected_num_factories = 5
+        expected_num_factories = 6
 
         # act
         class_names = sut.dataset_factory_names

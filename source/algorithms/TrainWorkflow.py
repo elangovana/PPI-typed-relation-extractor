@@ -43,15 +43,20 @@ class TrainWorkflow:
             train_pipeline(train, val)
 
             val_results, val_actuals, val_predicted = train_pipeline(train, val)
-        precision, recall, fscore, support = precision_recall_fscore_support(val_actuals, val_predicted,
-                                                                             average='binary',
-                                                                             pos_label=train.positive_label)
+
+        # Get binary average
+        try:
+            self.print_average_scores(val_actuals, val_predicted, pos_label=train.positive_label, average='binary')
+        except ValueError as ev:
+            self.logger.info("Could not be not be binary class {}, failed with error ".format(ev))
+
+        self.print_average_scores(val_actuals, val_predicted, pos_label=train.positive_label, average='micro')
+
+        self.print_average_scores(val_actuals, val_predicted, pos_label=train.positive_label, average='macro')
+
         tn, fp, fn, tp = confusion_matrix(val_actuals, val_predicted).ravel()
 
         self.logger.info("Confusion matrix: tn, fp, fn, tp  is {}".format((tn, fp, fn, tp)))
-        self.logger.info("Scores: precision, recall, fscore, support {}".format((precision, recall, fscore, support)))
-
-        self.logger.info(" F-score is {}".format(fscore))
 
         if test_file is not None:
             train_pipeline = builder.get_trainpipeline()
@@ -59,6 +64,16 @@ class TrainWorkflow:
             self.predict_test_set(dataset_factory, self.model_dir, self.out_dir, test_file, train_pipeline)
 
         return val_results, val_actuals, val_predicted
+
+    def print_average_scores(self, val_actuals, val_predicted, pos_label=None, average='macro'):
+        precision, recall, fscore, support = precision_recall_fscore_support(val_actuals, val_predicted,
+                                                                             average=average,
+                                                                             pos_label=pos_label)
+        self.logger.info(
+            "Binary average scores: precision, recall, fscore, support {}".format(
+                (precision, recall, fscore, support)))
+
+        self.logger.info("F-score () : is {}".format(average, fscore))
 
     def predict_test_set(self, dataset_factory, model_dir, out_dir, test_file, train_pipeline):
         logger = logging.getLogger(__name__)
