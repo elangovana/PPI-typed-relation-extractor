@@ -8,7 +8,8 @@ class PretrainedEmbedderLoaderMinimum:
     Only uses words in  vocab
     """
 
-    def __init__(self, pad_token, dim):
+    def __init__(self, pad_token, dim, seed=None):
+        self.seed = seed
         self.dim = dim
         self.pad_token = pad_token
 
@@ -27,6 +28,11 @@ sandberger 0.072617 -0.51393 0.4728 -0.52202 -0.35534 0.34629 0.23211 0.23096 0.
         :return: a tuple (word_index_dict, embeddings_array)
         :param handle: handle containing the embedding
         """
+
+        np.random.seed(self.seed)
+
+        self.logger.info("Using random seed {}".format(np.random.get_state()))
+
         initial_words_index_dict = initial_words_index_dict or {}
 
         if len(initial_words_index_dict) > 0:
