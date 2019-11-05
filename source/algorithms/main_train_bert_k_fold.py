@@ -4,6 +4,7 @@ import os
 import sys
 import tempfile
 
+import numpy as np
 import pandas as pd
 from sklearn.model_selection import KFold
 
@@ -50,6 +51,8 @@ def run_k_fold(dataset_factory_name, network_factory_name, train_file, model_dir
             k_val_results.append(val_results)
 
             logger.info("Fold {}, F-score is {}".format(k, val_results))
+
+    print("Average F-score", np.asarray(k_val_results).mean())
 
 
 if "__main__" == __name__:
