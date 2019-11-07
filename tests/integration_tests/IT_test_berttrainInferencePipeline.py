@@ -28,11 +28,24 @@ class ITTestBertTrainInferencePipeline(TestCase):
         # Act
         actual = sut(mock_dataset_train, mock_dataset_val)
 
-    def _get_sut_train_pipeline(self, mock_dataset, out_dir=tempfile.mkdtemp(), epochs=5):
+    def test_call_aimeddataset_bertlstm(self):
+        # Arrange
+        mock_dataset_train = self._get_aimeddataset()
+        mock_dataset_val = self._get_aimeddataset()
+
+        sut = self._get_sut_train_pipeline(mock_dataset_train,
+                                           network_factory_name="RelationExtractorBertBiLstmNetworkNoPosFactory")
+
+        # Act
+        actual = sut(mock_dataset_train, mock_dataset_val)
+
+    def _get_sut_train_pipeline(self, mock_dataset, out_dir=tempfile.mkdtemp(), epochs=5,
+                                network_factory_name="RelationExtractorBioBertFactory"):
         base_model_dir = os.path.join(os.path.dirname(__file__), "..", "temp", "biobert")
 
         factory = BertTrainInferenceBuilder(dataset=mock_dataset,
                                             output_dir=out_dir, model_dir=out_dir, epochs=epochs,
+                                            network_factory_name=network_factory_name,
                                             extra_args={"pretrained_biobert_dir": base_model_dir})
         sut = factory.get_trainpipeline()
         return sut
