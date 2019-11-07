@@ -21,6 +21,8 @@ class RelationExtractorBertBiLstmNetworkNoPosFactory(BertNetworkFactoryBase):
         assert model_dir is not None, "The model directory is mandatory and must contain the pretrained Biobert artifacts"
 
         lstm_dropout = float(self._get_value(kwargs, "lstm_dropout", ".5"))
+        input_dropout = float(self._get_value(kwargs, "input_dropout", ".1"))
+
 
         lstm_num_layers = int(self._get_value(kwargs, "lstm_num_layers", "3"))
         dropout_rate_fc = float(self._get_value(kwargs, "fc_drop_out_rate", ".5"))
@@ -29,7 +31,7 @@ class RelationExtractorBertBiLstmNetworkNoPosFactory(BertNetworkFactoryBase):
         fine_tune_embeddings = bool(int(self._get_value(kwargs, "fine_tune_embeddings", "1")))
 
         model = RelationExtractorBertBiLstmNetworkNoPos(model_dir, class_size, feature_lens,
-                                                        hidden_size=lstm_hidden_size,
+                                                        hidden_size=lstm_hidden_size, input_dropout=input_dropout,
                                                         dropout_rate_fc=dropout_rate_fc, num_layers=lstm_num_layers,
                                                         lstm_dropout=lstm_dropout,
                                                         fine_tune_embeddings=fine_tune_embeddings)

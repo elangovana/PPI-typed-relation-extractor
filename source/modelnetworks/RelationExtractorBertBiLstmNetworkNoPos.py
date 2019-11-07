@@ -11,7 +11,8 @@ class RelationExtractorBertBiLstmNetworkNoPos(nn.Module):
     """
 
     def __init__(self, bert_model_dir, class_size, feature_lens, seed=None,
-                 hidden_size=75, dropout_rate_fc=0.2, num_layers=2, lstm_dropout=.3, fine_tune_embeddings=True):
+                 hidden_size=75, dropout_rate_fc=0.2, num_layers=2, input_dropout=.3, lstm_dropout=0.5,
+                 fine_tune_embeddings=True):
         self.fine_tune_embeddings = fine_tune_embeddings
         if seed is None:
             seed = torch.initial_seed() & ((1 << 63) - 1)
@@ -35,9 +36,9 @@ class RelationExtractorBertBiLstmNetworkNoPos(nn.Module):
                                                                         num_labels=class_size).bert.embeddings.word_embeddings
 
         self.lstm = nn.Sequential(
-            nn.Dropout(p=lstm_dropout),
+            nn.Dropout(p=input_dropout),
             nn.LSTM(self.embeddings.embedding_dim, hidden_size=hidden_size, num_layers=num_layers, batch_first=True,
-                    bidirectional=bidirectional))
+                    bidirectional=bidirectional, dropout=lstm_dropout))
 
         #
         self.fc_input_size = (hidden_size * num_directions) * self.max_sequence_len
