@@ -6,6 +6,7 @@ import sys
 import pandas as pd
 from sklearn.metrics import precision_recall_fscore_support, confusion_matrix
 
+from algorithms.bert_network_factory_locator import BertNetworkFactoryLocator
 from algorithms.dataset_factory import DatasetFactory
 from trainpipelinesbuilders.BertTrainInferenceBuilder import BertTrainInferenceBuilder
 
@@ -91,8 +92,8 @@ if "__main__" == __name__:
     parser.add_argument("--dataset", help="The dataset type", choices=DatasetFactory().dataset_factory_names,
                         required=True)
 
-    parser.add_argument("--network", help="The network type", choices={"RelationExtractorBioBertFactory"},
-                        default="RelationExtractorBioBertFactory")
+    parser.add_argument("--network", help="The network type", choices=BertNetworkFactoryLocator().factory_names,
+                        default=BertNetworkFactoryLocator().factory_names[0])
 
     parser.add_argument("--trainfile",
                         help="The input train file wrt to train  dir", required=True)

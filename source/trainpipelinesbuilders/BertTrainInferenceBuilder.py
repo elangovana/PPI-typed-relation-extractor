@@ -7,7 +7,7 @@ from algorithms.BertTrain import BertTrain
 from algorithms.BertTrainInferencePipeline import BertTrainInferencePipeline
 from algorithms.DataPipeline import DataPipeline
 from algorithms.LabelPipeline import LabelPipeline
-from algorithms.network_factory_locator import NetworkFactoryLocator
+from algorithms.bert_network_factory_locator import BertNetworkFactoryLocator
 from algorithms.transform_berttext_token_to_index import TransformBertTextTokenToIndex
 from algorithms.transform_berttext_tokenise import TransformBertTextTokenise
 from algorithms.transform_label_encoder import TransformLabelEncoder
@@ -65,7 +65,7 @@ class BertTrainInferenceBuilder:
         np_feature_lens = np.array(max_feature_lens)
 
         # network
-        model_factory = NetworkFactoryLocator().get_factory(self.network_factory_name)
+        model_factory = BertNetworkFactoryLocator().get_factory(self.network_factory_name)
         model = model_factory.get_network(embedding_dim=None, class_size=class_size, feature_lens=np_feature_lens,
                                           **self.additional_args)
 

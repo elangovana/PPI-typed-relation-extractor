@@ -1,10 +1,10 @@
 import logging
 
-from modelnetworks.NetworkFactoryBase import NetworkFactoryBase
+from modelnetworks.BertNetworkFactoryBase import BertNetworkFactoryBase
 from modelnetworks.RelationExtractorBioBert import RelationExtractorBioBert
 
 
-class RelationExtractorBioBertFactory(NetworkFactoryBase):
+class RelationExtractorBioBertFactory(BertNetworkFactoryBase):
 
     @property
     def logger(self):
