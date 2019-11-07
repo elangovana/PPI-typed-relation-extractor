@@ -4,7 +4,7 @@ import os
 import pickle
 
 import torch
-from pytorch_pretrained_bert import BertAdam
+from torch.optim import Adam
 from torch.utils.data import DataLoader
 
 from algorithms.Collator import Collator
@@ -63,7 +63,7 @@ class BertTrainInferencePipeline:
         learning_rate = float(self._get_value(self.additional_args, "learningrate", ".01"))
         # optimiser = SGD(lr=self.learning_rate, momentum=self.momentum, params=model.parameters())
         weight_decay = float(self._get_value(self.additional_args, "weight_decay", ".0001"))
-        optimiser = BertAdam(params=self.model.parameters(), lr=learning_rate, weight_decay=weight_decay)
+        optimiser = Adam(params=self.model.parameters(), lr=learning_rate, weight_decay=weight_decay)
         # optimiser = RMSprop(params=model.parameters(), lr=learning_rate)
         self.logger.info("Using optimiser {}".format(type(optimiser)))
 
