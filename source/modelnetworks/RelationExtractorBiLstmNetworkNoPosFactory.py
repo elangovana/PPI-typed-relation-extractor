@@ -17,6 +17,7 @@ class RelationExtractorBiLstmNetworkFactoryNoPos(NetworkFactoryBase):
 
     def get_network(self, class_size, embedding_dim, feature_lens, **kwargs):
         lstm_dropout = float(self._get_value(kwargs, "lstm_dropout", ".5"))
+        input_dropout = float(self._get_value(kwargs, "input_dropout", ".1"))
 
         lstm_num_layers = int(self._get_value(kwargs, "lstm_num_layers", "3"))
         dropout_rate_fc = float(self._get_value(kwargs, "fc_drop_out_rate", ".5"))
@@ -26,6 +27,7 @@ class RelationExtractorBiLstmNetworkFactoryNoPos(NetworkFactoryBase):
 
         model = RelationExtractorBiLstmNetworkNoPos(class_size=class_size, embedding_dim=embedding_dim,
                                                     feature_lengths=feature_lens, hidden_size=lstm_hidden_size,
+                                                    input_dropout=input_dropout,
                                                     dropout_rate_fc=dropout_rate_fc, num_layers=lstm_num_layers,
                                                     lstm_dropout=lstm_dropout,
                                                     fine_tune_embeddings=fine_tune_embeddings)

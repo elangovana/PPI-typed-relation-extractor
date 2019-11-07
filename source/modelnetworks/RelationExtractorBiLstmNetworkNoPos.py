@@ -12,7 +12,7 @@ Identifying Protein-protein Interactions in Biomedical Literature using Recurren
 Proceedings of the Eighth International Joint Conference on Natural Language Processing. Asian Federation of Natural Language Processing, 2017. p. 240-245 (Proceedings of the Eighth International Joint Conference on Natural Language Processing).
     """
 
-    def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0, seed=None,
+    def __init__(self, class_size, embedding_dim, feature_lengths, embed_vocab_size=0, seed=None, input_dropout=0.5,
                  hidden_size=75, dropout_rate_fc=0.2, num_layers=2, lstm_dropout=.3, fine_tune_embeddings=True):
         self.fine_tune_embeddings = fine_tune_embeddings
         self.embed_vocab_size = embed_vocab_size
@@ -42,9 +42,9 @@ Proceedings of the Eighth International Joint Conference on Natural Language Pro
         num_directions = 2 if bidirectional else 1
 
         self.lstm = nn.Sequential(
-            nn.Dropout(p=lstm_dropout),
+            nn.Dropout(p=input_dropout),
             nn.LSTM(total_dim_size, hidden_size=hidden_size, num_layers=num_layers, batch_first=True,
-                    bidirectional=bidirectional))
+                    bidirectional=bidirectional, dropout=lstm_dropout))
 
         #
         self.fc_input_size = (hidden_size * num_directions) * self.max_sequence_len
