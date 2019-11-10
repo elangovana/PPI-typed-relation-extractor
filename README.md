@@ -255,6 +255,8 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
     python ./source/algorithms/main_train_k_fold.py  --trainfile aimedsample.json --traindir tests/data --embeddingfile tests/test_algorithms/sample_PubMed-and-PMC-w2v.bin.txt --outdir /tmp --modeldir /tmp --embeddim 200 --epochs 2 --dataset PpiAimedDatasetPreprocessedFactory
 
     ```
+ 
+2. To use use the pretrained embeddings by _Chiu et al. How to Train good Word Embeddings for Biomedical NLP_  download the embeddings from https://github.com/cambridgeltl/BioNLP-2016 
 
     
 ## Other embeddings
@@ -265,7 +267,6 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
     ```bash
     python ./source/algorithms/collobert_embedding_formatter.py  --vocabfile vocab.txt --embedfile words.txt --outputfile words_vocab_collabert.txt
     ```
- 
  
 ## Pretrained biobert
 
@@ -283,7 +284,7 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
 
     ```bash
     export PYTHONPATH=./source
-    python ./source/algorithms/main_train_bert.py --dataset PpiAimedDatasetFactory --trainfile Aimedsample.json --traindir tests/data/ --valfile Aimedsample.json --valdir tests/data --pretrained_biobert_dir <biobertdir>
+    python ./source/algorithms/main_train_bert.py --dataset PpiAimedDatasetFactory --trainfile Aimedsample.json --traindir tests/data/ --valfile Aimedsample.json --valdir tests/data --pretrained_biobert_dir "<biobertdir>"
 
     ```
     
