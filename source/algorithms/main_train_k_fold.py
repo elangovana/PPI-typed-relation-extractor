@@ -13,33 +13,39 @@ from algorithms.main_train import run
 from algorithms.network_factory_locator import NetworkFactoryLocator
 
 
-def k_fold_unique_pubmed(data_file, n_splits=10):
+def k_fold_unique_doc(data_file, docid_field_name, n_splits=10):
     kf = KFold(n_splits=n_splits, random_state=777, shuffle=True)
     df = pd.read_json(data_file)
     unique_docids = df.docid.unique()
-    stratified = [df.query("docid == '{}'".format(p))['isValid'].iloc[0] for p in unique_docids]
-    for train_index, test_index in kf.split(unique_docids, groups=stratified):
+    # stratified = [df.query("{} == '{}'".format(docid_field_name, p))[label_field_name].iloc[0] for p in unique_docids]
+    for train_index, test_index in kf.split(unique_docids):
         train_doc, test_doc = unique_docids[train_index], unique_docids[test_index]
-        train = df[df['docid'].isin(train_doc)]
-        val = df[df['docid'].isin(test_doc)]
+        train = df[df[docid_field_name].isin(train_doc)]
+        val = df[df[docid_field_name].isin(test_doc)]
 
         yield (train, val)
 
 
-def k_fold(data_file, n_splits=10):
+def k_fold_ignore_doc(data_file, label_field_name, n_splits=10):
     kf = KFold(n_splits=n_splits, random_state=777, shuffle=True)
     df = pd.read_json(data_file)
 
-    for train_index, test_index in kf.split(df, groups=df["isValid"]):
+    for train_index, test_index in kf.split(df, groups=df[label_field_name]):
         train, val = df.iloc[train_index], df.iloc[test_index]
 
         yield (train, val)
 
 
-def run_k_fold(dataset_factory_name, network_factory_name, train_file, embedding_file, embed_dim, model_dir, out_dir,
-               epochs, earlystoppingpatience, additionalargs):
-    logger = logging.getLogger(__name__)
+def k_fold(data_file, label_field_name, docid_field_name=None, n_splits=10):
+    if docid_field_name is None:
+        yield from k_fold_ignore_doc(data_file, label_field_name, n_splits)
+    else:
+        yield from k_fold_unique_doc(data_file, docid_field_name, n_splits)
 
+
+def run_k_fold(dataset_factory_name, network_factory_name, train_file, embedding_file, embed_dim, model_dir, out_dir,
+               epochs, earlystoppingpatience, additionalargs, docid_field_name, label_field_name):
+    logger = logging.getLogger(__name__)
 
     if not os.path.exists(out_dir) or not os.path.isdir(out_dir):
         raise FileNotFoundError("The path {} should exist and must be a directory".format(out_dir))
@@ -49,7 +55,7 @@ def run_k_fold(dataset_factory_name, network_factory_name, train_file, embedding
 
     k_val_results = []
 
-    for k, (train_df, val_df) in enumerate(k_fold(train_file)):
+    for k, (train_df, val_df) in enumerate(k_fold(train_file, label_field_name, docid_field_name)):
         with tempfile.NamedTemporaryFile() as tmp_train_spilt_file:
             train_df.to_json(tmp_train_spilt_file.name)
             with tempfile.NamedTemporaryFile() as tmp_val_split_file:
@@ -92,6 +98,13 @@ if "__main__" == __name__:
 
     parser.add_argument("--modeldir", help="The output dir", default=os.environ.get("SM_MODEL_DIR", "."))
 
+    parser.add_argument("--docidfieldname",
+                        help="The name of the doc id field so that the k fold does not have test set leakage",
+                        required=False, default=None)
+
+    parser.add_argument("--labelfieldname",
+                        help="The name of the label field so that the k fold is stratified by label", required=True)
+
     parser.add_argument("--embeddim", help="the embed dim", type=int, required=True)
 
     parser.add_argument("--epochs", help="The number of epochs", type=int, default=10)
@@ -119,4 +132,5 @@ if "__main__" == __name__:
     trainjson = os.path.join(args.traindir, args.trainfile)
     embeddingfile = os.path.join(args.embeddingdir, args.embeddingfile)
     run_k_fold(args.dataset, args.network, trainjson, embeddingfile, args.embeddim,
-               args.modeldir, args.outdir, args.epochs, args.earlystoppingpatience, additional_dict)
+               args.modeldir, args.outdir, args.epochs, args.earlystoppingpatience, additional_dict,
+               args.docidfieldname, args.labelfieldname)
