@@ -14,6 +14,8 @@ from algorithms.main_train_bert import run
 
 
 def k_fold_unique_doc(data_file, docid_field_name, n_splits=10):
+    logger = logging.getLogger(__name__)
+    logger.info("Splitting such that the {} is unique across datasets".format(docid_field_name))
     kf = KFold(n_splits=n_splits, random_state=777, shuffle=True)
     df = pd.read_json(data_file)
     unique_docids = df.docid.unique()
