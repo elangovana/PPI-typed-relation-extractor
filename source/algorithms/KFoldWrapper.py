@@ -51,8 +51,10 @@ def k_fold_unique_doc(data_file, label_field_name, docid_field_name, n_splits=10
         train = df[df[docid_field_name].isin(train_doc)]
         val = df[df[docid_field_name].isin(test_doc)]
 
-        logger.info("Train split label distribution \n{} ".format(label_distribution(train, label_field_name)))
-        logger.info("Validation split label distribution \n{} ".format(label_distribution(val, label_field_name)))
+        logger.info("Train split label distribution {} ".format(
+            str(label_distribution(train, label_field_name)).replace("\n", "\t")))
+        logger.info("Validation split label distribution {} ".format(
+            str(label_distribution(val, label_field_name)).replace("\n", "\t")))
         yield (train, val)
 
 
@@ -64,8 +66,11 @@ def k_fold_ignore_doc(data_file, label_field_name, n_splits=10):
     for train_index, test_index in kf.split(df, df[label_field_name]):
         train, val = df.iloc[train_index], df.iloc[test_index]
 
-        logger.info("Train split label distribution \n{} ".format(label_distribution(train, label_field_name)))
-        logger.info("Validation split label distribution \n{} ".format(label_distribution(val, label_field_name)))
+        logger.info("Train split label distribution {} ".format(
+            str(label_distribution(train, label_field_name)).replace("\n", "\t")))
+        logger.info("Validation split label distribution {} ".format(
+            str(label_distribution(val, label_field_name)).replace("\n", "\t")))
+
         yield (train, val)
 
 
