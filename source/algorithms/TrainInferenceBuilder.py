@@ -18,8 +18,10 @@ from algorithms.transform_text_index import TransformTextToIndex
 
 class TrainInferenceBuilder:
 
-    def __init__(self, dataset, embedding_dim, embedding_handle, model_dir, output_dir, epochs=100, patience_epochs=20,
+    def __init__(self, dataset, embedding_dim, embedding_handle, model_dir, output_dir, results_scorer, epochs=100,
+                 patience_epochs=20,
                  extra_args=None, network_factory_name="RelationExtractorSimpleResnetCnnPosNetworkFactory"):
+        self.results_scorer = results_scorer
         self.network_factory_name = network_factory_name
         self.patience_epochs = patience_epochs
         self.model_dir = model_dir
@@ -91,7 +93,8 @@ class TrainInferenceBuilder:
         self.logger.info("Using loss function {}".format(type(loss_function)))
 
         # Trainer
-        trainer = Train(epochs=self.epochs, early_stopping_patience=self.patience_epochs)
+        trainer = Train(epochs=self.epochs, early_stopping_patience=self.patience_epochs,
+                        results_scorer=self.results_scorer)
 
         # merge train val vocab
         merge_vocab_train_val = bool(int(self._get_value(self.additional_args, "train_val_vocab_merge", "0")))

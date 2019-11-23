@@ -19,6 +19,11 @@ def run(dataset_factory_name, network_factory_name, train_file, val_file, model_
 
     train, val = dataset_factory.get_dataset(train_file), dataset_factory.get_dataset(val_file)
 
+    scorer_factory = dataset_factory.get_metric_factory()
+    scorer = scorer_factory.get_scorer()
+
+    self.logger.info("Using objective metric {}".format(type(scorer)))
+
     if not os.path.exists(out_dir) or not os.path.isdir(out_dir):
         raise FileNotFoundError("The path {} should exist and must be a directory".format(out_dir))
 
@@ -28,7 +33,8 @@ def run(dataset_factory_name, network_factory_name, train_file, val_file, model_
     builder = BertTrainInferenceBuilder(dataset=train,
                                         model_dir=model_dir, output_dir=out_dir, epochs=epochs,
                                         patience_epochs=earlystoppingpatience,
-                                        extra_args=additionalargs, network_factory_name=network_factory_name)
+                                        extra_args=additionalargs, network_factory_name=network_factory_name,
+                                        results_scorer=scorer)
     train_pipeline = builder.get_trainpipeline()
     val_results, val_actuals, val_predicted = train_pipeline(train, val)
 

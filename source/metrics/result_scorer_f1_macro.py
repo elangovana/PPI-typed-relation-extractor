@@ -2,9 +2,10 @@
 
 Calculate the score
 """
+from metrics.base_classification_scorer import BaseClassificationScorer
 
 
-class ResultScorerF1:
+class ResultScorerF1Macro(BaseClassificationScorer):
 
     def __init__(self):
         pass

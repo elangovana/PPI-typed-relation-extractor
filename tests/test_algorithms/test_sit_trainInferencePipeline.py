@@ -14,29 +14,29 @@ class TestSitTrainInferencePipeline(TestCase):
 
     def test_call_ppidataset(self):
         # Arrange
-        mock_dataset_train = self._get_ppidataset()
-        mock_dataset_val = self._get_ppidataset()
+        mock_dataset_train, scorer = self._get_ppidataset()
+        mock_dataset_val, _ = self._get_ppidataset()
 
-        sut = self._get_sut_train_pipeline(mock_dataset_train)
+        sut = self._get_sut_train_pipeline(mock_dataset_train, scorer=scorer)
 
         # Act
         actual = sut(mock_dataset_train, mock_dataset_val)
 
     def test_call_aimeddataset(self):
         # Arrange
-        mock_dataset_train = self._get_aimeddataset()
-        mock_dataset_val = self._get_aimeddataset()
+        mock_dataset_train, scorer = self._get_aimeddataset()
+        mock_dataset_val, _ = self._get_aimeddataset()
 
-        sut = self._get_sut_train_pipeline(mock_dataset_train)
+        sut = self._get_sut_train_pipeline(mock_dataset_train, scorer=scorer)
 
         # Act
         actual = sut(mock_dataset_train, mock_dataset_val)
 
-    def _get_sut_train_pipeline(self, mock_dataset, out_dir=tempfile.mkdtemp(), epochs=5):
+    def _get_sut_train_pipeline(self, mock_dataset, out_dir=tempfile.mkdtemp(), epochs=5, scorer=None):
         embedding = StringIO(
             "\n".join(["4 3", "hat 0.2 .34 0.8", "mat 0.5 .34 0.8", "entity1 0.5 .55 0.8", "entity2 0.3 .55 0.9"]))
         factory = TrainInferenceBuilder(dataset=mock_dataset, embedding_handle=embedding, embedding_dim=3,
-                                        output_dir=out_dir, model_dir=out_dir, epochs=epochs)
+                                        output_dir=out_dir, model_dir=out_dir, epochs=epochs, results_scorer=scorer)
         sut = factory.get_trainpipeline()
         return sut
 
@@ -46,21 +46,24 @@ class TestSitTrainInferencePipeline(TestCase):
         train_file = os.path.join(os.path.dirname(__file__), "..", "data", "sample_train.json")
         factory = DatasetFactory().get_datasetfactory("PpiDatasetFactory")
         dataset = factory.get_dataset(train_file)
-        return dataset
+        scorer = factory.get_metric_factory().get()
+
+        return dataset, scorer
 
     def _get_aimeddataset(self):
         train_file = os.path.join(os.path.dirname(__file__), "..", "data", "Aimedsample.json")
         factory = DatasetFactory().get_datasetfactory("PpiAimedDatasetFactory")
         dataset = factory.get_dataset(train_file)
-        return dataset
+        scorer = factory.get_metric_factory().get()
+        return dataset, scorer
 
     def test_predict(self):
         # Arrange
-        mock_dataset_train = self._get_ppidataset()
-        mock_dataset_val = self._get_ppidataset()
+        mock_dataset_train, scorer = self._get_ppidataset()
+        mock_dataset_val, _ = self._get_ppidataset()
         out_dir = tempfile.mkdtemp()
 
-        sut = self._get_sut_train_pipeline(mock_dataset_train, out_dir=out_dir, epochs=20)
+        sut = self._get_sut_train_pipeline(mock_dataset_train, out_dir=out_dir, epochs=20, scorer=scorer)
 
         # get predictions
         # Todo: fix the return from sut.... it is not a batch of scores but flattened

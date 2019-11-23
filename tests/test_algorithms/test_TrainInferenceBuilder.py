@@ -11,6 +11,8 @@ class TestTrainInferenceBuilder(TestCase):
     def test_get_trainpipeline(self):
         # Arrange
         mock_dataset = MagicMock()
+        mock_scorer = MagicMock()
+        mock_scorer.return_value = 1
         mock_dataset.data = [[["This is sample text", "entity1", "entity2", "phosphorylation"], ["yes"]],
                              [["This is sample text2", "entity1", "entity2", "phosphorylation"], ["no"]]]
         mock_dataset.feature_lens = [100, 1, 1, 1]
@@ -26,7 +28,7 @@ class TestTrainInferenceBuilder(TestCase):
 
         sut = TrainInferenceBuilder(dataset=mock_dataset, embedding_handle=embedding, output_dir=out_dir,
                                     model_dir=out_dir,
-                                    embedding_dim=3)
+                                    embedding_dim=3, results_scorer=mock_scorer)
 
         # Act
         actual = sut.get_trainpipeline()

@@ -16,8 +16,9 @@ from algorithms.transform_label_rehaper import TransformLabelReshaper
 
 class BertTrainInferenceBuilder:
 
-    def __init__(self, dataset, model_dir, output_dir, epochs=100, patience_epochs=20,
+    def __init__(self, dataset, model_dir, output_dir, results_scorer, epochs=100, patience_epochs=20,
                  extra_args=None, network_factory_name="RelationExtractorBioBertFactory"):
+        self.results_scorer = results_scorer
         self.network_factory_name = network_factory_name
         self.patience_epochs = patience_epochs
         self.model_dir = model_dir
@@ -79,7 +80,7 @@ class BertTrainInferenceBuilder:
         # Trainer
         accumulation_steps = int(self._get_value(self.additional_args, "accumulation_steps", 1))
         trainer = BertTrain(epochs=self.epochs, early_stopping_patience=self.patience_epochs,
-                            accumulation_steps=accumulation_steps)
+                            accumulation_steps=accumulation_steps, results_scorer=self.results_scorer)
 
         pipeline = BertTrainInferencePipeline(model=model, loss_function=loss_function,
                                               trainer=trainer,

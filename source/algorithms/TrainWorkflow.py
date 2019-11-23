@@ -30,6 +30,10 @@ class TrainWorkflow:
 
     def __call__(self, train_file, val_file, test_file=None):
         dataset_factory = DatasetFactory().get_datasetfactory(self.dataset_factory_name)
+        scorer_factory = dataset_factory.get_metric_factory()
+        scorer = scorer_factory.get_metric_factory()
+
+        self.logger.info("Using objective metric {}".format(type(scorer)))
 
         train, val = dataset_factory.get_dataset(train_file), dataset_factory.get_dataset(val_file)
         with open(self.embedding_file, "r") as embedding_handle:
@@ -38,7 +42,7 @@ class TrainWorkflow:
                                             model_dir=self.model_dir, output_dir=self.out_dir, epochs=self.epochs,
                                             patience_epochs=self.earlystoppingpatience,
                                             extra_args=self.additionalargs,
-                                            network_factory_name=self.network_factory_name)
+                                            network_factory_name=self.network_factory_name, results_scorer=scorer)
             train_pipeline = builder.get_trainpipeline()
             train_pipeline(train, val)
 

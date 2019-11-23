@@ -5,13 +5,13 @@ import torch
 import torch.utils.data
 
 from algorithms.ModelSnapshotCallback import ModelSnapshotCallback
-from algorithms.result_scorer_f1 import ResultScorerF1
 from algorithms.result_writer import ResultWriter
+from metrics.result_scorer_f1_macro import ResultScorerF1Macro
 
 
 class BertTrain:
 
-    def __init__(self, device=None, epochs=10, early_stopping_patience=20, accumulation_steps=1):
+    def __init__(self, device=None, epochs=10, early_stopping_patience=20, accumulation_steps=1, results_scorer=None):
         """
 
         :param device:
@@ -23,7 +23,7 @@ class BertTrain:
         self.early_stopping_patience = early_stopping_patience
         self.epochs = epochs
         self.snapshotter = None
-        self.results_scorer = None
+        self.results_scorer = results_scorer
         self.results_writer = None
         self.device = device or ('cuda:0' if torch.cuda.is_available() else 'cpu')
 
@@ -46,7 +46,7 @@ class BertTrain:
 
     @property
     def results_scorer(self):
-        self.__results_scorer__ = self.__results_scorer__ or ResultScorerF1()
+        self.__results_scorer__ = self.__results_scorer__ or ResultScorerF1Macro()
         return self.__results_scorer__
 
     @results_scorer.setter

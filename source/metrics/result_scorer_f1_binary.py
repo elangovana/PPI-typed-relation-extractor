@@ -2,9 +2,10 @@
 
 Calculate the score
 """
+from metrics.base_classification_scorer import BaseClassificationScorer
 
 
-class ResultScorerF1Binary:
+class ResultScorerF1Binary(BaseClassificationScorer):
 
     def __init__(self):
         pass

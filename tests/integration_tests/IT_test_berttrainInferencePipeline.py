@@ -10,28 +10,29 @@ class ITTestBertTrainInferencePipeline(TestCase):
 
     def test_call_ppidataset(self):
         # Arrange
-        mock_dataset_train = self._get_ppidataset()
-        mock_dataset_val = self._get_ppidataset()
+        mock_dataset_train, scorer = self._get_ppidataset()
+        mock_dataset_val, _ = self._get_ppidataset()
 
-        sut = self._get_sut_train_pipeline(mock_dataset_train)
+        sut = self._get_sut_train_pipeline(mock_dataset_train, scorer=scorer)
 
         # Act
         actual = sut(mock_dataset_train, mock_dataset_val)
 
     def test_call_aimeddataset(self):
         # Arrange
-        mock_dataset_train = self._get_aimeddataset()
-        mock_dataset_val = self._get_aimeddataset()
+        mock_dataset_train, scorer = self._get_aimeddataset()
+        mock_dataset_val, _ = self._get_aimeddataset()
 
-        sut = self._get_sut_train_pipeline(mock_dataset_train)
+        sut = self._get_sut_train_pipeline(mock_dataset_train, scorer=scorer)
+
 
         # Act
         actual = sut(mock_dataset_train, mock_dataset_val)
 
     def test_call_aimeddataset_bertlstm(self):
         # Arrange
-        mock_dataset_train = self._get_aimeddataset()
-        mock_dataset_val = self._get_aimeddataset()
+        mock_dataset_train, scorer = self._get_aimeddataset()
+        mock_dataset_val, _ = self._get_aimeddataset()
 
         sut = self._get_sut_train_pipeline(mock_dataset_train,
                                            network_factory_name="RelationExtractorBertBiLstmNetworkNoPosFactory")
@@ -39,14 +40,15 @@ class ITTestBertTrainInferencePipeline(TestCase):
         # Act
         actual = sut(mock_dataset_train, mock_dataset_val)
 
-    def _get_sut_train_pipeline(self, mock_dataset, out_dir=tempfile.mkdtemp(), epochs=5,
-                                network_factory_name="RelationExtractorBioBertFactory"):
+    def _get_sut_train_pipeline(self, mock_dataset, out_dir=tempfile.mkdtemp(), epochs=1,
+                                network_factory_name="RelationExtractorBioBertFactory", scorer=None):
         base_model_dir = os.path.join(os.path.dirname(__file__), "..", "temp", "biobert")
 
         factory = BertTrainInferenceBuilder(dataset=mock_dataset,
                                             output_dir=out_dir, model_dir=out_dir, epochs=epochs,
                                             network_factory_name=network_factory_name,
-                                            extra_args={"pretrained_biobert_dir": base_model_dir})
+                                            extra_args={"pretrained_biobert_dir": base_model_dir},
+                                            results_scorer=scorer)
         sut = factory.get_trainpipeline()
         return sut
 
@@ -55,21 +57,24 @@ class ITTestBertTrainInferencePipeline(TestCase):
         train_file = os.path.join(os.path.dirname(__file__), "..", "data", "sample_train.json")
         factory = DatasetFactory().get_datasetfactory("PpiDatasetFactory")
         dataset = factory.get_dataset(train_file)
-        return dataset
+        scorer = factory.get_metric_factory().get()
+        return dataset, scorer
 
     def _get_aimeddataset(self):
         train_file = os.path.join(os.path.dirname(__file__), "..", "data", "Aimedsample.json")
         factory = DatasetFactory().get_datasetfactory("PpiAimedDatasetFactory")
         dataset = factory.get_dataset(train_file)
-        return dataset
+        scorer = factory.get_metric_factory().get()
+
+        return dataset, scorer
 
     def test_predict(self):
         # Arrange
-        mock_dataset_train = self._get_ppidataset()
-        mock_dataset_val = self._get_ppidataset()
+        mock_dataset_train, scorer = self._get_ppidataset()
+        mock_dataset_val, _ = self._get_ppidataset()
         out_dir = tempfile.mkdtemp()
 
-        sut = self._get_sut_train_pipeline(mock_dataset_train, out_dir=out_dir, epochs=20)
+        sut = self._get_sut_train_pipeline(mock_dataset_train, out_dir=out_dir, epochs=4, scorer=scorer)
 
         # get predictions
         # Todo: fix the return from sut.... it is not a batch of scores but flattened
