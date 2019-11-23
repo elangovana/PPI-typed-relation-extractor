@@ -20,7 +20,7 @@ def run(dataset_factory_name, network_factory_name, train_file, val_file, model_
     train, val = dataset_factory.get_dataset(train_file), dataset_factory.get_dataset(val_file)
 
     scorer_factory = dataset_factory.get_metric_factory()
-    scorer = scorer_factory.get_scorer()
+    scorer = scorer_factory.get()
 
     logger.info("Using objective metric {}".format(type(scorer)))
 

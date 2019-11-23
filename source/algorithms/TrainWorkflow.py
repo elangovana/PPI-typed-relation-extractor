@@ -31,7 +31,7 @@ class TrainWorkflow:
     def __call__(self, train_file, val_file, test_file=None):
         dataset_factory = DatasetFactory().get_datasetfactory(self.dataset_factory_name)
         scorer_factory = dataset_factory.get_metric_factory()
-        scorer = scorer_factory.get_metric_factory()
+        scorer = scorer_factory.get()
 
         self.logger.info("Using objective metric {}".format(type(scorer)))
 
