@@ -22,7 +22,7 @@ def run(dataset_factory_name, network_factory_name, train_file, val_file, model_
     scorer_factory = dataset_factory.get_metric_factory()
     scorer = scorer_factory.get_scorer()
 
-    self.logger.info("Using objective metric {}".format(type(scorer)))
+    logger.info("Using objective metric {}".format(type(scorer)))
 
     if not os.path.exists(out_dir) or not os.path.isdir(out_dir):
         raise FileNotFoundError("The path {} should exist and must be a directory".format(out_dir))
