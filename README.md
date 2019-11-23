@@ -249,10 +249,17 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
     python source/datatransformer/AimedXmlToDataFramePreprocessed.py tests/test_datatransformer/data/sample_aimed_pyyasaol_converted.xml /tmp/df.json
     ```
     
-1. Run 10 fold training
+1. Run 10 fold training with unique docid
     
     ```bash
-    python ./source/algorithms/main_train_k_fold.py  --trainfile aimedsample.json --traindir tests/data --embeddingfile tests/test_algorithms/sample_PubMed-and-PMC-w2v.bin.txt --outdir /tmp --modeldir /tmp --embeddim 200 --epochs 2 --dataset PpiAimedDatasetPreprocessedFactory
+    python ./source/algorithms/main_train_k_fold.py  --trainfile aimedsample.json --traindir tests/data --embeddingfile tests/test_algorithms/sample_PubMed-and-PMC-w2v.bin.txt --outdir /tmp --modeldir /tmp --embeddim 200 --epochs 2 --dataset PpiAimedDatasetPreprocessedFactory --labelfieldname isValid --docidfieldname docid
+
+    ```
+    
+1. Run 10 fold training ignore unique doc id
+    
+    ```bash
+    python ./source/algorithms/main_train_k_fold.py  --trainfile aimedsample.json --traindir tests/data --embeddingfile tests/test_algorithms/sample_PubMed-and-PMC-w2v.bin.txt --outdir /tmp --modeldir /tmp --embeddim 200 --epochs 2 --dataset PpiAimedDatasetPreprocessedFactory --labelfieldname isValid 
 
     ```
  
