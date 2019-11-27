@@ -79,8 +79,11 @@ class BertTrainInferenceBuilder:
 
         # Trainer
         accumulation_steps = int(self._get_value(self.additional_args, "accumulation_steps", 1))
+        use_loss_objective_metric = bool(int(self._get_value(self.additional_args, "use_loss_objective_metric", 1)))
+        self.logger.info("Using use_loss_objective_metric is {}".format(use_loss_objective_metric))
         trainer = BertTrain(epochs=self.epochs, early_stopping_patience=self.patience_epochs,
-                            accumulation_steps=accumulation_steps, results_scorer=self.results_scorer)
+                            accumulation_steps=accumulation_steps, results_scorer=self.results_scorer,
+                            use_loss_objective_metric=use_loss_objective_metric)
 
         pipeline = BertTrainInferencePipeline(model=model, loss_function=loss_function,
                                               trainer=trainer,

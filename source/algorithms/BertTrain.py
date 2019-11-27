@@ -11,7 +11,8 @@ from metrics.result_scorer_f1_macro import ResultScorerF1Macro
 
 class BertTrain:
 
-    def __init__(self, device=None, epochs=10, early_stopping_patience=20, accumulation_steps=1, results_scorer=None):
+    def __init__(self, device=None, epochs=10, early_stopping_patience=20, accumulation_steps=1, results_scorer=None,
+                 use_loss_objective_metric=False):
         """
 
         :param device:
@@ -19,6 +20,7 @@ class BertTrain:
         :param early_stopping_patience:
         :param accumulation_steps: The accumulation steps for gradient accumulation
         """
+        self.use_loss_objective_metric = use_loss_objective_metric
         self.accumulation_steps = accumulation_steps
         self.early_stopping_patience = early_stopping_patience
         self.epochs = epochs
@@ -140,30 +142,43 @@ class BertTrain:
             # Print training set confusion matrix
             self.logger.info("Validation set result details: {} ".format(val_score))
 
-            # Snapshot best score
-            if (best_score is None or val_score > best_score):
+            # Snapshot best score, use loss function
+            if self.use_loss_objective_metric:
+                if (lowest_loss is None or val_loss < lowest_loss):
+                    best_results = (val_score, val_actuals, val_predicted)
 
-                best_results = (val_score, val_actuals, val_predicted)
-                self.logger.info(
-                    "Snapshotting because the current score {} is greater than {} ".format(val_score, best_score))
-                self.snapshotter(model_network, output_dir=model_dir)
+                    self.logger.info(
+                        "Snapshotting because the current loss {} is lower than {} ".format(val_loss, lowest_loss))
+                    self.snapshotter(model_network, output_dir=output_dir)
 
-                best_score = val_score
-                lowest_loss = val_loss
-                no_improvement_epochs = 0
-
-            # Here is the score if the same, but lower loss
-            elif best_score == val_score and (lowest_loss is None or val_loss < lowest_loss):
-                best_results = (val_score, val_actuals, val_predicted)
-
-                self.logger.info(
-                    "Snapshotting because the current loss {} is lower than {} ".format(val_loss, lowest_loss))
-                self.snapshotter(model_network, output_dir=output_dir)
-
-                lowest_loss = val_loss
-                no_improvement_epochs = 0
+                    lowest_loss = val_loss
+                    no_improvement_epochs = 0
+                else:
+                    no_improvement_epochs += 1
             else:
-                no_improvement_epochs += 1
+                if (best_score is None or val_score > best_score):
+
+                    best_results = (val_score, val_actuals, val_predicted)
+                    self.logger.info(
+                        "Snapshotting because the current score {} is greater than {} ".format(val_score, best_score))
+                    self.snapshotter(model_network, output_dir=model_dir)
+
+                    best_score = val_score
+                    lowest_loss = val_loss
+                    no_improvement_epochs = 0
+
+                # Here is the score if the same, but lower loss
+                elif (best_score == val_score) and (lowest_loss is None or val_loss < lowest_loss):
+                    best_results = (val_score, val_actuals, val_predicted)
+
+                    self.logger.info(
+                        "Snapshotting because the current loss {} is lower than {} ".format(val_loss, lowest_loss))
+                    self.snapshotter(model_network, output_dir=output_dir)
+
+                    lowest_loss = val_loss
+                    no_improvement_epochs = 0
+                else:
+                    no_improvement_epochs += 1
 
             # evaluate performance on validation set periodically
             self.logger.info(val_log_template.format((datetime.datetime.now() - start).seconds,
