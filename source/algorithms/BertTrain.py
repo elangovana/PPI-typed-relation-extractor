@@ -149,7 +149,7 @@ class BertTrain:
 
                     self.logger.info(
                         "Snapshotting because the current loss {} is lower than {} ".format(val_loss, lowest_loss))
-                    self.snapshotter(model_network, output_dir=output_dir)
+                    self.snapshotter(model_network, output_dir=model_dir)
 
                     lowest_loss = val_loss
                     no_improvement_epochs = 0
@@ -173,7 +173,7 @@ class BertTrain:
 
                     self.logger.info(
                         "Snapshotting because the current loss {} is lower than {} ".format(val_loss, lowest_loss))
-                    self.snapshotter(model_network, output_dir=output_dir)
+                    self.snapshotter(model_network, output_dir=model_dir)
 
                     lowest_loss = val_loss
                     no_improvement_epochs = 0
