@@ -235,12 +235,21 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
 
       ```
 
-1. Next convert the xml to dataframe json and pre-process so that protien names that are not relevant are masked as "PROTEIN"
+1. Next convert the xml to dataframe json
     
-    ```bash
-    export PYTHONPATH=./source
-    python source/datatransformer/AimedXmlToDataFramePreprocessed.py tests/test_datatransformer/data/sample_aimed_pyyasaol_converted.xml /tmp/df.json
-    ```
+    - Option A: This convert xml to dataframe json,  and pre-processes so that protien names that are not relevant are masked as "PROTEIN"
+       
+       ```bash
+        export PYTHONPATH=./source
+        python source/datatransformer/AimedXmlToDataFramePreprocessed.py tests/test_datatransformer/data/sample_aimed_pyyasaol_converted.xml /tmp/df.json
+        ```
+    
+    - Option B : If you want to just convert the AIMedXML to json without replacing non-participating protein names to "PROTEIN", then use this script instead
+    
+        ```bash
+        export PYTHONPATH=./source
+        python source/datatransformer/AimedXmlToDataFrame.py tests/test_datatransformer/data/sample_aimed_pyyasaol_converted.xml /tmp/df.json
+        ```
     
 1. Run 10 fold training with unique docid
     
@@ -256,7 +265,7 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
 
     ```
  
-2. To use use the pretrained embeddings by _Chiu et al. How to Train good Word Embeddings for Biomedical NLP_  download the embeddings from https://github.com/cambridgeltl/BioNLP-2016 
+1. To use use the pretrained embeddings by _Chiu et al. How to Train good Word Embeddings for Biomedical NLP_  download the embeddings from https://github.com/cambridgeltl/BioNLP-2016 
 
     
 ## Other embeddings
