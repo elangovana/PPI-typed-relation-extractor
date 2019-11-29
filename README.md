@@ -10,19 +10,21 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
 -	The protein-protein interaction extraction task recognizes “phosphorylate” as the relationship between “cPLA2” & “p42 mitogen-activated protein (MAP) kinase”.
 
 
-# Prerequisite
-1. Data
-   Get the MIPS Interaction XML file & extract
-   ```shell
-   wget http://mips.helmholtz-muenchen.de/proj/ppi/data/mppi.gz
-   gunzip mppi.gz 
-   ```  
-
-
-## Run Docker
+## Run via Docker
 
 ### Download and analyse the dataset with elastic search
-#### Visualise
+
+#### Download IMEX raw xml files from intact
+
+
+1. Download dataset from Imex ftp site ftp.ebi.ac.uk
+    ```bash
+    basedata=/home/ubuntu/data
+ 
+    sudo docker run -v ${basedata}:/data  lanax/kegg-pathway-extractor:latest scripts/dowloadintactinteractions.sh /data  "<filepattern e.g. human*.xml>" "<optional s3 destination>"
+    ```
+
+#### Optional: Visualise through elastic search on AWS
 1. Sample download intact files with pattern human0* and elastic search index
     ```bash
     region=$1
@@ -36,16 +38,6 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
  
     script=scripts/run_pipeline_download_esindex.sh
     sudo docker run -v ${basedata}:/data --env elasticsearch_domain_name=$esdomain --env AWS_ACCESS_KEY_ID=$accesskey   --env AWS_REGION=$region --env AWS_SECRET_ACCESS_KEY=$accesssecret lanax/kegg-pathway-extractor:latest $script /data $file_pattern $s3path 
-    ```
-
-#### Prepare dataset
-
-
-1. Download dataset from Imex ftp site ftp.ebi.ac.uk
-    ```bash
-    basedata=/home/ubuntu/data
- 
-    sudo docker run -v ${basedata}:/data  scripts/dowloadintactinteractions.sh /data  "<filepattern e.g. human*.xml>" "<optional s3 destination>"
     ```
 
 
@@ -65,6 +57,7 @@ For instance, in the sentence “Full-length cPLA2 was phosphorylated stoichiome
     export PYTHONPATH=./source
     python source/pipeline/main_pipeline_dataprep.py "<inputdir containing imex xml files>" "outputdir"
     ```
+
 3. Create pubtator formatted abstracts so that GnormPlus can recognises entities
 
     ```bash
