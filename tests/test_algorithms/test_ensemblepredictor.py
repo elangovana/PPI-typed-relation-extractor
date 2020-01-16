@@ -11,11 +11,12 @@ class TestEnsemblePredictor(TestCase):
         """
         # Arrange
         # output mock data
-        predictions = [1, 0]
-        confidence_scores = [[0.0715140849351883, 0.088773213326931], [0.0815140849351883, 0.078773213326931]]
+        predictions = [[1, 0]]
+        # return a batch of results
+        confidence_scores = [[[0.0715140849351883, 0.088773213326931], [0.0815140849351883, 0.078773213326931]]]
         # mock predictor
         mock_predictor = MagicMock()
-        mock_predictor.return_value = predictions, confidence_scores
+        mock_predictor.predict.return_value = predictions, confidence_scores
 
         mock_model = MagicMock
         models = mock_model
@@ -35,12 +36,12 @@ class TestEnsemblePredictor(TestCase):
         """
         # Arrange
         # output mock data
-        predictions = [1, 0]
-        confidence_scores = [[0.0715140849351883, 0.088773213326931], [0.0815140849351883, 0.078773213326931]]
+        predictions = [[1], [0]]
+        confidence_scores = [[[0.0715140849351883, 0.088773213326931]], [[0.0815140849351883, 0.078773213326931]]]
 
         # mock predictor
         mock_predictor = MagicMock()
-        mock_predictor.return_value = predictions, confidence_scores
+        mock_predictor.predict.return_value = predictions, confidence_scores
 
         mock_model = MagicMock()
         # 2 models
@@ -61,11 +62,11 @@ class TestEnsemblePredictor(TestCase):
         """
         # Arrange
         # output mock data
-        predictions = [1, 0]
-        confidence_scores_1 = [[0.0, 1], [1.0, 0.0]]
-        confidence_scores_2 = [[0.05, .95], [.80, 0.2]]
+        predictions = [[1, 0]]
+        confidence_scores_1 = [[[0.0, 1], [1.0, 0.0]]]
+        confidence_scores_2 = [[[0.05, .95], [.80, 0.2]]]
 
-        expected_confidence_scores = [[0.05 / 2, 1.95 / 2], [1.8 / 2, 0.2 / 2]]
+        expected_confidence_scores = [[[0.05 / 2, 1.95 / 2], [1.8 / 2, 0.2 / 2]]]
 
         mock_model_1 = MagicMock()
         mock_model_2 = MagicMock()
@@ -78,7 +79,7 @@ class TestEnsemblePredictor(TestCase):
         def mock_model_wrapper_call(m, d, h):
             return (predictions, confidence_scores_1) if m == mock_model_1 else (predictions, confidence_scores_2)
 
-        mock_model_wrapper.side_effect = mock_model_wrapper_call
+        mock_model_wrapper.predict.side_effect = mock_model_wrapper_call
 
         # 2 models
         sut = EnsemblePredictor(model_wrapper=mock_model_wrapper)

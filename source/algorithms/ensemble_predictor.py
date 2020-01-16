@@ -14,26 +14,35 @@ class EnsemblePredictor:
 
         scores_ensemble = []
         for model_network in model_networks:
-            predicted, scores = self.model_wrapper(model_network, dataloader, device)
+            predicted, scores = self.model_wrapper.predict(model_network, dataloader, device)
+            self._populate_aggregate_scores_(scores, scores_ensemble)
 
-            self._populate_aggregate_scores_(predicted, scores, scores_ensemble)
-
+        scores_ensemble_avg = []
         # average the confidence
-        scores_ensemble = [list(map(lambda x: x / len(model_networks), p)) for p in scores_ensemble]
+        for batch in scores_ensemble:
+            scores_ensemble_avg.append([list(map(lambda x: x / len(model_networks), p)) for p in batch])
+
 
         # Predicted ensemble , arg max
-        predicted_ensemble = [p.index(max(p)) for p in scores_ensemble]
-        return predicted_ensemble, scores_ensemble
+        predicted_ensemble = []
+        for batch in scores_ensemble_avg:
+            predicted_ensemble.append([p.index(max(p)) for p in batch])
+        return predicted_ensemble, scores_ensemble_avg
 
     @staticmethod
-    def _populate_aggregate_scores_(predicted, scores, output_scores_ensemble):
+    def _populate_aggregate_scores_(batches_of_scores, output_scores_ensemble):
 
-        for i in range(len(predicted)):
+        for bi in range(len(batches_of_scores)):
             # First time not intialised case
-            if len(output_scores_ensemble) < i + 1:
-                output_scores_ensemble.append(scores[i])
+            if len(output_scores_ensemble) < bi + 1:
+                output_scores_ensemble.append(batches_of_scores[bi])
             else:
-                output_scores_ensemble[i] = list(map(add, output_scores_ensemble[i], scores[i]))
+                batch_sum = []
+                for line in range(len(batches_of_scores[bi])):
+                    batch_sum.append(list(map(add, output_scores_ensemble[bi][line], batches_of_scores[bi][line])))
+                output_scores_ensemble[bi] = batch_sum
+
+        print(output_scores_ensemble)
 
     @staticmethod
     def _is_iterable(o):

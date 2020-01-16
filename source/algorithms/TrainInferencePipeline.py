@@ -8,8 +8,8 @@ from torch.optim import Adam
 from torch.utils.data import DataLoader
 
 from algorithms.Collator import Collator
-from algorithms.Predictor import Predictor
 from algorithms.VocabMerge import VocabMerger
+from algorithms.ensemble_predictor import EnsemblePredictor
 
 
 class TrainInferencePipeline:
@@ -133,14 +133,27 @@ class TrainInferencePipeline:
 
     @staticmethod
     def load(artifacts_dir):
-        model_file = TrainInferencePipeline._find_artifact("{}/*model.pt".format(artifacts_dir))
-
-        data_pipeline = TrainInferencePipeline._load_artifact("{}/*picked_datapipeline.pb".format(artifacts_dir))
-        label_pipeline = TrainInferencePipeline._load_artifact("{}/*picked_labelpipeline.pb".format(artifacts_dir))
-
-        model = torch.load(model_file)
+        data_pipeline, label_pipeline, model = TrainInferencePipeline._load_single_model(artifacts_dir)
 
         return lambda x: TrainInferencePipeline.predict(x, model, data_pipeline, label_pipeline)
+
+    @staticmethod
+    def load_ensemble(artifacts_dirs_list):
+        models = []
+        for artifacts_dir in artifacts_dirs_list:
+            data_pipeline, label_pipeline, model = TrainInferencePipeline._load_single_model(artifacts_dir)
+            models.append(model)
+
+        return lambda x: TrainInferencePipeline.predict(x, models, data_pipeline, label_pipeline)
+
+    @staticmethod
+    def _load_single_model(artifacts_dir):
+        model_file = TrainInferencePipeline._find_artifact("{}/*model.pt".format(artifacts_dir))
+        data_pipeline = TrainInferencePipeline._load_artifact("{}/*picked_datapipeline.pb".format(artifacts_dir))
+        label_pipeline = TrainInferencePipeline._load_artifact("{}/*picked_labelpipeline.pb".format(artifacts_dir))
+        model = torch.load(model_file)
+
+        return data_pipeline, label_pipeline, model
 
     @staticmethod
     def _load_artifact(pickled_file_search_filter):
@@ -165,7 +178,7 @@ class TrainInferencePipeline:
 
         val_examples = data_pipeline.transform(dataloader)
 
-        predictor = Predictor()
+        predictor = EnsemblePredictor()
 
         predictions, confidence_scores = predictor.predict(model, val_examples)
 
