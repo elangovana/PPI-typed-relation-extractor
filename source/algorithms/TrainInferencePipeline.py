@@ -139,7 +139,10 @@ class TrainInferencePipeline:
 
     @staticmethod
     def load_ensemble(artifacts_dirs_list):
+        assert len(artifacts_dirs_list) > 0, "Expecting at least one dir"
+
         models = []
+
         for artifacts_dir in artifacts_dirs_list:
             data_pipeline, label_pipeline, model = TrainInferencePipeline._load_single_model(artifacts_dir)
             models.append(model)
