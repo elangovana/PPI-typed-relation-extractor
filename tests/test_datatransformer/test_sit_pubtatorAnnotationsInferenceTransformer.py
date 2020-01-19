@@ -34,7 +34,6 @@ class TestSitPubtatorAnnotationsInferenceTransformer(TestCase):
         expected = [
 
             {"pubmedId": "19167335"
-                , "interactionType": "phosphorylation"
                 , "participant1Id": "Q10076"
                 , "participant2Id": "Q10076"
                 ,
@@ -43,7 +42,6 @@ class TestSitPubtatorAnnotationsInferenceTransformer(TestCase):
              "normalised_abstract": "Normalisedtext.."}
             ,
             {"pubmedId": "19167335"
-                , "interactionType": "phosphorylation"
                 , "participant1Id": "Q10076"
                 , "participant2Id": "Q11099"
                 ,
@@ -51,7 +49,6 @@ class TestSitPubtatorAnnotationsInferenceTransformer(TestCase):
                 ,
              "normalised_abstract": "Normalisedtext.."},
             {"pubmedId": "19167335"
-                , "interactionType": "phosphorylation"
                 , "participant1Id": "Q11099"
                 , "participant2Id": "Q11099"
                 ,
@@ -59,7 +56,6 @@ class TestSitPubtatorAnnotationsInferenceTransformer(TestCase):
                 ,
              "normalised_abstract": "Normalisedtext.."}
             , {"pubmedId": "25260751"
-                , "interactionType": "phosphorylation"
                 , "participant1Id": "Q26401"
                 , "participant2Id": "Q26401"
                 ,
@@ -71,8 +67,8 @@ class TestSitPubtatorAnnotationsInferenceTransformer(TestCase):
         actual = sut.parse(input)
 
         # Assert
-        sort_func = lambda x: "{}#{}#{}#{}".format(x["pubmedId"], x["interactionType"], x["participant1Id"],
-                                                   x["participant2Id"])
+        sort_func = lambda x: "{}#{}#{}".format(x["pubmedId"], x["participant1Id"],
+                                                x["participant2Id"])
         self.assertEqual(expected, sorted(list(actual), key=sort_func))
 
     def test_load_file(self):
