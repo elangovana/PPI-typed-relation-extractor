@@ -18,6 +18,7 @@ import os
 import shutil
 import sys
 import tarfile
+import tempfile
 
 from helpers.s3_util import S3Util
 
@@ -49,36 +50,37 @@ class EnsembleInferenceBatchS3:
     def __call__(self, remote_model_path_list, local_dir=None):
 
         # Set up working dir
-        result_dir = os.path.join(local_dir, "results")
-        os.mkdir(result_dir)
+        result_dir = local_dir
 
-        # Download files
-        for i, remote_path in enumerate(remote_model_path_list):
+        with tempfile.TemporaryDirectory() as tmpdir:
 
-            cur_result_dir = os.path.join(result_dir, "{}".format(i))
-            cur_tmp_dir = os.path.join(local_dir, "tmp_{}".format(i))
+            # Download files
+            for i, remote_path in enumerate(remote_model_path_list):
 
-            os.mkdir(cur_result_dir)
-            os.mkdir(cur_tmp_dir)
+                cur_result_dir = os.path.join(result_dir, "{}".format(i))
+                cur_tmp_dir = os.path.join(tmpdir, "tmp_{}".format(i))
 
-            self.logger.info("Downloading {} to {}".format(remote_path, cur_tmp_dir))
+                os.mkdir(cur_result_dir)
+                os.mkdir(cur_tmp_dir)
 
-            self.external_file_source.download_file(remote_path, cur_tmp_dir)
+                self.logger.info("Downloading {} to {}".format(remote_path, cur_tmp_dir))
 
-            self.logger.info("Moving results  {} to {}".format(remote_path, cur_result_dir))
+                self.external_file_source.download_file(remote_path, cur_tmp_dir)
 
-            # Move all files to the working dir, extract tar.gz if required
-            for f in os.listdir(cur_tmp_dir):
+                self.logger.info("Moving results  {} to {}".format(remote_path, cur_result_dir))
 
-                full_file_path = os.path.join(cur_tmp_dir, f)
-                if full_file_path.endswith("tar.gz"):
-                    self._extract_tar(full_file_path, cur_result_dir)
-                else:
-                    dest_path = os.path.join(cur_result_dir, os.path.basename(f))
+                # Move all files to the working dir, extract tar.gz if required
+                for f in os.listdir(cur_tmp_dir):
 
-                    shutil.move(full_file_path, dest_path)
+                    full_file_path = os.path.join(cur_tmp_dir, f)
+                    if full_file_path.endswith("tar.gz"):
+                        self._extract_tar(full_file_path, cur_result_dir)
+                    else:
+                        dest_path = os.path.join(cur_result_dir, os.path.basename(f))
 
-        return result_dir
+                        shutil.move(full_file_path, dest_path)
+
+            return result_dir
 
 
 if __name__ == '__main__':
