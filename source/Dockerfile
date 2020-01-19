@@ -12,7 +12,7 @@ WORKDIR /usr/src/ftp
 #Set up kegg extractor
 COPY ./  /opt/program/kegg_protein_extractor
 RUN ls -la /opt/program/kegg_protein_extractor
-RUN pip install -r /opt/program/kegg_protein_extractor/requirements.txt
+RUN pip install -r /opt/program/kegg_protein_extractor/requirements_prod.txt
 RUN pip install  awscli --upgrade
 
 #Set PythonPath
