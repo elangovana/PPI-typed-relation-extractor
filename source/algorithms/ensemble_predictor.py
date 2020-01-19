@@ -42,7 +42,6 @@ class EnsemblePredictor:
                     batch_sum.append(list(map(add, output_scores_ensemble[bi][line], batches_of_scores[bi][line])))
                 output_scores_ensemble[bi] = batch_sum
 
-        print(output_scores_ensemble)
 
     @staticmethod
     def _is_iterable(o):
