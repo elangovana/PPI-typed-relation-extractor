@@ -101,15 +101,13 @@ Convert Ncbi geneId to uniprot
             genes = self._get_genes(rec['annotations'])
 
             for gene_pair in itertools.combinations_with_replacement(genes, 2):
-                for interaction_type in self.interaction_types:
-                    gene_pair = sorted(list(gene_pair))
-                    yield {'pubmedId': rec['id']
-                        , 'interactionType': interaction_type
-                        , 'participant1Id': gene_pair[0]
-                        , 'participant2Id': gene_pair[1]
-                        , 'abstract': rec['text']
-                        , 'normalised_abstract': normalised_abstract
-                           }
+                gene_pair = sorted(list(gene_pair))
+                yield {'pubmedId': rec['id']
+                    , 'participant1Id': gene_pair[0]
+                    , 'participant2Id': gene_pair[1]
+                    , 'abstract': rec['text']
+                    , 'normalised_abstract': normalised_abstract
+                       }
 
 
 if "__main__" == __name__:
