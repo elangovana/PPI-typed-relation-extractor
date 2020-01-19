@@ -65,3 +65,7 @@ class PpiMulticlassDataset(CustomDatasetBase):
     @property
     def text_column_index(self):
         return 0
+
+    @property
+    def lambda_postive_field_filter(self):
+        return lambda x: x != "other"

@@ -26,3 +26,7 @@ class CustomDatasetBase(Dataset):
     @property
     def entity_markers(self):
         raise NotImplementedError
+
+    @property
+    def lambda_postive_field_filter(self):
+        return lambda x: True
