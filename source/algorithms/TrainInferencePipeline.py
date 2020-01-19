@@ -151,7 +151,8 @@ class TrainInferencePipeline:
         model_file = TrainInferencePipeline._find_artifact("{}/*model.pt".format(artifacts_dir))
         data_pipeline = TrainInferencePipeline._load_artifact("{}/*picked_datapipeline.pb".format(artifacts_dir))
         label_pipeline = TrainInferencePipeline._load_artifact("{}/*picked_labelpipeline.pb".format(artifacts_dir))
-        model = torch.load(model_file)
+        device = "cpu"
+        model = torch.load(model_file, map_location=device)
 
         return data_pipeline, label_pipeline, model
 
