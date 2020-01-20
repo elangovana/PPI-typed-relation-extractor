@@ -65,6 +65,12 @@ This is the job definition for this sample job.
             "privileged": True,
             "ulimits": [],
             "user": ""
+            , "resourceRequirements": [
+                {
+                    "type": "GPU",
+                    "value": "1"
+                }
+            ]
         },
         "retryStrategy": {
             "attempts": 5
