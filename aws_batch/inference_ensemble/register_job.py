@@ -6,8 +6,8 @@ import sys
 import boto3
 
 from createrole import create_role
-from inference.template_access_policy import create_access_policy
-from inference.template_job_definition import get_job_definition
+from inference_ensemble.template_access_policy import create_access_policy
+from inference_ensemble.template_job_definition import get_job_definition
 
 """
 Registers the same job with AWS Batch

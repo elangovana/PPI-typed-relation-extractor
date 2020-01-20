@@ -8,7 +8,7 @@ import boto3
 from s3_utilities import list_files
 
 
-def submit_job(job_def, queue_name, s3_source_prefix, dest_s3, s3_network_prefix_csv, network_type,
+def submit_job(job_def, queue_name, s3_source_prefix, dest_s3, s3_network_prefix_csv, dataset,
                positives_filter_threshold,
                local_path="/data"):
     client = boto3.client('batch')
@@ -21,7 +21,7 @@ def submit_job(job_def, queue_name, s3_source_prefix, dest_s3, s3_network_prefix
             "s3src": s3_source_prefix,
             "s3destination": dest_s3,
             "s3network_csv": s3_network_prefix_csv,
-            "networktype": network_type,
+            "dataset": dataset,
             "threshold": str(positives_filter_threshold)
 
         },
@@ -65,8 +65,8 @@ if __name__ == '__main__':
     parser.add_argument("s3_network_artifacts_prefix_csv",
                         help="The s3 uri prefix containing the network related artifacts. Makesure the name ends in / , e.g. s3://mybucket/model/")
 
-    parser.add_argument("s3_network_type",
-                        help="The type of network e.g. CnnPos, Cnn or Linear")
+    parser.add_argument("dataset",
+                        help="The type of dataset, e.g. PpiMulticlassDataset")
 
     parser.add_argument("--positives-filter-threshold",
                         help="Threshold to use", type=float, default=0.0)
@@ -75,6 +75,6 @@ if __name__ == '__main__':
 
     # Register job
     submit_multiple(args.job_name, args.queue, args.s3_source_prefix, args.s3_dest_prefix,
-                    args.s3_network_artifacts_prefix_csv, args.s3_network_type, args.positives_filter_threshold)
+                    args.s3_network_artifacts_prefix_csv, args.dataset, args.positives_filter_threshold)
 
     logger.info("Completed")
