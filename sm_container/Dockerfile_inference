@@ -1,0 +1,17 @@
+ARG REGION=us-west-2
+ARG DOCKERBASE=
+ARG ACCOUNT=1
+FROM ${ACCOUNT}.dkr.ecr.$REGION.amazonaws.com/${DOCKERBASE}
+
+# COPY all the code into the /opt/ml/code directory,
+
+COPY ./source/*   /opt/ml/code
+
+
+
+#Set PythonPath
+ENV PYTHONPATH /opt/ml/code
+
+WORKDIR /opt/ml/code
+
+
