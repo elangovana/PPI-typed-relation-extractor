@@ -54,7 +54,7 @@ phases:
       - export DOCKER_BASE_IMAGE=$IMAGE_REPO_NAME:$VERSION_DEVICE_TAG
       # Get the login command from ECR in order to pull down the Sagmaker custom training image
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-      - docker build -t IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG   --build-arg REGION=$AWS_DEFAULT_REGION  --build-arg DEVICE=$DEVICE --build-arg DOCKERBASE=$DOCKER_BASE_IMAGE -f $DOCKERFILE_INFERENCE $CODEBUILD_SRC_DIR
+      - docker build -t $IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG   --build-arg REGION=$AWS_DEFAULT_REGION  --build-arg DEVICE=$DEVICE --build-arg DOCKERBASE=$DOCKER_BASE_IMAGE -f $DOCKERFILE_INFERENCE $CODEBUILD_SRC_DIR
       - docker tag $IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG
       - docker tag $IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME_INFERENCE:$VERSION_DEVICE_TAG
       # Push Docker Image
@@ -86,7 +86,7 @@ phases:
       - export DOCKER_BASE_IMAGE=$IMAGE_REPO_NAME:$VERSION_DEVICE_TAG
       # Get the login command from ECR in order to pull down the Sagmaker custom training image
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-      - docker build -t IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG   --build-arg REGION=$AWS_DEFAULT_REGION  --build-arg DEVICE=$DEVICE --build-arg DOCKERBASE=$DOCKER_BASE_IMAGE -f $DOCKERFILE_INFERENCE $CODEBUILD_SRC_DIR
+      - docker build -t $IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG   --build-arg REGION=$AWS_DEFAULT_REGION  --build-arg DEVICE=$DEVICE --build-arg DOCKERBASE=$DOCKER_BASE_IMAGE -f $DOCKERFILE_INFERENCE $CODEBUILD_SRC_DIR
       - docker tag $IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG
       - docker tag $IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME_INFERENCE:$VERSION_DEVICE_TAG
       # Push Docker Image
