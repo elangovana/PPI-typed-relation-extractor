@@ -12,11 +12,14 @@ phases:
        ## CONFIGURE THIS: Repo name, please make sure this repo exists in ECR
       - export projectname=ppi-extractor
       - export IMAGE_REPO_NAME=ppi-extractor
+      - export IMAGE_REPO_NAME_INFERENCE=${IMAGE_REPO_NAME}_inference
+
       - export PYTORCH_VERSION=1.0.0
       # AWS cli version to login into ecr. This needs to be compatible with the version of boto3 in the requirements file
       - export awscli_version=1.16.35
       - export AWS_PYTORCH_ECR_ACCOUNT=520713654638
       - export DOCKERFILE=sm_container/Dockerfile
+      - export DOCKERFILE_INFERENCE=sm_container/Dockerfile_inference
 
 
   build:
@@ -46,6 +49,24 @@ phases:
       - echo Pushing the Docker image...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$VERSION_DEVICE_TAG
 
+      # Inference #################
+      # Build docker image for gpu
+      - export DOCKER_BASE_IMAGE=$IMAGE_REPO_NAME:$VERSION_DEVICE_TAG
+      # Get the login command from ECR in order to pull down the Sagmaker custom training image
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - docker build -t IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG   --build-arg REGION=$AWS_DEFAULT_REGION  --build-arg DEVICE=$DEVICE --build-arg DOCKERBASE=DOCKER_BASE_IMAGE -f $DOCKERFILE_INFERENCE $CODEBUILD_SRC_DIR
+      - docker tag $IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG
+      - docker tag $IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME_INFERENCE:$VERSION_DEVICE_TAG
+      # Push Docker Image
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME_INFERENCE:$VERSION_DEVICE_TAG
+
+
+
+
+
+
       # Build docker image for cpu
       - export DEVICE=cpu
       - export VERSION_DEVICE_TAG=${DEVICE}-${PYTORCH_VERSION}-${VERSION_TAG}
@@ -59,4 +80,17 @@ phases:
       - echo Pushing the Docker image...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$LATEST_TAG
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$VERSION_DEVICE_TAG
+
+      # Inference #################
+      # Build docker image for cpu
+      - export DOCKER_BASE_IMAGE=$IMAGE_REPO_NAME:$VERSION_DEVICE_TAG
+      # Get the login command from ECR in order to pull down the Sagmaker custom training image
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - docker build -t IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG   --build-arg REGION=$AWS_DEFAULT_REGION  --build-arg DEVICE=$DEVICE --build-arg DOCKERBASE=DOCKER_BASE_IMAGE -f $DOCKERFILE_INFERENCE $CODEBUILD_SRC_DIR
+      - docker tag $IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG
+      - docker tag $IMAGE_REPO_NAME_INFERENCE:$LATEST_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME_INFERENCE:$VERSION_DEVICE_TAG
+      # Push Docker Image
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME_INFERENCE:$VERSION_DEVICE_TAG
 
