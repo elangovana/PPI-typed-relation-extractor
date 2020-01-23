@@ -40,6 +40,16 @@ This is the policy required to run this sample job
                 "Resource": [
                     "arn:aws:s3:::{}".format(bucket_name)
                 ]
+            },
+            {
+                "Sid": "ECRaccess",
+                "Effect": "Allow",
+                "Action": [
+                    "ecr:*"
+                ],
+                "Resource": [
+                    "arn:aws:ecr:*:*:*"
+                ]
             }
         ]
     }
