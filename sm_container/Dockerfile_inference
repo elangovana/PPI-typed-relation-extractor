@@ -15,3 +15,6 @@ ENV PYTHONPATH /opt/ml/code
 WORKDIR /opt/ml/code
 
 
+#Example run
+ENTRYPOINT bash
+CMD [ "scripts/run_pipeline_download_esindex.sh", "/data" , "human_01*.xml"]
