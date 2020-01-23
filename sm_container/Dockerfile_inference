@@ -5,7 +5,7 @@ FROM ${ACCOUNT}.dkr.ecr.$REGION.amazonaws.com/${DOCKERBASE}
 
 # COPY all the code into the /opt/ml/code directory,
 
-COPY ./source/*   /opt/ml/code
+ADD ./source   /opt/ml/code
 
 
 
