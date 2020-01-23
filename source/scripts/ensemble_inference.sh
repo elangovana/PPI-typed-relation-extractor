@@ -1,4 +1,3 @@
-#!/bin/bash
 src_s3=$1
 dest_s3=$2
 network_s3_csv=$3
