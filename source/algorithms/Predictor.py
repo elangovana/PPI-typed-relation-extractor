@@ -18,6 +18,8 @@ class Predictor:
         model_network.eval()
         predicted = []
         scores = []
+        self.logger.info("Running inference {}".format(device))
+
         with torch.no_grad():
             for _, (batch_x, batch_y) in enumerate(dataloader):
 
@@ -35,4 +37,7 @@ class Predictor:
                 predicted.append(pred_flat.cpu().numpy().tolist())
 
         scores = [r.cpu().numpy().tolist() for r in scores]
+
+        self.logger.info("Completed inference {}".format(device))
+
         return predicted, scores
