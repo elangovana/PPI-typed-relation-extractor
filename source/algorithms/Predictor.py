@@ -1,10 +1,18 @@
+import logging
+
 import torch
 
 
 class Predictor:
 
+    @property
+    def logger(self):
+        return logging.getLogger(__name__)
+
     def predict(self, model_network, dataloader, device=None):
         device = device or ('cuda:0' if torch.cuda.is_available() else 'cpu')
+
+        self.logger.info("Using device {}".format(device))
         model_network.to(device)
         # switch model to evaluation mode
         model_network.eval()
