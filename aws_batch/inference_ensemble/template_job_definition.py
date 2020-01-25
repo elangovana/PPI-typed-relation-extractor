@@ -29,7 +29,7 @@ This is the job definition for this sample job.
             "vcpus": ncpus,
             "memory": memoryInMB,
             "command": [
-                "bash",
+
                 "scripts/ensemble_inference.sh",
                 "Ref::s3src",
                 "Ref::s3destination",
