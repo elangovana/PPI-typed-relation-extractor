@@ -5,9 +5,9 @@
 1. Python 3.5+, https://www.python.org/downloads/release/python-350/ 
 2. Install pip, see https://pip.pypa.io/en/stable/installing/ 
 3. Install dependencies for this project
-```bash
-pip install -r source/requirements.txt
-``` 
+    ```bash
+    pip install -r source/requirements.txt
+    ``` 
 
 
 
@@ -34,6 +34,12 @@ This is the full sequence to download the entire data..
     python aws_batch/register_job_dataprep_pipeline.py lanax/kegg-pathway-extractor:$tag <bucket>
 
  ```
+ To get specific interaction types
+     
+ ```bash
+    python ./aws_batch/register_job_dataprep_pipeline.py lanax/kegg-pathway-extractor:latest aegovan-data "direct interaction,colocalization,dephosphorylation,enzymatic reaction,methylation,ubiquitination,adp ribosylation,gtpase reaction,acetylation,deacetylation,demethylation,disulfide bond,atpase reaction,physical interaction,deubiquitination,hydroxylation,glycosylation,genetic interaction,putative self interaction,redox reaction,sumoylation,rna cleavage,self interaction,lipid cleavage,phosphotransfer,neddylation,palmitoylation,deamination,ampylation,demyristoylation,dna cleavage,transglutamination,deamidation,phospholipase reaction,deneddylation,depalmitoylation,dna elongation,isomerase reaction,proline isomerization  reaction"
+ ```
+
 
 ### Run large scale inference
 
