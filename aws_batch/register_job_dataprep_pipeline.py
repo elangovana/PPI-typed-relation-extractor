@@ -12,7 +12,7 @@ class RegisterJob:
         self.account = account or boto3.client('sts').get_caller_identity().get('Account')
         self.region = aws_region or boto3.session.Session().region_name
 
-    def run(self, container_name: str, data_bucket: str):
+    def run(self, container_name: str, data_bucket: str, interaction_types: str):
         """
         Registers a job with aws batch.
         :param data_bucket: the name of the s3 bucket that will hold the data
@@ -66,10 +66,10 @@ class RegisterJob:
             "jobDefinitionName": job_def_name,
             "type": "container",
             "parameters": {
-                "input_path": "s3://<bucker>/prefix/",
-                "output_path": "s3://<bucker>/prefix_ouput/",
+                "input_path": "s3://{}/prefix/".format(data_bucket),
+                "output_path": "s3://{}/prefix_ouput/".format(data_bucket),
                 "log_level": "INFO",
-                "interaction_types": "phosphorylation,dephosphorylation,ubiquitination,methylation,acetylation,deubiquitination,demethylation"
+                "interaction_types": interaction_types
 
             },
             "containerProperties": {
@@ -90,7 +90,7 @@ class RegisterJob:
                 "volumes": [
                     {
                         "host": {
-                            "sourcePath": job_def_name
+                            "sourcePath": "/dev/shm"
                         },
                         "name": "data"
                     }
@@ -128,9 +128,13 @@ if __name__ == '__main__':
                         help="Container image, e.g docker pull lanax/kegg-pathway-extractor:latest")
 
     parser.add_argument("data_bucket",
-                        help="The names of the s3 bucket that will contain the input/output data")
+                        help="The name of the s3 bucket that will contain the input/output data")
+
+    parser.add_argument("interaction_types",
+                        help="The interaction types to download",
+                        default="phosphorylation,dephosphorylation,ubiquitination,methylation,acetylation,deubiquitination,demethylation")
 
     job = RegisterJob()
     args = parser.parse_args()
-    result = job.run(args.containerimage, args.data_bucket)
+    result = job.run(args.containerimage, args.data_bucket, args.interaction_types)
     print(result)
