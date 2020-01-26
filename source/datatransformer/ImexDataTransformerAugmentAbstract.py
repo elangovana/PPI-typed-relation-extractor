@@ -63,11 +63,11 @@ Adds the pubmed abstract to each item based on the pubmed id
 
     def _get_pubmed_abstract(self, item):
         pubmed_details_list = self.pubmed_extractor.extract_abstract_by_pubmedid([item[self.id_key]])
-        if len(pubmed_details_list) == 0:
-            self.logger.warning("Could not find abstract for record {}".format(item[self.id_key]))
-            return
 
         # expect only one record in the array
-        assert len(pubmed_details_list) == 1, "Expecting just 1,  but found {}".format(len(pubmed_details_list))
+        if len(pubmed_details_list) != 1:
+            self.logger.warning("Expecting just 1,  but found {}".format(len(pubmed_details_list)))
+            return
+
         item[self.abstract_key] = pubmed_details_list[0]["abstract"]
         return item
