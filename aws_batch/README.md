@@ -19,6 +19,7 @@ This is the full sequence to download the entire data..
  1. Register aws batch
  
  ```bash
+    export PYTHONPATH=./aws_batch
 
     python aws_batch/register_job_download_raw_files.py lanax/kegg-pathway-extractor:latest "<bucket>"
 
@@ -30,14 +31,17 @@ This is the full sequence to download the entire data..
  1. Register aws batch
  
  ```bash
+    export PYTHONPATH=./aws_batch
 
-    python aws_batch/register_job_dataprep_pipeline.py lanax/kegg-pathway-extractor:$tag <bucket>
+    python aws_batch/register_job_dataprep_pipeline.py lanax/kegg-pathway-extractor:latest "<bucket>"
 
  ```
  To get specific interaction types
      
  ```bash
-    python ./aws_batch/register_job_dataprep_pipeline.py lanax/kegg-pathway-extractor:latest aegovan-data "direct interaction,colocalization,dephosphorylation,enzymatic reaction,methylation,ubiquitination,adp ribosylation,gtpase reaction,acetylation,deacetylation,demethylation,disulfide bond,atpase reaction,physical interaction,deubiquitination,hydroxylation,glycosylation,genetic interaction,putative self interaction,redox reaction,sumoylation,rna cleavage,self interaction,lipid cleavage,phosphotransfer,neddylation,palmitoylation,deamination,ampylation,demyristoylation,dna cleavage,transglutamination,deamidation,phospholipase reaction,deneddylation,depalmitoylation,dna elongation,isomerase reaction,proline isomerization  reaction"
+    export PYTHONPATH=./aws_batch
+
+    python ./aws_batch/register_job_dataprep_pipeline.py lanax/kegg-pathway-extractor:latest aegovan-data "direct interaction,association,colocalization,phosphorylation,dephosphorylation,cleavage,enzymatic reaction,protein cleavage,methylation,ubiquitination,adp ribosylation,gtpase reaction,acetylation,covalent binding,deacetylation,demethylation,disulfide bond,atpase reaction,physical interaction,deubiquitination,hydroxylation,glycosylation,genetic interaction,putative self interaction,redox reaction,sumoylation,rna cleavage,self interaction,lipid cleavage,phosphotransfer,neddylation,palmitoylation,deamination,ampylation,demyristoylation,dna cleavage,transglutamination,deamidation,phospholipase reaction,deneddylation,depalmitoylation,dna elongation,isomerase reaction,proline isomerization  reaction"
  ```
 
 
