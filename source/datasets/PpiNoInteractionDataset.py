@@ -43,7 +43,7 @@ class PpiNoInteractionDataset(CustomDatasetBase):
         if self.transformer is not None:
             x = self.transformer(x)
 
-        return self.transformer(x), y
+        return x, y
 
     @property
     def class_size(self):
