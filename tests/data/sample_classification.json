@@ -1,0 +1,3446 @@
+{
+  "interactionId": {
+    "17169": 515605,
+    "22785": 755229,
+    "22115": 1445682,
+    "21755": 694795,
+    "6860": 2581172,
+    "9066": 1316314,
+    "16474": 1318883,
+    "12235": 1191707,
+    "2191": 1186668,
+    "15624": 2504388,
+    "18465": 833370,
+    "22724": 2618469,
+    "1296": 1583755,
+    "3083": 795471,
+    "4444": 359571,
+    "13898": 2458,
+    "10553": 1478078,
+    "13728": 2731466,
+    "1740": 192577,
+    "13596": 1828372,
+    "10678": 1520558,
+    "13415": 2599765,
+    "17183": 515317,
+    "8524": 883642,
+    "17710": 2700118,
+    "20798": 1532215,
+    "1798": 515033,
+    "13332": 505032,
+    "19187": 2590492,
+    "12556": 1262170,
+    "21832": 948732,
+    "15826": 2656546,
+    "2753": 1010792,
+    "1559": 145411,
+    "13209": 501183,
+    "16325": 594192,
+    "13820": 1294210,
+    "1308": 2722431,
+    "10408": 1258030,
+    "17571": 1381177,
+    "11767": 2643745,
+    "15773": 936257,
+    "16824": 122947,
+    "3884": 2655468,
+    "12921": 2592357,
+    "13897": 298357,
+    "10364": 101526,
+    "18368": 100504,
+    "14909": 2595046,
+    "1485": 191123
+  },
+  "interactionType": {
+    "17169": "other",
+    "22785": "other",
+    "22115": "other",
+    "21755": "other",
+    "6860": "other",
+    "9066": "other",
+    "16474": "other",
+    "12235": "other",
+    "2191": "other",
+    "15624": "other",
+    "18465": "dephosphorylation",
+    "22724": "other",
+    "1296": "other",
+    "3083": "other",
+    "4444": "other",
+    "13898": "other",
+    "10553": "other",
+    "13728": "other",
+    "1740": "other",
+    "13596": "other",
+    "10678": "other",
+    "13415": "other",
+    "17183": "other",
+    "8524": "other",
+    "17710": "other",
+    "20798": "other",
+    "1798": "other",
+    "13332": "other",
+    "19187": "other",
+    "12556": "other",
+    "21832": "other",
+    "15826": "other",
+    "2753": "other",
+    "1559": "other",
+    "13209": "other",
+    "16325": "other",
+    "13820": "other",
+    "1308": "other",
+    "10408": "other",
+    "17571": "other",
+    "11767": "other",
+    "15773": "other",
+    "16824": "other",
+    "3884": "other",
+    "12921": "other",
+    "13897": "other",
+    "10364": "other",
+    "18368": "other",
+    "14909": "other",
+    "1485": "other"
+  },
+  "isNegative": {
+    "17169": "false",
+    "22785": "false",
+    "22115": "false",
+    "21755": "false",
+    "6860": "false",
+    "9066": "false",
+    "16474": "false",
+    "12235": "false",
+    "2191": "false",
+    "15624": "false",
+    "18465": "false",
+    "22724": "false",
+    "1296": "false",
+    "3083": "false",
+    "4444": "false",
+    "13898": "false",
+    "10553": "false",
+    "13728": "false",
+    "1740": "false",
+    "13596": "false",
+    "10678": "false",
+    "13415": "false",
+    "17183": "false",
+    "8524": "false",
+    "17710": "false",
+    "20798": "false",
+    "1798": "false",
+    "13332": "false",
+    "19187": "false",
+    "12556": "false",
+    "21832": "false",
+    "15826": "false",
+    "2753": "false",
+    "1559": "false",
+    "13209": "false",
+    "16325": "false",
+    "13820": "false",
+    "1308": "false",
+    "10408": "false",
+    "17571": "false",
+    "11767": "false",
+    "15773": "false",
+    "16824": "false",
+    "3884": "false",
+    "12921": "false",
+    "13897": "false",
+    "10364": "false",
+    "18368": "false",
+    "14909": "false",
+    "1485": "false"
+  },
+  "participants": {
+    "17169": [
+      {
+        "uniprotid": "Q9UJY5",
+        "alias": [
+          [
+            "gga1_human"
+          ],
+          [
+            "ADP-ribosylation factor-binding protein GGA1"
+          ],
+          [
+            "Golgi-localized, gamma ear-containing, ARF-binding protein 1"
+          ],
+          [
+            "Gamma-adaptin-related protein 1"
+          ],
+          [
+            "GGA1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9UGW0",
+          "Q9UGW1",
+          "Q6IC75",
+          "A8K3D3",
+          "Q9BW94",
+          "Q86YA9",
+          "Q8NCS6",
+          "Q9UG00",
+          "Q5R3N1",
+          "B0QYR7",
+          "Q5TG07"
+        ]
+      },
+      {
+        "uniprotid": "Q8BSL7",
+        "alias": [
+          [
+            "arf2_mouse"
+          ],
+          [
+            "ADP-ribosylation factor 2"
+          ],
+          [
+            "Arf2"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q3TJ37",
+          "P10947",
+          "P16500",
+          "Q91VR9"
+        ]
+      }
+    ],
+    "22785": [
+      {
+        "uniprotid": "Q8TBX8",
+        "alias": [
+          [
+            "pi42c_human"
+          ],
+          [
+            "Phosphatidylinositol 5-phosphate 4-kinase type-2 gamma"
+          ],
+          [
+            "PIP4K2C"
+          ],
+          [
+            "PIP5K2C"
+          ],
+          [
+            "Phosphatidylinositol 5-phosphate 4-kinase type II gamma"
+          ]
+        ],
+        "alternative_uniprots": [
+          "B2RDL3",
+          "B4DM11",
+          "B4DY44",
+          "Q9H6N2"
+        ]
+      },
+      {
+        "uniprotid": "Q8TBX8",
+        "alias": [
+          [
+            "pi42c_human"
+          ],
+          [
+            "Phosphatidylinositol 5-phosphate 4-kinase type-2 gamma"
+          ],
+          [
+            "PIP4K2C"
+          ],
+          [
+            "PIP5K2C"
+          ],
+          [
+            "Phosphatidylinositol 5-phosphate 4-kinase type II gamma"
+          ]
+        ],
+        "alternative_uniprots": [
+          "B2RDL3",
+          "B4DM11",
+          "B4DY44",
+          "Q9H6N2"
+        ]
+      }
+    ],
+    "22115": [
+      {
+        "uniprotid": "Q13315",
+        "alias": [
+          [
+            "atm_human"
+          ],
+          [
+            "Serine-protein kinase ATM"
+          ],
+          [
+            "ATM"
+          ],
+          [
+            "Ataxia telangiectasia mutated"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q12758",
+          "O15429",
+          "Q9NP02",
+          "Q9UCX7",
+          "B2RNX5",
+          "Q93007",
+          "Q16551"
+        ]
+      },
+      {
+        "uniprotid": "Q9WMX2-PRO_0000037549",
+        "alias": [
+          [
+            "ns3_ns4a_hcvco"
+          ],
+          [
+            "Serine protease NS3\/Non-structural protein 4A"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9WMX2-PRO_0000037549",
+          "Q9WMX2-PRO_0000037548"
+        ]
+      }
+    ],
+    "21755": [
+      {
+        "uniprotid": "Q96PM5",
+        "alias": [
+          [
+            "zn363_human"
+          ],
+          [
+            "RING finger and CHY zinc finger domain-containing protein 1"
+          ],
+          [
+            "RING-type E3 ubiquitin transferase RCHY1"
+          ],
+          [
+            "Zinc finger protein 363"
+          ],
+          [
+            "CH-rich-interacting match with PLAG1"
+          ],
+          [
+            "Androgen receptor N-terminal-interacting protein"
+          ],
+          [
+            "p53-induced RING-H2 protein"
+          ],
+          [
+            "RING finger protein 199"
+          ],
+          [
+            "RCHY1"
+          ],
+          [
+            "ARNIP"
+          ],
+          [
+            "CHIMP"
+          ],
+          [
+            "ZNF363"
+          ],
+          [
+            "PIRH2"
+          ],
+          [
+            "RNF199"
+          ],
+          [
+            "E3 ubiquitin-protein ligase Pirh2"
+          ]
+        ],
+        "alternative_uniprots": [
+          "C7E541",
+          "Q2KN33",
+          "E7EMC8",
+          "D3YRV2",
+          "Q86X26",
+          "E7ETW5",
+          "C7E542",
+          "Q59GN7",
+          "J3KPI0",
+          "B3KRG3",
+          "C7E543",
+          "Q96PR5"
+        ]
+      },
+      {
+        "uniprotid": "P04637",
+        "alias": [
+          [
+            "p53_human"
+          ],
+          [
+            "Cellular tumor antigen p53"
+          ],
+          [
+            "TP53"
+          ],
+          [
+            "P53"
+          ],
+          [
+            "Tumor suppressor p53"
+          ],
+          [
+            "Phosphoprotein p53"
+          ],
+          [
+            "Antigen NY-CO-13"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q99659",
+          "Q3LRW1",
+          "Q86UG1",
+          "Q9HAQ8",
+          "Q9UQ61",
+          "Q9NPJ2",
+          "Q15087",
+          "Q16808",
+          "Q3LRW5",
+          "Q16848",
+          "Q15086",
+          "Q9NZD0",
+          "Q16809",
+          "Q9UBI2",
+          "Q3LRW4",
+          "Q9NP68",
+          "Q16535",
+          "Q16810",
+          "Q8J016",
+          "Q2XN98",
+          "Q16811",
+          "Q3LRW3",
+          "Q16807",
+          "Q9BTM4",
+          "Q15088",
+          "Q3LRW2"
+        ]
+      }
+    ],
+    "6860": [
+      {
+        "uniprotid": "Q5VY80",
+        "alias": [
+          [
+            "ulbp6_human"
+          ],
+          [
+            "UL16-binding protein 6"
+          ],
+          [
+            "Retinoic acid early transcript 1L protein"
+          ],
+          [
+            "ULBP6"
+          ],
+          [
+            "RAET1L"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q8TE74",
+          "A3KME4"
+        ]
+      },
+      {
+        "uniprotid": "P26718",
+        "alias": [
+          [
+            "nkg2d_human"
+          ],
+          [
+            "NKG2-D type II integral membrane protein"
+          ],
+          [
+            "KLRK1"
+          ],
+          [
+            "NKG2D"
+          ],
+          [
+            "NKG2-D-activating NK receptor"
+          ],
+          [
+            "NK cell receptor D"
+          ],
+          [
+            "Killer cell lectin-like receptor subfamily K member 1"
+          ],
+          [
+            "D12S2489E"
+          ]
+        ],
+        "alternative_uniprots": [
+          "A8K7K5",
+          "Q9NR41",
+          "A8K7P4"
+        ]
+      }
+    ],
+    "9066": [
+      {
+        "uniprotid": "P05067",
+        "alias": [
+          [
+            "a4_human"
+          ],
+          [
+            "Amyloid-beta A4 protein"
+          ],
+          [
+            "Amyloid precursor protein"
+          ],
+          [
+            "APP"
+          ],
+          [
+            "A4"
+          ],
+          [
+            "AD1"
+          ],
+          [
+            "Alzheimer disease amyloid protein"
+          ],
+          [
+            "ABPP"
+          ],
+          [
+            "PreA4"
+          ],
+          [
+            "Cerebral vascular amyloid peptide"
+          ],
+          [
+            "Protease nexin-II"
+          ],
+          [
+            "APPI"
+          ],
+          [
+            "Amyloid-beta precursor protein"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q6GSC0",
+          "Q9UCC8",
+          "B2R5V1",
+          "D3DSD3",
+          "Q8WZ99",
+          "Q9UC33",
+          "Q13764",
+          "B4DII8",
+          "P78438",
+          "Q16020",
+          "Q9BT38",
+          "Q16014",
+          "Q16011",
+          "Q9UCA9",
+          "Q13778",
+          "Q9UCB6",
+          "P09000",
+          "Q16019",
+          "Q9UCD1",
+          "Q13793",
+          "D3DSD2",
+          "D3DSD1",
+          "Q9UQ58"
+        ]
+      }
+    ],
+    "16474": [
+      {
+        "uniprotid": "Q9Y320",
+        "alias": [
+          [
+            "tmx2_human"
+          ],
+          [
+            "Thioredoxin-related transmembrane protein 2"
+          ],
+          [
+            "Cell proliferation-inducing gene 26 protein"
+          ],
+          [
+            "TXNDC14"
+          ],
+          [
+            "Thioredoxin domain-containing protein 14"
+          ],
+          [
+            "CGI-31"
+          ],
+          [
+            "My009"
+          ],
+          [
+            "PIG26"
+          ],
+          [
+            "PSEC0045"
+          ],
+          [
+            "UNQ237\/PRO270"
+          ],
+          [
+            "TMX2"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q5J7Q7",
+          "B7Z4R4",
+          "Q561W0",
+          "Q8NBP9",
+          "Q53G73",
+          "Q9H3L1"
+        ]
+      },
+      {
+        "uniprotid": "Q9H3N1",
+        "alias": [
+          [
+            "tmx1_human"
+          ],
+          [
+            "Thioredoxin-related transmembrane protein 1"
+          ],
+          [
+            "Transmembrane Trx-related protein"
+          ],
+          [
+            "TMX1"
+          ],
+          [
+            "TXNDC1"
+          ],
+          [
+            "TMX"
+          ],
+          [
+            "TXNDC"
+          ],
+          [
+            "PSEC0085"
+          ],
+          [
+            "UNQ235\/PRO268"
+          ],
+          [
+            "Thioredoxin domain-containing protein 1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9Y4T6",
+          "Q8N487",
+          "Q8NBN5",
+          "B2R7A4"
+        ]
+      },
+      {
+        "uniprotid": "Q96JJ7",
+        "alias": [
+          [
+            "tmx3_human"
+          ],
+          [
+            "Protein disulfide-isomerase TMX3"
+          ],
+          [
+            "TMX3"
+          ],
+          [
+            "KIAA1830"
+          ],
+          [
+            "TXNDC10"
+          ],
+          [
+            "Thioredoxin-related transmembrane protein 3"
+          ],
+          [
+            "Thioredoxin domain-containing protein 10"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9NWJ9",
+          "Q8N5J0",
+          "Q52LT7",
+          "B3KV75"
+        ]
+      },
+      {
+        "uniprotid": "P27824",
+        "alias": [
+          [
+            "calx_human"
+          ],
+          [
+            "Calnexin"
+          ],
+          [
+            "CANX"
+          ],
+          [
+            "Major histocompatibility complex class I antigen-binding protein p88"
+          ],
+          [
+            "p90"
+          ],
+          [
+            "IP90"
+          ]
+        ],
+        "alternative_uniprots": [
+          "D6R9K3",
+          "B4DGP8",
+          "B4E2T8",
+          "D3DWQ3",
+          "B2R5V8"
+        ]
+      },
+      {
+        "uniprotid": "Q9H1E5",
+        "alias": [
+          [
+            "tmx4_human"
+          ],
+          [
+            "Thioredoxin-related transmembrane protein 4"
+          ],
+          [
+            "KIAA1162"
+          ],
+          [
+            "TXNDC13"
+          ],
+          [
+            "Thioredoxin domain-containing protein 13"
+          ],
+          [
+            "PSEC0095"
+          ],
+          [
+            "UNQ475\/PRO938"
+          ],
+          [
+            "TMX4"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9ULQ8",
+          "Q8N4P7",
+          "Q9UJA1",
+          "Q8NCC1"
+        ]
+      }
+    ],
+    "12235": [
+      {
+        "uniprotid": "Q96RS0",
+        "alias": [
+          [
+            "tgs1_human"
+          ],
+          [
+            "Trimethylguanosine synthase"
+          ],
+          [
+            "Cap-specific guanine-N2 methyltransferase"
+          ],
+          [
+            "Nuclear receptor coactivator 6-interacting protein"
+          ],
+          [
+            "PRIP-interacting protein with methyltransferase motif"
+          ],
+          [
+            "CLL-associated antigen KW-2"
+          ],
+          [
+            "Hepatocellular carcinoma-associated antigen 137"
+          ],
+          [
+            "TGS1"
+          ],
+          [
+            "PIMT"
+          ],
+          [
+            "HCA137"
+          ],
+          [
+            "NCOA6IP"
+          ]
+        ],
+        "alternative_uniprots": [
+          "A6NJQ5",
+          "Q9H5V3",
+          "Q5GH23",
+          "Q8TDG9",
+          "Q96QU3"
+        ]
+      },
+      {
+        "uniprotid": "O14980",
+        "alias": [
+          [
+            "xpo1_human"
+          ],
+          [
+            "Exportin-1"
+          ],
+          [
+            "CRM1"
+          ],
+          [
+            "XPO1"
+          ],
+          [
+            "Chromosome region maintenance 1 protein homolog"
+          ]
+        ],
+        "alternative_uniprots": [
+          "A8K1K5",
+          "Q68CP3",
+          "A6NL14",
+          "Q99433",
+          "Q63HP8",
+          "D6W5E2"
+        ]
+      }
+    ],
+    "2191": [
+      {
+        "uniprotid": "Q15388",
+        "alias": [
+          [
+            "tom20_human"
+          ],
+          [
+            "Mitochondrial import receptor subunit TOM20 homolog"
+          ],
+          [
+            "Outer mitochondrial membrane receptor Tom20"
+          ],
+          [
+            "TOMM20"
+          ],
+          [
+            "KIAA0016"
+          ],
+          [
+            "Mitochondrial 20 kDa outer membrane protein"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q6IBT4",
+          "Q498B3",
+          "A8K195"
+        ]
+      },
+      {
+        "uniprotid": "Q96C03",
+        "alias": [
+          [
+            "mid49_human"
+          ],
+          [
+            "Mitochondrial dynamics protein MID49"
+          ],
+          [
+            "Mitochondrial dynamics protein of 49 kDa"
+          ],
+          [
+            "MIEF2"
+          ],
+          [
+            "MID49"
+          ],
+          [
+            "Mitochondrial elongation factor 2"
+          ],
+          [
+            "SMCR7"
+          ],
+          [
+            "Smith-Magenis syndrome chromosomal region candidate gene 7 protein"
+          ]
+        ],
+        "alternative_uniprots": [
+          "J3KPT3",
+          "Q96N07",
+          "Q6ZRD4"
+        ]
+      }
+    ],
+    "15624": [
+      {
+        "uniprotid": "P52294",
+        "alias": [
+          [
+            "ima5_human"
+          ],
+          [
+            "Importin subunit alpha-5"
+          ],
+          [
+            "KPNA1"
+          ],
+          [
+            "RCH2"
+          ],
+          [
+            "Karyopherin subunit alpha-1"
+          ],
+          [
+            "SRP1-beta"
+          ],
+          [
+            "RAG cohort protein 2"
+          ],
+          [
+            "Nucleoprotein interactor 1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9BQ56",
+          "Q6IBQ9",
+          "D3DN93"
+        ]
+      },
+      {
+        "uniprotid": "P06748",
+        "alias": [
+          [
+            "npm_human"
+          ],
+          [
+            "Nucleophosmin"
+          ],
+          [
+            "NPM1"
+          ],
+          [
+            "NPM"
+          ],
+          [
+            "Nucleolar phosphoprotein B23"
+          ],
+          [
+            "Numatrin"
+          ],
+          [
+            "Nucleolar protein NO38"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q5EU99",
+          "Q5EU95",
+          "Q96DC4",
+          "Q12826",
+          "Q9UDJ7",
+          "D3DQL6",
+          "Q13440",
+          "Q14115",
+          "Q96AT6",
+          "Q6V962",
+          "Q96EA5",
+          "Q8WTW5",
+          "Q9BYG9",
+          "Q5EU97",
+          "A8K3N7",
+          "Q5EU98",
+          "Q5EU94",
+          "Q13441",
+          "Q5EU96",
+          "B5BU00",
+          "P08693"
+        ]
+      }
+    ],
+    "18465": [
+      {
+        "uniprotid": "P19174",
+        "alias": [
+          [
+            "plcg1_human"
+          ],
+          [
+            "1-phosphatidylinositol 4,5-bisphosphate phosphodiesterase gamma-1"
+          ],
+          [
+            "PLC-148"
+          ],
+          [
+            "PLC1"
+          ],
+          [
+            "Phospholipase C-II"
+          ],
+          [
+            "PLCG1"
+          ],
+          [
+            "Phosphoinositide phospholipase C-gamma-1"
+          ],
+          [
+            "Phospholipase C-gamma-1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q2V575",
+          "B7ZLY7",
+          "E1P5W4",
+          "B9EGH4"
+        ]
+      }
+    ],
+    "22724": [
+      {
+        "uniprotid": "Q15843",
+        "alias": [
+          [
+            "nedd8_human"
+          ],
+          [
+            "NEDD8"
+          ],
+          [
+            "Ubiquitin-like protein Nedd8"
+          ],
+          [
+            "Neddylin"
+          ],
+          [
+            "Neural precursor cell expressed developmentally down-regulated protein 8"
+          ],
+          [
+            "NEDD8"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q6LES6",
+          "Q3SXN8"
+        ]
+      },
+      {
+        "uniprotid": "P61081",
+        "alias": [
+          [
+            "ubc12_human"
+          ],
+          [
+            "NEDD8-conjugating enzyme Ubc12"
+          ],
+          [
+            "UBE2M"
+          ],
+          [
+            "UBC12"
+          ],
+          [
+            "Ubiquitin-conjugating enzyme E2 M"
+          ],
+          [
+            "NEDD8 carrier protein"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q8VC50",
+          "O76069"
+        ]
+      }
+    ],
+    "1296": [
+      {
+        "uniprotid": "P15559",
+        "alias": [
+          [
+            "nqo1_human"
+          ],
+          [
+            "NAD(P)H dehydrogenase [quinone] 1"
+          ],
+          [
+            "NQO1"
+          ],
+          [
+            "DIA4"
+          ],
+          [
+            "NMOR1"
+          ],
+          [
+            "Azoreductase"
+          ],
+          [
+            "DT-diaphorase"
+          ],
+          [
+            "Menadione reductase"
+          ],
+          [
+            "NAD(P)H:quinone oxidoreductase 1"
+          ],
+          [
+            "Phylloquinone reductase"
+          ],
+          [
+            "Quinone reductase 1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "B4DNM7",
+          "Q86UK1",
+          "B2R5Y9",
+          "B7ZAD1"
+        ]
+      }
+    ],
+    "3083": [
+      {
+        "uniprotid": "Q9NZM1",
+        "alias": [
+          [
+            "myof_human"
+          ],
+          [
+            "Myoferlin"
+          ],
+          [
+            "MYOF"
+          ],
+          [
+            "KIAA1207"
+          ],
+          [
+            "FER1L3"
+          ],
+          [
+            "Fer-1-like protein 3"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9Y4U4",
+          "Q9NZM0",
+          "Q9ULL3",
+          "B3KQN5",
+          "Q5VWW3",
+          "Q5VWW2",
+          "Q7Z642",
+          "Q8IWH0",
+          "Q5VWW4",
+          "Q5VWW5",
+          "Q9HBU3"
+        ]
+      },
+      {
+        "uniprotid": "Q8BH64",
+        "alias": [
+          [
+            "ehd2_mouse"
+          ],
+          [
+            "EH domain-containing protein 2"
+          ],
+          [
+            "Ehd2"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q8BL28"
+        ]
+      }
+    ],
+    "4444": [
+      {
+        "uniprotid": "O95400",
+        "alias": [
+          [
+            "cd2b2_human"
+          ],
+          [
+            "CD2 antigen cytoplasmic tail-binding protein 2"
+          ],
+          [
+            "CD2BP2"
+          ],
+          [
+            "KIAA1178"
+          ],
+          [
+            "U5 snRNP 52K protein"
+          ]
+        ],
+        "alternative_uniprots": [
+          "B2RDX2",
+          "Q9ULP2"
+        ]
+      },
+      {
+        "uniprotid": "O94906",
+        "alias": [
+          [
+            "prp6_human"
+          ],
+          [
+            "Pre-mRNA-processing factor 6"
+          ],
+          [
+            "U5 snRNP-associated 102 kDa protein"
+          ],
+          [
+            "PRP6 homolog"
+          ],
+          [
+            "PRPF6"
+          ],
+          [
+            "C20orf14"
+          ],
+          [
+            "Androgen receptor N-terminal domain-transactivating protein 1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q5VXS5",
+          "O95109",
+          "Q9H3Z1",
+          "Q9H4T9",
+          "Q9NTE6",
+          "Q9H4U8",
+          "B2RAR5",
+          "B3KMC6"
+        ]
+      }
+    ],
+    "13898": [
+      {
+        "uniprotid": "Q14118",
+        "alias": [
+          [
+            "dag1_human"
+          ],
+          [
+            "Dystroglycan"
+          ],
+          [
+            "DAG1"
+          ],
+          [
+            "Dystrophin-associated glycoprotein 1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "A8K6M7",
+          "Q969J9"
+        ]
+      },
+      {
+        "uniprotid": "P62994",
+        "alias": [
+          [
+            "grb2_rat"
+          ],
+          [
+            "Growth factor receptor-bound protein 2"
+          ],
+          [
+            "Grb2"
+          ],
+          [
+            "Ash"
+          ],
+          [
+            "Adapter protein GRB2"
+          ],
+          [
+            "SH2\/SH3 adapter GRB2"
+          ],
+          [
+            "Protein Ash"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q14450",
+          "P29354",
+          "Q63059",
+          "Q5BKA7",
+          "Q63057"
+        ]
+      }
+    ],
+    "10553": [
+      {
+        "uniprotid": "P29846-PRO_0000037666",
+        "alias": [
+          [
+            "p29846-pro_0000037666"
+          ],
+          [
+            "Core protein p21"
+          ]
+        ],
+        "alternative_uniprots": []
+      },
+      {
+        "uniprotid": "P61978",
+        "alias": [
+          [
+            "hnrpk_human"
+          ],
+          [
+            "Heterogeneous nuclear ribonucleoprotein K"
+          ],
+          [
+            "HNRNPK"
+          ],
+          [
+            "HNRPK"
+          ],
+          [
+            "Transformation up-regulated nuclear protein"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q922Y7",
+          "Q59F98",
+          "Q60577",
+          "Q15671",
+          "Q96J62",
+          "Q5T6W4",
+          "Q6IBN1",
+          "Q07244"
+        ]
+      }
+    ],
+    "13728": [
+      {
+        "uniprotid": "P62837",
+        "alias": [
+          [
+            "ub2d2_human"
+          ],
+          [
+            "Ubiquitin-conjugating enzyme E2 D2"
+          ],
+          [
+            "(E3-independent) E2 ubiquitin-conjugating enzyme D2"
+          ],
+          [
+            "E2 ubiquitin-conjugating enzyme D2"
+          ],
+          [
+            "UBC5B"
+          ],
+          [
+            "UBCH4"
+          ],
+          [
+            "UBE2D2"
+          ],
+          [
+            "UBC4"
+          ],
+          [
+            "UBCH5B"
+          ],
+          [
+            "Ubiquitin-protein ligase D2"
+          ],
+          [
+            "Ubiquitin carrier protein D2"
+          ],
+          [
+            "Ubiquitin-conjugating enzyme E2-17 kDa 2"
+          ],
+          [
+            "Ubiquitin-conjugating enzyme E2(17)KB 2"
+          ],
+          [
+            "PUBC1"
+          ],
+          [
+            "p53-regulated ubiquitin-conjugating enzyme 1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "P51669",
+          "Q96RP6",
+          "Q3MN78",
+          "D3DQC9"
+        ]
+      },
+      {
+        "uniprotid": "Q5X159",
+        "alias": [
+          [
+            "lubx_legpa"
+          ],
+          [
+            "E3 ubiquitin-protein ligase LubX"
+          ],
+          [
+            "lubX"
+          ],
+          [
+            "Legionella U-box protein"
+          ],
+          [
+            "RING-type E3 ubiquitin transferase LubX"
+          ],
+          [
+            "lpp2887"
+          ]
+        ],
+        "alternative_uniprots": []
+      }
+    ],
+    "1740": [
+      {
+        "uniprotid": "Q9ESJ1",
+        "alias": [
+          [
+            "cabl1_mouse"
+          ],
+          [
+            "CDK5 and ABL1 enzyme substrate 1"
+          ],
+          [
+            "Interactor with CDK3 1"
+          ],
+          [
+            "Cables1"
+          ],
+          [
+            "Cables"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9EPR8",
+          "E9QNI6"
+        ]
+      },
+      {
+        "uniprotid": "O15350",
+        "alias": [
+          [
+            "p73_human"
+          ],
+          [
+            "Tumor protein p73"
+          ],
+          [
+            "TP73"
+          ],
+          [
+            "P73"
+          ],
+          [
+            "p53-like transcription factor"
+          ],
+          [
+            "p53-related protein"
+          ]
+        ],
+        "alternative_uniprots": [
+          "O15351",
+          "Q5TBV6",
+          "B7Z8Z1",
+          "Q8TDY6",
+          "B7Z9C1",
+          "Q9NTK8",
+          "Q8TDY5",
+          "Q17RN8",
+          "Q5TBV5",
+          "B7Z7J4",
+          "Q8NHW9",
+          "C9J521"
+        ]
+      }
+    ],
+    "13596": [
+      {
+        "uniprotid": "Q96KQ7",
+        "alias": [
+          [
+            "ehmt2_human"
+          ],
+          [
+            "Histone-lysine N-methyltransferase EHMT2"
+          ],
+          [
+            "KMT1C"
+          ],
+          [
+            "Histone H3-K9 methyltransferase 3"
+          ],
+          [
+            "Euchromatic histone-lysine N-methyltransferase 2"
+          ],
+          [
+            "HLA-B-associated transcript 8"
+          ],
+          [
+            "Protein G9a"
+          ],
+          [
+            "Lysine N-methyltransferase 1C"
+          ],
+          [
+            "EHMT2"
+          ],
+          [
+            "BAT8"
+          ],
+          [
+            "G9A"
+          ],
+          [
+            "NG36"
+          ],
+          [
+            "C6orf30"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q5JQA1",
+          "Q6PK06",
+          "Q9UQL8",
+          "Q5JP83",
+          "B0UZY2",
+          "Q5JQG3",
+          "Q96QD0",
+          "Q9Y331",
+          "Q5JQ92",
+          "Q14349",
+          "Q96MH5"
+        ]
+      },
+      {
+        "uniprotid": "P23771",
+        "alias": [
+          [
+            "gata3_human"
+          ],
+          [
+            "Trans-acting T-cell-specific transcription factor GATA-3"
+          ],
+          [
+            "GATA3"
+          ],
+          [
+            "GATA-binding factor 3"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q5VWG8",
+          "Q96J16",
+          "Q5VWG7"
+        ]
+      }
+    ],
+    "10678": [
+      {
+        "uniprotid": "P02749",
+        "alias": [
+          [
+            "apoh_human"
+          ],
+          [
+            "Beta-2-glycoprotein 1"
+          ],
+          [
+            "APOH"
+          ],
+          [
+            "B2G1"
+          ],
+          [
+            "Beta-2-glycoprotein I"
+          ],
+          [
+            "Apolipoprotein H"
+          ],
+          [
+            "Activated protein C-binding protein"
+          ],
+          [
+            "APC inhibitor"
+          ],
+          [
+            "Anticardiolipin cofactor"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9UCN7",
+          "B2R9M3"
+        ]
+      },
+      {
+        "uniprotid": "P08519",
+        "alias": [
+          [
+            "apoa_human"
+          ],
+          [
+            "Apolipoprotein(a)"
+          ],
+          [
+            "LPA"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9UD88",
+          "Q5VTD7"
+        ]
+      }
+    ],
+    "13415": [
+      {
+        "uniprotid": "P33176",
+        "alias": [
+          [
+            "kinh_human"
+          ],
+          [
+            "Kinesin-1 heavy chain"
+          ],
+          [
+            "KIF5B"
+          ],
+          [
+            "KNS"
+          ],
+          [
+            "KNS1"
+          ],
+          [
+            "Ubiquitous kinesin heavy chain"
+          ],
+          [
+            "Conventional kinesin heavy chain"
+          ]
+        ],
+        "alternative_uniprots": [
+          "A0AVB2",
+          "Q5VZ85"
+        ]
+      },
+      {
+        "uniprotid": "P33176",
+        "alias": [
+          [
+            "kinh_human"
+          ],
+          [
+            "Kinesin-1 heavy chain"
+          ],
+          [
+            "KIF5B"
+          ],
+          [
+            "KNS"
+          ],
+          [
+            "KNS1"
+          ],
+          [
+            "Ubiquitous kinesin heavy chain"
+          ],
+          [
+            "Conventional kinesin heavy chain"
+          ]
+        ],
+        "alternative_uniprots": [
+          "A0AVB2",
+          "Q5VZ85"
+        ]
+      }
+    ],
+    "17183": [
+      {
+        "uniprotid": "P0CG47",
+        "alias": [
+          [
+            "ubb_human"
+          ],
+          [
+            "Polyubiquitin-B"
+          ],
+          [
+            "UBB"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q91888",
+          "Q9UPK7",
+          "Q9BWD6",
+          "P02248",
+          "Q91887",
+          "Q6LBL4",
+          "Q9UEF2",
+          "Q9BX98",
+          "P62988",
+          "Q6LDU5",
+          "Q29120",
+          "P02250",
+          "Q8WYN8",
+          "P02249",
+          "Q9UEK8",
+          "Q9UEG1"
+        ]
+      },
+      {
+        "uniprotid": "Q93009",
+        "alias": [
+          [
+            "ubp7_human"
+          ],
+          [
+            "Ubiquitin carboxyl-terminal hydrolase 7"
+          ],
+          [
+            "USP7"
+          ],
+          [
+            "HAUSP"
+          ],
+          [
+            "Ubiquitin thioesterase 7"
+          ],
+          [
+            "Ubiquitin-specific-processing protease 7"
+          ],
+          [
+            "Deubiquitinating enzyme 7"
+          ],
+          [
+            "Herpesvirus-associated ubiquitin-specific protease"
+          ]
+        ],
+        "alternative_uniprots": [
+          "A6NMY8",
+          "B7Z815",
+          "H0Y3G8"
+        ]
+      }
+    ],
+    "8524": [
+      {
+        "uniprotid": "Q63629",
+        "alias": [
+          [
+            "q63629_rat"
+          ]
+        ],
+        "alternative_uniprots": []
+      },
+      {
+        "uniprotid": "P67828",
+        "alias": [
+          [
+            "kc1a_rabit"
+          ],
+          [
+            "Casein kinase I isoform alpha"
+          ],
+          [
+            "CSNK1A1"
+          ],
+          [
+            "CK1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "P35506"
+        ]
+      }
+    ],
+    "17710": [
+      {
+        "uniprotid": "Q9UJM3",
+        "alias": [
+          [
+            "errfi_human"
+          ],
+          [
+            "ERBB receptor feedback inhibitor 1"
+          ],
+          [
+            "ERRFI1"
+          ],
+          [
+            "MIG6"
+          ],
+          [
+            "Mitogen-inducible gene 6 protein"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9NTG9",
+          "Q9UD05",
+          "B2RDX9"
+        ]
+      },
+      {
+        "uniprotid": "P00533",
+        "alias": [
+          [
+            "egfr_human"
+          ],
+          [
+            "Epidermal growth factor receptor"
+          ],
+          [
+            "ERBB1"
+          ],
+          [
+            "EGFR"
+          ],
+          [
+            "Receptor tyrosine-protein kinase erbB-1"
+          ],
+          [
+            "Proto-oncogene c-ErbB-1"
+          ],
+          [
+            "ERBB"
+          ],
+          [
+            "HER1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9UMD7",
+          "Q14225",
+          "Q9UMG5",
+          "Q9H3C9",
+          "Q9UMD8",
+          "O00732",
+          "Q68GS5",
+          "O00688",
+          "Q9H2C9",
+          "P06268",
+          "Q9BZS2",
+          "Q9GZX1",
+          "Q92795"
+        ]
+      }
+    ],
+    "20798": [
+      {
+        "uniprotid": "Q6Q788",
+        "alias": [
+          [
+            "apoa5_human"
+          ],
+          [
+            "Apolipoprotein A-V"
+          ],
+          [
+            "APOA5"
+          ],
+          [
+            "RAP3"
+          ],
+          [
+            "Apolipoprotein A5"
+          ],
+          [
+            "Regeneration-associated protein 3"
+          ],
+          [
+            "UNQ411\/PRO773"
+          ]
+        ],
+        "alternative_uniprots": [
+          "B0YIV9",
+          "Q6UWK9",
+          "Q9UBJ3",
+          "Q3MIK6"
+        ]
+      },
+      {
+        "uniprotid": "P11151",
+        "alias": [
+          [
+            "lipl_bovin"
+          ],
+          [
+            "Lipoprotein lipase"
+          ],
+          [
+            "LPL"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q17R03"
+        ]
+      }
+    ],
+    "1798": [
+      {
+        "uniprotid": "P00533",
+        "alias": [
+          [
+            "egfr_human"
+          ],
+          [
+            "Epidermal growth factor receptor"
+          ],
+          [
+            "ERBB1"
+          ],
+          [
+            "EGFR"
+          ],
+          [
+            "Receptor tyrosine-protein kinase erbB-1"
+          ],
+          [
+            "Proto-oncogene c-ErbB-1"
+          ],
+          [
+            "ERBB"
+          ],
+          [
+            "HER1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9UMD7",
+          "Q14225",
+          "Q9UMG5",
+          "Q9H3C9",
+          "Q9UMD8",
+          "O00732",
+          "Q68GS5",
+          "O00688",
+          "Q9H2C9",
+          "P06268",
+          "Q9BZS2",
+          "Q9GZX1",
+          "Q92795"
+        ]
+      },
+      {
+        "uniprotid": "P01135",
+        "alias": [
+          [
+            "tgfa_human"
+          ],
+          [
+            "Protransforming growth factor alpha"
+          ],
+          [
+            "TGFA"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9UKM3",
+          "A8K286",
+          "Q15577",
+          "Q9UKM2",
+          "Q9UKM1",
+          "Q53SK7",
+          "Q9BS56",
+          "Q9UEI3"
+        ]
+      }
+    ],
+    "13332": [
+      {
+        "uniprotid": "P12004",
+        "alias": [
+          [
+            "pcna_human"
+          ],
+          [
+            "Proliferating cell nuclear antigen"
+          ],
+          [
+            "PCNA"
+          ],
+          [
+            "Cyclin"
+          ]
+        ],
+        "alternative_uniprots": [
+          "B2R897",
+          "D3DW02"
+        ]
+      },
+      {
+        "uniprotid": "Q13111",
+        "alias": [
+          [
+            "caf1a_human"
+          ],
+          [
+            "Chromatin assembly factor 1 subunit A"
+          ],
+          [
+            "CHAF1A"
+          ],
+          [
+            "CAF"
+          ],
+          [
+            "CAF1P150"
+          ],
+          [
+            "Chromatin assembly factor I p150 subunit"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q7Z7K3",
+          "Q6NXG5",
+          "Q9UJY8"
+        ]
+      }
+    ],
+    "19187": [
+      {
+        "uniprotid": "P06213-1",
+        "alias": [
+          [
+            "p06213-1"
+          ],
+          [
+            "Insulin receptor"
+          ],
+          [
+            "INSR"
+          ],
+          [
+            "HIR-B"
+          ]
+        ],
+        "alternative_uniprots": []
+      },
+      {
+        "uniprotid": "P18031",
+        "alias": [
+          [
+            "ptn1_human"
+          ],
+          [
+            "Tyrosine-protein phosphatase non-receptor type 1"
+          ],
+          [
+            "PTPN1"
+          ],
+          [
+            "PTP1B"
+          ],
+          [
+            "Protein-tyrosine phosphatase 1B"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q5TGD8",
+          "Q9NQQ4",
+          "Q9BQV9"
+        ]
+      }
+    ],
+    "12556": [
+      {
+        "uniprotid": "P04637",
+        "alias": [
+          [
+            "p53_human"
+          ],
+          [
+            "Cellular tumor antigen p53"
+          ],
+          [
+            "TP53"
+          ],
+          [
+            "P53"
+          ],
+          [
+            "Tumor suppressor p53"
+          ],
+          [
+            "Phosphoprotein p53"
+          ],
+          [
+            "Antigen NY-CO-13"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q99659",
+          "Q3LRW1",
+          "Q86UG1",
+          "Q9HAQ8",
+          "Q9UQ61",
+          "Q9NPJ2",
+          "Q15087",
+          "Q16808",
+          "Q3LRW5",
+          "Q16848",
+          "Q15086",
+          "Q9NZD0",
+          "Q16809",
+          "Q9UBI2",
+          "Q3LRW4",
+          "Q9NP68",
+          "Q16535",
+          "Q16810",
+          "Q8J016",
+          "Q2XN98",
+          "Q16811",
+          "Q3LRW3",
+          "Q16807",
+          "Q9BTM4",
+          "Q15088",
+          "Q3LRW2"
+        ]
+      },
+      {
+        "uniprotid": "Q9Y3T9",
+        "alias": [
+          [
+            "noc2l_human"
+          ],
+          [
+            "Nucleolar complex protein 2 homolog"
+          ],
+          [
+            "NOC2-like protein"
+          ],
+          [
+            "NOC2L"
+          ],
+          [
+            "NIR"
+          ],
+          [
+            "Novel INHAT repressor"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q5SVA3",
+          "Q9BTN6"
+        ]
+      }
+    ],
+    "21832": [
+      {
+        "uniprotid": "O46385",
+        "alias": [
+          [
+            "svil_bovin"
+          ],
+          [
+            "Supervillin"
+          ],
+          [
+            "SVIL"
+          ],
+          [
+            "Archvillin"
+          ],
+          [
+            "p205\/p250"
+          ]
+        ],
+        "alternative_uniprots": []
+      },
+      {
+        "uniprotid": "P35580",
+        "alias": [
+          [
+            "myh10_human"
+          ],
+          [
+            "Myosin-10"
+          ],
+          [
+            "MYH10"
+          ],
+          [
+            "Myosin heavy chain 10"
+          ],
+          [
+            "Myosin heavy chain, non-muscle IIb"
+          ],
+          [
+            "Non-muscle myosin heavy chain IIb"
+          ],
+          [
+            "Cellular myosin heavy chain, type B"
+          ],
+          [
+            "Non-muscle myosin heavy chain B"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q6PK16",
+          "Q12989",
+          "Q16087",
+          "D3DTS1",
+          "Q149N4",
+          "Q4LE45",
+          "Q9BWG0",
+          "B2RWP9",
+          "F8VTL3",
+          "Q149N3"
+        ]
+      }
+    ],
+    "15826": [
+      {
+        "uniprotid": "Q8AZ57",
+        "alias": [
+          [
+            "q8az57_machu"
+          ],
+          [
+            "Pre-glycoprotein polyprotein GP complex"
+          ],
+          [
+            "GPC"
+          ]
+        ],
+        "alternative_uniprots": []
+      },
+      {
+        "uniprotid": "P02786",
+        "alias": [
+          [
+            "tfr1_human"
+          ],
+          [
+            "Transferrin receptor protein 1"
+          ],
+          [
+            "TFRC"
+          ],
+          [
+            "T9"
+          ],
+          [
+            "p90"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9UCU5",
+          "Q9UDF9",
+          "Q59G55",
+          "Q9UK21",
+          "D3DXB0",
+          "Q1HE24",
+          "Q9UCN0"
+        ]
+      }
+    ],
+    "2753": [
+      {
+        "uniprotid": "Q9NRG1",
+        "alias": [
+          [
+            "prdc1_human"
+          ],
+          [
+            "Phosphoribosyltransferase domain-containing protein 1"
+          ],
+          [
+            "PRTFDC1"
+          ],
+          [
+            "HHGP"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q59EL9",
+          "B7Z1Z3",
+          "Q5VV20",
+          "Q53HA7",
+          "Q5VV18"
+        ]
+      }
+    ],
+    "1559": [
+      {
+        "uniprotid": "O14964",
+        "alias": [
+          [
+            "hgs_human"
+          ],
+          [
+            "Hepatocyte growth factor-regulated tyrosine kinase substrate"
+          ],
+          [
+            "Protein pp110"
+          ],
+          [
+            "Hrs"
+          ],
+          [
+            "HGS"
+          ],
+          [
+            "HRS"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9NR36"
+        ]
+      },
+      {
+        "uniprotid": "P0CG48",
+        "alias": [
+          [
+            "ubc_human"
+          ],
+          [
+            "Polyubiquitin-C"
+          ],
+          [
+            "UBC"
+          ]
+        ],
+        "alternative_uniprots": [
+          "P02250",
+          "P02249",
+          "Q6LDU5",
+          "Q91887",
+          "Q9BWD6",
+          "Q9UEK8",
+          "Q8WYN8",
+          "P62988",
+          "Q9BX98",
+          "Q6LBL4",
+          "Q9UPK7",
+          "Q9UEG1",
+          "Q9UEF2",
+          "Q91888",
+          "P02248",
+          "Q29120"
+        ]
+      }
+    ],
+    "13209": [
+      {
+        "uniprotid": "Q15554",
+        "alias": [
+          [
+            "terf2_human"
+          ],
+          [
+            "Telomeric repeat-binding factor 2"
+          ],
+          [
+            "TTAGGG repeat-binding factor 2"
+          ],
+          [
+            "Telomeric DNA-binding protein"
+          ],
+          [
+            "TERF2"
+          ],
+          [
+            "TRF2"
+          ],
+          [
+            "TRBF2"
+          ]
+        ],
+        "alternative_uniprots": []
+      },
+      {
+        "uniprotid": "Q13416",
+        "alias": [
+          [
+            "orc2_human"
+          ],
+          [
+            "Origin recognition complex subunit 2"
+          ],
+          [
+            "ORC2"
+          ],
+          [
+            "ORC2L"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q13204",
+          "Q53TX5"
+        ]
+      }
+    ],
+    "16325": [
+      {
+        "uniprotid": "Q13813",
+        "alias": [
+          [
+            "sptn1_human"
+          ],
+          [
+            "Spectrin alpha chain, non-erythrocytic 1"
+          ],
+          [
+            "SPTAN1"
+          ],
+          [
+            "SPTA2"
+          ],
+          [
+            "Alpha-II spectrin"
+          ],
+          [
+            "Fodrin alpha chain"
+          ],
+          [
+            "NEAS"
+          ],
+          [
+            "Spectrin, non-erythroid alpha subunit"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q7Z6M5",
+          "Q13186",
+          "Q59EF1",
+          "Q16606",
+          "Q5VXV6",
+          "Q5VXV5",
+          "Q15324",
+          "Q9P0V0"
+        ]
+      },
+      {
+        "uniprotid": "Q01082-2",
+        "alias": [
+          [
+            "q01082-2"
+          ],
+          [
+            "Spectrin beta chain, non-erythrocytic 1"
+          ],
+          [
+            "SPTBN1"
+          ],
+          [
+            "SPTB2"
+          ],
+          [
+            "Beta-II spectrin"
+          ],
+          [
+            "Fodrin beta chain"
+          ],
+          [
+            "Spectrin, non-erythroid beta chain 1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q01082-2"
+        ]
+      }
+    ],
+    "13820": [
+      {
+        "uniprotid": "P03372",
+        "alias": [
+          [
+            "esr1_human"
+          ],
+          [
+            "Estrogen receptor"
+          ],
+          [
+            "ESR1"
+          ],
+          [
+            "ESR"
+          ],
+          [
+            "NR3A1"
+          ],
+          [
+            "Estradiol receptor"
+          ],
+          [
+            "ER-alpha"
+          ],
+          [
+            "Nuclear receptor subfamily 3 group A member 1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q14276",
+          "Q13511",
+          "Q9NU51",
+          "Q9UDZ7",
+          "Q6MZQ9",
+          "Q5T5H7",
+          "Q9UIS7"
+        ]
+      },
+      {
+        "uniprotid": "Q02447",
+        "alias": [
+          [
+            "sp3_human"
+          ],
+          [
+            "Transcription factor Sp3"
+          ],
+          [
+            "SPR-2"
+          ],
+          [
+            "SP3"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q69B26",
+          "Q69B27",
+          "Q8TD56",
+          "Q9BQR1",
+          "Q8WWU4",
+          "A0AVL9",
+          "B4E2B7"
+        ]
+      }
+    ],
+    "1308": [
+      {
+        "uniprotid": "Q8NFJ9",
+        "alias": [
+          [
+            "bbs1_human"
+          ],
+          [
+            "Bardet-Biedl syndrome 1 protein"
+          ],
+          [
+            "BBS1"
+          ],
+          [
+            "BBS2L2"
+          ],
+          [
+            "BBS2-like protein 2"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q32MM9",
+          "Q96SN4",
+          "Q32MN0"
+        ]
+      },
+      {
+        "uniprotid": "Q9H0F7-1",
+        "alias": [
+          [
+            "q9h0f7-1"
+          ],
+          [
+            "ADP-ribosylation factor-like protein 6"
+          ],
+          [
+            "ARL6"
+          ],
+          [
+            "BBS3"
+          ],
+          [
+            "Bardet-Biedl syndrome 3 protein"
+          ],
+          [
+            "BBS3"
+          ]
+        ],
+        "alternative_uniprots": []
+      }
+    ],
+    "10408": [
+      {
+        "uniprotid": "Q99952",
+        "alias": [
+          [
+            "ptn18_human"
+          ],
+          [
+            "Tyrosine-protein phosphatase non-receptor type 18"
+          ],
+          [
+            "Brain-derived phosphatase"
+          ],
+          [
+            "PTPN18"
+          ],
+          [
+            "BDP1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "B4E1E6",
+          "Q53P42"
+        ]
+      },
+      {
+        "uniprotid": "O43586",
+        "alias": [
+          [
+            "ppip1_human"
+          ],
+          [
+            "Proline-serine-threonine phosphatase-interacting protein 1"
+          ],
+          [
+            "CD2-binding protein 1"
+          ],
+          [
+            "H-PIP"
+          ],
+          [
+            "PSTPIP1"
+          ],
+          [
+            "CD2BP1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "O95657",
+          "B5BU74",
+          "O43585",
+          "B5BUK4"
+        ]
+      }
+    ],
+    "17571": [
+      {
+        "uniprotid": "Q5JWF2",
+        "alias": [
+          [
+            "gnas1_human"
+          ],
+          [
+            "Guanine nucleotide-binding protein G(s) subunit alpha isoforms XLas"
+          ],
+          [
+            "GNAS"
+          ],
+          [
+            "GNAS1"
+          ],
+          [
+            "Adenylate cyclase-stimulating G alpha protein"
+          ],
+          [
+            "Extra large alphas protein"
+          ]
+        ],
+        "alternative_uniprots": [
+          "O75684",
+          "Q5JWF1",
+          "Q5JW67",
+          "A2A2S3",
+          "O75685",
+          "Q9NY42",
+          "E1P5G3"
+        ]
+      },
+      {
+        "uniprotid": "P49407",
+        "alias": [
+          [
+            "arrb1_human"
+          ],
+          [
+            "Beta-arrestin-1"
+          ],
+          [
+            "Non-visual arrestin-2"
+          ],
+          [
+            "Arrestin beta-1"
+          ],
+          [
+            "ARRB1"
+          ],
+          [
+            "ARR1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "O75630",
+          "Q2PP20",
+          "Q9BTK8",
+          "O75625",
+          "B6V9G8"
+        ]
+      }
+    ],
+    "11767": [
+      {
+        "uniprotid": "Q9H444",
+        "alias": [
+          [
+            "chm4b_human"
+          ],
+          [
+            "Charged multivesicular body protein 4b"
+          ],
+          [
+            "Chromatin-modifying protein 4b"
+          ],
+          [
+            "Vacuolar protein sorting-associated protein 32-2"
+          ],
+          [
+            "SNF7-2"
+          ],
+          [
+            "SNF7 homolog associated with Alix 1"
+          ],
+          [
+            "CHMP4B"
+          ],
+          [
+            "C20orf178"
+          ],
+          [
+            "SHAX1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q53ZD6",
+          "E1P5N4"
+        ]
+      }
+    ],
+    "15773": [
+      {
+        "uniprotid": "P54792",
+        "alias": [
+          [
+            "dvlp1_human"
+          ],
+          [
+            "Putative segment polarity protein dishevelled homolog DVL1P1"
+          ],
+          [
+            "DVL1P1"
+          ],
+          [
+            "DSH homolog 1-like"
+          ],
+          [
+            "DVL"
+          ],
+          [
+            "DVL1"
+          ],
+          [
+            "DVL1L1"
+          ],
+          [
+            "Segment polarity protein dishevelled homolog DVL-1-like"
+          ]
+        ],
+        "alternative_uniprots": []
+      },
+      {
+        "uniprotid": "P25054",
+        "alias": [
+          [
+            "apc_human"
+          ],
+          [
+            "Adenomatous polyposis coli protein"
+          ],
+          [
+            "APC"
+          ],
+          [
+            "DP2.5"
+          ],
+          [
+            "Deleted in polyposis 2.5"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q15162",
+          "D3DT03",
+          "Q93042",
+          "Q15163",
+          "B7Z2B6"
+        ]
+      }
+    ],
+    "16824": [
+      {
+        "uniprotid": "P35222",
+        "alias": [
+          [
+            "ctnb1_human"
+          ],
+          [
+            "Catenin beta-1"
+          ],
+          [
+            "Beta-catenin"
+          ],
+          [
+            "OK\/SW-cl.35"
+          ],
+          [
+            "PRO2286"
+          ],
+          [
+            "CTNNB1"
+          ],
+          [
+            "CTNNB"
+          ]
+        ],
+        "alternative_uniprots": [
+          "A8K1L7",
+          "Q8NI94",
+          "Q9H391",
+          "Q8NEW9"
+        ]
+      },
+      {
+        "uniprotid": "P10275",
+        "alias": [
+          [
+            "andr_human"
+          ],
+          [
+            "Androgen receptor"
+          ],
+          [
+            "Dihydrotestosterone receptor"
+          ],
+          [
+            "Nuclear receptor subfamily 3 group C member 4"
+          ],
+          [
+            "AR"
+          ],
+          [
+            "DHTR"
+          ],
+          [
+            "NR3C4"
+          ]
+        ],
+        "alternative_uniprots": [
+          "A2RUN2",
+          "B1AKD7",
+          "Q9UD95",
+          "C0JKD3",
+          "E7EVX6",
+          "A0A0B4J1T2",
+          "C0JKD4"
+        ]
+      }
+    ],
+    "3884": [
+      {
+        "uniprotid": "O43572",
+        "alias": [
+          [
+            "aka10_human"
+          ],
+          [
+            "A-kinase anchor protein 10, mitochondrial"
+          ],
+          [
+            "Protein kinase A-anchoring protein 10"
+          ],
+          [
+            "Dual specificity A kinase-anchoring protein 2"
+          ],
+          [
+            "AKAP10"
+          ]
+        ],
+        "alternative_uniprots": [
+          "B2R650",
+          "Q96AJ7"
+        ]
+      },
+      {
+        "uniprotid": "P00514",
+        "alias": [
+          [
+            "kap0_bovin"
+          ],
+          [
+            "cAMP-dependent protein kinase type I-alpha regulatory subunit"
+          ],
+          [
+            "PRKAR1A"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q17QP8",
+          "A5D9F4"
+        ]
+      }
+    ],
+    "12921": [
+      {
+        "uniprotid": "O14964",
+        "alias": [
+          [
+            "hgs_human"
+          ],
+          [
+            "Hepatocyte growth factor-regulated tyrosine kinase substrate"
+          ],
+          [
+            "Protein pp110"
+          ],
+          [
+            "Hrs"
+          ],
+          [
+            "HGS"
+          ],
+          [
+            "HRS"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9NR36"
+        ]
+      },
+      {
+        "uniprotid": "P62990",
+        "alias": [
+          [
+            "ubiq_bovin"
+          ],
+          [
+            "Ubiquitin"
+          ],
+          [
+            "RPS27A"
+          ],
+          [
+            "UBA80"
+          ],
+          [
+            "UBCEP1"
+          ],
+          [
+            "UBA52"
+          ],
+          [
+            "UBCEP2"
+          ],
+          [
+            "UBB"
+          ],
+          [
+            "UBC"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q29120",
+          "P02249",
+          "P02248",
+          "Q862F4",
+          "Q862T5",
+          "Q24K23",
+          "Q28170",
+          "Q3T0V5",
+          "Q91888",
+          "Q862X8",
+          "P02250",
+          "Q862M4",
+          "Q28169",
+          "Q91887",
+          "P80169",
+          "Q01235",
+          "O97577",
+          "Q3ZCE3",
+          "Q862C1"
+        ]
+      }
+    ],
+    "13897": [
+      {
+        "uniprotid": "P03116",
+        "alias": [
+          [
+            "ve1_bpv1"
+          ],
+          [
+            "Replication protein E1"
+          ],
+          [
+            "E1"
+          ],
+          [
+            "ATP-dependent helicase E1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q9WMH1"
+        ]
+      },
+      {
+        "uniprotid": "P63279",
+        "alias": [
+          [
+            "ubc9_human"
+          ],
+          [
+            "SUMO-conjugating enzyme UBC9"
+          ],
+          [
+            "RING-type E3 SUMO transferase UBC9"
+          ],
+          [
+            "UBE2I"
+          ],
+          [
+            "p18"
+          ],
+          [
+            "SUMO-protein ligase"
+          ],
+          [
+            "UBC9"
+          ],
+          [
+            "UBCE9"
+          ],
+          [
+            "Ubiquitin carrier protein 9"
+          ],
+          [
+            "Ubiquitin carrier protein I"
+          ],
+          [
+            "Ubiquitin-conjugating enzyme E2 I"
+          ],
+          [
+            "Ubiquitin-protein ligase I"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q15698",
+          "Q59GX1",
+          "P50550",
+          "Q86VB3",
+          "D3DU69"
+        ]
+      }
+    ],
+    "10364": [
+      {
+        "uniprotid": "P30491",
+        "alias": [
+          [
+            "1b53_human"
+          ],
+          [
+            "HLA class I histocompatibility antigen, B-53 alpha chain"
+          ],
+          [
+            "HLA-B"
+          ],
+          [
+            "Bw-53"
+          ],
+          [
+            "HLAB"
+          ],
+          [
+            "MHC class I antigen B*53"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q5TK76",
+          "Q9MY42",
+          "Q9TQH8",
+          "Q9BD43",
+          "Q9GJF0",
+          "O78053",
+          "Q30198",
+          "O78138",
+          "Q9TP36"
+        ]
+      },
+      {
+        "uniprotid": "P61769",
+        "alias": [
+          [
+            "b2mg_human"
+          ],
+          [
+            "Beta-2-microglobulin"
+          ],
+          [
+            "B2M"
+          ],
+          [
+            "CDABP0092"
+          ],
+          [
+            "HDCMA22P"
+          ]
+        ],
+        "alternative_uniprots": [
+          "P01884",
+          "Q9UDF4",
+          "Q540F8",
+          "Q9UCK0",
+          "Q9UD48",
+          "Q6IAT8"
+        ]
+      }
+    ],
+    "18368": [
+      {
+        "uniprotid": "P06400",
+        "alias": [
+          [
+            "rb_human"
+          ],
+          [
+            "Retinoblastoma-associated protein"
+          ],
+          [
+            "pRb"
+          ],
+          [
+            "pp110"
+          ],
+          [
+            "p105-Rb"
+          ],
+          [
+            "RB1"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q5VW46",
+          "A8K5E3",
+          "Q8IZL4",
+          "P78499"
+        ]
+      },
+      {
+        "uniprotid": "P03070",
+        "alias": [
+          [
+            "lt_sv40"
+          ],
+          [
+            "Large T antigen"
+          ]
+        ],
+        "alternative_uniprots": []
+      }
+    ],
+    "14909": [
+      {
+        "uniprotid": "P01857",
+        "alias": [
+          [
+            "ighg1_human"
+          ],
+          [
+            "Immunoglobulin heavy constant gamma 1"
+          ],
+          [
+            "IGHG1"
+          ],
+          [
+            "Ig gamma-1 chain C region"
+          ],
+          [
+            "Ig gamma-1 chain C region EU"
+          ],
+          [
+            "Ig gamma-1 chain C region KOL"
+          ],
+          [
+            "Ig gamma-1 chain C region NIE"
+          ]
+        ],
+        "alternative_uniprots": []
+      },
+      {
+        "uniprotid": "P04488",
+        "alias": [
+          [
+            "ge_hhv11"
+          ],
+          [
+            "Envelope glycoprotein E"
+          ],
+          [
+            "gE"
+          ],
+          [
+            "gE-1"
+          ],
+          [
+            "US8"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q09I69",
+          "B9VQK2"
+        ]
+      }
+    ],
+    "1485": [
+      {
+        "uniprotid": "O95049",
+        "alias": [
+          [
+            "zo3_human"
+          ],
+          [
+            "Tight junction protein ZO-3"
+          ],
+          [
+            "Zonula occludens protein 3"
+          ],
+          [
+            "Zona occludens protein 3"
+          ],
+          [
+            "Tight junction protein 3"
+          ],
+          [
+            "TJP3"
+          ],
+          [
+            "ZO3"
+          ]
+        ],
+        "alternative_uniprots": [
+          "B3KR73",
+          "B3KXZ0",
+          "K7EK22",
+          "A6NFP3",
+          "F5H2X0",
+          "B4E2W6",
+          "Q32N01",
+          "F5H4S9"
+        ]
+      },
+      {
+        "uniprotid": "Q8NI35",
+        "alias": [
+          [
+            "inadl_human"
+          ],
+          [
+            "InaD-like protein"
+          ],
+          [
+            "PATJ"
+          ],
+          [
+            "INADL"
+          ],
+          [
+            "Pals1-associated tight junction protein"
+          ],
+          [
+            "Protein associated to tight junctions"
+          ]
+        ],
+        "alternative_uniprots": [
+          "Q5VUA8",
+          "Q8WU78",
+          "O60833",
+          "Q5VUA9",
+          "Q5VUA5",
+          "Q5VUA6",
+          "Q9H3N9",
+          "Q5VUB0",
+          "O15249",
+          "O43742",
+          "Q5VUA7"
+        ]
+      }
+    ]
+  },
+  "pubmedId": {
+    "17169": "12679809",
+    "22785": "18255255",
+    "22115": "17931678",
+    "21755": "17568776",
+    "6860": "28559451",
+    "9066": "22584060",
+    "16474": "22045338",
+    "12235": "21522132",
+    "2191": "21508961",
+    "15624": "20701745",
+    "18465": "11434923",
+    "22724": "18264111",
+    "1296": "25143260",
+    "3083": "18502764",
+    "4444": "15840814",
+    "13898": "10903901",
+    "10553": "9651361",
+    "13728": "26146184",
+    "1740": "11706030",
+    "13596": "26028330",
+    "10678": "9269765",
+    "13415": "17013387",
+    "17183": "12507430",
+    "8524": "19860830",
+    "17710": "23273428",
+    "20798": "15178420",
+    "1798": "12297049",
+    "13332": "16826239",
+    "19187": "16271887",
+    "12556": "16322561",
+    "21832": "17925381",
+    "15826": "20208545",
+    "2753": "21054786",
+    "1559": "12207904",
+    "13209": "16799465",
+    "16325": "17088250",
+    "13820": "10816575",
+    "1308": "25402481",
+    "10408": "9422760",
+    "17571": "23353685",
+    "11767": "19523902",
+    "15773": "20224554",
+    "16824": "12588987",
+    "3884": "20159461",
+    "12921": "16462748",
+    "13897": "10871618",
+    "10364": "8624812",
+    "18368": "11226179",
+    "14909": "16646632",
+    "1485": "12021270"
+  },
+  "pubmedTitle": {
+    "17169": null,
+    "22785": null,
+    "22115": null,
+    "21755": null,
+    "6860": null,
+    "9066": null,
+    "16474": null,
+    "12235": null,
+    "2191": null,
+    "15624": null,
+    "18465": null,
+    "22724": "Identification of conjugation specificity determinants unmasks vestigial preference for ubiquitin within the NEDD8 E2.",
+    "1296": null,
+    "3083": null,
+    "4444": null,
+    "13898": null,
+    "10553": null,
+    "13728": "Molecular Characterization of LubX: Functional Divergence of the U-Box Fold by Legionella pneumophila.",
+    "1740": null,
+    "13596": null,
+    "10678": null,
+    "13415": "Single-molecule observations of neck linker conformational changes in the kinesin motor protein.",
+    "17183": null,
+    "8524": null,
+    "17710": "Insights into the aberrant activity of mutant EGFR kinase domain and drug recognition.",
+    "20798": null,
+    "1798": null,
+    "13332": null,
+    "19187": "Crystal structure of a complex between protein tyrosine phosphatase 1B and the insulin receptor tyrosine kinase.",
+    "12556": null,
+    "21832": null,
+    "15826": "Structural basis for receptor recognition by New World hemorrhagic fever arenaviruses.",
+    "2753": null,
+    "1559": null,
+    "13209": null,
+    "16325": null,
+    "13820": null,
+    "1308": "Structural basis for membrane targeting of the BBSome by ARL6.",
+    "10408": null,
+    "17571": null,
+    "11767": "A crescent-shaped ALIX dimer targets ESCRT-III CHMP4 filaments.",
+    "15773": null,
+    "16824": null,
+    "3884": "Structure of D-AKAP2:PKA RI complex: insights into AKAP specificity and selectivity.",
+    "12921": "Double-sided ubiquitin binding of Hrs-UIM in endosomal protein sorting.",
+    "13897": null,
+    "10364": null,
+    "18368": null,
+    "14909": "Crystal structure of the HSV-1 Fc receptor bound to Fc reveals a mechanism for antibody bipolar bridging.",
+    "1485": null
+  },
+  "pubmedabstract": {
+    "17169": "GGAs are critical for trafficking soluble proteins from the trans-Golgi network (TGN) to endosomes\/lysosomes through interactions with TGN-sorting receptors, ADP-ribosylation factor (ARF) and clathrin. ARF-GTP bound to TGN membranes recruits its effector GGA by binding to the GAT domain, thus facilitating recognition of GGA for cargo-loaded receptors. Here we report the X-ray crystal structures of the human GGA1-GAT domain and the complex between ARF1-GTP and the N-terminal region of the GAT domain. When unbound, the GAT domain forms an elongated bundle of three a-helices with a hydrophobic core. Structurally, this domain, combined with the preceding VHS domain, resembles CALM, an AP180 homolog involved in endocytosis. In the complex with ARF1-GTP, a helix-loop-helix of the N-terminal part of GGA1-GAT interacts with the switches 1 and 2 of ARF1 predominantly in a hydrophobic manner. These data reveal a molecular mechanism underlying membrane recruitment of adaptor proteins by ARF-GTP.",
+    "22785": "Liver regeneration is a complex process that involves a multitude of cellular functions, including primarily cell proliferation, apoptosis, inflammation, and metabolism. A number of signaling pathways that control these processes have been identified, and cross communication between them by direct protein-protein interactions has been shown to be crucial in orchestrating liver regeneration. Previously, we have identified a group of transcription factors capable of regulating liver cell growth and that may be involved in liver cancer development. The expression of some of their mouse counterpart genes was altered dramatically after liver injury and regeneration induced by CCl(4) in mice. In an effort to elucidate the molecular basis for liver regeneration through protein-protein interactions (PPI), a matrix mating Y2H approach was produced to generate a PPI network between a set of 32 regulatory proteins. Sixty-four interactions were identified, including 4 that had been identified previously. Ten of the interactions were further confirmed with GST pull-down and coimmunoprecipitation assays. Information provided by this PPI network may shed further light on the molecular mechanisms that regulate liver regeneration at the protein interaction level and ultimately identify regulatory factors that may serve as candidate drug targets for the treatment of liver diseases.",
+    "22115": "Hepatitis C virus (HCV) infection is frequently associated with the development of hepatocellular carcinomas and non-Hodgkin's B-cell lymphomas. Nonstructural protein 3 (NS3) of HCV possesses serine protease, nucleoside triphosphatase, and helicase activities, while NS4A functions as a cofactor for the NS3 serine protease. Here, we show that HCV NS3\/4A interacts with the ATM (ataxia-telangiectasia mutated), a cellular protein essential for cellular response to irradiation. The expression of NS3\/4A caused cytoplasmic translocation of either endogenous or exogenous ATM and delayed dephosphorylation of the phosphorylated ATM and gamma-H2AX following ionizing irradiation. As a result, the irradiation-induced gamma-H2AX foci persisted longer in the NS3\/4A-expressing cells. Furthermore, these cells showed increased comet tail moment in single-cell electrophoresis assay, indicating increased double-strand DNA breaks. The cells harboring an HCV replicon also exhibited cytoplasmic localization of ATM and increased sensitivity to irradiation. These results demonstrate that NS3\/4A impairs the efficiency of DNA repair by interacting with ATM and renders the cells more sensitive to DNA damage. This effect may contribute to HCV oncogenesis.",
+    "21755": "Although the recently identified Pirh2 protein is known as a p53-induced ubiquitin-protein E3 ligase, which negatively regulates p53, the detailed mechanism underlying the regulation of Pirh2 remains largely unknown. Here, we demonstrate that while Pirh2 is mostly detected in the phosphorylated form in normal tissues, it is predominantly present in the unphosphorylated form in majority of tumor cell lines and tissues examined. Phosphorylated Pirh2 is far more unstable than its unphosphorylated form. We further identified that Calmodulin-dependent kinase II (CaMK II) phosphorylates Pirh2 on residues Thr-154 and Ser-155. Phosphorylation of Pirh2 appears to be regulated through cell cycle-dependent mechanism. CaMK II-mediated Pirh2 phosphorylation abrogates its E3 ligase activity toward p53. Together, our data suggest that phosphorylation of Pirh2 may act as a fine-tuning to maintain the balance of p53-Pirh2 autoregulatory feedback loop, which facilitates the tight regulation of p53 stability and tumor suppression.",
+    "6860": "NKG2D (natural killer group 2, member D) is an activating receptor found on the surface of immune cells, including natural killer (NK) cells, which regulates innate and adaptive immunity through recognition of the stress-induced ligands ULBP1 (UL16 binding protein 1) to ULBP6 and MICA\/B. Similar to class I human leukocyte antigen (HLA), these NKG2D ligands have a major histocompatibility complex-like fold and exhibit pronounced polymorphism, which influences human disease susceptibility. However, whereas class I HLA polymorphisms occur predominantly in the \u03b11\u03b12 groove and affect antigen binding, the effects of most NKG2D ligand polymorphisms are unclear. We studied the molecular and functional consequences of the two major alleles of ",
+    "9066": "Some pathogenic mutations associated with Alzheimer's disease are thought to affect structural-dynamic properties and the lateral dimerization of amyloid precursor protein (APP) in neuron membrane. Dimeric structure of APP transmembrane fragment Gln(686)-Lys(726) was determined in membrane-mimicking dodecylphosphocholine micelles using high-resolution NMR spectroscopy. The APP membrane-spanning \u03b1-helix Lys(699)-Lys(724) self-associates in a left-handed parallel dimer through extended heptad repeat motif I(702)X(3)M(706)X(2)G(709)X(3)A(713)X(2)I(716)X(3)I(720)X(2)I(723), whereas the juxtamembrane region Gln(686)-Val(695) constitutes the nascent helix, also sensing the dimerization. The dimerization mechanism of APP transmembrane domain has been described at atomic resolution for the first time and is important for understanding molecular events of APP sequential proteolytical cleavage resulting in amyloid-\u03b2 peptide.",
+    "16474": "The mitochondria-associated membrane (MAM) is a domain of the endoplasmic reticulum (ER) that mediates the exchange of ions, lipids and metabolites between the ER and mitochondria. ER chaperones and oxidoreductases are critical components of the MAM. However, the localization motifs and mechanisms for most MAM proteins have remained elusive. Using two highly related ER oxidoreductases as a model system, we now show that palmitoylation enriches ER-localized proteins on the MAM. We demonstrate that palmitoylation of cysteine residue(s) adjacent to the membrane-spanning domain promotes MAM enrichment of the transmembrane thioredoxin family protein TMX. In addition to TMX, our results also show that calnexin shuttles between the rough ER and the MAM depending on its palmitoylation status. Mutation of the TMX and calnexin palmitoylation sites and chemical interference with palmitoylation disrupt their MAM enrichment. Since ER-localized heme oxygenase-1, but not cytosolic GRP75 require palmitoylation to reside on the MAM, our findings identify palmitoylation as key for MAM enrichment of ER membrane proteins.",
+    "12235": "Transport of C\/D snoRNPs to nucleoli involves nuclear export factors. In particular, CRM1 binds nascent snoRNPs, but its precise role remains unknown. We show here that both CRM1 and nucleocytoplasmic trafficking are required to transport snoRNPs to nucleoli, but the snoRNPs do not transit through the cytoplasm. Instead, CRM1 controls the composition of nucleoplasmic pre-snoRNP complexes. We observed that Tgs1 long form (Tgs1 LF), the long isoform of the cap hypermethylase, contains a leucine-rich nuclear export signal, shuttles in a CRM1-dependent manner, and binds to the nucleolar localization signal (NoLS) of the core snoRNP protein Nop58. In vitro data indicate that CRM1 binds Tgs1 LF and promotes its dissociation from Nop58 NoLS, and immunoprecipitation experiments from cells indicate that the association of Tgs1 LF with snoRNPs increases upon CRM1 inhibition. Thus, CRM1 appears to promote nucleolar transport of snoRNPs by removing Tgs1 LF from the Nop58 NoLS. Microarray\/IP data show that this occurs on most snoRNPs, from both C\/D and H\/ACA families, and on the telomerase RNA. Hence, CRM1 provides a general molecular link between nuclear events and nucleocytoplasmic trafficking.",
+    "2191": "Mitochondria form intricate networks through fission and fusion events. Here, we identify mitochondrial dynamics proteins of 49 and 51 kDa (MiD49 and MiD51, respectively) anchored in the mitochondrial outer membrane. MiD49\/51 form foci and rings around mitochondria similar to the fission mediator dynamin-related protein 1 (Drp1). MiD49\/51 directly recruit Drp1 to the mitochondrial surface, whereas their knockdown reduces Drp1 association, leading to unopposed fusion. Overexpression of MiD49\/51 seems to sequester Drp1 from functioning at mitochondria and cause fused tubules to associate with actin. Thus, MiD49\/51 are new mediators of mitochondrial division affecting Drp1 action at mitochondria.",
+    "15624": "Classical nuclear localization signal (NLS) dependent nuclear import is carried out by a heterodimer of importin alpha and importin beta. NLS cargo is recognized by importin alpha, which is bound by importin beta. Importin beta mediates translocation of the complex through the central channel of the nuclear pore, and upon reaching the nucleus, RanGTP binding to importin beta triggers disassembly of the complex. To date, six importin alpha family members, encoded by separate genes, have been described in humans.",
+    "18465": "The tyrosine phosphatase r-PTPeta is able to suppress the malignant phenotype of rat thyroid tumorigenic cell lines. To identify r-PTPeta interacting proteins, a yeast two-hybrid screening was performed and an insert corresponding to the full-length syntenin cDNA was isolated. It encodes a protein containing two PDZ domains that mediates the binding of syntenin to proteins such as syndecan, proTGF-alpha, beta-ephrins and neurofascin. We show that r-PTPeta is able to interact with syntenin also in mammalian cells, and although syntenin is a tyrosine-phosphorylated protein it is not a substrate of r-PTPeta. The integrity of both PDZ domains of syntenin and the carboxy-terminal region of r-PTPeta are required for the interaction between syntenin and r-PTPeta.",
+    "22724": "Ubiquitin-like proteins (UBLs) modify targets via related E1-E2-E3 cascades. How is UBL conjugation fidelity established? Here we report the basis for UBL selection by UBL conjugating enzyme 12 (Ubc12), which is specific for the neural precursor cell expressed, developmentally down-regulated protein 8 (NEDD8), and does not form a thioester-linked conjugate with ubiquitin. We systematically identified Ubc12 surfaces impeding Ubc12 approximately ubiquitin conjugate formation and found that several structurally dispersed E1 binding elements, rather than UBL-interacting surfaces, determine E2 approximately UBL specificity. In addition to roles for conserved E1 and E2 domains, unique structures contribute UBL specificity to the NEDD8 and ubiquitin pathways. By removing surface elements, without substituting corresponding sequences from ubiquitin E2s, we unmasked Ubc12's vestigial preference for ubiquitin over NEDD8 by approximately 10(10)-fold. This has implications for the evolution of specific functions among ubiquitin E2s. We also find that Ubc12 sequences dictating UBL selection map to the E3 binding site, thus providing a molecular mechanism preventing inappropriate modification of targets.",
+    "1296": "Human",
+    "3083": "Skeletal muscle is a multinucleated syncytium that develops and is maintained by the fusion of myoblasts to the syncytium. Myoblast fusion involves the regulated coalescence of two apposed membranes. Myoferlin is a membrane-anchored, multiple C2 domain-containing protein that is highly expressed in fusing myoblasts and required for efficient myoblast fusion to myotubes. We found that myoferlin binds directly to the eps15 homology domain protein, EHD2. Members of the EHD family have been previously implicated in endocytosis as well as endocytic recycling, a process where membrane proteins internalized by endocytosis are returned to the plasma membrane. EHD2 binds directly to the second C2 domain of myoferlin, and EHD2 is reduced in myoferlin null myoblasts. In contrast to normal myoblasts, myoferlin null myoblasts accumulate labeled transferrin and have delayed recycling. Introduction of dominant negative EHD2 into myoblasts leads to the sequestration of myoferlin and inhibition of myoblast fusion. The interaction of myoferlin with EHD2 identifies molecular overlap between the endocytic recycling pathway and the machinery that regulates myoblast membrane fusion.",
+    "4444": "The U5 snRNP plays an essential role in both U2- and U12-dependent splicing. Here, we have characterized a 52-kDa protein associated with the human U5 snRNP, designated U5-52K. Protein sequencing revealed that U5-52K is identical to the CD2BP2, which interacts with the cytoplasmic portion of the human T-cell surface protein CD2. Consistent with it associating with an snRNP, immunofluorescence studies demonstrated that the 52K protein is predominantly located in the nucleoplasm of HeLa cells, where it overlaps, at least in part, with splicing-factor compartments (or \"speckles\"). We further demonstrate that the 52K protein is a constituent of the 20S U5 snRNP, but is not found in U4\/U6.U5 tri-snRNPs. Thus, it is the only 20S U5-specific protein that is not integrated into the tri-snRNP and resembles, in this respect, the U4\/U6 di-snRNP assembly factor Prp24p\/p110. Yeast two-hybrid screening and pulldown assays revealed that the 52K protein interacts with the U5-specific 102K and 15K proteins, suggesting that these interactions are responsible for its integration into the U5 particle. The N-terminal two-thirds of 52K interact with the 102K protein, whereas its C-terminal GYF-domain binds the 15K protein. As the latter lacks a proline-rich tract, our data indicate that a GYF-domain can also engage in specific protein-protein interactions in a polyproline-independent manner. Interestingly, the U5-102K protein has been shown previously to play an essential role in tri-snRNP formation, binding the U4\/U6-61K protein. The interaction of 52K with a tri-snRNP bridging protein, coupled with its absence from the tri-snRNP, suggests it might function in tri-snRNP assembly.",
+    "13898": "The beta-dystroglycan\/Grb2 interaction was investigated and a proline-rich region within beta-dystroglycan that binds Grb2-src homology 3 domains identified. We used surface plasmon resonance (SPR), fluorescence analysis, and solid-phase binding assay to measure the affinity constants between Grb2 and the beta-dystroglycan cytoplasmic tail. Analysis of the data obtained from SPR reveals a high-affinity interaction (K(D) approximately 240 nM) between Grb2 and the last 20 amino acids of the beta-dystroglycan carboxyl-terminus, which also contains a dystrophin-binding site. A similar K(D) value (K(D) approximately 280 nM) was obtained by solid-phase binding assay and in solution by fluorescence. Both Grb2-SH3 domains bind beta-dystroglycan but the N-terminal SH3 domain binds with an affinity approximately fourfold higher than that of the C-terminal SH3 domain. The Grb2-beta-dystroglycan interaction was inhibited by dystrophin in a range of concentration of 160-400 nM. These data suggest a highly regulated and dynamic dystrophin\/dystroglycan complex formation and that this complex is involved in cell signaling.",
+    "10553": "Hepatitis C virus (HCV) core protein, a component of viral nucleocapsid, has been shown to modulate cellular and viral promoter activities. To identify potential cellular targets for HCV core protein, a human liver cDNA library was screened for core-interacting proteins using the yeast two-hybrid system. Among the proteins identified was heterogeneous nuclear ribonucleoprotein K (hnRNP K), which has been demonstrated to be a transcriptional regulator. The interaction of HCV core protein with hnRNP K was confirmed by glutathione S-transferase fusion protein binding assay, protein-protein blotting assay, and coimmunoprecipitation in vitro and in vivo. Additionally, these two proteins were shown to be partially colocalized in the nucleus. The hnRNP K-binding site in HCV core protein was mapped to the region from amino acid residues 25-91, a hydrophilic area near the N terminus. The HCV core protein-binding domain was located within amino acid residues 250 to 392, which contain the three proline-rich domains, of hnRNP K. Furthermore, HCV core protein relieved the suppression effect of hnRNP K on the activity of the human thymidine kinase gene promoter. The specific binding of HCV core protein to hnRNP K suggests that multiple functions of hnRNP K may be disrupted by the core protein during HCV infection and thus explains, in part, the pathogenesis of HCV.",
+    "13728": "LubX is part of the large arsenal of effectors in Legionella pneumophila that are translocated into the host cytosol during infection. Despite such unique features as the presence of two U-box motifs and its targeting of another effector SidH, the molecular basis of LubX activity remains poorly understood. Here we show that the N terminus of LubX is able to activate an extended number of ubiquitin-conjugating (E2) enzymes including UBE2W, UBEL6, and all tested members of UBE2D and UBE2E families. Crystal structures of LubX alone and in complex with UBE2D2 revealed drastic molecular diversification between the two U-box domains, with only the N-terminal U-box retaining E2 recognition features typical for its eukaryotic counterparts. Extensive mutagenesis followed by functional screening in a yeast model system captured functionally important LubX residues including Arg121, critical for interactions with SidH. Combined, these data provide a new molecular insight into the function of this unique pathogenic factor. ",
+    "1740": "ik3-1\/Cables is associated with cdk3 in self-replicating cells. In postmitotic neurons, it may serve as an adaptor molecule, functionally connecting c-abl and cdk5, and supporting neurite growth. Here we report that ik3-1 binds to p53 and p73 in vivo. Ectopically expressed ik3-1 potentiates p53-induced cell death but not p73-induced cell death in U2OS cells. On the contrary, coexpression of ik3-1-DeltaC, an ik3-1 deletion mutant lacking the C-terminal 139 [corrected] amino acids (corresponding to the cyclin box-homologous region), inhibits p73-induced cell death but not p53-induced cell death. ik3-1-DeltaC-mediated inhibition of p73-induced cell death are partially attenuated by overexpression of ik3-1. These data indicate that ik3-1 is not only a regulator for p53-induced cell death but also an essential regulator for p73-induced cell death, and ik3-1-DeltaC competes with ik3-1 only in p73-induced cell death. Furthermore, functional domains of p53 responsible for its interaction with ik3-1 are partially different from those of p73. In conclusion, we found that ik3-1, a putative component of cell cycle regulation, is functionally connected with p53 and p73, but in distinct fashions.",
+    "13596": "How loss-of-function of GATA3 contributes to the development of breast cancer is poorly understood. Here, we report that GATA3 nucleates a transcription repression program composed of G9A and MTA3-, but not MTA1- or MTA2-, constituted NuRD complex. Genome-wide analysis of the GATA3\/G9A\/NuRD(MTA3) targets identified a cohort of genes including ZEB2 that are critically involved in epithelial-to-mesenchymal transition and cell invasion. We demonstrate that the GATA3\/G9A\/NuRD(MTA3) complex inhibits the invasive potential of breast cancer cells in vitro and suppresses breast cancer metastasis in vivo. Strikingly, the expression of GATA3, G9A, and MTA3 is concurrently downregulated during breast cancer progression, leading to an elevated expression of ZEB2, which, in turn, represses the expression of G9A and MTA3 through the recruitment of G9A\/NuRD(MTA1).",
+    "10678": "Lipoprotein(a) [Lp(a)], which has been shown to interact with fibrin(ogen) and other components of the blood clotting cascade, is a major independent risk factor for atherothrombotic disease in humans. The physiological function(s) of Lp(a), as well as the precise mechanism(s) by which high plasma levels of Lp(a) increase risk are unknown. Identification of further potential apo(a)-protein ligands may be crucial to illuminate apo(a)'s function(s) and pathophysiological properties. We used the repetitive apo(a) kringle IV type 2, which is variable in number in apo(a), to screen a human liver cDNA library by the yeast two-hybrid interaction trap system. Among 11 positive clones that emerged from the screen, eight clones were identified as beta-2 glycoprotein I and one as fibronectin. Coimmunoprecipitation experiments confirmed that beta-2 glycoprotein I and apo(a)\/Lp(a) interact in human plasma and in cell culture supernatants of COS-1 cells, which ectopically expressed apo(a). The apo(a)-beta2-glycoprotein I interaction indicates new potential roles for Lp(a) in fibrinolysis and autoimmunity.",
+    "13415": "Kinesin-1 is a dimeric motor protein that moves cargo processively along microtubules. Kinesin motility has been proposed to be driven by the coordinated forward extension of the neck linker (a approximately 12-residue peptide) in one motor domain and the rearward positioning of the neck linker in the partner motor domain. To test this model, we have introduced fluorescent dyes selectively into one subunit of the kinesin dimer and performed 'half-molecule' fluorescence resonance energy transfer to measure conformational changes of the neck linker. We show that when kinesin binds with both heads to the microtubule, the neck linkers in the rear and forward heads extend forward and backward, respectively. During ATP-driven motility, the neck linkers switch between these conformational states. These results support the notion that neck linker movements accompany the 'hand-over-hand' motion of the two motor domains.",
+    "17183": "The ubiquitin-specific processing protease (UBP) family of deubiquitinating enzymes plays an essential role in numerous cellular processes. HAUSP, a representative UBP, specifically deubiquitinates and hence stabilizes the tumor suppressor protein p53. Here, we report the crystal structures of the 40 kDa catalytic core domain of HAUSP in isolation and in complex with ubiquitin aldehyde. These studies reveal that the UBP deubiquitinating enzymes exhibit a conserved three-domain architecture, comprising Fingers, Palm, and Thumb. The leaving ubiquitin moiety is specifically coordinated by the Fingers, with its C terminus placed in the active site between the Palm and the Thumb. Binding by ubiquitin aldehyde induces a drastic conformational change in the active site that realigns the catalytic triad residues for catalysis.",
+    "8524": "We have previously shown that casein kinase (CK) Ialpha from mammalian brain phosphorylates 14-3-3 zeta and tau isoforms on residue 233. In the present study, we show that CKIalpha associates with 14-3-3 both in vitro and in vivo. The interaction between CKIalpha and 14-3-3 is dependent on CKIalpha phosphorylation, unlike centaurin-alpha1 (also known as ADAP1), which binds to unphosphorylated CKIalpha on the same region. CKIalpha preferentially interacts with mammalian eta and gamma 14-3-3 isoforms, and peptides that bind to the 14-3-3 binding pocket prevent this interaction. The region containing Ser218 in this CKIalpha binding site was mutated and the interaction between CKIalpha and 14-3-3 was reduced. We subsequently identified a second phosphorylation-dependent 14-3-3 binding site within CKIalpha containing Ser242 that may be the principal site of interaction. We also show that both fission and budding yeast CKI kinase homologues phosphorylate mammalian and budding yeast (BMH1 and BMH2) 14-3-3 at the equivalent site.",
+    "17710": "The oncogenicity of the L858R mutant form of the epidermal growth factor receptor (EGFR) in non-small-cell lung cancer is thought to be due to the constitutive activation of its kinase domain. The selectivity of the marketed drugs gefitinib and erlotinib for L858R mutant is attributed to their specific recognition of the active kinase and to weaker ATP binding by L858R EGFR. We present crystal structures showing that neither L858R nor the drug-resistant L858R+T790M EGFR kinase domain is in the constitutively active conformation. Additional co-crystal structures show that gefitinib and dacomitinib, an irreversible anilinoquinazoline derivative currently in clinical development, may not be conformation specific for the active state of the enzyme. Structural data further reveal the potential mode of recognition of one of the autophosphorylation sites in the C-terminal tail, Tyr-1016, by the kinase domain. Biochemical and biophysical evidence suggest that the oncogenic mutations impact the conformational dynamics of the enzyme.",
+    "20798": "Overexpression of human APOA5 in mice results in dramatically decreased plasma triglyceride levels. In this study we explored the mechanism underlying this hypotriglyceridemic effect. Initially we found that triglyceride turnover was faster in hAPOA5 transgenic mice compared to controls, and this strongly correlated with increased LPL activity in postheparin plasma. Furthermore, we show that in vitro recombinant apoAV interacts physically with lipoprotein lipase and significantly increased its activity. We show that both apoB and apoCIII are decreased in hAPOA5 transgenic mice indicating a decrease in VLDL number. To further investigate the mechanism of hAPOA5 in a hyperlipidemic background, we inter-crossed hAPOA5 and hAPOC3 transgenic mice. We found a marked decrease in VLDL triglyceride and cholesterol, as well as apolipoprotein B and CIII levels. These data indicated that apoAV induces a decrease in VLDL size by activating lipolysis and an increase of VLDL clearance. In a postprandial state, the normal triglyceride response found in wild-type mice was significantly reduced in hAPOA5 transgenics. In addition, we demonstrated that in response to this fat load in hAPOA5xhAPOC3 mice, apoAV, but not apoCIII, was redistributed from primarily HDL to VLDL. This shift of apoAV in VLDL appears to limit the increase of triglyceride by activating the lipoprotein lipase.",
+    "1798": "We report the crystal structure, at 2.5 A resolution, of a truncated human EGFR ectodomain bound to TGFalpha. TGFalpha interacts with both L1 and L2 domains of EGFR, making many main chain contacts with L1 and interacting with L2 via key conserved residues. The results indicate how EGFR family members can bind a family of highly variable ligands. In the 2:2 TGFalpha:sEGFR501 complex, each ligand interacts with only one receptor molecule. There are two types of dimers in the asymmetric unit: a head-to-head dimer involving contacts between the L1 and L2 domains and a back-to-back dimer dominated by interactions between the CR1 domains of each receptor. Based on sequence conservation, buried surface area, and mutagenesis experiments, the back-to-back dimer is favored to be biologically relevant.",
+    "13332": "The coordination of chromatin assembly with DNA replication, which is essential for genomic stability, requires the combined activation of histone deposition with the firing of replication origins. We report here the direct interaction of chromatin assembly factor 1 (CAF1), a key factor involved in histone deposition, with the replication kinase Cdc7-Dbf4. We isolated a complex containing both the largest subunit of CAF1 (p150) and the Cdc7-Dbf4 kinase specifically in S phase and thus prove the existence of this interaction in vivo. We then show that the Cdc7-Dbf4 kinase efficiently phosphorylates p150. This event induces a change in p150 oligomerization state, which promotes binding to proliferating cell nuclear antigen (PCNA). Conversely, CAF1 recruitment is reduced in a PCNA\/DNA loading assay using Cdc7-depleted extracts. Our data define p150 as a new target for this kinase with implications for the coordination between DNA replication and CAF1 functions.",
+    "19187": "Protein tyrosine phosphatase 1B (PTP1B) is a highly specific negative regulator of insulin receptor signaling in vivo. The determinants of PTP1B specificity for the insulin receptor versus other receptor tyrosine kinases are largely unknown. Here, we report a crystal structure at 2.3 A resolution of the catalytic domain of PTP1B (trapping mutant) in complex with the phosphorylated tyrosine kinase domain of the insulin receptor (IRK). The crystallographic asymmetric unit contains two PTP1B-IRK complexes that interact through an IRK dimer interface. Rather than binding to a phosphotyrosine in the IRK activation loop, PTP1B binds instead to the opposite side of the kinase domain, with the phosphorylated activation loops sequestered within the IRK dimer. The crystal structure provides evidence for a noncatalytic mode of interaction between PTP1B and IRK, which could be important for the selective recruitment of PTP1B to the insulin receptor.",
+    "12556": "Most transcriptional repression pathways depend on the targeted deacetylation of histone tails. In this report, we characterize NIR, a novel transcriptional corepressor with inhibitor of histone acetyltransferase (INHAT) activity. NIR (Novel INHAT Repressor) is ubiquitously expressed throughout embryonic development and adulthood. NIR is a potent transcriptional corepressor that is not blocked by histone deacetylase inhibitors and is capable of silencing both basal and activator-driven transcription. NIR directly binds to nucleosomes and core histones and prevents acetylation by histone acetyltransferases, thus acting as a bona fide INHAT. Using a tandem affinity purification approach, we identified the tumor suppressor p53 as a NIR-interacting partner. Association of p53 and NIR was verified in vitro and in vivo. Upon recruitment by p53, NIR represses transcription of both p53-dependent reporters and endogenous target genes. Knock-down of NIR by RNA interference significantly enhances histone acetylation at p53-regulated promoters. Moreover, p53-dependent apoptosis is robustly increased upon depletion of NIR. In summary, our findings describe NIR as a novel INHAT that plays an important role in the control of p53 function.",
+    "21832": "During cell migration, myosin II modulates adhesion, cell protrusion and actin organization at the leading edge. We show that an F-actin- and membrane-associated scaffolding protein, called supervillin (SV, p205), binds directly to the subfragment 2 domains of nonmuscle myosin IIA and myosin IIB and to the N-terminus of the long form of myosin light chain kinase (L-MLCK). SV inhibits cell spreading via an MLCK- and myosin II-dependent mechanism. Overexpression of SV reduces the rate of cell spreading, and RNAi-mediated knockdown of endogenous SV increases it. Endogenous and EGFP-tagged SV colocalize with, and enhance the formation of, cortical bundles of F-actin and activated myosin II during early cell spreading. The effects of SV are reversed by inhibition of myosin heavy chain (MHC) ATPase (blebbistatin), MLCK (ML-7) or MEK (U0126), but not by inhibiting Rho-kinase with Y-27632. Flag-tagged L-MLCK co-localizes in cortical bundles with EGFP-SV, and kinase-dead L-MLCK disorganizes these bundles. The L-MLCK- and myosin-binding site in SV, SV1-171, rearranges and co-localizes with mono- and di-phosphorylated myosin light chain and with L-MLCK, but not with the short form of MLCK (S-MLCK) or with myosin phosphatase. Thus, the membrane protein SV apparently contributes to myosin II assembly during cell spreading by modulating myosin II regulation by L-MLCK.",
+    "15826": "New World hemorrhagic fever arenaviruses are rodent-borne agents that cause severe human disease. The GP1 subunit of the surface glycoprotein mediates cell attachment through transferrin receptor 1 (TfR1). We report the structure of Machupo virus (MACV) GP1 bound with human TfR1. Atomic details of the GP1-TfR1 interface clarify the importance of TfR1 residues implicated in New World arenavirus host specificity. Analysis of sequence variation among New World arenavirus GP1s and their host-species receptors, in light of the molecular structure, indicates determinants of viral zoonotic transmission. Infectivities of pseudoviruses in cells expressing mutated TfR1 confirm that contacts at the tip of the TfR1 apical domain determine the capacity of human TfR1 to mediate infection by particular New World arenaviruses. We propose that New World arenaviruses that are pathogenic to humans fortuitously acquired affinity for human TfR1 during adaptation to TfR1 of their natural hosts.",
+    "2753": "Human hypoxanthine-guanine phosphoribosyltransferase (HPRT) (EC 2.4.2.8) catalyzes the conversion of hypoxanthine and guanine to their respective nucleoside monophosphates. Human HPRT deficiency as a result of genetic mutations is linked to both Lesch-Nyhan disease and gout. In the present study, we have characterized phosphoribosyltransferase domain containing protein 1 (PRTFDC1), a human HPRT homolog of unknown function. The PRTFDC1 structure has been determined at 1.7 \u00c5 resolution with bound GMP. The overall structure and GMP binding mode are very similar to that observed for HPRT. Using a thermal-melt assay, a nucleotide metabolome library was screened against PRTFDC1 and revealed that hypoxanthine and guanine specifically interacted with the enzyme. It was subsequently confirmed that PRTFDC1 could convert these two bases into their corresponding nucleoside monophosphate. However, the catalytic efficiency (k(cat)\/K(m)) of PRTFDC1 towards hypoxanthine and guanine was only 0.26% and 0.09%, respectively, of that of HPRT. This low activity could be explained by the fact that PRTFDC1 has a Gly in the position of the proposed catalytic Asp of HPRT. In PRTFDC1, a water molecule at the position of the aspartic acid side chain position in HPRT might be responsible for the low activity observed by acting as a weak base. The data obtained in the present study indicate that PRTFDC1 does not have a direct catalytic role in the nucleotide salvage pathway.",
+    "1559": "The ubiquitin-interacting motif (UIM) is a short, approximately 20 residue, structural element, which is present in, but not limited to, the proteins involved in endocytotic and proteasomal degradation. UIMs facilitate endocytotic vesicular sorting of the monoubiquitinated proteins and may be important for the targeting of the polyubiquitinated proteins to the proteasome. Using heteronuclear NMR backbone and side-chain chemical shift mapping of the ubiquitin interaction surface, the UIM from the hepatocyte growth factor-regulated tyrosine kinase substrate, Hrs, specifically binds to the ubiquitin hydrophobic surface using UIM's well-conserved central helical LALAL motif. Molecular modeling of the ubiquitin:UIM_Hrs complex suggests that binding occurs through a specific interaction of Leu263 and Leu267 of the UIM_Hrs with two ubiquitin hydrophobic patches located in close proximity to the ubiquitin major polyubiquitination site, Lys48. Intramolecular binding of ubiquitin to a UIM in monoubiquitinated proteins would render Lys48 unavailable for further ubiquitination, thus, explaining the absolute requirement of UIMs for monoubiquitination. Two leucines, Leu265 and Leu269, located on the opposite face of UIM_Hrs can also interact, albeit less favorably than Leu263 and Leu267, with the ubiquitin hydrophobic patches, suggesting a possible mode for polyubiquitin:UIM binding and apparent preference of UIMs for polyubiquitins.",
+    "13209": "In higher eukaryotes, the origin recognition complex (ORC) lacks sequence-specific DNA binding, and it remains unclear what other factors specify an origin of DNA replication. The Epstein-Barr virus origin of plasmid replication (OriP) recruits ORC, but the precise mechanism of ORC recruitment and origin activation is not clear. We now show that ORC is recruited selectively to the dyad symmetry (DS) region of OriP as a consequence of direct interactions with telomere repeat factor 2 (TRF2) and ORC1. TRF-binding sites within DS stimulate replication initiation and facilitate ORC recruitment in vitro and in vivo. TRF2, but not TRF1 or hRap1, recruits ORC from nuclear extracts. The amino-terminal domain of TRF2 associated with a specific region of ORC1 and was necessary for stimulation of DNA replication. These results support a model in which TRF2 stimulates OriP replication activity by direct binding with ORC subunits.",
+    "16325": "Spectrin tetramers are cytoskeletal proteins required in the formation of complex animal tissues. Mammalian alphaII- and betaII-spectrin subunits form dimers that associate head to head with high affinity to form tetramers, but it is not known if this interaction is regulated. We show here that the short C-terminal splice variant of betaII-spectrin (betaIISigma2) is a substrate for phosphorylation. In vitro, protein kinase CK2 phosphorylates Ser-2110 and Thr-2159; protein kinase A phosphorylates Thr-2159. Antiphospho-Thr-2159 peptide antibody detected phosphorylated betaIISigma2 in Cos-1 cells. Immunoreactivity was increased in Cos-1 cells by treatment with forskolin, indicating that phosphorylation is promoted by elevated cAMP. The effect of forskolin was counteracted by the cAMP-dependent kinase inhibitor, H89. In vitro, protein kinase A phosphorylation of an active fragment of betaIISigma2 greatly reduced its interaction with alphaII-spectrin at the tetramerization site. Mutation of Thr-2159 to alanine eliminated inhibition by phosphorylation. Among the processes that require spectrin in mammals is the formation of neurites (incipient nerve axons). We tested the relationship of spectrin phosphorylation to neuritogenesis by transfecting the neuronal cell line, PC12, with enhanced green fluorescent protein-coupled fragments of betaIISigma2-spectrin predicted to act as inhibitors of spectrin tetramer formation. Both wild-type and T2159E mutant fragments allowed normal neuritogenesis in PC12 cells in response to nerve growth factor. The mutant T2159A inhibited neuritogenesis. Because the T2159A mutant represents a high affinity inhibitor of tetramer formation, we conclude that tetramers are requisite for neuritogenesis. Furthermore, because both the T2159E mutant and the wild-type allow neuritogenesis, we conclude that the short C-terminal betaII-spectrin is phosphorylated during this process.",
+    "13820": "Treatment of HEC1A endometrial cancer cells with 10 nm 17beta-estradiol (E2) resulted in decreased vascular endothelial growth factor (VEGF) mRNA expression, and a similar response was observed using a construct, pVEGF1, containing a VEGF gene promoter insert from -2018 to +50. In HEC1A cells transiently transfected with pVEGF1 and a series of deletion plasmids, it was shown that E2-dependent down-regulation was dependent on wild-type estrogen receptor alpha (ERalpha) and reversed by the anti-estrogen ICI 182, 780, and this response was not affected by progestins. Deletion analysis of the VEGF gene promoter identified an overlapping G\/GC-rich site between -66 to -47 that was required for decreased transactivation by E2. Protein-DNA binding studies using electrophoretic mobility shift and DNA footprinting assays showed that both Sp1 and Sp3 proteins bound this region of the VEGF promoter. Coimmunoprecipitation and pull-down assays demonstrated that Sp3 and ERalpha proteins physically interact, and the interacting domains of both proteins are different from those previously observed for interactions between Sp1 and ERalpha proteins. Using a dominant negative form of Sp3 and transcriptional activation assays in Schneider SL-2 insect cells, it was confirmed that ERalpha-Sp3 interactions define a pathway for E2-mediated inhibition of gene expression, and this represents a new mechanism for decreased gene expression by E2.",
+    "1308": "The BBSome is a coat-like ciliary trafficking complex composed of proteins mutated in Bardet-Biedl syndrome (BBS). A critical step in BBSome-mediated sorting is recruitment of the BBSome to membranes by the GTP-bound Arf-like GTPase ARL6. We have determined crystal structures of Chlamydomonas reinhardtii ARL6-GDP, ARL6-GTP and the ARL6-GTP-BBS1 complex. The structures demonstrate how ARL6-GTP binds the BBS1 \u03b2-propeller at blades 1 and 7 and explain why GTP- but not GDP-bound ARL6 can recruit the BBSome to membranes. Single point mutations in the ARL6-GTP-BBS1 interface abolish the interaction of ARL6 with the BBSome and prevent the import of BBSomes into cilia. Furthermore, we show that BBS1 with the M390R mutation, responsible for 30% of all reported BBS disease cases, fails to interact with ARL6-GTP, thus providing a molecular rationale for patient pathologies. ",
+    "10408": "Protein-protein interactions are often mediated by the recognition of proline-rich domains by SH3 or WW modules. Previously, we demonstrated that the PEST-type protein-tyrosine phosphatase, PTP HSCF (hematopoietic stem cell fraction), bound to a novel cytoskeletal associated protein, proline serine threonine phosphatase interacting protein (PST PIP), via an interaction between the proline-rich COOH terminus of the PTP and a site within the putative coiled-coil domain of PST PIP. Here we describe a more detailed analysis of this interaction. Earlier data suggested that the NH2 terminus of PST PIP was important for binding to the phosphatase, and deletion of the NH2-terminal 50 amino acids of the PST PIP resulted in an apparently misfolded protein that was incapable of binding PTP HSCF. To examine the region involved with binding to PTP HSCF, alanine-scanning mutants were produced at intervals throughout PST PIP. This analysis demonstrated that a tryptophan at position 232 was essential for binding in vitro. Transfection experiments demonstrated that the Trp232 mutant protein was capable of association with the cortical cytoskeleton but was not bound to PTP HSCF in vivo. Alanine scanning of a peptide derived from the COOH-terminal proline-rich domain of PTP HSCF revealed that a subset of prolines, as well as other residues, was required for efficient binding to PST PIP, and introduction of alanines at some of these positions in the protein resulted in decreased binding to PST PIP in vitro and in vivo. Analysis of in vivo tyrosine phosphorylation of the Trp232 mutant of PST PIP in the presence of v-Src revealed that this protein was phosphorylated more efficiently than the wild-type molecule. Thus, the interaction between PTP HSCF and PST PIP is mediated by a novel site in the cytoskeletal associated protein which interacts with residues within the proline-rich COOH terminus of the phosphatase.",
+    "17571": "\u03b2-Arrestins function to mediate G protein-coupled receptor (GPCR) desensitization and internalization and to initiate G protein independent signaling of GPCRs. Elucidating how \u03b2-arrestin and G protein signal pathways coordinate with each other is important to fully understand GPCR signaling. Here we report that \u03b2-arrestin-1 directly interacts with G\u03b1(s). Purified \u03b2-arrestin-1 binds to G\u03b1(s) in a rapid association and dissociation manner. \u03b2-Arrestin-1 promotes the binding and the release of GTP\u03b3S from G\u03b1(s) in vitro. \u03b2-Arrestin-1 L33K mutant shows reduced interaction with G\u03b1(s) and has no detectable effects on G\u03b1(s) function. Our study thus reveals a direct crosstalk of \u03b2-arrestin-1 with G\u03b1(s).",
+    "11767": "ALIX recruits ESCRT-III CHMP4 and is involved in membrane remodeling during endosomal receptor sorting, budding of some enveloped viruses, and cytokinesis. We show that ALIX dimerizes via the middle domain (ALIX(-V)) in solution. Structural modeling based on small angle X-ray scattering (SAXS) data reveals an elongated crescent-shaped conformation for dimeric ALIX lacking the proline-rich domain (ALIX(BRO1-V)). Mutations at the dimerization interface prevent dimerization and induce an open elongated monomeric conformation of ALIX(-V) as determined by SAXS modeling. ALIX dimerizes in vivo and dimeric ALIX colocalizes with CHMP4B upon coexpression. We show further that ALIX dimerization affects HIV-1 budding. C-terminally truncated activated CHMP4B retaining the ALIX binding site forms linear, circular, and helical filaments in vitro, which can be bridged by ALIX. Our data suggest that dimeric ALIX represents the active form that interacts with ESCRT-III CHMP4 polymers and functions as a scaffolding protein during membrane remodeling processes.",
+    "15773": "Wnt5a is a representative ligand that activates the Wnt\/beta-catenin-independent pathway, resulting in the regulation of cell adhesion, migration, and polarity, but its molecular mechanism is poorly understood. This report shows that Dishevelled (Dvl) binds to adenomatous polyposis coli (APC) gene product, and this binding is enhanced by Wnt5a. Dvl was involved in the stabilization of the plus end dynamics of microtubules as well as APC. Frizzled2 (Fz2) was present with Wnt5a at the leading edge of migrating cells and formed a complex with APC through Dvl. Fz2 also interacted with integrins at the leading edge, and Dvl and APC associated with and activated focal adhesion kinase and paxillin. The binding of APC to Dvl enhanced the localization of paxillin to the leading edge and was involved in Wnt5a-dependent focal adhesion turnover. Furthermore, this new Wnt5a signalling pathway was important for the epithelial morphogenesis in the three-dimensional culture. These results suggest that the functional and physical interaction of Dvl and APC is involved in Wnt5a\/Fz2-dependent focal adhesion dynamics during cell migration and epithelial morphogenesis.",
+    "16824": "Beta-catenin is a multifunctional molecule that is activated by signaling through WNT receptors. beta-Catenin can also enhance the transcriptional activity of some steroid hormone receptors such as the androgen receptor and retinoic acid receptor alpha. Androgens can affect nuclear translocation of beta-catenin and influence its subcellular distribution. Using mammalian two-hybrid binding assays, analysis of reporter gene transcription, and coimmunoprecipitation, we now show that beta-catenin binds to the androgen receptor ligand-binding domain (LBD) and modulates the transcriptional effects of TIF2 and the androgen receptor N-terminal domain (NTD). In functional assays, beta-catenin bound to androgen receptor only in the presence of ligand agonists, not antagonists. Beta-catenin binding to the androgen receptor LBD was independent of and cooperative with the androgen receptor NTD and the p160 coactivator TIF2, both of which bind to the activation function 2 (AF-2) region of the androgen receptor. Different mutations of androgen receptor helix 3 amino acids disrupted binding of androgen receptor NTD and beta-catenin. beta-Catenin, androgen receptor NTD, and TIF2 binding to the androgen receptor LBD were affected similarly by a subset of helix 12 mutations, but disruption of two sites on helix 12 affected only binding of beta-catenin and not of TIF2 or the androgen receptor NTD. Mutational disruption of each of five LXXLL peptide motifs in the beta-catenin armadillo repeats did not disrupt either binding to androgen receptor or transcriptional coactivation. ICAT, an inhibitor of T-cell factor 4 (TCF-4), and E-cadherin binding to beta-catenin also blocked binding of the androgen receptor LBD. We also demonstrated cross talk between the WNT and androgen receptor signaling pathways because excess androgen receptor could interfere with WNT signaling and excess TCF-4 inhibited the interaction of beta-catenin and androgen receptor. Taken together, the data show that beta-catenin can bind to the androgen receptor LBD and modulate the effects of the androgen receptor NTD and TIF2 on transcription.",
+    "3884": "A-kinase anchoring proteins (AKAPs) regulate cyclic AMP-dependent protein kinase (PKA) signaling in space and time. Dual-specific AKAP 2 (D-AKAP2) binds to the dimerization\/docking (D\/D) domain of both RI and RII regulatory subunits of PKA with high affinity. Here we have determined the structures of the RIalpha D\/D domain alone and in complex with D-AKAP2. The D\/D domain presents an extensive surface for binding through a well-formed N-terminal helix, and this surface restricts the diversity of AKAPs that can interact. The structures also underscore the importance of a redox-sensitive disulfide in affecting AKAP binding. An unexpected shift in the helical register of D-AKAP2 compared to the RIIalpha:D-AKAP2 complex structure makes the mode of binding to RIalpha novel. Finally, the comparison allows us to deduce a molecular explanation for the sequence and spatial determinants of AKAP specificity.",
+    "12921": "Hrs has an essential role in sorting of monoubiquitinated receptors to multivesicular bodies for lysosomal degradation, through recognition of ubiquitinated receptors by its ubiquitin-interacting motif (UIM). Here, we present the structure of a complex of Hrs-UIM and ubiquitin at 1.7-A resolution. Hrs-UIM forms a single alpha-helix, which binds two ubiquitin molecules, one on either side. These two ubiquitin molecules are related by pseudo two-fold screw symmetry along the helical axis of the UIM, corresponding to a shift by two residues on the UIM helix. Both ubiquitin molecules interact with the UIM in the same manner, using the Ile44 surface, with equal binding affinities. Mutational experiments show that both binding sites of Hrs-UIM are required for efficient degradative protein sorting. Hrs-UIM belongs to a new subclass of double-sided UIMs, in contrast to its yeast homolog Vps27p, which has two tandem single-sided UIMs.",
+    "13897": "Papillomavirus E1 protein is the replication initiator that recognizes and binds to the viral origin and initiates DNA strand separation through its ATP-dependent helicase activity. The E1 protein also functions in viral DNA replication by recruiting several cellular proteins to the origin, including host DNA polymerase alpha and replication protein A. To identify other cellular proteins that interact with bovine papillomavirus E1, an HeLa cDNA library was screened using a yeast two-hybrid assay. The host cell sumoylating enzyme, Ubc9, was found to interact specifically with E1 both in vitro and in vivo. Mapping studies localized critical E1 sequences for interaction to amino acids 315-459 and strongly implicated leucine 420 as critical for E1.Ubc9 complex formation. In addition to binding E1, Ubc9 catalyzed the covalent linkage of the ubiquitin-like protein, SUMO-1, to E1. An E1 mutant unable to bind Ubc9 showed normal intracellular stability, but was impaired for intranuclear distribution. Failure to accumulate in appropriate nuclear subdomains may account for the previously demonstrated replication defect of a human papillomavirus 16 E1 protein that was also unable to bind Ubc9 and suggests that sumoylation is a functionally important modification with regulatory implications for papillomavirus replication.",
+    "10364": "The structure of the human MHC class I molecule HLA-B53 complexed to two nonameric peptide epitopes (from the malaria parasite P. falciparum and the HIV2 gag protein) has been determined by X-ray crystallography at 2.3 angstrom resolution. The structures reveal the architecture of a Pro-specific B pocket common to many HLA-B alleles. Relative to other alleles, the B53 peptide-binding groove is widened by a significant (up to 1.25 angstrom) shift in the position of the alpha 1 helix. Within this groove, bound water molecules, acting in concert with the side chains of polymorphic residues, provide the functional malleability of the MHC, which enables the high affinity\/low specificity binding of multiple peptide epitopes.",
+    "18368": "Inactivation of the retinoblastoma (Rb) tumor suppressor by Simian virus 40 (SV40) large T antigen is one of the central features of tumorigenesis induced by SV40. Both the N-terminal J domain and the LxCxE motif of large T antigen are required for inactivation of Rb. The crystal structure of the N-terminal region (residues 7-117) of SV40 large T antigen bound to the pocket domain of Rb reveals that large T antigen contains a four-helix bundle, and residues from helices alpha2 and alpha4 and from a loop containing the LxCxE motif participate in the interactions with Rb. The two central helices and a connecting loop in large T antigen have structural similarities with the J domains of the molecular chaperones DnaJ and HDJ-1, suggesting that large T antigen may use a chaperone mechanism for its biological function. However, there are significant differences between large T antigen and the molecular chaperones in other regions and these differences are likely to provide the specificity needed for large T antigen to inactivate Rb.",
+    "14909": "Herpes simplex virus type-1 expresses a heterodimeric Fc receptor, gE-gI, on the surfaces of virions and infected cells that binds the Fc region of host immunoglobulin G and is implicated in the cell-to-cell spread of virus. gE-gI binds immunoglobulin G at the basic pH of the cell surface and releases it at the acidic pH of lysosomes, consistent with a role in facilitating the degradation of antiviral antibodies. Here we identify the C-terminal domain of the gE ectodomain (CgE) as the minimal Fc-binding domain and present a 1.78-angstroms CgE structure. A 5-angstroms gE-gI\/Fc crystal structure, which was independently verified by a theoretical prediction method, reveals that CgE binds Fc at the C(H)2-C(H)3 interface, the binding site for several mammalian and bacterial Fc-binding proteins. The structure identifies interface histidines that may confer pH-dependent binding and regions of CgE implicated in cell-to-cell spread of virus. The ternary organization of the gE-gI\/Fc complex is compatible with antibody bipolar bridging, which can interfere with the antiviral immune response.",
+    "1485": "Mammalian homologues of the Drosophila polarity proteins Stardust, Discs Lost, and Crumbs have been identified as Pals1, Pals1-associated tight junction protein (PATJ), and human Crumbs homologue 1 (CRB1), respectively. We have previously demonstrated that PATJ, Pals1, and CRB1 can form a tripartite tight junction complex in epithelial cells and that PATJ recruits Pals1 to tight junctions. Here, we observed that the Pals1\/PATJ interaction was not crucial for the ultimate targeting of PATJ itself to tight junctions. This prompted us to examine if any of the 10 post-synaptic density-95\/Discs Large\/zona occludens-1 (PDZ) domains of PATJ could bind to the carboxyl termini of known tight junction constituents. We found that the 6th and 8th PDZ domains of PATJ can interact with the carboxyl termini of zona occludens-3 (ZO-3) and claudin 1, respectively. PATJ missing the 6th PDZ domain was found to mislocalize away from cell contacts. Surprisingly, deleting the 8th PDZ domain had little effect on PATJ localization. Finally, reciprocal co-immunoprecipitation experiments revealed that full-length ZO-3 can associate with PATJ. Hence, the PATJ\/ZO-3 interaction is likely important for recruiting PATJ and its associated proteins to tight junctions."
+  }
+}

@@ -29,6 +29,16 @@ class ITTestBertTrainInferencePipeline(TestCase):
         # Act
         actual = sut(mock_dataset_train, mock_dataset_val)
 
+    def test_call_interactiondataset(self):
+        # Arrange
+        mock_dataset_train, scorer = self._get_interactiondataset()
+        mock_dataset_val, _ = self._get_interactiondataset()
+
+        sut = self._get_sut_train_pipeline(mock_dataset_train, scorer=scorer)
+
+        # Act
+        actual = sut(mock_dataset_train, mock_dataset_val)
+
     def test_call_aimeddataset_bertlstm(self):
         # Arrange
         mock_dataset_train, scorer = self._get_aimeddataset()
@@ -63,6 +73,14 @@ class ITTestBertTrainInferencePipeline(TestCase):
     def _get_aimeddataset(self):
         train_file = os.path.join(os.path.dirname(__file__), "..", "data", "Aimedsample.json")
         factory = DatasetFactory().get_datasetfactory("PpiAimedDatasetFactory")
+        dataset = factory.get_dataset(train_file)
+        scorer = factory.get_metric_factory().get()
+
+        return dataset, scorer
+
+    def _get_interactiondataset(self):
+        train_file = os.path.join(os.path.dirname(__file__), "..", "data", "sample_classification.json")
+        factory = DatasetFactory().get_datasetfactory("InteractionDatasetFactory")
         dataset = factory.get_dataset(train_file)
         scorer = factory.get_metric_factory().get()
 
