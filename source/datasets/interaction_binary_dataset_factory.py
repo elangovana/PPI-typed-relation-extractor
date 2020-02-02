@@ -3,7 +3,7 @@ from datasets.interaction_binary_dataset import InteractionBinaryDataset
 from metrics.result_scorer_f1_binary_factory import ResultScorerF1BinaryFactory
 
 
-class InteractionDatasetFactory(CustomDatasetFactoryBase):
+class InteractionBinaryDatasetFactory(CustomDatasetFactoryBase):
 
     def get_metric_factory(self):
         return ResultScorerF1BinaryFactory()
