@@ -11,7 +11,7 @@
 
 
 
-## Run
+## Training data prep
 This is the full sequence to download the entire data..
 
 ### Download raw PPI function xml from Imex ftp
@@ -44,6 +44,26 @@ This is the full sequence to download the entire data..
     python ./aws_batch/register_job_dataprep_pipeline.py lanax/kegg-pathway-extractor:latest aegovan-data "direct interaction,association,colocalization,phosphorylation,dephosphorylation,cleavage,enzymatic reaction,protein cleavage,methylation,ubiquitination,adp ribosylation,gtpase reaction,acetylation,covalent binding,deacetylation,demethylation,disulfide bond,atpase reaction,physical interaction,deubiquitination,hydroxylation,glycosylation,genetic interaction,putative self interaction,redox reaction,sumoylation,rna cleavage,self interaction,lipid cleavage,phosphotransfer,neddylation,palmitoylation,deamination,ampylation,demyristoylation,dna cleavage,transglutamination,deamidation,phospholipase reaction,deneddylation,depalmitoylation,dna elongation,isomerase reaction,proline isomerization  reaction"
  ```
 
+## Running inference
+
+### Convert gnormplus annotations into inference json formation 
+
+1. Register aws batch
+
+     ```bash
+    export PYTHONPATH=./aws_batch
+
+    python aws_batch/pubtator_annotations_inference_transformer_s3/register_job.py  lanax/kegg-pathway-extractor:latest s3://aegovan-data  --job-name ppi_pubmedinference_dataprep  --cpus 4   
+    
+    ```
+
+2. Transform all data in s3, passing in the source & dest s3 files and the ncbi gene id mapping file
+    ```bash
+    export PYTHONPATH=./aws_batch
+
+    python aws_batch/pubtator_annotations_inference_transformer_s3/submit_multiple_jobs.py  lanax/kegg-pathway-extractor:latest s3://aegovan-data  ppi_pubmedinference_dataprep  queue s3://aegovan-data/pubmed_json_parts_annotation_iseries/ s3://aegovan-data/pubmed_asbtract/inference_multi/ s3://aegovan-data/settings/HUMAN_9606_idmapping.dat
+    
+    ```
 
 ### Run large scale inference
 
