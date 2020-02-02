@@ -71,6 +71,31 @@ class TestSitPubtatorAnnotationsInferenceTransformer(TestCase):
                                                 x["participant2Id"])
         self.assertEqual(expected, sorted(list(actual), key=sort_func))
 
+    def test_parse_self_relation(self):
+        # Arrange
+        sut = PubtatorAnnotationsInferenceTransformer(interaction_types=['phosphorylation'], filter_self_relation=True)
+        input = StringIO("""25260751|a|Unlike the other MAP3Ks, MEKK1 (encoded by Map3k1) contains a PHD motif. To understand the role of this motif, we have created a knockin mutant of mouse Map3k1 (Map3k1(m) (PHD)) with an inactive PHD motif. Map3k1(m) (PHD) ES cells demonstrate that the MEKK1 PHD controls p38 and JNK activation during TGF-b, EGF and microtubule disruption signalling, but does not affect MAPK responses to hyperosmotic stress. Protein microarray profiling identified the adaptor TAB1 as a PHD substrate, and TGF-b- or EGF-stimulated Map3k1(m) (PHD) ES cells exhibit defective non-canonical ubiquitination of MEKK1 and TAB1. The MEKK1 PHD binds and mediates the transfer of Lys63-linked poly-Ub, using the conjugating enzyme UBE2N, onto TAB1 to regulate TAK1 and MAPK activation by TGF-b and EGF. Both the MEKK1 PHD and TAB1 are critical for ES-cell differentiation and tumourigenesis. Map3k1(m) (PHD) (/+) mice exhibit aberrant cardiac tissue, B-cell development, testis and T-cell signalling. 
+25260751	25	30	MEKK1	Gene	26401
+
+""")
+
+        mock_text_nomaliser = MagicMock()
+        mock_text_nomaliser.return_value = "Normalisedtext.."
+        sut.textGeneNormaliser = mock_text_nomaliser
+
+        mock_gene_converter = MagicMock()
+        mock_gene_converter.convert.side_effect = lambda x: {x: ["Q{}".format(x)]}
+        sut.geneIdConverter = mock_gene_converter
+
+        expected = []
+
+        # Act
+        actual = sut.parse(input)
+
+        # Assert
+
+        self.assertEqual(expected, sorted(list(actual)))
+
     def test_load_file(self):
         # Arrange
         sut = PubtatorAnnotationsInferenceTransformer()
@@ -119,6 +144,34 @@ class TestSitPubtatorAnnotationsInferenceTransformer(TestCase):
         dest_dir = tempfile.mkdtemp()
         expected_parts_len = 2
         expected_total_records = 4
+        mock_text_nomaliser = MagicMock()
+        mock_text_nomaliser.return_value = "Normalisedtext.."
+        sut.textGeneNormaliser = mock_text_nomaliser
+
+        mock_gene_converter = MagicMock()
+        mock_gene_converter.convert.side_effect = lambda x: {x: ["Q{}".format(x)]}
+        sut.geneIdConverter = mock_gene_converter
+
+        # Act
+        actual = sut.load_directory_save(input_dir, dest_dir)
+
+        # Assert
+        self.assertEqual(expected_parts_len, len(os.listdir(dest_dir)))
+
+        # Assert that the length of the array within the json file matches
+        total_actual = 0
+        for f in os.listdir(dest_dir):
+            with open(os.path.join(dest_dir, f), "r") as handle:
+                total_actual += len(json.load(handle))
+        self.assertEqual(expected_total_records, total_actual)
+
+    def test_load_directory_save_ignore_empty_File(self):
+        # Arrange
+        sut = PubtatorAnnotationsInferenceTransformer(filter_self_relation=True)
+        input_dir = os.path.join(os.path.dirname(__file__), "data_sample_annotation")
+        dest_dir = tempfile.mkdtemp()
+        expected_parts_len = 1
+        expected_total_records = 1
         mock_text_nomaliser = MagicMock()
         mock_text_nomaliser.return_value = "Normalisedtext.."
         sut.textGeneNormaliser = mock_text_nomaliser

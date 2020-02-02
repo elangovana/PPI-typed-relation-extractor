@@ -14,11 +14,12 @@ from datatransformer.textGeneNormaliser import TextGeneNormaliser
 
 class PubtatorAnnotationsInferenceTransformer:
 
-    def __init__(self, interaction_types=None, geneIdConverter=None):
+    def __init__(self, interaction_types=None, geneIdConverter=None, filter_self_relation=False):
         """
         Prepares inference for these interaction types, by default uses 'phosphorylation'
         :type interaction_types: list
         """
+        self.filter_self_relation = filter_self_relation
         self.pubtator_annotations_reader = None
         self.interaction_types = interaction_types or ['phosphorylation']
         self.geneIdConverter = geneIdConverter
@@ -92,6 +93,9 @@ Convert Ncbi geneId to uniprot
             result = [r for r in self.load_file(input_file)]
             self.logger.info("Processed file {} with records {}".format(input_file, len(result)))
             total += len(result)
+            if len(result) == 0:
+                self.logger.info("No records generated")
+                continue
             destination_file = os.path.join(destination_dir, "{}.json".format(os.path.basename(input_file)))
             with open(destination_file, "w") as fp:
                 json.dump(result, fp)
@@ -102,7 +106,11 @@ Convert Ncbi geneId to uniprot
             normalised_abstract = self.textGeneNormaliser(rec['text'], rec['annotations'])
             genes = self._get_genes(rec['annotations'])
 
-            for gene_pair in itertools.combinations_with_replacement(genes, 2):
+            combinator = itertools.combinations_with_replacement(genes, 2)
+            if self.filter_self_relation:
+                combinator = itertools.combinations(genes, 2)
+
+            for gene_pair in combinator:
                 gene_pair = sorted(list(gene_pair))
                 yield {'pubmedId': rec['id']
                     , 'participant1Id': gene_pair[0]
@@ -127,11 +135,12 @@ if "__main__" == __name__:
     - ID_type
     - ID
 """)
+    parser.add_argument("--filterselfrelations", help="To filter self relations", default=1, type=bool, choices={1, 0})
 
     args = parser.parse_args()
     with open(args.idMappingDat, "r") as h:
         geneIdconverter = NcbiGeneUniprotLocalDbMapper(h)
         obj = PubtatorAnnotationsInferenceTransformer(
             ['acetylation', 'demethylation', 'dephosphorylation', 'deubiquitination', 'methylation', 'phosphorylation',
-             'ubiquitination'], geneIdconverter)
+             'ubiquitination'], geneIdconverter, filter_self_relation=args.filterselfrelations)
         obj.load_directory_save(args.inputdir, args.outputdir)
