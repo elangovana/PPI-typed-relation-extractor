@@ -58,10 +58,11 @@ This is the full sequence to download the entire data..
     ```
 
 2. Transform all data in s3, passing in the source & dest s3 files and the ncbi gene id mapping file
+    
     ```bash
     export PYTHONPATH=./aws_batch
 
-    python aws_batch/pubtator_annotations_inference_transformer_s3/submit_multiple_jobs.py  lanax/kegg-pathway-extractor:latest s3://aegovan-data  ppi_pubmedinference_dataprep  queue s3://aegovan-data/pubmed_json_parts_annotation_iseries/ s3://aegovan-data/pubmed_asbtract/inference_multi/ s3://aegovan-data/settings/HUMAN_9606_idmapping.dat
+    python aws_batch/pubtator_annotations_inference_transformer_s3/submit_multiple_jobs.py  ppi_pubmedinference_dataprep:2 m5  s3://aegovan-data/pubmed_json_parts_annotation_iseries/ s3://aegovan-data/pubmed_asbtract/inference_multi/ s3://aegovan-data/settings/HUMAN_9606_idmapping.dat
     
     ```
 
