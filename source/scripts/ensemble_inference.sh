@@ -35,8 +35,9 @@ export PYTHONPATH=${source_dir}
 
 python ${source_dir}/algorithms/ensemble_inference_batchs3.py --input-comma-sep-path  ${network_s3_csv} --dest-dir ${network_local_path}
 python ${source_dir}/algorithms/main_predict.py ${dataset}  ${src_local_file}  ${network_local_path}   ${dest_local_path}  --positives-filter-threshold ${threshold}
-mv ${dest_local_path}/predicted.json ${dest_local_path}/${src_file_name}.prediction.json
-
+if [ -e ${dest_local_path}/predicted.json ]; then
+    mv ${dest_local_path}/predicted.json ${dest_local_path}/${src_file_name}.prediction.json
+fi
 # Copy results back s3
 aws s3 cp --recursive ${dest_local_path}/ ${dest_s3}
 
