@@ -166,16 +166,6 @@ Uploads the files in local directory to s3
 
         return results
 
-    def _get_directory_size(self, start_path):
-        total_size = 0
-        for dirpath, dirnames, filenames in os.walk(start_path):
-            for f in filenames:
-                fp = os.path.join(dirpath, f)
-                # skip if it is symbolic link
-                if not os.path.islink(fp):
-                    total_size += os.path.getsize(fp)
-        return total_size
-
 
 if "__main__" == __name__:
     parser = argparse.ArgumentParser()
