@@ -55,6 +55,12 @@ class S3Util(ExternalFileBase):
         return bucket_name, key
 
     def download_file(self, remote_path, local_dir):
+        """
+        Download a single file from s3
+        :param remote_path: The remote s3 file
+        :param local_dir: The local directory to save the file to
+        :return:
+        """
         bucket, key = self._get_bucketname_key(remote_path)
 
         s3 = boto3.client('s3')
@@ -64,6 +70,11 @@ class S3Util(ExternalFileBase):
         s3.download_file(bucket, key, local_file)
 
     def download_object(self, remote_path):
+        """
+        Downloads binary bytes from s3 without saving file
+        :param remote_path: The remote s3 path
+        :return: returns binary bytes from s3 without saving file
+        """
         bucket, key = self._get_bucketname_key(remote_path)
 
         s3 = boto3.client('s3')
@@ -71,9 +82,14 @@ class S3Util(ExternalFileBase):
         s3_response_object = s3.get_object(Bucket=bucket, Key=key)
         object_content = s3_response_object['Body'].read()
 
-        return len(object_content)
+        return object_content
 
     def list_files(self, remote_path):
+        """
+Lists the files in s3
+        :param remote_path: The s3 uri, e.g. s3://mybucket/prefix/
+        :return: List of files
+        """
         assert remote_path.startswith("s3://")
         assert remote_path.endswith("/")
 
@@ -86,17 +102,30 @@ class S3Util(ExternalFileBase):
         return ((o.bucket_name, o.key) for o in bucket.objects.filter(Prefix=key))
 
     def upload_files(self, local_dir, remote_path, num_threads=20):
+        """
+Uploads the files in local directory to s3
+        :param local_dir: The local directory
+        :param remote_path: The remote s3 prefix
+        :param num_threads: The number of parallel threads used to upload to s3
+        """
         input_tuples = ((f, remote_path) for f in glob.glob("{}/*".format(local_dir)))
 
         with ThreadPool(num_threads) as pool:
             pool.starmap(self.uploadfile, input_tuples)
 
     def download_files(self, remote_path, local_dir, num_threads=20):
+        """
+    Downloads the files from s3 to  local directory
+        :param remote_path: The remote s3 path prefix
+        :param local_dir: The local directory
+        :param num_threads: The number of parallel downloads
+        :return: 
+        """
         input_tuples = (("s3://{}/{}".format(s3_bucket, s3_key), local_dir) for s3_bucket, s3_key in
                         self.list_files(remote_path))
 
         with ThreadPool(num_threads) as pool:
-            results = pool.starmap(self.download_file, input_tuples)
+            pool.starmap(self.download_file, input_tuples)
 
     def download_objects(self, s3_prefix, num_threads=20):
         s3_files = ("s3://{}/{}".format(s3_bucket, s3_key) for s3_bucket, s3_key in self.list_files(s3_prefix))
@@ -104,7 +133,7 @@ class S3Util(ExternalFileBase):
         with ThreadPool(num_threads) as pool:
             results = pool.map(self.download_object, s3_files)
 
-        return sum(results) / 1024
+        return results
 
     def _get_directory_size(self, start_path):
         total_size = 0
@@ -121,18 +150,18 @@ if "__main__" == __name__:
     parser = argparse.ArgumentParser()
     parser.add_argument("s3url",
                         help="The s3 path. to download from e.g. s3://mybuck/prefix/")
-    # parser.add_argument("localdir",
-    #                    help="The local directory to save the file to")
+    parser.add_argument("localdir",
+                        help="The local directory to save the file to")
 
     args = parser.parse_args()
 
     print("Starting download...into memory without saving to filefile")
     start = datetime.datetime.now()
-    # download_files(args.s3url, args.localdir, num_threads=15)
+
     s3_util = S3Util()
-    total_bytes = s3_util.download_objects(args.s3url, num_threads=15)
+    s3_util.download_files(args.s3url, args.localdir, num_threads=15)
     end = datetime.datetime.now()
 
     download_time = end - start
 
-    print("Total time in seconds to download {} bytes : {} seconds".format(total_bytes, download_time.total_seconds()))
+    print("Total time in seconds to download  {} seconds".format(download_time.total_seconds()))
