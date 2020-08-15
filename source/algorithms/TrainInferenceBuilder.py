@@ -93,8 +93,9 @@ class TrainInferenceBuilder:
         self.logger.info("Using loss function {}".format(type(loss_function)))
 
         # Trainer
+        use_loss_objective_metric = bool(int(self._get_value(self.additional_args, "use_loss_objective_metric", 0)))
         trainer = Train(epochs=self.epochs, early_stopping_patience=self.patience_epochs,
-                        results_scorer=self.results_scorer)
+                        results_scorer=self.results_scorer, use_loss_objective_metric=use_loss_objective_metric)
 
         # merge train val vocab
         merge_vocab_train_val = bool(int(self._get_value(self.additional_args, "train_val_vocab_merge", "0")))
