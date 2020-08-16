@@ -1,7 +1,6 @@
 import logging
 
 import numpy as np
-from torch import nn
 
 from algorithms.DataPipeline import DataPipeline
 from algorithms.LabelPipeline import LabelPipeline
@@ -9,6 +8,7 @@ from algorithms.PretrainedEmbedderLoader import PretrainedEmbedderLoader
 from algorithms.PretrainedEmbedderLoaderMinimum import PretrainedEmbedderLoaderMinimum
 from algorithms.Train import Train
 from algorithms.TrainInferencePipeline import TrainInferencePipeline
+from algorithms.loss_function_factory_locator import LossFunctionFactoryLocator
 from algorithms.network_factory_locator import NetworkFactoryLocator
 from algorithms.transform_label_encoder import TransformLabelEncoder
 from algorithms.transform_label_rehaper import TransformLabelReshaper
@@ -89,7 +89,10 @@ class TrainInferenceBuilder:
         self.logger.info("\n{}".format(model))
 
         # Loss function
-        loss_function = nn.CrossEntropyLoss()
+        loss_func_factory_name = self._get_value(self.additional_args, "loss_func_factory_name",
+                                                 "algorithms.cross_entropy_loss_factory.CrossEntropyLossFactory")
+        loss_function_factory = LossFunctionFactoryLocator().get(loss_func_factory_name)
+        loss_function = loss_function_factory.get(kwargs=self.additional_args)
         self.logger.info("Using loss function {}".format(type(loss_function)))
 
         # Trainer

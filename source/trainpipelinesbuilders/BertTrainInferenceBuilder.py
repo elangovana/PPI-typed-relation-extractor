@@ -1,13 +1,13 @@
 import logging
 
 import numpy as np
-from torch import nn
 
 from algorithms.BertTrain import BertTrain
 from algorithms.BertTrainInferencePipeline import BertTrainInferencePipeline
 from algorithms.DataPipeline import DataPipeline
 from algorithms.LabelPipeline import LabelPipeline
 from algorithms.bert_network_factory_locator import BertNetworkFactoryLocator
+from algorithms.loss_function_factory_locator import LossFunctionFactoryLocator
 from algorithms.transform_berttext_token_to_index import TransformBertTextTokenToIndex
 from algorithms.transform_berttext_tokenise import TransformBertTextTokenise
 from algorithms.transform_label_encoder import TransformLabelEncoder
@@ -74,7 +74,11 @@ class BertTrainInferenceBuilder:
         self.logger.info("\n{}".format(model))
 
         # Loss function
-        loss_function = nn.CrossEntropyLoss()
+        # Loss function
+        loss_func_factory_name = self._get_value(self.additional_args, "loss_func_factory_name",
+                                                 "algorithms.cross_entropy_loss_factory.CrossEntropyLossFactory")
+        loss_function_factory = LossFunctionFactoryLocator().get(loss_func_factory_name)
+        loss_function = loss_function_factory.get(kwargs=self.additional_args)
         self.logger.info("Using loss function {}".format(type(loss_function)))
 
         # Trainer
