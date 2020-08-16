@@ -92,7 +92,7 @@ class TrainInferenceBuilder:
         loss_func_factory_name = self._get_value(self.additional_args, "loss_func_factory_name",
                                                  "algorithms.cross_entropy_loss_factory.CrossEntropyLossFactory")
         loss_function_factory = LossFunctionFactoryLocator().get(loss_func_factory_name)
-        loss_function = loss_function_factory.get(kwargs=self.additional_args)
+        loss_function = loss_function_factory.get(**self.additional_args)
         self.logger.info("Using loss function {}".format(type(loss_function)))
 
         # Trainer
