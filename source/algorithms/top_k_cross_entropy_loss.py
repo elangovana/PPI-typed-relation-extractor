@@ -12,6 +12,8 @@
 #  express or implied. See the License for the specific language governing    *
 #  permissions and limitations under the License.                             *
 # *****************************************************************************
+import logging
+
 import torch
 from torch import nn
 
@@ -26,6 +28,10 @@ class TopKCrossEntropyLoss(nn.Module):
         self.k = k
         self._loss_func = nn.CrossEntropyLoss(reduction='none')
 
+    @property
+    def _logger(self):
+        return logging.getLogger(__name__)
+
     def forward(self, predicted, target):
         # make sure k is within the length of the target shape
         k = min(self.k, target.shape[0])
@@ -34,5 +40,7 @@ class TopKCrossEntropyLoss(nn.Module):
 
         # Obtain only the top k hard samples
         top_k_loss = torch.mean(torch.topk(loss_per_item, k=k)[0])
+        self._logger.debug("Total loss {} vs topk loss {}".format(torch.mean(loss_per_item), top_k_loss))
+
 
         return top_k_loss
