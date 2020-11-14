@@ -54,22 +54,28 @@ class TransformBertTextTokenise:
 
         batches = []
         unknown_tokens = 0
+        token_lens = []
         for idx, b in enumerate(x):
             b_x = b[0]
             b_y = b[1]
             col = []
             for c_index, c in enumerate(b_x):
                 row = []
+                token_lens[c_index] = []
                 max = self.max_feature_lens[c_index]
                 for _, r in enumerate(c):
-                    tokens = tokeniser(r)[0:max - 2]
-                    unknown_tokens += sum([1 for t in tokens if t == self.unk_token()])
-                    tokens = ['[CLS]'] + tokens + [pad] * (max - 2 - len(tokens)) + ['[SEP]']
-                    row.append(tokens)
+                    all_tokens = tokeniser(r)
+                    token_lens[c_index].append(len(all_tokens))
+                    sized_tokens = all_tokens[0:max - 2]
+                    unknown_tokens += sum([1 for t in sized_tokens if t == self.unk_token()])
+                    sized_tokens = ['[CLS]'] + sized_tokens + [pad] * (max - 2 - len(sized_tokens)) + ['[SEP]']
+                    row.append(sized_tokens)
                 col.append(row)
 
             batches.append([col, b_y])
         self.logger.info("Unknown tokens count {}".format(unknown_tokens))
+        self.logger.info("Token lens count \n{}".format(token_lens))
+
         self.logger.info("Completed TransformBertTextTokenise")
         return batches
 
