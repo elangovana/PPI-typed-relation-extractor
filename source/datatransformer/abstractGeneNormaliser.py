@@ -10,7 +10,7 @@ class AbstractGeneNormaliser:
     def __init__(self, pubmed_annotations: iter, key_func=None, abstract_func=None,
                  annotations_func=None, field_name_prefix=''):
         """
-        :param field_name_prefix: The name of the output dataframe field value
+        :param field_name_prefix: The prefix to use of the output fields in the dataframe
         :param annotations_func: A function to obtain the annotations value.
         :param key_func: A function to obtain the key value. e.g. (lambda x: x['id'])
         :param abstract_func: A function to obtain the abstract value.
