@@ -9,6 +9,7 @@ class TextGeneNormaliser:
     def __init__(self, geneIdConverter=None):
         self.geneIdConverter = geneIdConverter
 
+
     @property
     def geneIdConverter(self):
         self.__geneIdConverter__ = self.__geneIdConverter__ or NcbiGeneUniprotMapper()
@@ -18,7 +19,8 @@ class TextGeneNormaliser:
     def geneIdConverter(self, value):
         self.__geneIdConverter__ = value
 
-    def __call__(self, text, annotations, preferred_uniprots=None):
+    def __call__(self, text, annotations, preferred_uniprots=None, annotation_id_key='normalised_id'):
+
         offset = 0
         annotations.sort(key=lambda x: int(x['start']), reverse=False)
         preferred_uniprots = preferred_uniprots or {}
@@ -26,7 +28,7 @@ class TextGeneNormaliser:
         name_to_ncbi_map = {}
         for a in annotations:
             if a['type'].lower() != 'gene': continue
-            name_to_ncbi_map[a['name']] = a['normalised_id']
+            name_to_ncbi_map[a['name']] = a[annotation_id_key]
 
         alternative_ncbi_uniprot = {}
         for g_in_anno, ncbi in name_to_ncbi_map.items():
@@ -42,7 +44,7 @@ class TextGeneNormaliser:
             s = int(a['start']) + offset
             e = int(a['end']) + offset
 
-            ncbi_id = a['normalised_id']
+            ncbi_id = a[annotation_id_key]
 
             # We might get more than one matching uniprot.
             # e.g. {'6850': ['P43405','A0A024R244','A0A024R273']}
