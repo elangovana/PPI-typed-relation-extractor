@@ -53,7 +53,7 @@ class TestAbstractGeneNormaliser(TestCase):
         mockTextNormaliser.return_value = "Normalised text.."
 
         sut = AbstractGeneNormaliser(self.annotations)
-        sut.textGeneNormaliser = mockTextNormaliser
+        sut.text_gene_normaliser = mockTextNormaliser
 
         expected_data = [
             {"interactionId": "1",
@@ -83,7 +83,7 @@ class TestAbstractGeneNormaliser(TestCase):
         mockTextNormaliser.return_value = "Normalised text.."
 
         sut = AbstractGeneNormaliser(self.annotations)
-        sut.textGeneNormaliser = mockTextNormaliser
+        sut.text_gene_normaliser = mockTextNormaliser
 
         # Act
         result_df = sut.transform(self.data)
@@ -99,7 +99,7 @@ class TestAbstractGeneNormaliser(TestCase):
         mockTextNormaliser.return_value = "Normalised text.."
 
         sut = AbstractGeneNormaliser(self.annotations)
-        sut.textGeneNormaliser = mockTextNormaliser
+        sut.text_gene_normaliser = mockTextNormaliser
 
         # Act
         result_df = sut.transform(self.data)
@@ -115,7 +115,7 @@ class TestAbstractGeneNormaliser(TestCase):
         mockTextNormaliser.return_value = "Normalised text.."
 
         sut = AbstractGeneNormaliser(self.annotations)
-        sut.textGeneNormaliser = mockTextNormaliser
+        sut.text_gene_normaliser = mockTextNormaliser
 
         expected_unique_gene_id_mentions = [
             3

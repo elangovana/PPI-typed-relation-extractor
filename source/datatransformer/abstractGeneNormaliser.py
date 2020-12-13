@@ -25,21 +25,30 @@ class AbstractGeneNormaliser:
                         }]
         :param geneIdConverter:  Converter NCBI genes to the Uniprot
         """
-        self.annotations_func = annotations_func or (lambda x: x['annotations'])
-        self.abstract_func = abstract_func or (lambda x: x['text'])
-        self.key_func = key_func or (lambda x: x['id'])
-        self.pubmed_annotations = pubmed_annotations
-        self.textGeneNormaliser = None
-        self.field_name_prefix = field_name_prefix
+        self._annotations_func = annotations_func or (lambda x: x['annotations'])
+        self._abstract_func = abstract_func or (lambda x: x['text'])
+        self._key_func = key_func or (lambda x: x['id'])
+        self._pubmed_annotations = pubmed_annotations
+
+        #
+        self._text_gene_normaliser = TextGeneNormaliser()
+        self._field_name_prefix = field_name_prefix
 
     @property
-    def textGeneNormaliser(self):
-        self.__textGeneNormaliser__ = self.__textGeneNormaliser__ or TextGeneNormaliser()
-        return self.__textGeneNormaliser__
+    def text_gene_normaliser(self):
+        return self._text_gene_normaliser
 
-    @textGeneNormaliser.setter
-    def textGeneNormaliser(self, value):
-        self.__textGeneNormaliser__ = value
+    @text_gene_normaliser.setter
+    def text_gene_normaliser(self, value):
+        self._text_gene_normaliser = value
+
+    @property
+    def field_name_prefix(self):
+        return self._field_name_prefix
+
+    @field_name_prefix.setter
+    def field_name_prefix(self, value):
+        self._field_name_prefix = value
 
     def transform(self, df):
         annotations_dict = self._construct_dict()
@@ -65,16 +74,16 @@ class AbstractGeneNormaliser:
 
     def _construct_dict(self):
         result = {}
-        for r in self.pubmed_annotations:
-            key = self.key_func(r)
-            abstract = self.abstract_func(r)
-            annotations = self.annotations_func(r)
+        for r in self._pubmed_annotations:
+            key = self._key_func(r)
+            abstract = self._abstract_func(r)
+            annotations = self._annotations_func(r)
 
             result[key] = {"abstract": abstract, "annotations": annotations}
         return result
 
     def _normalise_abstract(self, annotations, abstract, preferred_uniprots=None):
-        abstract = self.textGeneNormaliser(abstract, annotations, preferred_uniprots)
+        abstract = self.text_gene_normaliser(abstract, annotations, preferred_uniprots)
         return abstract
 
     def _count_unique_gene_id_mentions(self, annotations):
