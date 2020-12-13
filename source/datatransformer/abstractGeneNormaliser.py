@@ -57,6 +57,9 @@ class AbstractGeneNormaliser:
             lambda r: annotations_dict[r['pubmedId']]["abstract"],
             axis=1)
 
+        df["num_unique_gene_normalised_id"] = df["annotations"].apply(self._count_unique_gene_id_mentions)
+
+
         return df
 
     def _construct_dict(self):
@@ -72,3 +75,21 @@ class AbstractGeneNormaliser:
     def _normalise_abstract(self, annotations, abstract, preferred_uniprots=None):
         abstract = self.textGeneNormaliser(abstract, annotations, preferred_uniprots)
         return abstract
+
+    def _count_unique_gene_id_mentions(self, annotations):
+        """
+        Returns the count of unique gene mentions ..
+        :param annotations:
+        [{'start': '0', 'end': '5', 'name': 'NLRP3', 'type': 'Gene', 'normalised_id': '114548'},
+         {'start': '206', 'end': '211', 'name': 'NLRP3', 'type': 'Gene', 'normalised_id': '114548'}]
+        :return:
+        """
+        unique_genes = set()
+
+        for anno in annotations:
+            # If not a gene annotation skip, as it could be species etc
+            if anno["type"] != 'Gene': continue
+
+            unique_genes = unique_genes.union([anno['normalised_id']])
+
+        return len(unique_genes)
