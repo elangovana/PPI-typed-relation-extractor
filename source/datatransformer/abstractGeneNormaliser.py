@@ -8,8 +8,9 @@ from datatransformer.textGeneNormaliser import TextGeneNormaliser
 class AbstractGeneNormaliser:
 
     def __init__(self, pubmed_annotations: iter, key_func=None, abstract_func=None,
-                 annotations_func=None):
+                 annotations_func=None, field_name_prefix=''):
         """
+        :param field_name_prefix: The name of the output dataframe field value
         :param annotations_func: A function to obtain the annotations value.
         :param key_func: A function to obtain the key value. e.g. (lambda x: x['id'])
         :param abstract_func: A function to obtain the abstract value.
@@ -29,6 +30,7 @@ class AbstractGeneNormaliser:
         self.key_func = key_func or (lambda x: x['id'])
         self.pubmed_annotations = pubmed_annotations
         self.textGeneNormaliser = None
+        self.field_name_prefix = field_name_prefix
 
     @property
     def textGeneNormaliser(self):
@@ -41,7 +43,7 @@ class AbstractGeneNormaliser:
 
     def transform(self, df):
         annotations_dict = self._construct_dict()
-        df['normalised_abstract'] = df.apply(
+        df[f'{self.field_name_prefix}normalised_abstract'] = df.apply(
             lambda r: self._normalise_abstract(annotations_dict[r['pubmedId']]["annotations"],
                                                annotations_dict[r['pubmedId']]["abstract"],
                                                {r['participant1Id']: r['participant1Alias'],
@@ -49,16 +51,15 @@ class AbstractGeneNormaliser:
             axis=1)
 
         # Also add annotations to the data frame..
-        df['annotations'] = df.apply(
+        df[f'{self.field_name_prefix}annotations'] = df.apply(
             lambda r: annotations_dict[r['pubmedId']]["annotations"],
             axis=1)
 
-        df['annotations_abstract'] = df.apply(
+        df[f'{self.field_name_prefix}annotations_abstract'] = df.apply(
             lambda r: annotations_dict[r['pubmedId']]["abstract"],
             axis=1)
 
         df["num_unique_gene_normalised_id"] = df["annotations"].apply(self._count_unique_gene_id_mentions)
-
 
         return df
 
