@@ -68,7 +68,8 @@ class AbstractGeneNormaliser:
             lambda r: annotations_dict[r['pubmedId']]["abstract"],
             axis=1)
 
-        df["num_unique_gene_normalised_id"] = df["annotations"].apply(self._count_unique_gene_id_mentions)
+        df[f'{self.field_name_prefix}num_unique_gene_normalised_id'] = df["annotations"].apply(
+            self._count_unique_gene_id_mentions)
 
         return df
 
