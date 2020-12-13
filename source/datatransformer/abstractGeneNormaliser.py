@@ -60,7 +60,8 @@ class AbstractGeneNormaliser:
             axis=1)
 
         # Also add annotations to the data frame..
-        df[f'{self.field_name_prefix}annotations'] = df.apply(
+        annotations_field = f'{self.field_name_prefix}annotations'
+        df[annotations_field] = df.apply(
             lambda r: annotations_dict[r['pubmedId']]["annotations"],
             axis=1)
 
@@ -68,8 +69,11 @@ class AbstractGeneNormaliser:
             lambda r: annotations_dict[r['pubmedId']]["abstract"],
             axis=1)
 
-        df[f'{self.field_name_prefix}num_unique_gene_normalised_id'] = df["annotations"].apply(
+        df[f'{self.field_name_prefix}num_unique_gene_normalised_id'] = df[annotations_field].apply(
             self._count_unique_gene_id_mentions)
+
+        df[f'{self.field_name_prefix}num_gene_normalised_id'] = df[annotations_field].apply(
+            self._count_gene_id_mentions)
 
         return df
 
@@ -104,3 +108,16 @@ class AbstractGeneNormaliser:
             unique_genes = unique_genes.union([anno['normalised_id']])
 
         return len(unique_genes)
+
+    def _count_gene_id_mentions(self, annotations):
+        """
+        Returns the count of unique gene mentions ..
+        :param annotations:
+        [{'start': '0', 'end': '5', 'name': 'NLRP3', 'type': 'Gene', 'normalised_id': '114548'},
+         {'start': '206', 'end': '211', 'name': 'NLRP3', 'type': 'Gene', 'normalised_id': '114548'}]
+        :return:
+        """
+
+        gene_mentions = list(filter(lambda anno: anno["type"] == 'Gene', annotations))
+
+        return len(gene_mentions)

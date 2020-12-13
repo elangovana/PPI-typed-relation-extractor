@@ -108,7 +108,7 @@ class TestAbstractGeneNormaliser(TestCase):
         for r in result_df['annotations_abstract'].values:
             self.assertEqual(self.annotations[0]['text'], r)
 
-    def test_transform_gene_count(self):
+    def test_transform_gene_unique_count(self):
         # Arrange
         # Mock uniprot converter
         mockTextNormaliser = MagicMock()
@@ -127,4 +127,25 @@ class TestAbstractGeneNormaliser(TestCase):
         # Assert
         # Unique num of gene mentions
         for e, r in zip(expected_unique_gene_id_mentions, result_df['num_unique_gene_normalised_id'].values):
+            self.assertEqual(expected_unique_gene_id_mentions, r)
+
+    def test_transform_gene_count(self):
+        # Arrange
+        # Mock uniprot converter
+        mockTextNormaliser = MagicMock()
+        mockTextNormaliser.return_value = "Normalised text.."
+
+        sut = AbstractGeneNormaliser(self.annotations)
+        sut.text_gene_normaliser = mockTextNormaliser
+
+        expected_unique_gene_id_mentions = [
+            10
+        ]
+
+        # Act
+        result_df = sut.transform(self.data)
+
+        # Assert
+        # Unique num of gene mentions
+        for e, r in zip(expected_unique_gene_id_mentions, result_df['num_gene_normalised_id'].values):
             self.assertEqual(expected_unique_gene_id_mentions, r)
