@@ -48,6 +48,15 @@ class AbstractGeneNormaliser:
                                                 r['participant2Id']: r['participant2Alias']}),
             axis=1)
 
+        # Also add annotations to the data frame..
+        df['annotations'] = df.apply(
+            lambda r: annotations_dict[r['pubmedId']]["annotations"],
+            axis=1)
+
+        df['annotations_abstract'] = df.apply(
+            lambda r: annotations_dict[r['pubmedId']]["abstract"],
+            axis=1)
+
         return df
 
     def _construct_dict(self):
