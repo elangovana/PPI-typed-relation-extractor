@@ -1,6 +1,7 @@
 """
 Replaces the gene name in abstract with the uniprot number
 """
+import logging
 
 from datatransformer.textGeneNormaliser import TextGeneNormaliser
 
@@ -35,6 +36,10 @@ class AbstractGeneNormaliser:
         self._field_name_prefix = field_name_prefix
 
     @property
+    def _logger(self):
+        return logging.getLogger(__name__)
+
+    @property
     def text_gene_normaliser(self):
         return self._text_gene_normaliser
 
@@ -51,6 +56,8 @@ class AbstractGeneNormaliser:
         self._field_name_prefix = value
 
     def transform(self, df):
+        self._logger.info("Starting transformation..")
+
         annotations_dict = self._construct_dict()
         df[f'{self.field_name_prefix}normalised_abstract'] = df.apply(
             lambda r: self._normalise_abstract(annotations_dict[r['pubmedId']]["annotations"],
@@ -59,21 +66,31 @@ class AbstractGeneNormaliser:
                                                 r['participant2Id']: r['participant2Alias']}),
             axis=1)
 
+        self._logger.info("Completed normalised abstract...")
+
+
         # Also add annotations to the data frame..
+        self._logger.info("Adding annotations ...")
         annotations_field = f'{self.field_name_prefix}annotations'
         df[annotations_field] = df.apply(
             lambda r: annotations_dict[r['pubmedId']]["annotations"],
             axis=1)
 
+        self._logger.info("Adding annotations_abstract...")
         df[f'{self.field_name_prefix}annotations_abstract'] = df.apply(
             lambda r: annotations_dict[r['pubmedId']]["abstract"],
             axis=1)
 
+        self._logger.info("Adding num_unique_gene_normalised_id...")
         df[f'{self.field_name_prefix}num_unique_gene_normalised_id'] = df[annotations_field].apply(
             self._count_unique_gene_id_mentions)
 
+        self._logger.info("Adding num_gene_normalised_id...")
         df[f'{self.field_name_prefix}num_gene_normalised_id'] = df[annotations_field].apply(
             self._count_gene_id_mentions)
+
+        self._logger.info("Completed transformation")
+
 
         return df
 
