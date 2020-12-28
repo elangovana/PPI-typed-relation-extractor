@@ -84,27 +84,27 @@ class TestTextGeneNormaliser(TestCase):
         # Assert
         self.assertEqual(expected_text, actual)
 
-    def test_transform_preferred_alias(self):
-        """
-        When more than one matching uniprot for a gene name ncbi, it should select the one matching either of the participants in the dataframe
-        :return:
-        """
-        # Arrange
-        text = 'NLRP3 is the most crucial member of the NLR family'
-        annotations = [
-            {'start': '0', 'end': '5', 'name': 'NLRP3', 'type': 'Gene', 'normalised_id': '114548'}]
-
-        # Mock uniprot converter
-
-        geneIdConverter = MagicMock()
-        geneIdConverter.convert.side_effect = lambda x: {x: ["Q{}".format(x)]}
-
-        sut = TextGeneNormaliser()
-        sut.geneIdConverter = geneIdConverter
-
-        expected_text = 'uni_10076 is the most crucial member of the NLR family'
-
-        # Act
-        actual = sut(text, annotations, preferred_uniprots={'uni_10076': [['NLRP3']]})
-
-        self.assertEqual(expected_text, actual)
+    # def test_transform_preferred_alias(self):
+    #     """
+    #     When more than one matching uniprot for a gene name ncbi, it should select the one matching either of the participants in the dataframe
+    #     :return:
+    #     """
+    #     # Arrange
+    #     text = 'NLRP3 is the most crucial member of the NLR family'
+    #     annotations = [
+    #         {'start': '0', 'end': '5', 'name': 'NLRP3', 'type': 'Gene', 'normalised_id': '114548'}]
+    #
+    #     # Mock uniprot converter
+    #
+    #     geneIdConverter = MagicMock()
+    #     geneIdConverter.convert.side_effect = lambda x: {x: ["Q{}".format(x)]}
+    #
+    #     sut = TextGeneNormaliser()
+    #     sut.geneIdConverter = geneIdConverter
+    #
+    #     expected_text = 'uni_10076 is the most crucial member of the NLR family'
+    #
+    #     # Act
+    #     actual = sut(text, annotations, preferred_uniprots={'uni_10076': [['NLRP3']]})
+    #
+    #     self.assertEqual(expected_text, actual)

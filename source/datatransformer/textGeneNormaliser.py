@@ -1,6 +1,3 @@
-import operator
-from functools import reduce
-
 from datatransformer.ncbiGeneUniprotMapper import NcbiGeneUniprotMapper
 
 
@@ -30,13 +27,13 @@ class TextGeneNormaliser:
             if a['type'].lower() != 'gene': continue
             name_to_ncbi_map[a['name']] = a[annotation_id_key]
 
-        alternative_ncbi_uniprot = {}
-        for g_in_anno, ncbi in name_to_ncbi_map.items():
-            for u, aliases in preferred_uniprots.items():
-                flatened_alias = [i.lower() for i in reduce(operator.concat, aliases)]
-
-                if g_in_anno.lower() in flatened_alias:
-                    alternative_ncbi_uniprot[ncbi] = u
+        # alternative_ncbi_uniprot = {}
+        # for g_in_anno, ncbi in name_to_ncbi_map.items():
+        #     for u, aliases in preferred_uniprots.items():
+        #         flatened_alias = [i.lower() for i in reduce(operator.concat, aliases)]
+        #
+        #         if g_in_anno.lower() in flatened_alias:
+        #             alternative_ncbi_uniprot[ncbi] = u
 
         for a in annotations:
             if a['type'].lower() != 'gene': continue
@@ -61,9 +58,9 @@ class TextGeneNormaliser:
                     match = True
                     break
 
-            # Some of the uniprots dont match.. so try match with alias
-            if not match:
-                uniprot = alternative_ncbi_uniprot.get(ncbi_id, uniprot)
+            # # Some of the uniprots dont match.. so try match with alias
+            # if not match:
+            #     uniprot = alternative_ncbi_uniprot.get(ncbi_id, uniprot)
 
             text = text[:s] + uniprot + text[e:]
             offset += len(uniprot) - (e - s)
