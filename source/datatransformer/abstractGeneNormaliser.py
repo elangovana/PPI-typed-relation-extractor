@@ -89,6 +89,10 @@ class AbstractGeneNormaliser:
         df[f'{self.field_name_prefix}num_gene_normalised_id'] = df[annotations_field].apply(
             self._count_gene_id_mentions)
 
+        self._logger.info("Gene Id links...")
+        df[f'{self.field_name_prefix}gene_to_uniprot_map'] = df[annotations_field].apply(
+            self._gene_id_uniprot_map)
+
         self._logger.info("Completed transformation")
 
 
@@ -125,6 +129,28 @@ class AbstractGeneNormaliser:
             unique_genes = unique_genes.union([anno['normalised_id']])
 
         return len(unique_genes)
+
+    def _gene_id_uniprot_map(self, annotations):
+        """
+        Maps the normalised id to  uniprot
+        :param annotations:
+        [{'start': '0', 'end': '5', 'name': 'NLRP3', 'type': 'Gene', 'normalised_id': '114548'},
+         {'start': '206', 'end': '211', 'name': 'NLRP3', 'type': 'Gene', 'normalised_id': '114548'}]
+        :return:
+        """
+        unique_genes = set()
+
+        for anno in annotations:
+            # If not a gene annotation skip, as it could be species etc
+            if anno["type"] != 'Gene': continue
+
+            unique_genes = unique_genes.union([anno['normalised_id']])
+
+        result = {}
+        for g in list(unique_genes):
+            result[g] = self.text_gene_normaliser.geneIdConverter.convert(g).get(g, [])
+
+        return result
 
     def _count_gene_id_mentions(self, annotations):
         """
