@@ -72,12 +72,13 @@ Convert Ncbi geneId to uniprot
             yield from self.parse(i)
 
     def _get_genes(self, annotations):
-        result = set()
+        result = {}
+
         for a in filter(lambda x: x["type"] == "Gene", annotations):
             uniprot_ids = self.geneIdConverter.convert(a["normalised_id"]).get(a["normalised_id"], [a["normalised_id"]])
             # use just the first ID, even if there is more than mapping..
-            uniprot_id = [uniprot_ids[0]]
-            result = result.union(uniprot_id)
+            uniprot_id = uniprot_ids[0]
+            result[a["normalised_id"]] = uniprot_id
         return result
 
     def load_directory(self, dir_path):
@@ -104,7 +105,8 @@ Convert Ncbi geneId to uniprot
     def parse(self, handle):
         for rec in self.pubtator_annotations_reader(handle):
             normalised_abstract = self.textGeneNormaliser(rec['text'], rec['annotations'])
-            genes = self._get_genes(rec['annotations'])
+            genes_map = self._get_genes(rec['annotations'])
+            genes = list(genes_map.values())
 
             combinator = itertools.combinations_with_replacement(genes, 2)
             if self.filter_self_relation:
@@ -117,6 +119,8 @@ Convert Ncbi geneId to uniprot
                     , 'participant2Id': gene_pair[1]
                     , 'abstract': rec['text']
                     , 'normalised_abstract': normalised_abstract
+                    , 'annotations': rec['annotations']
+                    , 'gene_id_map': genes_map
                        }
 
 
