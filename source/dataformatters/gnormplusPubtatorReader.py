@@ -52,8 +52,11 @@ class GnormplusPubtatorReader:
     def __call__(self, handle) -> iter:
 
         for header in handle:
+            # Skip blank lines
+            if header.strip("\n\t\s") == "": continue
 
             record = {}
+
             header_parts = header.split("|")
             record["id"] = header_parts[0]
             record["type"] = header_parts[1]
