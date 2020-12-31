@@ -14,14 +14,13 @@ from datatransformer.textGeneNormaliser import TextGeneNormaliser
 
 class PubtatorAnnotationsInferenceTransformer:
 
-    def __init__(self, interaction_types=None, geneIdConverter=None, filter_self_relation=False):
+    def __init__(self, geneIdConverter=None, filter_self_relation=False):
         """
-        Prepares inference for these interaction types, by default uses 'phosphorylation'
+        Prepares inference
         :type interaction_types: list
         """
         self.filter_self_relation = filter_self_relation
         self.pubtator_annotations_reader = None
-        self.interaction_types = interaction_types or ['phosphorylation']
         self.geneIdConverter = geneIdConverter
         self.textGeneNormaliser = None
 
@@ -145,6 +144,5 @@ if "__main__" == __name__:
     with open(args.idMappingDat, "r") as h:
         geneIdconverter = NcbiGeneUniprotLocalDbMapper(h)
         obj = PubtatorAnnotationsInferenceTransformer(
-            ['acetylation', 'demethylation', 'dephosphorylation', 'deubiquitination', 'methylation', 'phosphorylation',
-             'ubiquitination'], geneIdconverter, filter_self_relation=args.filterselfrelations)
+            geneIdconverter, filter_self_relation=args.filterselfrelations)
         obj.load_directory_save(args.inputdir, args.outputdir)
