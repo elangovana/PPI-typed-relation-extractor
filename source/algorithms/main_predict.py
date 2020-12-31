@@ -1,17 +1,30 @@
 import argparse
+import glob
 import logging
+import os
 import sys
+from pathlib import Path
 
 from algorithms.InferencePipeline import InferencePipeline
 from algorithms.dataset_factory import DatasetFactory
 
 
-def run(dataset, datajson, artefactsbase_dir, outdir, positives_filter_threshold):
-    dataset_factory = DatasetFactory().get_datasetfactory(dataset)
+def run(dataset_name, datajson, artefactsbase_dir, outdir, positives_filter_threshold):
+    logger = logging.getLogger(__name__)
+    if os.path.isdir(datajson):
+        for data_file in glob.glob("{}/*.json".format(datajson)):
+            f_outdir = os.path.join(outdir, Path(data_file).stem)
+            logger.info("Running prediction for {}, output dir {}".format(data_file, f_outdir))
+
+            os.makedirs(f_outdir)
+            run_file(dataset_name, data_file, artefactsbase_dir, outdir, positives_filter_threshold)
+    else:
+        run_file(dataset_name, datajson, artefactsbase_dir, outdir, positives_filter_threshold)
+
+
+def run_file(dataset_name, datajson, artefactsbase_dir, outdir, positives_filter_threshold):
+    dataset_factory = DatasetFactory().get_datasetfactory(dataset_name)
     dataset = dataset_factory.get_dataset(datajson)
-
-    # artifacts_list = [os.path.join(artefactsbase_dir, d) for d in os.listdir(artefactsbase_dir) if os.path.isdir(d)]
-
     InferencePipeline().run(dataset, datajson, artefactsbase_dir, outdir, positives_filter_threshold)
 
 
