@@ -19,12 +19,18 @@ class EnsemblePredictor:
         if device is None:
             if torch.cuda.device_count() > 0:
                 devices = ["cuda:{}".format(i) for i in range(torch.cuda.device_count())]
+
+                # This is a hack workaround to initialise the device before multi threading
+                # See issue https://github.com/pytorch/pytorch/issues/16559
+                for d in devices:
+                    with torch.cuda.device(d):
+                        torch.tensor([1.]).cuda()
             else:
                 devices = ["cpu"]
         else:
             devices = [device]
 
-        # Use all available GPUS..
+        # Use all available GPUS using multithreading
         self._logger.info("Using devices {}".format(devices))
         model_device_map = [(m, dataloader, devices[i % len(devices)]) for i, m in enumerate(model_networks)]
         with Pool(len(devices)) as p:
