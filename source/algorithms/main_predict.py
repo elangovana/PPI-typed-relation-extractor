@@ -3,7 +3,6 @@ import glob
 import logging
 import os
 import sys
-from pathlib import Path
 
 from algorithms.InferencePipeline import InferencePipeline
 from algorithms.dataset_factory import DatasetFactory
@@ -13,10 +12,8 @@ def run(dataset_name, datajson, artefactsbase_dir, outdir, positives_filter_thre
     logger = logging.getLogger(__name__)
     if os.path.isdir(datajson):
         for data_file in glob.glob("{}/*.json".format(datajson)):
-            f_outdir = os.path.join(outdir, Path(data_file).stem)
-            logger.info("Running prediction for {}, output dir {}".format(data_file, f_outdir))
+            logger.info("Running prediction for {}".format(data_file))
 
-            os.makedirs(f_outdir)
             run_file(dataset_name, data_file, artefactsbase_dir, outdir, positives_filter_threshold)
     else:
         run_file(dataset_name, datajson, artefactsbase_dir, outdir, positives_filter_threshold)

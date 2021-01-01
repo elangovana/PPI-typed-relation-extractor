@@ -2,6 +2,7 @@ import glob
 import logging
 import math
 import os
+from pathlib import Path
 
 import pandas as pd
 
@@ -25,7 +26,7 @@ class InferencePipeline:
                                           confidence_score_field=predicted_confidence_field,
                                           predicted_field=predicted_output_field)
 
-        predictions_file = os.path.join(out_dir, "predicted.json")
+        predictions_file = os.path.join(out_dir, "{}_predicted.json".format(Path(data_file).stem))
         # Safe as json line format so it is easier to use json lines for downstream
         if final_df.shape[0] > 0:
             final_df.to_json(predictions_file, orient="records", lines=True)
