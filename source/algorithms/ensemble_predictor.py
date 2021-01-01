@@ -24,6 +24,7 @@ class EnsemblePredictor:
         else:
             devices = [device]
 
+        # Use all available GPUS..
         self._logger.info("Using devices {}".format(devices))
         model_device_map = [(m, dataloader, devices[i % len(devices)]) for i, m in enumerate(model_networks)]
         with Pool(len(devices)) as p:
