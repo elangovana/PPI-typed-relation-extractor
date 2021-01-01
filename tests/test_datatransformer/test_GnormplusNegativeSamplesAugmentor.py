@@ -107,7 +107,8 @@ class TestGnormplusNegativeSamplesAugmentor(TestCase):
                 logger.debug("Actual {}".format(a))
                 logger.debug("Expect {}\n".format(e))
 
-        self.assertEqual(len(actual.values), len(expected.values))
+        self.assertEqual(len(actual.values), len(expected.values),
+                         "Expected and actual does not match \n{}\n{}".format(expected.values, actual.values))
 
         for a, e in zip(actual.values, expected.values):
             for ac, ec in zip(a, e):
