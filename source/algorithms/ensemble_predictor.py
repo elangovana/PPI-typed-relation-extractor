@@ -22,8 +22,8 @@ class EnsemblePredictor:
 
                 # This is a hack workaround to initialise the device before multi threading
                 # See issue https://github.com/pytorch/pytorch/issues/16559
-                for d in devices:
-                    with torch.cuda.device(d):
+                for i in range(len(devices)):
+                    with torch.cuda.device(i):
                         torch.tensor([1.]).cuda()
             else:
                 devices = ["cpu"]
