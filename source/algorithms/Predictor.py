@@ -20,7 +20,9 @@ class Predictor:
         scores = []
         self.logger.info("Running inference {}".format(device))
 
+
         with torch.no_grad():
+            softmax = torch.nn.Softmax(dim=1)
             for _, (batch_x, batch_y) in enumerate(dataloader):
 
                 # TODO: CLean this up
@@ -30,6 +32,8 @@ class Predictor:
                     val_batch_idx = batch_x.to(device=device)
 
                 pred_batch_y = model_network(val_batch_idx)
+                # Soft max the predictions
+                pred_batch_y = softmax(pred_batch_y)
                 scores.append(pred_batch_y)
                 pred_binary = torch.max(pred_batch_y, 1)[1]
                 pred_flat = pred_binary.view(pred_binary.size())
