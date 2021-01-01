@@ -1,6 +1,5 @@
 import glob
 import logging
-import math
 import os
 from pathlib import Path
 
@@ -77,11 +76,10 @@ class InferencePipeline:
         label_names = list(df[confidence_scores_dict_field].iloc[0].keys())
         col_names = [str(l) for l in label_names]
 
-        # This is log softmax, convert to softmax prob
         for k in label_names:
-            df[str(k)] = df.apply(lambda x: math.exp(x[confidence_scores_dict_field][k]), axis=1)
+            df[str(k)] = df.apply(lambda x: x[confidence_scores_dict_field][k], axis=1)
 
         df[predicted_field] = df.apply(lambda r: col_names[list(r[col_names]).index(max(r[col_names]))], axis=1)
-        df[predicted_confidence_field] = df.apply(lambda r: max(r[col_names] / sum(r[col_names])), axis=1)
+        df[predicted_confidence_field] = df.apply(lambda r: max(r[col_names]), axis=1)
 
         return df
