@@ -10,9 +10,7 @@ COPY ./source  /opt/ml/code
 COPY ./source/requirements_prod.txt  /tmp
 
 
-ENV PATH=/opt/ml/code:${PATH}
-
-ENV PYTHONPATH=/opt/ml/code:${PYTHONPATH}
+ENV PATH=/opt/ml/code:/opt/ml/code/algorithms:${PATH}
 
 # this environment variable is used by the SageMaker PyTorch container to determine our user code directory.
 ENV SAGEMAKER_SUBMIT_DIRECTORY /opt/ml/code
