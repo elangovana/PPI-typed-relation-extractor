@@ -15,6 +15,7 @@
 import argparse
 import datetime
 import glob
+import logging
 import os
 from multiprocessing.dummy import Pool as ThreadPool
 
@@ -24,6 +25,11 @@ from helpers.external_file_base import ExternalFileBase
 
 
 class S3Util(ExternalFileBase):
+
+    @property
+    def _logger(self):
+        return logging.getLogger(__name__)
+
     def uploadfile(self, localpath, remote_path):
         """
     Uploads a file to s3
@@ -36,8 +42,9 @@ class S3Util(ExternalFileBase):
         if key.endswith("/"):
             key = "{}{}".format(key, os.path.basename(localpath))
 
-        s3 = boto3.client('s3')
+        self._logger.info("Uploading file {} s3://{}/{}".format(localpath, bucket, key))
 
+        s3 = boto3.client('s3')
         s3.upload_file(localpath, bucket, key)
 
     def _get_bucketname_key(self, uripath):
