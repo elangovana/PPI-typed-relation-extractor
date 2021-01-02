@@ -13,7 +13,21 @@ class TestProteinMasker(TestCase):
         sut = ProteinMasker(entity_column_indices=[1], text_column_index=0, masks=["PROTEIN_1"])
 
         # Act
-        actual = sut(["This is sample entity1 entity1", "entity1", "entity2", "phosphorylation"])
+        actual = sut(data)
+
+        # Assert
+        self.assertSequenceEqual(expected, actual)
+
+    def test_transform_inttype(self):
+        # Arrange
+        data = ["This is sample 1222 1222", 1222, "entity2", "phosphorylation"]
+
+        expected = ["This is sample PROTEIN_1 PROTEIN_1", "PROTEIN_1", "entity2", "phosphorylation"]
+
+        sut = ProteinMasker(entity_column_indices=[1], text_column_index=0, masks=["PROTEIN_1"])
+
+        # Act
+        actual = sut(data)
 
         # Assert
         self.assertSequenceEqual(expected, actual)

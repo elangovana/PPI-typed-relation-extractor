@@ -62,7 +62,8 @@ If entity_offset is specified, then only the value in that location is replaced,
         text = row_x[self.text_column_index]
         adj = 0
         for ei, oi, m in zip(sorted_entities_cols, sorted_offset_cols, sorted_masks):
-            e = row_x[ei]
+            e = str(row_x[ei])
+            m = str(m)
 
             if oi == None:
                 text = text.replace(e, m)
@@ -74,8 +75,10 @@ If entity_offset is specified, then only the value in that location is replaced,
                 #     pos_s, ei, offset_text)
                 if offset_text != e:
                     self.logger.warning(
-                        "The text at offset_start {} must match entity '{}', but found '{}' for text \n{}".format(pos_s, e,
-                                                                                                    offset_text, text))
+                        "The text at offset_start {} must match entity '{}', but found '{}' for text \n{}".format(pos_s,
+                                                                                                                  e,
+                                                                                                                  offset_text,
+                                                                                                                  text))
                 text = text[:pos_s] + m + text[pos_e:]
                 adj = len(m) - len(row_x[ei])
             row_x[ei] = m
