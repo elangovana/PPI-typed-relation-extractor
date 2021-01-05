@@ -74,10 +74,13 @@ Convert Ncbi geneId to uniprot
         result = {}
 
         for a in filter(lambda x: x["type"] == "Gene", annotations):
-            uniprot_ids = self.geneIdConverter.convert(a["normalised_id"]).get(a["normalised_id"], [a["normalised_id"]])
-            # use just the first ID, even if there is more than mapping..
-            uniprot_id = uniprot_ids[0]
-            result[a["normalised_id"]] = uniprot_id
+            uniprot_ids = self.geneIdConverter.convert(a["normalised_id"]).get(a["normalised_id"], None)
+
+            # Add Mapping only when available
+            if uniprot_ids is not None:
+                # use just the first ID, even if there is more than mapping..
+                uniprot_id = uniprot_ids[0]
+                result[a["normalised_id"]] = uniprot_id
         return result
 
     def load_directory(self, dir_path):

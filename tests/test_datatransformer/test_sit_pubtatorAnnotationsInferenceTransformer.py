@@ -120,6 +120,33 @@ class TestSitPubtatorAnnotationsInferenceTransformer(TestCase):
 
         self.assertEqual(expected, sorted(list(actual)))
 
+    def test_parse_missing_mapping(self):
+        # Arrange
+        sut = PubtatorAnnotationsInferenceTransformer(filter_self_relation=True)
+        input = StringIO("""19167335|a|Protein tyrosine phosphatases (PTPs) play a critical role in regulating cellular functions by selectively dephosphorylating their substrates. Here we present 22 human PTP crystal structures that, together with prior structural knowledge, enable a comprehensive analysis of the classical PTP family. Despite their largely conserved fold, surface properties of PTPs are strikingly diverse. A potential secondary substrate-binding pocket is frequently found in phosphatases, and this has implications for both substrate recognition and development of selective inhibitors. Structural comparison identified four diverse catalytic loop (WPD) conformations and suggested a mechanism for loop closure. Enzymatic assays revealed vast differences in PTP catalytic activity and identified PTPD1, PTPD2, and HDPTP as catalytically inert protein phosphatases. We propose a "head-to-toe" dimerization model for RPTPgamma/zeta that is distinct from the "inhibitory wedge" model and that provides a molecular basis for inhibitory regulation. This phosphatome resource gives an expanded insight into intrafamily PTP diversity, catalytic activity, substrate recognition, and autoregulatory self-association.
+19167335	167	170	PTP	Gene	10076
+19167335	779	784	PTPD1	Gene	11099
+
+""")
+
+        mock_text_nomaliser = MagicMock()
+        mock_text_nomaliser.return_value = "Normalisedtext.."
+        sut.textGeneNormaliser = mock_text_nomaliser
+
+        mock_gene_converter = MagicMock()
+        mock_gene_converter.convert.side_effect = lambda x: {}
+        sut.geneIdConverter = mock_gene_converter
+
+        expected = []
+
+        # Act
+        actual = sut.parse(input)
+
+        # Assert
+        actual = list(actual)
+        print(actual)
+        self.assertEqual(expected, sorted(actual))
+
     def test_load_file(self):
         # Arrange
         sut = PubtatorAnnotationsInferenceTransformer()
