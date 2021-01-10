@@ -67,23 +67,28 @@ class GnormplusNegativeSamplesAugmentor:
                 existing_participants.add(participants)
 
             new_participants = all_possible_participants - existing_participants
+            new_participants = sorted(new_participants, key=lambda x: "#".join(sorted(list(x))))
+
             template_record = input_df[input_df.pubmedId == pubmedid].iloc[0]
 
-            for i, p in enumerate(new_participants):
+            # Only use participants if only frozen set has more than one participants
+            self_filter = lambda x: len(x) > 1
+            if self.include_self_relations:
+                # If include self relations, no filter
+                self_filter = lambda x: True
 
-                l = list(p)
+            for i, p in enumerate(filter(self_filter, new_participants)):
+
+                l = sorted(list(p))
                 p1 = l[0]
-                p2 = l[1] if len(l) > 1 else l[0]
-
-                # Do not include self relations unless specified
-                if not self.include_self_relations and p1 == p2: continue;
+                p2 = l[1]
 
                 record = copy.deepcopy(template_record)
                 record["isValid"] = False
                 record["participant1Id"] = p1
                 record["participant2Id"] = p2
-                record["participant1Alias"] = list(alias_map[p1])
-                record["participant2Alias"] = list(alias_map[p2])
+                record["participant1Alias"] = sorted(list(alias_map[p1]))
+                record["participant2Alias"] = sorted(list(alias_map[p2]))
                 record["interactionId"] = record["interactionId"] + "_" + str(
                     uuid.uuid4()) + "_" + "fake_annot"
 
