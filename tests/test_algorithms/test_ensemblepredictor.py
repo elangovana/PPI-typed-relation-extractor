@@ -56,7 +56,7 @@ class TestEnsemblePredictor(TestCase):
         self.assertSequenceEqual(predictions, actual_predictions)
         self.assertSequenceEqual(confidence_scores, actual_confidence)
 
-    def test_predict_2_differnt_confidence(self):
+    def test_predict_2_different_confidence(self):
         """
         Simple base case with 2 items in ensemble
         """
@@ -67,6 +67,41 @@ class TestEnsemblePredictor(TestCase):
         confidence_scores_2 = [[[0.05, .95], [.80, 0.2]]]
 
         expected_confidence_scores = [[[0.05 / 2, 1.95 / 2], [1.8 / 2, 0.2 / 2]]]
+
+        mock_model_1 = MagicMock()
+        mock_model_2 = MagicMock()
+
+        models = [mock_model_1, mock_model_2]
+
+        # mock predictor
+        mock_model_wrapper = MagicMock()
+
+        def mock_model_wrapper_call(m, d, h):
+            return (predictions, confidence_scores_1) if m == mock_model_1 else (predictions, confidence_scores_2)
+
+        mock_model_wrapper.predict.side_effect = mock_model_wrapper_call
+
+        # 2 models
+        sut = EnsemblePredictor(model_wrapper=mock_model_wrapper)
+
+        # Act
+        actual_predictions, actual_confidence = sut.predict(models, input)
+
+        # Assert
+        self.assertSequenceEqual(predictions, actual_predictions)
+        self.assertSequenceEqual(expected_confidence_scores, actual_confidence)
+
+    def test_predict_2_different_confidence_multiple_batch(self):
+        """
+        Simple base case with 2 items in ensemble
+        """
+        # Arrange
+        # output mock data
+        predictions = [[1], [0]]
+        confidence_scores_1 = [[[0.0, 1]], [[1.0, 0.0]]]
+        confidence_scores_2 = [[[0.05, .95]], [[.80, 0.2]]]
+
+        expected_confidence_scores = [[[0.05 / 2, 1.95 / 2]], [[1.8 / 2, 0.2 / 2]]]
 
         mock_model_1 = MagicMock()
         mock_model_2 = MagicMock()
