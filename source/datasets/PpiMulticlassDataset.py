@@ -47,7 +47,7 @@ class PpiMulticlassDataset(CustomDatasetBase):
 
     @property
     def class_size(self):
-        return 8
+        return 7
 
     @property
     def positive_label(self):
