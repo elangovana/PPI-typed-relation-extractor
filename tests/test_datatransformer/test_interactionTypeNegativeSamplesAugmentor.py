@@ -82,8 +82,7 @@ class TestInteractionTypeNegativeSamplesAugmentor(TestCase):
         sort_keys = ['pubmedId', "isValid", "interactionType", 'participant1Id', 'participant2Id']
         # dropping interaction_id because they are auto generated guids and may not remain consistent across tests.
         actual = actual.drop(["interactionId"], axis=1).sort_values(by=sort_keys)
-        expected = pd.DataFrame(columns=data.columns)
-        expected = expected.append(expected_fake)
+        expected = expected_fake
         expected = expected.append(data)
         expected = expected.drop(["interactionId"], axis=1).sort_values(by=sort_keys)
 

@@ -51,7 +51,7 @@ class GnormplusNegativeSamplesAugmentor:
         :param input_df: A pandas dataframe like object with columns atleast these columns [interactionId, isValid, pubmedId, particpant1Id, particpant2Id] .
         """
 
-        data_fake = pd.DataFrame(columns=input_df.columns)
+        data_fake = input_df
 
         pubmedid_entities_map = self._construct_pubmed_entities_map()
 
@@ -97,8 +97,7 @@ class GnormplusNegativeSamplesAugmentor:
                 if self.max_negative_per_pubmed is not None and self.max_negative_per_pubmed == i:
                     break
 
-        # Data with negative samples
-        data_fake = data_fake.append(input_df, ignore_index=True)
+
         return data_fake
 
     def _construct_pubmed_entities_map(self):

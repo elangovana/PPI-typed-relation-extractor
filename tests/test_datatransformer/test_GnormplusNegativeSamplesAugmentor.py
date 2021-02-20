@@ -83,8 +83,7 @@ class TestGnormplusNegativeSamplesAugmentor(TestCase):
         columns.remove("interactionId")
 
         # format expected..
-        expected = pd.DataFrame(columns=data.columns)
-        expected = expected.append(expected_fake)
+        expected = expected_fake
         expected = expected.append(data)
 
         expected = expected.sort_values(by=sort_keys)[columns]

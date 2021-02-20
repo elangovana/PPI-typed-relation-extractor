@@ -31,7 +31,7 @@ class InteractionTypeNegativeSamplesAugmentor:
         tot_interactions = len(interaction_types)
         self.logger.debug("Interactions types found in the dataset {}".format(interaction_types))
 
-        data_fake = pd.DataFrame(columns=input_df.columns)
+        data_fake = input_df.copy(deep = True)
         for pubmedid in input_df['pubmedId'].unique():
             # input records matching the given pubmed
             input_records_pubmed = input_df[input_df.pubmedId == pubmedid]
@@ -66,6 +66,5 @@ class InteractionTypeNegativeSamplesAugmentor:
 
                 data_fake = data_fake.append(record)
 
-        # Data with negative samples
-        data_fake = data_fake.append(input_df, ignore_index=True)
+
         return data_fake
