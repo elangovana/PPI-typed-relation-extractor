@@ -96,7 +96,8 @@ class GnormplusNegativeSamplesAugmentor:
 
                 if self.max_negative_per_pubmed is not None and self.max_negative_per_pubmed == i:
                     break
-
+        # Reset index so that they are unique..
+        data_fake = data_fake.reset_index()
 
         return data_fake
 
