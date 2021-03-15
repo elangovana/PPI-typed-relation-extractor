@@ -15,7 +15,7 @@ class ResultScorerAucMacro(BaseClassificationScorer):
         y_pred = np.array(y_pred)
         y_actual =  np.array(y_actual)
 
-        y_actual, y_pred = self.a_dd_fake_labels(y_actual, y_pred)
+        y_actual, y_pred = self._add_fake_labels(y_actual, y_pred)
 
         f1 = roc_auc_score(y_actual, y_pred, average='macro', multi_class='ovr')
 
