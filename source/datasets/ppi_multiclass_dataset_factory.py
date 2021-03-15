@@ -1,6 +1,6 @@
 from datasets.PpiMulticlassDataset import PpiMulticlassDataset
 from datasets.custom_dataset_factory_base import CustomDatasetFactoryBase
-from metrics.result_scorer_f1_macro_factory import ResultScorerF1MacroFactory
+from metrics.result_scorer_auc_macro_factory import ResultScorerAucMacroFactory
 from preprocessor.Preprocessor import Preprocessor
 from preprocessor.ProteinMasker import ProteinMasker
 
@@ -8,7 +8,7 @@ from preprocessor.ProteinMasker import ProteinMasker
 class PpiMulticlassDatasetFactory(CustomDatasetFactoryBase):
 
     def get_metric_factory(self):
-        return ResultScorerF1MacroFactory()
+        return ResultScorerAucMacroFactory()
 
 
     def get_dataset(self, file_path):

@@ -22,6 +22,16 @@ class TestSitTrainInferencePipeline(TestCase):
         # Act
         actual = sut(mock_dataset_train, mock_dataset_val)
 
+    def test_call_ppimulticlassdataset(self):
+        # Arrange
+        mock_dataset_train, scorer = self._get_ppimulticlassdataset()
+        mock_dataset_val, _ = self._get_ppimulticlassdataset()
+
+        sut = self._get_sut_train_pipeline(mock_dataset_train, scorer=scorer)
+
+        # Act
+        actual = sut(mock_dataset_train, mock_dataset_val)
+
     def test_call_aimeddataset(self):
         # Arrange
         mock_dataset_train, scorer = self._get_aimeddataset()
@@ -45,6 +55,17 @@ class TestSitTrainInferencePipeline(TestCase):
         # Arrange
         train_file = os.path.join(os.path.dirname(__file__), "..", "data", "sample_train.json")
         factory = DatasetFactory().get_datasetfactory("PpiDatasetFactory")
+        dataset = factory.get_dataset(train_file)
+        scorer = factory.get_metric_factory().get()
+
+        return dataset, scorer
+
+
+    def _get_ppimulticlassdataset(self):
+        # Arrange
+        # Arrange
+        train_file = os.path.join(os.path.dirname(__file__), "..", "data", "sample_train_multiclass.json")
+        factory = DatasetFactory().get_datasetfactory("PpiMulticlassDatasetFactory")
         dataset = factory.get_dataset(train_file)
         scorer = factory.get_metric_factory().get()
 

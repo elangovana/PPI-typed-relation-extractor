@@ -250,13 +250,13 @@
     "1815": "other",
     "2343": "other",
     "3143": "phosphorylation",
-    "1058": "other",
+    "1058": "deubiquitiniation",
     "1032": "other",
-    "2300": "other",
+    "2300": "ubiquitiniation",
     "1911": "other",
     "2796": "phosphorylation",
-    "1308": "other",
-    "172": "other",
+    "1308": "methylation",
+    "172": "acetylation",
     "210": "other"
   }
 }

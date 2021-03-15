@@ -124,20 +124,20 @@ class BertTrain:
                     optimizer.step()
                     model_network.zero_grad()
 
-            actuals_train, predicted_train, train_loss = self.validate(loss_function, model_network, data_iter)
+            actuals_train, predicted_train, train_loss, train_conf_scores = self.validate(loss_function, model_network, data_iter)
 
             # Print training set confusion matrix
             self.logger.info("Train set result details:")
             self.results_writer(data_iter, actuals_train, predicted_train, output_dir)
-            train_score = self.results_scorer(y_actual=actuals_train, y_pred=predicted_train,
+            train_score = self.results_scorer(y_actual=actuals_train, y_pred=train_conf_scores,
                                               pos_label=pos_label.item())
             trainings_scores.append({"epoch": epoch, "score": train_score, "loss": train_loss})
             self.logger.info("Train set result details: {}".format(train_score))
 
             self.logger.info("Validation set result details:")
-            val_actuals, val_predicted, val_loss = self.validate(loss_function, model_network, validation_iter)
+            val_actuals, val_predicted, val_loss, val_conf_scores = self.validate(loss_function, model_network, validation_iter)
             self.results_writer(validation_iter, val_actuals, val_predicted, output_dir)
-            val_score = self.results_scorer(y_actual=val_actuals, y_pred=val_predicted, pos_label=pos_label.item())
+            val_score = self.results_scorer(y_actual=val_actuals, y_pred=val_conf_scores, pos_label=pos_label.item())
             validation_scores.append({"epoch": epoch, "score": val_score, "loss": val_loss})
             # Print training set confusion matrix
             self.logger.info("Validation set result details: {} ".format(val_score))
@@ -209,8 +209,12 @@ class BertTrain:
 
         scores = []
         with torch.no_grad():
+            softmax_fun = torch.nn.Softmax(dim=-1)
+
             actuals = torch.tensor([]).to(device=self.device)
             predicted = torch.tensor([]).to(device=self.device)
+            scores = torch.tensor([]).to(device=self.device)
+
             for idx, val in enumerate(val_iter):
                 val_batch_idx = val[0].to(device=self.device)
                 val_y = val[1].to(device=self.device)
@@ -221,6 +225,8 @@ class BertTrain:
                 val_loss += loss_function(pred_batch_y, val_y).item()
                 actuals = torch.cat([actuals.long(), val_y])
                 predicted = torch.cat([predicted.long(), pred_flat])
+                scores = torch.cat([scores, softmax_fun(pred_batch_y)])
+
 
         self.logger.debug("The validation confidence scores are {}".format(scores))
-        return actuals.cpu().numpy().tolist(), predicted.cpu().numpy().tolist(), val_loss
+        return actuals.cpu().numpy().tolist(), predicted.cpu().numpy().tolist(), val_loss, scores.cpu().tolist()
