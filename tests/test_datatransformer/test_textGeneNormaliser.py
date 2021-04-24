@@ -104,8 +104,8 @@ class TestTextGeneNormaliser(TestCase):
         sut.geneIdConverter = geneIdConverter
 
         expected_anno = [
-            {"offset": 0, "len": 8, "text" : "11454800"}
-            ,{"offset": 43, "len": 7, "text": "1145499"},
+            {"charOffset": 0, "len": 8, "text" : "11454800"}
+            ,{"charOffset": 43, "len": 7, "text": "1145499"},
 
         ]
 

@@ -53,7 +53,7 @@ class TextGeneNormaliser:
             offset += len(uniprot) - (e - s)
 
             new_annotations.append({
-                "offset" : s,
+                "charOffset" : s,
                 "len" : len(uniprot),
                 "text" : uniprot
             })
