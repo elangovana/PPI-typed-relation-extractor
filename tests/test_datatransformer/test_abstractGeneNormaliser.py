@@ -50,7 +50,7 @@ class TestAbstractGeneNormaliser(TestCase):
 
         # Mock uniprot converter
         mockTextNormaliser = MagicMock()
-        mockTextNormaliser.return_value = "Normalised text.."
+        mockTextNormaliser.return_value = "Normalised text..", [{"charOffset": 10, "len":20, "text":"..."}]
 
         sut = AbstractGeneNormaliser(self.annotations)
         sut.text_gene_normaliser = mockTextNormaliser
@@ -80,7 +80,7 @@ class TestAbstractGeneNormaliser(TestCase):
         # Arrange
         # Mock uniprot converter
         mockTextNormaliser = MagicMock()
-        mockTextNormaliser.return_value = "Normalised text.."
+        mockTextNormaliser.return_value = "Normalised text..", [{"charOffset": 10, "len":20, "text":"..."}]
 
         sut = AbstractGeneNormaliser(self.annotations)
         sut.text_gene_normaliser = mockTextNormaliser
@@ -96,7 +96,7 @@ class TestAbstractGeneNormaliser(TestCase):
         # Arrange
         # Mock uniprot converter
         mockTextNormaliser = MagicMock()
-        mockTextNormaliser.return_value = "Normalised text.."
+        mockTextNormaliser.return_value = "Normalised text..", [{"charOffset": 10, "len":20, "text":"..."}]
 
         sut = AbstractGeneNormaliser(self.annotations)
         sut.text_gene_normaliser = mockTextNormaliser
@@ -112,7 +112,7 @@ class TestAbstractGeneNormaliser(TestCase):
         # Arrange
         # Mock uniprot converter
         mockTextNormaliser = MagicMock()
-        mockTextNormaliser.return_value = "Normalised text.."
+        mockTextNormaliser.return_value = "Normalised text..", [{"charOffset": 10, "len":20, "text":"..."}]
 
         sut = AbstractGeneNormaliser(self.annotations)
         sut.text_gene_normaliser = mockTextNormaliser
@@ -133,7 +133,7 @@ class TestAbstractGeneNormaliser(TestCase):
         # Arrange
         # Mock uniprot converter
         mockTextNormaliser = MagicMock()
-        mockTextNormaliser.return_value = "Normalised text.."
+        mockTextNormaliser.return_value = "Normalised text..", [{"charOffset": 10, "len":20, "text":"..."}]
 
         sut = AbstractGeneNormaliser(self.annotations)
         sut.text_gene_normaliser = mockTextNormaliser
@@ -154,7 +154,7 @@ class TestAbstractGeneNormaliser(TestCase):
         # Arrange
         # Mock uniprot converter
         mockTextNormaliser = MagicMock()
-        mockTextNormaliser.return_value = "Normalised text.."
+        mockTextNormaliser.return_value = "Normalised text..", [{"charOffset": 10, "len":20, "text":"..."}]
         mockTextNormaliser.geneIdConverter = MagicMock()
         mockTextNormaliser.geneIdConverter.convert.side_effect = lambda x: {x: [f"U{x}"]}
 
