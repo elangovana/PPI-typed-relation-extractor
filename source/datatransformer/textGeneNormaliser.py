@@ -21,6 +21,8 @@ class TextGeneNormaliser:
         annotations.sort(key=lambda x: int(x['start']), reverse=False)
         preferred_uniprots = preferred_uniprots or {}
 
+        new_annotations = []
+
         name_to_ncbi_map = {}
         for a in annotations:
             if a['type'].lower() != 'gene': continue
@@ -49,4 +51,10 @@ class TextGeneNormaliser:
 
             text = text[:s] + uniprot + text[e:]
             offset += len(uniprot) - (e - s)
-        return text
+
+            new_annotations.append({
+                "offset" : s,
+                "len" : len(uniprot),
+                "text" : uniprot
+            })
+        return text, new_annotations

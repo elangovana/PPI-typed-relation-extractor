@@ -106,7 +106,7 @@ Convert Ncbi geneId to uniprot
 
     def parse(self, handle):
         for rec in self.pubtator_annotations_reader(handle):
-            normalised_abstract = self.textGeneNormaliser(rec['text'], rec['annotations'])
+            normalised_abstract, new_annotations = self.textGeneNormaliser(rec['text'], rec['annotations'])
             genes_map = self._get_genes(rec['annotations'])
             genes = list(genes_map.values())
 
@@ -123,6 +123,7 @@ Convert Ncbi geneId to uniprot
                     , 'normalised_abstract': normalised_abstract
                     , 'annotations': rec['annotations']
                     , 'gene_id_map': genes_map
+                    , "normalised_abstract_annotations" : new_annotations
                        }
 
 

@@ -59,12 +59,11 @@ class AbstractGeneNormaliser:
         self._logger.info("Starting transformation..")
 
         annotations_dict = self._construct_dict()
-        df[f'{self.field_name_prefix}normalised_abstract'] = df.apply(
+        df[ [f'{self.field_name_prefix}normalised_abstract', f'{self.field_name_prefix}normalised_abstract_annotations' ]] = df.apply(
             lambda r: self._normalise_abstract(annotations_dict[r['pubmedId']]["annotations"],
                                                annotations_dict[r['pubmedId']]["abstract"],
                                                {r['participant1Id']: r['participant1Alias'],
-                                                r['participant2Id']: r['participant2Alias']}),
-            axis=1)
+                                                r['participant2Id']: r['participant2Alias']}),axis=1, result_type='expand')
 
         self._logger.info("Completed normalised abstract...")
 
@@ -109,8 +108,8 @@ class AbstractGeneNormaliser:
         return result
 
     def _normalise_abstract(self, annotations, abstract, preferred_uniprots=None):
-        abstract = self.text_gene_normaliser(abstract, annotations, preferred_uniprots)
-        return abstract
+        abstract, new_annotations = self.text_gene_normaliser(abstract, annotations, preferred_uniprots)
+        return abstract, new_annotations
 
     def _count_unique_gene_id_mentions(self, annotations):
         """

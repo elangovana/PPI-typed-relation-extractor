@@ -55,9 +55,9 @@ class TestTextGeneNormaliser(TestCase):
         expected_text = 'Q114548 is the most crucial member of the NLR family, as it detects the existence of pathogen invasion and self-derived molecules associated with cellular damage. Several studies have reported that excessive Q114548 inflammasome-mediated Q834 activation is a key factor in the development of diseases. Recent studies have reported that Q6850 is involved in pathogen-induced Q114548 inflammasome activation; however, the detailed mechanism linking Q6850 to Q114548 inflammasome remains unclear. In this study, we showed that Q6850 mediates Q114548 stimuli-induced processing of procaspase-1 and the consequent activation of Q834. Moreover, the kinase activity of Q6850 is required to potentiate Q834 activation in a reconstituted Q114548 inflammasome system in HEK293T cells. The adaptor protein Q29108 bridges Q114548 with the effector protein Q834. Herein, we find that Q6850 can associate directly with Q29108 and Q114548 by its kinase domain but interact indirectly with procaspase-1. Q6850 can phosphorylate Q29108 at Y146 and Y187 residues, and the phosphorylation of both residues is critical to enhance Q29108 oligomerization and the recruitment of procaspase-1. Together, our results reveal a new molecular pathway through which Q6850 promotes Q114548 inflammasome formation, resulting from the phosphorylation of Q29108. Thus, the control of Q6850 activity might be effective to modulate Q114548 inflammasome activation and treat Q114548-related immune diseases.'
 
         # Act
-        actual = sut(text, annotations)
+        actual_text, _ = sut(text, annotations)
 
-        self.assertEqual(expected_text, actual)
+        self.assertEqual(expected_text, actual_text)
 
     def test_transform_preferred(self):
         """
@@ -79,32 +79,39 @@ class TestTextGeneNormaliser(TestCase):
         expected_text = 'uni_10076 is the most crucial member of the NLR family'
 
         # Act
-        actual = sut.__call__(text, annotations, preferred_uniprots={'uni_10076': [['NLRP3']]})
+        actual_text, _ = sut.__call__(text, annotations, preferred_uniprots={'uni_10076': [['NLRP3']]})
 
         # Assert
-        self.assertEqual(expected_text, actual)
+        self.assertEqual(expected_text, actual_text)
 
-    # def test_transform_preferred_alias(self):
-    #     """
-    #     When more than one matching uniprot for a gene name ncbi, it should select the one matching either of the participants in the dataframe
-    #     :return:
-    #     """
-    #     # Arrange
-    #     text = 'NLRP3 is the most crucial member of the NLR family'
-    #     annotations = [
-    #         {'start': '0', 'end': '5', 'name': 'NLRP3', 'type': 'Gene', 'normalised_id': '114548'}]
-    #
-    #     # Mock uniprot converter
-    #
-    #     geneIdConverter = MagicMock()
-    #     geneIdConverter.convert.side_effect = lambda x: {x: ["Q{}".format(x)]}
-    #
-    #     sut = TextGeneNormaliser()
-    #     sut.geneIdConverter = geneIdConverter
-    #
-    #     expected_text = 'uni_10076 is the most crucial member of the NLR family'
-    #
-    #     # Act
-    #     actual = sut(text, annotations, preferred_uniprots={'uni_10076': [['NLRP3']]})
-    #
-    #     self.assertEqual(expected_text, actual)
+    def test_transform_annotations(self):
+        """
+        :return:
+        """
+        # Arrange
+        text = 'NLRP3 is the most crucial member of the NLR family'
+        annotations = [
+            {'start': '0', 'end': '5', 'name': 'NLRP3', 'type': 'Gene', 'normalised_id': '11454800'},
+            {'start': '40', 'end': '43', 'name': 'NLR', 'type': 'Gene', 'normalised_id': '1145499'}
+
+        ]
+
+        # Mock uniprot converter
+        geneIdConverter = MagicMock()
+        geneIdConverter.convert.side_effect = lambda x: {x: [x]}
+
+        sut = TextGeneNormaliser()
+        sut.geneIdConverter = geneIdConverter
+
+        expected_anno = [
+            {"offset": 0, "len": 8, "text" : "11454800"}
+            ,{"offset": 43, "len": 7, "text": "1145499"},
+
+        ]
+
+        # Act
+        actual_text, actual_anno = sut(text, annotations, preferred_uniprots={'uni_10076': [['NLRP3']]})
+
+        # Assert
+        self.assertEqual(expected_anno, actual_anno)
+
