@@ -122,7 +122,7 @@ Convert Ncbi geneId to uniprot
                     , 'abstract': rec['text']
                     , 'normalised_abstract': normalised_abstract
                     , 'annotations': rec['annotations']
-                    , 'gene_id_map': genes_map
+                    , 'gene_to_uniprot_map': genes_map
                     , "normalised_abstract_annotations" : new_annotations
                        }
 
