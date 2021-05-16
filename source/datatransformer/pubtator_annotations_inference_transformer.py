@@ -83,6 +83,16 @@ Convert Ncbi geneId to uniprot
                 result[a["normalised_id"]] = uniprot_id
         return result
 
+    def _reverse_uniprot_name_map(self, uniprot, gene_to_prot_map, annot):
+        uniprot_matches = list(filter(lambda x: uniprot in gene_to_prot_map[x], gene_to_prot_map))
+
+        if len(uniprot_matches) == 0: return None
+
+        for a in annot:
+
+            if a["normalised_id"] == uniprot_matches[0]:
+                return a["name"]
+
     def load_directory(self, dir_path):
         files = glob.glob("{}/*.txt".format(dir_path))
         for input_file in files:
@@ -116,14 +126,21 @@ Convert Ncbi geneId to uniprot
 
             for gene_pair in combinator:
                 gene_pair = sorted(list(gene_pair))
+                participant1_id = gene_pair[0]
+                participant1_name = self._reverse_uniprot_name_map(participant1_id, genes_map, rec['annotations'])
+                participant2_id = gene_pair[1]
+                participant2_name = self._reverse_uniprot_name_map(participant2_id, genes_map, rec['annotations'])
+
                 yield {'pubmedId': rec['id']
-                    , 'participant1Id': gene_pair[0]
-                    , 'participant2Id': gene_pair[1]
+                    , 'participant1Id': participant1_id
+                    , 'participant1Name': participant1_name
+                    , 'participant2Id': participant2_id
+                    , 'participant2Name': participant2_name
                     , 'abstract': rec['text']
                     , 'normalised_abstract': normalised_abstract
                     , 'annotations': rec['annotations']
                     , 'gene_to_uniprot_map': genes_map
-                    , "normalised_abstract_annotations" : new_annotations
+                    , "normalised_abstract_annotations": new_annotations
                        }
 
 

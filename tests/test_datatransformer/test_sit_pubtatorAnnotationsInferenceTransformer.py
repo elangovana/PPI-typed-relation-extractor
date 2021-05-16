@@ -36,8 +36,9 @@ class TestSitPubtatorAnnotationsInferenceTransformer(TestCase):
 
             {"pubmedId": "19167335"
                 , "participant1Id": "Q10076"
+                , "participant1Name": "PTP"
                 , "participant2Id": "Q10076"
-                ,
+                , "participant2Name": "PTP",
              "abstract": """Protein tyrosine phosphatases (PTPs) play a critical role in regulating cellular functions by selectively dephosphorylating their substrates. Here we present 22 human PTP crystal structures that, together with prior structural knowledge, enable a comprehensive analysis of the classical PTP family. Despite their largely conserved fold, surface properties of PTPs are strikingly diverse. A potential secondary substrate-binding pocket is frequently found in phosphatases, and this has implications for both substrate recognition and development of selective inhibitors. Structural comparison identified four diverse catalytic loop (WPD) conformations and suggested a mechanism for loop closure. Enzymatic assays revealed vast differences in PTP catalytic activity and identified PTPD1, PTPD2, and HDPTP as catalytically inert protein phosphatases. We propose a "head-to-toe" dimerization model for RPTPgamma/zeta that is distinct from the "inhibitory wedge" model and that provides a molecular basis for inhibitory regulation. This phosphatome resource gives an expanded insight into intrafamily PTP diversity, catalytic activity, substrate recognition, and autoregulatory self-association."""
                 ,
              "normalised_abstract": "Normalisedtext.."
@@ -52,8 +53,9 @@ class TestSitPubtatorAnnotationsInferenceTransformer(TestCase):
             ,
             {"pubmedId": "19167335"
                 , "participant1Id": "Q10076"
+                , "participant1Name": "PTP"
                 , "participant2Id": "Q11099"
-                ,
+                , "participant2Name": "PTPD1",
              "abstract": """Protein tyrosine phosphatases (PTPs) play a critical role in regulating cellular functions by selectively dephosphorylating their substrates. Here we present 22 human PTP crystal structures that, together with prior structural knowledge, enable a comprehensive analysis of the classical PTP family. Despite their largely conserved fold, surface properties of PTPs are strikingly diverse. A potential secondary substrate-binding pocket is frequently found in phosphatases, and this has implications for both substrate recognition and development of selective inhibitors. Structural comparison identified four diverse catalytic loop (WPD) conformations and suggested a mechanism for loop closure. Enzymatic assays revealed vast differences in PTP catalytic activity and identified PTPD1, PTPD2, and HDPTP as catalytically inert protein phosphatases. We propose a "head-to-toe" dimerization model for RPTPgamma/zeta that is distinct from the "inhibitory wedge" model and that provides a molecular basis for inhibitory regulation. This phosphatome resource gives an expanded insight into intrafamily PTP diversity, catalytic activity, substrate recognition, and autoregulatory self-association."""
                 ,
              "normalised_abstract": "Normalisedtext.."
@@ -68,7 +70,9 @@ class TestSitPubtatorAnnotationsInferenceTransformer(TestCase):
              },
             {"pubmedId": "19167335"
                 , "participant1Id": "Q11099"
+                , "participant1Name": "PTPD1"
                 , "participant2Id": "Q11099"
+                , "participant2Name": "PTPD1"
                 ,
              "abstract": """Protein tyrosine phosphatases (PTPs) play a critical role in regulating cellular functions by selectively dephosphorylating their substrates. Here we present 22 human PTP crystal structures that, together with prior structural knowledge, enable a comprehensive analysis of the classical PTP family. Despite their largely conserved fold, surface properties of PTPs are strikingly diverse. A potential secondary substrate-binding pocket is frequently found in phosphatases, and this has implications for both substrate recognition and development of selective inhibitors. Structural comparison identified four diverse catalytic loop (WPD) conformations and suggested a mechanism for loop closure. Enzymatic assays revealed vast differences in PTP catalytic activity and identified PTPD1, PTPD2, and HDPTP as catalytically inert protein phosphatases. We propose a "head-to-toe" dimerization model for RPTPgamma/zeta that is distinct from the "inhibitory wedge" model and that provides a molecular basis for inhibitory regulation. This phosphatome resource gives an expanded insight into intrafamily PTP diversity, catalytic activity, substrate recognition, and autoregulatory self-association."""
                 ,
@@ -82,8 +86,9 @@ class TestSitPubtatorAnnotationsInferenceTransformer(TestCase):
              }
             , {"pubmedId": "25260751"
                 , "participant1Id": "Q26401"
+                , "participant1Name": "MEKK1"
                 , "participant2Id": "Q26401"
-                ,
+                , "participant2Name": "MEKK1",
                "abstract": "Unlike the other MAP3Ks, MEKK1 (encoded by Map3k1) contains a PHD motif. To understand the role of this motif, we have created a knockin mutant of mouse Map3k1 (Map3k1(m) (PHD)) with an inactive PHD motif. Map3k1(m) (PHD) ES cells demonstrate that the MEKK1 PHD controls p38 and JNK activation during TGF-b, EGF and microtubule disruption signalling, but does not affect MAPK responses to hyperosmotic stress. Protein microarray profiling identified the adaptor TAB1 as a PHD substrate, and TGF-b- or EGF-stimulated Map3k1(m) (PHD) ES cells exhibit defective non-canonical ubiquitination of MEKK1 and TAB1. The MEKK1 PHD binds and mediates the transfer of Lys63-linked poly-Ub, using the conjugating enzyme UBE2N, onto TAB1 to regulate TAK1 and MAPK activation by TGF-b and EGF. Both the MEKK1 PHD and TAB1 are critical for ES-cell differentiation and tumourigenesis. Map3k1(m) (PHD) (/+) mice exhibit aberrant cardiac tissue, B-cell development, testis and T-cell signalling. "
                 ,
                "normalised_abstract": "Normalisedtext.."
@@ -98,6 +103,7 @@ class TestSitPubtatorAnnotationsInferenceTransformer(TestCase):
         # Assert
         sort_func = lambda x: "{}#{}#{}".format(x["pubmedId"], x["participant1Id"],
                                                 x["participant2Id"])
+
         self.assertEqual(expected, sorted(list(actual), key=sort_func))
 
     def test_parse_self_relation(self):
