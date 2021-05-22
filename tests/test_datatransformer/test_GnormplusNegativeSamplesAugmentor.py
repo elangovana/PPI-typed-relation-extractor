@@ -42,7 +42,7 @@ class TestGnormplusNegativeSamplesAugmentor(TestCase):
         geneIdConverter.convert.side_effect = lambda x: {x: ["uni_{}".format(x)]}
 
         sut = GnormplusNegativeSamplesAugmentor(annotations, geneIdConverter)
-        data = pd.DataFrame([
+        input_df = pd.DataFrame([
             {"interactionId": "1",
              "interactionType": "phosphorylation",
              "isValid": True,
@@ -84,17 +84,16 @@ class TestGnormplusNegativeSamplesAugmentor(TestCase):
 
         # format expected..
         expected = expected_fake
-        expected = expected.append(data)
+        expected = expected.append(input_df)
 
         expected = expected.sort_values(by=sort_keys)[columns]
 
         # Act
-        actual = sut.transform(data)
+        actual = sut.transform(input_df)
 
         # Assert
-        actual = actual.sort_values(by=sort_keys)[columns]
-        self.assertEqual(len(actual.values), len(expected.values),
-                         "Expected and actual does not match \n{}\n{}".format(expected.values, actual.values))
+        actual = actual.sort_values(by=sort_keys)[columns].reset_index(drop=True)
+        expected = expected.sort_values(by=sort_keys)[columns].reset_index(drop=True)
+        pd.testing.assert_frame_equal(expected, actual)
 
-        for a, e in zip(actual.values, expected.values):
-            self.assertSequenceEqual(a.tolist(), e.tolist())
+

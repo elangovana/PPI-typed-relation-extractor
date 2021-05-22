@@ -68,6 +68,7 @@ class AbstractGeneNormaliser:
         self._logger.info("Completed normalised abstract...")
 
 
+
         # Also add annotations to the data frame..
         self._logger.info("Adding annotations ...")
         annotations_field = f'{self.field_name_prefix}annotations'
@@ -92,10 +93,28 @@ class AbstractGeneNormaliser:
         df[f'{self.field_name_prefix}gene_to_uniprot_map'] = df[annotations_field].apply(
             self._gene_id_uniprot_map)
 
+        df[f'{self.field_name_prefix}participant1Name'] = df[["participant1Id", f"{self.field_name_prefix}gene_to_uniprot_map", "annotations"]] \
+            .apply(lambda x: self._reverse_uniprot_name_map(*x), axis=1)
+
+        df[f'{self.field_name_prefix}participant2Name'] = df[["participant2Id", f"{self.field_name_prefix}gene_to_uniprot_map", "annotations"]] \
+            .apply(lambda x: self._reverse_uniprot_name_map(*x), axis=1)
+
+        self._logger.info("Completed normalised abstract...")
+
         self._logger.info("Completed transformation")
 
 
         return df
+
+    def _reverse_uniprot_name_map(self, uniprot, gene_to_prot_map, annot):
+        uniprot_matches = list(filter(lambda x: uniprot in gene_to_prot_map[x], gene_to_prot_map))
+
+        if len(uniprot_matches) == 0: return None
+
+        for a in annot:
+
+            if a["normalised_id"] == uniprot_matches[0]:
+                return a["name"]
 
     def _construct_dict(self):
         result = {}

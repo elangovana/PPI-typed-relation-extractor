@@ -88,7 +88,10 @@ class GnormplusNegativeSamplesAugmentor:
                 record["participant1Id"] = p1
                 record["participant2Id"] = p2
                 record["participant1Alias"] = sorted(list(alias_map[p1]))
+                record["participant1Name"] = record["participant1Alias"][0]
                 record["participant2Alias"] = sorted(list(alias_map[p2]))
+                record["participant2Name"] = record["participant2Alias"][0]
+
                 record["interactionId"] = record["interactionId"] + "_" + str(
                     uuid.uuid4()) + "_" + "fake_annot"
 
